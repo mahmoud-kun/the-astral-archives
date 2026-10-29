@@ -8,7 +8,7 @@ This is a decision backlog, **not** a checklist of auto-approved features. Main 
 
 1. **Competition rules/timing and reuse:** obtain definitive guidance from the relevant NASA Space Apps organizers about permissible pre-event work, developer prototypes, asset creation, licensing and submission. Do not assume prep work can automatically be submitted.
 2. **Delivery/platform details:** React + strict TypeScript + Vite portrait-first Web foundation is APPROVED (A01–A03); supported browser targets, hosting/deployment, offline behavior and optional PWA requirements remain OPEN.
-3. **Engineering design loop:** specify complete design, management, and simulation choices beyond selecting fault/solution; agree reusable resource model and per-case rules.
+3. **Engineering design loop details:** E01 APPROVED: player composes/configures the appropriate vehicle systems and/or corrective equipment and allocates resources instead of picking preset plans. Still decide degree of freedom, component choices, shared resource model/units, case-specific constraints and equations, feedback and outcome rules; avoid forcing physical spacecraft rescue in every mission.
 4. **Five missions:** approve mission list and distinguish verified NASA facts from fictional alternate-history content; source brief's Mars Climate Orbiter, OCO, Mars Polar Lander, Genesis, Apollo 13 are **candidates only**.
 5. **Narrative continuity:** decide how missions from different historical eras coexist in one station; do not imply every case has a crew to physically rescue.
 6. **First vertical slice:** agree exact playable demonstration scope, acceptance criteria, test cases, representative data and visual placeholder requirements.
