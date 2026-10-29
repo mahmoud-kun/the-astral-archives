@@ -13,6 +13,11 @@ This is a decision backlog, **not** a checklist of auto-approved features. Main 
 5. **Narrative continuity:** decide how NASA missions from different historical eras coexist in one station. T06 confirms that a stranded crew/reestablishing communication is merely one possible case premise; crewed and uncrewed mission incidents need different appropriate interventions. The initial five cases are a demo and may be extended later (T07).
 6. **First vertical slice:** agree exact playable demonstration scope, acceptance criteria, test cases, representative data and visual placeholder requirements.
 
+## Investigation mechanic decisions
+
+- **I01 CONFIRMED (2026-10-30):** Hybrid Deduction — free exploration and evidence assignment, followed by active clue connections and hypothesis testing with bounded guidance rather than automatic solutions.
+- **OPEN:** exact evidence-link UI (pairwise vs multi-clue), hypothesis testing and wrong-link feedback, hints, flashback/reconstruction triggers, communication restoration as a case-specific mechanic, and authoring schema. Avoid exposing the definitive root cause or mission result through a single clue.
+
 ## Decisions that can be deferred
 
 - Exact number/arrangement of rooms and hotspot gating; original source suggests five but does not approve them.
