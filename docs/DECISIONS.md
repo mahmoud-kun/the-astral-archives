@@ -31,13 +31,15 @@ For exact per-ID descriptions and nuances, consult `docs/CASE404_SOURCE_OF_TRUTH
 | T04 | Maintain stable interfaces so engineering, content research, and art assets can proceed **in parallel** with minimal integration changes. | CONFIRMED | Direct user statement. |
 | T05 | Original designer brief must be kept as provenance; new decisions must be versioned in the project repo rather than held only in ChatGPT memory. | CONFIRMED | Direct user statement. |
 
-## Technical proposal — NOT ratified
+## Architecture decisions — approved foundation on 2026-10-29
 
-| ID | Proposed direction | Status |
+| ID | Decision | Status |
 |---|---|---|
-| A01 | Portrait-first static Web game using React + TypeScript + Vite. | PROPOSED; favored by technical discussion |
-| A02 | No backend for initial single-player experience; JSON schemas, data-driven scene/mission content, pure TypeScript simulation engine. | PROPOSED |
-| A03 | Content schemas with stable IDs and manifest-driven assets, placeholder support, validation before integration. | PROPOSED architecture; parallel-work principle itself confirmed |
-| A04 | Vitest, Zod, ESLint Flat Config and minimal state library only if needed. | PROPOSED tooling |
+| A01 | Portrait-first static Web game for mobile and desktop browsers, using React + strict TypeScript + Vite. | CONFIRMED |
+| A02 | For the initial single-player game, no backend; separate a pure, deterministic TypeScript domain/simulation engine from React and use validated, data-driven JSON scene/mission content. | CONFIRMED architectural direction; exact simulation rules remain OPEN |
+| A03 | Use stable mission/evidence/room/asset IDs, manifest-driven media, explicit placeholders, and content/reference validation to support parallel engineering, design and content work. | CONFIRMED architectural direction; exact content/asset schemas remain OPEN |
+| A04 | Prefer Zod for runtime content validation; Vitest, ESLint Flat Config and any optional state library are tooling proposals subject to compatible-version verification when implementation is authorized. | PROPOSED tooling; no additional dependency approval |
 
-Before changing these statuses, have Main chat explicitly accept the relevant proposal and update `docs/ARCHITECTURE.md` accordingly.
+**Approval / rationale (2026-10-29):** The Technical Owner explicitly approved the concise Web-first architecture recommendation in Main Chat. It fits the confirmed portrait, point-and-click, evidence/planner UI and enables independent content/asset delivery without an unnecessary backend or full game engine. This **does not** approve numeric simulation rules, final schemas, browser/deployment specifics, dependency versions, or implementation timing.
+
+**Competition gate:** Verify NASA Space Apps 2026 pre-event implementation rules and licensing with official organizers before coding a competition submission. See `docs/COMPETITION_NOTES.md` and `docs/OPEN_QUESTIONS.md`.
