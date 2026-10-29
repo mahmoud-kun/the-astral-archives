@@ -67,6 +67,12 @@ The topics below are **OPEN**, not new approvals. Do **not** re-decide baseline 
 - **TECHNICAL DESIGN OPEN:** Actual shared-budget costs and budget reservation display; physically correct but age-appropriate engineering computations; accessible alternatives to small-target taps; save schema; detailed end-game scoring/replay and authoring schemas.
 - **DO NOT RE-ASK:** whether cases are sequential, whether rooms are enterable, whether investigation informs engineering, whether engineering uses real units, or whether mobile save/resume exists as a requirement.
 
+## Resolved implementation defaults (X01–X07, 2026-10-30)
+
+The Technical Owner delegated selection/approval of seven practical implementation defaults. **CONFIRMED:** mobile Evidence Board; optional graduated self-talk hints; interactive 2D flashback inspection; coherent shared budget aggregation and final over-budget gate; age-appropriate authentic physics arithmetic; one collective report with replay; versioned content/session model, local resume and one-case vertical slice after eligibility clearance. **See [implementation decisions](IMPLEMENTATION_DECISIONS_2026-10-30.md)**.
+
+Earlier notes in this file labeling board controls, hint approach, flashback inspection approach, saving, budget aggregation and final report presentation **OPEN** are superseded *only at approach level*. Still OPEN: mission-specific facts and puzzle triggers, exact cost numbers, scientifically reviewed case formula inputs, numeric final scoring weights, specific UI art, schema field definitions, optional dependency/version choice, NASA competition permissions and implementation itself. Content selection remains with Content Owner.
+
 ## Decisions that can be deferred
 
 - Exact number/arrangement of rooms and hotspot gating; original source suggests five but does not approve them.
