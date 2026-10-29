@@ -26,7 +26,7 @@ Last updated: 2026-10-29
 
 - Authors should distinguish inspectable clues, the source object/room, their mission attribution, meaningful relationships to other clues, and any supported hypothesis or contradiction.
 - Specify evidence-bounded flashback/reconstruction beats (including relevant mission-design history where appropriate), rather than exposing the entire cause on first inspection.
-- Supply data for **Hybrid Deduction**: player-driven cross-reference/hypothesis reasoning with bounded guidance. Exact relationship schema, required clue count, hint policy and wrong-hypothesis handling are **OPEN** until separately approved.
+- Supply data for **Hybrid Deduction** and the approved functional **Evidence Board (I02)**: player-driven multi-clue relationships and hypothesis reasoning with bounded guidance. Relationships must reference stable evidence IDs, not image geometry or card placement. Exact graph semantics, required clue count, hint policy and wrong-hypothesis handling are **OPEN** until separately approved.
 - Any communications-restoration steps are mission-specific narrative/engineering content, **not** universal to crewed and uncrewed cases.
 
 ## Validation requirements
