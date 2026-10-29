@@ -22,6 +22,13 @@ Last updated: 2026-10-29
 - Explicit labels for **historical facts** versus **fictional documents/reconstruction and simulated outcomes**.
 - Post-game educational comparison with verified original NASA outcome.
 
+## Approved investigation direction (I01); content interface remains DRAFT
+
+- Authors should distinguish inspectable clues, the source object/room, their mission attribution, meaningful relationships to other clues, and any supported hypothesis or contradiction.
+- Specify evidence-bounded flashback/reconstruction beats (including relevant mission-design history where appropriate), rather than exposing the entire cause on first inspection.
+- Supply data for **Hybrid Deduction**: player-driven cross-reference/hypothesis reasoning with bounded guidance. Exact relationship schema, required clue count, hint policy and wrong-hypothesis handling are **OPEN** until separately approved.
+- Any communications-restoration steps are mission-specific narrative/engineering content, **not** universal to crewed and uncrewed cases.
+
 ## Validation requirements
 
 - Every reference resolves; IDs are unique and stable; no unbounded random strings masquerading as parameters.
