@@ -45,6 +45,13 @@ tests/           # domain + integration + layout tests
 
 This layout is a **target after scaffolding**, not evidence that these directories/files already exist.
 
+## Approved engineering gameplay direction (E01 — 2026-10-29)
+
+- The Rescue Mission planner is **player-composed**: the player selects/configures appropriate spacecraft subsystems or intervention equipment and manages constrained resources, **not** simply a preset mission-design choice or diagnosis quiz.
+- The shared pure TypeScript domain engine must support data-driven, mission-specific design/feasibility rules; some cases involve spacecraft/vehicle design while others require pre-launch correction or operations/intervention planning. Do not force a physical rescue craft into every historical case.
+- Exact resource dimensions, component catalogues, equations, units, validation limits, tradeoff UI, scoring, and outcome logic are still **OPEN**; they are not implied by approving E01.
+- Existing confirmed flow remains: five concurrent investigation dossiers, a separately submitted plan per dossier and **one collective final reveal** without early outcome leakage.
+
 ## State/data contract principles
 
 - Stable `missionId`, `evidenceId`, `roomId`, `assetId`; explicit version field for persisted saves.
