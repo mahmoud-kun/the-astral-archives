@@ -109,6 +109,10 @@ This layout is a **target after scaffolding**, not evidence that these directori
 - When a hypothesis is tested, show bounded reflections on missing support, contradictions or uncertainty as the investigator's **inner monologue**, grounded in evidence already found.
 - Do not reveal the correct diagnosis or outcome; keep exact feedback logic, authored lines and voice-versus-text presentation OPEN.
 
+## I04 — Hybrid Flashbacks (approved 2026-10-30)
+
+Evidence discovery unlocks some flashbacks; evidence deductions unlock deeper scenes. The investigator is an observer. Exact conditions remain open.
+
 ## State/data contract principles
 
 - Stable `missionId`, `evidenceId`, `roomId`, `assetId`; explicit version field for persisted saves.
