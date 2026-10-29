@@ -119,6 +119,12 @@ Evidence discovery unlocks some flashbacks; evidence deductions unlock deeper sc
 - Inspection can reveal bounded evidence linked to stable IDs. The protagonist remains an observer and cannot alter past events.
 - The specifics of hotspot actions, UI controls and unlocked evidence remain OPEN.
 
+## I06 — Hybrid Flashback inspection targets (approved 2026-10-30)
+
+- Interactive reconstructions contain both clearly discoverable inspection targets and subtle details that require observation.
+- Both kinds use validated stable-ID hotspot/evidence references; hidden details must not require inaccessible precision or reveal a full answer on inspection.
+- Exact indication, zoom, focus navigation and feedback remain OPEN.
+
 ## State/data contract principles
 
 - Stable `missionId`, `evidenceId`, `roomId`, `assetId`; explicit version field for persisted saves.
