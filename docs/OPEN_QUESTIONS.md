@@ -19,6 +19,8 @@ This is a decision backlog, **not** a checklist of auto-approved features. Main 
 - **I02 CONFIRMED (2026-10-30):** functional Evidence Board — player arranges multiple clue cards and makes editable links that participate in hypothesis/deduction state, not merely visual decoration.
 - **OPEN:** Evidence Board gestures/layout for portrait, semantics of links/groups, hypothesis testing and wrong-link feedback, hints, flashback/reconstruction triggers, communication restoration as a case-specific mechanic, and authoring schema. Avoid exposing the definitive root cause or mission result through a single clue.
 
+**I03 CONFIRMED (2026-10-30):** Contextual feedback uses the investigator's self-talk on testing hypotheses; no instant right/wrong on linked evidence. Details of triggers, scripts, voice/text and hint timing remain OPEN.
+
 ## Decisions that can be deferred
 
 - Exact number/arrangement of rooms and hotspot gating; original source suggests five but does not approve them.
