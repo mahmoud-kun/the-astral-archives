@@ -56,6 +56,17 @@ The topics below are **OPEN**, not new approvals. Do **not** re-decide baseline 
 
 **I06 CONFIRMED (2026-10-30):** Hybrid Flashback Hotspots — mix discoverable inspection targets and subtle hidden details inside interactive reconstructions; avoid making every meaningful object obvious. Exact accessibility and indicators remain OPEN.
 
+## 2026-10-30 ownership and research update
+
+- **CONFIRMED:** All rooms can be entered, but discovering one clue may unlock a deeper interaction, sub-area or next clue. Five case dossiers remain concurrent; they are not linear levels (I07/I09).
+- **CONFIRMED:** Players infer their own hypotheses; a board or contextual reflection must not auto-write the answer. How conclusions are input remains OPEN (I08).
+- **CONFIRMED:** The investigation supplies knowledge, evidence and constraints for player-created engineering interventions, with optional reflective hints (I10).
+- **CONFIRMED:** Progress must be resumable, and mobile portrait controls supported (P01); exact storage and design choices OPEN.
+- **DELEGATED TO CONTENT OWNER:** incident-specific communication puzzles, story evidence, exact hypotheses and flashback writing. Do not ask Technical Owner to invent the incidents.
+- **RESEARCH/PROPOSE — NOT APPROVED:** Board on portrait: case-filtered graph, pan/zoom and tap-to-connect; clue inspection with scalable focus/zoom; optional graduated self-talk hints; final assessment separated into deduction, engineering constraints and historical learning. Study Outer Wilds Ship Log, Return of the Obra Dinn journal, An Elmwood Trail pacing and NASA JPL Marsbound! before choosing implementation details.
+- **TECHNICAL DESIGN OPEN:** Actual shared-budget costs and budget reservation display; physically correct but age-appropriate engineering computations; accessible alternatives to small-target taps; save schema; detailed end-game scoring/replay and authoring schemas.
+- **DO NOT RE-ASK:** whether cases are sequential, whether rooms are enterable, whether investigation informs engineering, whether engineering uses real units, or whether mobile save/resume exists as a requirement.
+
 ## Decisions that can be deferred
 
 - Exact number/arrangement of rooms and hotspot gating; original source suggests five but does not approve them.
