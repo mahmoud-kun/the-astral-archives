@@ -44,6 +44,16 @@ For exact per-ID descriptions and nuances, consult `docs/CASE404_SOURCE_OF_TRUTH
 
 **Approval / rationale (2026-10-29):** The Technical Owner explicitly approved the concise Web-first architecture recommendation in Main Chat. It fits the confirmed portrait, point-and-click, evidence/planner UI and enables independent content/asset delivery without an unnecessary backend or full game engine. This **does not** approve numeric simulation rules, final schemas, browser/deployment specifics, dependency versions, or implementation timing.
 
+## Investigation gameplay decisions — 2026-10-30
+
+| ID | Decision | Status | Rationale |
+|---|---|---|---|
+| I01 | Use **Hybrid Deduction**: the player freely explores the shared station, collects and assigns mixed evidence across mission dossiers, then actively connects evidence and tests hypotheses when sufficient clues are available. Offer bounded, context-sensitive guidance rather than always revealing the correct answer or reducing deduction to a passive quiz. | CONFIRMED | Technical Owner explicitly approved Hybrid Deduction in Main Chat on 2026-10-30 to preserve investigative agency without leaving novice players directionless. |
+
+**I01 scope:** Deduction must reflect the player's evidence/hypothesis interactions and fit the existing case-mixed investigation, clue-triggered flashbacks/reconstructions, root-cause analysis and eventual engineering plans. A single clue must not automatically disclose the entire solution. Distinguish interim evidence/consistency feedback from correctness of the final diagnosis and rescue outcome, which must remain hidden until the collective Final Evaluation.
+
+**Still OPEN for investigation:** exact evidence-link gestures/UI, whether links are pairs or groups, required clue thresholds and feedback, incorrect hypothesis handling, hint availability, reconstruction unlock conditions, deductions changing communications possibilities, replay, and exact content schema. The Content Owner authors case-specific puzzles and evidence; engineering builds reusable mechanics.
+
 ## Engineering gameplay decisions — 2026-10-29
 
 | ID | Decision | Status | Rationale |
