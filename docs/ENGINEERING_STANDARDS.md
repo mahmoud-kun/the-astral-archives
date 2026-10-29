@@ -2,7 +2,7 @@
 
 Last updated: 2026-10-29
 
-Status: Reviewed technical guidance. These are code-quality expectations; the **stack remains proposed** until `docs/DECISIONS.md` says otherwise.
+Status: Reviewed technical guidance. **The React + strict TypeScript + Vite foundation is approved (A01–A03, 2026-10-29)**; exact dependency versions, optional tooling and simulation schemas remain unapproved.
 
 ## Current official evidence (verified 2026-10-29)
 
