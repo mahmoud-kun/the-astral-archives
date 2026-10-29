@@ -54,6 +54,16 @@ For exact per-ID descriptions and nuances, consult `docs/CASE404_SOURCE_OF_TRUTH
 
 **I01 scope:** Deduction must reflect the player's evidence/hypothesis interactions and fit the existing case-mixed investigation, clue-triggered flashbacks/reconstructions, root-cause analysis and eventual engineering plans. A single clue must not automatically disclose the entire solution. Distinguish interim evidence/consistency feedback from correctness of the final diagnosis and rescue outcome, which must remain hidden until the collective Final Evaluation.
 
+## Clarifications from Technical Owner — 2026-10-30
+
+- **I07 CONFIRMED — Case-as-dossier:** Cases are concurrent evidence folders, not sequential levels; evidence from different incidents coexists in the station. This reiterates D13–D16, not a new sequential-unlock model.
+- **I08 CONFIRMED — Knowledge-led investigation:** The player personally infers hypotheses from evidence, rather than a system composing the conclusion for them. The Evidence Board and contextual inner monologue support reasoning, not automated solving. Exact free-text versus structured entry remains OPEN.
+- **I09 CONFIRMED — Clue-to-clue depth:** All station rooms are navigable; access to deeper interactions, sub-areas and clues can depend on discoveries and deductions. Do not gate the five mission files sequentially. Exact gating conditions are content-authored and OPEN.
+- **I10 CONFIRMED — Investigation informs intervention:** Discovered facts, credible hypotheses and engineering requirements provide knowledge for building the case's rescue/correction plan; optional investigator self-talk may help players reason without generating the plan for them.
+- **P01 CONFIRMED — Resume and mobile input:** The game must preserve progress and support continued play with functional portrait/mobile controls. Save strategy, implementation and specific accessibility design remain OPEN.
+
+**Delegated decisions:** Content Owner determines individual case mysteries, clues, communication-recovery circumstances and scripts. Technical Owner delegated specific layout, hint patterns, assessment details, cost model and age-appropriate science formula proposals for research/technical recommendation, not automatic approval. Scientific equations must be genuine, with assumptions and units; avoid impossible calculations for younger players.
+
 **I06 CONFIRMED (2026-10-30): Hybrid Flashback Hotspots.** Interactive reconstructions mix visually discoverable inspection targets with unmarked details requiring careful observation. Inspection reveals limited evidence, never the entire solution. The investigator remains an observer. Exact indicators, difficulty, accessibility and controls remain OPEN. Technical Owner approved option C.
 
 **I05 CONFIRMED (2026-10-30): Interactive Flashbacks (option B).** The player can pause and inspect selected objects, documents, displays or engineering details within a reconstruction. This is an investigative inspection of the past, not time travel or an ability to change historical events. Findings can contribute clues to the ongoing investigation. Exact interactions, controls and scene scope remain OPEN. Approved by Technical Owner.
