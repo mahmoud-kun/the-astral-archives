@@ -103,6 +103,12 @@ This layout is a **target after scaffolding**, not evidence that these directori
 - Must be feasible on mobile portrait, with accessible non-drag alternatives to be designed. Case content supplies evidence relationship logic through validated data, not imperative scripts.
 - **OPEN:** exact drawing/interaction model, graph semantics, auto-layout vs manual pin positions, incorrect-link feedback, hint thresholds and reconstruction triggers.
 
+## Approved contextual deduction feedback (I03 — 2026-10-30)
+
+- No immediate right/wrong grading when the player draws Evidence Board links.
+- When a hypothesis is tested, show bounded reflections on missing support, contradictions or uncertainty as the investigator's **inner monologue**, grounded in evidence already found.
+- Do not reveal the correct diagnosis or outcome; keep exact feedback logic, authored lines and voice-versus-text presentation OPEN.
+
 ## State/data contract principles
 
 - Stable `missionId`, `evidenceId`, `roomId`, `assetId`; explicit version field for persisted saves.
