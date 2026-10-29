@@ -95,6 +95,14 @@ This layout is a **target after scaffolding**, not evidence that these directori
 - No premature final correctness or rescue outcome reveal; any hint/consistency feedback must respect the established collective Final Evaluation.
 - **OPEN:** UI interaction method, link cardinality, clue thresholds, hypothesis validation and wrong-answer policy, hints, reconstruction unlocking details and case-specific authoring schema.
 
+## Approved multi-evidence board (I02 — 2026-10-30)
+
+- The investigation has a functional **Evidence Board**: the player places and rearranges multiple discovered clues and creates/removes visible relationships between them.
+- Player-created relationships feed the underlying Hybrid Deduction and hypothesis systems; rendering lines or proximity alone must never auto-solve a case.
+- Treat board composition and link state as explicit, stable-ID-backed investigation state; keep graph validity/meaning separate from visual drag/drop details and screen coordinates.
+- Must be feasible on mobile portrait, with accessible non-drag alternatives to be designed. Case content supplies evidence relationship logic through validated data, not imperative scripts.
+- **OPEN:** exact drawing/interaction model, graph semantics, auto-layout vs manual pin positions, incorrect-link feedback, hint thresholds and reconstruction triggers.
+
 ## State/data contract principles
 
 - Stable `missionId`, `evidenceId`, `roomId`, `assetId`; explicit version field for persisted saves.
