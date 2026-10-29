@@ -16,7 +16,8 @@ This is a decision backlog, **not** a checklist of auto-approved features. Main 
 ## Investigation mechanic decisions
 
 - **I01 CONFIRMED (2026-10-30):** Hybrid Deduction — free exploration and evidence assignment, followed by active clue connections and hypothesis testing with bounded guidance rather than automatic solutions.
-- **OPEN:** exact evidence-link UI (pairwise vs multi-clue), hypothesis testing and wrong-link feedback, hints, flashback/reconstruction triggers, communication restoration as a case-specific mechanic, and authoring schema. Avoid exposing the definitive root cause or mission result through a single clue.
+- **I02 CONFIRMED (2026-10-30):** functional Evidence Board — player arranges multiple clue cards and makes editable links that participate in hypothesis/deduction state, not merely visual decoration.
+- **OPEN:** Evidence Board gestures/layout for portrait, semantics of links/groups, hypothesis testing and wrong-link feedback, hints, flashback/reconstruction triggers, communication restoration as a case-specific mechanic, and authoring schema. Avoid exposing the definitive root cause or mission result through a single clue.
 
 ## Decisions that can be deferred
 
