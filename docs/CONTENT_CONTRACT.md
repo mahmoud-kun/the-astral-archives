@@ -31,6 +31,8 @@ Last updated: 2026-10-29
 
 **I03 approved:** Content Writer supplies optional investigator internal-monologue responses after hypothesis testing: uncertainty, contradiction, or missing evidence, grounded in clues already available to the player. No immediate link correctness or unearned solutions. Exact script, feedback thresholds and text/voice delivery remain OPEN.
 
+**I04 approved:** Author limited flashbacks on key clue discovery, with deeper segments triggered by deductions. Keep mission-design historical scenes distinct from simulated interpretations. Exact conditions and presentation are OPEN.
+
 ## Validation requirements
 
 - Every reference resolves; IDs are unique and stable; no unbounded random strings masquerading as parameters.
