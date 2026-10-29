@@ -54,6 +54,8 @@ For exact per-ID descriptions and nuances, consult `docs/CASE404_SOURCE_OF_TRUTH
 
 **I01 scope:** Deduction must reflect the player's evidence/hypothesis interactions and fit the existing case-mixed investigation, clue-triggered flashbacks/reconstructions, root-cause analysis and eventual engineering plans. A single clue must not automatically disclose the entire solution. Distinguish interim evidence/consistency feedback from correctness of the final diagnosis and rescue outcome, which must remain hidden until the collective Final Evaluation.
 
+**I06 CONFIRMED (2026-10-30): Hybrid Flashback Hotspots.** Interactive reconstructions mix visually discoverable inspection targets with unmarked details requiring careful observation. Inspection reveals limited evidence, never the entire solution. The investigator remains an observer. Exact indicators, difficulty, accessibility and controls remain OPEN. Technical Owner approved option C.
+
 **I05 CONFIRMED (2026-10-30): Interactive Flashbacks (option B).** The player can pause and inspect selected objects, documents, displays or engineering details within a reconstruction. This is an investigative inspection of the past, not time travel or an ability to change historical events. Findings can contribute clues to the ongoing investigation. Exact interactions, controls and scene scope remain OPEN. Approved by Technical Owner.
 
 **I04 CONFIRMED (2026-10-30): Hybrid Flashbacks.** Key clues can unlock limited flashbacks upon discovery; further scenes unlock from meaningful evidence links and deductions. Reconstructed events may show mission design and preparation, with investigator as observer. No scene may give away a full diagnosis. Detailed conditions and format remain OPEN. Approved by Technical Owner.
