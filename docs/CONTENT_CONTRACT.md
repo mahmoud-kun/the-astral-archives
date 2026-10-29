@@ -33,6 +33,8 @@ Last updated: 2026-10-29
 
 **I04 approved:** Author limited flashbacks on key clue discovery, with deeper segments triggered by deductions. Keep mission-design historical scenes distinct from simulated interpretations. Exact conditions and presentation are OPEN.
 
+**I05 approved:** Content Writer identifies inspectable historical-scene hotspots and the limited evidence or design details they reveal. The player may pause and inspect a reconstruction, but does not change the past. Exact controls and hotspot formats remain OPEN.
+
 ## Validation requirements
 
 - Every reference resolves; IDs are unique and stable; no unbounded random strings masquerading as parameters.
