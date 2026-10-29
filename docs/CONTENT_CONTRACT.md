@@ -2,7 +2,7 @@
 
 Last updated: 2026-10-29
 
-**Status: INTERFACE PROPOSAL ONLY.** E01–E03 confirm a player-composed Guided Engineering Sandbox with case-specific resources and plausible non-essential equipment choices that must be evaluated through evidence and tradeoffs, but no exact case list, data schema, numerical rules or sample historical values have been approved.
+**Status: INTERFACE PROPOSAL ONLY.** E01–E04 confirm a player-composed Guided Engineering Sandbox with case-specific resources, plausible non-essential equipment choices and one fictional shared Global Budget linking five mission plans. No exact case list, data schema, numerical budget amounts/rules or historical sample values have been approved.
 
 ## Shared object model — identifiers to agree first
 
@@ -18,7 +18,7 @@ Last updated: 2026-10-29
 - Alternate-history framing, diagnosis/symptom, stage of mission, possible intervention windows and deadlines.
 - Evidence record with source location, player-facing text, media reference, provenance and responsible mission.
 - Plausible wrong hypotheses and why evidence rules them out; avoid giving complete answer on one clue.
-- Engineering decisions available to the player, case-specific resource constraints and units, a plausible selectable catalogue that may include non-essential options, real option costs, feasible/failed branches and educational rationale. Do not identify the optimal subset to players upfront or invent fake resource types to trick them.
+- Engineering decisions available to the player, case-specific resource constraints and units, a plausible selectable catalogue that may include non-essential options, explainable option costs against the **fictional shared program budget**, feasible/failed branches and educational rationale. Keep budget allocations distinguishable from case-local physical resources; do not identify the optimal subset to players upfront or invent fake resource types to trick them.
 - Explicit labels for **historical facts** versus **fictional documents/reconstruction and simulated outcomes**.
 - Post-game educational comparison with verified original NASA outcome.
 
