@@ -50,9 +50,13 @@ For exact per-ID descriptions and nuances, consult `docs/CASE404_SOURCE_OF_TRUTH
 |---|---|---|---|
 | I01 | Use **Hybrid Deduction**: the player freely explores the shared station, collects and assigns mixed evidence across mission dossiers, then actively connects evidence and tests hypotheses when sufficient clues are available. Offer bounded, context-sensitive guidance rather than always revealing the correct answer or reducing deduction to a passive quiz. | CONFIRMED | Technical Owner explicitly approved Hybrid Deduction in Main Chat on 2026-10-30 to preserve investigative agency without leaving novice players directionless. |
 
+| I02 | Provide an interactive **Evidence Board** where players place multiple collected evidence items, draw/edit connections between them and use those connections in the actual hypothesis/deduction mechanics; it is not merely a decorative corkboard or a fixed two-item pairing screen. | CONFIRMED | Technical Owner selected the multi-evidence Evidence Board option in Main Chat on 2026-10-30 to make investigation visual and active. |
+
 **I01 scope:** Deduction must reflect the player's evidence/hypothesis interactions and fit the existing case-mixed investigation, clue-triggered flashbacks/reconstructions, root-cause analysis and eventual engineering plans. A single clue must not automatically disclose the entire solution. Distinguish interim evidence/consistency feedback from correctness of the final diagnosis and rescue outcome, which must remain hidden until the collective Final Evaluation.
 
-**Still OPEN for investigation:** exact evidence-link gestures/UI, whether links are pairs or groups, required clue thresholds and feedback, incorrect hypothesis handling, hint availability, reconstruction unlock conditions, deductions changing communications possibilities, replay, and exact content schema. The Content Owner authors case-specific puzzles and evidence; engineering builds reusable mechanics.
+**I02 scope:** The board supports several pieces of evidence per investigation and meaningful editable relationships; a linked group may support a hypothesis, but a drawn line alone is not proof or an automatic correct deduction. Board links must persist as part of the investigation state and integrate with evidence attribution and hypothesis testing. Visual presentation must remain usable in portrait mode.
+
+**Still OPEN for investigation:** board layout and mobile gestures/accessibility, line/link semantics, group thresholds, correctness/feedback of links, incorrect hypothesis handling, hints, flashback unlock conditions, deductions affecting communications, replay, and exact content schema. The Content Owner authors case-specific puzzles and evidence; engineering builds reusable mechanics.
 
 ## Engineering gameplay decisions — 2026-10-29
 
