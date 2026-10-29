@@ -60,6 +60,14 @@ This layout is a **target after scaffolding**, not evidence that these directori
 - Different NASA missions may expose different engineering parameters and intervention types; keep the shared engine and mission-specific content/data distinct.
 - **OPEN:** exact components, parameter ranges/units, numerical equations, feedback thresholds/UI and scoring. An illustrative sandbox interaction is **not** an approved scientific model.
 
+## Approved mission-specific resources and plausible distractors (E03 — 2026-10-29)
+
+- Keep one shared deterministic engine; each case supplies its own relevant resource constraints, engineering context and allowable equipment/operation choices.
+- Offer a broader catalogue of plausible systems/equipment. Some items may be unnecessary for a particular case; **do not label the useful subset in advance**. Evidence and engineering reasoning should help players distinguish valuable from unnecessary choices.
+- Avoid meaningless fake resource counters or arbitrary gotchas: options must have understandable real costs (when selected, e.g. mass, power, time or budget) and consistent evaluation effects. An irrelevant option need not be harmful by itself, but it can consume finite resources.
+- The player can receive neutral feasibility diagnostics without disclosing whether the intervention will succeed before the combined final reveal.
+- **OPEN:** the precise equipment catalogue, which constraints apply per case, quantitative costs, penalty/score rules, difficulty balancing and schema.
+
 ## State/data contract principles
 
 - Stable `missionId`, `evidenceId`, `roomId`, `assetId`; explicit version field for persisted saves.
