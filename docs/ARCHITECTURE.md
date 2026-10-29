@@ -68,6 +68,13 @@ This layout is a **target after scaffolding**, not evidence that these directori
 - The player can receive neutral feasibility diagnostics without disclosing whether the intervention will succeed before the combined final reveal.
 - **OPEN:** the precise equipment catalogue, which constraints apply per case, quantitative costs, penalty/score rules, difficulty balancing and schema.
 
+## Approved cross-mission Global Budget (E04 — 2026-10-29)
+
+- All five mission plans share one **fictional program budget pool**. A budget allocation or expense for any one mission decreases the amount available for the other four; the planner must account for the aggregate rather than assessing each mission's money independently.
+- Preserve **mission-specific** equipment/engineering constraints (such as spacecraft mass, power, fuel, timing and communications) unless another explicit decision introduces shared inventory. The common budget must not be presented as historically real NASA cross-era financing.
+- Model the budget in shared game/session state, with plan-level allocations and a deterministic budget feasibility calculation independent of React; retain the existing delayed collective outcome reveal.
+- **OPEN:** exact budget amount and units, cost table, whether drafts reserve money, whether submissions lock money, whether reallocations/revisions are allowed before final evaluation, handling of over-budget plans and difficulty tuning.
+
 ## State/data contract principles
 
 - Stable `missionId`, `evidenceId`, `roomId`, `assetId`; explicit version field for persisted saves.
