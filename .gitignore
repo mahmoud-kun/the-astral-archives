@@ -1,0 +1,26 @@
+# JavaScript / TypeScript (when a build is authorized)
+node_modules/
+dist/
+build/
+coverage/
+.vitest/
+.vite/
+*.tsbuildinfo
+
+# Secrets and local credentials
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+
+# Local editor/system files
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/*.local.json
+
+# Scratch/large generated artifacts
+*.log
+.tmp/
+.temp/
