@@ -23,6 +23,8 @@ This is a decision backlog, **not** a checklist of auto-approved features. Main 
 
 **I04 CONFIRMED (2026-10-30):** Hybrid Flashbacks: short scenes from finding important clues, deeper scenes from successful evidence deductions. Detailed triggers and presentation OPEN.
 
+**I05 CONFIRMED (2026-10-30):** Interactive Flashbacks (B). Players pause and inspect details in reconstructions; they cannot alter the past. Open: hotspot gestures, pause controls, evidence discoveries and scene formats.
+
 ## Decisions that can be deferred
 
 - Exact number/arrangement of rooms and hotspot gating; original source suggests five but does not approve them.
