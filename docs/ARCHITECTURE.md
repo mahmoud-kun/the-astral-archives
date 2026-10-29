@@ -86,6 +86,15 @@ This layout is a **target after scaffolding**, not evidence that these directori
 - Neutral design-time feasibility feedback remains allowed; **success, partial-success and failure verdicts must remain hidden** until the collective Final Evaluation.
 - **OPEN:** specific formulas, numeric ranges, fidelity levels, case-specific rule semantics, calculation inputs, content schemas, scoring weights and scientific review tests.
 
+## Approved hybrid investigation/deduction model (I01 — 2026-10-30)
+
+- Investigation remains freeform across the same connected station rooms and five mixed mission dossiers. Player actions collect/inspect evidence and assign it to mission files.
+- A **Hybrid Deduction** layer lets players deliberately connect gathered evidence, formulate or select contextual hypotheses, and test their relationships; provide bounded guidance when a relevant set of clues exists rather than a fully guided quiz or automatically solved mystery.
+- Maintain explicit evidence, assignment, link and hypothesis states. Content supplies evidence relationships and reconstruction triggers via validated data; reviewed engine code evaluates actions deterministically without executable case scripts.
+- No single clue should expose the entire cause. A reconstruction/flashback reveals only bounded information consistent with acquired evidence, including relevant mission-design history when authored.
+- No premature final correctness or rescue outcome reveal; any hint/consistency feedback must respect the established collective Final Evaluation.
+- **OPEN:** UI interaction method, link cardinality, clue thresholds, hypothesis validation and wrong-answer policy, hints, reconstruction unlocking details and case-specific authoring schema.
+
 ## State/data contract principles
 
 - Stable `missionId`, `evidenceId`, `roomId`, `assetId`; explicit version field for persisted saves.
