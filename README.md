@@ -31,13 +31,13 @@ If two files disagree, record the conflict and ask the project main chat to deci
 
 ## Current technology position
 
-**Proposed, not yet ratified:** React + TypeScript + Vite; data-driven static web app; a pure deterministic TypeScript simulation engine; JSON content with runtime validation; no backend or online AI required for v1. See `docs/ARCHITECTURE.md` and `docs/ENGINEERING_STANDARDS.md`.
+**Approved architectural foundation (A01–A03, 2026-10-29):** portrait-first static Web app using React + strict TypeScript + Vite; pure deterministic TypeScript simulation engine separated from React; validated JSON mission/scene data; manifest-driven placeholder assets; no backend for v1. Exact simulation rules, schemas, deployment specifics and optional tooling remain open. See `docs/DECISIONS.md`, `docs/ARCHITECTURE.md` and `docs/ENGINEERING_STANDARDS.md`.
 
 **Confirmed experience constraint:** mobile-style **portrait orientation**, even when opened on desktop.
 
 ## Next decisions
 
-Confirm the platform/stack, NASA contest timing/compliance, mission selection, mission-engineering loop and data contracts; then initialize development only when permitted. See [`docs/OPEN_QUESTIONS.md`](docs/OPEN_QUESTIONS.md).
+Confirm NASA contest timing/compliance, mission selection, mission-engineering loop, content/asset schemas and deployment specifics; then initialize development only when permitted. See [`docs/OPEN_QUESTIONS.md`](docs/OPEN_QUESTIONS.md).
 
 ## Development
 
