@@ -113,6 +113,12 @@ This layout is a **target after scaffolding**, not evidence that these directori
 
 Evidence discovery unlocks some flashbacks; evidence deductions unlock deeper scenes. The investigator is an observer. Exact conditions remain open.
 
+## I05 — Interactive Flashback inspection (approved 2026-10-30)
+
+- Players may pause and inspect authored hotspots in flashback scenes: equipment, documents, displays or design details.
+- Inspection can reveal bounded evidence linked to stable IDs. The protagonist remains an observer and cannot alter past events.
+- The specifics of hotspot actions, UI controls and unlocked evidence remain OPEN.
+
 ## State/data contract principles
 
 - Stable `missionId`, `evidenceId`, `roomId`, `assetId`; explicit version field for persisted saves.
