@@ -2,7 +2,7 @@
 
 Last updated: 2026-10-29
 
-**Status: INTERFACE PROPOSAL ONLY.** No exact case list, data schema, numerical rules or sample historical values have been approved.
+**Status: INTERFACE PROPOSAL ONLY.** E01 confirms a player-composed mission-specific engineering planner (systems/equipment selection plus resource allocation), but no exact case list, data schema, numerical rules or sample historical values have been approved.
 
 ## Shared object model — identifiers to agree first
 
