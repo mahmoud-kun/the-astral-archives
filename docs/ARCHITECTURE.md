@@ -73,7 +73,9 @@ This layout is a **target after scaffolding**, not evidence that these directori
 - All five mission plans share one **fictional program budget pool**. A budget allocation or expense for any one mission decreases the amount available for the other four; the planner must account for the aggregate rather than assessing each mission's money independently.
 - Preserve **mission-specific** equipment/engineering constraints (such as spacecraft mass, power, fuel, timing and communications) unless another explicit decision introduces shared inventory. The common budget must not be presented as historically real NASA cross-era financing.
 - Model the budget in shared game/session state, with plan-level allocations and a deterministic budget feasibility calculation independent of React; retain the existing delayed collective outcome reveal.
-- **OPEN:** exact budget amount and units, cost table, whether drafts reserve money, whether submissions lock money, whether reallocations/revisions are allowed before final evaluation, handling of over-budget plans and difficulty tuning.
+- **E05 APPROVED:** submitted and draft plans may be revised, and their shared-budget allocations redistributed, up until starting Final Evaluation. One current plan per mission dossier; submitting a new revision replaces the previous active plan, not a new simultaneous expense. Recompute aggregate budget usage from current plan allocations.
+- **Final Evaluation boundary:** on the player's final-evaluation action, freeze a consistent snapshot of all five current plans and allocations at once; calculate/reveal outcomes only in the collective final report. Individual submission remains a neutral acknowledgement, not a final budget lock or outcome.
+- **OPEN:** exact budget amount and units, cost table, whether/how unfinished drafts count toward the displayed reserved budget, handling over-budget submissions, post-evaluation replay, and difficulty tuning.
 
 ## State/data contract principles
 
