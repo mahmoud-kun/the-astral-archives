@@ -42,4 +42,14 @@ For exact per-ID descriptions and nuances, consult `docs/CASE404_SOURCE_OF_TRUTH
 
 **Approval / rationale (2026-10-29):** The Technical Owner explicitly approved the concise Web-first architecture recommendation in Main Chat. It fits the confirmed portrait, point-and-click, evidence/planner UI and enables independent content/asset delivery without an unnecessary backend or full game engine. This **does not** approve numeric simulation rules, final schemas, browser/deployment specifics, dependency versions, or implementation timing.
 
+## Engineering gameplay decisions — 2026-10-29
+
+| ID | Decision | Status | Rationale |
+|---|---|---|---|
+| E01 | The Rescue Mission planner must let the player **construct/configure a mission-specific engineering solution** by selecting spacecraft systems and/or intervention equipment and allocating or adjusting limited resources, rather than merely selecting one of several ready-made designs or a correct-answer quiz. | CONFIRMED | Explicit Main Chat approval of the first, player-designed option. Engineering tradeoffs are central to the mission-design-game challenge. |
+
+**E01 scope:** Keep the existing five simultaneous dossiers, one separate plan submission per case and one collective final outcome reveal. The required solution can be a spacecraft/vehicle configuration **where appropriate**, or a case-specific correction, equipment or operations plan for other historical missions; this decision does not claim that all five require launching a physical rescue spacecraft.
+
+**Still OPEN:** exact component inventory, design freedom, shared resource/units model, mission-specific choices, feasibility equations and feedback, numerical values, scoring, plan revision, data schemas and any detailed implementation. E01 is a gameplay-direction decision, **not** approval of those rules or permission to code before competition clearance.
+
 **Competition gate:** Verify NASA Space Apps 2026 pre-event implementation rules and licensing with official organizers before coding a competition submission. See `docs/COMPETITION_NOTES.md` and `docs/OPEN_QUESTIONS.md`.
