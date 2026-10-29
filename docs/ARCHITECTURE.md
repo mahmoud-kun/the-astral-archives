@@ -1,19 +1,23 @@
-# CASE:404 — Architecture Decision Draft
+# CASE:404 — Architecture Decision — Approved Foundation
 
 Last updated: 2026-10-29
 
-**STATUS: PROPOSED — NOT APPROVED.** The Main chat should ratify this before project-specific implementation. Confirm contest timing before writing submission code.
+**STATUS: FOUNDATION APPROVED (A01–A03, 2026-10-29).** Main Chat approved the Web-first stack, separation of pure simulation from UI, JSON-driven content, and manifest-based placeholder assets. Detailed simulation rules, data schemas and deployment specifics remain OPEN. Approval is **not** permission to begin competition implementation before official timing/eligibility is cleared.
 
 ## Primary goal
 
 Create a polished portrait-first point-and-click mystery/engineering game whose code and logic can be written independently of content and art. Five missions share scene navigation, evidence mechanics, planning and deferred final evaluation.
 
-## Recommended foundation
+## Approved foundation (A01–A03)
 
-- **React + TypeScript + Vite** for static client-side application, not a conventional website layout.
-- **Pure TypeScript domain engine** for evidence attribution, resources, feasibility and evaluation; no React imports, DOM APIs, or network calls in engine.
-- **JSON case data** validated at load/build time (prefer a schema library such as Zod after baseline review). Do not execute JS or arbitrary expressions from JSON.
-- **Asset manifest** maps stable `assetId` to file path/media metadata; placeholders implement the same IDs and are replaced without changes to gameplay logic.
+- **React + strict TypeScript + Vite** for a static, portrait-first Web game accessed from mobile and desktop browsers, not a conventional website layout.
+- **Pure, deterministic TypeScript domain/simulation engine** for evidence attribution, resources, feasibility and evaluation; no React imports, DOM APIs, or network calls in the engine.
+- **Validated, data-driven JSON scene/mission content** with stable identifiers; no executable JS or arbitrary expressions in mission JSON. Exact schemas and validator dependency versions remain OPEN.
+- **Manifest-driven assets**: stable `assetId` maps to media path and metadata; approved placeholders keep IDs unchanged until designer delivery. Validate missing references before integration.
+- **No backend or mandatory online service for v1** without a new approval.
+
+## Proposed implementation details (not yet individually ratified)
+
 - **Client-only save** with explicit save schema version/migration once persistence needs are agreed. No mandatory backend, login or cloud service.
 - Use CSS/HTML with accessible hotspots and overlays on scene artwork; scene hotspot coordinates should be relative to intrinsic art dimensions, not raw device pixels. Preserve aspect ratio and accurate hit regions at narrow portrait widths.
 - Use light animations/appropriate video files from the designer. Evaluate Phaser or other engine only if a validated gameplay feature requires canvas scene handling, sprites/physics or complex timelines.
@@ -50,9 +54,9 @@ This layout is a **target after scaffolding**, not evidence that these directori
 - Historical NASA facts and game reconstruction/fiction are explicitly labeled with provenance and uncertainty.
 - Invalid content blocks a development build with useful diagnostics; do not silently substitute fabricated mission facts/assets.
 
-## Acceptance approach
+## Proposed acceptance approach (after competition clearance)
 
-- First authorized implementation is a **one-room/one-case vertical slice** using fictional, labeled placeholder content; scale to five confirmed cases once contracts are validated.
+- Suggested first authorized implementation is a **one-room/one-case vertical slice** using fictional, labeled placeholder content; scale to five confirmed cases once contracts are validated.
 - Verify stable replacement of image/audio/text data without modifying domain logic.
 - Write tests for cross-reference validity, pure simulation constraints, no early result reveal and portrait navigation/back behavior.
 - No backend/database server, queues, Unity/Godot switch, heavy state abstraction or AI API without a new decision record.
