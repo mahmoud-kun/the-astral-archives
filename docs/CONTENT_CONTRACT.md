@@ -29,6 +29,8 @@ Last updated: 2026-10-29
 - Supply data for **Hybrid Deduction** and the approved functional **Evidence Board (I02)**: player-driven multi-clue relationships and hypothesis reasoning with bounded guidance. Relationships must reference stable evidence IDs, not image geometry or card placement. Exact graph semantics, required clue count, hint policy and wrong-hypothesis handling are **OPEN** until separately approved.
 - Any communications-restoration steps are mission-specific narrative/engineering content, **not** universal to crewed and uncrewed cases.
 
+**I03 approved:** Content Writer supplies optional investigator internal-monologue responses after hypothesis testing: uncertainty, contradiction, or missing evidence, grounded in clues already available to the player. No immediate link correctness or unearned solutions. Exact script, feedback thresholds and text/voice delivery remain OPEN.
+
 ## Validation requirements
 
 - Every reference resolves; IDs are unique and stable; no unbounded random strings masquerading as parameters.
