@@ -10,7 +10,7 @@ This is a decision backlog, **not** a checklist of auto-approved features. Main 
 2. **Delivery/platform details:** React + strict TypeScript + Vite portrait-first Web foundation is APPROVED (A01–A03); supported browser targets, hosting/deployment, offline behavior and optional PWA requirements remain OPEN.
 3. **Engineering design loop details:** E01–E06 APPROVED: player-configured Guided Engineering Sandbox, case-specific resources and plausible nonessential equipment, **one fictional Global Budget shared across five revisable plans**, plus a **Hybrid Simulation Engine** (testable physical resource calculations + mission-specific rules) with one collective Final Evaluation. Still decide budget scale/units/costs, how unfinished drafts reserve funds, over-budget handling, component catalogue, scientifically justified formulas/ranges, exact case rules, difficulty, scoring, preview details and replay. Do not imply historical NASA cross-era pooled financing, invent fake resources/telemetry, reveal early outcomes, or force physical rescue spacecraft into every case.
 4. **Five missions:** approve mission list and distinguish verified NASA facts from fictional alternate-history content; source brief's Mars Climate Orbiter, OCO, Mars Polar Lander, Genesis, Apollo 13 are **candidates only**.
-5. **Narrative continuity:** decide how missions from different historical eras coexist in one station; do not imply every case has a crew to physically rescue.
+5. **Narrative continuity:** decide how NASA missions from different historical eras coexist in one station. T06 confirms that a stranded crew/reestablishing communication is merely one possible case premise; crewed and uncrewed mission incidents need different appropriate interventions. The initial five cases are a demo and may be extended later (T07).
 6. **First vertical slice:** agree exact playable demonstration scope, acceptance criteria, test cases, representative data and visual placeholder requirements.
 
 ## Decisions that can be deferred
@@ -27,7 +27,7 @@ This is a decision backlog, **not** a checklist of auto-approved features. Main 
 
 ## Known tensions
 
-- Original dramatic crewed-spacecraft rescue premise conflicts with the five historical uncrewed candidates. Keep player fantasy but adapt intervention timing/meaning to each mission only after Main chat approves.
+- **Resolved clarification (T06):** the original stranded-astronaut narrative is an example, not a requirement for every case. Content Owner chooses crewed or uncrewed incidents and the appropriate investigation/intervention for each mission; actual mission selection and story continuity remain open.
 - NASA challenge focuses on complete mission design/management; investigation-only mechanics do not satisfy that by themselves.
 - 10-second intro montage (source current baseline) vs earlier longer Opportunity cinematic concept: use the source baseline until team revises it. Do not silently produce a 30–40 second intro.
 - Designer source describes the designer as the user; newer team correction establishes user as engineering owner.
