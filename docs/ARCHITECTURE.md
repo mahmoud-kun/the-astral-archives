@@ -80,7 +80,7 @@ This layout is a **target after scaffolding**, not evidence that these directori
 ## Approved hybrid simulation model (E06 — 2026-10-29)
 
 - Use a **Hybrid Simulation Engine** built from (1) reusable pure TypeScript resource/engineering calculations and (2) validated, mission-specific intervention and feasibility rules supplied through data and interpreted by reviewed domain code.
-- Calculate relevant physical constraints such as mass budgets, power supply/demand or fuel needs with explicit units, documented assumptions and deterministic boundary behavior. Not every mission needs every calculation.
+- **E07 APPROVED:** calculate and display relevant physical constraints using dimensionally consistent real-world units (such as kg, W, s and m/s), not arbitrary physical Game Points. Define conversions and validate dimensional consistency; not every case needs every measurement. Fictional budget currency is clearly distinguished from historical NASA costs. Record all assumptions and deterministic boundary behavior.
 - A mission intervention is evaluated against both physical feasibility and case-specific root cause, timing and operating conditions. A correct diagnosis alone does not guarantee mission success.
 - Avoid implementing a full orbital/physics sandbox without a separately demonstrated need and approval; don't present illustrative numbers or alternate-history parameters as authentic NASA readings.
 - Neutral design-time feasibility feedback remains allowed; **success, partial-success and failure verdicts must remain hidden** until the collective Final Evaluation.
