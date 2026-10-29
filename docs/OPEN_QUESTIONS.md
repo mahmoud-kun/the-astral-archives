@@ -21,6 +21,8 @@ This is a decision backlog, **not** a checklist of auto-approved features. Main 
 
 **I03 CONFIRMED (2026-10-30):** Contextual feedback uses the investigator's self-talk on testing hypotheses; no instant right/wrong on linked evidence. Details of triggers, scripts, voice/text and hint timing remain OPEN.
 
+**I04 CONFIRMED (2026-10-30):** Hybrid Flashbacks: short scenes from finding important clues, deeper scenes from successful evidence deductions. Detailed triggers and presentation OPEN.
+
 ## Decisions that can be deferred
 
 - Exact number/arrangement of rooms and hotspot gating; original source suggests five but does not approve them.
