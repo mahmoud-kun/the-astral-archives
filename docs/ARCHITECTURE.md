@@ -52,6 +52,14 @@ This layout is a **target after scaffolding**, not evidence that these directori
 - Exact resource dimensions, component catalogues, equations, units, validation limits, tradeoff UI, scoring, and outcome logic are still **OPEN**; they are not implied by approving E01.
 - Existing confirmed flow remains: five concurrent investigation dossiers, a separately submitted plan per dossier and **one collective final reveal** without early outcome leakage.
 
+## Approved sandbox gameplay (E02 — 2026-10-29)
+
+- Implement the engineering experience as a **Guided Engineering Sandbox**, not a fixed-design picker and not an unrestricted physics simulator.
+- Players configure relevant systems/equipment and adjust meaningful resource/engineering parameters. The planner gives understandable *feasibility/tradeoff* feedback so the player can learn through iteration.
+- Feasibility diagnostics (e.g., resource over-budget) are separate from mission outcome; continue to hide per-mission success/failure until the one collective final evaluation.
+- Different NASA missions may expose different engineering parameters and intervention types; keep the shared engine and mission-specific content/data distinct.
+- **OPEN:** exact components, parameter ranges/units, numerical equations, feedback thresholds/UI and scoring. An illustrative sandbox interaction is **not** an approved scientific model.
+
 ## State/data contract principles
 
 - Stable `missionId`, `evidenceId`, `roomId`, `assetId`; explicit version field for persisted saves.
