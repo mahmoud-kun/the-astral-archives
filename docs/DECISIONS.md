@@ -100,4 +100,18 @@ For exact per-ID descriptions and nuances, consult `docs/CASE404_SOURCE_OF_TRUTH
 
 **Still OPEN:** global budget amount/currency, costs and balancing; draft-versus-submitted accounting/presentation details, over-budget handling, exact component inventory, adjustable parameters and safe ranges, specific physical formulas, units/conversions by case and assumptions, per-mission engineering rules/equations, feedback, scoring, data schemas, replay behavior and implementation. E01–E07 approve gameplay direction only; they do **not** authorize coding before competition clearance. Live feasibility feedback must not reveal mission success/failure ahead of the confirmed collective final evaluation.
 
+## Delegated implementation decisions — 2026-10-30
+
+| ID | Confirmed choice | Rationale |
+|---|---|---|
+| X01 | Portrait Evidence Board with dossier filtering, tap-to-link, pan/zoom, accessible drag alternatives. | Keep deduction interactive and mobile-usable. |
+| X02 | Hypothesis-triggered contextual investigator self-talk plus optional graduated authored hints. | Preserve player agency without dead ends. |
+| X03 | Pause/inspect/zoom interactive 2D flashbacks with clear and subtle hotspots and accessible inspection. | Achievable production scope while supporting observation. |
+| X04 | Fictional shared USD-equivalent budget with sum of five current plans; draft previews; final over-budget gate. | Explainable, reversible resource tradeoffs. |
+| X05 | Authentic beginner-friendly mass, power, energy and resource arithmetic; advanced formulas only after case-specific scientific validation. | Scientific correctness and age accessibility. |
+| X06 | Single frozen five-case final report with separate historical/fictional comparisons and explicit replay/new-session behavior. | No early answer leakage and educational closure. |
+| X07 | Stable versioned JSON/domain contracts, local-first autosave/resume, and a narrow one-case test slice only after competition clearance. | Three-person delivery, reliability and growth beyond five cases. |
+
+**Authority:** Technical Owner explicitly delegated research, selection and approval of these seven implementation approaches to Main Chat on 2026-10-30. **Full normative details, exclusions and references:** [IMPLEMENTATION_DECISIONS_2026-10-30.md](IMPLEMENTATION_DECISIONS_2026-10-30.md). These are approved **design contracts**, not evidence of implemented or tested code. Specific content, numeric game costs, mission formulas, final scoring weights, selected package versions and contest eligibility remain OPEN.
+
 **Competition gate:** Verify NASA Space Apps 2026 pre-event implementation rules and licensing with official organizers before coding a competition submission. See `docs/COMPETITION_NOTES.md` and `docs/OPEN_QUESTIONS.md`.
