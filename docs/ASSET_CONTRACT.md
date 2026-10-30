@@ -40,3 +40,8 @@ Asset file list, final visual formats/resolutions, naming conventions, UI safe a
 - Approved **Cinematic + Interactive Hybrid (V08)** for alternate-history past interactions: short arrival transition; stylized 2D point-and-click background(s) with character/object hotspots; portrait dialogue panels and expressions; reusable Mission Builder presentation; return transition without early outcome reveal.
 - Assets should be separable and replaceable by manifest ID: transition media, past environment backgrounds, interactive object states, character portraits/expressions, dialogue UI and engineering UI art. Do not assume continuous character animation or a fully animated cutscene for every conversation.
 - Exact shot count, timing, portraits per case, object inventory and exports are not yet final; coordinate with Content Owner and Engineer before producing full case-specific sets.
+
+## Confirmed room art scope — 2026-10-30 (V09–V10)
+
+- Prepare visual concepts and eventually individually addressable background/hotspot assets for four **core present station rooms**: (1) Investigation Office — main starting hub, all five dossier stories, evidence sorting/board and Rescue Mission entry; (2) File Archives; (3) Recordings Room; (4) Signal Room. Fixed-view portrait-first point-and-click presentation applies; specific counts of views, objects and animations are pending.
+- **Alternate-history past scenes use a hybrid environment set:** reusable shared location types and distinctive mission-specific locations with historical-era variations. Scene count and case-specific deliverables depend on Content Owner's finalized missions. Flashback assets are distinct observer-only reconstructions.
