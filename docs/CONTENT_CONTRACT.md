@@ -1,8 +1,10 @@
-# CASE:404 — Content Handoff Contract (DRAFT)
+# The Astral Archives — Content Handoff Contract (DRAFT)
 
 Last updated: 2026-10-30
 
 **Status: DRAFT CONTENT SCHEMA, APPROVED GAMEPLAY RULES.** E01–E07 and X01–X07 approve the player-built Guided Engineering Sandbox, case-specific real-unit constraints and a fictional shared Global Budget, with outcomes disclosed only in the collective Final Evaluation. **Latest team decisions V01–V10 supersede inconsistent older content assumptions:** four core present-day rooms; historical observer-only Investigation Flashbacks separate from fictional, changeable Rescue Mission time travel; hybrid cinematic/interactive past presentation; reusable plus mission-specific past locations. No final case list, JSON schema, cost values, equations or authored historical sample data is approved.
+
+**Naming (V11, 2026-10-30):** The official public game title is **The Astral Archives**. Use this title in new player-facing text and writer handoff copy, replacing CASE:404 as the old working name. Content IDs and the existing GitHub repository path `case404` remain stable. The final artwork and logo title lockup are still pending Designer delivery.
 
 ## Shared object model — identifiers to agree first
 
