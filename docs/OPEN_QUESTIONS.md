@@ -107,3 +107,8 @@ Earlier notes in this file labeling board controls, hint approach, flashback ins
 4. Approve precise room/recording/signal clue hotspot inventories and scripts with Content Owner; do not assume every room contains the same evidence in every case.
 
 These clarifications supersede older open-question language that treated the above resolved directions as unchosen, but do not resolve their detailed production specifications.
+
+## Past-interaction presentation resolved — 2026-10-30
+
+- **RESOLVED (V08):** Rescue Mission past presentation is option C, Cinematic + Interactive Hybrid: short arrival cinematic, point-and-click exploration with portrait-based team dialogue, and a Guided Engineering Mission Builder. This does **not** replace or modify observer-only investigation Flashbacks.
+- **Still OPEN:** per-case cinematic durations, specific team characters/dialogue options, hotspot inventories, how/when the Builder opens in each case, and exact asset/export counts.
