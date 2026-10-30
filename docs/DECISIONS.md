@@ -129,3 +129,8 @@ These decisions clarify the prior D-series baseline and supersede contradictory 
 - **V07 RECONFIRMED — Ownership and content:** Three-person ownership per T01; Content/Data Owner selects the final five historical missions. Evidence Board, interactive observer-only Flashbacks and collective results continue per approved I/X decisions.
 
 **Narrative boundary:** A fictional time-travel device/story mechanism is now approved for the Rescue Mission narrative. Implementation must remain an achievable portrait-first, data-driven guided design game; whether past-team scenes use portraits, static room frames or another presentation remains open. Historical source events and speculative alternate-history outcomes must be visibly distinguishable.
+
+## Designer-approved past interaction presentation — 2026-10-30
+
+- **V08 CONFIRMED — Cinematic + Interactive Hybrid (option C):** Each Rescue Mission past-entry uses a short cinematic transition, followed by a stylized 2D point-and-click past environment. Players select historical-team characters and inspect contextual objects/hotspots; character interactions use portrait dialogue and bounded player choices. The player then accesses the mission-specific Guided Engineering Mission Builder to configure the alternate-history intervention. Return to present does not reveal success/failure before collective Final Evaluation.
+- **Scope:** Reuse portrait dialogue UI, interaction affordances and Mission Builder across cases. This is not a requirement for full-body animation, continuous cutscenes, free-roaming 3D, or a cinematic for every conversation. Cinematic duration, exact dialogue choices, per-case number of environments, and scene-by-scene storyboarding remain OPEN to Designer/Content Owner agreement.
