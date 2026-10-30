@@ -1,8 +1,10 @@
-# CASE:404 — Architecture Decision — Approved Foundation
+# The Astral Archives — Architecture Decision — Approved Foundation
 
 Last updated: 2026-10-30
 
 **STATUS: FOUNDATION APPROVED (A01–A03, 2026-10-29).** Main Chat approved the Web-first stack, separation of pure simulation from UI, JSON-driven content, and manifest-based placeholder assets. Detailed simulation rules, data schemas and deployment specifics remain OPEN. Approval is **not** permission to begin competition implementation before official timing/eligibility is cleared.
+
+**V11 (2026-10-30):** Official player-facing name is **The Astral Archives**; **CASE:404** is the superseded working title. Keep the private `case404` repository path and stable IDs intact. The V04 logo remains a temporary concept pending the final graphic/title lockup.
 
 ## Primary goal
 
