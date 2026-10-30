@@ -1,15 +1,17 @@
-# CASE:404 — Current Open Questions (after team reconciliation)
+# The Astral Archives — Current Open Questions (after team reconciliation)
 
 Last updated: 2026-10-30
 **Status:** Unresolved details ONLY. This file is not permission to implement or replace an approved decision.
 
 ## Canonical decision precedence
 
-1. **Most recent team approvals V01–V10 in [DECISIONS.md](DECISIONS.md)** control any conflicting older proposals or OPEN labels.
+1. **Most recent team approvals V01–V11 in [DECISIONS.md](DECISIONS.md)** control any conflicting older proposals or OPEN labels.
 2. Existing **D/T/A/I/E/X/P decisions remain approved** where compatible with V01–V10. See [Implementation Decisions](IMPLEMENTATION_DECISIONS_2026-10-30.md) for approved X01–X07 design defaults.
 3. [CASE404_SOURCE_OF_TRUTH.md](CASE404_SOURCE_OF_TRUTH.md) is the **unchanged original historical designer record**, NOT the present implementation specification. Its proposed five-room maps, source-era ownership labels and other superseded text must not override newer team decisions.
 
 ## Settled — never treat as OPEN again
+
+- **Official game title (V11): _The Astral Archives_** (replaces old working title CASE:404). The final production logo artwork/lockup is still pending; logo rights/trademark checks are separate from title approval. The `case404` repository path remains unchanged.
 
 - **Five simultaneous mission dossiers**, not five sequential levels. Five cases are current demo scope (T07); exact NASA mission selection belongs to Content Owner.
 - **Four core present-day station rooms (V09):** Investigation Office (start, case dossiers, Evidence Board, Rescue Mission access), File Archives, Recordings Room and Signal Room. Room-to-room point-and-click; base rooms are accessible, while deeper evidence/sub-interactions may unlock progressively (I09). **No fifth core room is approved.**
@@ -55,7 +57,7 @@ Last updated: 2026-10-30
 - Final evaluation criteria, partial outcomes, score weights, report copy and case-specific education comparisons; one collective reveal is fixed by X06.
 - Save schema/migration/export/reset UX; production browser targets, deployment/offline/PWA, performance, accessibility and media fallbacks. IndexedDB approach is an approved default, not a deployed save.
 - Optional runtime dependency choices and pinned versions; React Flow/Phaser are **not** automatically approved.
-- Temp logo export, final title/branding rights, palette HEX, room/background dimensions and final audio/animation asset lists.
+- Temp logo export, final logo/title lockup, branding/trademark/asset rights, palette HEX, room/background dimensions and final audio/animation asset lists.
 - License, NASA/third-party asset provenance and repo-publication requirements.
 
 ## Ownership and handoff
