@@ -112,3 +112,8 @@ These clarifications supersede older open-question language that treated the abo
 
 - **RESOLVED (V08):** Rescue Mission past presentation is option C, Cinematic + Interactive Hybrid: short arrival cinematic, point-and-click exploration with portrait-based team dialogue, and a Guided Engineering Mission Builder. This does **not** replace or modify observer-only investigation Flashbacks.
 - **Still OPEN:** per-case cinematic durations, specific team characters/dialogue options, hotspot inventories, how/when the Builder opens in each case, and exact asset/export counts.
+
+## Present station and past-location decisions resolved — 2026-10-30
+
+- **RESOLVED V09:** Four **core** present-day rooms: Investigation Office (starting/main narrative and evidence hub containing five case dossiers), File Archives, Recordings Room, Signal Room. Earlier prose claiming the core room number is fully open is superseded. Still open: exact topology, room-specific interactive objects, hotspot placement, and whether any extra optional spaces are later proposed and approved.
+- **RESOLVED V10:** Hybrid past environments: reusable shared setting types plus case-specific locations, adapted to each mission's historical era. Do not infer a fixed number of past rooms. Still open: case-specific location inventory, scene art, and interaction triggers.
