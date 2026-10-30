@@ -1,6 +1,8 @@
-# CASE:404 — Approved implementation choices (2026-10-30)
+# The Astral Archives — Approved implementation choices (2026-10-30)
 
 **Status: CONFIRMED — delegated technical/product defaults.** Technical Owner asked Main Chat to research, choose and approve practical implementations for seven unresolved systems on 2026-10-30. These choices refine the existing I01–I10, E01–E07 and P01 direction. They do not approve story facts, specific mission datasets, art assets, NASA eligibility, package versions or writing game code before contest clearance.
+
+**V11 later team naming decision:** The official title is **The Astral Archives** (replacing former public working name CASE:404). All new player-facing text and presentation must use V11. The `case404` repository, document names, and ID contracts remain unchanged. V04's emblem is temporary until final logo art is provided.
 
 ## X01 — Portrait Evidence Board
 
