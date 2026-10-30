@@ -1,4 +1,4 @@
-# CASE:404 — Agent Instructions
+# The Astral Archives — Agent Instructions
 
 Last updated: 2026-10-30
 
@@ -9,7 +9,7 @@ Before planning or changing anything, read: `README.md`, `docs/DECISIONS.md` (**
 ## Decision authority and source-of-truth rules
 
 - `docs/DECISIONS.md` is the approved working baseline. `docs/CASE404_SOURCE_OF_TRUTH.md` is the original designer handoff, preserved as supplied; its PROPOSED/OPEN/SUPERSEDED sections are **not implementation authorization**.
-- **Newest explicit team approvals V01–V10 prevail** if older approved/proposed/open prose disagrees. Preserve otherwise compatible T/A/I/E/X/P decisions. V09 fixes **four present-day core rooms**; V01 separates observer-only investigation Flashbacks from fictional changeable Rescue Mission time travel; V08 fixes cinematic + 2D point-and-click + portrait dialogue + player-built Mission Builder; V10 chooses shared plus mission-specific past environments. `docs/OPEN_QUESTIONS.md` tracks only still-unresolved details.
+- **Newest explicit team approvals V01–V11 prevail** if older approved/proposed/open prose disagrees. Preserve otherwise compatible T/A/I/E/X/P decisions. V09 fixes **four present-day core rooms**; V01 separates observer-only investigation Flashbacks from fictional changeable Rescue Mission time travel; V08 fixes cinematic + 2D point-and-click + portrait dialogue + player-built Mission Builder; V10 chooses shared plus mission-specific past environments. **V11 fixes the public game title _The Astral Archives_**, superseding CASE:404 as a player-facing name. The GitHub repo `case404` and historical designer source stay unchanged. **The logo is only a temporary V04 concept** until a final asset is supplied and approved. `docs/OPEN_QUESTIONS.md` tracks only still-unresolved details.
 - Explicit user/team corrections override outdated ownership labels in the original. When product/technical choices are not ratified, label them **PROPOSED** or **OPEN**, do not silently approve them.
 - Main project chat owns product/architecture changes; technical chat implements an approved bounded batch. No unilateral feature additions or architecture pivots.
 - Update the smallest relevant decision/specification document when a decision is actually approved; include rationale, date and status. **Also reconcile any older conflicting text in dependent active docs in the same approved batch**; a new note appended to one file is not enough to leave other active instructions misleading. After modifications, **reread the entire changed file** for correctness and contradictions.
