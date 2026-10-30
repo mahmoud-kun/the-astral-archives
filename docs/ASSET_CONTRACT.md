@@ -1,4 +1,4 @@
-# CASE:404 — Asset Handoff Contract (DRAFT)
+# The Astral Archives — Asset Handoff Contract (DRAFT)
 
 Last updated: 2026-10-30
 
@@ -27,9 +27,11 @@ Gameplay logic references **stable `assetId`s**, never final filenames. A placeh
 
 Production asset files, final visual formats/resolutions, naming conventions, UI safe area, scene hotspot overlays, accessibility/touch targets, voice-over spec, **exact lengths/shots for Rescue Mission arrival transitions** and license clearance remain unfinalized. The **opening montage is already fixed at approximately 10 seconds (V05)**. The four core present-day room types and hybrid past presentation are already approved (V08–V10); do not reopen them merely because the asset inventory is incomplete.
 
+**V11 final game title (2026-10-30):** All player-facing title text, launch screens, packaging and any new logo lockup must read **The Astral Archives**. **CASE:404** is an old working title only. V04's protagonist-free three-world logo is still a **temporary concept**, pending actual image delivery, final text lockup, approval and asset metadata; do not claim the logo file exists. The GitHub repository path and historical file names remain unchanged.
+
 ## Designer-confirmed visual scope — 2026-10-30
 
-- **Temporary logo:** use the most recent approved conceptual emblem direction **without the protagonist**, blending Past, Station and Space as one composition. This is the game's temporary logo direction, not an already-delivered production file. A final title lockup, optimized small icon and validated asset/rights information remain pending.
+- **Temporary logo:** use the most recent approved conceptual emblem direction **without the protagonist**, blending Past, Station and Space as one composition. This is the game's temporary logo direction, not an already-delivered production file. A final **The Astral Archives** title lockup, optimized small icon and validated asset/rights information remain pending.
 - **Approved core present station scenes (V09):** **four** distinct rooms — Investigation Office (starting hub/evidence board/five dossiers/Rescue Mission entry), File Archives, Recordings Room and Signal Room — all under the Station navy/orange geometric 2D language. Their map, hotspot layout and asset counts remain open; additional **optional** present rooms are not approved by inference.
 - **Distinct past content types:** (1) evidence-driven interactive **Flashbacks**: protagonist observes, player pauses/zooms/inspects marked and subtle hotspots; (2) fictional **Rescue Mission past**: player interacts with historical mission-team characters and then configures decisions in the Guided Engineering Mission Builder. Keep historical vs fictional alternate-history labels and separate asset IDs.
 - **Cinematic:** 10-second opening montage ends at a rocket transition, then a separately paced director call; do not use 30–40 seconds as the approved intro length.
