@@ -91,3 +91,19 @@ Earlier notes in this file labeling board controls, hint approach, flashback ins
 - NASA challenge focuses on complete mission design/management; investigation-only mechanics do not satisfy that by themselves.
 - 10-second intro montage (source current baseline) vs earlier longer Opportunity cinematic concept: use the source baseline until team revises it. Do not silently produce a 30–40 second intro.
 - Designer source describes the designer as the user; newer team correction establishes user as engineering owner.
+
+## Designer clarifications resolved on 2026-10-30
+
+- **RESOLVED:** Flashback and Rescue Mission are different phases. Flashbacks are interactive observation and clue inspection, not historical editing. Rescue Mission is fictional travel to a changeable earlier timeline, blending authored past-team interactions with the player-controlled Guided Engineering Mission Builder. See V01–V02 in DECISIONS.
+- **RESOLVED (minimum room types only):** Present station must include File Archives, Recordings, and Signal rooms; other rooms, total count, spatial layout and all alternate-history past locations remain open. Previous five-room diagrams were concepts, not a room-count decision.
+- **RESOLVED:** Latest protagonist-free, three-world blended emblem concept serves as the temporary game logo (V04); finalized title, delivery-grade logo file, small-size variant, and licensing review remain open.
+- **RESOLVED:** Intro remains ~10 seconds with a slower director call afterward. Content/Data Owner chooses the five real NASA missions (not yet final).
+
+## New outstanding design/content details
+
+1. Define the additional present-day rooms and the locations reached through each past Rescue Mission; distinguish investigation-only Flashback spaces from changeable alternate-history past-team scenes.
+2. Define the Time Travel transition/fictional rules, the extent of dialogue with historical teams and what can be redesigned, while ensuring player agency, engineering feasibility and historical-fact labels.
+3. Approve the temporary logo's actual deliverable asset/version and final name before considering it ready for production; current decision approves its visual concept only.
+4. Approve precise room/recording/signal clue hotspot inventories and scripts with Content Owner; do not assume every room contains the same evidence in every case.
+
+These clarifications supersede older open-question language that treated the above resolved directions as unchosen, but do not resolve their detailed production specifications.
