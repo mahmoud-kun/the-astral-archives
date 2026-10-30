@@ -26,3 +26,11 @@ Gameplay logic references **stable `assetId`s**, never final filenames. A placeh
 ## Pending
 
 Asset file list, final visual formats/resolutions, naming conventions, UI safe area, scene hotspot overlays, accessibility/touch targets, voice-over spec, cinematic timing and license clearance will be finalized with the Designer and Technical Owner.
+
+## Designer-confirmed visual scope — 2026-10-30
+
+- **Temporary logo:** use the most recent approved conceptual emblem direction **without the protagonist**, blending Past, Station and Space as one composition. This is the game's temporary logo direction, not an already-delivered production file. A final title lockup, optimized small icon and validated asset/rights information remain pending.
+- **Required present station scenes:** File Archives, Recordings Room and Signal Room, all under the Station navy/orange language with shared geometric 2D art direction. Total room count, additional present rooms and layout are not final.
+- **Distinct past content types:** (1) evidence-driven interactive **Flashbacks**: protagonist observes, player pauses/zooms/inspects marked and subtle hotspots; (2) fictional **Rescue Mission past**: player interacts with historical mission-team characters and then configures decisions in the Guided Engineering Mission Builder. Keep historical vs fictional alternate-history labels and separate asset IDs.
+- **Cinematic:** 10-second opening montage ends at a rocket transition, then a separately paced director call; do not use 30–40 seconds as the approved intro length.
+- **Visual language:** Past cream/yellow, Station navy/orange, Space purple, matching geometric 2D artwork. Final HEX tokens, export targets, files and timings beyond the montage remain pending.
