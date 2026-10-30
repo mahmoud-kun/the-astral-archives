@@ -21,7 +21,7 @@
 
 - Interactive 2D reconstructed scene or illustrated sequence with authored hotspot overlays. Player can pause, inspect, zoom and return; replay available from evidence records.
 - Mix marked and subtly unmarked inspectable details per I06. Never require a precision pixel hunt: offer **Inspect Mode** that magnifies/focuses regions, and accessible sequential hotspot navigation, including subtly hidden targets without labeling which ones are important.
-- Inspector is an observer; inspecting cannot alter past events. Every discovery has stable evidence, flashback and asset IDs. Historical/reconstructed/alternate-history scenes must be labeled.
+- Inspector is an observer; inspecting an **Investigation Flashback cannot alter historical events**. Every discovery has stable evidence, flashback and asset IDs. Keep reconstructed historical evidence explicitly labeled and distinguish it from **V01–V02/V08's separate fictional changeable Rescue Mission past**; do not reuse one scene state type for both.
 - Acceptance: touch, keyboard and mouse inspection; replay and no one-clue full-answer leakage. Avoid full free-roaming 3D or pre-rendered interactive video requirements.
 
 ## X04 — Shared program budget: rule model
@@ -56,6 +56,17 @@
 - **Local-first resume**: persist compact versioned progress in browser storage, autosave at meaningful transitions, read/validate/migrate on start, handle quota/disabled storage errors without falsely reporting success. Prefer IndexedDB for scalable saves; use a small adapter so backend/cloud is not needed. Browser data is not guaranteed permanent; user-visible local-save limitations and reset/export policy need final UX.
 - First technical vertical slice **after NASA eligibility clearance**: one station room, two inspectable clues, board link and hypothesis reflection, one interactive flashback, one case-specific basic engineering calculation, save/resume and simulated final evaluation in a test fixture. **Do not treat one-case mock final as approval to change the five-case final reveal in the real game.**
 - Tests: schema/reference validity, touch/tap/keyboard, save/resume, graph state, science units, shared-budget edits, final snapshot and no early outcome. Minimum usable accessibility target WCAG 2.2 AA; aim for 44 CSS px targets where practical, with 24 px AA minimum/spacing exceptions.
+
+## Current team scene constraints (V01–V10; 2026-10-30)
+
+These are **later explicit team decisions**, not new optional X-system proposals. Implement X01–X07 within them:
+
+- **V09 fixes four present-day core rooms:** Investigation Office is the playable hub (Evidence Board, all five dossiers, Rescue Mission access), alongside File Archives, Recordings Room and Signal Room. The one-room engineering **vertical slice is an internal test fixture**, not a reduced approved game specification. Do not reinterpret T07's five-case demo as one playable case.
+- **V01 distinct states:** interactive evidence-bounded Investigation Flashbacks are observer-only and historical. Separately, Rescue Mission is explicitly fictional time-travel to an **alternate** changeable past. Maintain provenance labels, stable scene IDs, different state transitions, and no accidental mixing of historical facts with game changes.
+- **V02/V08 Rescue Mission presentation:** short cinematic arrival, 2D point-and-click environments and inspectable objects, portraits/dialogue with historical mission teams, followed by/interleaved with player-controlled engineering design; story dialogue cannot replace the E01 player-composed Mission Builder.
+- **V10 environments:** reuse shared past location types with case/era variants; add mission-specific scenes as needed. No number of past rooms/scenes is predetermined.
+- **V04/V05/V06:** temporary logo **concept** without protagonist; ~10-second opening montage plus slower director briefing; three agreed visual categories. No production art file exists merely because a concept was approved.
+- **No outcome leakage:** after past interaction or submission, the player may revise any of five plans and reallocate the Global Budget before the one collective Final Evaluation (E05/X04/X06). No per-case verdict or earlier automatic scoring.
 
 ## Still delegated / gated
 
