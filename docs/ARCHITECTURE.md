@@ -140,3 +140,12 @@ Evidence discovery unlocks some flashbacks; evidence deductions unlock deeper sc
 - Verify stable replacement of image/audio/text data without modifying domain logic.
 - Write tests for cross-reference validity, pure simulation constraints, no early result reveal and portrait navigation/back behavior.
 - No backend/database server, queues, Unity/Godot switch, heavy state abstraction or AI API without a new decision record.
+
+## Clarified dual-past presentation — designer confirmation 2026-10-30
+
+Preserve the approved architecture and deterministic simulation engine. The UI/content model distinguishes:
+
+- **Investigation Flashback:** a replayable, interactive *observer* scene for evidence inspection; no choices that rewrite actual history, with clue/evidence IDs and inspectable hotspots (I04–I06/X03).
+- **Rescue Mission Alternate-History:** a distinct fictional interactive past phase containing mission-team story interactions followed by or interleaved with a Guided Engineering Mission Builder; player-authored changes affect the **counterfactual simulation only**. E01–E07, shared budget, live feasibility calculations and one delayed collective outcome remain authoritative.
+
+Shared present-day station scenes include Archives, Recordings and Signal rooms. Their total count, topology, case-specific hotspots and additional past mission settings remain content/design decisions, not fixed architecture. The current protagonist-free three-world concept is an interim branding direction; no production asset is asserted.
