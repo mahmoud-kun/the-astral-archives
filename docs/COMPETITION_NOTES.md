@@ -1,8 +1,10 @@
-# CASE:404 — Competition and Licensing Verification
+# The Astral Archives — Competition and Licensing Verification
 
-Last updated: 2026-10-29
+Last updated: 2026-10-30
 
 **Status: eligibility/compliance check pending. Not legal advice.**
+
+**Official game name (V11; 2026-10-30): The Astral Archives**, replacing CASE:404 as the working/public title. Keep `case404` as the current GitHub repo identifier. The logo art has not yet been delivered, and title/trademark and asset rights are not claimed verified.
 
 - Event target: NASA Space Apps Challenge 2026. The designer brief identifies the challenge as a *Space Mission Design Game*; confirm that this is the registered team’s actual selected challenge.
 - Confirm with official NASA event rules / local event organizer what preparation, code, design work, assets and reused materials are allowed before the hackathon and what must be produced during it. **Do not infer eligibility from the existence of this documentation.**
