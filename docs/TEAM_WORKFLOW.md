@@ -1,4 +1,4 @@
-# CASE:404 — Team and Chat Workflow
+# The Astral Archives — Team and Chat Workflow
 
 Last updated: 2026-10-30
 
@@ -18,8 +18,8 @@ This corrects the owner labels inside the unmodified original designer handoff. 
 
 ## Team-approved scene scope and precedence (2026-10-30)
 
-- Decisions V01–V10 in `DECISIONS.md` override earlier contradictory design notes. The original `CASE404_SOURCE_OF_TRUTH.md` stays unmodified historical input; `OPEN_QUESTIONS.md` has the current unresolved-only list.
-- **Designer:** scope four **core present-day room concepts**: Investigation Office (main hub), File Archives, Recordings Room, Signal Room. Deliver past-scene art as two clearly labeled sets: observer-only evidence Flashbacks, and fictional changeable Rescue Mission past locations. V08 specifies short cinematic arrival, point-and-click 2D scenes and portrait dialogue; V10 permits reusable shared and distinct mission-specific past settings. The temporary three-world emblem is a **concept**, not a delivered logo.
+- Decisions V01–V11 in `DECISIONS.md` override earlier contradictory design notes. The original `CASE404_SOURCE_OF_TRUTH.md` stays unmodified historical input; `OPEN_QUESTIONS.md` has the current unresolved-only list.
+- **Designer:** scope four **core present-day room concepts**: Investigation Office (main hub), File Archives, Recordings Room, Signal Room. Deliver past-scene art as two clearly labeled sets: observer-only evidence Flashbacks, and fictional changeable Rescue Mission past locations. V08 specifies short cinematic arrival, point-and-click 2D scenes and portrait dialogue; V10 permits reusable shared and distinct mission-specific past settings. **V11 fixes the game title to The Astral Archives**, replacing public use of CASE:404; the `case404` repo identifier remains. The temporary three-world emblem is a **concept**, not a delivered logo, so a final title lockup still needs the Designer's asset.
 - **Content Owner:** choose/source historical missions, author the historical Flashback evidence and the distinct fictional past-team dialogue and case-specific interventions, time-travel narrative framing, era/location needs and verified-vs-fictional labels; coordinate before asset list freezes.
 - **Technical Owner:** retain the approved guided player-built Mission Builder, five-case shared budget and one collective final evaluation; define validated independent scene/data types without mixing the observation and intervention timelines. Do not implement until NASA competition eligibility has been verified.
 
