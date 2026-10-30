@@ -1,6 +1,6 @@
 # CASE:404 — Architecture Decision — Approved Foundation
 
-Last updated: 2026-10-29
+Last updated: 2026-10-30
 
 **STATUS: FOUNDATION APPROVED (A01–A03, 2026-10-29).** Main Chat approved the Web-first stack, separation of pure simulation from UI, JSON-driven content, and manifest-based placeholder assets. Detailed simulation rules, data schemas and deployment specifics remain OPEN. Approval is **not** permission to begin competition implementation before official timing/eligibility is cleared.
 
@@ -125,6 +125,15 @@ Evidence discovery unlocks some flashbacks; evidence deductions unlock deeper sc
 - Both kinds use validated stable-ID hotspot/evidence references; hidden details must not require inaccessible precision or reveal a full answer on inspection.
 - Exact indication, zoom, focus navigation and feedback remain OPEN.
 
+## Current team-approved scene flow and distinctions (V01–V10; 2026-10-30)
+
+- **Investigation Office (V09):** primary starting hub, all five concurrent case dossiers, evidence sorting/board and per-dossier Rescue Mission entry. The other present-day core rooms are **File Archives**, **Recordings Room** and **Signal Room**. All four are enterable by room-to-room point-and-click; evidence may unlock deeper sub-interactions without turning cases into sequential levels.
+- **Observer-only Investigation Flashback (I04–I06/X03/V01):** evidence-bounded interactive inspection and replay, with visible and hidden hotspots; no rewrites of historical events.
+- **Fictional Rescue Mission time travel (V01–V02/V08):** a short cinematic entry; 2D point-and-click past scenes with character/object hotspots and portrait dialogue; player configures the case-appropriate engineering intervention using the approved Guided Engineering Mission Builder. Scene dialogue does not select an automatic solution. Past changes exist **only** in the alternate-history simulation.
+- **Hybrid past locations (V10):** share reusable setting types/components across cases, plus selectively unique case locations. Do not hardcode a count or make one new room per historical event by default.
+- **One deferred result (D18/E05):** return to present and revise any of five plans/resources without receiving a case success/failure verdict; the collective Final Evaluation freezes and evaluates all five.
+- **Content contract implication:** separately identify `flashbackId/reconstructionId` and `pastSceneId` plus each scene's `timelineMode` (historical observation vs fictional intervention). Names/fields here are conceptual; exact validated schema remains OPEN. Never label synthetic past dialogue/changed NASA outcomes as archival fact.
+
 ## State/data contract principles
 
 - Stable `missionId`, `evidenceId`, `roomId`, `assetId`; explicit version field for persisted saves.
@@ -148,4 +157,4 @@ Preserve the approved architecture and deterministic simulation engine. The UI/c
 - **Investigation Flashback:** a replayable, interactive *observer* scene for evidence inspection; no choices that rewrite actual history, with clue/evidence IDs and inspectable hotspots (I04–I06/X03).
 - **Rescue Mission Alternate-History:** a distinct fictional interactive past phase containing mission-team story interactions followed by or interleaved with a Guided Engineering Mission Builder; player-authored changes affect the **counterfactual simulation only**. E01–E07, shared budget, live feasibility calculations and one delayed collective outcome remain authoritative.
 
-Shared present-day station scenes include Archives, Recordings and Signal rooms. Their total count, topology, case-specific hotspots and additional past mission settings remain content/design decisions, not fixed architecture. The current protagonist-free three-world concept is an interim branding direction; no production asset is asserted.
+**V09 supersedes earlier room-count uncertainty:** there are **exactly four approved core present-day rooms**: **Investigation Office** (starting hub, five dossiers, Evidence Board, and Rescue Mission access), **File Archives**, **Recordings Room**, and **Signal Room**. Their topology/hotspots and separately approved optional spaces remain open; no fifth core room is implied. **V10:** alternate-history Rescue Mission past uses shared reusable types of environments with era-specific presentation plus mission-specific locations where justified; no approved past scene count. The protagonist-free emblem blending the three worlds is a **temporary logo concept only**; no production asset has been delivered.
