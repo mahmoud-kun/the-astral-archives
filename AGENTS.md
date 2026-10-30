@@ -1,17 +1,18 @@
 # CASE:404 — Agent Instructions
 
-Last updated: 2026-10-29
+Last updated: 2026-10-30
 
 ## Read-first order
 
-Before planning or changing anything, read: `README.md`, `docs/DECISIONS.md`, `docs/OPEN_QUESTIONS.md`, `docs/ARCHITECTURE.md`, `docs/ENGINEERING_STANDARDS.md`, and the current chat bootstrap. Read the designer's `docs/CASE404_SOURCE_OF_TRUTH.md` when product detail or origin is relevant. Read relevant content/asset contracts before making changes to those areas.
+Before planning or changing anything, read: `README.md`, `docs/DECISIONS.md` (**especially V01–V10**), `docs/OPEN_QUESTIONS.md`, `docs/ARCHITECTURE.md`, `docs/ENGINEERING_STANDARDS.md`, and the current chat bootstrap. Read the designer's `docs/CASE404_SOURCE_OF_TRUTH.md` when product detail or origin is relevant. Read relevant content/asset contracts before making changes to those areas.
 
 ## Decision authority and source-of-truth rules
 
 - `docs/DECISIONS.md` is the approved working baseline. `docs/CASE404_SOURCE_OF_TRUTH.md` is the original designer handoff, preserved as supplied; its PROPOSED/OPEN/SUPERSEDED sections are **not implementation authorization**.
+- **Newest explicit team approvals V01–V10 prevail** if older approved/proposed/open prose disagrees. Preserve otherwise compatible T/A/I/E/X/P decisions. V09 fixes **four present-day core rooms**; V01 separates observer-only investigation Flashbacks from fictional changeable Rescue Mission time travel; V08 fixes cinematic + 2D point-and-click + portrait dialogue + player-built Mission Builder; V10 chooses shared plus mission-specific past environments. `docs/OPEN_QUESTIONS.md` tracks only still-unresolved details.
 - Explicit user/team corrections override outdated ownership labels in the original. When product/technical choices are not ratified, label them **PROPOSED** or **OPEN**, do not silently approve them.
 - Main project chat owns product/architecture changes; technical chat implements an approved bounded batch. No unilateral feature additions or architecture pivots.
-- Update the smallest relevant decision/specification document when a decision is actually approved; include rationale, date and status. After modifications, **reread the entire changed file** for correctness and contradictions.
+- Update the smallest relevant decision/specification document when a decision is actually approved; include rationale, date and status. **Also reconcile any older conflicting text in dependent active docs in the same approved batch**; a new note appended to one file is not enough to leave other active instructions misleading. After modifications, **reread the entire changed file** for correctness and contradictions.
 
 ## Senior-engineering standard (current, not fashion-driven)
 
