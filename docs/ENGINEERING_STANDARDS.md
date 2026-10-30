@@ -1,6 +1,6 @@
-# CASE:404 — Modern Engineering Standard
+# The Astral Archives — Modern Engineering Standard
 
-Last updated: 2026-10-29
+Last updated: 2026-10-30
 
 Status: Reviewed technical guidance. **The React + strict TypeScript + Vite foundation is approved (A01–A03, 2026-10-29)**; exact dependency versions, optional tooling and simulation schemas remain unapproved.
 
@@ -15,6 +15,8 @@ Status: Reviewed technical guidance. **The React + strict TypeScript + Vite foun
 - npm clean/reproducible installation: https://docs.npmjs.com/cli/commands/npm-ci/
 
 Do **not** hard-code a `latest` version into docs or write an unverified lockfile. At authorized scaffold time, check official peer dependencies/engines/releases, install compatible stable versions, lock them and record the actual tested versions in `package.json`/lockfile and the implementation handoff.
+
+**V11 naming boundary (2026-10-30):** Ship UI and app metadata under the title **The Astral Archives**. `case404` remains the repository/legacy identifier and is not a reason to rename stable IDs. No production logo has been supplied.
 
 ## React architecture
 
