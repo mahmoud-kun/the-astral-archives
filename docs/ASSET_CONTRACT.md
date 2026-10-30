@@ -34,3 +34,9 @@ Asset file list, final visual formats/resolutions, naming conventions, UI safe a
 - **Distinct past content types:** (1) evidence-driven interactive **Flashbacks**: protagonist observes, player pauses/zooms/inspects marked and subtle hotspots; (2) fictional **Rescue Mission past**: player interacts with historical mission-team characters and then configures decisions in the Guided Engineering Mission Builder. Keep historical vs fictional alternate-history labels and separate asset IDs.
 - **Cinematic:** 10-second opening montage ends at a rocket transition, then a separately paced director call; do not use 30–40 seconds as the approved intro length.
 - **Visual language:** Past cream/yellow, Station navy/orange, Space purple, matching geometric 2D artwork. Final HEX tokens, export targets, files and timings beyond the montage remain pending.
+
+## Rescue Mission visual presentation — confirmed 2026-10-30
+
+- Approved **Cinematic + Interactive Hybrid (V08)** for alternate-history past interactions: short arrival transition; stylized 2D point-and-click background(s) with character/object hotspots; portrait dialogue panels and expressions; reusable Mission Builder presentation; return transition without early outcome reveal.
+- Assets should be separable and replaceable by manifest ID: transition media, past environment backgrounds, interactive object states, character portraits/expressions, dialogue UI and engineering UI art. Do not assume continuous character animation or a fully animated cutscene for every conversation.
+- Exact shot count, timing, portraits per case, object inventory and exports are not yet final; coordinate with Content Owner and Engineer before producing full case-specific sets.
