@@ -1,5 +1,8 @@
 # The Astral Archives — Architecture Decision — Approved Foundation
 
+> **2026-11-09 gameplay update:** See [Gameplay & UX Decisions (2026-11-09)](GAMEPLAY_DESIGN_2026-11-09.md) for the newer designer-approved first-person investigation, folder-based evidence progress, contextual robot assistance, past engineering interaction, and per-mission outcomes. It **supersedes conflicting older gameplay directions**, especially mandatory deduction-board gating and collective-only result reveal. Shared Global Budget, observer-only flashbacks, historical content and responsive orientation have unresolved reconciliation points; do not treat old conflicting prescriptions as simultaneous requirements. Documentation update only; no gameplay implementation.
+
+
 Last updated: 2026-10-30
 
 **STATUS: FOUNDATION APPROVED (A01–A03, 2026-10-29).** Main Chat approved the Web-first stack, separation of pure simulation from UI, JSON-driven content, and manifest-based placeholder assets. Detailed simulation rules, data schemas and deployment specifics remain OPEN. Approval is **not** permission to begin competition implementation before official timing/eligibility is cleared.
