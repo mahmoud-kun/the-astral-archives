@@ -6,6 +6,7 @@ type RoomId = 'investigation' | 'archive' | 'recordings' | 'signal'
 type InspectionId = 'mission-files' | 'evidence-board' | 'desk-terminal' | 'archive-console' | 'recording-console' | 'signal-console'
 type LayoutMode = 'auto' | 'portrait'
 type DialogueKind = 'intro' | 'hint' | 'support' | null
+type SceneId = 'menu' | RoomId
 type IconName = 'search' | 'folder' | 'gear' | 'expand' | 'arrow' | 'close' | 'compass' | 'chevron' | 'eye' | 'back' | 'info' | 'signal'
 
 const ROOMS: { id: RoomId; title: string; code: string; location: string }[] = [
@@ -82,6 +83,64 @@ function Emblem({ small = false }: { small?: boolean }) {
   </div>
 }
 
+const SCENES: Record<SceneId, { webp: string; mobile: string; fallback: string }> = {
+  menu: { webp: '/assets/optimized/menu-archive.webp', mobile: '/assets/optimized/menu-archive-sm.webp', fallback: '/assets/rooms/Archive_Original_REFERENCE.png' },
+  investigation: { webp: '/assets/optimized/room-investigation.webp', mobile: '/assets/optimized/room-investigation-sm.webp', fallback: '/assets/rooms/Investigation_Wide_Artwork.png' },
+  archive: { webp: '/assets/optimized/room-archive.webp', mobile: '/assets/optimized/room-archive-sm.webp', fallback: '/assets/rooms/Archive_Original_REFERENCE.png' },
+  recordings: { webp: '/assets/optimized/room-recordings.webp', mobile: '/assets/optimized/room-recordings-sm.webp', fallback: '/assets/rooms/Recordings_Original_REFERENCE.png' },
+  signal: { webp: '/assets/optimized/room-signal.webp', mobile: '/assets/optimized/room-signal-sm.webp', fallback: '/assets/rooms/Signal_Original_REFERENCE.png' },
+}
+
+function SceneVisual({ scene }: { scene: SceneId }) {
+  const [fallback, setFallback] = useState(false)
+  const [loaded, setLoaded] = useState(false)
+  const asset = SCENES[scene]
+  return (
+    <div className={scene === 'menu' ? 'menu-scene' : 'station-room-art'} aria-hidden="true">
+      <img className={'scene-image' + (loaded ? ' is-loaded' : '')}
+        src={fallback ? asset.fallback : asset.webp}
+        srcSet={fallback ? undefined : asset.mobile + ' 960w, ' + asset.webp + ' 1920w'}
+        sizes="100vw" decoding="async" loading="eager"
+        fetchPriority={scene === 'menu' ? 'high' : 'auto'} alt=""
+        onLoad={() => setLoaded(true)}
+        onError={() => { if (!fallback) { setFallback(true); setLoaded(false) } }}
+      />
+    </div>
+  )
+}
+
+function HendaPortrait() {
+  const [fallback, setFallback] = useState(false)
+  return <img
+    src={fallback ? '/assets/henda-portrait-prototype.svg' : '/assets/optimized/henda-portrait-sm.webp'}
+    srcSet={fallback ? undefined : '/assets/optimized/henda-portrait-sm.webp 180w, /assets/optimized/henda-portrait.webp 360w'}
+    sizes="(max-width: 580px) 73px, (max-width: 800px) 90px, 119px"
+    alt="Henda, the investigator, with auburn hair, glasses and an engineering suit"
+    width="180" height="244" loading="eager" decoding="async"
+    onError={() => { if (!fallback) setFallback(true) }}
+  />
+}
+
+// Only the entered scene is fetched; the other three rooms are never bulk-loaded.
+function preloadScene(scene: SceneId): Promise<void> {
+  const asset = SCENES[scene]
+  const width = window.innerWidth * Math.min(window.devicePixelRatio || 1, 2)
+  const source = width <= 960 ? asset.mobile : asset.webp
+  return new Promise(resolve => {
+    const image = new Image()
+    let resolved = false
+    const finish = () => { if (!resolved) { resolved = true; resolve() } }
+    image.onload = finish
+    image.onerror = () => {
+      const backup = new Image()
+      backup.onload = finish
+      backup.onerror = finish
+      backup.src = asset.fallback
+    }
+    image.src = source
+  })
+}
+
 function App() {
   const [screen, setScreen] = useState<Screen>('menu')
   const [overlay, setOverlay] = useState<Overlay>(null)
@@ -94,6 +153,7 @@ function App() {
   const [hintUsed, setHintUsed] = useState(false)
   const [activity, setActivity] = useState(0)
   const frameRef = useRef<HTMLDivElement>(null)
+  const [openingMessage, setOpeningMessage] = useState('CONNECTING TO ARCHIVES')
 
   const room = ROOMS.find(item => item.id === roomId) ?? ROOMS[0]
   const revealIdentity = visited.length >= 2
@@ -107,13 +167,18 @@ function App() {
 
   useEffect(() => {
     if (screen !== 'opening') return
-    const timer = window.setTimeout(() => {
+    let cancelled = false
+    const minimum = new Promise<void>(resolve => window.setTimeout(resolve, 850))
+    const timeout = new Promise<void>(resolve => window.setTimeout(resolve, 7000))
+    setOpeningMessage('PREPARING INVESTIGATION ROOM')
+    void Promise.all([minimum, Promise.race([preloadScene('investigation'), timeout])]).then(() => {
+      if (cancelled) return
       setRoomId('investigation')
       setScreen('station')
       setDialogue('intro')
       setActivity(value => value + 1)
-    }, 1500)
-    return () => window.clearTimeout(timer)
+    })
+    return () => { cancelled = true }
   }, [screen])
 
   useEffect(() => {
@@ -177,7 +242,7 @@ function App() {
   return (
     <div ref={frameRef} className={'experience layout-' + layoutMode + ' phase-' + screen}>
       {screen === 'menu' && <main className="menu-view">
-        <div className="menu-scene" aria-hidden="true"/>
+        <SceneVisual scene="menu"/>
         <div className="menu-atmosphere" aria-hidden="true"/>
         <div className="menu-frame">
           <header className="menu-topbar">
@@ -190,10 +255,10 @@ function App() {
               <span className="title-the">THE</span>
               <h1><span>ASTRAL</span><strong>ARCHIVES</strong></h1>
             </div>
-            <p className="menu-description">Every mission leaves a trace.<br/>Every answer changes the future.</p>
+            <p className="menu-description">Somewhere in these archives, every mission left an answer.<br/>Find what history could not explain.</p>
             <div className="menu-rule"><Emblem small/><span>INVESTIGATE <b>·</b> ANALYZE <b>·</b> REDESIGN <b>·</b> RESCUE</span></div>
             <nav className="menu-actions" aria-label="Choose an action">
-              <button className="game-button game-button-primary" onClick={begin}><span className="button-symbol"><Icon name="search"/></span><span className="button-text"><strong>START INVESTIGATION</strong><small>BEGIN THE FIRST CASE</small></span><Icon name="arrow" size={20}/></button>
+              <button className="game-button game-button-primary" onClick={begin}><span className="button-symbol"><Icon name="search"/></span><span className="button-text"><strong>START INVESTIGATION</strong><small>ENTER THE STATION</small></span><Icon name="arrow" size={20}/></button>
               <button className="game-button" onClick={() => setOverlay('archives')}><span className="button-symbol"><Icon name="folder"/></span><span className="button-text"><strong>MISSION ARCHIVES</strong><small>FIVE UNRESOLVED FILES</small></span><Icon name="chevron" size={18}/></button>
               <button className="game-button game-button-compact" onClick={() => setOverlay('settings')}><span className="button-symbol"><Icon name="gear"/></span><span className="button-text"><strong>SETTINGS</strong></span><Icon name="chevron" size={18}/></button>
               <button className="game-button game-button-compact" onClick={toggleFullscreen}><span className="button-symbol"><Icon name="expand"/></span><span className="button-text"><strong>{fullscreen ? 'EXIT FULLSCREEN' : 'FULLSCREEN'}</strong></span><Icon name="chevron" size={18}/></button>
@@ -203,10 +268,10 @@ function App() {
         </div>
       </main>}
 
-      {screen === 'opening' && <div className="opening-view" role="status" aria-label="Entering investigation room"><Emblem/><span>THE ARCHIVES ARE OPENING</span><div className="opening-line"/></div>}
+      {screen === 'opening' && <div className="opening-view" role="status" aria-label="Preparing investigation room"><Emblem/><span className="opening-kicker">INVESTIGATION CONNECTION</span><strong>{openingMessage}</strong><div className="opening-line"><span/></div><small>RETRIEVING STATION VISUALS</small></div>}
 
       {screen === 'station' && <main className={'station-view room-' + roomId}>
-        <div className="station-room-art" aria-hidden="true"/>
+        <SceneVisual key={roomId} scene={roomId}/>
         <div className="station-vignette" aria-hidden="true"/>
         <header className="station-topbar">
           <div className="room-identity"><Emblem small/><div><span className="room-kicker">STATION / PRESENT TIMELINE</span><strong>{room.title.toUpperCase()}</strong></div></div>
@@ -231,7 +296,7 @@ function App() {
         <div className="station-footer"><span className="coordinate-mark">{room.location.toUpperCase()}</span><span className="coordinate-mark">ROOM {room.code} / 04</span></div>
 
         {dialogue && <aside className="dialogue-card" aria-live="polite">
-          <div className="character-frame"><img src="/assets/henda-portrait-prototype.svg" alt="A woman in an engineer's uniform, with long auburn hair and glasses" /></div>
+          <div className="character-frame"><HendaPortrait/></div>
           <div className="dialogue-copy"><div className="dialogue-overline"><span className="voice-indicator"/>{revealIdentity ? 'HENDA / INVESTIGATION ENGINEER' : 'INCOMING VOICE / IDENTITY UNKNOWN'}</div>
             <p>{dialogue === 'intro' ? 'Five files. Five missions. We need to understand what went wrong.' : dialogue === 'hint' ? 'There must be something useful in the files. I wonder what the mission records tell us.' : 'If I wanted to understand this place, I would start with whatever the room was built to keep.'}</p>
             <span className="dialogue-subtitle">INTERCOM / TEXT CAPTION</span>
