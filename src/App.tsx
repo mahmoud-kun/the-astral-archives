@@ -115,7 +115,7 @@ function HendaPortrait() {
     src={fallback ? '/assets/henda-portrait-prototype.svg' : '/assets/optimized/henda-portrait-sm.webp'}
     srcSet={fallback ? undefined : '/assets/optimized/henda-portrait-sm.webp 180w, /assets/optimized/henda-portrait.webp 360w'}
     sizes="(max-width: 580px) 73px, (max-width: 800px) 90px, 119px"
-    alt="Henda, the investigator, with auburn hair, glasses and an engineering suit"
+    alt="Portrait of a glasses-wearing space investigator in an engineering suit"
     width="180" height="244" loading="eager" decoding="async"
     onError={() => { if (!fallback) setFallback(true) }}
   />
