@@ -1,0 +1,27 @@
+/* THE ASTRAL ARCHIVES — HYBRID EVIDENCE TYPOGRAPHY */
+/* Online font loading; for offline builds, vendor properly licensed fonts in the app. */
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap');
+:root {
+  --font-display: 'Orbitron', 'Arial', sans-serif;
+  --font-ui: 'IBM Plex Sans', Arial, sans-serif;
+  --font-mono: 'IBM Plex Mono', Consolas, monospace;
+  --font-ui-ar: 'IBM Plex Sans Arabic', Tahoma, sans-serif;
+  --color-ink: #F2E8D2;
+  --color-muted: #91AFC0;
+  --color-bg: #081B2B;
+  --color-panel: #102C3D;
+  --color-active: #F4A261;
+  --color-signal: #2EC4C3;
+}
+body { font-family: var(--font-ui); font-size: 16px; line-height: 1.5; }
+:lang(ar) { font-family: var(--font-ui-ar); line-height: 1.7; direction: rtl; }
+.game-title { font-family: var(--font-display); font-size: clamp(30px, 5vw, 44px); font-weight: 600; letter-spacing: .08em; line-height: 1.15; }
+.room-heading { font-family: var(--font-display); font-size: 28px; font-weight: 600; line-height: 1.25; }
+.panel-heading { font-family: var(--font-ui); font-size: 20px; font-weight: 600; }
+.evidence-card__title { font-family: var(--font-ui); font-size: 18px; font-weight: 600; }
+.evidence-body { font-family: var(--font-ui); font-size: 16px; font-weight: 400; line-height: 1.5; }
+.evidence-caption { font-family: var(--font-ui); font-size: 14px; color: var(--color-muted); }
+.evidence-code, .evidence-timestamp, .telemetry-value { font-family: var(--font-mono); font-size: 13px; font-weight: 500; font-variant-numeric: tabular-nums; direction: ltr; unicode-bidi: isolate; }
+.evidence-button { font-family: var(--font-ui); font-size: 15px; font-weight: 600; }
+:lang(ar).evidence-body, :lang(ar).evidence-button, :lang(ar).evidence-caption { font-family: var(--font-ui-ar); }
+@media (max-width: 480px) { .room-heading { font-size: 23px; } .panel-heading { font-size: 18px; } .evidence-card__title { font-size: 16px; } }
