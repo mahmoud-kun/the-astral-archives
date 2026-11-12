@@ -286,3 +286,119 @@ button:disabled { cursor: not-allowed; }
 @media (prefers-reduced-motion: reduce) {
   * { animation-duration: .01ms !important; transition-duration: .01ms !important; scroll-behavior: auto !important; }
 }
+
+/* V4: actual image element, responsive sources and progressive crossfade.
+   No large room images are referenced by CSS; only the mounted scene downloads. */
+.menu-scene { background: linear-gradient(125deg,#102b3b,#071323 60%,#112e41); overflow: hidden; }
+.station-room-art { background: linear-gradient(130deg,#142c43,#071422); overflow: hidden; }
+.room-investigation .station-room-art,
+.room-archive .station-room-art,
+.room-recordings .station-room-art,
+.room-signal .station-room-art { background-image: none; }
+.scene-image {
+  display: block; position: absolute; width: 100%; height: 100%;
+  inset: 0; object-fit: cover; object-position: center;
+  opacity: 0; filter: saturate(.95);
+  transform: scale(1.023);
+  transition: opacity .85s cubic-bezier(.22,1,.36,1),transform 3.2s cubic-bezier(.2,.7,.15,1);
+  will-change: opacity;
+}
+.scene-image.is-loaded { opacity: 1; transform: scale(1); }
+.menu-scene .scene-image { object-position: 62% center; }
+.room-investigation .scene-image { object-position: 50% center; }
+.room-archive .scene-image { object-position: 63% center; }
+.room-recordings .scene-image { object-position: 50% center; }
+.room-signal .scene-image { object-position: 56% center; }
+
+/* Restrained cinematic entrance: focus/title first, actions in a short cascade. */
+.menu-topbar { animation: fadeInDown .6s both; }
+.menu-overline { animation: fadeInDown .68s .07s both; }
+.menu-title { animation: revealTitle .84s .1s both; }
+.menu-description, .menu-rule { animation: fadeInUp .7s .22s both; }
+.menu-actions .game-button { animation: fadeInUp .52s cubic-bezier(.16,1,.3,1) both; }
+.menu-actions .game-button:nth-child(1) { animation-delay: .30s; }
+.menu-actions .game-button:nth-child(2) { animation-delay: .36s; }
+.menu-actions .game-button:nth-child(3) { animation-delay: .42s; }
+.menu-actions .game-button:nth-child(4) { animation-delay: .48s; }
+.menu-footer { animation: fadeInUp .56s .47s both; }
+.game-button {
+  isolation: isolate; transition: transform .22s cubic-bezier(.2,.8,.2,1),background .2s,border-color .2s,box-shadow .2s;
+  touch-action: manipulation;
+}
+.game-button .button-symbol { transition: transform .22s,background-color .22s; }
+.game-button:hover .button-symbol, .game-button:focus-visible .button-symbol { transform: rotate(-7deg) scale(1.08); }
+.game-button > svg { transition: transform .22s cubic-bezier(.18,.9,.24,1); }
+.game-button:hover > svg,.game-button:focus-visible > svg { transform: translateX(5px); }
+.game-button:active { transform: translateX(3px) scale(.986); }
+.game-button-primary { position: relative; }
+.game-button-primary:focus-visible { outline-color: var(--orange); }
+.menu-view::after {
+  content: ''; position: absolute; z-index: 1; inset: 0;
+  pointer-events: none; background: radial-gradient(ellipse at 66% 65%,#f4a26108,transparent 55%);
+}
+.menu-frame { z-index: 2; }
+.menu-title h1 strong { filter: drop-shadow(0 0 13px #2ec4c322); }
+.menu-rule .emblem { animation: slowTurn 18s linear infinite; }
+
+/* Native visual loading indicator, deliberately no invented progress %. */
+.opening-view {
+  background:
+    radial-gradient(ellipse at 50% 48%,#153047a8,transparent 56%),
+    linear-gradient(145deg,#05101e,#020710);
+  gap: 16px;
+  text-align: center; padding: 22px;
+}
+.opening-view .emblem { width: 76px; height: 76px; }
+.opening-view .opening-kicker { font: 9px 'IBM Plex Mono',monospace; color: var(--orange); letter-spacing: .21em; }
+.opening-view strong { font: 500 clamp(12px,1.8vw,16px) 'Orbitron',sans-serif; letter-spacing: .16em; color: #d7e5eb; }
+.opening-view small { font: 9px 'IBM Plex Mono',monospace; letter-spacing: .12em; color: #749cab; }
+.opening-line { height: 2px; width: min(280px,66vw); position: relative; overflow: hidden; background: #21455a; }
+.opening-line > span { position: absolute; left: -38%; width: 38%; height: 100%; display: block; background: linear-gradient(90deg,transparent,var(--cyan),var(--orange)); box-shadow: 0 0 12px var(--cyan); animation: loadingSweep 1.25s cubic-bezier(.4,0,.4,1) infinite; }
+
+/* Investigation room remains the dominant visual. Only real focus changes glow. */
+.room-hotspots { z-index: 2; }
+.station-topbar { animation: fadeInDown .6s .12s both; }
+.station-footer { animation: fadeInUp .55s .38s both; }
+.hotspot-ring { animation: hotspotBreathe 3.1s ease-in-out infinite; }
+.scene-hotspot:hover .hotspot-ring,.scene-hotspot:focus-visible .hotspot-ring {
+  animation-play-state: paused;
+  box-shadow: 0 0 13px #2ec4c3dd,0 0 25px #f4a26144;
+}
+.scene-hotspot { -webkit-tap-highlight-color: transparent; touch-action: manipulation; }
+.scene-hotspot:active { background: #f4a26117; }
+.modal-scrim { animation: modalAppear .2s ease both; }
+.archive-panel { animation: panelEnter .34s cubic-bezier(.16,1,.3,1) both; }
+.dossier-card { transition: transform .2s,box-shadow .2s,border-color .2s; }
+.dossier-card:hover { transform: translateY(-3px); border-color: #6da4b2; box-shadow: 0 10px 30px #0005; }
+.room-list-entry { transition: transform .2s ease,border-color .2s,background-color .2s; }
+.room-list-entry:active { transform: scale(.99); }
+.tool-button { touch-action: manipulation; }
+.character-frame img { object-fit: cover; object-position: center 16%; }
+.dialogue-card { animation: dialogueArrive .38s cubic-bezier(.16,1,.3,1) both; }
+
+@keyframes fadeInDown { from { opacity: 0; transform: translateY(-14px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes fadeInUp { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes revealTitle { from { opacity: 0; transform: translateY(18px) scale(.985); filter: blur(5px); } to { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); } }
+@keyframes loadingSweep { to { left: 100%; } }
+@keyframes hotspotBreathe { 0%,100% { opacity: .44; transform: scale(.9); } 50% { opacity: .9; transform: scale(1.08); } }
+@keyframes panelEnter { from { opacity: 0; transform: translateY(18px) scale(.975); } to { opacity: 1; transform: translateY(0) scale(1); } }
+
+@media (max-width: 800px) {
+  .menu-scene .scene-image { object-position: 62% center; }
+}
+@media (max-width: 580px) {
+  .menu-scene .scene-image { object-position: 58% center; }
+  .room-investigation .scene-image { object-position: 47% center; }
+  .menu-title h1 { font-size: clamp(35px,10vw,58px); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .menu-topbar,.menu-overline,.menu-title,.menu-description,.menu-rule,
+  .menu-actions .game-button,.menu-footer,.station-topbar,.station-footer,
+  .hotspot-ring,.archive-panel,.modal-scrim,.dialogue-card,.menu-rule .emblem,
+  .opening-line > span,.opening-view .emblem,.menu-scene,.station-view {
+    animation: none !important; opacity: 1 !important; transform: none !important;
+  }
+  .scene-image,.game-button,.button-symbol,.game-button > svg,.room-list-entry,
+  .dossier-card { transition: none !important; }
+  .scene-image { transform: none !important; }
+}
