@@ -30,6 +30,7 @@ function App() {
   const [isFullscreen, setIsFullscreen] = useState(Boolean(document.fullscreenElement))
   const [showDialogue, setShowDialogue] = useState(false)
   const [currentLine, setCurrentLine] = useState(0)
+  const [hintShown, setHintShown] = useState(false)
   const [visited, setVisited] = useState<string[]>([])
   const [activeHotspot, setActiveHotspot] = useState<string | null>(null)
   const hintTimer = useRef<number | null>(null)
@@ -55,21 +56,22 @@ function App() {
 
   useEffect(() => {
     if (screen !== 'office') return
-    if (hotspotCount > 0 || activeHotspot || showDialogue) {
+    if (hotspotCount > 0 || activeHotspot || showDialogue || hintShown) {
       if (hintTimer.current !== null) window.clearTimeout(hintTimer.current)
       return
     }
     const elapsed = Date.now() - sessionStartedAt.current
     hintTimer.current = window.setTimeout(() => {
       setCurrentLine(1)
+      setHintShown(true)
       setShowDialogue(true)
     }, Math.max(0, 60000 - elapsed))
     return () => { if (hintTimer.current !== null) window.clearTimeout(hintTimer.current) }
-  }, [screen, hotspotCount, activeHotspot, showDialogue])
+  }, [screen, hotspotCount, activeHotspot, showDialogue, hintShown])
 
   function start() {
     setPanel(null); setShowDialogue(false); setVisited([]); setActiveHotspot(null)
-    setCurrentLine(0); setScreen('transition')
+    setCurrentLine(0); setHintShown(false); setScreen('transition')
   }
 
   function inspect(id: string) {
