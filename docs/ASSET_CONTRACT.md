@@ -1,5 +1,8 @@
 # The Astral Archives — Asset Handoff Contract (DRAFT)
 
+> **LATEST 360° USER APPROVAL / 2026-11-13 (supersedes older camera and 2D-only status below):** Mahmoud authorized a **fixed seated first-person 360° look camera**, including optional lightweight 3D, for a separate Investigation Room experiment. The currently active experiment uses Three.js procedural geometry and preserves the previous 2.5D as a comparison fallback. No free-roam or movement. This does not approve final art, modify NASA mission/evidence rules, or authorize merge to `main`. See [Seated 360° experimental checkpoint](SEATED_360_PROTOTYPE_2026-11-13.md). Player/browser/mobile/FPS validation remains pending.
+
+
 > **CURRENT V2.2 / 2026-11-13 (latest; overrides historical preview status below):** Mahmoud requested a designer-reference-faithful, **separately authored 2D reconstruction**. V2.1 raster/background and cutout rendering was explicitly rejected and is **not active**. The current experiment uses **20 independent SVG scene assets** in `public/assets/experiments/investigation-room-v2-2/`, with **zero direct reference-image rendering** in `Investigation25D.tsx`. Camera V3 control feel was user-accepted and behavior is preserved; player/designer validation of V2.2 visuals, real browser/mobile tests and measured performance remain **pending**. Report: [V2.2 designer-faithful layered scene](DESIGNER_FAITHFUL_LAYERED_V2_2_2026-11-13.md). This status applies only to `experiment/interactive-investigation-v2-2026-11-13`; no merge to main or original asset replacement is authorized.
 
 
