@@ -273,7 +273,7 @@ function App() {
 
       {screen === 'station' && <main className={'station-view room-' + roomId}>
         {roomId === 'investigation'
-          ? <Investigation25D disabled={Boolean(overlay)} onInspect={inspect} onExit={() => changeRoom('archive')}/>
+          ? <Investigation25D disabled={Boolean(overlay || dialogue)} onInspect={inspect} onExit={() => changeRoom('archive')}/>
           : <SceneVisual key={roomId} scene={roomId}/>}
         
         <div className="station-vignette" aria-hidden="true"/>
