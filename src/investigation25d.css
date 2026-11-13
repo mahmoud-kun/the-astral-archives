@@ -286,6 +286,9 @@
   pointer-events: none;
 }
 .exploration-room-far { transform: translate3d(var(--far-motion), 0, 0); }
+/* The opaque back wall stays edge-to-edge so the old still can never peek out
+   during parallax movement; all nearer planes continue moving independently. */
+.exploration-room-layer:first-child { transform: none; }
 .exploration-room-mid { transform: translate3d(var(--mid-motion), 0, 0); }
 .exploration-room-near { transform: translate3d(var(--near-motion), 0, 0); }
 .exploration-room-foreground { transform: translate3d(var(--near-motion-right), 0, 0); }
