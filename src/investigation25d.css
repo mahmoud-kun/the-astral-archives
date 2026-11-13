@@ -264,35 +264,68 @@
   .exploration-aim .aim-ring { transition: none; }
 }
 
-/* EXPERIMENTAL FULL-ROOM ART V2 — nine full-canvas, separate SVG images.
-   Camera V3 motion, hotspot positions, focus and pointer behavior are unchanged.
-   Artwork uses 1920x824 matching the world aspect ratio (~2.33:1). */
-.exploration-room-layers {
+/* DESIGNER-FIDELITY V2.1
+   The actual approved-reference Investigation Room image is the visible scene.
+   These masked image copies isolate EXISTING features for subtle independent
+   parallax. Avoid adding fictional cabinets, new architecture or new props.
+   Cutout movement is deliberately small to minimize double-edge artifacts. */
+.exploration-far-wall picture {
+  transform: none; /* Exact image-to-cutout registration. */
+  will-change: auto;
+}
+.exploration-designer-layers {
   position: absolute;
   inset: 0;
   z-index: 1;
-  overflow: hidden;
   pointer-events: none;
+  overflow: hidden;
 }
-.exploration-room-layer {
+.exploration-designer-layer {
   position: absolute;
   inset: 0;
-  width: 100%;
-  height: 100%;
-  display: block;
-  object-fit: fill;
-  user-select: none;
-  -webkit-user-drag: none;
   pointer-events: none;
+  background-image: url('/assets/optimized/investigation-panorama-hq.webp');
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  background-position: center;
+  user-select: none;
+  -webkit-user-select: none;
+  will-change: transform;
 }
-.exploration-room-far { transform: translate3d(var(--far-motion), 0, 0); }
-/* The opaque back wall stays edge-to-edge so the old still can never peek out
-   during parallax movement; all nearer planes continue moving independently. */
-.exploration-room-layer:first-child { transform: none; }
-.exploration-room-mid { transform: translate3d(var(--mid-motion), 0, 0); }
-.exploration-room-near { transform: translate3d(var(--near-motion), 0, 0); }
-.exploration-room-foreground { transform: translate3d(var(--near-motion-right), 0, 0); }
-.exploration-room-light { transform: translate3d(var(--far-motion), 0, 0); }
-.exploration-atmospheric-glow,
-.exploration-dust { z-index: 2; }
-.exploration-surfaces { z-index: 3; }
+.exploration-designer-mid { transform: translate3d(var(--designer-mid-motion),0,0); }
+.exploration-designer-near { transform: translate3d(var(--designer-near-motion),0,0); }
+.exploration-designer-front { transform: translate3d(var(--designer-foreground-motion),0,0); }
+/* Each polygon is anchored to locations in the original 1916x821 reference. */
+.exploration-designer-files {
+  clip-path: polygon(17% 26%, 31.5% 26%, 32% 67%, 17% 68%);
+  -webkit-mask-image: radial-gradient(ellipse 18% 32% at 24% 47%, black 48%, transparent 100%);
+  mask-image: radial-gradient(ellipse 18% 32% at 24% 47%, black 48%, transparent 100%);
+}
+.exploration-designer-board {
+  clip-path: polygon(34% 32%, 48.5% 31%, 49.5% 54%, 33.5% 56%);
+  -webkit-mask-image: radial-gradient(ellipse 17% 20% at 41.5% 43%, black 46%, transparent 100%);
+  mask-image: radial-gradient(ellipse 17% 20% at 41.5% 43%, black 46%, transparent 100%);
+}
+.exploration-designer-desk {
+  clip-path: polygon(34.5% 47%, 66% 46%, 67.5% 79%, 33% 81%);
+  -webkit-mask-image: radial-gradient(ellipse 36% 28% at 50% 65%, black 57%, transparent 100%);
+  mask-image: radial-gradient(ellipse 36% 28% at 50% 65%, black 57%, transparent 100%);
+}
+.exploration-designer-portal {
+  clip-path: polygon(72% 22%, 85% 22%, 88.5% 28%, 89% 67%, 70.5% 73%, 68% 46%);
+  -webkit-mask-image: radial-gradient(ellipse 22% 39% at 79% 47%, black 46%, transparent 100%);
+  mask-image: radial-gradient(ellipse 22% 39% at 79% 47%, black 46%, transparent 100%);
+}
+.exploration-designer-left-front {
+  clip-path: polygon(0 62%, 17% 67%, 18% 100%, 0 100%);
+  -webkit-mask-image: radial-gradient(ellipse 24% 36% at 5% 88%, black 38%, transparent 99%);
+  mask-image: radial-gradient(ellipse 24% 36% at 5% 88%, black 38%, transparent 99%);
+}
+.exploration-designer-right-front {
+  clip-path: polygon(84% 70%, 100% 64%, 100% 100%, 83% 100%);
+  -webkit-mask-image: radial-gradient(ellipse 22% 38% at 95% 88%, black 37%, transparent 99%);
+  mask-image: radial-gradient(ellipse 22% 38% at 95% 88%, black 37%, transparent 99%);
+}
+@media (prefers-reduced-motion: reduce) {
+  .exploration-designer-layer { will-change: auto; }
+}

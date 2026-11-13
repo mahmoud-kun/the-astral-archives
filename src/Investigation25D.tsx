@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState, type MouseEvent as ReactMouseEvent, type PointerEvent } from 'react'
 import './investigation25d.css'
-import { INVESTIGATION_ROOM_LAYERS } from './investigationRoomLayers'
+import { INVESTIGATION_DESIGNER_LAYERS } from './investigationDesignerLayers'
 
 type ObjectId = 'mission-files' | 'evidence-board' | 'desk-terminal'
 type Focus = ObjectId | 'door' | null
@@ -71,6 +71,9 @@ export default function Investigation25D({ onInspect, onExit, disabled = false }
           'translate3d(calc(-50% + ' + pan.toFixed(2) + 'px), 0, 0) scale(' + zoomNow.current.toFixed(4) + ')'
       }
       if (frameRef.current) {
+        frameRef.current.style.setProperty('--designer-mid-motion', (-look * 5).toFixed(1) + 'px')
+        frameRef.current.style.setProperty('--designer-near-motion', (-look * 10).toFixed(1) + 'px')
+        frameRef.current.style.setProperty('--designer-foreground-motion', (-look * 15).toFixed(1) + 'px')
         frameRef.current.style.setProperty('--far-motion', (look * 9).toFixed(1) + 'px')
         frameRef.current.style.setProperty('--mid-motion', (-look * 18).toFixed(1) + 'px')
         frameRef.current.style.setProperty('--near-motion', (-look * 38).toFixed(1) + 'px')
@@ -323,13 +326,11 @@ export default function Investigation25D({ onInspect, onExit, disabled = false }
             <img src="/assets/rooms/Investigation_Wide_Artwork.png" width="1916" height="821" alt="" draggable={false} />
           </picture>
         </div>
-        {/* The complete room has replaceable 2D planes; Camera V3 and hotspots stay unchanged. */}
-        <div className="exploration-room-layers" aria-hidden="true">
-          {INVESTIGATION_ROOM_LAYERS.map(layer => (
-            <img key={layer.assetId}
-              src={layer.path} width={1920} height={824}
-              className={'exploration-room-layer exploration-room-' + layer.depth}
-              alt="" decoding="async" draggable={false} />
+        {/* Reference-driven cutouts keep the designer's original art and room layout. */}
+        <div className="exploration-designer-layers" aria-hidden="true">
+          {INVESTIGATION_DESIGNER_LAYERS.map(layer => (
+            <div key={layer.assetId}
+              className={'exploration-designer-layer exploration-designer-' + layer.region + ' exploration-designer-' + layer.depth} />
           ))}
         </div>
         <div className="exploration-atmospheric-glow" aria-hidden="true" />
@@ -351,13 +352,6 @@ export default function Investigation25D({ onInspect, onExit, disabled = false }
           </button>
         </div>
       </div>
-      <div className="exploration-near-left" aria-hidden="true">
-        <span className="near-strut"/><span className="near-illumination"/>
-      </div>
-      <div className="exploration-near-right" aria-hidden="true">
-        <span className="near-strut"/><span className="near-illumination"/>
-      </div>
-
       {locked && <div className={'exploration-aim' + (aimed ? ' has-target' : '')} aria-hidden="true">
         <span className="aim-ring" />
         {aimed && <span className="aim-label">{aimed.replaceAll('-', ' ').toUpperCase()}</span>}
