@@ -1,11 +1,13 @@
 # The Astral Archives — Architecture Decision — Approved Foundation
 
+> **Newer UX/navigation status (2026-11-13):** Read [current checkpoint](CHECKPOINT_2026-11-13_INTERACTIVE_INVESTIGATION.md). First-person **bounded 2.5D**, no 3D/360/free roam. Camera V2 exists but was **rejected in player testing**; V3 is planned/not built. This note changes camera/asset/prototype status ONLY; this document's **Nov 9 evidence and Rescue rules remain authoritative**, not October collective-only rules.
+
 > **2026-11-09 gameplay update:** See [Gameplay & UX Decisions (2026-11-09)](GAMEPLAY_DESIGN_2026-11-09.md) for the newer designer-approved first-person investigation, folder-based evidence progress, contextual robot assistance, past engineering interaction, and per-mission outcomes. It **supersedes conflicting older gameplay directions**, especially mandatory deduction-board gating and collective-only result reveal. Shared Global Budget, observer-only flashbacks, historical content and responsive orientation have unresolved reconciliation points; do not treat old conflicting prescriptions as simultaneous requirements. Documentation update only; no gameplay implementation.
 
 
 Last updated: 2026-10-30
 
-**STATUS: FOUNDATION APPROVED (A01–A03, 2026-10-29).** Main Chat approved the Web-first stack, separation of pure simulation from UI, JSON-driven content, and manifest-based placeholder assets. Detailed simulation rules, data schemas and deployment specifics remain OPEN. Approval is **not** permission to begin competition implementation before official timing/eligibility is cleared.
+**STATUS: APPROVED WEB FOUNDATION, with limited experimental app implemented (see current checkpoint); not a completed game.** FOUNDATION APPROVED (A01–A03, 2026-10-29). Main Chat approved the Web-first stack, separation of pure simulation from UI, JSON-driven content, and manifest-based placeholder assets. Detailed simulation rules, data schemas and deployment specifics remain OPEN. Approval is **not** permission to begin competition implementation before official timing/eligibility is cleared.
 
 **V11 (2026-10-30):** Official player-facing name is **The Astral Archives**; **CASE:404** is the superseded working title. Keep the private `case404` repository path and stable IDs intact. The V04 logo remains a temporary concept pending the final graphic/title lockup.
 
@@ -163,3 +165,10 @@ Preserve the approved architecture and deterministic simulation engine. The UI/c
 - **Rescue Mission Alternate-History:** a distinct fictional interactive past phase containing mission-team story interactions followed by or interleaved with a Guided Engineering Mission Builder; player-authored changes affect the **counterfactual simulation only**. E01–E07, shared budget, live feasibility calculations and one delayed collective outcome remain authoritative.
 
 **V09 supersedes earlier room-count uncertainty:** there are **exactly four approved core present-day rooms**: **Investigation Office** (starting hub, five dossiers, Evidence Board, and Rescue Mission access), **File Archives**, **Recordings Room**, and **Signal Room**. Their topology/hotspots and separately approved optional spaces remain open; no fifth core room is implied. **V10:** alternate-history Rescue Mission past uses shared reusable types of environments with era-specific presentation plus mission-specific locations where justified; no approved past scene count. The protagonist-free emblem blending the three worlds is a **temporary logo concept only**; no production asset has been delivered.
+
+## 2026-11-13 architecture boundary / superseding implementation note
+- Current actual React/Vite source renders a still-image **2.5D CSS** room with panorama-like movement and hotspots, NOT real 3D or an implemented simulation engine.
+- **User rejected Camera V2** despite successful Vercel build. Next bounded Camera V3 experiment changes **input** (relative mouse-look with browser Pointer Lock after user activation); not renderer, world geometry, navigation topology or gameplay data. No Three.js/R3F, no 360°, no free roam.
+- Designer-authorable distinct 2D layers and object closeup artwork are a later **separate** experiment, not part of Camera V3 and not yet supplied.
+- Older architecture paragraphs mandating the October link-board hypothesis gate, shared Global Budget and collective-only outcome are **historical/superseded where they conflict with the Nov 9 approval**. Do not implement both models simultaneously.
+- Preserve accessible keyboard/touch and portrait behavior, verify camera and performance on actual browser/device, and seek player sign-off before next feature.
