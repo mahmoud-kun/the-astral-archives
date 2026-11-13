@@ -263,3 +263,31 @@
 @media (prefers-reduced-motion: reduce) {
   .exploration-aim .aim-ring { transition: none; }
 }
+
+/* EXPERIMENTAL CORNER: art layers anchored to a single authored 2D location.
+   Existing scene/hotspot coordinates, Camera V3 controls and bounds are retained.
+   Do not use this temporary art stack as a final designer-approved room asset. */
+.exploration-corner {
+  position: absolute;
+  left: 0; top: 0; width: 42%; height: 100%;
+  z-index: 1;
+  overflow: visible;
+  pointer-events: none;
+}
+.exploration-corner-layer {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: fill;
+  pointer-events: none;
+  user-select: none;
+  -webkit-user-drag: none;
+  will-change: transform;
+}
+.exploration-corner-architecture { transform: translate3d(var(--far-motion), 0, 0); }
+.exploration-corner-cabinet { transform: translate3d(var(--far-motion), 0, 0); }
+.exploration-corner-props { transform: translate3d(var(--near-motion), 0, 0); }
+.exploration-corner-lighting { transform: translate3d(var(--far-motion), 0, 0); }
+.exploration-corner-foreground { transform: translate3d(var(--near-motion), 0, 0); }
+@media (prefers-reduced-motion: reduce) {
+  .exploration-corner-layer { will-change: auto; }
+}

@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1080" width="1024" height="1080" fill="none">
+
+<defs>
+ <linearGradient id="paper" x1="0" y1="0" x2="1" y2=".7"><stop stop-color="#e1dbca"/><stop offset=".55" stop-color="#c6c7b8"/><stop offset="1" stop-color="#849ca0"/></linearGradient>
+ <linearGradient id="folder" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#547b88"/><stop offset="1" stop-color="#2c5868"/></linearGradient>
+</defs>
+<g transform="translate(0 374)">
+  <path d="M383 -4L601 -15 618 -6 618 65 388 76Z" fill="#d2d3c1" opacity=".55"/>
+  <path d="M393 5L630 -7 646 11 644 69 400 80Z" fill="url(#folder)" stroke="#668a95" stroke-width="3"/>
+  <path d="M398 3L449 0 468 12 635 4" stroke="#c3ded7" stroke-width="4" opacity=".74"/>
+  <path d="M408 27L622 19" stroke="#8dc6c4" stroke-width="2" opacity=".5"/>
+  <rect x="411" y="33" width="88" height="26" rx="2" fill="#d9d6c5"/>
+  <path d="M416 38L493 36" stroke="#82929b" stroke-width="2" opacity=".5"/>
+  <text x="420" y="52" font-family="sans-serif" font-size="14" font-weight="700" letter-spacing="1.5" fill="#223e50">FILE 01</text>
+  <path d="M528 39L607 36" stroke="#9ac3c0" stroke-width="3" opacity=".47"/>
+  <path d="M529 48L584 46" stroke="#9ac3c0" stroke-width="2" opacity=".25"/>
+ </g>
+<g transform="translate(5 473)">
+  <path d="M383 -4L601 -15 618 -6 618 65 388 76Z" fill="#d2d3c1" opacity=".55"/>
+  <path d="M393 5L630 -7 646 11 644 69 400 80Z" fill="url(#folder)" stroke="#668a95" stroke-width="3"/>
+  <path d="M398 3L449 0 468 12 635 4" stroke="#c3ded7" stroke-width="4" opacity=".74"/>
+  <path d="M408 27L622 19" stroke="#8dc6c4" stroke-width="2" opacity=".5"/>
+  <rect x="411" y="33" width="88" height="26" rx="2" fill="#d9d6c5"/>
+  <path d="M416 38L493 36" stroke="#82929b" stroke-width="2" opacity=".5"/>
+  <text x="420" y="52" font-family="sans-serif" font-size="14" font-weight="700" letter-spacing="1.5" fill="#223e50">FILE 02</text>
+  <path d="M528 39L607 36" stroke="#9ac3c0" stroke-width="3" opacity=".47"/>
+  <path d="M529 48L584 46" stroke="#9ac3c0" stroke-width="2" opacity=".25"/>
+ </g>
+<g transform="translate(0 572)">
+  <path d="M383 -4L601 -15 618 -6 618 65 388 76Z" fill="#d2d3c1" opacity=".55"/>
+  <path d="M393 5L630 -7 646 11 644 69 400 80Z" fill="url(#folder)" stroke="#668a95" stroke-width="3"/>
+  <path d="M398 3L449 0 468 12 635 4" stroke="#c3ded7" stroke-width="4" opacity=".74"/>
+  <path d="M408 27L622 19" stroke="#8dc6c4" stroke-width="2" opacity=".5"/>
+  <rect x="411" y="33" width="88" height="26" rx="2" fill="#d9d6c5"/>
+  <path d="M416 38L493 36" stroke="#82929b" stroke-width="2" opacity=".5"/>
+  <text x="420" y="52" font-family="sans-serif" font-size="14" font-weight="700" letter-spacing="1.5" fill="#223e50">FILE 03</text>
+  <path d="M528 39L607 36" stroke="#9ac3c0" stroke-width="3" opacity=".47"/>
+  <path d="M529 48L584 46" stroke="#9ac3c0" stroke-width="2" opacity=".25"/>
+ </g>
+<g transform="translate(5 671)">
+  <path d="M383 -4L601 -15 618 -6 618 65 388 76Z" fill="#d2d3c1" opacity=".55"/>
+  <path d="M393 5L630 -7 646 11 644 69 400 80Z" fill="url(#folder)" stroke="#668a95" stroke-width="3"/>
+  <path d="M398 3L449 0 468 12 635 4" stroke="#c3ded7" stroke-width="4" opacity=".74"/>
+  <path d="M408 27L622 19" stroke="#8dc6c4" stroke-width="2" opacity=".5"/>
+  <rect x="411" y="33" width="88" height="26" rx="2" fill="#d9d6c5"/>
+  <path d="M416 38L493 36" stroke="#82929b" stroke-width="2" opacity=".5"/>
+  <text x="420" y="52" font-family="sans-serif" font-size="14" font-weight="700" letter-spacing="1.5" fill="#223e50">FILE 04</text>
+  <path d="M528 39L607 36" stroke="#9ac3c0" stroke-width="3" opacity=".47"/>
+  <path d="M529 48L584 46" stroke="#9ac3c0" stroke-width="2" opacity=".25"/>
+ </g>
+<g transform="translate(0 770)">
+  <path d="M383 -4L601 -15 618 -6 618 65 388 76Z" fill="#d2d3c1" opacity=".55"/>
+  <path d="M393 5L630 -7 646 11 644 69 400 80Z" fill="url(#folder)" stroke="#668a95" stroke-width="3"/>
+  <path d="M398 3L449 0 468 12 635 4" stroke="#c3ded7" stroke-width="4" opacity=".74"/>
+  <path d="M408 27L622 19" stroke="#8dc6c4" stroke-width="2" opacity=".5"/>
+  <rect x="411" y="33" width="88" height="26" rx="2" fill="#d9d6c5"/>
+  <path d="M416 38L493 36" stroke="#82929b" stroke-width="2" opacity=".5"/>
+  <text x="420" y="52" font-family="sans-serif" font-size="14" font-weight="700" letter-spacing="1.5" fill="#223e50">FILE 05</text>
+  <path d="M528 39L607 36" stroke="#9ac3c0" stroke-width="3" opacity=".47"/>
+  <path d="M529 48L584 46" stroke="#9ac3c0" stroke-width="2" opacity=".25"/>
+ </g>
+
+</svg>

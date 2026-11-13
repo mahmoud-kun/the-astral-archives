@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState, type MouseEvent as ReactMouseEvent, type PointerEvent } from 'react'
 import './investigation25d.css'
+import { INVESTIGATION_CORNER_LAYERS } from './investigationCornerLayers'
 
 type ObjectId = 'mission-files' | 'evidence-board' | 'desk-terminal'
 type Focus = ObjectId | 'door' | null
@@ -320,6 +321,15 @@ export default function Investigation25D({ onInspect, onExit, disabled = false }
             <source srcSet="/assets/optimized/investigation-panorama-hq.webp" type="image/webp" />
             <img src="/assets/rooms/Investigation_Wide_Artwork.png" width="1916" height="821" alt="" draggable={false} />
           </picture>
+        </div>
+        {/* One independently authored preview corner; Camera V3 and existing hotspots are unchanged. */}
+        <div className="exploration-corner" aria-hidden="true">
+          {INVESTIGATION_CORNER_LAYERS.map(layer => (
+            <img key={layer.assetId}
+              src={layer.path} width={1024} height={1080}
+              className={'exploration-corner-layer exploration-corner-' + layer.depth}
+              alt="" decoding="async" draggable={false} />
+          ))}
         </div>
         <div className="exploration-atmospheric-glow" aria-hidden="true" />
         <div className="exploration-dust" aria-hidden="true">

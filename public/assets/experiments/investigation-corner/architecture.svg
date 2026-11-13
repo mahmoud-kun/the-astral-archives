@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1080" width="1024" height="1080" fill="none">
+
+<defs>
+ <linearGradient id="wall" x1="0" y1="0" x2="0.95" y2="1"><stop stop-color="#1e445c"/><stop offset=".42" stop-color="#112f44"/><stop offset="1" stop-color="#071928"/></linearGradient>
+ <linearGradient id="shadow" x1="0" y1=".1" x2="1" y2=".9"><stop stop-color="#081929"/><stop offset="1" stop-color="#122e3e"/></linearGradient>
+ <linearGradient id="wallEdge" x1="0" y1="0" x2="1" y2="0"><stop stop-color="#0a1b2c"/><stop offset=".65" stop-color="#183a50"/><stop offset="1" stop-color="#183a5000"/></linearGradient>
+ <linearGradient id="softEdge"><stop offset="0" stop-color="white"/><stop offset=".77" stop-color="white"/><stop offset="1" stop-color="black"/></linearGradient>
+ <mask id="fade"><rect width="1024" height="1080" fill="url(#softEdge)"/></mask>
+</defs>
+<g mask="url(#fade)">
+  <path d="M0 1080V110L108 54 840 70 957 152V1080Z" fill="#071725"/>
+  <path d="M92 105 L815 91 886 160 883 919 112 950 93 865Z" fill="url(#wall)" stroke="#31566a" stroke-width="7"/>
+  <path d="M90 105L188 178 186 926 112 950 93 865Z" fill="#071929" stroke="#3a6572" stroke-width="5"/>
+  <path d="M188 178L825 151 852 823 187 905Z" fill="url(#shadow)" stroke="#214b60" stroke-width="4"/>
+  <path d="M198 179L796 153 807 204 197 230Z" fill="#173c51"/>
+  <path d="M201 226L804 198" stroke="#6bb3bc" stroke-opacity=".38" stroke-width="4"/>
+  <path d="M188 900L846 826 884 921 122 962Z" fill="#0b2232" stroke="#4e7886" stroke-width="4"/>
+  <path d="M111 949L887 914 1024 1074H0V1003Z" fill="#0a1b29"/>
+  <path d="M210 966L887 927" stroke="#456776" stroke-width="5"/>
+  <path d="M190 1060L905 1002" stroke="#21445a" stroke-width="3"/>
+  <path d="M86 101L814 86" stroke="#91d6d2" stroke-opacity=".40" stroke-width="6"/>
+  <path d="M97 107L99 911" stroke="#f2a56d" stroke-opacity=".55" stroke-width="5"/>
+  <path d="M890 171V906" stroke="#3d6f7f" stroke-width="11"/>
+  <path d="M896 172V906" stroke="#071927" stroke-width="4"/>
+  <path d="M229 273L784 251" stroke="#15384d" stroke-width="2" stroke-dasharray="18 9"/>
+  <path d="M216 790L788 739" stroke="#25445b" stroke-width="2" stroke-opacity=".5"/>
+  <path d="M0 80L105 30 844 43 920 100 1024 100V0H0Z" fill="url(#wallEdge)" fill-opacity=".85"/>
+</g>
+</svg>
