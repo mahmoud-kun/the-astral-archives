@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState, type PointerEvent } from 'react'
+import { useEffect, useRef, useState, type MouseEvent as ReactMouseEvent, type PointerEvent } from 'react'
 import './investigation25d.css'
 
 type ObjectId = 'mission-files' | 'evidence-board' | 'desk-terminal'
@@ -11,11 +11,12 @@ type Props = {
 }
 
 const CLAMP = (n: number, low = -1, high = 1) => Math.min(high, Math.max(low, n))
-const FOCUS: Record<Exclude<Focus, null>, { look: number; shiftX: number; shiftY: number; zoom: number }> = {
-  'mission-files': { look: -.88, shiftX: 5, shiftY: 1, zoom: 1.33 },
-  'evidence-board': { look: -.28, shiftX: 1, shiftY: 2, zoom: 1.37 },
-  'desk-terminal': { look: .09, shiftX: -2, shiftY: -9, zoom: 1.45 },
-  'door': { look: .88, shiftX: -5, shiftY: 1, zoom: 1.29 },
+const LOOK_SENSITIVITY = 0.0024
+const FOCUS: Record<Exclude<Focus, null>, { look: number; zoom: number }> = {
+  'mission-files': { look: -.72, zoom: 1.08 },
+  'evidence-board': { look: -.28, zoom: 1.09 },
+  'desk-terminal': { look: .09, zoom: 1.12 },
+  'door': { look: .8, zoom: 1.07 },
 }
 
 export default function Investigation25D({ onInspect, onExit, disabled = false }: Props) {
@@ -36,6 +37,11 @@ export default function Investigation25D({ onInspect, onExit, disabled = false }
   const [focus, setFocus] = useState<Focus>(null)
   const [showInfo, setShowInfo] = useState(false)
   const [guide, setGuide] = useState(true)
+  const [locked, setLocked] = useState(false)
+  const [lockIssue, setLockIssue] = useState(false)
+  const [aimed, setAimed] = useState<Exclude<Focus, null> | null>(null)
+  const aimedRef = useRef<Exclude<Focus, null> | null>(null)
+  const aim = useRef({ x: .5, y: .5 })
   const pending = useRef<number | null>(null)
 
   useEffect(() => { focusRef.current = focus }, [focus])
@@ -44,32 +50,38 @@ export default function Investigation25D({ onInspect, onExit, disabled = false }
   useEffect(() => {
     let raf = 0
     let last = 0
+    let lastAimCheck = 0
     const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
     const tick = (now: number) => {
       const dt = Math.min(0.06, Math.max(.001, (now - (last || now)) / 1000))
       last = now
       const dest = focusRef.current ? FOCUS[focusRef.current].look : target.current
-      const f = reducedMotion ? 1 : 1 - Math.exp(-dt * 4.4)
+      const f = reducedMotion ? 1 : 1 - Math.exp(-dt * 7.2)
       current.current += (dest - current.current) * f
       const zGoal = focusRef.current ? FOCUS[focusRef.current].zoom : 1
-      zoomNow.current += (zGoal - zoomNow.current) * (reducedMotion ? 1 : 1 - Math.exp(-dt * 3.4))
+      zoomNow.current += (zGoal - zoomNow.current) * (reducedMotion ? 1 : 1 - Math.exp(-dt * 6.2))
       const look = current.current
-      const pose = focusRef.current ? FOCUS[focusRef.current] : null
-      const shiftX = pose?.shiftX ?? 0
-      const shiftY = pose?.shiftY ?? 0
       if (worldRef.current && frameRef.current) {
         // Travel is measured from the actual artwork width: on portrait screens
         // swipes reveal the whole room instead of shifting a cropped image.
         const travel = Math.max(0, (worldRef.current.clientWidth - frameRef.current.clientWidth) / 2)
         const pan = -look * travel
         worldRef.current.style.transform =
-          'translate3d(calc(-50% + ' + pan.toFixed(2) + 'px + ' + shiftX.toFixed(2) + '%), ' + shiftY.toFixed(2) + '%, 0) scale(' + zoomNow.current.toFixed(4) + ') rotateY(' + (-look * 1.2).toFixed(2) + 'deg)'
+          'translate3d(calc(-50% + ' + pan.toFixed(2) + 'px), 0, 0) scale(' + zoomNow.current.toFixed(4) + ')'
       }
       if (frameRef.current) {
         frameRef.current.style.setProperty('--far-motion', (look * 9).toFixed(1) + 'px')
         frameRef.current.style.setProperty('--near-motion', (-look * 38).toFixed(1) + 'px')
         frameRef.current.style.setProperty('--near-motion-right', (look * 38).toFixed(1) + 'px')
         frameRef.current.style.setProperty('--near-rotation', (-look * 2.1).toFixed(1) + 'deg')
+      }
+      if (document.pointerLockElement === frameRef.current && now - lastAimCheck > 90) {
+        lastAimCheck = now
+        const next = findAimed()
+        if (aimedRef.current !== next) {
+          aimedRef.current = next
+          setAimed(next)
+        }
       }
       raf = requestAnimationFrame(tick)
     }
@@ -79,6 +91,7 @@ export default function Investigation25D({ onInspect, onExit, disabled = false }
 
   useEffect(() => {
     if (!disabled) return
+    if (document.pointerLockElement === frameRef.current) document.exitPointerLock()
     if (pending.current !== null) {
       window.clearTimeout(pending.current)
       pending.current = null
@@ -86,7 +99,33 @@ export default function Investigation25D({ onInspect, onExit, disabled = false }
   }, [disabled])
 
   useEffect(() => {
+    const syncLock = () => {
+      const active = document.pointerLockElement === frameRef.current
+      setLocked(active)
+      if (active) {
+        setLockIssue(false)
+        setGuide(false)
+      } else {
+        aimedRef.current = null
+        setAimed(null)
+      }
+    }
+    const lockError = () => setLockIssue(true)
+    document.addEventListener('pointerlockchange', syncLock)
+    document.addEventListener('pointerlockerror', lockError)
+    return () => {
+      if (document.pointerLockElement === frameRef.current) document.exitPointerLock()
+      document.removeEventListener('pointerlockchange', syncLock)
+      document.removeEventListener('pointerlockerror', lockError)
+    }
+  }, [])
+
+  useEffect(() => {
     const handleKey = (e: KeyboardEvent) => {
+      if ((e.key === 'Tab' || e.key === 'Escape') && document.pointerLockElement === frameRef.current) {
+        document.exitPointerLock()
+        if (e.key === 'Escape') return
+      }
       if (disabled || e.altKey || e.ctrlKey || e.metaKey) return
       if (e.key === 'ArrowLeft' || e.key.toLowerCase() === 'a') {
         e.preventDefault()
@@ -125,8 +164,69 @@ export default function Investigation25D({ onInspect, onExit, disabled = false }
     setFocus(null)
   }
 
+  function findAimed(): Exclude<Focus, null> | null {
+    const frame = frameRef.current
+    if (!frame) return null
+    const bounds = frame.getBoundingClientRect()
+    const x = bounds.left + aim.current.x * bounds.width
+    const y = bounds.top + aim.current.y * bounds.height
+    for (const element of frame.querySelectorAll<HTMLButtonElement>('.object-hotspot')) {
+      const rect = element.getBoundingClientRect()
+      if (x < rect.left || x > rect.right || y < rect.top || y > rect.bottom) continue
+      const id = element.dataset.objectId
+      if (id === 'mission-files' || id === 'evidence-board' || id === 'desk-terminal' || id === 'door') return id
+    }
+    return null
+  }
+
+  function setAimPosition(x: number, y: number) {
+    aim.current = { x: CLAMP(x, .06, .94), y: CLAMP(y, .08, .92) }
+    frameRef.current?.style.setProperty('--aim-x', (aim.current.x * 100).toFixed(2) + '%')
+    frameRef.current?.style.setProperty('--aim-y', (aim.current.y * 100).toFixed(2) + '%')
+  }
+
+  function activateLook() {
+    if (disabled || focusRef.current) return
+    const frame = frameRef.current
+    if (!frame?.requestPointerLock) {
+      setLockIssue(true)
+      return
+    }
+    setAimPosition(.5, .5)
+    try {
+      // Call within this click's user activation; some browsers return void.
+      void Promise.resolve(frame.requestPointerLock()).catch(() => setLockIssue(true))
+    } catch {
+      setLockIssue(true)
+    }
+  }
+
+  function mouseMove(event: ReactMouseEvent<HTMLDivElement>) {
+    if (disabled || focusRef.current) return
+    const frame = frameRef.current
+    if (!frame) return
+    const bounds = frame.getBoundingClientRect()
+    if (document.pointerLockElement === frame) {
+      setAimPosition(aim.current.x + event.movementX / Math.max(1, bounds.width),
+        aim.current.y + event.movementY / Math.max(1, bounds.height))
+      target.current = CLAMP(target.current + event.movementX * LOOK_SENSITIVITY)
+    } else if (window.matchMedia('(pointer: fine)').matches && event.buttons === 0) {
+      // Graceful no-drag fallback if the browser rejects Pointer Lock.
+      setAimPosition((event.clientX - bounds.left) / bounds.width, (event.clientY - bounds.top) / bounds.height)
+      target.current = CLAMP((aim.current.x - .5) * 2)
+    }
+  }
+
+  function capturedClick(event: ReactMouseEvent<HTMLDivElement>) {
+    if (disabled || event.detail === 0 || document.pointerLockElement !== frameRef.current) return
+    event.preventDefault()
+    event.stopPropagation()
+    const id = findAimed()
+    if (id) select(id, true)
+  }
+
   function pointerDown(event: PointerEvent<HTMLDivElement>) {
-    if (disabled || panActive.current || (event.pointerType === 'mouse' && event.button !== 0)) return
+    if (disabled || panActive.current || event.pointerType !== 'touch') return
     const origin = event.target as HTMLElement
     if (origin.closest('.exploration-help-button, .exploration-help button')) return
     panActive.current = true
@@ -144,7 +244,7 @@ export default function Investigation25D({ onInspect, onExit, disabled = false }
   }
 
   function pointerMove(event: PointerEvent<HTMLDivElement>) {
-    if (disabled || focusRef.current || !panActive.current || gesturePointerId.current !== event.pointerId) return
+    if (disabled || focusRef.current || event.pointerType !== 'touch' || !panActive.current || gesturePointerId.current !== event.pointerId) return
     const frame = frameRef.current
     const world = worldRef.current
     if (!frame || !world) return
@@ -175,26 +275,28 @@ export default function Investigation25D({ onInspect, onExit, disabled = false }
   }
 
   function select(id: Exclude<Focus, null>, keyboardActivation = false) {
-    if (disabled) return
+    if (disabled || focusRef.current) return
     if (!keyboardActivation && suppressClick.current) {
       suppressClick.current = false
       return
     }
     setGuide(false)
     setFocus(id)
+    if (document.pointerLockElement === frameRef.current) document.exitPointerLock()
     if (pending.current !== null) window.clearTimeout(pending.current)
+    const approachDelay = window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 0 : 620
     if (id === 'door') {
       pending.current = window.setTimeout(() => {
         pending.current = null
         onExit()
-      }, 750)
+      }, approachDelay)
       return
     }
-    // Camera physically approaches the object before opening its examination UI.
+    // Single artwork remains visible; dedicated authored close-ups are a later feature.
     pending.current = window.setTimeout(() => {
       pending.current = null
       onInspect(id)
-    }, 780)
+    }, approachDelay)
   }
 
   useEffect(() => {
@@ -207,7 +309,8 @@ export default function Investigation25D({ onInspect, onExit, disabled = false }
 
   return (
     <div
-      ref={frameRef} className="exploration25d" role="region" aria-label="Investigation Room. Drag or swipe to look around; select an illuminated object to inspect."
+      ref={frameRef} className={'exploration25d' + (locked ? ' is-locked' : '')} role="region" aria-label="Investigation Room. Activate Mouse Look, move the mouse to explore, and click at the aiming reticle. Escape releases control. Touch users can swipe; keyboard users can use arrow keys."
+      onMouseMove={mouseMove} onClickCapture={capturedClick}
       onPointerDown={pointerDown} onPointerMove={pointerMove} onPointerUp={pointerUp}
       onPointerCancel={pointerUp} onLostPointerCapture={pointerUp}
     >
@@ -217,7 +320,6 @@ export default function Investigation25D({ onInspect, onExit, disabled = false }
             <source srcSet="/assets/optimized/investigation-panorama-hq.webp" type="image/webp" />
             <img src="/assets/rooms/Investigation_Wide_Artwork.png" width="1916" height="821" alt="" draggable={false} />
           </picture>
-          {focus && focus !== "door" && <img className="exploration-close-angle" src="/assets/optimized/investigation-close-hq.webp" width="1752" height="897" alt="" draggable={false} /> }
         </div>
         <div className="exploration-atmospheric-glow" aria-hidden="true" />
         <div className="exploration-dust" aria-hidden="true">
@@ -245,17 +347,24 @@ export default function Investigation25D({ onInspect, onExit, disabled = false }
         <span className="near-strut"/><span className="near-illumination"/>
       </div>
 
+      {locked && <div className={'exploration-aim' + (aimed ? ' has-target' : '')} aria-hidden="true">
+        <span className="aim-ring" />
+        {aimed && <span className="aim-label">{aimed.replaceAll('-', ' ').toUpperCase()}</span>}
+      </div>}
       <div className="exploration-top-note" aria-hidden="true">CAMERA / INVESTIGATION <span>◆</span> PRESENT TIME</div>
 
       <button type="button" className="exploration-help-button" aria-label="How to explore" aria-expanded={showInfo}
-        onClick={() => setShowInfo(v => !v)}>?</button>
+        onClick={() => { if (document.pointerLockElement === frameRef.current) document.exitPointerLock(); setShowInfo(v => !v) }}>?</button>
 
-      {guide && <div className="exploration-guide" role="status">DRAG OR SWIPE TO LOOK AROUND <span>·</span> SELECT A LIT OBJECT</div>}
+      {!disabled && !focus && !locked && <button type="button" className="exploration-look-toggle"
+        onClick={activateLook}>ENABLE MOUSE LOOK <small>Click once · Move to explore</small></button>}
+      {guide && <div className="exploration-guide" role="status"><span className="desktop-note">ACTIVATE MOUSE LOOK · AIM AND CLICK · ESC TO RELEASE</span><span className="touch-note">SWIPE TO LOOK AROUND · TAP AN OBJECT</span></div>}
+      {lockIssue && !locked && !disabled && <div className="exploration-lock-fallback" role="status">Pointer Lock unavailable. Move the cursor to look, or use A / D.</div>}
 
       {showInfo && <section className="exploration-help" aria-label="Camera controls">
         <button type="button" onClick={() => setShowInfo(false)} aria-label="Close controls">×</button>
         <strong>EXPLORE THE ROOM</strong>
-        <p>Drag with a mouse or swipe to look across this room. Select an illuminated object to approach it. Keyboard: A / D or ← / → to look, Home to center, Escape to cancel an approach.</p>
+        <p>Desktop: choose Enable Mouse Look once, move the mouse to look and aim, then click a lit object. Escape or Tab releases the pointer for menus; re-enable after returning from inspection. Without Pointer Lock the cursor still moves the view. Touch: swipe to look and tap an object. Keyboard: A / D or ← / →, Home to center.</p>
         <small>Prototype: layered 2.5D camera, not a free-roaming 3D environment.</small>
       </section>}
 
