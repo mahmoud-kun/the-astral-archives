@@ -86,7 +86,7 @@ function Emblem({ small = false }: { small?: boolean }) {
 
 const SCENES: Record<SceneId, { webp: string; mobile: string; fallback: string }> = {
   menu: { webp: '/assets/optimized/menu-archive.webp', mobile: '/assets/optimized/menu-archive-sm.webp', fallback: '/assets/rooms/Archive_Original_REFERENCE.png' },
-  investigation: { webp: '/assets/optimized/room-investigation.webp', mobile: '/assets/optimized/room-investigation-sm.webp', fallback: '/assets/rooms/Investigation_Wide_Artwork.png' },
+  investigation: { webp: '/assets/optimized/investigation-panorama-hq.webp', mobile: '/assets/optimized/room-investigation-sm.webp', fallback: '/assets/rooms/Investigation_Wide_Artwork.png' },
   archive: { webp: '/assets/optimized/room-archive.webp', mobile: '/assets/optimized/room-archive-sm.webp', fallback: '/assets/rooms/Archive_Original_REFERENCE.png' },
   recordings: { webp: '/assets/optimized/room-recordings.webp', mobile: '/assets/optimized/room-recordings-sm.webp', fallback: '/assets/rooms/Recordings_Original_REFERENCE.png' },
   signal: { webp: '/assets/optimized/room-signal.webp', mobile: '/assets/optimized/room-signal-sm.webp', fallback: '/assets/rooms/Signal_Original_REFERENCE.png' },
