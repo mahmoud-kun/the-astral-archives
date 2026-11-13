@@ -1,5 +1,8 @@
 # The Astral Archives — Camera V3 experiment / verification (2026-11-13)
 
+> **CURRENT EXPERIMENT / 2026-11-13 — supersedes older status statements below:** Camera V3 mouse-look was positively accepted by the player for control feel. Its independent browser/device/FPS testing remains open. The first layered Mission Files corner was also positively assessed for depth, but the remaining flat room was rejected. **Layered Investigation Room V2** has now been implemented as a *nine-layer, full-room, artist-replaceable SVG experiment* on `experiment/interactive-investigation-v2-2026-11-13`; its Vercel build is READY and **player visual approval is pending**. See [Layered Room V2 verification](LAYERED_ROOM_V2_2026-11-13.md). This is not approval of production artwork, new gameplay, 3D, audio or changes to `main`.
+
+
 **Status:** Implemented on experiment branch and built successfully; **player acceptance and real browser input tests still PENDING**. This is not a production approval.
 
 ## Authority and scope
