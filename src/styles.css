@@ -402,3 +402,26 @@ button:disabled { cursor: not-allowed; }
   .dossier-card { transition: none !important; }
   .scene-image { transform: none !important; }
 }
+
+/* Henda uses the actual approved character artwork with real alpha.
+   The portrait preserves glass reflections and ponytail silhouette. */
+.character-frame {
+  background: radial-gradient(ellipse at 45% 35%,#2a536c 1%,#102b43 59%,#071725 100%);
+  border-color: #74a1a5;
+}
+.character-frame img {
+  display: block;
+  object-fit: cover;
+  object-position: center top;
+  height: 100%;
+  width: 100%;
+  filter: drop-shadow(0 2px 3px #01081566);
+}
+.room-investigation .station-vignette { z-index: 1; }
+.room-investigation .station-topbar { z-index: 6; }
+.room-investigation .station-footer { z-index: 3; }
+.room-investigation .dialogue-card { z-index: 8; }
+.room-investigation .room-hotspots { display: none; }
+@media (max-width: 720px) {
+  .room-investigation .station-footer { bottom: 8px; opacity: .62; }
+}
