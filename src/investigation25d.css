@@ -114,7 +114,7 @@
   transition:opacity .3s;
 }
 .exploration-near-left { left:-68px; }
-.exploration-near-right { right:-68px; transform:translate3d(calc(var(--near-motion) * -1),0,0) rotateY(var(--near-rotation)); }
+.exploration-near-right { right:-68px; transform:translate3d(var(--near-motion-right),0,0) rotateY(var(--near-rotation)); }
 .near-strut {
   position:absolute; left:0; top:0; height:100%; width:100%; opacity:.67;
   border:1px solid #2c6d83;
@@ -212,4 +212,22 @@
   .exploration-depth-world { will-change:auto; }
   .exploration-atmospheric-glow,
   .exploration-dust i,.hotspot-reticle,.exploration-guide,.exploration-focus-state { animation:none !important; }
+}
+
+/* The closer-angle photo appears only when the camera approaches an object;
+   it is not fetched on initial page load. */
+.exploration-close-angle {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%; object-fit: cover;
+  object-position: 50% center; pointer-events: none;
+  opacity: 0;
+  animation: alternateViewReveal .68s .12s ease-out forwards;
+  filter: saturate(1.04);
+}
+@keyframes alternateViewReveal {
+  from { opacity: 0; transform: scale(1.025); }
+  to { opacity: .9; transform: scale(1); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .exploration-close-angle { animation: none; opacity: .9; transform: none; }
 }
