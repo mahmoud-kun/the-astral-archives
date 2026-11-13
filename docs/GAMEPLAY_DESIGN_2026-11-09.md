@@ -1,6 +1,8 @@
 # The Astral Archives — Gameplay & UX Decisions (2026-11-09)
 
-**Status:** Designer-confirmed gameplay direction from the November 9 design session. Documentation only: no gameplay, art, media, or simulation has been implemented by this update.
+> **Newer UX/navigation status (2026-11-13):** Read [current checkpoint](CHECKPOINT_2026-11-13_INTERACTIVE_INVESTIGATION.md). First-person **bounded 2.5D**, no 3D/360/free roam. Camera V2 exists but was **rejected in player testing**; V3 is planned/not built. This note changes camera/asset/prototype status ONLY; this document's **Nov 9 evidence and Rescue rules remain authoritative**, not October collective-only rules.
+
+**Status:** Nov 9 designer-confirmed gameplay contract. The game is not fully implemented, but a partial browser prototype and preview art now exist on the experimental branch; see 2026-11-13 checkpoint. Its first-person 'fixed-view' means no free-roam avatar, not a prohibition on testing limited mouse-look.
 
 **Scope:** Present investigation, evidence filing, rescue unlock, alternate-history past engineering, user interface, story presentation, outcomes, and asset-production constraints.
 
@@ -128,3 +130,5 @@ The visible **Investigation Progress** remains present in the HUD even though Mi
 ## 10. Implementation boundary
 
 This change records **design decisions, not completed game code**. Update older active specs, schemas, and tests in a separately reviewed engineering integration batch. Do not silently preserve contradictory enforcement of collective-only outcome, mandatory link-board gating or pre-execution testing. Newer explicit approvals should be reconciled by product/technical owners before code integration.
+
+**Current camera supplement (2026-11-13):** Henda is female, not the older male draft. Mouse-look without hold, art-layer decomposition, and tactile drawer are NOT implemented by this document and do not alter the five-folder progress/Rescue unlock contract.
