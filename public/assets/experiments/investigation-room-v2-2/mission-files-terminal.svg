@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1920" height="824" viewBox="0 0 1920 824" fill="none" aria-hidden="true"><defs>
+<linearGradient id="steel" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#34536a"/><stop offset=".32" stop-color="#18374c"/><stop offset=".72" stop-color="#0b2439"/><stop offset="1" stop-color="#081a2a"/></linearGradient>
+<linearGradient id="dark" x1="0" y1="0" x2=".6" y2="1"><stop stop-color="#132f45"/><stop offset="1" stop-color="#061726"/></linearGradient>
+<linearGradient id="panel" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#1b455c"/><stop offset=".48" stop-color="#0b283e"/><stop offset="1" stop-color="#06182c"/></linearGradient>
+<linearGradient id="glass" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#11465a"/><stop offset=".58" stop-color="#08273d"/><stop offset="1" stop-color="#03182d"/></linearGradient>
+<linearGradient id="cyan" x1="0" y1="0" x2="1" y2="0"><stop stop-color="#09647f"/><stop offset=".5" stop-color="#18dbf0"/><stop offset="1" stop-color="#7af9ff"/></linearGradient>
+<linearGradient id="amber" x1="0" y1="0" x2="1" y2="0"><stop stop-color="#a45420"/><stop offset=".5" stop-color="#ff9d45"/><stop offset="1" stop-color="#ffd07c"/></linearGradient>
+<linearGradient id="floor" x1="0" y1="0" x2=".5" y2="1"><stop stop-color="#143b50"/><stop offset=".55" stop-color="#0c273c"/><stop offset="1" stop-color="#071a2f"/></linearGradient>
+<radialGradient id="halo"><stop stop-color="#25dced" stop-opacity=".36"/><stop offset=".46" stop-color="#1cd5fa" stop-opacity=".085"/><stop offset="1" stop-color="#1cd5fa" stop-opacity="0"/></radialGradient>
+<radialGradient id="sun"><stop stop-color="#ffb364" stop-opacity=".38"/><stop offset=".55" stop-color="#ff9d42" stop-opacity=".065"/><stop offset="1" stop-color="#ff9d42" stop-opacity="0"/></radialGradient>
+<filter id="glow" x="-55%" y="-180%" width="210%" height="460%"><feGaussianBlur stdDeviation="4"/></filter>
+</defs>
+<path d="M319 251L347 225 537 221 565 252 553 554 333 560Z" fill="#071b2c" stroke="#3f6979" stroke-width="6"/>
+<polygon points="344,227 536,221 560,251 334,262" fill="#365970" stroke="#78a7a8" stroke-width="4" />
+<polygon points="335,257 552,248 550,553 337,559" fill="url(#steel)" stroke="#4e7584" stroke-width="5" />
+<polygon points="347,277 539,268 539,425 350,431" fill="#091b2b" stroke="#4f8da2" stroke-width="7" />
+<polygon points="358,287 528,282 530,415 359,419" fill="url(#glass)" stroke="#0ce6f4" stroke-width="5" />
+<polygon points="363,292 525,287 525,304 362,310" fill="#1bdbe8"  />
+<text x="371" y="301" fill="#dff5ec" font-family="monospace" font-size="12" letter-spacing="1">MISSION FILES</text>
+<path d="M380 345L394 345 398 336 420 336 420 365 380 368Z" fill="none" stroke="#45eafa" stroke-width="3" /><path d="M427 345L441 345 445 336 467 336 467 365 427 368Z" fill="none" stroke="#45eafa" stroke-width="3" /><path d="M474 345L488 345 492 336 514 336 514 365 474 368Z" fill="none" stroke="#45eafa" stroke-width="3" />
+<path d="M370 388h41" fill="none" stroke="#4387a0" stroke-width="5" /><path d="M423 388h41" fill="none" stroke="#4387a0" stroke-width="5" /><path d="M476 388h41" fill="none" stroke="#4387a0" stroke-width="5" />
+<path d="M353 432L539 427 548 447 342 451Z" fill="#1e4c61" stroke="#426b80" stroke-width="4" />
+<path d="M350 458L538 454 537 482 351 487Z" fill="#122e40" stroke="#385d70" stroke-width="3"/><path d="M424 470L460 468" stroke="#25c9df" stroke-width="7"/><path d="M437 476L446 476" stroke="#ddaa75" stroke-width="2"/><path d="M350 489L538 485 537 513 351 518Z" fill="#122e40" stroke="#385d70" stroke-width="3"/><path d="M424 501L460 499" stroke="#25c9df" stroke-width="7"/><path d="M437 507L446 507" stroke="#ddaa75" stroke-width="2"/><path d="M350 520L538 516 537 544 351 549Z" fill="#122e40" stroke="#385d70" stroke-width="3"/><path d="M424 532L460 530" stroke="#25c9df" stroke-width="7"/><path d="M437 538L446 538" stroke="#ddaa75" stroke-width="2"/>
+<path d="M340 553L551 547" fill="none" stroke="#1fe4f4" stroke-width="5" opacity=".8"/>
+<path d="M346 264L548 255" fill="none" stroke="#ffa64e" stroke-width="5" opacity=".85"/>
+<path d="M333 232L548 217" fill="none" stroke="#0c2939" stroke-width="10" />
+<text x="366" y="258" fill="#f0c485" font-family="monospace" font-size="15" letter-spacing="1">▣  MISSION FILES</text>
+<path d="M346 226L540 222" fill="none" stroke="#f8a052" stroke-width="3" />
+<path d="M405 273h111" stroke="#4da1b4" stroke-width="2" opacity=".4"/>
+</svg>

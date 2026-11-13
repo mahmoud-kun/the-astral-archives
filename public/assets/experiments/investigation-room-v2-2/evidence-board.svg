@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1920" height="824" viewBox="0 0 1920 824" fill="none" aria-hidden="true"><defs>
+<linearGradient id="steel" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#34536a"/><stop offset=".32" stop-color="#18374c"/><stop offset=".72" stop-color="#0b2439"/><stop offset="1" stop-color="#081a2a"/></linearGradient>
+<linearGradient id="dark" x1="0" y1="0" x2=".6" y2="1"><stop stop-color="#132f45"/><stop offset="1" stop-color="#061726"/></linearGradient>
+<linearGradient id="panel" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#1b455c"/><stop offset=".48" stop-color="#0b283e"/><stop offset="1" stop-color="#06182c"/></linearGradient>
+<linearGradient id="glass" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#11465a"/><stop offset=".58" stop-color="#08273d"/><stop offset="1" stop-color="#03182d"/></linearGradient>
+<linearGradient id="cyan" x1="0" y1="0" x2="1" y2="0"><stop stop-color="#09647f"/><stop offset=".5" stop-color="#18dbf0"/><stop offset="1" stop-color="#7af9ff"/></linearGradient>
+<linearGradient id="amber" x1="0" y1="0" x2="1" y2="0"><stop stop-color="#a45420"/><stop offset=".5" stop-color="#ff9d45"/><stop offset="1" stop-color="#ffd07c"/></linearGradient>
+<linearGradient id="floor" x1="0" y1="0" x2=".5" y2="1"><stop stop-color="#143b50"/><stop offset=".55" stop-color="#0c273c"/><stop offset="1" stop-color="#071a2f"/></linearGradient>
+<radialGradient id="halo"><stop stop-color="#25dced" stop-opacity=".36"/><stop offset=".46" stop-color="#1cd5fa" stop-opacity=".085"/><stop offset="1" stop-color="#1cd5fa" stop-opacity="0"/></radialGradient>
+<radialGradient id="sun"><stop stop-color="#ffb364" stop-opacity=".38"/><stop offset=".55" stop-color="#ff9d42" stop-opacity=".065"/><stop offset="1" stop-color="#ff9d42" stop-opacity="0"/></radialGradient>
+<filter id="glow" x="-55%" y="-180%" width="210%" height="460%"><feGaussianBlur stdDeviation="4"/></filter>
+</defs>
+<path d="M679 276L896 272 912 421 673 427Z" fill="#071b2e" stroke="#416f82" stroke-width="10" />
+<path d="M690 288L887 286 898 407 686 414Z" fill="url(#panel)" stroke="#65a0a8" stroke-width="3" />
+<text x="698" y="299" fill="#faad67" font-family="monospace" font-size="10" letter-spacing="1">CASE EVIDENCE</text>
+<path d="M704 315L748 311 750 348 704 350Z" fill="#866b5c" stroke="#cc9673" stroke-width="1.8"/><path d="M712 333L725 318 739 338" fill="none" stroke="#e6aa77" stroke-width="2"/><path d="M768 315L812 311 814 348 768 350Z" fill="#947865" stroke="#cc9673" stroke-width="1.8"/><path d="M776 333L789 318 803 338" fill="none" stroke="#e6aa77" stroke-width="2"/><path d="M832 315L876 311 878 348 832 350Z" fill="#866b5c" stroke="#cc9673" stroke-width="1.8"/><path d="M840 333L853 318 867 338" fill="none" stroke="#e6aa77" stroke-width="2"/>
+<path d="M714 360L760 383 820 352 871 393" fill="none" stroke="#ffad73" stroke-width="2.8" stroke-dasharray="6 4"/>
+<circle cx="714" cy="352" r="5.5" fill="#ffa55f" stroke="#e8c293" stroke-width="2"/><circle cx="760" cy="383" r="5.5" fill="#ffa55f" stroke="#e8c293" stroke-width="2"/><circle cx="820" cy="352" r="5.5" fill="#ffa55f" stroke="#e8c293" stroke-width="2"/><circle cx="871" cy="383" r="5.5" fill="#ffa55f" stroke="#e8c293" stroke-width="2"/>
+<path d="M706 397h45" fill="none" stroke="#55859a" stroke-width="3" /><path d="M766 397h45" fill="none" stroke="#55859a" stroke-width="3" /><path d="M826 397h45" fill="none" stroke="#55859a" stroke-width="3" />
+<path d="M681 276L894 272" fill="none" stroke="#96c1c3" stroke-width="3" />
+<path d="M681 421L909 417" fill="none" stroke="#ffac62" stroke-width="4" opacity=".52"/>
+</svg>
