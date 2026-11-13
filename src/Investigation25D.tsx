@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState, type MouseEvent as ReactMouseEvent, type PointerEvent } from 'react'
 import './investigation25d.css'
-import { INVESTIGATION_DESIGNER_LAYERS } from './investigationDesignerLayers'
+import { INVESTIGATION_FAITHFUL_LAYERS } from './investigationFaithfulLayers'
 
 type ObjectId = 'mission-files' | 'evidence-board' | 'desk-terminal'
 type Focus = ObjectId | 'door' | null
@@ -71,9 +71,10 @@ export default function Investigation25D({ onInspect, onExit, disabled = false }
           'translate3d(calc(-50% + ' + pan.toFixed(2) + 'px), 0, 0) scale(' + zoomNow.current.toFixed(4) + ')'
       }
       if (frameRef.current) {
-        frameRef.current.style.setProperty('--designer-mid-motion', (-look * 5).toFixed(1) + 'px')
-        frameRef.current.style.setProperty('--designer-near-motion', (-look * 10).toFixed(1) + 'px')
-        frameRef.current.style.setProperty('--designer-foreground-motion', (-look * 15).toFixed(1) + 'px')
+        frameRef.current.style.setProperty('--faithful-far', (look * 6).toFixed(1) + 'px')
+        frameRef.current.style.setProperty('--faithful-mid', (-look * 13).toFixed(1) + 'px')
+        frameRef.current.style.setProperty('--faithful-near', (-look * 28).toFixed(1) + 'px')
+        frameRef.current.style.setProperty('--faithful-front', (-look * 42).toFixed(1) + 'px')
         frameRef.current.style.setProperty('--far-motion', (look * 9).toFixed(1) + 'px')
         frameRef.current.style.setProperty('--mid-motion', (-look * 18).toFixed(1) + 'px')
         frameRef.current.style.setProperty('--near-motion', (-look * 38).toFixed(1) + 'px')
@@ -320,17 +321,15 @@ export default function Investigation25D({ onInspect, onExit, disabled = false }
       onPointerCancel={pointerUp} onLostPointerCapture={pointerUp}
     >
       <div className="exploration-depth-world" ref={worldRef}>
-        <div className="exploration-far-wall">
-          <picture>
-            <source srcSet="/assets/optimized/investigation-panorama-hq.webp" type="image/webp" />
-            <img src="/assets/rooms/Investigation_Wide_Artwork.png" width="1916" height="821" alt="" draggable={false} />
-          </picture>
-        </div>
-        {/* Reference-driven cutouts keep the designer's original art and room layout. */}
-        <div className="exploration-designer-layers" aria-hidden="true">
-          {INVESTIGATION_DESIGNER_LAYERS.map(layer => (
-            <div key={layer.assetId}
-              className={'exploration-designer-layer exploration-designer-' + layer.region + ' exploration-designer-' + layer.depth} />
+        {/* Designer-reference-inspired original vector assets — independently rendered.
+            The reference image itself is NEVER loaded in this scene. */}
+        <div className="exploration-faithful-room" aria-hidden="true">
+          {INVESTIGATION_FAITHFUL_LAYERS.map(layer => (
+            <img key={layer.assetId}
+              src={layer.path}
+              width={1920} height={824}
+              className={'exploration-faithful-asset exploration-faithful-' + layer.depth}
+              alt="" decoding="async" draggable={false} />
           ))}
         </div>
         <div className="exploration-atmospheric-glow" aria-hidden="true" />

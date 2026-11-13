@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1920" height="824" viewBox="0 0 1920 824" fill="none" aria-hidden="true"><defs>
+<linearGradient id="steel" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#4b7286"/><stop offset=".35" stop-color="#1b4157"/><stop offset="1" stop-color="#061b2e"/></linearGradient>
+<linearGradient id="dark" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#203b51"/><stop offset="1" stop-color="#061724"/></linearGradient>
+<linearGradient id="panel" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#1c5067"/><stop offset=".45" stop-color="#0b3043"/><stop offset="1" stop-color="#051b2c"/></linearGradient>
+<linearGradient id="glass" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#206a7a"/><stop offset=".5" stop-color="#0b3e55"/><stop offset="1" stop-color="#081d34"/></linearGradient>
+<linearGradient id="cyan"><stop stop-color="#06899c"/><stop offset=".5" stop-color="#1ceaff"/><stop offset="1" stop-color="#95f8fa"/></linearGradient>
+<linearGradient id="orange"><stop stop-color="#8d4b20"/><stop offset=".5" stop-color="#ff9a42"/><stop offset="1" stop-color="#ffc46b"/></linearGradient>
+<radialGradient id="cold"><stop stop-color="#1cdaf6" stop-opacity=".31"/><stop offset=".3" stop-color="#0ae0f9" stop-opacity=".11"/><stop offset="1" stop-color="#1ce6f9" stop-opacity="0"/></radialGradient>
+<radialGradient id="warm"><stop stop-color="#ffa454" stop-opacity=".31"/><stop offset=".5" stop-color="#ffa454" stop-opacity=".07"/><stop offset="1" stop-color="#ffa454" stop-opacity="0"/></radialGradient>
+</defs>
+<path d="M769 483L787 440 834 420" fill="none" stroke="#102438" stroke-width="16" />
+<path d="M769 483L786 443 828 421" fill="none" stroke="#c48947" stroke-width="4" />
+<circle cx="786" cy="441" r="11" fill="#1e3b4c" stroke="#6e8b96" stroke-width="3"/>
+<circle cx="832" cy="422" r="11" fill="#1c4051" stroke="#a6a9a0" stroke-width="3"/>
+<polygon points="825,412 857,411 882,432 809,439" fill="#143749" stroke="#9d9f89" stroke-width="4"/>
+<polygon points="824,435 870,429 864,439 821,443" fill="#ffb86e" />
+<ellipse cx="851" cy="465" rx="74" ry="28" fill="url(#warm)" />
+<path d="M764 483L789 485" fill="none" stroke="#35586d" stroke-width="11" />
+<polygon points="772,479 788,478 806,488 761,489" fill="#335367" />
+<polygon points="870,493 903,487 909,500 870,506" fill="#a77b52" stroke="#526271" stroke-width="2"/>
+<polygon points="913,480 947,480 954,503 912,503" fill="#0d3450" stroke="#498298" stroke-width="3"/>
+<path d="M922 482L940 480" fill="none" stroke="#22d7eb" stroke-width="2" />
+<circle cx="934" cy="492" r="10" fill="none" stroke="#feb06a" stroke-width="2"/>
+<rect x="958" y="475" width="20" height="27" rx="2" fill="#d0954d" />
+<path d="M958 475L961 470M967 475L968 463M975 475L978 468" fill="none" stroke="#f8c06f" stroke-width="2.5" />
+</svg>
