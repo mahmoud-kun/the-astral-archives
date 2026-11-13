@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import * as THREE from 'three'
+import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js'
 import { buildInvestigationRoom, type InvestigationTarget } from './investigation360/buildRoom'
 import './investigation360.css'
 
@@ -75,6 +76,26 @@ export default function Investigation360({
     const scene = new THREE.Scene()
     scene.background = new THREE.Color(0x061526)
     scene.fog = new THREE.Fog(0x061526, 12, 22)
+    // Low-intensity studio reflection map makes metallic PBR read as metal
+    // without loading a remote HDR asset. Fall back to direct lights if needed.
+    let reflectionMap: THREE.Texture | null = null
+    try {
+      const environment = new RoomEnvironment()
+      const generator = new THREE.PMREMGenerator(renderer)
+      try {
+        reflectionMap = generator.fromScene(environment).texture
+        scene.environment = reflectionMap
+        scene.environmentIntensity = .48
+      } finally {
+        environment.dispose()
+        generator.dispose()
+      }
+    } catch {
+      // A graphics driver may reject the extra reflection pass.
+      reflectionMap?.dispose()
+      reflectionMap = null
+      scene.environment = null
+    }
     const camera = new THREE.PerspectiveCamera(74, 1, 0.08, 55)
     camera.position.set(0, 1.63, 2.45) // chair / seated eye point: IMMUTABLE
     camera.rotation.order = 'YXZ'
@@ -283,6 +304,7 @@ export default function Investigation360({
       canvas.removeEventListener('click', onClick)
       canvas.removeEventListener('webglcontextlost', onContextLost)
       room.dispose()
+      reflectionMap?.dispose()
       renderer.dispose()
       canvas.remove()
       canvasRef.current = null
