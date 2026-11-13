@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
+import Investigation25D from './Investigation25D'
 
 type Screen = 'menu' | 'opening' | 'station'
 type Overlay = 'settings' | 'archives' | 'rooms' | 'inspect' | null
@@ -112,11 +113,11 @@ function SceneVisual({ scene }: { scene: SceneId }) {
 function HendaPortrait() {
   const [fallback, setFallback] = useState(false)
   return <img
-    src={fallback ? '/assets/henda-portrait-prototype.svg' : '/assets/optimized/henda-portrait-sm.webp'}
-    srcSet={fallback ? undefined : '/assets/optimized/henda-portrait-sm.webp 180w, /assets/optimized/henda-portrait.webp 360w'}
+    src={fallback ? '/assets/optimized/henda-portrait-sm.webp' : '/assets/optimized/henda-portrait-alpha.webp'}
+    srcSet={undefined}
     sizes="(max-width: 580px) 73px, (max-width: 800px) 90px, 119px"
     alt="Portrait of a glasses-wearing space investigator in an engineering suit"
-    width="180" height="244" loading="eager" decoding="async"
+    width="355" height="492" loading="eager" decoding="async"
     onError={() => { if (!fallback) setFallback(true) }}
   />
 }
@@ -188,13 +189,13 @@ function App() {
   }, [dialogue, screen])
 
   useEffect(() => {
-    if (screen !== 'station' || hintUsed || dialogue || overlay || visited.length > 0) return
+    if (screen !== 'station' || hintUsed || dialogue || overlay) return
     const timer = window.setTimeout(() => {
       setHintUsed(true)
       setDialogue('hint')
     }, 60000)
     return () => window.clearTimeout(timer)
-  }, [screen, dialogue, overlay, hintUsed, activity, visited.length])
+  }, [screen, dialogue, overlay, hintUsed, activity])
 
   useEffect(() => {
     const handleEscape = (event: KeyboardEvent) => {
@@ -271,7 +272,10 @@ function App() {
       {screen === 'opening' && <div className="opening-view" role="status" aria-label="Preparing investigation room"><Emblem/><span className="opening-kicker">INVESTIGATION CONNECTION</span><strong>{openingMessage}</strong><div className="opening-line"><span/></div><small>RETRIEVING STATION VISUALS</small></div>}
 
       {screen === 'station' && <main className={'station-view room-' + roomId}>
-        <SceneVisual key={roomId} scene={roomId}/>
+        {roomId === 'investigation'
+          ? <Investigation25D disabled={Boolean(overlay)} onInspect={inspect} onExit={() => changeRoom('archive')}/>
+          : <SceneVisual key={roomId} scene={roomId}/>}
+        
         <div className="station-vignette" aria-hidden="true"/>
         <header className="station-topbar">
           <div className="room-identity"><Emblem small/><div><span className="room-kicker">STATION / PRESENT TIMELINE</span><strong>{room.title.toUpperCase()}</strong></div></div>
@@ -283,12 +287,6 @@ function App() {
         </header>
 
         <div className="room-hotspots" aria-label="Objects in the room">
-          {roomId === 'investigation' && <>
-            <button className="scene-hotspot scene-hotspot-files" onClick={() => inspect('mission-files')} aria-label="Inspect mission files"><span className="hotspot-ring"/><span className="hotspot-tooltip">MISSION FILES</span></button>
-            <button className="scene-hotspot scene-hotspot-board" onClick={() => inspect('evidence-board')} aria-label="Examine evidence board"><span className="hotspot-ring"/><span className="hotspot-tooltip">EVIDENCE BOARD</span></button>
-            <button className="scene-hotspot scene-hotspot-desk" onClick={() => inspect('desk-terminal')} aria-label="Examine investigation desk"><span className="hotspot-ring"/><span className="hotspot-tooltip">INVESTIGATION DESK</span></button>
-            <button className="scene-hotspot scene-hotspot-door" onClick={() => changeRoom('archive')} aria-label="Enter archive room"><span className="hotspot-ring"/><span className="hotspot-tooltip">ENTER THE ARCHIVE <b>→</b></span></button>
-          </>}
           {roomId === 'archive' && <button className="scene-hotspot scene-hotspot-console" onClick={() => inspect('archive-console')} aria-label="Inspect archive terminal"><span className="hotspot-ring"/><span className="hotspot-tooltip">ARCHIVE CONSOLE</span></button>}
           {roomId === 'recordings' && <button className="scene-hotspot scene-hotspot-console" onClick={() => inspect('recording-console')} aria-label="Inspect recording terminal"><span className="hotspot-ring"/><span className="hotspot-tooltip">RECORDING STATION</span></button>}
           {roomId === 'signal' && <button className="scene-hotspot scene-hotspot-console" onClick={() => inspect('signal-console')} aria-label="Inspect signal monitor"><span className="hotspot-ring"/><span className="hotspot-tooltip">SIGNAL MONITOR</span></button>}
