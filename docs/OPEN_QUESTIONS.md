@@ -1,5 +1,7 @@
 # The Astral Archives — Current Open Questions (after team reconciliation)
 
+> **Newer UX/navigation status (2026-11-13):** Read [current checkpoint](CHECKPOINT_2026-11-13_INTERACTIVE_INVESTIGATION.md). First-person **bounded 2.5D**, no 3D/360/free roam. Camera V2 exists but was **rejected in player testing**; V3 is planned/not built. This note changes camera/asset/prototype status ONLY; this document's **Nov 9 evidence and Rescue rules remain authoritative**, not October collective-only rules.
+
 > **2026-11-09 gameplay update:** See [Gameplay & UX Decisions (2026-11-09)](GAMEPLAY_DESIGN_2026-11-09.md) for the newer designer-approved first-person investigation, folder-based evidence progress, contextual robot assistance, past engineering interaction, and per-mission outcomes. It **supersedes conflicting older gameplay directions**, especially mandatory deduction-board gating and collective-only result reveal. Shared Global Budget, observer-only flashbacks, historical content and responsive orientation have unresolved reconciliation points; do not treat old conflicting prescriptions as simultaneous requirements. Documentation update only; no gameplay implementation.
 
 
@@ -8,7 +10,7 @@ Last updated: 2026-10-30
 
 ## Canonical decision precedence
 
-1. **Most recent team approvals V01–V11 in [DECISIONS.md](DECISIONS.md)** control any conflicting older proposals or OPEN labels.
+1. **Latest explicit decisions, including V12–V17 camera/UX and Nov 9 evidence/Rescue rules**, override incompatible older claims. Camera V2 is a rejected trial, not a completed solution.
 2. Existing **D/T/A/I/E/X/P decisions remain approved** where compatible with V01–V10. See [Implementation Decisions](IMPLEMENTATION_DECISIONS_2026-10-30.md) for approved X01–X07 design defaults.
 3. [CASE404_SOURCE_OF_TRUTH.md](CASE404_SOURCE_OF_TRUTH.md) is the **unchanged original historical designer record**, NOT the present implementation specification. Its proposed five-room maps, source-era ownership labels and other superseded text must not override newer team decisions.
 
@@ -73,3 +75,10 @@ Last updated: 2026-10-30
 ## Superseded wording removed from the live backlog
 
 Earlier notes calling the core room count open, treating interactive Flashbacks as the only past mode, treating all past locations as undefined, calling the approved logo concept an unchosen proposal, or describing X01–X07 methods as undecided are **historical, not current requirements**. For their original context, consult the preserved designer brief and Git history; do not copy those older states into new work.
+
+## Additional OPEN items from 2026-11-13 checkpoint
+- Camera V3 Pointer Lock genuine user activation, mouse movement sensitivity, bounded view, reticle, Esc/overlay release/re-entry, keyboard access and mobile touch fallback. None verified in deployed V3 yet.
+- Measured on-device camera/transition smoothness vs merely perceived abrupt focus; not proven an FPS fault. Check laptop, portrait phone, reduced motion.
+- Designer review: one corner as separate 2D layers and a dedicated close-up image; final assets, alpha edges, safe zones, hotspot registration and export dimensions are NOT approved or produced.
+- Camera V2 player rejection is **settled feedback**, not an open question. No 3D, no 360, no free-roam are settled constraints.
+- Old shared Global Budget/collective evaluation conflicts with Nov 9 per-mission Execute/outcome: seek explicit design reconciliation **before Rescue engine coding**, not during Camera V3.
