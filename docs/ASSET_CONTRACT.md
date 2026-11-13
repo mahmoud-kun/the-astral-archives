@@ -1,5 +1,7 @@
 # The Astral Archives — Asset Handoff Contract (DRAFT)
 
+> **Current 2026-11-13 handoff:** [Camera V2 rejected / Camera V3 next](CHECKPOINT_2026-11-13_INTERACTIVE_INVESTIGATION.md). Bounded first-person 2.5D **without 3D, 360° or free roam**. V3 not coded. Current Nov 9 evidence/Rescue approvals supersede incompatible older rules; use experiment branch only, not main.
+
 > **2026-11-09 gameplay update:** See [Gameplay & UX Decisions (2026-11-09)](GAMEPLAY_DESIGN_2026-11-09.md) for the newer designer-approved first-person investigation, folder-based evidence progress, contextual robot assistance, past engineering interaction, and per-mission outcomes. It **supersedes conflicting older gameplay directions**, especially mandatory deduction-board gating and collective-only result reveal. Shared Global Budget, observer-only flashbacks, historical content and responsive orientation have unresolved reconciliation points; do not treat old conflicting prescriptions as simultaneous requirements. Documentation update only; no gameplay implementation.
 
 
@@ -50,3 +52,12 @@ Production asset files, final visual formats/resolutions, naming conventions, UI
 
 - Prepare visual concepts and eventually individually addressable background/hotspot assets for four **core present station rooms**: (1) Investigation Office — main starting hub, all five dossier stories, evidence sorting/board and Rescue Mission entry; (2) File Archives; (3) Recordings Room; (4) Signal Room. Fixed-view portrait-first point-and-click presentation applies; specific counts of views, objects and animations are pending.
 - **Alternate-history past scenes use a hybrid environment set:** reusable shared location types and distinctive mission-specific locations with historical-era variations. Scene count and case-specific deliverables depend on Content Owner's finalized missions. Flashback assets are distinct observer-only reconstructions.
+
+## Current experimental asset inventory and separate proposed art direction — 2026-11-13
+
+Contrary to original pre-production assumptions, the experiment branch contains actual **preview** assets:
+- `public/assets/optimized/investigation-panorama-hq.webp` and `investigation-close-hq.webp` — static full-scene stills used by the rejected Camera V2, **not true panoramic or final approved scene**.
+- `public/assets/optimized/henda-portrait-alpha.webp` and `henda-full-alpha.webp` — real-alpha cutouts from a Henda reference; transparency tested, but cleaned silhouette, precise character look and production approval not established.
+- Existing optimized menu and other room WebPs remain experimental placeholders.
+
+Player rejected the flat/mismatched static close-up experience. **Next proposed art batch (AFTER Camera V3 accepts):** one Investigation Room corner using **designer-authored separate stylized 2D** background architecture, furniture, clickable prop states, foreground/lighting and a dedicated object-inspection illustration. Final layer counts, source files, dimensions, safe zones, and transparency must be reviewed with Designer. Never treat a zoomed low-res image or AI-generated elements as automatically approved. No 3D export, 360 background or music/SFX deliverable is authorized.
