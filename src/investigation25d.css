@@ -6,18 +6,21 @@
   z-index: 0;
   overflow: hidden;
   isolation: isolate;
-  touch-action: pan-y;
+  touch-action: none;
+  user-select: none;
   cursor: grab;
   --far-motion: 0px;
   --near-motion: 0px;
   --near-rotation: 0deg;
-  --look-position: 50%;
   background: radial-gradient(ellipse at 52% 40%,#18384b,#071321);
 }
 .exploration25d:active { cursor: grabbing; }
 .exploration-depth-world {
   position: absolute;
-  inset: -5% -19% -3%;
+  top: 0;
+  left: 50%;
+  width: max(100%, 233.4vh);
+  height: 100%;
   z-index: 0;
   transform-origin: 50% 51%;
   will-change: transform;
@@ -135,45 +138,31 @@
   text-shadow:0 2px 5px #001019; pointer-events:none;
 }
 .exploration-top-note span { color:#f4a261; }
-.exploration-control {
-  position:absolute; z-index:4; bottom:38px; left:50%;
-  transform:translateX(-50%);
-  display:flex; align-items:center; gap:9px;
-  padding:8px 12px; background:#071b2dd9;
-  backdrop-filter:blur(18px); border:1px solid #40738a;
-  box-shadow:0 8px 32px #0009;
+.exploration-help-button {
+  position:absolute; z-index:5;
+  top:98px; right:clamp(14px,2.8vw,46px);
+  display:grid; place-items:center;
+  width:36px; height:36px;
+  border:1px solid #498095; border-radius:50%;
+  color:#d2e9e9; background:#091e2bc9;
+  font:15px 'IBM Plex Mono',monospace;
+  cursor:pointer; touch-action:manipulation;
+  backdrop-filter:blur(8px);
 }
-.exploration-control button {
-  border:1px solid #355d72; background:#103148; color:#e0f0ee;
-  display:grid; place-items:center; width:35px; height:32px;
-  font-size:25px; line-height:1;
+.exploration-help-button:hover,.exploration-help-button:focus-visible {
+  border-color:#f4a261; background:#153a4e;
 }
-.exploration-control button:hover,.exploration-control button:focus-visible { border-color:#f4a261; background:#1a465c; }
-.exploration-control .exploration-help-button { font:13px 'IBM Plex Mono',monospace; width:29px; border-radius:50%; margin-left:5px; }
-.exploration-look-track {
-  width:96px; height:3px; border-radius:2px; background:#2b566b;
-  position:relative; margin:0 5px;
-}
-.exploration-look-track::before,.exploration-look-track::after {
-  content:''; position:absolute; height:7px; width:1px; top:-2px; background:#6a9fab;
-}
-.exploration-look-track::before { left:0; }.exploration-look-track::after { right:0; }
-.exploration-look-track > span {
-  position:absolute; left:var(--look-position); top:50%;
-  width:10px; height:10px; border:2px solid #f4a261; border-radius:50%;
-  background:#122d44; box-shadow:0 0 11px #f4a261;
-  transform:translate(-50%,-50%);
-}
+.exploration-help-button:focus-visible { outline:2px solid #f4a261; outline-offset:3px; }
 .exploration-guide {
-  position:absolute; z-index:3; bottom:101px; left:50%; transform:translateX(-50%);
+  position:absolute; z-index:3; bottom:44px; left:50%; transform:translateX(-50%);
   font:9px 'IBM Plex Mono',monospace; color:#b7d4d9;
   letter-spacing:.12em; text-align:center; white-space:nowrap;
   text-shadow:0 2px 6px #000; animation:guideFade 1.3s .8s both;
 }
 .exploration-guide span { color:#f4a261; margin:0 5px; }
 .exploration-help {
-  position:absolute; z-index:10; bottom:104px; left:50%;
-  transform:translateX(-50%); padding:23px; width:min(375px,calc(100vw - 30px));
+  position:absolute; z-index:10; top:141px; right:clamp(14px,2.8vw,46px);
+  padding:23px; width:min(375px,calc(100% - 30px));
   background:#081e31ef; border:1px solid #418397;
   box-shadow:0 15px 50px #000b; color:#eaf2ee;
 }
@@ -195,16 +184,11 @@
 @keyframes focusStatus { from { opacity:0; transform:translate(-50%,12px); } to { opacity:1; transform:translate(-50%,0); } }
 
 @media(max-width:720px) {
-  .exploration-depth-world { inset:-3% -26% -2%; }
-  .object-files { left:10%; width:22%; }
-  .object-evidence { left:30%; width:23%; }
-  .object-desk { left:40%; width:25%; }
-  .object-door { left:72%; width:22%; }
+  /* Keep hotspot locations anchored to the same image coordinates on touch screens. */
   .exploration-top-note { top:78px; left:12px; font-size:7px; }
-  .exploration-control { bottom:32px; padding:7px; gap:6px; }
-  .exploration-control button { width:31px; height:30px; }
-  .exploration-look-track { width:55px; }
-  .exploration-guide { bottom:90px; max-width:90vw; line-height:1.7; font-size:8px; white-space:normal; }
+  .exploration-help-button { top:77px; right:12px; width:34px; height:34px; }
+  .exploration-help { top:119px; right:12px; }
+  .exploration-guide { bottom:38px; max-width:90vw; line-height:1.7; font-size:8px; white-space:normal; }
   .exploration-near-left { left:-84px; }
   .exploration-near-right { right:-84px; }
 }
