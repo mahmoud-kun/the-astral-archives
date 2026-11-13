@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1920" height="824" viewBox="0 0 1920 824" fill="none" role="img">
+
+<defs><linearGradient id="frame" x1="0" y1="0" x2="1" y2="0"><stop stop-color="#091b29"/><stop offset=".35" stop-color="#34586c"/><stop offset=".75" stop-color="#163447"/><stop offset="1" stop-color="#071929"/></linearGradient>
+<linearGradient id="panel" x1="0" y1="0" x2="1" y2=".8"><stop stop-color="#24455b"/><stop offset=".5" stop-color="#0e2b3f"/><stop offset="1" stop-color="#061b2c"/></linearGradient></defs>
+<path d="M1417 211L1450 174 1739 170 1776 216 1767 645 1416 652Z" fill="#081a29" stroke="#618a96" stroke-width="8"/>
+<path d="M1451 174L1739 169 1777 214 1430 216Z" fill="#3c6075" stroke="#88b2b4" stroke-width="4"/>
+<path d="M1432 215L1769 211 1766 642 1416 649Z" fill="url(#frame)" stroke="#355b70" stroke-width="4"/>
+<path d="M1464 245L1733 241 1734 603 1459 611Z" fill="#061524" stroke="#4d7885" stroke-width="5"/>
+<path d="M1482 260L1719 258 1720 596 1480 599Z" fill="url(#panel)" stroke="#2e5066" stroke-width="3"/>
+<path d="M1588 263L1588 596" stroke="#3e7282" stroke-width="6"/>
+<path d="M1595 269V588" stroke="#081e31" stroke-width="4"/>
+<path d="M1507 289H1564V390H1507Z" fill="#071d2d" stroke="#4c8293" stroke-width="4"/>
+<path d="M1516 303H1555V365H1516Z" fill="#225166"/>
+<path d="M1523 311L1549 309" stroke="#72beba" stroke-width="3" opacity="0.25"/>
+<path d="M1523 325L1549 323" stroke="#72beba" stroke-width="3" opacity="0.38"/>
+<path d="M1523 339L1549 337" stroke="#72beba" stroke-width="3" opacity="0.51"/>
+<path d="M1523 353L1549 351" stroke="#72beba" stroke-width="3" opacity="0.64"/>
+<path d="M1505 417H1557V460H1505Z" fill="#112e43" stroke="#52828f" stroke-width="3"/>
+<path d="M1520 431H1542V435H1520Z" fill="#a7d6ca" opacity=".58"/>
+<path d="M1517 447H1546V450H1517Z" fill="#a7d6ca" opacity=".28"/>
+<path d="M1667 321H1702V498H1667Z" fill="#071c2b" stroke="#527b87" stroke-width="3"/>
+<path d="M1684 333V473" stroke="#ebb27d" stroke-width="8" opacity=".7"/>
+<path d="M1684 338V471" stroke="#ffd5a4" stroke-width="2" opacity=".7"/>
+<path d="M1483 245L1731 241" stroke="#85acae" stroke-width="3" opacity=".6"/>
+<text x="1487" y="228" fill="#d6ddd2" font-family="monospace" font-size="13" letter-spacing="2" font-weight="700">ARCHIVE ACCESS</text>
+<path d="M1430 616L1765 612 1792 650 1410 655Z" fill="#29485c" stroke="#74969b" stroke-width="4"/>
+<path d="M1490 610L1748 608" stroke="#f5b57c" stroke-width="3" opacity=".57"/>
+
+</svg>

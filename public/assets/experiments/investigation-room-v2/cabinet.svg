@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1920" height="824" viewBox="0 0 1920 824" fill="none" role="img">
+
+<defs>
+<linearGradient id="cab" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#33576a"/><stop offset=".42" stop-color="#173347"/><stop offset="1" stop-color="#071c2d"/></linearGradient>
+<linearGradient id="drawer" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#1b4157"/><stop offset="1" stop-color="#091d2c"/></linearGradient>
+</defs>
+<ellipse cx="411" cy="627" rx="230" ry="28" fill="#020c17" opacity=".58"/>
+<path d="M203 254L249 222 549 220 574 248 572 612 524 630 206 622Z" fill="#0a2436" stroke="#5a8592" stroke-width="5"/>
+<path d="M205 254L249 226 255 610 205 621Z" fill="#091927" stroke="#375f72" stroke-width="5"/>
+<path d="M248 226L549 220 574 248 251 260Z" fill="#45667a" stroke="#8fb5b6" stroke-width="3"/>
+<path d="M252 263L571 249 568 609 256 611Z" fill="url(#cab)" stroke="#537989" stroke-width="4"/>
+<path d="M278 281L547 274 545 578 280 583Z" fill="#071b2b" stroke="#456a7b" stroke-width="5"/>
+<path d="M289 297L536 289 534 565 292 570Z" fill="url(#drawer)" stroke="#244d65" stroke-width="2"/>
+<path d="M287 345L538 340" stroke="#527c86" stroke-width="7"/>
+<path d="M296 338L532 333" stroke="#092032" stroke-width="3"/>
+<path d="M283 298L544 292" stroke="#87aeb3" stroke-opacity=".21" stroke-width="2"/>
+<path d="M287 399L538 394" stroke="#527c86" stroke-width="7"/>
+<path d="M296 392L532 387" stroke="#092032" stroke-width="3"/>
+<path d="M283 352L544 346" stroke="#87aeb3" stroke-opacity=".21" stroke-width="2"/>
+<path d="M287 453L538 448" stroke="#527c86" stroke-width="7"/>
+<path d="M296 446L532 441" stroke="#092032" stroke-width="3"/>
+<path d="M283 406L544 400" stroke="#87aeb3" stroke-opacity=".21" stroke-width="2"/>
+<path d="M287 507L538 502" stroke="#527c86" stroke-width="7"/>
+<path d="M296 500L532 495" stroke="#092032" stroke-width="3"/>
+<path d="M283 460L544 454" stroke="#87aeb3" stroke-opacity=".21" stroke-width="2"/>
+<path d="M287 561L538 556" stroke="#527c86" stroke-width="7"/>
+<path d="M296 554L532 549" stroke="#092032" stroke-width="3"/>
+<path d="M283 514L544 508" stroke="#87aeb3" stroke-opacity=".21" stroke-width="2"/>
+<rect x="293" y="589" width="237" height="16" fill="#132d3e" rx="2"/>
+<text x="295" y="244" fill="#d5d5be" font-family="monospace" font-size="12" letter-spacing="2" font-weight="700">MISSION FILES</text>
+<path d="M288 253L521 247" stroke="#ebac7a" stroke-opacity=".69" stroke-width="3"/>
+<path d="M238 272L239 604" stroke="#eda36f" stroke-opacity=".5" stroke-width="4"/>
+<path d="M560 268L557 609" stroke="#a5e6d6" stroke-opacity=".3" stroke-width="4"/>
+
+</svg>

@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1920" height="824" viewBox="0 0 1920 824" fill="none" role="img">
+
+<defs><linearGradient id="screen" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#26566a"/><stop offset=".4" stop-color="#14384b"/><stop offset="1" stop-color="#071b2b"/></linearGradient>
+<linearGradient id="surface" x1="0" y1="0" x2=".85" y2="1"><stop stop-color="#41677a"/><stop offset=".5" stop-color="#1c4053"/><stop offset="1" stop-color="#092236"/></linearGradient>
+<linearGradient id="stand"><stop stop-color="#0a1c2c"/><stop offset=".6" stop-color="#2e5668"/><stop offset="1" stop-color="#0b2333"/></linearGradient></defs>
+<!-- Freestanding terminal is in front of the board and anchored to a common desk plane. -->
+<ellipse cx="1040" cy="664" rx="380" ry="29" fill="#010b15" opacity=".62"/>
+<path d="M761 580L1233 567 1332 629 736 648Z" fill="url(#surface)" stroke="#729da7" stroke-width="6"/>
+<path d="M737 648L1330 628 1306 666 749 680Z" fill="#0a2536" stroke="#2c5a6b" stroke-width="5"/>
+<path d="M798 673L901 670 904 772 798 777Z" fill="url(#stand)" stroke="#406b7d" stroke-width="4"/>
+<path d="M1212 664L1287 662 1264 779 1204 778Z" fill="url(#stand)" stroke="#426c7a" stroke-width="4"/>
+<path d="M915 433L1182 427 1192 579 914 590Z" fill="#071624" stroke="#527b87" stroke-width="8"/>
+<path d="M930 449L1168 445 1175 559 931 566Z" fill="url(#screen)" stroke="#70a8a8" stroke-opacity=".36" stroke-width="2"/>
+<path d="M936 455L1163 451" stroke="#75bbb6" stroke-width="3" opacity=".7"/>
+<path d="M950 471H1063V478H950Z" fill="#72c5bd" opacity=".56"/>
+<rect x="948" y="492" width="167" height="5" fill="#5f9daa" opacity="0.46"/>
+<rect x="948" y="509" width="147" height="5" fill="#db985e" opacity="0.38"/>
+<rect x="948" y="526" width="127" height="5" fill="#5f9daa" opacity="0.30000000000000004"/>
+<path d="M1144 471V540" stroke="#6cc2ba" stroke-width="4" opacity=".45"/>
+<text x="946" y="547" fill="#d0d6c7" font-family="monospace" font-size="11" letter-spacing="2" >INQUIRY</text>
+<path d="M1029 591L1088 588 1111 604 1013 607Z" fill="#26495a" stroke="#7198a1" stroke-width="4"/>
+<path d="M983 609L1144 605 1175 625 949 630Z" fill="#071d2d" stroke="#477388" stroke-width="4"/>
+<path d="M963 620L1158 616" stroke="#a5d9d1" opacity=".2" stroke-width="2"/>
+<path d="M823 593L931 590 958 604 821 611Z" fill="#071e30" stroke="#4c7d89" stroke-width="3"/>
+<path d="M836 598L925 595" stroke="#7aa5a6" stroke-width="1" opacity="0.3"/>
+<path d="M836 600L925 597" stroke="#7aa5a6" stroke-width="1" opacity="0.3"/>
+<path d="M836 602L925 599" stroke="#7aa5a6" stroke-width="1" opacity="0.3"/>
+<path d="M836 604L925 601" stroke="#7aa5a6" stroke-width="1" opacity="0.3"/>
+<path d="M836 606L925 603" stroke="#7aa5a6" stroke-width="1" opacity="0.3"/>
+<path d="M1203 599L1241 596 1267 607 1218 611Z" fill="#c99b6e" opacity=".72"/>
+<path d="M759 633L1318 618" stroke="#b2c3ba" opacity=".34" stroke-width="3"/>
+
+</svg>
