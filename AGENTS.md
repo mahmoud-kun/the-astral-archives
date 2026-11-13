@@ -1,5 +1,8 @@
 # The Astral Archives — Agent Instructions
 
+> **CODEX FULL-GAME STUDIO PILOT — 2026-11-13; branch-specific and highest priority on `experiment/codex-game-studios-fullgame-2026-11-13` only:** Mahmoud authorized a **separate experimental branch using the full-game Claude Code Game Studios methodology adapted to Codex**, not an art-only task. Start by reading `docs/CODEX_GAME_STUDIO_PILOT_2026-11-13.md` and the `astral-game-studio` Codex Skill. The entire current React/Vite/Three.js game is cloned from checkpoint `45e8f679`; neither `main` nor the original 360 experiment is to be edited. No Claude hooks/subagents are running and no upstream framework is installed by this branch. First audit all systems, then implement scoped vertical slices, validate, and request no merge without explicit approval. The newer 360 camera acceptance overrides 2.5D-only historical notes, while `docs/GAMEPLAY_DESIGN_2026-11-09.md` remains authority for evidence and Rescue mechanics.
+
+
 > **LATEST 360° USER APPROVAL / 2026-11-13 (supersedes older camera and 2D-only status below):** Mahmoud authorized a **fixed seated first-person 360° look camera**, including optional lightweight 3D, for a separate Investigation Room experiment. The currently active experiment uses Three.js procedural geometry and preserves the previous 2.5D as a comparison fallback. No free-roam or movement. This does not approve final art, modify NASA mission/evidence rules, or authorize merge to `main`. See [Seated 360° experimental checkpoint](docs/SEATED_360_PROTOTYPE_2026-11-13.md). Player/browser/mobile/FPS validation remains pending.
 
 
