@@ -26,6 +26,7 @@ export default function Investigation25D({ onInspect, onExit, disabled = false }
   const zoomNow = useRef(1)
   const panActive = useRef(false)
   const startX = useRef(0)
+  const startY = useRef(0)
   const dragDistance = useRef(0)
   const gesturePointerId = useRef<number | null>(null)
   const suppressClick = useRef(false)
@@ -131,6 +132,7 @@ export default function Investigation25D({ onInspect, onExit, disabled = false }
     panActive.current = true
     gesturePointerId.current = event.pointerId
     startX.current = event.clientX
+    startY.current = event.clientY
     lastX.current = event.clientX
     dragDistance.current = 0
     suppressClick.current = false
@@ -149,7 +151,7 @@ export default function Investigation25D({ onInspect, onExit, disabled = false }
     const dx = event.clientX - lastX.current
     lastX.current = event.clientX
     dragDistance.current += Math.abs(dx)
-    if (Math.abs(event.clientX - startX.current) > 8 || dragDistance.current > 12) {
+    if (Math.abs(event.clientX - startX.current) > 8 || Math.abs(event.clientY - startY.current) > 8 || dragDistance.current > 12) {
       suppressClick.current = true
       setGuide(false)
     }
@@ -161,6 +163,15 @@ export default function Investigation25D({ onInspect, onExit, disabled = false }
     if (gesturePointerId.current !== event.pointerId) return
     panActive.current = false
     gesturePointerId.current = null
+    // Touch browsers can suppress their synthetic click immediately after a swipe.
+    // Treat a genuine tap as an action on pointer-up and suppress the later click.
+    if (disabled || event.pointerType !== 'touch' || suppressClick.current) return
+    const pressed = (event.target as HTMLElement).closest<HTMLButtonElement>('.object-hotspot')
+    const id = pressed?.dataset.objectId
+    if (id === 'mission-files' || id === 'evidence-board' || id === 'desk-terminal' || id === 'door') {
+      select(id)
+      suppressClick.current = true
+    }
   }
 
   function select(id: Exclude<Focus, null>, keyboardActivation = false) {
@@ -213,16 +224,16 @@ export default function Investigation25D({ onInspect, onExit, disabled = false }
           <i/><i/><i/><i/><i/><i/><i/><i/>
         </div>
         <div className="exploration-surfaces" aria-label="Objects you can investigate">
-          <button type="button" className="object-hotspot object-files" aria-label="Approach mission files" onClick={event => select('mission-files', event.detail === 0)}>
+          <button type="button" className="object-hotspot object-files" data-object-id="mission-files" aria-label="Approach mission files" onClick={event => select('mission-files', event.detail === 0)}>
             <span className="hotspot-reticle"><span/></span><span className="object-tag">MISSION FILES</span>
           </button>
-          <button type="button" className="object-hotspot object-evidence" aria-label="Approach evidence board" onClick={event => select('evidence-board', event.detail === 0)}>
+          <button type="button" className="object-hotspot object-evidence" data-object-id="evidence-board" aria-label="Approach evidence board" onClick={event => select('evidence-board', event.detail === 0)}>
             <span className="hotspot-reticle"><span/></span><span className="object-tag">EVIDENCE BOARD</span>
           </button>
-          <button type="button" className="object-hotspot object-desk" aria-label="Approach investigation desk" onClick={event => select('desk-terminal', event.detail === 0)}>
+          <button type="button" className="object-hotspot object-desk" data-object-id="desk-terminal" aria-label="Approach investigation desk" onClick={event => select('desk-terminal', event.detail === 0)}>
             <span className="hotspot-reticle"><span/></span><span className="object-tag">DESK TERMINAL</span>
           </button>
-          <button type="button" className="object-hotspot object-door" aria-label="Enter the Archive Room" onClick={event => select('door', event.detail === 0)}>
+          <button type="button" className="object-hotspot object-door" data-object-id="door" aria-label="Enter the Archive Room" onClick={event => select('door', event.detail === 0)}>
             <span className="hotspot-reticle"><span/></span><span className="object-tag">ARCHIVE DOOR <b>→</b></span>
           </button>
         </div>
