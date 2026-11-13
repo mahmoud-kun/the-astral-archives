@@ -1,5 +1,8 @@
 # The Astral Archives — Agent Instructions
 
+> **OFFICIAL TITLE AND REPOSITORY NAME — 2026-11-13:** The game's official and only current title is **The Astral Archives** (not CASE:404). The intended GitHub repository slug is **`the-astral-archives`**. The GitHub remote rename is **pending an administrator action in repository Settings**; do not claim it has happened just because the package name changed. Historical source files and older branch/commit references containing `CASE404` or `case404` are provenance, not the current title. Keep existing game behavior unchanged.
+
+
 > **CODEX FULL-GAME STUDIO PILOT — 2026-11-13; branch-specific and highest priority on `experiment/codex-game-studios-fullgame-2026-11-13` only:** Mahmoud authorized a **separate experimental branch using the full-game Claude Code Game Studios methodology adapted to Codex**, not an art-only task. Start by reading `docs/CODEX_GAME_STUDIO_PILOT_2026-11-13.md` and the `astral-game-studio` Codex Skill. The entire current React/Vite/Three.js game is cloned from checkpoint `45e8f679`; neither `main` nor the original 360 experiment is to be edited. No Claude hooks/subagents are running and no upstream framework is installed by this branch. First audit all systems, then implement scoped vertical slices, validate, and request no merge without explicit approval. The newer 360 camera acceptance overrides 2.5D-only historical notes, while `docs/GAMEPLAY_DESIGN_2026-11-09.md` remains authority for evidence and Rescue mechanics.
 
 

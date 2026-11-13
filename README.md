@@ -17,7 +17,7 @@ Last updated: 2026-10-30
 
 **Current status (2026-11-13):** A React/TypeScript/Vite experimental browser app, menu, four preview rooms and optimized artwork **do exist on experimental branches**. Camera V2 deployed but was rejected in player testing. Camera V3, approved production assets, verified full NASA case data, evidence/rescue engine and full simulation **do not exist**. Official competition/licensing verification is still needed.
 
-**Official game title (V11): The Astral Archives.** `case404` remains the unchanged private repository and historical technical codename. The original source brief preserves older title references for provenance. The logo visual concept is still temporary pending final artwork and approval.
+**Official game title: The Astral Archives.** The legacy identifier `case404` is historical; the GitHub repository rename to `the-astral-archives` has been requested but must be completed in GitHub repository Settings. Preserve past historical source filenames for traceability. The original source brief preserves older title references for provenance. The logo visual concept is still temporary pending final artwork and approval.
 
 ## Where truth lives
 
