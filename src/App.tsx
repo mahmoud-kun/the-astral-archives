@@ -1,6 +1,6 @@
-import { useEffect, useRef, useState } from 'react'
+import { lazy, Suspense, useEffect, useRef, useState } from 'react'
 import Investigation25D from './Investigation25D'
-import Investigation360 from './Investigation360'
+const Investigation360 = lazy(() => import('./Investigation360'))
 
 type Screen = 'menu' | 'opening' | 'station'
 type Overlay = 'settings' | 'archives' | 'rooms' | 'inspect' | null
@@ -277,9 +277,11 @@ function App() {
       {screen === 'station' && <main className={'station-view room-' + roomId}>
         {roomId === 'investigation'
           ? roomRenderMode === '360'
-            ? <Investigation360 disabled={Boolean(overlay || dialogue)}
-                onInspect={inspect} onExit={() => changeRoom('archive')}
-                onFallback={() => setRoomRenderMode('2.5d')}/>
+            ? <Suspense fallback={<div className="investigation360-loading" role="status">INITIALIZING SEATED CAMERA…</div>}>
+                <Investigation360 disabled={Boolean(overlay || dialogue)}
+                  onInspect={inspect} onExit={() => changeRoom('archive')}
+                  onFallback={() => setRoomRenderMode('2.5d')}/>
+              </Suspense>
             : <Investigation25D disabled={Boolean(overlay || dialogue)} onInspect={inspect}
                 onExit={() => changeRoom('archive')}/>
           : <SceneVisual key={roomId} scene={roomId}/>}

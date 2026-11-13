@@ -442,3 +442,5 @@ button:disabled { cursor: not-allowed; }
 @media(max-width:720px) {
  .room-render-switch { bottom: 13px; right: 8px; font-size: 8px; max-width: 134px; }
 }
+
+.investigation360-loading { position:absolute; inset:0; display:grid; place-items:center; background:#061525; color:#a8d7dc; font:11px 'IBM Plex Mono', monospace; letter-spacing:.16em; }
