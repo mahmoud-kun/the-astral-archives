@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState, type PointerEvent } from 'react'
 import './investigation25d.css'
 
 type ObjectId = 'mission-files' | 'evidence-board' | 'desk-terminal'
@@ -30,7 +30,6 @@ export default function Investigation25D({ onInspect, onExit, disabled = false }
   const [focus, setFocus] = useState<Focus>(null)
   const [showInfo, setShowInfo] = useState(false)
   const [guide, setGuide] = useState(true)
-  const [closeVariant, setCloseVariant] = useState(false)
   const pending = useRef<number | null>(null)
 
   useEffect(() => { focusRef.current = focus }, [focus])
@@ -105,14 +104,14 @@ export default function Investigation25D({ onInspect, onExit, disabled = false }
     target.current = CLAMP(target.current + delta)
   }
 
-  function pointerDown(event: React.PointerEvent<HTMLDivElement>) {
+  function pointerDown(event: PointerEvent<HTMLDivElement>) {
     if (disabled || (event.target as HTMLElement).closest('button')) return
     panActive.current = true
     lastX.current = event.clientX
     try { event.currentTarget.setPointerCapture(event.pointerId) } catch { /* optional */ }
   }
 
-  function pointerMove(event: React.PointerEvent<HTMLDivElement>) {
+  function pointerMove(event: PointerEvent<HTMLDivElement>) {
     if (disabled || focusRef.current) return
     const bounds = frameRef.current?.getBoundingClientRect()
     if (!bounds) return
@@ -152,7 +151,7 @@ export default function Investigation25D({ onInspect, onExit, disabled = false }
   useEffect(() => {
     if (disabled) return
     if (focusRef.current) {
-      const timer = window.setTimeout(() => { setFocus(null); setCloseVariant(false) }, 210)
+      const timer = window.setTimeout(() => { setFocus(null) }, 210)
       return () => window.clearTimeout(timer)
     }
   }, [disabled])
