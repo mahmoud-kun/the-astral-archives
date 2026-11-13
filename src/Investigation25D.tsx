@@ -25,6 +25,8 @@ export default function Investigation25D({ onInspect, onExit, disabled = false }
   const current = useRef(0)
   const zoomNow = useRef(1)
   const panActive = useRef(false)
+  const edgeRef = useRef(0)
+  const disabledRef = useRef(disabled)
   const lastX = useRef(0)
   const focusRef = useRef<Focus>(null)
   const [focus, setFocus] = useState<Focus>(null)
@@ -33,6 +35,7 @@ export default function Investigation25D({ onInspect, onExit, disabled = false }
   const pending = useRef<number | null>(null)
 
   useEffect(() => { focusRef.current = focus }, [focus])
+  useEffect(() => { disabledRef.current = disabled }, [disabled])
 
   useEffect(() => {
     let raf = 0
@@ -40,6 +43,9 @@ export default function Investigation25D({ onInspect, onExit, disabled = false }
     const tick = (now: number) => {
       const dt = Math.min(0.06, Math.max(.001, (now - (last || now)) / 1000))
       last = now
+      if (!focusRef.current && !disabledRef.current && edgeRef.current !== 0) {
+        target.current = CLAMP(target.current + edgeRef.current * dt * .46)
+      }
       const dest = focusRef.current ? FOCUS[focusRef.current].look : target.current
       const f = 1 - Math.exp(-dt * 4.4)
       current.current += (dest - current.current) * f
@@ -122,8 +128,7 @@ export default function Investigation25D({ onInspect, onExit, disabled = false }
       if (Math.abs(dx) > 3) setGuide(false)
     } else if (event.pointerType === 'mouse') {
       const x = (event.clientX - bounds.left) / bounds.width
-      if (x <= .10) target.current = CLAMP(target.current - .014)
-      if (x >= .90) target.current = CLAMP(target.current + .014)
+      edgeRef.current = x <= .10 ? -1 : x >= .90 ? 1 : 0
     }
   }
 
@@ -161,13 +166,16 @@ export default function Investigation25D({ onInspect, onExit, disabled = false }
       ref={frameRef} className="exploration25d" aria-label="Investigation Room 2.5D exploration"
       onPointerDown={pointerDown} onPointerMove={pointerMove} onPointerUp={pointerUp}
       onPointerCancel={pointerUp} onLostPointerCapture={pointerUp}
+      onPointerLeave={() => { edgeRef.current = 0 }}
     >
       <div className="exploration-depth-world" ref={worldRef}>
         <div className="exploration-far-wall">
           <picture>
+            <source media="(max-width: 620px)" srcSet="/assets/optimized/room-investigation-sm.webp" type="image/webp" />
             <source srcSet="/assets/optimized/investigation-panorama-hq.webp" type="image/webp" />
             <img src="/assets/rooms/Investigation_Wide_Artwork.png" width="1916" height="821" alt="" draggable={false} />
           </picture>
+          {focus && focus !== "door" && <img className="exploration-close-angle" src="/assets/optimized/investigation-close-hq.webp" width="1752" height="897" alt="" draggable={false} /> }
         </div>
         <div className="exploration-atmospheric-glow" aria-hidden="true" />
         <div className="exploration-dust" aria-hidden="true">
