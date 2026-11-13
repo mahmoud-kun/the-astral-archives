@@ -62,6 +62,7 @@ export default function Investigation25D({ onInspect, onExit, disabled = false }
       if (frameRef.current) {
         frameRef.current.style.setProperty('--far-motion', (look * 9).toFixed(1) + 'px')
         frameRef.current.style.setProperty('--near-motion', (-look * 38).toFixed(1) + 'px')
+        frameRef.current.style.setProperty('--near-motion-right', (look * 38).toFixed(1) + 'px')
         frameRef.current.style.setProperty('--near-rotation', (-look * 2.1).toFixed(1) + 'deg')
         frameRef.current.style.setProperty('--look-position', ((look + 1) * 50).toFixed(1) + '%')
       }
