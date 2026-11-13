@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import Investigation25D from './Investigation25D'
+import Investigation360 from './Investigation360'
 
 type Screen = 'menu' | 'opening' | 'station'
 type Overlay = 'settings' | 'archives' | 'rooms' | 'inspect' | null
@@ -148,6 +149,8 @@ function App() {
   const [layoutMode, setLayoutMode] = useState<LayoutMode>('auto')
   const [fullscreen, setFullscreen] = useState(Boolean(document.fullscreenElement))
   const [roomId, setRoomId] = useState<RoomId>('investigation')
+  // Experiment only: preserve the approved 2.5D camera as a comparison fallback.
+  const [roomRenderMode, setRoomRenderMode] = useState<'360' | '2.5d'>('360')
   const [inspectionId, setInspectionId] = useState<InspectionId>('mission-files')
   const [visited, setVisited] = useState<InspectionId[]>([])
   const [dialogue, setDialogue] = useState<DialogueKind>(null)
@@ -273,8 +276,18 @@ function App() {
 
       {screen === 'station' && <main className={'station-view room-' + roomId}>
         {roomId === 'investigation'
-          ? <Investigation25D disabled={Boolean(overlay || dialogue)} onInspect={inspect} onExit={() => changeRoom('archive')}/>
+          ? roomRenderMode === '360'
+            ? <Investigation360 disabled={Boolean(overlay || dialogue)}
+                onInspect={inspect} onExit={() => changeRoom('archive')}
+                onFallback={() => setRoomRenderMode('2.5d')}/>
+            : <Investigation25D disabled={Boolean(overlay || dialogue)} onInspect={inspect}
+                onExit={() => changeRoom('archive')}/>
           : <SceneVisual key={roomId} scene={roomId}/>}
+        {roomId === 'investigation' && !overlay && !dialogue && <button type="button"
+          className="room-render-switch"
+          onClick={() => setRoomRenderMode(mode => mode === '360' ? '2.5d' : '360')}>
+          {roomRenderMode === '360' ? 'COMPARE 2.5D VIEW' : 'TRY SEATED 360° VIEW'}
+        </button>}
         
         <div className="station-vignette" aria-hidden="true"/>
         <header className="station-topbar">

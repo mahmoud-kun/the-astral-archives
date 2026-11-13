@@ -425,3 +425,20 @@ button:disabled { cursor: not-allowed; }
 @media (max-width: 720px) {
   .room-investigation .station-footer { bottom: 8px; opacity: .62; }
 }
+
+/* Isolated 360-degree experiment comparison, not a permanent gameplay setting. */
+.room-render-switch {
+  position: absolute; z-index: 7;
+  right: clamp(16px,2.8vw,46px); bottom: 44px;
+  padding: 10px 12px;
+  color: #e1eeed; background: #071e2dd9;
+  border: 1px solid #77a6b1;
+  font: 9px 'IBM Plex Mono',monospace;
+  letter-spacing: .07em; backdrop-filter: blur(6px);
+}
+.room-render-switch:hover,.room-render-switch:focus-visible {
+  color: #fff0d7; background: #163c51; border-color: #ffad70;
+}
+@media(max-width:720px) {
+ .room-render-switch { bottom: 13px; right: 8px; font-size: 8px; max-width: 134px; }
+}

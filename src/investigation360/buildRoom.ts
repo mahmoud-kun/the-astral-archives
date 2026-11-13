@@ -252,7 +252,8 @@ export function buildInvestigationRoom(scene: THREE.Scene): RoomScene {
 
   // Observation window on the LEFT wall, not a flat full-room illustration.
   const leftWindow = display(4.1, 2.2, -7.89, 2.50, -1.65, 'OBSERVATION DECK', 'window', Math.PI / 2)
-  leftWindow.material.depthWrite = false
+  // No independent background image is rendered; the viewport is a true wall plane.
+  void leftWindow
   for (const z of [-3.4, -1.5, 0.4]) {
     box(0.23, 2.42, 0.12, -7.72, 2.49, z, border)
   }
