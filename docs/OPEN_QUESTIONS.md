@@ -29,7 +29,7 @@ Last updated: 2026-10-30
 - **Art V06:** geometric stylized 2D, Past cream/yellow, Station navy/orange, Space purple; character choices retained.
 - **Investigation I01–I10:** player infers hypotheses; Evidence Board with editable links; contextual self-talk; discoveries unlock deeper clues/Flashbacks; investigation teaches the player what they need to compose a corrective/rescue mission.
 - **Engineering E01–E07/X04–X05:** player-configured Guided Engineering Sandbox, case-relevant options, correct unit-based calculations, one fictional shared Global Budget across **five editable plans** until final action, deterministic hybrid simulation. Do **not** replace by preset rescue answer, universal crewed rescue, historical cross-era NASA funding, or full physics simulator without approval.
-- **Outcome E05/X06:** one **collective Final Evaluation** after all five case plans, no per-case outcome revealed on submission; explanatory report and separate replay/reset.
+- **Historical only / SUPERSEDED where conflicting (E05/X06):** the 2026-10-30 collective Final Evaluation model was replaced by 2026-11-09 per-mission Execute Mission/outcome/Return to Station; shared budget still requires a new explicit owner decision before rescue engine implementation.
 - **Technology A01–A03/X01–X03/X07/P01:** React + strict TypeScript + Vite; pure TypeScript simulation, validated data and stable asset IDs, no backend required for v1, portrait/mobile evidence interactions, local-first save/resume, accessible inspection and hints.
 - **Ownership T01:** Software Engineer/Technical Owner, Designer, Data Analyst/Content Owner (team of three). The Content Owner selects historical missions; the Designer produces visual assets.
 
@@ -59,7 +59,7 @@ Last updated: 2026-10-30
 ### Engineering, final report and technical integration
 - Fictional Global Budget numeric amount and cost table, provisional draft accounting and feedback, case-specific feasibility and balance; X04 fixes aggregate behavior and final over-budget gate.
 - Physics inputs, real-world/alternate-history parameter sources, simulation fidelity and unit tests by case; X05 fixes youth-friendly mass/power/energy basics, not detailed per-case formulas.
-- Final evaluation criteria, partial outcomes, score weights, report copy and case-specific education comparisons; one collective reveal is fixed by X06.
+- Final report criteria, explanatory copy, case-specific learning comparisons, save/retry policy and score weights are open; the historical 'collective reveal fixed by X06' no longer overrides the 2026-11-09 per-mission Execute outcome contract.
 - Save schema/migration/export/reset UX; production browser targets, deployment/offline/PWA, performance, accessibility and media fallbacks. IndexedDB approach is an approved default, not a deployed save.
 - Optional runtime dependency choices and pinned versions; React Flow/Phaser are **not** automatically approved.
 - Temp logo export, final logo/title lockup, branding/trademark/asset rights, palette HEX, room/background dimensions and final audio/animation asset lists.
