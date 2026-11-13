@@ -61,8 +61,9 @@ export default function Investigation360({
     renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.5))
     renderer.outputColorSpace = THREE.SRGBColorSpace
     renderer.toneMapping = THREE.ACESFilmicToneMapping
-    renderer.toneMappingExposure = 1.22
-    renderer.shadowMap.enabled = false
+    renderer.toneMappingExposure = 1.12
+    renderer.shadowMap.enabled = true
+    renderer.shadowMap.type = THREE.PCFSoftShadowMap
 
     const canvas = renderer.domElement
     canvas.className = 'investigation360-canvas'

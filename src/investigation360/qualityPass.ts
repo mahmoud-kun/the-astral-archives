@@ -278,7 +278,7 @@ export function installVisualQuality(scene: THREE.Scene): { dispose: () => void 
   // 4. Mission Files: multilayer display frame, visible drawers, fasteners,
   // status lamps and structural fins. Keep its existing raycast target intact.
   rounded(2.67, 2.41, .14, -5.45, 1.48, -5.07, anodized, .06)
-  rounded(2.36, 1.27, .09, -5.45, 2.06, -4.67, darkAlloy, .045)
+  // Display must remain unobstructed; four rails provide an outer bezel.
   for (const x of [-6.61, -4.29]) {
     smallBox(.06, 1.21, .05, x, 2.07, -4.58, rimMetal)
   }

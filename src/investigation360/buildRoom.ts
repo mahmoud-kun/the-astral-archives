@@ -1,4 +1,5 @@
 import * as THREE from 'three'
+import { installVisualQuality } from './qualityPass'
 
 export type InvestigationTarget = 'mission-files' | 'evidence-board' | 'desk-terminal' | 'door'
 
@@ -28,10 +29,11 @@ export function buildInvestigationRoom(scene: THREE.Scene): RoomScene {
   const textures: THREE.Texture[] = []
   const targets: THREE.Object3D[] = []
 
-  function mat(color: number, glow = 0, metallic = 0.34): THREE.MeshStandardMaterial {
-    const material = new THREE.MeshStandardMaterial({
-      color, metalness: metallic, roughness: 0.58,
-      emissive: glow || 0x000000, emissiveIntensity: glow ? 0.43 : 0,
+  function mat(color: number, glow = 0, metallic = 0.34): THREE.MeshPhysicalMaterial {
+    const material = new THREE.MeshPhysicalMaterial({
+      color, metalness: metallic, roughness: metallic > .1 ? .43 : .78,
+      clearcoat: metallic > .1 ? .18 : .05, clearcoatRoughness: .32,
+      emissive: glow || 0x000000, emissiveIntensity: glow ? 0.32 : 0,
     })
     mats.push(material)
     return material
@@ -93,15 +95,26 @@ export function buildInvestigationRoom(scene: THREE.Scene): RoomScene {
   }
   function labelTexture(title: string, kind: 'files'|'board'|'terminal'|'status'|'window' = 'terminal'): THREE.CanvasTexture {
     const canvas = document.createElement('canvas')
-    canvas.width = 512
-    canvas.height = 256
+    canvas.width = 1024
+    canvas.height = 512
     const ctx = canvas.getContext('2d')
     if (ctx) {
+      // HiDPI display content is drawn in the old 512x256 design units.
+      ctx.setTransform(2, 0, 0, 2, 0, 0)
       const fill = ctx.createLinearGradient(0, 0, 512, 256)
       fill.addColorStop(0, '#103c52')
       fill.addColorStop(1, '#041827')
       ctx.fillStyle = fill
       ctx.fillRect(0, 0, 512, 256)
+      // Restrained micro-grid to give screens physical surface detail.
+      ctx.strokeStyle = 'rgba(58,179,196,.075)'
+      ctx.lineWidth = 1
+      for (let x = 18; x < 510; x += 18) {
+        ctx.beginPath(); ctx.moveTo(x, 16); ctx.lineTo(x, 239); ctx.stroke()
+      }
+      for (let y = 17; y < 240; y += 16) {
+        ctx.beginPath(); ctx.moveTo(16, y); ctx.lineTo(497, y); ctx.stroke()
+      }
       ctx.strokeStyle = '#38ddeb'
       ctx.lineWidth = 5
       ctx.strokeRect(16, 16, 480, 224)
@@ -344,21 +357,26 @@ export function buildInvestigationRoom(scene: THREE.Scene): RoomScene {
     box(1.0, 0.63, 0.68, -6.4, 0.36 + i * 0.63, 3.20, i % 2 ? border : metal)
   }
 
-  scene.add(new THREE.AmbientLight(0x6f98b0, 0.8))
-  scene.add(new THREE.HemisphereLight(0xa0d3df, 0x142131, 1.2))
-  const main = new THREE.PointLight(0x4ce4ed, 17, 12)
+  scene.add(new THREE.AmbientLight(0x6f98b0, 0.36))
+  scene.add(new THREE.HemisphereLight(0xa0d3df, 0x142131, 0.85))
+  const main = new THREE.PointLight(0x4ce4ed, 12, 12)
   main.position.set(0, 4.13, -0.9)
   scene.add(main)
-  const warm = new THREE.PointLight(0xff994c, 10, 8)
+  const warm = new THREE.PointLight(0xff994c, 6.8, 8)
   warm.position.set(-1.0, 3.9, -3)
   scene.add(warm)
-  const doorGlow = new THREE.PointLight(0x1ccee4, 10, 6)
+  const doorGlow = new THREE.PointLight(0x1ccee4, 7, 6)
   doorGlow.position.set(5, 2.4, -4.6)
   scene.add(doorGlow)
+
+  // Attaches PBR, real shadows, screen trims, hero prop geometry and details.
+  // Does not touch target positions or the seated camera.
+  const quality = installVisualQuality(scene)
 
   return {
     targets,
     dispose: () => {
+      quality.dispose()
       for (const texture of textures) texture.dispose()
       for (const geo of geos) geo.dispose()
       for (const material of mats) material.dispose()
