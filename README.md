@@ -1,5 +1,7 @@
 # The Astral Archives
 
+> **2026-11-13 status and handoff:** [Camera V2 player-rejected / Camera V3 next](docs/CHECKPOINT_2026-11-13_INTERACTIVE_INVESTIGATION.md). Current game direction: first-person bounded **2.5D** only (**no 3D, no 360°, no free roam**). Camera V3 is **not implemented**. Evidence/Rescue rules follow the 2026-11-09 decisions, not conflicting October prose.
+
 > **2026-11-09 gameplay update:** See [Gameplay & UX Decisions (2026-11-09)](docs/GAMEPLAY_DESIGN_2026-11-09.md) for the newer designer-approved first-person investigation, folder-based evidence progress, contextual robot assistance, past engineering interaction, and per-mission outcomes. It **supersedes conflicting older gameplay directions**, especially mandatory deduction-board gating and collective-only result reveal. Shared Global Budget, observer-only flashbacks, historical content and responsive orientation have unresolved reconciliation points; do not treat old conflicting prescriptions as simultaneous requirements. Documentation update only; no gameplay implementation.
 
 
@@ -7,11 +9,13 @@ Last updated: 2026-10-30
 
 **The Astral Archives** (formerly **CASE:404**) is a **portrait-first stylized 2D forensic space-mission investigation and engineering game** planned for NASA Space Apps Challenge 2026. The player investigates five concurrent NASA-inspired mission dossiers in a four-room station, learns from real historical failure evidence, then enters **distinctly fictional alternate-history Rescue Missions** to interact with past mission teams, build engineering interventions and simulate counterfactual results. The five outcomes are disclosed together at Final Evaluation, not after each case.
 
-**Status:** Pre-production documentation. **No game code, production assets, verified content dataset, or completed simulation is present in this repository yet.** The team must verify competition eligibility/timing before implementing a submission.
+**Current status (2026-11-13):** A React/TypeScript/Vite experimental browser app, menu, four preview rooms and optimized artwork **do exist on experimental branches**. Camera V2 deployed but was rejected in player testing. Camera V3, approved production assets, verified full NASA case data, evidence/rescue engine and full simulation **do not exist**. Official competition/licensing verification is still needed.
 
 **Official game title (V11): The Astral Archives.** `case404` remains the unchanged private repository and historical technical codename. The original source brief preserves older title references for provenance. The logo visual concept is still temporary pending final artwork and approval.
 
 ## Where truth lives
+
+0. [**Current 2026-11-13 checkpoint and next-chat handoff**](docs/CHECKPOINT_2026-11-13_INTERACTIVE_INVESTIGATION.md): real branch/state, failed player playtest, confirmed camera constraints, next one-feature task.
 
 1. [`docs/DECISIONS.md`](docs/DECISIONS.md): current team working baseline and explicitly accepted decisions, including later corrections.
 2. [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md): approved architecture/gameplay constraints **plus clearly labeled proposed technical details**; not every sentence is separately ratified.
@@ -19,7 +23,7 @@ Last updated: 2026-10-30
 4. [`docs/CASE404_SOURCE_OF_TRUTH.md`](docs/CASE404_SOURCE_OF_TRUTH.md): original designer-supplied discussion record, preserved verbatim for provenance; not every idea inside it is an approved implementation requirement.
 5. [`AGENTS.md`](AGENTS.md): mandatory operating instructions for Codex and other engineering agents.
 
-**Precedence:** the explicit latest team decisions **V01–V11** in `DECISIONS.md` supersede inconsistent older proposals/open statements; compatible older confirmed decisions remain valid. `CASE404_SOURCE_OF_TRUTH.md` remains an unchanged historical input, **not a competing live specification**. For a new conflict not covered by a confirmed decision, ask Main Chat and reconcile it in the relevant current file. See [`docs/CONTENT_CONTRACT.md`](docs/CONTENT_CONTRACT.md), [`docs/ASSET_CONTRACT.md`](docs/ASSET_CONTRACT.md) and [`docs/IMPLEMENTATION_DECISIONS_2026-10-30.md`](docs/IMPLEMENTATION_DECISIONS_2026-10-30.md) for owner handoffs and approved defaults.
+**Precedence:** Latest explicit decisions (Nov 13 camera/UX and Nov 9 evidence/Rescue) supersede inconsistent October proposals; compatible older confirmed decisions remain valid. `CASE404_SOURCE_OF_TRUTH.md` remains an unchanged historical input, **not a competing live specification**. For a new conflict not covered by a confirmed decision, ask Main Chat and reconcile it in the relevant current file. See [`docs/CONTENT_CONTRACT.md`](docs/CONTENT_CONTRACT.md), [`docs/ASSET_CONTRACT.md`](docs/ASSET_CONTRACT.md) and [`docs/IMPLEMENTATION_DECISIONS_2026-10-30.md`](docs/IMPLEMENTATION_DECISIONS_2026-10-30.md) for owner handoffs and approved defaults.
 
 ## Team
 
@@ -34,7 +38,7 @@ Last updated: 2026-10-30
 - Both chats read `AGENTS.md` and the relevant bootstrap in [`bootstraps/`](bootstraps/).
 - Design and content may progress **in parallel** with engineering, through stable content and asset contracts. Placeholders are permitted; missing final assets must be validated and reported rather than silently invented.
 
-## Latest approved team game flow (V01–V11; 2026-10-30)
+## Historical game flow (V01–V11, 2026-10-30; superseded where contradictory to Nov 9 / Nov 13)
 
 - **Four core present-day rooms (V09):** Investigation Office (**starting hub** with Evidence Board, five case folders and Rescue Mission entry), File Archives, Recordings Room and Signal Room. Point-and-click navigation; all four accessible, with deeper clues/interactions discovered gradually.
 - **Investigation Flashbacks (V01):** interactive, replayable historical inspection in which the protagonist **observes** and cannot change historical events.
@@ -55,7 +59,7 @@ Verify NASA contest timing/compliance; Content Owner selects and sources the fiv
 
 ## Development
 
-This is currently **documentation only**. Do not run `npm install` or pretend a working app exists yet. The first authorized technical batch should scaffold from official tooling, generate and commit a lockfile, and pass a basic build/typecheck/test baseline.
+An experimental **React 19 + TypeScript + Vite** app is already committed. For local Windows PowerShell, after installing dependencies, use `npm.cmd run dev` or `npm.cmd run build`. These are commands, not claims of execution in the documentation checkpoint. The V2 Vercel build is READY; the player did not accept the resulting UX. See checkpoint for exact code and preview.
 
 ## License and attribution
 
