@@ -8,13 +8,16 @@
   isolation: isolate;
   touch-action: none;
   user-select: none;
-  cursor: grab;
+  cursor: default;
+  --aim-x: 50%;
+  --aim-y: 50%;
   --far-motion: 0px;
   --near-motion: 0px;
   --near-rotation: 0deg;
   background: radial-gradient(ellipse at 52% 40%,#18384b,#071321);
 }
-.exploration25d:active { cursor: grabbing; }
+.exploration25d.is-locked,
+.exploration25d.is-locked .object-hotspot { cursor: none; }
 .exploration-depth-world {
   position: absolute;
   top: 0;
@@ -159,7 +162,8 @@
   letter-spacing:.12em; text-align:center; white-space:nowrap;
   text-shadow:0 2px 6px #000; animation:guideFade 1.3s .8s both;
 }
-.exploration-guide span { color:#f4a261; margin:0 5px; }
+.exploration-guide .touch-note { display:none; }
+.exploration-guide .desktop-note { color:#b7d4d9; }
 .exploration-help {
   position:absolute; z-index:10; top:141px; right:clamp(14px,2.8vw,46px);
   padding:23px; width:min(375px,calc(100% - 30px));
@@ -198,20 +202,64 @@
   .exploration-dust i,.hotspot-reticle,.exploration-guide,.exploration-focus-state { animation:none !important; }
 }
 
-/* The closer-angle photo appears only when the camera approaches an object;
-   it is not fetched on initial page load. */
-.exploration-close-angle {
-  position: absolute; inset: 0;
-  width: 100%; height: 100%; object-fit: cover;
-  object-position: 50% center; pointer-events: none;
-  opacity: 0;
-  animation: alternateViewReveal .68s .12s ease-out forwards;
-  filter: saturate(1.04);
+/* Pointer Lock is entered only by a user gesture; the look control never
+   grabs the cursor automatically or blocks touch / keyboard navigation. */
+.exploration-look-toggle {
+  position: absolute; z-index: 5;
+  left: 50%; bottom: 89px; transform: translateX(-50%);
+  display: flex; flex-direction: column; align-items: center; gap: 5px;
+  width: min(244px, calc(100% - 36px));
+  padding: 13px 17px;
+  border: 1px solid #73ced0; background: #071e2de8; color: #e8f5ef;
+  box-shadow: 0 8px 27px #010913a8, inset 0 0 14px #2ec4c31b;
+  font: 600 11px 'IBM Plex Mono',monospace; letter-spacing: .12em;
+  backdrop-filter: blur(8px);
 }
-@keyframes alternateViewReveal {
-  from { opacity: 0; transform: scale(1.025); }
-  to { opacity: .9; transform: scale(1); }
+.exploration-look-toggle:hover,.exploration-look-toggle:focus-visible {
+  border-color: #f4a261; background: #123246;
+}
+.exploration-look-toggle small {
+  font: 10px 'IBM Plex Sans',sans-serif;
+  letter-spacing: .03em; color: #c3d7da;
+}
+.exploration-aim {
+  position: absolute; z-index: 4; pointer-events: none;
+  left: var(--aim-x); top: var(--aim-y);
+  transform: translate(-50%, -50%);
+  width: 23px; height: 23px; display: grid; place-items: center;
+}
+.aim-ring {
+  display: block; width: 18px; height: 18px;
+  border: 1px solid #b7e8e9; border-radius: 50%;
+  box-shadow: 0 0 0 3px #071b2788,0 0 12px #21c6c677;
+}
+.aim-ring::after {
+  content: ''; display: block; width: 3px; height: 3px;
+  border-radius: 50%; background: #f2e8d2; margin: 6.5px;
+}
+.exploration-aim.has-target .aim-ring {
+  border-color: #ffbc7b; box-shadow: 0 0 0 3px #071b2788,0 0 16px #f4a261aa;
+}
+.aim-label {
+  position: absolute; top: 32px; left: 50%; transform: translateX(-50%);
+  padding: 6px 9px; width: max-content; max-width: 75vw;
+  color: #f2e8d2; background: #071b2bef;
+  border: 1px solid #4ba4ac;
+  font: 9px 'IBM Plex Mono',monospace; letter-spacing: .12em;
+}
+.exploration-lock-fallback {
+  position: absolute; z-index: 5; bottom: 18px;
+  left: 50%; transform: translateX(-50%);
+  width: min(400px, 90vw); text-align: center;
+  font: 10px/1.5 'IBM Plex Sans',sans-serif; color: #e4d8c5;
+  text-shadow: 0 2px 8px #000;
+}
+@media (hover: none), (pointer: coarse) {
+  .exploration-look-toggle { display: none; }
+  .exploration-guide .desktop-note { display: none; }
+  .exploration-guide .touch-note { display: inline; color:#b7d4d9; }
+  .exploration-lock-fallback { display: none; }
 }
 @media (prefers-reduced-motion: reduce) {
-  .exploration-close-angle { animation: none; opacity: .9; transform: none; }
+  .exploration-aim .aim-ring { transition: none; }
 }
