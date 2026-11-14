@@ -1,0 +1,23 @@
+/* Layered Investigation Room V3 — coordinates are read directly from Codex manifests.
+   Keep this stylesheet separate from HUD and inspector styles. */
+.idr-layered-scene{position:absolute;inset:0;overflow:hidden}
+.idr-layered-original{display:none}
+.idr-layered-plate{position:absolute;inset:0;display:block;width:100%;height:100%;object-fit:fill;user-select:none;pointer-events:none;-webkit-user-drag:none}
+.idr-layer-object{position:absolute;display:block;padding:0;border:0!important;outline:none;
+  background:transparent!important;appearance:none;touch-action:manipulation;cursor:pointer;
+  -webkit-tap-highlight-color:transparent}
+.idr-layer-object img{display:block;position:absolute;inset:0;width:100%;height:100%;
+  pointer-events:none;user-select:none;-webkit-user-drag:none}
+.idr-layer-glow{opacity:0;transition:opacity .18s ease}
+.idr-layer-object:is(.idr-layer-object-lit,:focus-visible,:active) .idr-layer-glow{opacity:1}
+.idr-layer-object:is(.idr-layer-object-lit,:focus-visible) .idr-layer-art:first-child{
+  filter:drop-shadow(0 0 4px #48d8e9a6) drop-shadow(0 0 7px #efb87d4d)}
+.idr-root .idr-layer-object:focus-visible{outline:none}
+.idr-root .idr-layer-object:focus-visible .idr-layer-glow{opacity:1;filter:drop-shadow(0 0 6px #68f1ff)}
+@media(orientation:portrait){
+  .idr-layered-wide{display:none}
+  .idr-layered-original{display:block}
+}
+@media(prefers-reduced-motion:reduce){
+  .idr-layer-object,.idr-layer-object img{transition:none!important;animation:none!important}
+}
