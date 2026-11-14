@@ -44,7 +44,8 @@ function LayeredObject({
     const x = Math.floor((clientX - bounds.left) / bounds.width * pixels.width)
     const y = Math.floor((clientY - bounds.top) / bounds.height * pixels.height)
     if (x < 0 || y < 0 || x >= pixels.width || y >= pixels.height) return false
-    return pixels.data[(y * pixels.width + x) * 4 + 3] > 40
+    // Masks supplied by Codex are grayscale PNGs: sample luminance, not alpha (which is 255 everywhere).
+    return pixels.data[(y * pixels.width + x) * 4] > 40
   }
 
   const { x, y, width, height } = object.position
