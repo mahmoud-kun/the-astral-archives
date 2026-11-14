@@ -123,9 +123,7 @@ export default function HomeScreen() {
           </div>
         </div>
       </div>
-      <div className="aa-home-hero-space" aria-hidden="true">
-        <div className="aa-home-art-caption"><span>01 / ARCHIVE STATION</span><strong>OBSERVATION HALL</strong><small>RECORDS · EVIDENCE · DISCOVERY</small></div>
-      </div>
+      <div className="aa-home-hero-space" aria-hidden="true"/>
     </section>
 
     <footer className="aa-home-footer">
