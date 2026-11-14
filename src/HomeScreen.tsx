@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { navigateGame } from './gameNavigation'
 import './homeScreen.css'
 
 type Panel = 'files' | 'about' | 'settings' | null
@@ -74,7 +75,7 @@ export default function HomeScreen() {
   }, [reduceMotion])
 
   function enterInvestigation() {
-    window.location.assign('/?room=1')
+    navigateGame('/?room=1')
   }
   async function toggleFullscreen() {
     try {
