@@ -53,30 +53,33 @@ const diagnosis = {
   consequence: { answer: 'divergence', evidenceId: 'NAD-01' },
 }
 
-test('Rescue requires 6/6 correctly filed plus submitted, fully supported diagnosis', () => {
+test('Rescue unlocks at 6/6 correct filing; diagnosis is an independent in-rescue review', () => {
   let state = fullNadir()
   assert.equal(countRequiredEvidence(state,'NAD'),6)
-  assert.equal(rescueIsReady(state,'NAD'),false)
+  assert.equal(rescueIsReady(state,'NAD'),true)
+  assert.equal(diagnosisIsSupported(state,'NAD'),false)
   state = updateDiagnosis(state,'NAD',diagnosis)
-  assert.equal(rescueIsReady(state,'NAD'),false)
+  assert.equal(rescueIsReady(state,'NAD'),true)
   state = submitDiagnosis(state,'NAD')
   assert.equal(diagnosisIsSupported(state,'NAD'),true)
-  assert.equal(rescueIsReady(state,'NAD'),true)
   const moved = fileEvidence(state,'NAD-02','KES')
   assert.equal(rescueIsReady(moved,'NAD'),false)
+  assert.equal(diagnosisIsSupported(moved,'NAD'),false)
   assert.equal(rescueIsReady(fileEvidence(moved,'NAD-02','NAD'),'NAD'),true)
 })
 
-test('wrong hypothesis and irrelevant support never silently unlock', () => {
+test('unsupported diagnosis never passes review, but does not relock an available rescue', () => {
   let state = fullNadir()
   state = submitDiagnosis(updateDiagnosis(state,'NAD',{
     ...diagnosis, technical: {answer:'tamper',evidenceId:'NAD-02'}
   }),'NAD')
-  assert.equal(rescueIsReady(state,'NAD'),false)
+  assert.equal(diagnosisIsSupported(state,'NAD'),false)
+  assert.equal(rescueIsReady(state,'NAD'),true)
   state = submitDiagnosis(updateDiagnosis(state,'NAD',{
     ...diagnosis, technical: {answer:'units',evidenceId:'NAD-06'}
   }),'NAD')
-  assert.equal(rescueIsReady(state,'NAD'),false)
+  assert.equal(diagnosisIsSupported(state,'NAD'),false)
+  assert.equal(rescueIsReady(state,'NAD'),true)
 })
 
 test('save restoration validates discovered IDs, folder references and submission shape', () => {
