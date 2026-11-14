@@ -29,14 +29,7 @@ export default function LandscapeGuard() {
   return <div className="aa-landscape-guard" role="dialog" aria-modal="true" aria-labelledby="aa-landscape-title">
     <div className="aa-landscape-panel">
       <div className="aa-landscape-brand">THE ASTRAL ARCHIVES <span>/ DISPLAY ALIGNMENT</span></div>
-      <svg className="aa-landscape-device" viewBox="0 0 160 112" fill="none" aria-hidden="true">
-        <rect x="45" y="22" width="70" height="111" rx="10" stroke="#e9b982" strokeWidth="3" strokeDasharray="5 5" transform="rotate(-28 80 77)"/>
-        <rect x="20" y="27" width="120" height="65" rx="9" fill="#0c2e42" stroke="#73dee8" strokeWidth="3"/>
-        <rect x="29" y="35" width="102" height="49" rx="4" fill="#124154" stroke="#386c80"/>
-        <path d="M35 72l24-22 18 13 26-18 19 12" stroke="#e9b982" strokeWidth="3" strokeLinecap="round"/>
-        <path d="M79 15l10-7-1 13" stroke="#e9b982" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"/>
-        <circle cx="80" cy="88" r="2.5" fill="#73dee8"/>
-      </svg>
+      <img className="aa-landscape-device" src="/assets/ui/rotate-landscape.svg" alt="" width="320" height="244" draggable={false}/>
       <p className="aa-landscape-kicker">LANDSCAPE REQUIRED</p>
       <h2 id="aa-landscape-title">ROTATE YOUR DEVICE</h2>
       <p className="aa-landscape-copy">The Astral Archives is designed for a horizontal, cinematic view. Turn on Auto-rotate and hold your phone sideways.</p>
