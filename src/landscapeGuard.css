@@ -1,0 +1,26 @@
+/* The mobile game is authored as a landscape experience.
+   The overlay is shown only on narrow portrait screens; device rotation
+   itself remains browser/OS controlled unless fullscreen orientation lock succeeds. */
+.aa-landscape-guard{display:none}
+@media screen and (orientation:portrait) and (max-width:900px){
+  .aa-landscape-guard{position:fixed;inset:0;z-index:2147483000;display:grid;place-items:center;
+    overflow:auto;overscroll-behavior:contain;padding:max(16px,env(safe-area-inset-top)) max(18px,env(safe-area-inset-right)) max(16px,env(safe-area-inset-bottom)) max(18px,env(safe-area-inset-left));
+    background:radial-gradient(ellipse at 50% 20%,#12334b,#061322 67%,#030d17);color:#f2e8d2;font-family:'IBM Plex Sans',sans-serif;}
+  .aa-landscape-panel{width:min(440px,100%);display:flex;flex-direction:column;align-items:center;gap:13px;
+    text-align:center;border:1px solid #487f90;background:#0d2638cc;padding:clamp(21px,5vh,35px) clamp(14px,5vw,34px);
+    box-shadow:0 20px 80px #0008;}
+  .aa-landscape-brand{align-self:stretch;font:700 clamp(11px,2.5vw,15px) 'Orbitron',sans-serif;letter-spacing:.1em;border-bottom:1px solid #345668;padding-bottom:13px}
+  .aa-landscape-brand span{display:block;font:500 8px 'IBM Plex Mono',monospace;color:#7fb7c2;letter-spacing:.09em;margin-top:6px}
+  .aa-landscape-device{width:min(180px,37vw);height:110px;filter:drop-shadow(0 0 16px #44c4d42f)}
+  .aa-landscape-kicker{font:700 10px 'IBM Plex Mono',monospace;letter-spacing:.17em;color:#f0b57f;margin:0}
+  .aa-landscape-panel h2{font:700 clamp(19px,4.7vw,29px) 'Orbitron',sans-serif;letter-spacing:.04em;line-height:1.15;margin:0}
+  .aa-landscape-copy{font:400 14px/1.55 'IBM Plex Sans',sans-serif;max-width:340px;color:#bfd3dc;margin:0}
+  .aa-landscape-action{min-height:44px;width:100%;max-width:315px;background:#e6b37a;border:1px solid #f6d4a7;color:#132838;
+    font:700 11px 'IBM Plex Mono',monospace;letter-spacing:.04em;padding:12px 14px;cursor:pointer}
+  .aa-landscape-action:focus-visible{outline:3px solid #80e8ef;outline-offset:4px}
+  .aa-landscape-help{font:400 11px/1.5 'IBM Plex Sans',sans-serif;color:#91bac7;margin:0;max-width:340px}
+}
+@media screen and (orientation:portrait) and (max-width:900px) and (max-height:570px){
+  .aa-landscape-panel{gap:8px;padding:12px}
+  .aa-landscape-device{height:70px}
+}
