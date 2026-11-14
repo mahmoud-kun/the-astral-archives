@@ -11,7 +11,7 @@ type Panel = Interaction | null
 const INTERACTIONS: {
   id: Interaction; name: string; clue: string
 }[] = [
-  { id: 'cases', name: 'Mission Files', clue: 'REVIEW CASES' },
+  { id: 'cases', name: 'Case Library', clue: 'FIVE MISSION DOSSIERS' },
   { id: 'briefing', name: 'Mission Briefing', clue: 'YOUR ASSIGNMENT' },
   { id: 'evidence', name: 'Evidence Board', clue: 'INVESTIGATION' },
   { id: 'door', name: 'Station Door', clue: 'EXPLORE STATION' },
@@ -71,6 +71,10 @@ export default function InvestigationDesignerScene() {
   }, [panel, objectMenu])
 
   function open(target: Interaction) {
+    if (target === 'cases') {
+      window.location.assign('/?folder-lab=1')
+      return
+    }
     setObjectMenu(false)
     setShowHint(false)
     setPanel(target)
@@ -87,7 +91,7 @@ export default function InvestigationDesignerScene() {
     <section className="idr-stage" aria-label="Full investigation room scene">
       <RoomBackdrop/>
       <div className="idr-hotspot-layer" aria-label="Interactive objects in the room">
-        <button className="idr-hotspot idr-hotspot-files" aria-label="Open Mission Files cabinet" onClick={() => open('cases')}>
+        <button className="idr-hotspot idr-hotspot-files" aria-label="Open the Case Library and all five mission folders" onClick={() => open('cases')}>
           <span className="idr-hotspot-point"/><span className="idr-hotspot-name">MISSION FILES</span>
         </button>
         <button className="idr-hotspot idr-hotspot-evidence" aria-label="Inspect Evidence Board" onClick={() => open('evidence')}>
@@ -124,7 +128,7 @@ export default function InvestigationDesignerScene() {
     <footer className="idr-foot">
       <div className="idr-foot-status"><span className="idr-foot-diamond"/> STATION 01 / 04 <b>·</b> INVESTIGATION HUB</div>
       <div className="idr-foot-actions">
-        <button onClick={() => open('cases')}><SmallIcon type="folder" size={17}/> CASE FILES</button>
+        <button aria-label="Open the full Case Library" onClick={() => open('cases')}><SmallIcon type="folder" size={17}/> CASE LIBRARY</button>
         <button onClick={() => setObjectMenu(v => !v)} aria-expanded={objectMenu}><SmallIcon type="eye" size={18}/> INTERACT</button>
       </div>
     </footer>
