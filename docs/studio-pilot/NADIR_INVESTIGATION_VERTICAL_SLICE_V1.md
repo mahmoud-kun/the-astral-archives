@@ -70,3 +70,32 @@ The existing archive diagnostic MCQ preview remains available for other cases as
 - Vercel build runs all suites before TypeScript and Vite. Deployment readiness should be confirmed after the final commit.
 - Outstanding QA: no physical Android Brave fullscreen/landscape screenshots for this new gameplay flow; no end-to-end browser automation of actual clicks/keyboard/touch was executed in this task. The station hotspots are provisional flattened-art regions until Codex supplies per-object layers.
 - Future: integrate Codex's Archive/Signal/Recordings layer packs without overwriting the puzzle state engine, replace placeholder composition, connect time-travel transition and full Past interactive rooms, and build the other four cases in order.
+
+## Visual-first investigation and low-bandwidth pass — 2026-11-14
+
+Following user feedback, Nadir puzzles were upgraded from document-first multiple-choice layouts to instrument-first, interactive vector devices:
+
+- `src/gameplay/EvidenceMachine.tsx` and `evidenceMachine.css`: an impulse calibration scope with dynamic value needle; producer/interface/consumer selectable chip panels; NAV-042 audit document with inspectable stamp; scrambled timeline illustration; recovered waveform; dimensional impulse diagram. Every graphic is lightweight SVG/CSS rather than a new megabyte-scale background.
+- `src/gameplay/NadirPuzzle.tsx`: native research records remain accessible via an intentionally opened `PRIMARY RECORDS` drawer. The visual instrument appears first, with calculations and independent validation remaining mandatory.
+- On mobile landscape the puzzle has two tabs, `INSPECT INSTRUMENT` and `RUN ANALYSIS`, so workbench controls are no longer squeezed beside the diagram. Evidence collection remains manual.
+- The Nadir puzzle now uses a React Portal to render above the Quick Evidence Tray, fixing their stacking-context conflict.
+- `src/gameplay/EvidenceGlyph.tsx` and tray/room styles: collectible document, signal, schematic and recording glyphs; subtle readable hotspots instead of invisibly large rectangles.
+- `src/gameplay/StationRoom.tsx` now serves pre-existing optimized images from `public/assets/optimized/room-{archive,signal,recordings}.webp` instead of 1.8–1.9MB source PNGs. The original designer artwork is retained untouched.
+- `src/InvestigationLayeredScene.tsx` only loads the approved landscape room variant. The unused original/portrait room variant remains available on disk for later art review.
+- `src/investigationDesignerScene.css` uses `room-investigation.webp` as the blurred ambient backdrop instead of causing a second 2MB image download.
+- A quality-controlled `wide/background/investigation_room_bg_clean.webp` is generated through the GitHub Actions visual QA and can be enabled in the live layer renderer only once its file is confirmed on the branch.
+
+### Independent browser QA
+
+- `.github/workflows/visual-qa.yml` runs Playwright Chromium against a local compiled Vite preview in GitHub Actions.
+- `tools/visual-qa.mjs` captures desktop 1366×768 and landscape phones 915×412, 800×360, 740×360, plus portrait guard. It checks visible images, Javascript errors, clipped primary controls, and console errors.
+- `tools/visual-contact-sheet.py` commits two ~200–300KB contact sheets and a machine-readable report to `docs/visual-qa/`, using GitHub rather than an unavailable Action artifact quota. This permits actual screenshot review without relying on the user's slow connection.
+- Initial successful visual QA: 33 screenshots, 0 broken images, 0 JS errors, 0 horizontally clipped primary buttons, 0 reported container overflows. This is not a substitute for physical-device touch testing or approval of aesthetics.
+- Earlier measured image request total: Home ~140KB, Signal ~143KB, Archive ~161KB, Recordings ~120KB, Investigation ~4.7MB before the ambient-backdrop optimization. The current Investigation transfer must be measured again after optimized background integration.
+- Earlier artifacts exposed a dense Nadir modal in mobile landscape and an Evidence Tray icon competing with its close button. The responsive tab layout and React Portal were added after identifying those visual issues.
+
+### Incomplete / not yet final
+
+- Codex's physically masked independent layered props for the other three rooms are not yet integrated. Their current active hotspots are still provisional rectangles with compact glyph beacons.
+- The SVG visuals are functional lightweight interface devices, not yet designer-authored final puzzle screen illustrations.
+- The live UI still needs direct user playtesting of touch targets, instrument legibility, and back/forward navigation on the actual Android Brave browser.
