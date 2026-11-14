@@ -1,5 +1,7 @@
 # The Astral Archives — Fixed Room Point-and-Click V1
 
+> **Active-branch interaction update — 2026-11-14:** The user explicitly requested removal of the persistent bottom `CASE LIBRARY` and `INTERACT` controls. The Mission Files wall monitor remains a clickable in-scene hotspot and opens the full Living Evidence Folder preview. Desktop hover/keyboard focus illuminates the object outline; touch users tap it. The generic object-picker menu and its fallback are removed. The top Home and Help controls remain. This supersedes the V1 persistent-action-button fallback described below. Continue work on `experiment/room-case-library-layout-fix-2026-11-14` only; do not create a new branch unless asked.
+
 **Branch:** experiment/fixed-room-point-click-v1-2026-11-14
 **Scope:** first isolated visual/playability milestone; no merge to main.
 **Supersedes earlier 360° camera direction for this experiment, per player decision November 14.**
