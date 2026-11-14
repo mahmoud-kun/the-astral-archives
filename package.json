@@ -10,9 +10,10 @@
     "typecheck": "tsc -b",
     "test:rescue": "node --test src/rescueEngine.test.mjs",
     "test:fixedroom": "node --test src/fixedRoomEvidence.test.mjs",
-    "test:studio": "npm run test:investigation && npm run test:fixedroom && npm run test:rescue && npm run test:archive",
+    "test:studio": "npm run test:investigation && npm run test:fixedroom && npm run test:rescue && npm run test:archive && npm run test:navigation",
     "test:investigation": "node --test src/investigationCases.test.mjs",
-    "test:archive": "node --test src/archive/archiveState.test.mjs"
+    "test:archive": "node --test src/archive/archiveState.test.mjs",
+    "test:navigation": "node --test src/gameNavigation.test.mjs"
   },
   "dependencies": {
     "react": "^19.2.0",
