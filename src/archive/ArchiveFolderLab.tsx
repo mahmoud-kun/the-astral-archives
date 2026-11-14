@@ -1,6 +1,7 @@
 import { useEffect, useState, type CSSProperties } from 'react'
 import { CASE_CODES, CASE_META, EVIDENCE_RECORDS, findEvidence, type ArchiveCaseId, type ArchiveEvidence } from './evidenceRecords'
 import { ARCHIVE_SAVE_KEY, DIAGNOSIS_PROMPTS, countInFolder, countRequiredEvidence, discoverEvidence, emptyArchiveState, fileEvidence, rescueIsReady, restoreArchiveState, submitDiagnosis, updateDiagnosis, type ArchiveState, type CaseDiagnosis, type DiagnosticPart } from './archiveState'
+import { onGameLinkClick } from '../gameNavigation'
 import './archiveFolderLab.css'
 
 const PARTS: readonly DiagnosticPart[] = ['technical', 'process', 'consequence']
@@ -96,7 +97,7 @@ export default function ArchiveFolderLab() {
   return <main className="af-app">
     <header className="af-header">
       <div className="af-brand"><span>THE ASTRAL ARCHIVES</span><strong>ARCHIVAL EVIDENCE / LIVING DOSSIERS</strong></div>
-      <div className="af-header-end"><span>EXPERIMENTAL GAMEPLAY PREVIEW</span><a href="/?room=1">RETURN TO STATION</a></div>
+      <div className="af-header-end"><span>EXPERIMENTAL GAMEPLAY PREVIEW</span><a href="/?room=1" onClick={event => onGameLinkClick(event, '/?room=1')}>RETURN TO STATION</a></div>
     </header>
     <div className="af-grid">
       <aside className="af-sidebar" aria-label="Mission archive">
