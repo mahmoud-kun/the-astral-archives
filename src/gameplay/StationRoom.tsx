@@ -9,14 +9,14 @@ type OtherStation = Exclude<StationId,'investigation'>
 type Hotspot = {id:NadirRecord;name:string;rect:[number,number,number,number];hint:string}
 const ROOM_SCENES:Record<OtherStation,{asset:string;description:string;hotspots:readonly Hotspot[]}> = {
  signal:{
-  asset:'/assets/rooms/Signal_Original_REFERENCE.png',description:'Telemetry and communication analysis',
+  asset:'/assets/optimized/room-signal.webp',description:'Telemetry and communication analysis',
   hotspots:[
    {id:'NAD-01',name:'NAVIGATION TRACK COMPARISON',rect:[29,30,41,31],hint:'Central signal display'},
    {id:'NAD-02',name:'RAW IMPULSE EXPORT 0038',rect:[42,61,17,13],hint:'Receiver and message equipment'},
   ],
  },
  archive:{
-  asset:'/assets/rooms/Archive_Original_REFERENCE.png',description:'Mission records, interface contracts and systems history',
+  asset:'/assets/optimized/room-archive.webp',description:'Mission records, interface contracts and systems history',
   hotspots:[
    {id:'NAD-03',name:'INTERFACE CONTROL ICD-07',rect:[69,31,29,24],hint:'Primary mission archive display'},
    {id:'NAD-04',name:'SOFTWARE EXPORT TRACE',rect:[25,47,26,23],hint:'Central processing desk'},
@@ -24,7 +24,7 @@ const ROOM_SCENES:Record<OtherStation,{asset:string;description:string;hotspots:
   ],
  },
  recordings:{
-  asset:'/assets/rooms/Recordings_Original_REFERENCE.png',description:'Recovered communications and review chronology',
+  asset:'/assets/optimized/room-recordings.webp',description:'Recovered communications and review chronology',
   hotspots:[
    {id:'NAD-05',name:'ENGINEER ANOMALY EMAIL',rect:[70,18,25,33],hint:'Recovered correspondence on playback display'},
    {id:'NAD-07',name:'REVIEW MEMORY CLIP',rect:[11,37,25,25],hint:'Left recording rack and waveform station'},
@@ -47,7 +47,7 @@ export default function StationRoom({station}:{station:OtherStation}){
  return <main className="sr-root" aria-label={stationLabel(station)+' Room'}>
   <div className="sr-space" aria-hidden="true"/>
   <section className="sr-stage" aria-label={scene.description}>
-   <img className="sr-plate" src={scene.asset} alt={stationLabel(station)+' space station room with interactive equipment'} decoding="async"/>
+   <img className="sr-plate" src={scene.asset} fetchPriority="high" loading="eager" alt={stationLabel(station)+' space station room with interactive equipment'} decoding="async"/>
    {scene.hotspots.map(spot=>{
     const solved=research.solved.includes(spot.id)
     const collected=archive.discovered.includes(spot.id)
