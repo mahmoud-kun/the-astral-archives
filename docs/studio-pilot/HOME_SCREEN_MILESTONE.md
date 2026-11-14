@@ -1,5 +1,7 @@
 # The Astral Archives — Home Screen V1
 
+> **Active-branch update — 2026-11-14:** The user requested a targeted Home Screen adjustment on `experiment/room-case-library-layout-fix-2026-11-14`. The menu now uses the approved `menu-approved-landscape.png` and `menu-approved-portrait.png` art, with the rover/Mars environment kept on the left and the menu aligned to the right on landscape. This supersedes the V1 background-path/layout note below; it does not change the approved menu actions or case-preview content. All further work stays on the active branch unless the user explicitly requests a new one.
+
 **Branch:** `experiment/home-screen-fixed-room-v1-2026-11-14`  
 **Scope:** Home Screen only. Isolated experiment. No merge to main.
 
