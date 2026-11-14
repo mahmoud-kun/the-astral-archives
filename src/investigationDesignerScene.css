@@ -17,7 +17,7 @@
 .idr-root a{color:inherit;text-decoration:none}
 .idr-root button:disabled{cursor:not-allowed;opacity:.45}
 .idr-background{position:absolute;inset:-8%;z-index:-2;pointer-events:none;
-  background:url('/assets/rooms/Investigation_Wide_Artwork.png') center / cover no-repeat;
+  background:url('/assets/optimized/room-investigation.webp') center / cover no-repeat;
   filter:blur(28px) brightness(.38) saturate(.9);}
 .idr-dark-edges{position:absolute;inset:0;z-index:-1;pointer-events:none;
   background:linear-gradient(180deg,#02101ef2,transparent 20%,transparent 80%,#02101eea),
@@ -103,7 +103,7 @@
   height:min(690px,calc(100dvh - 40px));display:flex;flex-direction:column;isolation:isolate;
   border:1px solid #779aaa;color:#f3e9d8;background:#0a1b2c;
   box-shadow:0 30px 115px #000e,0 0 28px #2ec4c32a;overflow:hidden}
-.idr-inspection-back{position:absolute;inset:0;z-index:-2;background:url('/assets/rooms/Investigation_Wide_Artwork.png') center 45% / cover no-repeat;
+.idr-inspection-back{position:absolute;inset:0;z-index:-2;background:url('/assets/optimized/room-investigation.webp') center 45% / cover no-repeat;
   opacity:.18;filter:blur(6px) brightness(.58);transform:scale(1.1)}
 .idr-inspection-back::after{content:"";position:absolute;inset:0;background:#071b2c99}
 .idr-inspection-back-cases{background-position:10% 40%;transform:scale(1.8)}
@@ -198,7 +198,7 @@
 @media(orientation:portrait){
   /* Portrait alternative is also authored by the designer. Entire composition is visible. */
   .idr-stage{width:min(100vw,195.32dvh);aspect-ratio:1752/897}
-  .idr-background{background-image:url('/assets/rooms/Investigation_Original_REFERENCE.png')}
+  .idr-background{background-image:url('/assets/optimized/room-investigation.webp')}
   .idr-hotspot-files{left:6.5%;top:32%;width:15.5%;height:28%}
   .idr-hotspot-evidence{left:29.8%;top:32%;width:18%;height:24%}
   .idr-hotspot-desk{left:33%;top:52%;width:37%;height:31%}
