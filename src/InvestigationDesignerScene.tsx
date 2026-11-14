@@ -89,7 +89,7 @@ export default function InvestigationDesignerScene() {
     </header>
 
     {showHint && <div className="idr-hint" role="status">
-      <span className="idr-pulse"/> <span>MOVE OVER AN OBJECT TO REVEAL IT · CLICK TO INSPECT</span>
+      <span className="idr-pulse"/> <span>HOVER OR TAP AN OBJECT TO INSPECT</span>
       <button onClick={() => setShowHint(false)} aria-label="Dismiss tip"><SmallIcon type="close" size={14}/></button>
     </div>}
 
