@@ -15,7 +15,7 @@
     "test:archive": "node --test src/archive/archiveState.test.mjs",
     "test:navigation": "node --experimental-strip-types --test src/gameNavigation.test.mjs",
     "test:layers": "node --test src/investigationLayers.test.mjs",
-    "test:nadir": "node --experimental-strip-types --test src/gameplay/nadirEngine.test.mjs"
+    "test:nadir": "node --experimental-strip-types --test src/gameplay/nadirEngine.test.mjs src/gameplay/nadirAcceptance.test.mjs"
   },
   "dependencies": {
     "react": "^19.2.0",
