@@ -45,13 +45,13 @@ test('impulse requires proper dimensional conversion, not numeric copy or wrong 
 })
 
 test('trajectory reconciliation is locked until conversion and rejects mechanical-failure shortcut',()=>{
- const a=solveNadir(emptyNadir(),'NAD-01',{hypothesis:'units',rerun:'53.38',comparison:'same'})
+ const a=solveNadir(emptyNadir(),'NAD-01',{hypothesis:'units',rerun:'53.38',comparison:'same',rawReplay:'completed',correctedReplay:'completed'})
  assert.equal(a.ok,false)
  assert.equal(a.next.attempts['NAD-01'],undefined)
  const converted=solveNadir(emptyNadir(),'NAD-02',impulse).next
- const wrong=solveNadir(converted,'NAD-01',{hypothesis:'thruster',rerun:'53.38',comparison:'same'})
+ const wrong=solveNadir(converted,'NAD-01',{hypothesis:'thruster',rerun:'53.38',comparison:'same',rawReplay:'completed',correctedReplay:'completed'})
  assert.equal(wrong.ok,false)
- const right=solveNadir(wrong.next,'NAD-01',{hypothesis:'units',rerun:'53.38',comparison:'same'})
+ const right=solveNadir(wrong.next,'NAD-01',{hypothesis:'units',rerun:'53.38',comparison:'same',rawReplay:'completed',correctedReplay:'completed'})
  assert.equal(right.ok,true)
 })
 
