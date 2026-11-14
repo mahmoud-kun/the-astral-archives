@@ -37,8 +37,9 @@ export default function NadirPuzzle({id,onClose}:{id:NadirRecord;onClose:()=>voi
  const progress=useNadirSave()
  const solved=progress.solved.includes(id)
  const collected=archive.discovered.includes(id)
- const [answer,setAnswer]=useState<NadirAnswer>(()=>id==='NAD-05'
-  ? {first:INITIAL_TIMELINE[0],second:INITIAL_TIMELINE[1],third:INITIAL_TIMELINE[2],fourth:INITIAL_TIMELINE[3]} : {})
+ const initialAnswer: NadirAnswer = id==='NAD-05'
+  ? {first:INITIAL_TIMELINE[0],second:INITIAL_TIMELINE[1],third:INITIAL_TIMELINE[2],fourth:INITIAL_TIMELINE[3]} : {}
+ const [answer,setAnswer]=useState<NadirAnswer>(initialAnswer)
  const [timeline,setTimeline]=useState<string[]>([...INITIAL_TIMELINE])
  const [replayMode,setReplayMode]=useState<'unrun'|'raw'|'corrected'>('unrun')
  const [feedback,setFeedback]=useState('')
