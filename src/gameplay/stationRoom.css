@@ -29,3 +29,17 @@
  .sr-heading small{display:none}.sr-heading strong{font-size:9px}.sr-nav button{font-size:7px;padding:4px}
 }
 @media(prefers-reduced-motion:reduce){.sr-hotspot,.sr-hotspot-label{transition:none!important}}
+
+/* Evidence beacons are tied to actual clickable scene equipment, not decorative HUD clutter. */
+.sr-beacon{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);display:grid;place-items:center;
+ width:35px;height:35px;border-radius:50%;background:#06182bab;border:1px solid #7ac5d59c;
+ box-shadow:0 0 0 6px #67d2e21e,0 0 16px #5acfe550;pointer-events:none;opacity:.78;transition:transform .2s ease,opacity .2s ease}
+.sr-beacon .eg-glyph{width:25px;height:25px;background:transparent;border:0;box-shadow:none}
+.sr-beacon .eg-glyph svg{width:18px;height:18px;filter:drop-shadow(0 0 4px #61d5ecaa)}
+.sr-hotspot:is(:hover,:focus-visible,:active) .sr-beacon{transform:translate(-50%,-50%) scale(1.13);opacity:1;background:#0a304be9;box-shadow:0 0 0 9px #67d2e22a,0 0 28px #56eeffe8}
+.sr-hotspot.sr-collected .sr-beacon{border-color:#daa16b;box-shadow:0 0 0 6px #d3a77225,0 0 15px #e4b884a1}
+@media(orientation:landscape) and (max-width:1000px) and (max-height:600px){
+ .sr-beacon{width:26px;height:26px;box-shadow:0 0 0 3px #67d2e21e}
+ .sr-beacon .eg-glyph{width:21px;height:21px}.sr-beacon .eg-glyph svg{width:15px;height:15px}
+}
+@media(prefers-reduced-motion:reduce){.sr-beacon{transition:none}}
