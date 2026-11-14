@@ -1,0 +1,308 @@
+{
+  "run_on": "2026-11-14T20:22:13.337Z",
+  "screenshots": 33,
+  "console_errors": 0,
+  "broken_images": 0,
+  "clipped_controls": 0,
+  "overflows": 0,
+  "errors": [],
+  "image_transfer_bytes_by_route": [
+    {
+      "route": "/",
+      "viewport": {
+        "width": 1366,
+        "height": 768
+      },
+      "label": "home",
+      "bytes": 140166
+    },
+    {
+      "route": "/?room=1",
+      "viewport": {
+        "width": 1366,
+        "height": 768
+      },
+      "label": "investigation",
+      "bytes": 4716615
+    },
+    {
+      "route": "/?station=signal",
+      "viewport": {
+        "width": 1366,
+        "height": 768
+      },
+      "label": "signal",
+      "bytes": 143120
+    },
+    {
+      "route": "/?station=archive",
+      "viewport": {
+        "width": 1366,
+        "height": 768
+      },
+      "label": "archive",
+      "bytes": 160942
+    },
+    {
+      "route": "/?station=recordings",
+      "viewport": {
+        "width": 1366,
+        "height": 768
+      },
+      "label": "recordings",
+      "bytes": 119860
+    },
+    {
+      "route": "/?station=signal",
+      "viewport": {
+        "width": 1366,
+        "height": 768
+      },
+      "label": "nadir-puzzle",
+      "bytes": 143120
+    },
+    {
+      "route": "/?station=signal",
+      "viewport": {
+        "width": 1366,
+        "height": 768
+      },
+      "label": "tray-open",
+      "bytes": 143120
+    },
+    {
+      "route": "/?folder-lab=1&return=signal",
+      "viewport": {
+        "width": 1366,
+        "height": 768
+      },
+      "label": "folder",
+      "bytes": 0
+    },
+    {
+      "route": "/",
+      "viewport": {
+        "width": 915,
+        "height": 412
+      },
+      "label": "home",
+      "bytes": 140166
+    },
+    {
+      "route": "/?room=1",
+      "viewport": {
+        "width": 915,
+        "height": 412
+      },
+      "label": "investigation",
+      "bytes": 4716615
+    },
+    {
+      "route": "/?station=signal",
+      "viewport": {
+        "width": 915,
+        "height": 412
+      },
+      "label": "signal",
+      "bytes": 143120
+    },
+    {
+      "route": "/?station=archive",
+      "viewport": {
+        "width": 915,
+        "height": 412
+      },
+      "label": "archive",
+      "bytes": 160942
+    },
+    {
+      "route": "/?station=recordings",
+      "viewport": {
+        "width": 915,
+        "height": 412
+      },
+      "label": "recordings",
+      "bytes": 119860
+    },
+    {
+      "route": "/?station=signal",
+      "viewport": {
+        "width": 915,
+        "height": 412
+      },
+      "label": "nadir-puzzle",
+      "bytes": 143120
+    },
+    {
+      "route": "/?station=signal",
+      "viewport": {
+        "width": 915,
+        "height": 412
+      },
+      "label": "tray-open",
+      "bytes": 143120
+    },
+    {
+      "route": "/?folder-lab=1&return=signal",
+      "viewport": {
+        "width": 915,
+        "height": 412
+      },
+      "label": "folder",
+      "bytes": 0
+    },
+    {
+      "route": "/",
+      "viewport": {
+        "width": 800,
+        "height": 360
+      },
+      "label": "home",
+      "bytes": 140166
+    },
+    {
+      "route": "/?room=1",
+      "viewport": {
+        "width": 800,
+        "height": 360
+      },
+      "label": "investigation",
+      "bytes": 4716615
+    },
+    {
+      "route": "/?station=signal",
+      "viewport": {
+        "width": 800,
+        "height": 360
+      },
+      "label": "signal",
+      "bytes": 143120
+    },
+    {
+      "route": "/?station=archive",
+      "viewport": {
+        "width": 800,
+        "height": 360
+      },
+      "label": "archive",
+      "bytes": 160942
+    },
+    {
+      "route": "/?station=recordings",
+      "viewport": {
+        "width": 800,
+        "height": 360
+      },
+      "label": "recordings",
+      "bytes": 119860
+    },
+    {
+      "route": "/?station=signal",
+      "viewport": {
+        "width": 800,
+        "height": 360
+      },
+      "label": "nadir-puzzle",
+      "bytes": 143120
+    },
+    {
+      "route": "/?station=signal",
+      "viewport": {
+        "width": 800,
+        "height": 360
+      },
+      "label": "tray-open",
+      "bytes": 143120
+    },
+    {
+      "route": "/?folder-lab=1&return=signal",
+      "viewport": {
+        "width": 800,
+        "height": 360
+      },
+      "label": "folder",
+      "bytes": 0
+    },
+    {
+      "route": "/",
+      "viewport": {
+        "width": 740,
+        "height": 360
+      },
+      "label": "home",
+      "bytes": 140166
+    },
+    {
+      "route": "/?room=1",
+      "viewport": {
+        "width": 740,
+        "height": 360
+      },
+      "label": "investigation",
+      "bytes": 4716615
+    },
+    {
+      "route": "/?station=signal",
+      "viewport": {
+        "width": 740,
+        "height": 360
+      },
+      "label": "signal",
+      "bytes": 143120
+    },
+    {
+      "route": "/?station=archive",
+      "viewport": {
+        "width": 740,
+        "height": 360
+      },
+      "label": "archive",
+      "bytes": 160942
+    },
+    {
+      "route": "/?station=recordings",
+      "viewport": {
+        "width": 740,
+        "height": 360
+      },
+      "label": "recordings",
+      "bytes": 119860
+    },
+    {
+      "route": "/?station=signal",
+      "viewport": {
+        "width": 740,
+        "height": 360
+      },
+      "label": "nadir-puzzle",
+      "bytes": 143120
+    },
+    {
+      "route": "/?station=signal",
+      "viewport": {
+        "width": 740,
+        "height": 360
+      },
+      "label": "tray-open",
+      "bytes": 143120
+    },
+    {
+      "route": "/?folder-lab=1&return=signal",
+      "viewport": {
+        "width": 740,
+        "height": 360
+      },
+      "label": "folder",
+      "bytes": 0
+    },
+    {
+      "route": "/",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "label": "portrait-guard",
+      "bytes": 140166
+    }
+  ]
+}
