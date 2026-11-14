@@ -35,15 +35,20 @@
 .idr-hotspot-layer{position:absolute;inset:0;z-index:2;pointer-events:none}
 .idr-hotspot{position:absolute;border:1px solid transparent;outline:0;background:transparent;
   color:#f5e9d7;pointer-events:auto;transition:background-color .22s,border-color .22s;
-  border-radius:7px;touch-action:manipulation;}
-.idr-hotspot:hover,.idr-hotspot:focus-visible{
-  background:#4ed4e012;border-color:#9feeff80;box-shadow:inset 0 0 30px #b4f0f110,0 0 20px #2ec4c314;
+  border-radius:7px;touch-action:manipulation;cursor:pointer;}
+.idr-hotspot::before{content:"";position:absolute;inset:4%;border:1px solid transparent;border-radius:4px;
+  opacity:0;pointer-events:none;transition:opacity .2s,border-color .2s,box-shadow .2s,background-color .2s;
+  background:linear-gradient(135deg,#2ec4c31a,transparent 42%);}
+.idr-hotspot:hover::before,.idr-hotspot:focus-visible::before{
+  opacity:1;border-color:#7cecf2b8;background-color:#2ec4c315;
+  box-shadow:inset 0 0 22px #2ec4c328,0 0 22px #2ec4c36b;
 }
+.idr-hotspot:hover,.idr-hotspot:focus-visible{background:transparent;border-color:transparent;}
 .idr-hotspot-point{position:absolute;left:50%;top:50%;width:15px;height:15px;
   transform:translate(-50%,-50%) rotate(45deg);
   border:1.5px solid #f0c18b;background:#0a253bc4;
   box-shadow:0 0 0 4px #121f2e77,0 0 14px #f2a261a6;
-  animation:idr-glint 2.8s ease-in-out infinite;}
+  opacity:0;animation:none;transition:opacity .18s,border-color .18s,box-shadow .18s;}
 .idr-hotspot-point::after{content:"";position:absolute;inset:4px;background:#f9ce9d}
 .idr-hotspot-name{position:absolute;top:calc(50% + 21px);left:50%;transform:translate(-50%,7px);
   padding:9px 12px;background:#071b2ceb;border:1px solid #73bed2;
@@ -52,12 +57,13 @@
 .idr-hotspot:hover .idr-hotspot-name,.idr-hotspot:focus-visible .idr-hotspot-name{
   opacity:1;transform:translate(-50%,0);}
 .idr-hotspot:hover .idr-hotspot-point,.idr-hotspot:focus-visible .idr-hotspot-point{
-  border-color:#bffaff;background:#12708c;box-shadow:0 0 0 5px #2ec4c333,0 0 17px #5bf1ff;}
-.idr-hotspot-files{left:19.5%;top:26%;width:11.4%;height:37%}
+  opacity:1;border-color:#bffaff;background:#12708c;box-shadow:0 0 0 5px #2ec4c333,0 0 17px #5bf1ff;}
+.idr-hotspot-files{left:19.7%;top:35.5%;width:10.8%;height:27%}
+.idr-hotspot-files::before{inset:5% 7%;border-radius:3px}
 .idr-hotspot-evidence{left:35.5%;top:32%;width:12.3%;height:23%}
-.idr-hotspot-desk{left:36.8%;top:55%;width:25.9%;height:26%}
+.idr-hotspot-desk{left:46.5%;top:54%;width:13.5%;height:18%}
 .idr-hotspot-door{left:68.9%;top:24%;width:12%;height:40%}
-.idr-hotspot-rescue{left:80.6%;top:45%;width:7.2%;height:21%}
+.idr-hotspot-rescue{left:82.5%;top:48%;width:6.5%;height:17%}
 .idr-hotspot-rescue .idr-hotspot-point{border-color:#8de6f1;box-shadow:0 0 0 4px #121f2e77,0 0 14px #33d6e2}
 
 /* UI floats on the scene like restrained game HUD, never page sections. */
@@ -80,11 +86,9 @@
 .idr-foot-status{text-shadow:0 2px 8px #000;white-space:nowrap}
 .idr-foot-status b{color:#f3ba7d;padding:0 6px}
 .idr-foot-diamond{display:inline-block;border:1px solid #e6ad71;transform:rotate(45deg);width:7px;height:7px;margin-right:9px}
-.idr-foot-actions{display:flex;align-items:center;gap:9px}
-.idr-foot-actions button{display:flex;gap:8px;align-items:center;padding:11px 14px;
-  background:#09283bdf;border:1px solid #5c9ca9;border-radius:3px;color:#e1f2ee;
-  font:600 11px 'IBM Plex Mono',monospace;letter-spacing:.07em;backdrop-filter:blur(10px)}
-.idr-foot-actions button:hover{background:#1c4a60;border-color:#f4b77c}
+.idr-foot-instruction{color:#a8cbd0;font:600 9px 'IBM Plex Mono',monospace;letter-spacing:.08em;
+  text-shadow:0 2px 8px #000b;text-align:right}
+.idr-foot-instruction-mobile{display:none}
 .idr-hint{position:absolute;z-index:6;left:50%;bottom:clamp(72px,9vh,105px);transform:translateX(-50%);
   display:flex;gap:11px;align-items:center;padding:9px 12px 9px 15px;
   background:#081f31e6;border:1px solid #568ca2;color:#e0e7eb;
@@ -92,15 +96,6 @@
   box-shadow:0 8px 33px #0009;}
 .idr-hint button{background:transparent;border:0;color:#b5dbe4;display:grid;place-items:center;padding:3px}
 .idr-pulse{width:6px;height:6px;border-radius:50%;background:#f1b87c;box-shadow:0 0 12px #eaa86b}
-.idr-object-list{position:absolute;z-index:9;right:clamp(15px,3vw,50px);bottom:81px;
-  width:min(300px,calc(100vw - 30px));background:#071b2af2;border:1px solid #6594a7;padding:7px;
-  display:grid;gap:4px;box-shadow:0 20px 60px #000b;backdrop-filter:blur(16px)}
-.idr-object-list button{display:flex;justify-content:space-between;gap:10px;align-items:center;
-  padding:12px;background:transparent;border:1px solid transparent;text-align:left;color:#f4efdf;}
-.idr-object-list button:hover{background:#255269;border-color:#4a99a9}
-.idr-object-list button span{font-size:14px;font-weight:600}
-.idr-object-list button small{font:600 9px 'IBM Plex Mono',monospace;letter-spacing:.06em;color:#f2be8b;white-space:nowrap}
-
 /* Focus scenes replace whole room visually: no web-document layout. */
 .idr-overlay{position:fixed;inset:0;z-index:40;background:#020a13d6;
   display:grid;place-items:center;padding:20px;backdrop-filter:blur(7px)}
@@ -204,7 +199,7 @@
   /* Portrait alternative is also authored by the designer. Entire composition is visible. */
   .idr-stage{width:min(100vw,195.32dvh);aspect-ratio:1752/897}
   .idr-background{background-image:url('/assets/rooms/Investigation_Original_REFERENCE.png')}
-  .idr-hotspot-files{left:6.5%;top:27%;width:15.5%;height:33%}
+  .idr-hotspot-files{left:6.5%;top:32%;width:15.5%;height:28%}
   .idr-hotspot-evidence{left:29.8%;top:32%;width:18%;height:24%}
   .idr-hotspot-desk{left:33%;top:52%;width:37%;height:31%}
   .idr-hotspot-door{left:80%;top:22%;width:16%;height:44%}
@@ -217,9 +212,9 @@
   .idr-hint{bottom:135px;max-width:90vw;font-size:9px;white-space:normal;min-height:41px}
   .idr-foot{align-items:flex-end}
   .idr-foot-status{font-size:9px;white-space:normal;line-height:1.6;max-width:110px}
-  .idr-foot-actions{gap:5px}
-  .idr-foot-actions button{padding:10px;font-size:10px}
-  .idr-object-list{bottom:65px;right:14px}
+  .idr-foot-instruction{max-width:130px;font-size:8px;line-height:1.5}
+  .idr-foot-instruction-desktop{display:none}
+  .idr-foot-instruction-mobile{display:inline}
 }
 @media(max-width:700px){
   .idr-head{padding:13px 14px}
@@ -271,7 +266,7 @@
 @media(max-width:390px){
   .idr-head-left{gap:7px}
   .idr-room-name strong{font-size:11px}
-  .idr-foot-actions button{font-size:9px;padding:9px 7px;gap:5px}
+  .idr-foot-instruction{font-size:7px;max-width:112px}
   .idr-case-data-bottom{grid-template-columns:1fr}
 }
 @media(prefers-reduced-motion:reduce){
