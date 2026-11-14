@@ -1,4 +1,4 @@
-import { EVIDENCE_RECORDS } from '../archive/evidenceRecords'
+import { EVIDENCE_RECORDS } from '../archive/evidenceRecords.ts'
 
 export type NadirRecord = 'NAD-01'|'NAD-02'|'NAD-03'|'NAD-04'|'NAD-05'|'NAD-06'|'NAD-07'|'NAD-08'
 export type StationId = 'investigation'|'signal'|'archive'|'recordings'
