@@ -1,0 +1,25 @@
+# The Astral Archives — Home Screen V1
+
+**Branch:** `experiment/home-screen-fixed-room-v1-2026-11-14`  
+**Scope:** Home Screen only. Isolated experiment. No merge to main.
+
+## Source-grounded design
+- Room backdrop uses the existing `public/assets/optimized/menu-archive.webp` derived from the designer's `Archive_Original_REFERENCE.png` in Google Drive `Nasa/الضيظاينر/The_Astral_Archives_COMPLETE_Asset_Library_V1/01_PRESENT/rooms`.
+- Palette and typography align with `05_DESIGN_SYSTEM/design_tokens.json`: navy `#081B2B`, cyan `#2EC4C3`, orange `#F4A261`, cream `#F2E8D2`; Orbitron display with IBM Plex Sans and Mono.
+- Five spoiler-light case summaries reference `Cases Evidence Production Bible v2.docx` and `Cases Game Design v1.1 Production Addendum.docx`, both in `Nasa`; fictional cases Kestrel, Nadir, Lumen, Oriole, Asterion.
+- The home does not present any invented evidence values as NASA telemetry. It does not disclose the linked-case culprit.
+
+## Behavior
+- Default `/` is the new home.
+- **Start Investigation** opens the existing fixed-room prototype `/?room=1`. Saved evidence state continues if the player has already collected evidence.
+- **Mission Archives** opens a five-item preview with real draft case names and initial stakes, no diagnosis spoilers; **Enter Investigation** opens the room.
+- **Settings** has a persistent reduced-motion toggle and a working fullscreen action; disabled audio controls were intentionally not added.
+- **About** describes the fictional educational setting and includes a NASA non-endorsement clarification.
+- Escape, Close and backdrop-click dismiss a panel.
+- `/?legacy=1` remains a comparison route to the previous menu; `/?workbench=1` preserves the existing Rescue Workbench.
+- Responsive desktop and phone views are styled. Full-room redesign, actual five-case evidence integration and Archive/Signal/Recordings room functionality are explicitly outside this milestone.
+
+## Checks / review
+- Build should run `tsc -b && vite build`, plus existing fixed room and rescue tests.
+- Manual playtest: open root; Start Investigation; back to home; Mission Archives switching; About and Settings; mobile portrait 360px; desktop 1366×768; Escape, fullscreen and reduced-motion.
+- The original approved artist scene is included as an illustration, not a certified game-ready menu layout. Visual signoff and real-device usability remain pending.
