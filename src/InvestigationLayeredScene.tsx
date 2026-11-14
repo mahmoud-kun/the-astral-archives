@@ -77,13 +77,17 @@ function LayeredObject({
 
 function Variant({ manifest, onOpen }: { manifest: SceneManifest; onOpen: (target: RoomObjectTarget) => void }) {
   const [status, setStatus] = useState<'loading' | 'ready' | 'error'>('loading')
+  // Source manifest keeps the unmodified PNG for exact art reconstruction.
+  // Runtime uses the quality-reviewed WebP plate when available; preserve PNG fallback.
+  const preferredBackground = '/assets/rooms/investigation/layers/wide/background/investigation_room_bg_clean.webp'
+  const [plateSrc,setPlateSrc] = useState(manifest.variant==='wide' ? preferredBackground : manifest.background)
   return <div className={'idr-layered-scene idr-layered-' + manifest.variant + (status === 'ready' ? ' idr-layered-ready' : '')}>
     <img className="idr-layered-plate"
-      src={status === 'error' ? manifest.sourceArt : manifest.background}
+      src={status === 'error' ? manifest.sourceArt : plateSrc}
       alt="Space-station investigation room, featuring interactive mission records, terminals, an evidence board and station access"
       decoding="async" fetchPriority="high"
       onLoad={() => { if (status !== 'error') setStatus('ready') }}
-      onError={() => setStatus('error')}/>
+      onError={() => { if(plateSrc !== manifest.background) setPlateSrc(manifest.background); else setStatus('error') }}/>
     {status === 'ready' && manifest.objects.map(object =>
       <LayeredObject key={object.id} object={object} coordinateSystem={manifest.coordinateSystem} onOpen={onOpen}/>)}
   </div>
