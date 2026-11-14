@@ -1,9 +1,11 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import {
   INVESTIGATION_CASES, INVESTIGATION_ACTIVE_CASE_KEY, isInvestigationCode,
   type InvestigationCode
 } from './investigationCases'
 import './investigationDesignerScene.css'
+import wideManifest from '../public/assets/rooms/investigation/layers/wide/manifest.json'
+import originalManifest from '../public/assets/rooms/investigation/layers/original/manifest.json'
 
 type Interaction = 'cases' | 'briefing' | 'evidence' | 'door' | 'rescue' | 'help'
 type Panel = Interaction | null
@@ -42,21 +44,74 @@ function SmallIcon({ type, size = 18 }: { type: 'back' | 'close' | 'folder' | 'h
   return <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">{shapes[type]}</svg>
 }
 
-function RoomBackdrop() {
-  return <picture className="idr-scene-image">
-    <source media="(orientation: portrait)" srcSet="/assets/rooms/Investigation_Original_REFERENCE.png" />
-    <img src="/assets/rooms/Investigation_Wide_Artwork.png"
-      alt="Designer artwork of the full station investigation room: mission files on the left, evidence board and desk in the center, station door and archive console on the right."
-      decoding="async" loading="eager"/>
-  </picture>
+type RoomObject = (typeof wideManifest.objects)[number]
+
+function LayeredObject({ object, scene, onOpen }: { object: RoomObject; scene: { width: number; height: number }; onOpen: (target: Interaction) => void }) {
+  const button = useRef<HTMLButtonElement>(null)
+  const pixels = useRef<ImageData | null>(null)
+  useEffect(() => {
+    const image = new Image()
+    image.src = object.assets.mask
+    image.onload = () => {
+      const canvas = document.createElement('canvas')
+      canvas.width = image.naturalWidth
+      canvas.height = image.naturalHeight
+      const context = canvas.getContext('2d', { willReadFrequently: true })
+      if (!context) return
+      context.drawImage(image, 0, 0)
+      pixels.current = context.getImageData(0, 0, canvas.width, canvas.height)
+    }
+    return () => { image.onload = null }
+  }, [object.assets.mask])
+
+  function inside(event: { clientX: number; clientY: number }) {
+    const node = button.current
+    const data = pixels.current
+    if (!node || !data) return true
+    const rect = node.getBoundingClientRect()
+    const x = Math.floor((event.clientX - rect.left) / rect.width * data.width)
+    const y = Math.floor((event.clientY - rect.top) / rect.height * data.height)
+    if (x < 0 || y < 0 || x >= data.width || y >= data.height) return false
+    return data.data[(y * data.width + x) * 4] > 40
+  }
+
+  const { x, y, width, height } = object.position
+  const style = { left: `${x / scene.width * 100}%`, top: `${y / scene.height * 100}%`,
+    width: `${width / scene.width * 100}%`, height: `${height / scene.height * 100}%`, zIndex: object.zIndex }
+  return <button ref={button} className="idr-object" style={style} aria-label={object.interaction.label}
+    onPointerMove={event => button.current?.classList.toggle('idr-object-lit', inside(event))}
+    onPointerLeave={() => button.current?.classList.remove('idr-object-lit')}
+    onPointerDown={event => button.current?.classList.toggle('idr-object-lit', inside(event))}
+    onClick={event => {
+      if (event.detail === 0 || inside(event)) onOpen(object.interaction.target as Interaction)
+    }}>
+    <img className="idr-object-art" src={object.assets.base} alt="" draggable={false}/>
+    {'screen' in object.assets && <img className="idr-object-art" src={object.assets.screen} alt="" draggable={false}/>}
+    {'foreground' in object.assets && <img className="idr-object-art" src={object.assets.foreground} alt="" draggable={false}/>}
+    <img className="idr-object-glow" src={object.assets.glow} alt="" draggable={false}/>
+  </button>
+}
+
+function RoomBackdrop({ onOpen }: { onOpen: (target: Interaction) => void }) {
+  return <>
+    <RoomVariant manifest={wideManifest} onOpen={onOpen}/>
+    <RoomVariant manifest={originalManifest} onOpen={onOpen}/>
+  </>
+}
+
+function RoomVariant({ manifest, onOpen }: { manifest: typeof wideManifest; onOpen: (target: Interaction) => void }) {
+  const [ready, setReady] = useState(false)
+  return <div className={'idr-layered-scene idr-layered-' + manifest.variant + (ready ? ' idr-scene-ready' : '')}>
+    <img className="idr-scene-image" src={manifest.background} alt="Designer artwork of the station investigation room"
+      decoding="async" fetchPriority="high" onLoad={() => setReady(true)}/>
+    {manifest.objects.map(object => <LayeredObject key={object.id} object={object} scene={manifest.coordinateSystem} onOpen={onOpen}/>)}
+  </div>
 }
 
 export default function InvestigationDesignerScene() {
   const [panel, setPanel] = useState<Panel>(null)
   const [selected, setSelected] = useState<InvestigationCode>(() => getStoredCase() ?? 'KES')
   const [tracked, setTracked] = useState<InvestigationCode | null>(getStoredCase)
-  const [objectMenu, setObjectMenu] = useState(false)
-  const [showHint, setShowHint] = useState(true)
   const selectedCase = INVESTIGATION_CASES.find(item => item.code === selected) ?? INVESTIGATION_CASES[0]
   const currentCase = INVESTIGATION_CASES.find(item => item.code === tracked)
 
@@ -64,15 +119,12 @@ export default function InvestigationDesignerScene() {
     const close = (event: KeyboardEvent) => {
       if (event.key !== 'Escape') return
       if (panel) setPanel(null)
-      else if (objectMenu) setObjectMenu(false)
     }
     window.addEventListener('keydown', close)
     return () => window.removeEventListener('keydown', close)
-  }, [panel, objectMenu])
+  }, [panel])
 
   function open(target: Interaction) {
-    setObjectMenu(false)
-    setShowHint(false)
     setPanel(target)
   }
 
@@ -85,24 +137,7 @@ export default function InvestigationDesignerScene() {
     <div className="idr-background" aria-hidden="true"/>
     <div className="idr-dark-edges" aria-hidden="true"/>
     <section className="idr-stage" aria-label="Full investigation room scene">
-      <RoomBackdrop/>
-      <div className="idr-hotspot-layer" aria-label="Interactive objects in the room">
-        <button className="idr-hotspot idr-hotspot-files" aria-label="Open Mission Files cabinet" onClick={() => open('cases')}>
-          <span className="idr-hotspot-point"/><span className="idr-hotspot-name">MISSION FILES</span>
-        </button>
-        <button className="idr-hotspot idr-hotspot-evidence" aria-label="Inspect Evidence Board" onClick={() => open('evidence')}>
-          <span className="idr-hotspot-point"/><span className="idr-hotspot-name">EVIDENCE BOARD</span>
-        </button>
-        <button className="idr-hotspot idr-hotspot-desk" aria-label="Read Mission Briefing on desk terminal" onClick={() => open('briefing')}>
-          <span className="idr-hotspot-point"/><span className="idr-hotspot-name">MISSION BRIEFING</span>
-        </button>
-        <button className="idr-hotspot idr-hotspot-door" aria-label="Open Station Door directory" onClick={() => open('door')}>
-          <span className="idr-hotspot-point"/><span className="idr-hotspot-name">STATION DOOR</span>
-        </button>
-        <button className="idr-hotspot idr-hotspot-rescue" aria-label="Inspect Rescue Console" onClick={() => open('rescue')}>
-          <span className="idr-hotspot-point"/><span className="idr-hotspot-name">RESCUE CONSOLE</span>
-        </button>
-      </div>
+      <RoomBackdrop onOpen={open}/>
     </section>
 
     <header className="idr-head">
@@ -116,24 +151,6 @@ export default function InvestigationDesignerScene() {
       </div>
     </header>
 
-    {showHint && <div className="idr-hint" role="status">
-      <span className="idr-pulse"/> <span>EXPLORE THE ROOM — CLICK AN OBJECT</span>
-      <button onClick={() => setShowHint(false)} aria-label="Dismiss tip"><SmallIcon type="close" size={14}/></button>
-    </div>}
-
-    <footer className="idr-foot">
-      <div className="idr-foot-status"><span className="idr-foot-diamond"/> STATION 01 / 04 <b>·</b> INVESTIGATION HUB</div>
-      <div className="idr-foot-actions">
-        <button onClick={() => open('cases')}><SmallIcon type="folder" size={17}/> CASE FILES</button>
-        <button onClick={() => setObjectMenu(v => !v)} aria-expanded={objectMenu}><SmallIcon type="eye" size={18}/> INTERACT</button>
-      </div>
-    </footer>
-
-    {objectMenu && <nav className="idr-object-list" aria-label="Choose an object to inspect">
-      {INTERACTIONS.filter(item => item.id !== 'help').map(item =>
-        <button key={item.id} onClick={() => open(item.id)}><span>{item.name}</span><small>{item.clue}</small></button>
-      )}
-    </nav>}
 
     {panel && <div className="idr-overlay" onMouseDown={event => { if (event.target === event.currentTarget) setPanel(null) }}>
       <div className={'idr-inspection idr-inspection-' + panel} role="dialog" aria-modal="true" aria-label={INTERACTIONS.find(item => item.id === panel)?.name ?? 'Station console'}>
