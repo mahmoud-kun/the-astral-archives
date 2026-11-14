@@ -11,7 +11,7 @@
     box-shadow:0 20px 80px #0008;}
   .aa-landscape-brand{align-self:stretch;font:700 clamp(11px,2.5vw,15px) 'Orbitron',sans-serif;letter-spacing:.1em;border-bottom:1px solid #345668;padding-bottom:13px}
   .aa-landscape-brand span{display:block;font:500 8px 'IBM Plex Mono',monospace;color:#7fb7c2;letter-spacing:.09em;margin-top:6px}
-  .aa-landscape-device{width:min(180px,37vw);height:110px;filter:drop-shadow(0 0 16px #44c4d42f)}
+  .aa-landscape-device{display:block;width:min(230px,55vw);height:auto;aspect-ratio:320/244;object-fit:contain;filter:drop-shadow(0 0 18px #44c4d455)}
   .aa-landscape-kicker{font:700 10px 'IBM Plex Mono',monospace;letter-spacing:.17em;color:#f0b57f;margin:0}
   .aa-landscape-panel h2{font:700 clamp(19px,4.7vw,29px) 'Orbitron',sans-serif;letter-spacing:.04em;line-height:1.15;margin:0}
   .aa-landscape-copy{font:400 14px/1.55 'IBM Plex Sans',sans-serif;max-width:340px;color:#bfd3dc;margin:0}
@@ -22,5 +22,5 @@
 }
 @media screen and (orientation:portrait) and (max-width:900px) and (max-height:570px){
   .aa-landscape-panel{gap:8px;padding:12px}
-  .aa-landscape-device{height:70px}
+  .aa-landscape-device{width:min(125px,35vw);height:auto}
 }
