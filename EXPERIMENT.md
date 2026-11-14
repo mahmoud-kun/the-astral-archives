@@ -34,6 +34,16 @@ The user explicitly requested that the **entire game be horizontal on phones, ma
 - Landscape CSS and orientation gate are isolated in `src/homeScreen.css`, `src/investigationDesignerScene.css`, `src/archive/archiveFolderLab.css`, `src/LandscapeGuard.tsx` and `src/landscapeGuard.css`.
 - Real-device QA remains required at landscape 800×360 and 915×412, plus desktop 1366×768, especially because UI screenshots cannot be inspected through the connected browser in this session.
 
+## Codex V3 layered room integration — 2026-11-14
+
+- **Keep this branch:** `experiment/room-case-library-layout-fix-2026-11-14`. The Codex branch is preserved for provenance only; its assets were merged into this branch (merge commit `58c875459ad75c9c1cb4c42654d86942054dacd5`).
+- Both Codex V3 layered room variants, masks, clean plates, separated terminals, glow art, comparison screenshots and reconstruction tools are now in `public/assets/rooms/investigation/layers/`, `docs/visual-validation/` and `tools/`.
+- `src/InvestigationLayeredScene.tsx` uses the manifests for actual independent object layering, silhouette glow and grayscale-mask hit tests. `src/InvestigationDesignerScene.tsx` integrates this without discarding our fullscreen navigation, Case Library, UI panels or no-bottom-buttons decision.
+- Home Screen right gradient was softened; current approved clean archive image and landscape menu remain unchanged.
+- `npm run build` now runs the entire `test:studio` suite including new layer tests, before TypeScript/Vite build. Current Vercel deployment: `https://astral-archives-bdb1bwv7q-mahmooud-kun.vercel.app/` (READY, build and all suites passed).
+- **Artwork is still experimental:** regenerated clean plates have documented seams; user visual review and physical device testing remain to be done.
+- Detailed handoff: `docs/studio-pilot/INVESTIGATION_LAYERED_INTEGRATION_V4.md`. Codex original report remains in `docs/INVESTIGATION_ROOM_V3_LAYERED_HANDOFF.md`.
+
 ## Approved clean Home Screen background — 2026-11-14 (latest user decision)
 
 The user reviewed and approved the newly generated **clean cinematic archive interior**: shelves and physical case folders on the left, a large planetary observation window, and dark negative space on the right for the interactive menu. It is now the authoritative Home Screen background, superseding older notes about the Mars surface or the earlier baked-in-menu artwork.
