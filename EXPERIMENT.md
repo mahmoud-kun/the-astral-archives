@@ -11,6 +11,24 @@
 - Inspect the latest branch state before each edit; preserve work already present.
 - Implement one bounded, reviewable change at a time and report the exact commit and verification status.
 
+## Integrated Nadir gameplay — 2026-11-14 (latest approved phase)
+
+The user approved a genuinely challenging hybrid investigation loop (not simplistic trivia quizzes), **Manual Collection**, a portable **Quick Evidence Tray** with direct access to Mission Folders, and diagnosis inside Rescue. This is now the authoritative gameplay specification for the Nadir vertical slice.
+
+- Source record bible: `src/archive/evidenceRecords.ts` (8 Nadir records, 6 required + 2 optional). All fictional simulated engineering data, never unqualified NASA telemetry.
+- Investigation Evidence Board → `NAD-06`; Signal → `NAD-01, NAD-02`; Archive → `NAD-03, NAD-04, NAD-08`; Recordings → `NAD-05, NAD-07`.
+- Nadir investigation uses multi-field analysis, numeric conversion, cross-record prerequisites, chronology reconstruction, adaptive hints after repeated attempts, explicit `COLLECT EVIDENCE`, and persistent progress. Merely opening a document does not collect it.
+- All four station rooms now have functional scene interactions. Archive/Signal/Recordings currently use intact designer reference artworks with provisional hotspot percentages, pending Codex's actual layered assets.
+- Quick Evidence Tray is global for the four present rooms. It shows unfiled/all-collected evidence and opens the full physical Mission Folders without returning to Investigation first. The return route preserves the originating room.
+- A standard player cannot use the archive's former all-record debug intake to bypass discovery; developer access requires `?debug=1`.
+- Physical filing is explicit Select & File; wrong filing is silently saved, reversible, and does not add correct mission progress.
+- **Rescue unlock:** six required records filed into their correct mission folder. Diagnostic support and the engineering two-vector rerun are challenges inside the Nadir Rescue stage, not extra gates on the Rescue button. Existing saved evidence remains compatible.
+- New live routes: `/?station=signal`, `/?station=archive`, `/?station=recordings`, `/?rescue=NAD`, and `/?folder-lab=1&return=signal|archive|recordings|investigation`.
+- The existing Mission Files, layered Investigation Room art, Home Screen, portrait rotation gate, fullscreen-safe navigation and Case Library visual identity remain preserved.
+- Codex's **asset preparation** is an independent task; do not overwrite concurrently generated layered room assets, or claim they have been delivered/integrated.
+- Source: `docs/studio-pilot/NADIR_INVESTIGATION_VERTICAL_SLICE_V1.md`.
+- Verification: `npm run build` runs all `test:studio` suites, then TypeScript and Vite. Physical mobile/browser visual QA of the new scenes is pending.
+
 ## Entry routes
 
 - `/` — Home Screen.
