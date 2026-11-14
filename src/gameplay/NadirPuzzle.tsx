@@ -1,4 +1,4 @@
-import { useState, type FormEvent } from 'react'
+import { useEffect, useState, type FormEvent } from 'react'
 import { discoverEvidence } from '../archive/archiveState'
 import { findEvidence } from '../archive/evidenceRecords'
 import { hintNadir, inspectNadir, NADIR_CHALLENGES, solveNadir, type NadirAnswer, type NadirRecord } from './nadirEngine'
@@ -23,6 +23,7 @@ function TrajectorySketch({ corrected }: {corrected:boolean}) {
 
 export default function NadirPuzzle({id,onClose}:{id:NadirRecord;onClose:()=>void}){
  const challenge=NADIR_CHALLENGES[id]
+ useEffect(()=>{updateNadir(current=>inspectNadir(current,id))},[id])
  const record=findEvidence(id)
  const archive=useArchiveSave()
  const progress=useNadirSave()
