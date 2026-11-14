@@ -1,4 +1,4 @@
-import { CASE_CODES, EVIDENCE_RECORDS, findEvidence, type ArchiveCaseId } from './evidenceRecords'
+import { CASE_CODES, EVIDENCE_RECORDS, findEvidence, type ArchiveCaseId } from './evidenceRecords.ts'
 
 export type DiagnosticPart = 'technical' | 'process' | 'consequence'
 export type DiagnosticChoice = { id: string; label: string }
