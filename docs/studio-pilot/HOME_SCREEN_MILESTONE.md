@@ -1,5 +1,7 @@
 # The Astral Archives — Home Screen V1
 
+> **2026-11-14 Latest approved Home artwork:** Replace the baked-in interface background with the clean archive interior image at `public/assets/menu-archive-clean.webp` (optimized from the generated `futuristic_archive_under_alien_skies.png`). The user selected this exact visual; it supersedes earlier Mars-surface and `menu-approved-landscape.png` notes for the Home Screen. Menu typography/buttons remain live React UI, aligned to the right, while the archive shelving and planetary window remain visible on the left. The mobile experience remains horizontal. Do not switch to another background without explicit user approval.
+
 > **Active-branch update — 2026-11-14:** The user requested a targeted Home Screen adjustment on `experiment/room-case-library-layout-fix-2026-11-14`. The menu now uses the approved `menu-approved-landscape.png` and `menu-approved-portrait.png` art, with the rover/Mars environment kept on the left and the menu aligned to the right on landscape. This supersedes the V1 background-path/layout note below; it does not change the approved menu actions or case-preview content. All further work stays on the active branch unless the user explicitly requests a new one.
 
 **Branch:** `experiment/home-screen-fixed-room-v1-2026-11-14`  
