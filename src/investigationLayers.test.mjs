@@ -53,7 +53,8 @@ test('Every layered room image exists, matches the manifest crop and preserves a
         const info = pngInfo(full)
         assert.equal(info.width,width,`Bad width: ${full}`)
         assert.equal(info.height,height,`Bad height: ${full}`)
-        assert.equal(info.colorType,6,`Object PNG must have an alpha channel: ${full}`)
+        if(kind === 'mask') assert.ok([0,4,6].includes(info.colorType),`Unsupported mask format: ${full}`)
+        else assert.equal(info.colorType,6,`Visible sprite PNG must have an alpha channel: ${full}`)
         assert.ok(info.bytes>100)
       }
       assert.equal(object.interaction.mask,object.assets.mask)
