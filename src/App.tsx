@@ -1,5 +1,6 @@
 import { lazy, Suspense, useEffect, useRef, useState } from 'react'
 import Investigation25D from './Investigation25D'
+import { navigateGame } from './gameNavigation'
 const Investigation360 = lazy(() => import('./Investigation360'))
 
 type Screen = 'menu' | 'opening' | 'station'
@@ -211,7 +212,7 @@ function App() {
   }, [overlay, dialogue])
 
   function begin() {
-    window.location.assign('/?room=1')
+    navigateGame('/?room=1')
   }
 
   function inspect(id: InspectionId) {
@@ -258,7 +259,7 @@ function App() {
             <div className="menu-rule"><Emblem small/><span>INVESTIGATE <b>·</b> ANALYZE <b>·</b> REDESIGN <b>·</b> RESCUE</span></div>
             <nav className="menu-actions" aria-label="Choose an action">
               <button className="game-button game-button-primary" onClick={begin}><span className="button-symbol"><Icon name="search"/></span><span className="button-text"><strong>START INVESTIGATION</strong><small>ENTER THE STATION</small></span><Icon name="arrow" size={20}/></button>
-              <button className="game-button" onClick={() => window.location.assign('/?workbench=1')}><span className="button-symbol"><Icon name="gear"/></span><span className="button-text"><strong>PLAY RESCUE WORKBENCH</strong><small>NEW INTERACTIVE ENGINEERING DEMO</small></span><Icon name="arrow" size={20}/></button>
+              <button className="game-button" onClick={() => navigateGame('/?workbench=1')}><span className="button-symbol"><Icon name="gear"/></span><span className="button-text"><strong>PLAY RESCUE WORKBENCH</strong><small>NEW INTERACTIVE ENGINEERING DEMO</small></span><Icon name="arrow" size={20}/></button>
               <button className="game-button" onClick={() => setOverlay('archives')}><span className="button-symbol"><Icon name="folder"/></span><span className="button-text"><strong>MISSION ARCHIVES</strong><small>FIVE UNRESOLVED FILES</small></span><Icon name="chevron" size={18}/></button>
               <button className="game-button game-button-compact" onClick={() => setOverlay('settings')}><span className="button-symbol"><Icon name="gear"/></span><span className="button-text"><strong>SETTINGS</strong></span><Icon name="chevron" size={18}/></button>
               <button className="game-button game-button-compact" onClick={toggleFullscreen}><span className="button-symbol"><Icon name="expand"/></span><span className="button-text"><strong>{fullscreen ? 'EXIT FULLSCREEN' : 'FULLSCREEN'}</strong></span><Icon name="chevron" size={18}/></button>
