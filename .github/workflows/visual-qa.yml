@@ -1,0 +1,52 @@
+name: Visual QA — Astral Archives
+
+on:
+  push:
+    branches:
+      - experiment/room-case-library-layout-fix-2026-11-14
+    paths:
+      - "src/**"
+      - "public/assets/optimized/**"
+      - "tools/visual-qa.mjs"
+      - ".github/workflows/visual-qa.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  screenshots:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+      - name: Install project dependencies
+        run: npm ci
+      - name: Install browser tooling for CI only
+        run: |
+          npm install --no-save --no-package-lock playwright@1.56.1
+          npx playwright install --with-deps chromium
+      - name: Compile and run existing unit suites
+        run: npm run build
+      - name: Start local Vite preview
+        run: |
+          npm run preview -- --host 127.0.0.1 > /tmp/astral-preview.log 2>&1 &
+          for n in $(seq 1 50); do
+            if curl -fsS http://127.0.0.1:4173/ >/dev/null; then break; fi
+            sleep 1
+          done
+          curl --fail http://127.0.0.1:4173/ -o /dev/null
+      - name: Capture desktop and phone layouts and audit clipping
+        run: VISUAL_QA_URL=http://127.0.0.1:4173 node tools/visual-qa.mjs
+      - name: Upload QA screenshots and report, including failed runs
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: astral-visual-qa
+          path: qa-artifacts/
+          retention-days: 7
+          if-no-files-found: warn
