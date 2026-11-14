@@ -20,6 +20,20 @@
 - `/?legacy=1` — previous application comparison.
 - `/?old-room=1` — earlier fixed-room comparison.
 
+## Mobile landscape requirement — 2026-11-14 (latest user approval)
+
+The user explicitly requested that the **entire game be horizontal on phones, matching the laptop composition**, after seeing the mobile portrait Home Screen with duplicated typography baked into the portrait art.
+
+- In portrait phone viewports (up to 900 px wide), show a full-screen rotate-device gate instead of stacking UI over the background art.
+- Include a user-initiated **TRY LANDSCAPE FULLSCREEN** action which attempts fullscreen plus the Screen Orientation API only when supported, with honest manual Auto-rotate fallback.
+- Do not claim browsers can forcibly change the device orientation on page load.
+- On landscape phones up to 1000 px wide and 600 px high, Home Screen uses artwork on the **left** and compact interactive menu on the **right**, preserving the four existing menu actions.
+- The Home Screen now uses `menu-approved-landscape.png` consistently instead of selecting the portrait mockup that contains baked-in UI lettering.
+- The first Investigation Room keeps its full fixed scene and direct object hotspots; top controls and closeups scale down at phone landscape heights.
+- The Living Evidence Folder stays a three-column archive in phone landscape with scrollable drawers and a height-fitted folder.
+- Landscape CSS and orientation gate are isolated in `src/homeScreen.css`, `src/investigationDesignerScene.css`, `src/archive/archiveFolderLab.css`, `src/LandscapeGuard.tsx` and `src/landscapeGuard.css`.
+- Real-device QA remains required at landscape 800×360 and 915×412, plus desktop 1366×768, especially because UI screenshots cannot be inspected through the connected browser in this session.
+
 ## Current visual direction
 
 ### Home Screen
