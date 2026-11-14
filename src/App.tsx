@@ -211,12 +211,7 @@ function App() {
   }, [overlay, dialogue])
 
   function begin() {
-    setVisited([])
-    setHintUsed(false)
-    setDialogue(null)
-    setOverlay(null)
-    setActivity(0)
-    setScreen('opening')
+    window.location.assign('/?room=1')
   }
 
   function inspect(id: InspectionId) {

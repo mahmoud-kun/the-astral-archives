@@ -209,7 +209,7 @@ export default function RescueWorkbench() {
     <header className="rb-topbar">
       <a className="rb-brand" href="/" aria-label="Return to The Astral Archives station"><span className="rb-brand-mark">✦</span><span><strong>THE ASTRAL ARCHIVES</strong><small>RESCUE ENGINEERING LAB</small></span></a>
       <span className="rb-demo-status"><span className="rb-pulse"/> FICTIONAL SYSTEMS DEMONSTRATION</span>
-      <a className="rb-return" href="/">← Return to station</a>
+      <a className="rb-return" href="/?room=1">← Return to station</a>
     </header>
 
     <main className="rb-container">
