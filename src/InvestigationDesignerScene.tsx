@@ -1,6 +1,10 @@
 import { useEffect, useState } from 'react'
 import { navigateGame, onGameLinkClick } from './gameNavigation'
 import InvestigationLayeredScene, { type RoomObjectTarget } from './InvestigationLayeredScene'
+import NadirPuzzle from './gameplay/NadirPuzzle'
+import { stationRoute, type NadirRecord } from './gameplay/nadirEngine'
+import { useArchiveSave } from './gameplay/gameSave'
+import { countRequiredEvidence, rescueIsReady } from './archive/archiveState'
 import './investigationDesignerScene.css'
 
 type Interaction = 'briefing' | 'evidence' | 'door' | 'rescue' | 'help'
@@ -27,6 +31,10 @@ function SmallIcon({ type, size = 18 }: { type: 'back' | 'close' | 'help' | 'arr
 export default function InvestigationDesignerScene() {
   const [panel, setPanel] = useState<Panel>(null)
   const [showHint, setShowHint] = useState(true)
+  const [puzzleId,setPuzzleId] = useState<NadirRecord|null>(null)
+  const archive = useArchiveSave()
+  const nadirRequired = countRequiredEvidence(archive,'NAD')
+  const nadirReady = rescueIsReady(archive,'NAD')
 
   useEffect(() => {
     const close = (event: KeyboardEvent) => {
@@ -38,7 +46,7 @@ export default function InvestigationDesignerScene() {
   }, [panel])
 
   function openCaseLibrary() {
-    navigateGame('/?folder-lab=1')
+    navigateGame('/?folder-lab=1&return=investigation')
   }
 
   function open(target: Interaction) {
@@ -99,7 +107,7 @@ export default function InvestigationDesignerScene() {
           <div className="idr-briefing-steps">
             <div><span>01</span><strong>REVIEW</strong><small>Open a mission file to understand what happened and what remains unexplained.</small></div>
             <div><span>02</span><strong>INVESTIGATE</strong><small>Inspect records, recordings and signal data in the station's rooms.</small></div>
-            <div><span>03</span><strong>RESCUE</strong><small>When all six required records are correctly filed and the diagnosis is supported, plan engineering changes in a separate simulation.</small></div>
+            <div><span>03</span><strong>RESCUE</strong><small>Once all six required records are correctly filed, unlock the Rescue Mission and defend your engineering repair.</small></div>
           </div>
           <button className="idr-primary" onClick={openCaseLibrary}>OPEN MISSION FILES <SmallIcon type="arrow"/></button>
         </div>}
@@ -109,7 +117,8 @@ export default function InvestigationDesignerScene() {
           <h2>THE EVIDENCE BOARD</h2>
           <p className="idr-lead">Keep the evidence. Follow the question.</p>
           <p>You'll collect records across the station and place them in the five mission folders. An incorrect filing is saved without a warning, and you can move an item later.</p>
-          <div className="idr-interface-message"><span>INTEGRATION STATUS</span><strong>EVIDENCE INTERACTIONS: NEXT GAMEPLAY STAGE</strong><small>The Case Library already stores and displays collected records. Discovery hotspots in the Archive, Signal and Recordings Rooms will connect in a later stage.</small></div>
+          <div className="idr-interface-message"><span>OPEN INVESTIGATION / CASE NADIR</span><strong>NAV-042 CLOSED WITHOUT A DOCUMENTED RERUN</strong><small>Audit the actual ticket. Identify whether the administrative stamp is supported by a reproduced navigation check.</small></div>
+          <button className="idr-primary" onClick={()=>{setPanel(null);setPuzzleId('NAD-06')}}>EXAMINE NAV-042 · NAD-06 <SmallIcon type="arrow"/></button>
           <button className="idr-primary" onClick={openCaseLibrary}>VIEW MISSION FILES <SmallIcon type="arrow"/></button>
         </div>}
 
@@ -118,31 +127,34 @@ export default function InvestigationDesignerScene() {
           <h2>STATION ACCESS</h2>
           <p className="idr-lead">Four rooms. One investigation.</p>
           <div className="idr-door-grid">
-            <div className="idr-door-active"><small>01 / CURRENT ROOM</small><strong>Investigation</strong><span>Mission hub and case files</span></div>
-            <div><small>02 / NEXT STAGE</small><strong>Archive</strong><span>Mission documents and equipment</span></div>
-            <div><small>03 / NEXT STAGE</small><strong>Recordings</strong><span>Audio records and memory fragments</span></div>
-            <div><small>04 / NEXT STAGE</small><strong>Signal</strong><span>Telemetry and technical traces</span></div>
+            <div className="idr-door-active"><small>01 / CURRENT ROOM</small><strong>Investigation</strong><span>Mission hub and NAV-042</span></div>
+            <button className="idr-door-room" onClick={()=>navigateGame(stationRoute('archive'))}><small>02 / ENTER ROOM</small><strong>Archive</strong><span>Interface contracts and records</span></button>
+            <button className="idr-door-room" onClick={()=>navigateGame(stationRoute('recordings'))}><small>03 / ENTER ROOM</small><strong>Recordings</strong><span>Escalations and chronology</span></button>
+            <button className="idr-door-room" onClick={()=>navigateGame(stationRoute('signal'))}><small>04 / ENTER ROOM</small><strong>Signal</strong><span>Telemetry and unit analysis</span></button>
           </div>
-          <p className="idr-integrity-note">The other rooms will be activated one by one after the Investigation Room visuals are approved.</p>
+          <p className="idr-integrity-note">Return here from any station room. Your evidence and analyzer progress persist automatically.</p>
         </div>}
 
         {panel === 'rescue' && <div className="idr-single-view">
           <span className="idr-eyebrow">ENGINEERING / RESCUE CONSOLE</span>
           <h2>THE RESCUE CONSOLE</h2>
           <p className="idr-lead">Understand the mission before changing its future.</p>
-          <p>Each rescue requires six correctly filed required records plus a verified technical diagnosis. Engineering decisions and outcomes will be built in the dedicated Rescue gameplay stage.</p>
-          <div className="idr-interface-message"><span>ACCESS STATUS</span><strong>AWAITING RESCUE ENGINE INTEGRATION</strong><small>The archive and diagnosis preview are available from Mission Files; the final engineering rescue flow is still separate.</small></div>
+          <p>For Nadir, filing all six required records in the correct mission folder unlocks the rescue workbench. The causal review and engineering test are solved inside the Rescue Mission.</p>
+          <div className="idr-interface-message"><span>CASE NAD / ACCESS STATUS</span><strong>{nadirReady?'RESCUE UNLOCKED':'RESCUE LOCKED · '+nadirRequired+'/6 REQUIRED'}</strong><small>Wrongly filed evidence is retained but does not increase the mission progress. Move records freely between folders.</small></div>
+          {nadirReady?<button className="idr-primary" onClick={()=>navigateGame('/?rescue=NAD')}>ENTER NADIR RESCUE <SmallIcon type="arrow"/></button>
+            :<button className="idr-primary" onClick={openCaseLibrary}>REVIEW MISSION FOLDERS <SmallIcon type="arrow"/></button>}
         </div>}
 
         {panel === 'help' && <div className="idr-single-view">
           <span className="idr-eyebrow">PLAYER ASSISTANT / CONTROLS</span>
           <h2>HOW TO EXPLORE</h2>
           <p className="idr-lead">The entire room is in front of you.</p>
-          <p>Move the cursor over an object to reveal its illuminated outline, then click to inspect it. On a touchscreen, tap an object directly. Choose BACK TO ROOM or press Escape to return. The view stays fixed; no walking or camera controls are needed.</p>
+          <p>Hover or tap a real object to open its inspection. The Station Door leads to Archive, Signal and Recordings. Complete analytical work in each room; then press COLLECT EVIDENCE manually. The Quick Evidence Tray follows you between rooms and opens the physical Mission Folders directly. Wrong filing is saved silently. Escape closes the active inspector.</p>
           <button className="idr-primary" onClick={openCaseLibrary}>START WITH MISSION FILES <SmallIcon type="arrow"/></button>
         </div>}
         <footer className="idr-inspection-foot"><span>STATION / INVESTIGATION 01</span><span>FICTIONAL CASES — NO NASA TELEMETRY PRESENTED</span></footer>
       </div>
     </div>}
+    {puzzleId && <NadirPuzzle id={puzzleId} onClose={()=>setPuzzleId(null)}/>}
   </main>
 }
