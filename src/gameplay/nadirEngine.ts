@@ -156,7 +156,7 @@ export function solveNadir(s:NadirProgress,id:NadirRecord,answer:NadirAnswer):{n
  switch(id){
  case 'NAD-06':valid=a.proof==='rerun'&&a.risk==='administrative';break
  case 'NAD-02':valid=a.source==='lbfs'&&a.target==='ns'&&near(a.converted??'');break
- case 'NAD-01':valid=a.hypothesis==='units'&&near(a.rerun??'')&&a.comparison==='same';break
+ case 'NAD-01':valid=a.hypothesis==='units'&&near(a.rerun??'')&&a.comparison==='same'&&a.rawReplay==='completed'&&a.correctedReplay==='completed';break
  case 'NAD-04':valid=a.producer==='lbfs'&&a.consumer==='ns'&&a.failure==='contract';break
  case 'NAD-03':valid=a.canonical==='ns'&&a.owner==='producer'&&a.verification==='rerun';break
  case 'NAD-05':valid=a.first==='export'&&a.second==='residual'&&a.third==='email'&&a.fourth==='closure';break
