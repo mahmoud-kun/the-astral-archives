@@ -1,4 +1,5 @@
 import { useEffect, useState, type FormEvent } from 'react'
+import { createPortal } from 'react-dom'
 import { discoverEvidence } from '../archive/archiveState'
 import { findEvidence } from '../archive/evidenceRecords'
 import { hintNadir, inspectNadir, NADIR_CHALLENGES, solveNadir, type NadirAnswer, type NadirRecord } from './nadirEngine'
@@ -45,6 +46,7 @@ export default function NadirPuzzle({id,onClose}:{id:NadirRecord;onClose:()=>voi
  const [replayMode,setReplayMode]=useState<'unrun'|'raw'|'corrected'>('unrun')
  const [feedback,setFeedback]=useState('')
  const [submitted,setSubmitted]=useState(false)
+ const [mobileStep,setMobileStep]=useState<'inspect'|'analyze'>('inspect')
  const locked=challenge.requires.filter(prerequisite=>!progress.solved.includes(prerequisite))
  const attempts=progress.attempts[id]??0
  const hintCount=progress.hints[id]??0
@@ -90,7 +92,7 @@ export default function NadirPuzzle({id,onClose}:{id:NadirRecord;onClose:()=>voi
  const candidateImpulse=Number(answer.rerun)
  const corrected=id==='NAD-01'&&(solved||(replayMode==='corrected'&&Number.isFinite(candidateImpulse)&&Math.abs(candidateImpulse-referenceImpulse)<=.02))
 
- return <div className="np-backdrop" role="presentation" onMouseDown={e=>{if(e.target===e.currentTarget)onClose()}}>
+ return createPortal(<div className="np-backdrop" role="presentation" onMouseDown={e=>{if(e.target===e.currentTarget)onClose()}}>
   <section className="np-dialog" role="dialog" aria-modal="true" aria-labelledby="np-title">
    <header className="np-head">
     <div><small>THE ASTRAL ARCHIVES / INVESTIGATIVE ANALYZER</small><strong id="np-title">{id} · {record?.title??'Record'}</strong></div>
@@ -100,7 +102,15 @@ export default function NadirPuzzle({id,onClose}:{id:NadirRecord;onClose:()=>voi
     <div className="np-meta"><span>{challenge.discipline}</span><span>FICTIONAL SIMULATION</span></div>
     <h2>BUILD YOUR CASE</h2>
     <p className="np-objective">{challenge.objective}</p>
-    <div className="np-columns">
+    <nav className="np-mobile-steps" aria-label="Investigation workstation steps">
+     <button type="button" aria-current={mobileStep==='inspect'?'step':undefined} className={mobileStep==='inspect'?'current':''} onClick={()=>setMobileStep('inspect')}>
+      <span>01</span> INSPECT INSTRUMENT
+     </button>
+     <button type="button" aria-current={mobileStep==='analyze'?'step':undefined} className={mobileStep==='analyze'?'current':''} onClick={()=>setMobileStep('analyze')}>
+      <span>02</span> RUN ANALYSIS
+     </button>
+    </nav>
+    <div className={'np-columns np-mobile-'+mobileStep}>
      <section className="np-sources">
       <h3>INVESTIGATION INSTRUMENT</h3>
       <EvidenceMachine id={id} answer={answer} onChange={change} disabled={solved||locked.length>0}/>
@@ -183,5 +193,5 @@ export default function NadirPuzzle({id,onClose}:{id:NadirRecord;onClose:()=>voi
     <button className="np-secondary" onClick={onClose}>RETURN TO STATION</button>
    </footer>
   </section>
- </div>
+ </div>, document.body)
 }
