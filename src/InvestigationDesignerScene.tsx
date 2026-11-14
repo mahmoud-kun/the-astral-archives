@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { navigateGame, onGameLinkClick } from './gameNavigation'
+import InvestigationLayeredScene, { type RoomObjectTarget } from './InvestigationLayeredScene'
 import './investigationDesignerScene.css'
 
 type Interaction = 'briefing' | 'evidence' | 'door' | 'rescue' | 'help'
@@ -21,15 +22,6 @@ function SmallIcon({ type, size = 18 }: { type: 'back' | 'close' | 'help' | 'arr
     arrow: <path d="M4 12h16m-6-6 6 6-6 6"/>,
   }
   return <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">{shapes[type]}</svg>
-}
-
-function RoomBackdrop() {
-  return <picture className="idr-scene-image">
-    <source media="(orientation: portrait)" srcSet="/assets/rooms/Investigation_Original_REFERENCE.png" />
-    <img src="/assets/rooms/Investigation_Wide_Artwork.png"
-      alt="Designer artwork of the full station investigation room: mission files on the left, evidence board and desk in the center, station door and archive console on the right."
-      decoding="async" loading="eager"/>
-  </picture>
 }
 
 export default function InvestigationDesignerScene() {
@@ -54,28 +46,17 @@ export default function InvestigationDesignerScene() {
     setPanel(target)
   }
 
+  function openObject(target: RoomObjectTarget) {
+    setShowHint(false)
+    if (target === 'cases') openCaseLibrary()
+    else open(target)
+  }
+
   return <main className="idr-root" aria-label="The Astral Archives — Investigation Room">
     <div className="idr-background" aria-hidden="true"/>
     <div className="idr-dark-edges" aria-hidden="true"/>
     <section className="idr-stage" aria-label="Full investigation room scene">
-      <RoomBackdrop/>
-      <div className="idr-hotspot-layer" aria-label="Interactive objects in the room">
-        <button className="idr-hotspot idr-hotspot-files" aria-label="Open the Case Library and all five mission folders" onClick={openCaseLibrary}>
-          <span className="idr-hotspot-point"/><span className="idr-hotspot-name">MISSION FILES</span>
-        </button>
-        <button className="idr-hotspot idr-hotspot-evidence" aria-label="Inspect Evidence Board" onClick={() => open('evidence')}>
-          <span className="idr-hotspot-point"/><span className="idr-hotspot-name">EVIDENCE BOARD</span>
-        </button>
-        <button className="idr-hotspot idr-hotspot-desk" aria-label="Read Mission Briefing on desk terminal" onClick={() => open('briefing')}>
-          <span className="idr-hotspot-point"/><span className="idr-hotspot-name">MISSION BRIEFING</span>
-        </button>
-        <button className="idr-hotspot idr-hotspot-door" aria-label="Open Station Door directory" onClick={() => open('door')}>
-          <span className="idr-hotspot-point"/><span className="idr-hotspot-name">STATION DOOR</span>
-        </button>
-        <button className="idr-hotspot idr-hotspot-rescue" aria-label="Inspect Rescue Console" onClick={() => open('rescue')}>
-          <span className="idr-hotspot-point"/><span className="idr-hotspot-name">RESCUE CONSOLE</span>
-        </button>
-      </div>
+      <InvestigationLayeredScene onOpen={openObject}/>
     </section>
 
     <header className="idr-head">
@@ -118,7 +99,7 @@ export default function InvestigationDesignerScene() {
           <div className="idr-briefing-steps">
             <div><span>01</span><strong>REVIEW</strong><small>Open a mission file to understand what happened and what remains unexplained.</small></div>
             <div><span>02</span><strong>INVESTIGATE</strong><small>Inspect records, recordings and signal data in the station's rooms.</small></div>
-            <div><span>03</span><strong>RESCUE</strong><small>Once the required evidence is filed, choose engineering changes in a separate simulation.</small></div>
+            <div><span>03</span><strong>RESCUE</strong><small>When all six required records are correctly filed and the diagnosis is supported, plan engineering changes in a separate simulation.</small></div>
           </div>
           <button className="idr-primary" onClick={openCaseLibrary}>OPEN MISSION FILES <SmallIcon type="arrow"/></button>
         </div>}
@@ -128,7 +109,7 @@ export default function InvestigationDesignerScene() {
           <h2>THE EVIDENCE BOARD</h2>
           <p className="idr-lead">Keep the evidence. Follow the question.</p>
           <p>You'll collect records across the station and place them in the five mission folders. An incorrect filing is saved without a warning, and you can move an item later.</p>
-          <div className="idr-interface-message"><span>INTEGRATION STATUS</span><strong>EVIDENCE INTERACTIONS: NEXT GAMEPLAY STAGE</strong><small>The 40 authored case records are available in the content bible; none are displayed as collected or verified here yet.</small></div>
+          <div className="idr-interface-message"><span>INTEGRATION STATUS</span><strong>EVIDENCE INTERACTIONS: NEXT GAMEPLAY STAGE</strong><small>The Case Library already stores and displays collected records. Discovery hotspots in the Archive, Signal and Recordings Rooms will connect in a later stage.</small></div>
           <button className="idr-primary" onClick={openCaseLibrary}>VIEW MISSION FILES <SmallIcon type="arrow"/></button>
         </div>}
 
@@ -149,8 +130,8 @@ export default function InvestigationDesignerScene() {
           <span className="idr-eyebrow">ENGINEERING / RESCUE CONSOLE</span>
           <h2>THE RESCUE CONSOLE</h2>
           <p className="idr-lead">Understand the mission before changing its future.</p>
-          <p>Each mission's rescue will become available after its required evidence has been collected and correctly filed. Engineering decisions and outcomes will be built in the dedicated Rescue gameplay stage.</p>
-          <div className="idr-interface-message"><span>ACCESS STATUS</span><strong>AWAITING CASE EVIDENCE INTEGRATION</strong><small>This stage focuses only on the Investigation Room environment and controls.</small></div>
+          <p>Each rescue requires six correctly filed required records plus a verified technical diagnosis. Engineering decisions and outcomes will be built in the dedicated Rescue gameplay stage.</p>
+          <div className="idr-interface-message"><span>ACCESS STATUS</span><strong>AWAITING RESCUE ENGINE INTEGRATION</strong><small>The archive and diagnosis preview are available from Mission Files; the final engineering rescue flow is still separate.</small></div>
         </div>}
 
         {panel === 'help' && <div className="idr-single-view">
