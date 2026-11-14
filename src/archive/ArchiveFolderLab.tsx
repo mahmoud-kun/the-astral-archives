@@ -33,7 +33,7 @@ function DossierSheet({ record, index, onClick }: { record: ArchiveEvidence; ind
 }
 function DocumentViewer({ record, archive, onDiscover, onFile, onClose }: {record: ArchiveEvidence; archive: ArchiveState; onDiscover:(id:string)=>void; onFile:(id:string, folder:ArchiveCaseId|null)=>void; onClose:()=>void }) {
   const found = archive.discovered.includes(record.id)
-  const [destination,setDestination] = useState(archive.filed[record.id]??'')
+  const [destination,setDestination] = useState<string>(archive.filed[record.id]??'')
   useEffect(() => {
     const onKey = (event:KeyboardEvent) => { if (event.key==='Escape') onClose() }
     document.addEventListener('keydown',onKey)
