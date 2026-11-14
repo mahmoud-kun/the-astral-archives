@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react'
 import { navigateGame } from '../gameNavigation'
 import NadirPuzzle from './NadirPuzzle'
+import EvidenceGlyph from './EvidenceGlyph'
+import { findEvidence } from '../archive/evidenceRecords'
 import { useArchiveSave, useNadirSave } from './gameSave'
 import { NADIR_ROOM, stationLabel, stationRoute, type NadirRecord, type StationId } from './nadirEngine'
 import './stationRoom.css'
@@ -55,6 +57,7 @@ export default function StationRoom({station}:{station:OtherStation}){
       left:spot.rect[0]+'%',top:spot.rect[1]+'%',width:spot.rect[2]+'%',height:spot.rect[3]+'%',
      }} title={spot.hint} aria-label={spot.name+(collected?', evidence collected':solved?', analyzed':'')}
       onClick={()=>setSelected(spot.id)}>
+      <span className="sr-beacon"><EvidenceGlyph kind={findEvidence(spot.id)?.kind??'document'}/></span>
       <span className="sr-hotspot-label">{spot.name}{collected?' · COLLECTED':solved?' · READY TO COLLECT':''}</span>
      </button>
    })}
