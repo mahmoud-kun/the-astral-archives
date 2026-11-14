@@ -4,6 +4,7 @@ import {
   type CaseFile, type Outcome, type Part, type Phase, type Plan, type Slot
 } from './rescueEngine'
 import './rescueWorkbench.css'
+import { onGameLinkClick } from './gameNavigation'
 
 type RunState = { phase: Phase; plan: Plan; outcome?: Outcome }
 type SavedRuns = Record<string, RunState>
@@ -207,9 +208,9 @@ export default function RescueWorkbench() {
   return <div className="rb-page" style={accentStyle}>
     <div className="rb-background" aria-hidden="true"/>
     <header className="rb-topbar">
-      <a className="rb-brand" href="/" aria-label="Return to The Astral Archives station"><span className="rb-brand-mark">✦</span><span><strong>THE ASTRAL ARCHIVES</strong><small>RESCUE ENGINEERING LAB</small></span></a>
+      <a className="rb-brand" href="/" onClick={event => onGameLinkClick(event, '/')} aria-label="Return to The Astral Archives station"><span className="rb-brand-mark">✦</span><span><strong>THE ASTRAL ARCHIVES</strong><small>RESCUE ENGINEERING LAB</small></span></a>
       <span className="rb-demo-status"><span className="rb-pulse"/> FICTIONAL SYSTEMS DEMONSTRATION</span>
-      <a className="rb-return" href="/?room=1">← Return to station</a>
+      <a className="rb-return" href="/?room=1" onClick={event => onGameLinkClick(event, '/?room=1')}>← Return to station</a>
     </header>
 
     <main className="rb-container">
