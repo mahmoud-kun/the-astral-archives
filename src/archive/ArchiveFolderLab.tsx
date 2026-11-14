@@ -128,6 +128,7 @@ export default function ArchiveFolderLab() {
           <div className="af-intake-items">
             {unseen.map(record=><button key={record.id} onClick={()=>setInspectedId(record.id)}><small>{record.id} / {record.room}</small><strong>{record.title}</strong><span>INSPECT TO COLLECT</span></button>)}
             {unfiled.map(record=><button key={record.id} onClick={()=>setInspectedId(record.id)}><small>{record.id} / COLLECTED</small><strong>{record.title}</strong><span>FILE INTO A MISSION</span></button>)}
+            {filed.map(record=><button key={'filed-'+record.id} onClick={()=>setInspectedId(record.id)}><small>{record.id} / FILED IN {caseId}</small><strong>{record.title}</strong><span>INSPECT / MOVE SHEET</span></button>)}
           </div>
         </section>}
       </section>
