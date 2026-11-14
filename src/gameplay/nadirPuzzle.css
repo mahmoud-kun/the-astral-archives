@@ -79,3 +79,27 @@
  .np-timeline-event>b,.np-timeline-event>span{font-size:10px}
  .np-timeline-event>button{min-height:29px;min-width:29px;font-size:15px}
 }
+
+/* Responsive visual-first evidence drawer; long forensic records are opened on demand. */
+.np-source-drawer{margin:9px 0;border:1px solid #477282;background:#092433;min-width:0}
+.np-source-drawer>summary{display:flex;align-items:center;justify-content:space-between;gap:8px;cursor:pointer;list-style:none;min-height:42px;padding:9px 11px;background:#13384a;color:#e5c39c;font:700 10px 'IBM Plex Mono',monospace;letter-spacing:.045em}
+.np-source-drawer>summary::-webkit-details-marker{display:none}
+.np-source-drawer>summary::after{content:'+';font-size:20px;line-height:1;color:#84d8e1}
+.np-source-drawer[open]>summary::after{content:'−'}
+.np-source-drawer>summary small{color:#96bcc7;font:700 8px 'IBM Plex Mono',monospace;margin-left:auto}
+.np-source-drawer>summary:focus-visible{outline:2px solid #7eebf1;outline-offset:2px}
+.np-source-drawer-body{padding:10px 10px 1px}
+.np-source-drawer.np-method{margin-top:12px}
+.np-method .np-educational{margin:0}
+.np-dialog,.np-scroll,.np-columns,.np-sources,.np-workbench{min-width:0;max-width:100%}
+.np-foot{padding-bottom:max(9px,env(safe-area-inset-bottom));padding-right:max(13px,env(safe-area-inset-right));padding-left:max(13px,env(safe-area-inset-left))}
+.np-head{padding-right:max(12px,env(safe-area-inset-right));padding-left:max(12px,env(safe-area-inset-left))}
+.np-head>div{min-width:0}.np-head strong{overflow-wrap:anywhere}
+.np-foot>button{flex-shrink:0}
+@media(orientation:landscape) and (max-height:600px){
+ .np-source-drawer>summary{min-height:32px;padding:5px 7px;font-size:8px}
+ .np-source-drawer>summary small{font-size:7px}
+ .np-source-drawer-body{padding:6px}
+ .np-head strong{font-size:clamp(11px,1.6vw,15px)}
+ .np-foot{padding:5px max(7px,env(safe-area-inset-right)) max(5px,env(safe-area-inset-bottom)) max(7px,env(safe-area-inset-left))}
+}
