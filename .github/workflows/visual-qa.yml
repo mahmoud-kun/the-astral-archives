@@ -57,7 +57,7 @@ jobs:
           if [ -f docs/visual-qa/latest-report.json ]; then
             git config user.name "github-actions[bot]"
             git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-            git add docs/visual-qa/
+            git add docs/visual-qa/ public/assets/rooms/investigation/layers/wide/background/investigation_room_bg_clean.webp
             git commit -m "test(visual): update compact screenshot QA evidence [skip ci]" || exit 0
             git pull --rebase origin "${GITHUB_REF_NAME}"
             git push origin "HEAD:${GITHUB_REF_NAME}"
