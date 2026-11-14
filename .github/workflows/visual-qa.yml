@@ -14,6 +14,10 @@ on:
       - ".github/workflows/visual-qa.yml"
   workflow_dispatch:
 
+concurrency:
+  group: astral-visual-qa-${{ github.ref }}
+  cancel-in-progress: true
+
 permissions:
   contents: write
 
@@ -51,14 +55,30 @@ jobs:
             python3 -m pip install --break-system-packages --quiet Pillow
             python3 tools/visual-contact-sheet.py
           fi
-      - name: Preserve contact sheets on approved branch
+      - name: Preserve contact sheets and optimized artwork on approved branch
         if: always()
         run: |
           if [ -f docs/visual-qa/latest-report.json ]; then
             git config user.name "github-actions[bot]"
             git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-            git add docs/visual-qa/ public/assets/rooms/investigation/layers/wide/background/investigation_room_bg_clean.webp
-            git commit -m "test(visual): update compact screenshot QA evidence [skip ci]" || exit 0
-            git pull --rebase origin "${GITHUB_REF_NAME}"
-            git push origin "HEAD:${GITHUB_REF_NAME}"
+            mkdir -p /tmp/astral-review
+            cp -r docs/visual-qa /tmp/astral-review/
+            cp public/assets/rooms/investigation/layers/wide/background/investigation_room_bg_clean.webp /tmp/astral-review/clean.webp
+            success=0
+            for retry in 1 2 3 4; do
+              git fetch origin "${GITHUB_REF_NAME}"
+              git reset --hard "origin/${GITHUB_REF_NAME}"
+              mkdir -p docs/visual-qa
+              cp -r /tmp/astral-review/visual-qa/* docs/visual-qa/
+              cp /tmp/astral-review/clean.webp public/assets/rooms/investigation/layers/wide/background/investigation_room_bg_clean.webp
+              git add docs/visual-qa/ public/assets/rooms/investigation/layers/wide/background/investigation_room_bg_clean.webp
+              if git diff --cached --quiet; then success=1; break; fi
+              git commit -m "test(visual): update compact screenshot QA evidence [skip ci]"
+              if git push origin "HEAD:${GITHUB_REF_NAME}"; then success=1; break; fi
+              sleep 2
+            done
+            if [ "$success" != "1" ]; then
+              echo "Unable to publish visual QA after four safe retries" >&2
+              exit 1
+            fi
           fi
