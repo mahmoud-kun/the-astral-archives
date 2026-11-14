@@ -10,7 +10,8 @@
     "typecheck": "tsc -b",
     "test:rescue": "node --test src/rescueEngine.test.mjs",
     "test:fixedroom": "node --test src/fixedRoomEvidence.test.mjs",
-    "test:studio": "npm run test:fixedroom && npm run test:rescue"
+    "test:studio": "npm run test:investigation && npm run test:fixedroom && npm run test:rescue",
+    "test:investigation": "node --test src/investigationCases.test.mjs"
   },
   "dependencies": {
     "react": "^19.2.0",
