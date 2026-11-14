@@ -45,7 +45,7 @@ The user explicitly requested that the **entire game be horizontal on phones, ma
 - Fullscreen is requested on `document.documentElement`, so internal route changes no longer unmount the fullscreen element. Native fullscreen may still be denied or exited by the browser, OS, or switching apps; automated rotation is best effort.
 - `src/gameNavigation.test.mjs` and `npm run test:navigation` cover no-document-reload navigation, back link behavior, and modified clicks.
 - Latest Vercel preview: `https://astral-archives-5k69wkttv-mahmooud-kun.vercel.app` — build completed (TypeScript + Vite) and deployment status READY.
-- Navigation unit tests are configured but have **not** been executed in this session. On-device fullscreen preservation in Brave still needs user confirmation.
+- Navigation unit tests: **3/3 PASS** using Node 22 with `--experimental-strip-types` against local copies whose lengths and FNV-1a checksums exactly matched the two GitHub source files (`gameNavigation.ts` and `gameNavigation.test.mjs`). This tests route logic, not actual mobile fullscreen behavior. The regression command is `npm run test:navigation`; full `test:studio` was not run. On-device fullscreen preservation in Brave still needs confirmation.
 
 ## Current visual direction
 
