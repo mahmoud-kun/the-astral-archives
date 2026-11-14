@@ -86,7 +86,6 @@ export default function HomeScreen() {
   return <main className={'aa-home' + (reduceMotion ? ' aa-home-still' : '')}>
     <div className="aa-home-art" aria-hidden="true">
       <picture>
-        {!fallbackArt && <source media="(orientation: portrait)" srcSet="/assets/menu-approved-portrait.png"/>}
         <img src={fallbackArt ? '/assets/optimized/menu-archive.webp' : '/assets/menu-approved-landscape.png'} alt="" loading="eager" fetchPriority="high" decoding="async" onError={() => setFallbackArt(true)}/>
       </picture>
     </div>
