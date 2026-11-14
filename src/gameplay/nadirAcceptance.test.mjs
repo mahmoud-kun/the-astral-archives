@@ -8,7 +8,7 @@ import { NADIR_CHALLENGES, NADIR_ROOM, REQUIRED_NADIR, emptyNadir, solveNadir,
 const correct={
   'NAD-06': {proof:'rerun',risk:'administrative'},
   'NAD-02': {source:'lbfs',target:'ns',converted:'53.37865938'},
-  'NAD-01': {hypothesis:'units',rerun:'53.37865938',comparison:'same'},
+  'NAD-01': {hypothesis:'units',rerun:'53.37865938',comparison:'same',rawReplay:'completed',correctedReplay:'completed'},
   'NAD-04': {producer:'lbfs',consumer:'ns',failure:'contract'},
   'NAD-03': {canonical:'ns',owner:'producer',verification:'rerun'},
   'NAD-05': {first:'export',second:'residual',third:'email',fourth:'closure'},
