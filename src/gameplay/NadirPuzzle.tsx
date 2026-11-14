@@ -21,6 +21,14 @@ function TrajectorySketch({ corrected }: {corrected:boolean}) {
  </div>
 }
 
+const TIMELINE_EVENTS = [
+ {id:'export',label:'Impulse packet exported'},
+ {id:'residual',label:'Navigation residual observed'},
+ {id:'email',label:'Engineer requests a cross-check'},
+ {id:'closure',label:'NAV-042 ticket marked closed'},
+] as const
+const INITIAL_TIMELINE = ['closure','email','export','residual']
+
 export default function NadirPuzzle({id,onClose}:{id:NadirRecord;onClose:()=>void}){
  const challenge=NADIR_CHALLENGES[id]
  useEffect(()=>{updateNadir(current=>inspectNadir(current,id))},[id])
@@ -29,7 +37,10 @@ export default function NadirPuzzle({id,onClose}:{id:NadirRecord;onClose:()=>voi
  const progress=useNadirSave()
  const solved=progress.solved.includes(id)
  const collected=archive.discovered.includes(id)
- const [answer,setAnswer]=useState<NadirAnswer>({})
+ const [answer,setAnswer]=useState<NadirAnswer>(()=>id==='NAD-05'
+  ? {first:INITIAL_TIMELINE[0],second:INITIAL_TIMELINE[1],third:INITIAL_TIMELINE[2],fourth:INITIAL_TIMELINE[3]} : {})
+ const [timeline,setTimeline]=useState<string[]>([...INITIAL_TIMELINE])
+ const [replayMode,setReplayMode]=useState<'unrun'|'raw'|'corrected'>('unrun')
  const [feedback,setFeedback]=useState('')
  const [submitted,setSubmitted]=useState(false)
  const locked=challenge.requires.filter(prerequisite=>!progress.solved.includes(prerequisite))
@@ -51,11 +62,31 @@ export default function NadirPuzzle({id,onClose}:{id:NadirRecord;onClose:()=>voi
   setFeedback('Evidence stored in UNFILED. Decide which mission dossier it belongs to.')
  }
  function change(key:string,value:string){
-  setAnswer(old=>({...old,[key]:value}))
+  setAnswer(old=>key==='rerun'?{...old,[key]:value,correctedReplay:''}:{...old,[key]:value})
+  if(key==='rerun')setReplayMode(v=>v==='corrected'?'raw':v)
   setSubmitted(false)
   setFeedback('')
  }
- const corrected=id==='NAD-01'&&solved
+ function replayTrajectory(mode:'raw'|'corrected'){
+  if(id!=='NAD-01'||solved||locked.length>0)return
+  if(mode==='corrected'&&answer.rawReplay!=='completed')return
+  if(mode==='corrected'&&(!answer.rerun?.trim()||!Number.isFinite(Number(answer.rerun))))return
+  setReplayMode(mode)
+  setAnswer(old=>({...old,[mode==='raw'?'rawReplay':'correctedReplay']:'completed'}))
+  setSubmitted(false)
+  setFeedback('')
+ }
+ function moveTimeline(index:number,delta:number){
+  const target=index+delta
+  if(target<0||target>=timeline.length||solved||locked.length>0)return
+  const order=[...timeline];[order[index],order[target]]=[order[target],order[index]]
+  setTimeline(order)
+  setAnswer(old=>({...old,first:order[0],second:order[1],third:order[2],fourth:order[3]}))
+  setSubmitted(false);setFeedback('')
+ }
+ const referenceImpulse=53.37865938
+ const candidateImpulse=Number(answer.rerun)
+ const corrected=id==='NAD-01'&&(solved||(replayMode==='corrected'&&Number.isFinite(candidateImpulse)&&Math.abs(candidateImpulse-referenceImpulse)<=.02))
 
  return <div className="np-backdrop" role="presentation" onMouseDown={e=>{if(e.target===e.currentTarget)onClose()}}>
   <section className="np-dialog" role="dialog" aria-modal="true" aria-labelledby="np-title">
@@ -72,6 +103,21 @@ export default function NadirPuzzle({id,onClose}:{id:NadirRecord;onClose:()=>voi
       <h3>RAW RECORDS · READ FIRST</h3>
       {challenge.fragments.map((line,i)=><div className="np-fragment" key={line}><b>FILE {String(i+1).padStart(2,'0')}</b><p>{line}</p></div>)}
       {(id==='NAD-01'||id==='NAD-02')&&<TrajectorySketch corrected={corrected}/>}
+      {id==='NAD-01'&&<div className="np-replay" aria-label="Interactive trajectory comparison console">
+       <strong>REPLAY CONSOLE · TWO RUNS REQUIRED</strong>
+       <div>
+        <button type="button" onClick={()=>replayTrajectory('raw')} disabled={solved||locked.length>0}>RUN BASELINE MODEL</button>
+        <button type="button" onClick={()=>replayTrajectory('corrected')}
+         disabled={solved||locked.length>0||answer.rawReplay!=='completed'||!answer.rerun?.trim()}>
+         RUN MODEL WITH MY IMPULSE
+        </button>
+       </div>
+       <small role="status">{solved?'REPLAY VERIFIED':replayMode==='unrun'
+        ?'Start with the baseline, calculate a corrected impulse in the workbench, then rerun.'
+        :replayMode==='raw'?'BASELINE RECORDED · Enter a physically equivalent impulse and rerun.'
+        :corrected?'REPLAY RECORDED · The simulated tracks now converge.'
+        :'REPLAY RECORDED · Tracks still diverge. Recheck your converted input and repeat.'}</small>
+      </div>}
       <div className="np-educational"><b>ANALYTICAL NOTE</b><p>Evidence may contain a legitimate observation and an unsupported interpretation. Verify the chain; don't simply choose the most convincing phrase.</p></div>
      </section>
      <section className="np-workbench">
@@ -81,14 +127,26 @@ export default function NadirPuzzle({id,onClose}:{id:NadirRecord;onClose:()=>voi
        <p>Complete the correlated investigation: {locked.join(', ')}. The record can be inspected now, but it cannot be validated until you have the supporting analysis.</p>
       </div>:null}
       <form onSubmit={submit}>
-       {challenge.fields.map(field=><label className="np-field" key={field.key}><span>{field.label}</span>
+       {id==='NAD-05'?<div className="np-timeline" aria-label="Reconstruct the historical order using move buttons">
+         <p>MOVE THE EVENTS INTO CAUSAL ORDER. The order you build is submitted as your evidence timeline.</p>
+         {timeline.map((eventId,index)=>{
+          const event=TIMELINE_EVENTS.find(item=>item.id===eventId)
+          return <div className="np-timeline-event" key={eventId}>
+           <b>{String(index+1).padStart(2,'0')}</b>
+           <span>{event?.label}</span>
+           <button type="button" onClick={()=>moveTimeline(index,-1)} disabled={index===0||solved||locked.length>0} aria-label={'Move '+event?.label+' earlier'}>↑</button>
+           <button type="button" onClick={()=>moveTimeline(index,1)} disabled={index===timeline.length-1||solved||locked.length>0} aria-label={'Move '+event?.label+' later'}>↓</button>
+          </div>
+         })}
+        </div>:challenge.fields.map(field=><label className="np-field" key={field.key}><span>{field.label}</span>
          {field.type==='number'
            ?<input type="number" inputMode="decimal" step="any" value={answer[field.key]??''} placeholder={field.placeholder??''} onChange={e=>change(field.key,e.target.value)} disabled={solved||locked.length>0}/>
            :<select value={answer[field.key]??''} onChange={e=>change(field.key,e.target.value)} disabled={solved||locked.length>0}>
             {field.choices?.map(opt=><option key={opt.value} value={opt.value}>{opt.label}</option>)}
            </select>}
        </label>)}
-       {!solved&&<button className="np-primary" type="submit" disabled={locked.length>0||challenge.fields.some(field=>!answer[field.key]?.trim())}>VERIFY ANALYSIS</button>}
+       {!solved&&<button className="np-primary" type="submit" disabled={locked.length>0||challenge.fields.some(field=>!answer[field.key]?.trim())||
+        (id==='NAD-01'&&(!answer.rawReplay||!answer.correctedReplay))}>VERIFY ANALYSIS</button>}
       </form>
       {submitted&&!solved&&feedback&&<p className="np-error" role="status">{feedback} · Attempt {attempts}</p>}
       {solved&&<div className="np-success" role="status"><strong>ANALYSIS VERIFIED</strong><p>You've reconstructed the evidence chain. Collection is a separate, deliberate step.</p></div>}
