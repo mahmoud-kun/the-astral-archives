@@ -97,3 +97,66 @@
 @media(max-width:560px){.af-header{height:auto;min-height:70px;padding:12px;align-items:flex-start}.af-brand>span{font-size:15px}.af-brand strong{font-size:8px}.af-header-end{display:grid;justify-items:end;gap:6px}.af-header-end>span{font-size:7px;text-align:right}.af-header-end a{padding:9px;font-size:8px}.af-workhead{padding:14px;min-height:100px}.af-workhead h1{font-size:25px}.af-workhead p{font-size:10px}.af-workhead button{font-size:9px;padding:9px}.af-desk{min-height:310px;padding:10px 4px}.af-inner-cover h2{font-size:17px}.af-inner-cover>small{font-size:5px}.af-inner-cover>em{font-size:7px}.af-cover-stamp{padding:5px;gap:2px;margin-top:3%}.af-cover-stamp strong{font-size:10px}.af-cover-stamp span{font-size:5px}.af-cover-note{padding:4px}.af-cover-note strong{font-size:5px}.af-cover-note p{font-size:6px}.af-dossier-sheet{padding:8% 7%;gap:2px}.af-dossier-sheet>strong{font-size:8px}.af-sheet-id{font-size:5px}.af-sheet-footer{font-size:4px}.af-dossier-sheet>em{font-size:5px;border-width:1px;padding:1px}.af-empty strong{font-size:8px}.af-empty span{font-size:7px}.af-bottom{padding:13px;gap:7px}.af-bottom strong{font-size:9px}.af-bottom small{font-size:8px}.af-bottom button{font-size:8px;padding:9px}.af-status{grid-template-columns:1fr}.af-document-scroll{padding:8px}.af-document-paper{padding:36px 26px;min-height:650px}.af-document-letterhead{font-size:7px}.af-document-copy{font-size:13px}.af-modal-footer{flex-direction:column;align-items:stretch}.af-file-select select{width:100%}.af-diagnosis-body{padding:15px}.af-diagnosis-part{padding:12px}}
 @media(min-width:901px) and (max-height:820px){.af-workhead{min-height:88px;padding-top:12px;padding-bottom:12px}.af-bottom{min-height:68px;padding-top:10px;padding-bottom:10px}.af-open-dossier{width:min(100%,1000px,88dvh)}.af-large-closed{height:min(58dvh,450px)}}
 @media(prefers-reduced-motion:reduce){.af-app *, .af-app *::before, .af-app *::after{animation-duration:.01ms!important;transition-duration:.01ms!important;scroll-behavior:auto!important}}
+
+
+/* Preserve the desktop three-column physical archive on phones held sideways.
+   Each side cabinet scrolls independently; the desk remains within the viewport. */
+@media screen and (orientation:landscape) and (max-width:1000px) and (max-height:600px){
+  .af-app{height:100dvh;min-height:0;overflow:hidden}
+  .af-header{height:42px;min-height:42px;padding:4px max(9px,env(safe-area-inset-right)) 4px max(9px,env(safe-area-inset-left))}
+  .af-brand{gap:1px}
+  .af-brand>span{font-size:14px;letter-spacing:.06em}
+  .af-brand strong{font-size:7px;letter-spacing:.05em}
+  .af-header-end{gap:7px;font-size:8px}
+  .af-header-end>span{display:none}
+  .af-header-end a{padding:7px 9px}
+  .af-grid{display:grid;grid-template-columns:minmax(112px,17%) minmax(0,1fr) minmax(154px,24%);
+    min-height:0;height:calc(100dvh - 42px);max-width:100%;overflow:hidden}
+  .af-sidebar,.af-status{min-height:0;overflow-y:auto;scrollbar-width:thin;padding:9px 7px}
+  .af-sidebar{border-right:1px solid #2a4652;border-bottom:0}
+  .af-status{display:block;border-left:1px solid #2a4652;border-top:0}
+  .af-sidebar h2,.af-status h2{font-size:9px;letter-spacing:.03em;gap:3px;margin:0 0 9px}
+  .af-sidebar h2 small,.af-status h2 small{font-size:8px}
+  .af-closed-list{display:grid;gap:2px;overflow:visible}
+  .af-folder-choice{min-width:0;width:100%;height:52px;padding:2px;gap:2px}
+  .af-folder-choice img{width:40px;height:47px}
+  .af-choice-label{gap:2px}
+  .af-choice-label small{font-size:7px}
+  .af-choice-label strong{font-size:10px}
+  .af-choice-label em{font-size:8px}
+  .af-main{height:100%;min-height:0;overflow-y:auto;scrollbar-width:thin}
+  .af-workhead{min-height:54px;padding:7px 10px;gap:6px}
+  .af-workhead>div>span{font-size:8px;letter-spacing:.04em}
+  .af-workhead h1{font-size:20px;line-height:1.1;margin:2px 0}
+  .af-workhead p{font-size:9px}
+  .af-workhead button{font-size:8px;padding:6px;white-space:nowrap}
+  .af-desk{min-height:185px;padding:5px 4px;overflow:hidden}
+  .af-open-dossier{width:min(100%,1000px,85dvh)}
+  .af-large-closed{height:min(50dvh,190px)}
+  .af-bottom{min-height:43px;padding:6px;gap:6px}
+  .af-bottom>div{gap:3px}
+  .af-bottom small{font-size:7px;letter-spacing:.02em}
+  .af-bottom strong{font-size:9px}
+  .af-bottom button{padding:7px 5px;font-size:7px;white-space:normal;text-align:center}
+  .af-status-section{padding:9px 0;border-left:0;border-right:0;border-bottom:0}
+  .af-status-section>span{font-size:8px;margin-bottom:5px}
+  .af-status-section>strong{font-size:13px}
+  .af-status-section>p{font-size:10px;line-height:1.4;margin:5px 0 7px}
+  .af-count{margin:3px 0}
+  .af-count strong{font-size:25px}
+  .af-count em{font-size:11px}
+  .af-side-action{padding:8px;font-size:8px}
+  .af-status-source{font-size:7px;padding-top:9px}
+  .af-reset{font-size:8px}
+  .af-intake{padding:9px}
+  .af-intake-items{max-height:130px;grid-template-columns:repeat(auto-fit,minmax(115px,1fr))}
+  .af-dialog-shade{padding:5px}
+  .af-document-modal,.af-diagnosis{height:calc(100dvh - 10px);max-height:none;width:min(900px,100%)}
+  .af-modal-bar{height:36px;min-height:36px;padding:5px 10px}
+  .af-document-scroll{padding:7px}
+  .af-document-paper{padding:34px 35px;min-height:660px}
+  .af-modal-footer{padding:6px 9px;flex-direction:row;align-items:center}
+  .af-diagnosis-body{padding:12px;gap:9px}
+  .af-diagnosis-body h2{font-size:23px}
+  .af-diagnosis-part{padding:10px;gap:9px}
+}
