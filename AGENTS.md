@@ -1,5 +1,7 @@
 # The Astral Archives — Agent Instructions
 
+> **MOBILE LANDSCAPE OVERRIDE — 2026-11-14 (latest user direction):** The phone gameplay presentation is **landscape**, matching the laptop's scene-left/menu-right visual composition. In portrait phone viewports, show the rotate-device gate with user-initiated fullscreen/orientation-lock attempt and manual fallback, not a squashed portrait copy of the home menu. Apply to Home Screen, Investigation Room, and Living Evidence Folder. Keep the working branch unchanged. See `EXPERIMENT.md` for complete details.
+
 > **ACTIVE WORKING BRANCH OVERRIDE — 2026-11-14:** The user selected `experiment/room-case-library-layout-fix-2026-11-14` as the ongoing working branch. For this branch, continue all approved follow-up work on this exact branch; **do not create new branches** unless the user explicitly asks. Do not merge to `main`. The current Home Screen and Investigation Room interaction contract is recorded in `EXPERIMENT.md` and the dated addenda in `docs/studio-pilot/HOME_SCREEN_MILESTONE.md`, `FIXED_ROOM_MILESTONE.md`, and `INVESTIGATION_DESIGNER_ROOM_V2.md`; those latest explicit user requests supersede conflicting older preview notes for these screens only. Preserve all unrelated work and read the active branch checkpoint before future edits.
 
 
