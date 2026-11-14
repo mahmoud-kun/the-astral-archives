@@ -3,6 +3,7 @@ import { discoverEvidence } from '../archive/archiveState'
 import { findEvidence } from '../archive/evidenceRecords'
 import { hintNadir, inspectNadir, NADIR_CHALLENGES, solveNadir, type NadirAnswer, type NadirRecord } from './nadirEngine'
 import { updateArchive, updateNadir, useArchiveSave, useNadirSave } from './gameSave'
+import EvidenceMachine from './EvidenceMachine'
 import './nadirPuzzle.css'
 
 function TrajectorySketch({ corrected }: {corrected:boolean}) {
@@ -101,9 +102,15 @@ export default function NadirPuzzle({id,onClose}:{id:NadirRecord;onClose:()=>voi
     <p className="np-objective">{challenge.objective}</p>
     <div className="np-columns">
      <section className="np-sources">
-      <h3>RAW RECORDS · READ FIRST</h3>
-      {challenge.fragments.map((line,i)=><div className="np-fragment" key={line}><b>FILE {String(i+1).padStart(2,'0')}</b><p>{line}</p></div>)}
-      {(id==='NAD-01'||id==='NAD-02')&&<TrajectorySketch corrected={corrected}/>}
+      <h3>INVESTIGATION INSTRUMENT</h3>
+      <EvidenceMachine id={id} answer={answer} onChange={change} disabled={solved||locked.length>0}/>
+      <details className="np-source-drawer">
+       <summary><span>OPEN PRIMARY RECORDS</span><small>{challenge.fragments.length} SOURCE FRAGMENTS</small></summary>
+       <div className="np-source-drawer-body">
+        {challenge.fragments.map((line,i)=><div className="np-fragment" key={line}><b>FILE {String(i+1).padStart(2,'0')}</b><p>{line}</p></div>)}
+       </div>
+      </details>
+      {id==='NAD-01'&&<TrajectorySketch corrected={corrected}/>}
       {id==='NAD-01'&&<div className="np-replay" aria-label="Interactive trajectory comparison console">
        <strong>REPLAY CONSOLE · TWO RUNS REQUIRED</strong>
        <div>
@@ -119,7 +126,10 @@ export default function NadirPuzzle({id,onClose}:{id:NadirRecord;onClose:()=>voi
         :corrected?'REPLAY RECORDED · The simulated tracks now converge.'
         :'REPLAY RECORDED · Tracks still diverge. Recheck your converted input and repeat.'}</small>
       </div>}
-      <div className="np-educational"><b>ANALYTICAL NOTE</b><p>Evidence may contain a legitimate observation and an unsupported interpretation. Verify the chain; don't simply choose the most convincing phrase.</p></div>
+      <details className="np-source-drawer np-method">
+       <summary><span>INVESTIGATION METHOD</span><small>OPTIONAL REFERENCE</small></summary>
+       <div className="np-educational"><b>SCIENCE NOTE</b><p>Evidence may contain a legitimate observation and an unsupported interpretation. Verify the chain and reproduce the measurement before choosing a conclusion.</p></div>
+      </details>
      </section>
      <section className="np-workbench">
       <h3>WORKBENCH · ENTER YOUR RECONSTRUCTION</h3>
@@ -139,13 +149,17 @@ export default function NadirPuzzle({id,onClose}:{id:NadirRecord;onClose:()=>voi
            <button type="button" onClick={()=>moveTimeline(index,1)} disabled={index===timeline.length-1||solved||locked.length>0} aria-label={'Move '+event?.label+' later'}>↓</button>
           </div>
          })}
-        </div>:challenge.fields.map(field=><label className="np-field" key={field.key}><span>{field.label}</span>
+        </div>:challenge.fields.map(field=>{
+         const instrumentControlled=(id==='NAD-04'&&(field.key==='producer'||field.key==='consumer'))||
+           (id==='NAD-03'&&(field.key==='owner'||field.key==='canonical'))
+         if(instrumentControlled)return null
+         return <label className="np-field" key={field.key}><span>{field.label}</span>
          {field.type==='number'
            ?<input type="number" inputMode="decimal" step="any" value={answer[field.key]??''} placeholder={field.placeholder??''} onChange={e=>change(field.key,e.target.value)} disabled={solved||locked.length>0}/>
            :<select value={answer[field.key]??''} onChange={e=>change(field.key,e.target.value)} disabled={solved||locked.length>0}>
             {field.choices?.map(opt=><option key={opt.value} value={opt.value}>{opt.label}</option>)}
            </select>}
-       </label>)}
+       </label>})}
        {!solved&&<button className="np-primary" type="submit" disabled={locked.length>0||challenge.fields.some(field=>!answer[field.key]?.trim())||
         (id==='NAD-01'&&(!answer.rawReplay||!answer.correctedReplay))}>VERIFY ANALYSIS</button>}
       </form>
