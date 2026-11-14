@@ -1,5 +1,7 @@
 # The Astral Archives — Investigation Room V2 art-first visual milestone
 
+> **Active-branch update — 2026-11-14:** The user subsequently requested a targeted Home Screen art/layout adjustment (approved Mars landscape/portrait assets, menu on the right) and removal of the Investigation Room's persistent bottom action buttons. The current room uses direct scene hotspots, with a hover/focus glow and tap-to-open behavior; the Mission Files monitor opens the full archive folder preview. This later explicit request supersedes the older note below that the Home Screen must remain unchanged and the INTERACT object-list fallback. The selected continuation branch is `experiment/room-case-library-layout-fix-2026-11-14`; all future edits stay there unless the user asks otherwise.
+
 **Status:** isolated Preview, player/designer visual approval and browser QA pending.
 **Branch:** `experiment/investigation-room-designer-scene-v2-2026-11-14`
 
