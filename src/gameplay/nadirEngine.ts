@@ -176,3 +176,22 @@ export function stationRoute(station:StationId):string {
 export function stationLabel(station:StationId):string {
  return {investigation:'Investigation',archive:'Archive',signal:'Signal',recordings:'Recordings'}[station]
 }
+
+/** Independent synthetic test vectors for the proposed interface repair. */
+export const RESCUE_TEST_VALUES = [12,0.8] as const
+export function verifyRescuePlan(plan:{
+ canonical:string;converter:string;guard:string;first:string;second:string
+}):{passed:boolean;report:string[]}{
+ const first=Number(plan.first.replace(',','.'))
+ const second=Number(plan.second.replace(',','.'))
+ const test1=Number.isFinite(first)&&Math.abs(first-12*4.448221615)<=0.02
+ const test2=Number.isFinite(second)&&Math.abs(second-.8*4.448221615)<=0.02
+ const checks=[
+  [plan.canonical==='ns','Canonical impulse unit defined in the ICD'],
+  [plan.converter==='producer','Single conversion owner assigned'],
+  [plan.guard==='automated','Consumer-side validation and rerun acceptance test defined'],
+  [test1,'Simulation case A / 12 lbf·s'],
+  [test2,'Simulation case B / 0.8 lbf·s'],
+ ] as const
+ return {passed:checks.every(([ok])=>ok),report:checks.map(([ok,label])=>label+': '+(ok?'PASS':'FAIL'))}
+}
