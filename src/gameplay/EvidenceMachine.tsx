@@ -83,7 +83,7 @@ function ImpulseVisual({id,answer}:{id:NadirRecord;answer:NadirAnswer}){
    <div className="em-small-arrow"><Symbol type="arrow"/></div>
    <div className="em-value em-value-target"><span><Symbol type="chip"/> PARSER INPUT</span><strong>{hasValue?candidate.toFixed(2):'--.--'}</strong><small>N·s</small></div>
   </div>
-  <div className="em-scope"><span>CALIBRATED IMPULSE SCOPE / 0–65 N·s</span>
+  <div className="em-scope"><span>CALIBRATED IMPULSE SCOPE  / 0–65 N·s</span>
    <div className="em-track"><i style={{width:pct+'%'}}/><b style={{left:pct+'%'}}/></div>
    <div className="em-axis"><small>0</small><small>16.25</small><small>32.5</small><small>48.75</small><small>65</small></div>
    <p>{hasValue?'The scope reflects your candidate input. A valid model requires dimensional consistency.':'Enter a conversion in the workbench to drive the scope.'}</p>
@@ -95,7 +95,7 @@ function ImpulseVisual({id,answer}:{id:NadirRecord;answer:NadirAnswer}){
 function ClockVisual(){
  return <div className="em-clock">
   <div className="em-clock-badge"><Symbol type="clock"/><span>RECOVERED REVIEW TIMELINE</span></div>
-  <div className="em-clock-steps">{['EXPORT','RESIDUAL','ESCALATION','CLOSURE'].map((v,i)=><div key={v}><span>{String(i+1).padStart(2,'0')}</span><strong>{v}</strong><i/></div>)}</div>
+  <div className="em-clock-steps">{['CLOSURE','ESCALATION','EXPORT','RESIDUAL'].map((v,i)=><div key={v}><span>{String(i+1).padStart(2,'0')}</span><strong>{v}</strong><i/></div>)}</div>
   <p>Those events are not yet in chronological order in the recovered queue. Rearrange the event cards in the workbench.</p>
  </div>
 }
