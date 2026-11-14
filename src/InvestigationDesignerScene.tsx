@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { navigateGame, onGameLinkClick } from './gameNavigation'
 import './investigationDesignerScene.css'
 
 type Interaction = 'briefing' | 'evidence' | 'door' | 'rescue' | 'help'
@@ -45,7 +46,7 @@ export default function InvestigationDesignerScene() {
   }, [panel])
 
   function openCaseLibrary() {
-    window.location.assign('/?folder-lab=1')
+    navigateGame('/?folder-lab=1')
   }
 
   function open(target: Interaction) {
@@ -79,7 +80,7 @@ export default function InvestigationDesignerScene() {
 
     <header className="idr-head">
       <div className="idr-head-left">
-        <a href="/" className="idr-home-button" aria-label="Return to Home Screen"><SmallIcon type="back" size={20}/></a>
+        <a href="/" onClick={event => onGameLinkClick(event, '/')} className="idr-home-button" aria-label="Return to Home Screen"><SmallIcon type="back" size={20}/></a>
         <div className="idr-room-name"><span>STATION / PRESENT TIMELINE</span><strong>INVESTIGATION ROOM</strong></div>
       </div>
       <div className="idr-head-right">
