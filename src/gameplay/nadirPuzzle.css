@@ -103,3 +103,40 @@
  .np-head strong{font-size:clamp(11px,1.6vw,15px)}
  .np-foot{padding:5px max(7px,env(safe-area-inset-right)) max(5px,env(safe-area-inset-bottom)) max(7px,env(safe-area-inset-left))}
 }
+
+/* Two-stage visual investigation: on short landscape phones, show an instrument first
+   and a dedicated workbench second. No tiny two-column form or hidden footer. */
+.np-mobile-steps{display:none}
+@media(orientation:landscape) and (max-height:600px) and (max-width:1000px){
+ .np-mobile-steps{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin:8px 0 10px}
+ .np-mobile-steps button{display:flex;align-items:center;justify-content:center;gap:9px;
+  min-height:40px;padding:6px 10px;background:#0d2b3b;border:1px solid #476a79;
+  color:#afcdd7;font:700 10px 'IBM Plex Mono',monospace;cursor:pointer;letter-spacing:.03em}
+ .np-mobile-steps button span{display:grid;place-items:center;width:23px;height:23px;
+  flex:none;color:#d9b080;border:1px solid #627d87;border-radius:50%;font-size:9px}
+ .np-mobile-steps button.current{background:#164356;border-color:#e5b27d;color:#ffe3c1}
+ .np-mobile-steps button.current span{background:#b98e65;color:#06192a;border-color:#e9bf8f}
+ .np-mobile-steps button:focus-visible{outline:2px solid #95edf3;outline-offset:2px}
+ .np-columns{display:block}
+ .np-columns.np-mobile-inspect>.np-workbench{display:none}
+ .np-columns.np-mobile-analyze>.np-sources{display:none}
+ .np-columns.np-mobile-analyze>.np-workbench{display:grid;gap:8px;max-width:670px;margin:0 auto}
+ .np-sources{max-width:760px;margin-inline:auto}
+ .np-scroll{padding:8px clamp(9px,2vw,24px)}
+ .np-objective{font-size:11px;line-height:1.4;margin:5px 0 3px}
+ .np-scroll h2{font-size:18px;margin:3px 0}
+ .np-columns h3{font-size:9px;margin:0 0 6px}
+ .np-head{padding:6px max(11px,env(safe-area-inset-right)) 6px max(11px,env(safe-area-inset-left))}
+ .np-head strong{font-size:clamp(12px,1.7vw,16px)}
+ .np-foot{flex-wrap:nowrap;gap:6px}
+ .np-foot>span{font-size:8px;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+ .np-foot .np-primary{white-space:nowrap}
+ .np-foot .np-secondary{white-space:nowrap}
+}
+@media(orientation:landscape) and (max-height:390px) and (max-width:1000px){
+ .np-mobile-steps{margin:5px 0;gap:4px}
+ .np-mobile-steps button{min-height:33px;padding:4px;font-size:9px}
+ .np-head{padding-block:4px}
+ .np-meta{font-size:8px}
+ .np-foot{padding-block:4px}
+}
