@@ -1,5 +1,8 @@
 # The Astral Archives — Agent Instructions
 
+> **ACTIVE WORKING BRANCH OVERRIDE — 2026-11-14:** The user selected `experiment/room-case-library-layout-fix-2026-11-14` as the ongoing working branch. For this branch, continue all approved follow-up work on this exact branch; **do not create new branches** unless the user explicitly asks. Do not merge to `main`. The current Home Screen and Investigation Room interaction contract is recorded in `EXPERIMENT.md` and the dated addenda in `docs/studio-pilot/HOME_SCREEN_MILESTONE.md`, `FIXED_ROOM_MILESTONE.md`, and `INVESTIGATION_DESIGNER_ROOM_V2.md`; those latest explicit user requests supersede conflicting older preview notes for these screens only. Preserve all unrelated work and read the active branch checkpoint before future edits.
+
+
 > **OFFICIAL TITLE AND REPOSITORY NAME — 2026-11-13:** The game's official and only current title is **The Astral Archives** (not CASE:404). The intended GitHub repository slug is **`the-astral-archives`**. The GitHub remote rename is **pending an administrator action in repository Settings**; do not claim it has happened just because the package name changed. Historical source files and older branch/commit references containing `CASE404` or `case404` are provenance, not the current title. Keep existing game behavior unchanged.
 
 
