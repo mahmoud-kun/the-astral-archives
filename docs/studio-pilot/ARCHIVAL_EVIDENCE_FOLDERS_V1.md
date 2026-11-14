@@ -1,9 +1,13 @@
 # The Astral Archives — Living Evidence Folder V1
 
-**Status:** Isolated experimental playable preview. Not merged to `main`; no changes to approved Home Screen or Codex room-layer experiment.
+**Status:** Active experimental playable preview on the user's selected working branch. Not merged to `main`.
 
-**Branch:** `experiment/archival-evidence-folders-v1-2026-11-14`  
+**Active working branch:** `experiment/room-case-library-layout-fix-2026-11-14`  
 **Preview route:** `/?folder-lab=1`
+
+**Working-branch rule:** All follow-up changes continue on this same branch. Do not create a new branch unless the user explicitly requests it.
+
+**Current integration:** The Investigation Room's wall-mounted `MISSION FILES` hotspot opens this full archive. The generic bottom `CASE LIBRARY` and `INTERACT` action buttons have been removed; discovery is intended to happen through scene objects. The Home Screen uses the approved landscape/portrait Mars artwork and right-side menu.
 
 ## Approved art/gameplay goal
 
@@ -58,9 +62,9 @@ An aged physical manila/kraft folder inspired by the player's reference: closed 
 - No Global Budget calculation is implemented here. Budget semantics and cost tables belong to the engineering stage.
 - Do not show a completed historical Rescue result or change actual history. Rescue operates on a fictional alternate engineering outcome.
 
-## Integration contract with Codex's layered-room work
+## Integration contract with the active working branch
 
-**Avoid editing room assets and `src/InvestigationDesignerScene.tsx` in parallel.** Once the independent room is approved, import the archive viewer/engine as reusable components and route an in-world Mission Files object to it. Swap the development intake drawer for room-based evidence discovery. Preserve stable IDs, misfile semantics, diagnosis gate and source/provenance fields. Keep `main` untouched until explicit visual and QA approval.
+The Investigation Room's wall-mounted Mission Files hotspot now routes to this standalone archive preview. The next integration step is to replace the development intake drawer with room-based evidence discovery. Preserve stable IDs, misfile semantics, diagnosis gate and source/provenance fields. Keep `main` untouched until explicit visual and QA approval. Continue all future work on `experiment/room-case-library-layout-fix-2026-11-14`; do not create another branch unless the user asks.
 
 ## Validation
 
