@@ -61,3 +61,29 @@ summary={
  "image_transfer_bytes_by_route":[{"route":p["route"],"viewport":p["viewport"],"label":p["label"],"bytes":sum(r["bytes"] for r in p["imagesRequested"])} for p in report["pages"]],
 }
 (OUT/"latest-report.json").write_text(json.dumps(summary,indent=2))
+
+# Produce a drop-in, exact-dimension WebP variant of the approved clean plate.
+# Original PNG and every object layer remain untouched for art provenance.
+from PIL import ImageChops, ImageStat
+source_plate=Path("public/assets/rooms/investigation/layers/wide/background/investigation_room_bg_clean.png")
+optimized_plate=source_plate.with_suffix(".webp")
+with Image.open(source_plate) as original:
+    rgb=original.convert("RGB")
+    rgb.save(optimized_plate,"WEBP",quality=90,method=6)
+    with Image.open(optimized_plate) as compressed:
+        assert compressed.size==rgb.size, "WebP changed the room coordinate system"
+        difference=ImageChops.difference(rgb,compressed.convert("RGB"))
+        average_error=sum(ImageStat.Stat(difference).mean)/3
+        metrics={
+            "input":str(source_plate),
+            "output":str(optimized_plate),
+            "pixel_width":rgb.width,
+            "pixel_height":rgb.height,
+            "original_bytes":source_plate.stat().st_size,
+            "optimized_bytes":optimized_plate.stat().st_size,
+            "saved_percent":round(100*(1-optimized_plate.stat().st_size/source_plate.stat().st_size),1),
+            "mean_absolute_rgb_error":round(average_error,3),
+        }
+        assert average_error<6, "Compressed background diverges visibly from approved art; reject optimization"
+        (OUT/"background-optimization.json").write_text(json.dumps(metrics,indent=2))
+        print("[VISUAL-QA] Optimized approved clean plate:",metrics)
