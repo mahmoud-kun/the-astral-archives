@@ -3,6 +3,7 @@ import { EVIDENCE_RECORDS, CASE_META } from '../archive/evidenceRecords'
 import { navigateGame } from '../gameNavigation'
 import { stationLabel, type StationId } from './nadirEngine'
 import { useArchiveSave } from './gameSave'
+import EvidenceGlyph from './EvidenceGlyph'
 import './evidenceTray.css'
 
 export default function EvidenceTray({room}:{room:StationId}){
@@ -41,14 +42,13 @@ export default function EvidenceTray({room}:{room:StationId}){
     <div className="et-list">
      {!showing.length&&<div className="et-empty"><strong>{tab==='unfiled'?'NO UNFILED EVIDENCE':'NO EVIDENCE COLLECTED'}</strong><p>Inspect a room object, complete its investigation when required, then manually collect the evidence.</p></div>}
      {showing.map(record=><button className={'et-record '+(review===record.id?'active':'')} key={record.id} onClick={()=>setReview(record.id)}>
-       <small>{record.id} · {record.room.toUpperCase()}</small><strong>{record.title}</strong><span>{archive.filed[record.id]?'FILED · '+CASE_META[archive.filed[record.id]].name.toUpperCase():'UNFILED'}</span>
+       <EvidenceGlyph kind={record.kind}/>
+       <span className="et-record-copy"><small>{record.id} · {record.room.toUpperCase()}</small><strong>{record.title}</strong><em>{archive.filed[record.id]?'FILED · '+CASE_META[archive.filed[record.id]].name.toUpperCase():'UNFILED'}</em></span>
       </button>)}
     </div>
     {selected&&<div className="et-preview">
-      <small>COLLECTED RECORD / {selected.id}</small>
-      <strong>{selected.title}</strong>
-      <p>{selected.content}</p>
-      <span>FICTIONAL SIMULATION · {selected.kind.toUpperCase()}</span>
+      <div className="et-preview-title"><EvidenceGlyph kind={selected.kind}/><div><small>COLLECTED RECORD / {selected.id}</small><strong>{selected.title}</strong><span>{selected.kind.toUpperCase()} · FICTIONAL SIMULATION</span></div></div>
+      <details><summary>EXAMINE SOURCE RECORD</summary><p>{selected.content}</p></details>
      </div>}
     <footer className="et-footer"><p>File evidence in the physical Mission Folders. An incorrect filing is saved without a warning.</p>
      <button onClick={openFolders}>OPEN MISSION FOLDERS</button>
