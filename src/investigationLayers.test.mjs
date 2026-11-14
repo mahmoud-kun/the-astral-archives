@@ -67,7 +67,7 @@ test('Room source is layered but keeps the archive navigation and fullscreen-saf
   const room = readFileSync('src/InvestigationDesignerScene.tsx','utf8')
   const layer = readFileSync('src/InvestigationLayeredScene.tsx','utf8')
   assert.match(room,/<InvestigationLayeredScene onOpen=\{openObject\}\/>/)
-  assert.match(room,/navigateGame\('\/\?folder-lab=1'\)/)
+  assert.match(room,/navigateGame\('\/\?folder-lab=1(?:&return=investigation)?'\)/)
   assert.match(room,/onGameLinkClick\(event, '\/'\)/)
   assert.doesNotMatch(room,/idr-foot-actions|idr-hotspot-layer/)
   assert.match(layer,/idr-layer-object/)
