@@ -34,6 +34,19 @@ The user explicitly requested that the **entire game be horizontal on phones, ma
 - Landscape CSS and orientation gate are isolated in `src/homeScreen.css`, `src/investigationDesignerScene.css`, `src/archive/archiveFolderLab.css`, `src/LandscapeGuard.tsx` and `src/landscapeGuard.css`.
 - Real-device QA remains required at landscape 800×360 and 915×412, plus desktop 1366×768, especially because UI screenshots cannot be inspected through the connected browser in this session.
 
+## Mobile icon and fullscreen continuity — 2026-11-14 (latest feedback)
+
+- The user approved the landscape-first mobile experience but requested a **higher-quality rotation icon** and reported that fullscreen exited when navigating from Home Screen into the game.
+- The rotation illustration now uses the scalable production SVG `public/assets/ui/rotate-landscape.svg`, displayed by `src/LandscapeGuard.tsx` and scaled without distortion in `src/landscapeGuard.css`. It replaces the earlier inline placeholder illustration.
+- Root cause of fullscreen loss: internal navigation previously used `window.location.assign()` and ordinary document-loading anchors, destroying the current HTML document and its fullscreen state.
+- `src/gameNavigation.ts` now performs same-origin client navigation with the History API and dispatches `astral:route-change`.
+- `src/main.tsx` listens to the route-change event and browser `popstate`, rendering Home, Investigation Room, Case Library, Rescue workbench, and legacy preview routes under one persistent document. `LandscapeGuard` remains mounted.
+- Home → Investigation → Case Library → Station → Home links, plus preview route links, now use the shared navigation helper. Standard modifier-key and middle-click link behavior is preserved.
+- Fullscreen is requested on `document.documentElement`, so internal route changes no longer unmount the fullscreen element. Native fullscreen may still be denied or exited by the browser, OS, or switching apps; automated rotation is best effort.
+- `src/gameNavigation.test.mjs` and `npm run test:navigation` cover no-document-reload navigation, back link behavior, and modified clicks.
+- Latest Vercel preview: `https://astral-archives-5k69wkttv-mahmooud-kun.vercel.app` — build completed (TypeScript + Vite) and deployment status READY.
+- Navigation unit tests are configured but have **not** been executed in this session. On-device fullscreen preservation in Brave still needs user confirmation.
+
 ## Current visual direction
 
 ### Home Screen
