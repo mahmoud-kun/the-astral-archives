@@ -66,6 +66,15 @@ An aged physical manila/kraft folder inspired by the player's reference: closed 
 
 The Investigation Room's wall-mounted Mission Files hotspot now routes to this standalone archive preview. The next integration step is to replace the development intake drawer with room-based evidence discovery. Preserve stable IDs, misfile semantics, diagnosis gate and source/provenance fields. Keep `main` untouched until explicit visual and QA approval. Continue all future work on `experiment/room-case-library-layout-fix-2026-11-14`; do not create another branch unless the user asks.
 
+## Latest active-branch preview
+
+- Branch: `experiment/room-case-library-layout-fix-2026-11-14`.
+- Latest deployment commit: `ec5379c3b58cf6c3f51e7c36774e3c65db66afff`.
+- Preview: `https://astral-archives-2raqtvldm-mahmooud-kun.vercel.app`.
+- Vercel status: **READY**; `tsc -b && vite build` completed successfully.
+- The pre-existing `Investigation360` chunk-size warning remains; it is not a build failure.
+- Automated Node suites and real-browser/device visual QA have not been run for this latest update.
+
 ## Validation
 
 The GitHub branch stores the full source and reusable SVG artwork. The Vercel deployment for the room/library integration reached **READY** and its build log shows `tsc -b && vite build` completed successfully. The standalone Node test suite (`npm run test:archive`) and the combined `npm run test:studio` are configured but were not executed in this change. The Vercel preview could not be opened through the available browser inspection channel, so exact visual fit at 1920×1080, 1366×768 and real-device touch behavior still need human confirmation. The layout changes specifically address the fixed-height body overflow and folder scaling that caused the screenshot's lower content to be cut off.
