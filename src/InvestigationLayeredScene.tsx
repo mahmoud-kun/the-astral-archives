@@ -1,6 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
 import wideManifest from '../public/assets/rooms/investigation/layers/wide/manifest.json'
-import originalManifest from '../public/assets/rooms/investigation/layers/original/manifest.json'
 import './investigationLayeredScene.css'
 
 export type RoomObjectTarget = 'cases' | 'evidence' | 'briefing' | 'door' | 'rescue'
@@ -93,7 +92,8 @@ function Variant({ manifest, onOpen }: { manifest: SceneManifest; onOpen: (targe
 /** Fixed first-person scene: both art variants use Codex V3 clean plate plus actual cutout layers. */
 export default function InvestigationLayeredScene({ onOpen }: { onOpen: (target: RoomObjectTarget) => void }) {
   return <>
+    {/* Game mode is landscape-only: skip the unused second large room plate.
+        The original variant is retained on disk for future art reviews. */}
     <Variant manifest={wideManifest} onOpen={onOpen}/>
-    <Variant manifest={originalManifest} onOpen={onOpen}/>
   </>
 }
