@@ -17,7 +17,7 @@
 .aa-home-art img{object-fit:cover;object-position:50% 50%;filter:saturate(1.03) brightness(1);transform:scale(1.025);animation:aa-art-breathe 32s ease-in-out infinite alternate}
 .aa-home-shade{position:absolute;inset:0;z-index:-3;pointer-events:none;
   background:
-  linear-gradient(90deg,#06152208 0%,#06152212 30%,#06152255 48%,#061522d9 69%,#04111ff5 100%),
+  linear-gradient(90deg,#06152208 0%,#06152210 30%,#06152234 48%,#06152296 69%,#04111fb0 100%),
   linear-gradient(180deg,#05152282 0%,transparent 18%,transparent 76%,#030f1bdc 100%),
   radial-gradient(ellipse at 23% 70%,#e9a0642b,transparent 42%)}
 .aa-home-grid{position:absolute;inset:0;z-index:-2;pointer-events:none;opacity:.09;
@@ -150,7 +150,7 @@
 @media(max-width:950px){
   .aa-home-hero{grid-template-columns:minmax(0,1fr) minmax(0,540px)}
   .aa-home-hero-copy{grid-column:2;grid-row:1;max-width:540px}
-  .aa-home-shade{background:linear-gradient(90deg,#06152208 0%,#06152225 25%,#061522a8 48%,#061522f0 75%,#04111ff7 100%),linear-gradient(180deg,#04111f80,transparent 34%,#061522bb)}
+  .aa-home-shade{background:linear-gradient(90deg,#06152208 0%,#0615221b 25%,#06152258 48%,#061522a0 75%,#04111fb0 100%),linear-gradient(180deg,#04111f80,transparent 34%,#061522bb)}
   .aa-home-title h1{font-size:clamp(53px,7vw,79px)}
   .aa-home-footer{font-size:8px}
 }
@@ -219,7 +219,7 @@
   .aa-home{height:100dvh;min-height:0;overflow:hidden}
   .aa-home-art img{object-fit:cover;object-position:37% center}
   .aa-home-shade{background:
-    linear-gradient(90deg,#06152200 0%,#06152218 30%,#0615226d 47%,#061522e6 67%,#04111ffa 100%),
+    linear-gradient(90deg,#06152200 0%,#06152212 30%,#06152245 47%,#061522a0 67%,#04111fba 100%),
     linear-gradient(180deg,#03111c8b,transparent 28%,transparent 77%,#030f1bd0)}
   .aa-home-header{height:38px;min-height:0;padding:0 max(13px,env(safe-area-inset-right)) 0 max(13px,env(safe-area-inset-left))}
   .aa-home-identity{font-size:9px;gap:8px;letter-spacing:.05em}
