@@ -28,11 +28,23 @@ The user explicitly requested that the **entire game be horizontal on phones, ma
 - Include a user-initiated **TRY LANDSCAPE FULLSCREEN** action which attempts fullscreen plus the Screen Orientation API only when supported, with honest manual Auto-rotate fallback.
 - Do not claim browsers can forcibly change the device orientation on page load.
 - On landscape phones up to 1000 px wide and 600 px high, Home Screen uses artwork on the **left** and compact interactive menu on the **right**, preserving the four existing menu actions.
-- The Home Screen now uses `menu-approved-landscape.png` consistently instead of selecting the portrait mockup that contains baked-in UI lettering.
+- The Home Screen's current approved source is `menu-archive-clean.webp`, replacing all older menu artwork with baked-in UI text.
 - The first Investigation Room keeps its full fixed scene and direct object hotspots; top controls and closeups scale down at phone landscape heights.
 - The Living Evidence Folder stays a three-column archive in phone landscape with scrollable drawers and a height-fitted folder.
 - Landscape CSS and orientation gate are isolated in `src/homeScreen.css`, `src/investigationDesignerScene.css`, `src/archive/archiveFolderLab.css`, `src/LandscapeGuard.tsx` and `src/landscapeGuard.css`.
 - Real-device QA remains required at landscape 800×360 and 915×412, plus desktop 1366×768, especially because UI screenshots cannot be inspected through the connected browser in this session.
+
+## Approved clean Home Screen background — 2026-11-14 (latest user decision)
+
+The user reviewed and approved the newly generated **clean cinematic archive interior**: shelves and physical case folders on the left, a large planetary observation window, and dark negative space on the right for the interactive menu. It is now the authoritative Home Screen background, superseding older notes about the Mars surface or the earlier baked-in-menu artwork.
+
+- Production asset: `public/assets/menu-archive-clean.webp` (1821×864, optimized from `futuristic_archive_under_alien_skies.png`).
+- Displayed from `src/HomeScreen.tsx`, with image presentation in `src/homeScreen.css`.
+- Keep all menu titles and buttons as accessible React elements over the artwork. Never introduce text or UI lettering into the background plate.
+- Keep the clean left composition visible; remove the unnecessary decorative caption over the leftmost artwork.
+- Retain desktop/phone landscape layout, orientation guard, fullscreen-safe routing and all menu actions.
+- Older `menu-approved-landscape.png` and `menu-approved-portrait.png` remain comparison/reference files, not the active home background.
+- Browser/phone visual approval is pending until the user tests the new deployment.
 
 ## Mobile icon and fullscreen continuity — 2026-11-14 (latest feedback)
 
@@ -51,8 +63,8 @@ The user explicitly requested that the **entire game be horizontal on phones, ma
 
 ### Home Screen
 
-- Use `public/assets/menu-approved-landscape.png` for landscape and `public/assets/menu-approved-portrait.png` for portrait.
-- Preserve the approved cinematic Mars-surface / rover composition: environment visible on the left, menu and title on the right for landscape; mobile uses the authored portrait alternative.
+- Use `public/assets/menu-archive-clean.webp` as the Home Screen background for both desktop and horizontal mobile play; older artwork is retained only as reference.
+- Preserve the approved cinematic archival-station composition: shelves and observation window on the left, all interactive menu typography on the right; portrait mobile shows the rotate-device gate.
 - Warm dusty atmospheric treatment, restrained slow image drift, and the approved navy / cyan / orange / cream interface palette.
 - Keep the existing Start Investigation, Mission Archives, Settings and About actions and their behavior.
 - The archive-save check reads the current `astral-archive-folder-v1` state as well as the earlier evidence-demo key.
