@@ -70,7 +70,7 @@ The Investigation Room's wall-mounted Mission Files hotspot now routes to this s
 
 - Branch: `experiment/room-case-library-layout-fix-2026-11-14`.
 - Latest deployment commit: `ec5379c3b58cf6c3f51e7c36774e3c65db66afff`.
-- Preview: `https://astral-archives-2raqtvldm-mahmooud-kun.vercel.app`.
+- Preview: `https://astral-archives-8igs468df-mahmooud-kun.vercel.app`.
 - Vercel status: **READY**; `tsc -b && vite build` completed successfully.
 - The pre-existing `Investigation360` chunk-size warning remains; it is not a build failure.
 - Automated Node suites and real-browser/device visual QA have not been run for this latest update.
