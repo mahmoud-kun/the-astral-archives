@@ -87,7 +87,7 @@ export default function HomeScreen() {
   return <main className={'aa-home' + (reduceMotion ? ' aa-home-still' : '')}>
     <div className="aa-home-art" aria-hidden="true">
       <picture>
-        <img src={fallbackArt ? '/assets/optimized/menu-archive.webp' : '/assets/menu-approved-landscape.png'} alt="" loading="eager" fetchPriority="high" decoding="async" onError={() => setFallbackArt(true)}/>
+        <img src={fallbackArt ? '/assets/optimized/menu-archive.webp' : '/assets/menu-archive-clean.webp'} alt="" loading="eager" fetchPriority="high" decoding="async" onError={() => setFallbackArt(true)}/>
       </picture>
     </div>
     <div className="aa-home-shade" aria-hidden="true"/>
@@ -124,7 +124,7 @@ export default function HomeScreen() {
         </div>
       </div>
       <div className="aa-home-hero-space" aria-hidden="true">
-        <div className="aa-home-art-caption"><span>01 / MARS SURFACE</span><strong>FIELD ARCHIVE</strong><small>EXPLORATION · ENGINEERING · DISCOVERY</small></div>
+        <div className="aa-home-art-caption"><span>01 / ARCHIVE STATION</span><strong>OBSERVATION HALL</strong><small>RECORDS · EVIDENCE · DISCOVERY</small></div>
       </div>
     </section>
 
