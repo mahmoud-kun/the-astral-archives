@@ -3,6 +3,7 @@ import { INVESTIGATION_FAITHFUL_LAYERS } from './investigationFaithfulLayers'
 import { CASES } from './rescueEngine'
 import { progressFor, moveEvidence, type SaveData, type EvidenceId } from './fixedRoomEvidence'
 import './fixedRoomAdventure.css'
+import { navigateGame, onGameLinkClick } from './gameNavigation'
 
 type RoomId = 'investigation' | 'archive' | 'recordings' | 'signal'
 type Focus = 'files' | 'board' | 'desk' | 'rescue' | 'door' | 'room-console' | null
@@ -138,8 +139,8 @@ export default function FixedRoomAdventure() {
   return <main className="fr-root">
     <div className="fr-stars" aria-hidden="true"/>
     <header className="fr-header">
-      <a className="fr-brand" href="/" aria-label="The Astral Archives main menu"><span className="fr-brand-symbol">✦</span><span>THE ASTRAL <b>ARCHIVES</b><small>INTERACTIVE INVESTIGATION</small></span></a>
-      <div className="fr-head-right"><span className="fr-demo-label">FICTIONAL CONTENT · DEVELOPMENT DEMO</span><a className="fr-back-link" href="/">Main Menu</a></div>
+      <a className="fr-brand" href="/" onClick={event => onGameLinkClick(event, '/')} aria-label="The Astral Archives main menu"><span className="fr-brand-symbol">✦</span><span>THE ASTRAL <b>ARCHIVES</b><small>INTERACTIVE INVESTIGATION</small></span></a>
+      <div className="fr-head-right"><span className="fr-demo-label">FICTIONAL CONTENT · DEVELOPMENT DEMO</span><a className="fr-back-link" href="/" onClick={event => onGameLinkClick(event, '/')}>Main Menu</a></div>
     </header>
 
     <section className="fr-content" aria-label="Astral Archives investigation game">
@@ -231,7 +232,7 @@ export default function FixedRoomAdventure() {
           <div className="fr-art-panel fr-rescue-art"><div className="fr-portal-illustration"><div className="fr-portal-ring"><span>✦</span></div><div className="fr-portal-line">ALTERNATE HISTORY LINK</div></div></div>
           <div className="fr-interaction-panel"><span className="fr-eyebrow">STEP 04 / RESCUE MISSION</span><h2>{ready?'Rescue authorization granted.':'Rescue console locked.'}</h2><p>{ready?'Two required fictional evidence records were filed in the Echo Relay dossier. Your engineering rescue is ready.':'Collect the required clues and file them in the correct mission folder before accessing the engineering workbench.'}</p>
             <div className="fr-unlock-status"><span>INVESTIGATION EVIDENCE</span><strong>{progress} / 2</strong><div className="fr-progress"><span style={{width:progress/2*100+'%'}}/></div></div>
-            {ready?<button className="fr-primary" onClick={()=>window.location.assign('/?workbench=1')}>ENTER ENGINEERING BLUEPRINT →</button>:<button className="fr-primary" onClick={()=>setFocus('files')}>OPEN MISSION FILES →</button>}
+            {ready?<button className="fr-primary" onClick={()=>navigateGame('/?workbench=1')}>ENTER ENGINEERING BLUEPRINT →</button>:<button className="fr-primary" onClick={()=>setFocus('files')}>OPEN MISSION FILES →</button>}
             <div className="fr-evidence-note">The Rescue Workbench uses five independent fictional engineering cases. This scene unlocks the first case as a gameplay demonstration, not a NASA reenactment.</div>
           </div>
         </div>}
