@@ -1,5 +1,5 @@
 {
-  "run_on": "2026-11-14T20:26:34.642Z",
+  "run_on": "2026-11-14T20:32:00.643Z",
   "screenshots": 33,
   "console_errors": 0,
   "broken_images": 0,
@@ -23,7 +23,7 @@
         "height": 768
       },
       "label": "investigation",
-      "bytes": 4716615
+      "bytes": 2647439
     },
     {
       "route": "/?station=signal",
@@ -95,7 +95,7 @@
         "height": 412
       },
       "label": "investigation",
-      "bytes": 4716615
+      "bytes": 2647439
     },
     {
       "route": "/?station=signal",
@@ -167,7 +167,7 @@
         "height": 360
       },
       "label": "investigation",
-      "bytes": 4716615
+      "bytes": 2647439
     },
     {
       "route": "/?station=signal",
@@ -239,7 +239,7 @@
         "height": 360
       },
       "label": "investigation",
-      "bytes": 4716615
+      "bytes": 2647439
     },
     {
       "route": "/?station=signal",
