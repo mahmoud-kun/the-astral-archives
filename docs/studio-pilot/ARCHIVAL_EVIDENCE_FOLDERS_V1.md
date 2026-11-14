@@ -22,6 +22,9 @@ An aged physical manila/kraft folder inspired by the player's reference: closed 
 
 ## Entry and usage
 
+- From the Investigation Room, clicking the left-wall **MISSION FILES** screen or the bottom **CASE LIBRARY** button opens this complete archive route directly. The station's other room interactions and the Home Screen remain unchanged.
+- The archive now owns a viewport-height scroll container; folder scale responds to viewport height, and the desk no longer clips the dossier. At short desktop heights the dossier scales down; on narrow screens the five folders, workspace and status stack vertically and scroll naturally.
+
 1. Open `/?folder-lab=1` on this branch's Vercel preview.
 2. Select one of five folders from the drawer.
 3. Open the **Evidence Intake** drawer to discover case records from their designated room, in lieu of not-yet-integrated room hotspots.
@@ -61,4 +64,4 @@ An aged physical manila/kraft folder inspired by the player's reference: closed 
 
 ## Validation
 
-The GitHub branch stores the full source and reusable SVG artwork. Vercel build compiles TypeScript and Vite. `npm run test:archive` and `npm run test:studio` are configured but require separate execution to claim PASS. Real-device visual parity with the approved image is NOT CERTIFIED.
+The GitHub branch stores the full source and reusable SVG artwork. The Vercel deployment for the room/library integration reached **READY** and its build log shows `tsc -b && vite build` completed successfully. The standalone Node test suite (`npm run test:archive`) and the combined `npm run test:studio` are configured but were not executed in this change. The Vercel preview could not be opened through the available browser inspection channel, so exact visual fit at 1920×1080, 1366×768 and real-device touch behavior still need human confirmation. The layout changes specifically address the fixed-height body overflow and folder scaling that caused the screenshot's lower content to be cut off.
