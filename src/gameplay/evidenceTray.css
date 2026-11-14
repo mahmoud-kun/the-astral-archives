@@ -32,3 +32,28 @@
  .et-footer{padding:5px 10px}.et-footer p{font-size:9px;margin-bottom:4px}
  .et-footer button{min-height:32px;font-size:9px}
 }
+
+/* Evidence is handled as recognizable collectible media, rather than a text-only list. */
+.et-record{display:grid;grid-template-columns:46px minmax(0,1fr);align-items:center;gap:10px}
+.et-record-copy{display:grid;gap:4px;min-width:0;text-align:left}
+.et-record-copy strong{font-size:12px;line-height:1.3;overflow-wrap:anywhere}
+.et-record-copy em{font:600 9px 'IBM Plex Mono',monospace;font-style:normal;color:#e8b17d}
+.eg-glyph{width:44px;height:44px;display:grid;place-items:center;flex:none;background:#0b3447;border:1px solid #3d788b;color:#7fdbdf;border-radius:3px;box-shadow:inset 0 0 14px #3bd1ec15}
+.eg-glyph svg{width:27px;height:27px}
+.eg-glyph.eg-document{border-color:#bd8b65;color:#f3bb8b;background:#352a2b}
+.eg-glyph.eg-blueprint{border-color:#847bbd;color:#bba2fb;background:#252c45}
+.eg-glyph.eg-recording{border-color:#3f9aa5;color:#8bebeb;background:#113947}
+.eg-glyph.eg-telemetry{border-color:#58a4ae;color:#a2edf6;background:#0d3348}
+.et-preview-title{display:flex;align-items:center;gap:10px}
+.et-preview-title>div{display:grid;gap:4px;min-width:0}
+.et-preview-title strong{line-height:1.3;overflow-wrap:anywhere}
+.et-preview details{margin-top:9px;border:1px solid #3d6b7b}
+.et-preview summary{cursor:pointer;padding:8px 10px;color:#e1bb89;background:#0d3c4a;font:700 9px 'IBM Plex Mono',monospace}
+.et-preview summary:focus-visible{outline:2px solid #9beaf2}
+.et-preview details p{padding:9px;margin:0;color:#cfdee3;font-size:11px;line-height:1.5}
+@media(orientation:landscape) and (max-height:600px){
+ .et-record{grid-template-columns:32px minmax(0,1fr);gap:6px}
+ .eg-glyph{width:32px;height:32px}.eg-glyph svg{width:21px;height:21px}
+ .et-record-copy strong{font-size:10px}.et-preview-title{gap:7px}
+ .et-record-copy em{font-size:8px}
+}
