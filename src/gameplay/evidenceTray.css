@@ -1,0 +1,34 @@
+.et-trigger{position:fixed;z-index:110;right:max(14px,env(safe-area-inset-right));top:max(64px,calc(env(safe-area-inset-top) + 58px));width:51px;height:43px;
+ display:flex;align-items:center;justify-content:center;gap:4px;background:#092438eb;border:1px solid #709eae;color:#c2f3fb;cursor:pointer;box-shadow:0 4px 22px #0009;font:700 12px 'IBM Plex Mono',monospace}
+.et-trigger:hover,.et-trigger:focus-visible{outline:2px solid #8de9ee;outline-offset:2px}
+.et-trigger span{background:#d1a06b;color:#091b29;padding:2px 4px;border-radius:2px;min-width:17px}
+.et-scrim{position:fixed;inset:0;z-index:170;background:#020b17a8;display:flex;justify-content:flex-end;color:#dceaf0;font-family:'IBM Plex Sans',sans-serif}
+.et-panel{width:min(420px,100%);height:100dvh;display:flex;flex-direction:column;min-height:0;background:#061b2a;border-left:1px solid #5b8799;box-shadow:-18px 0 65px #000b}
+.et-header{flex-shrink:0;display:flex;justify-content:space-between;align-items:center;gap:9px;padding:17px;background:#0b2c40;border-bottom:1px solid #476b78}
+.et-header>div{display:grid;gap:5px}.et-header small{font:700 9px 'IBM Plex Mono',monospace;color:#92b7c3;letter-spacing:.12em}
+.et-header strong{font:700 17px 'Orbitron',sans-serif;letter-spacing:.045em}
+.et-header button{background:#17374b;border:1px solid #7096a4;width:31px;height:31px;color:#eaf6f8;cursor:pointer;font-size:22px}
+.et-context{padding:10px 17px;color:#e5b57f;font:600 9px/1.5 'IBM Plex Mono',monospace;letter-spacing:.08em;margin:0}
+.et-tabs{display:grid;grid-template-columns:1fr 1fr;flex-shrink:0;border-block:1px solid #375366}
+.et-tabs button{background:#092235;border:0;border-bottom:3px solid transparent;color:#b0c5cd;padding:12px 7px;cursor:pointer;font:700 10px 'IBM Plex Mono',monospace}
+.et-tabs button.active{background:#143c4c;color:#c0f8f9;border-bottom-color:#76cfdf}
+.et-tabs b{color:#edbf88;margin-left:4px}.et-list{overflow:auto;flex:1;min-height:0;padding:10px 15px;display:grid;gap:8px;align-content:start;scrollbar-width:thin}
+.et-record{display:grid;gap:4px;text-align:left;background:#0e2b3e;border:1px solid #3d6675;padding:11px;cursor:pointer;color:#dfeced}
+.et-record:hover,.et-record.active{border-color:#e3b07f;background:#14394c}
+.et-record small{color:#81b1be;font:700 9px 'IBM Plex Mono',monospace}.et-record strong{font-size:13px;line-height:1.3}.et-record span{color:#e8b17d;font:600 9px 'IBM Plex Mono',monospace}
+.et-empty{padding:25px 17px;text-align:center;border:1px dashed #436c7c}.et-empty strong{font:700 12px 'IBM Plex Mono',monospace}.et-empty p{font-size:12px;color:#a9c2ca;line-height:1.5}
+.et-preview{flex-shrink:0;max-height:27dvh;overflow-y:auto;padding:12px 17px;border-top:1px solid #3b6975;background:#103249}
+.et-preview small{display:block;color:#e8bd8a;font:700 9px 'IBM Plex Mono',monospace;margin-bottom:5px}
+.et-preview strong{display:block;font-size:13px}.et-preview p{color:#cce2e7;font-size:11px;line-height:1.45}.et-preview span{font:700 9px 'IBM Plex Mono',monospace;color:#88b8c6}
+.et-footer{flex-shrink:0;padding:12px 17px max(16px,env(safe-area-inset-bottom));border-top:1px solid #466b78;background:#0a2a3b}
+.et-footer p{font-size:11px;color:#a5c1c8;line-height:1.4;margin:0 0 9px}.et-footer button{background:#e9b47d;border:1px solid #f5d0a4;color:#0a2332;min-height:43px;width:100%;font:800 11px 'IBM Plex Mono',monospace;cursor:pointer}
+@media(orientation:landscape) and (max-height:600px) and (max-width:1000px){
+ .et-trigger{top:41px;right:max(7px,env(safe-area-inset-right));width:43px;height:32px}
+ .et-trigger svg{width:16px}.et-panel{width:min(380px,55vw);max-height:100dvh}
+ .et-header{padding:7px 11px}.et-header strong{font-size:13px}.et-header small{font-size:8px}.et-header button{height:27px;width:27px}
+ .et-context{padding:5px 9px;font-size:8px}.et-tabs button{padding:7px;font-size:9px}
+ .et-list{padding:6px 9px;gap:5px}.et-record{padding:6px}.et-record strong{font-size:11px}
+ .et-preview{padding:6px 10px;max-height:25dvh}.et-preview p{margin:4px 0}
+ .et-footer{padding:5px 10px}.et-footer p{font-size:9px;margin-bottom:4px}
+ .et-footer button{min-height:32px;font-size:9px}
+}
