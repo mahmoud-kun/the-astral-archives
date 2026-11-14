@@ -39,8 +39,11 @@ function getPreference(): boolean {
 }
 function hasSavedInvestigation(): boolean {
   try {
-    const data = JSON.parse(localStorage.getItem('astral-fixed-room-evidence-demo-v1') || 'null') as { collected?: unknown } | null
-    return Array.isArray(data?.collected) && data.collected.length > 0
+    const archive = JSON.parse(localStorage.getItem('astral-archive-folder-v1') || 'null') as { discovered?: unknown } | null
+    if (Array.isArray(archive?.discovered) && archive.discovered.length > 0) return true
+
+    const legacy = JSON.parse(localStorage.getItem('astral-fixed-room-evidence-demo-v1') || 'null') as { collected?: unknown } | null
+    return Array.isArray(legacy?.collected) && legacy.collected.length > 0
   } catch { return false }
 }
 
@@ -83,13 +86,11 @@ export default function HomeScreen() {
   return <main className={'aa-home' + (reduceMotion ? ' aa-home-still' : '')}>
     <div className="aa-home-art" aria-hidden="true">
       <picture>
-        {!fallbackArt && <source media="(max-width: 700px)" srcSet="/assets/optimized/menu-archive-sm.webp"/>}
-        <img src={fallbackArt ? '/assets/rooms/Archive_Original_REFERENCE.png' : '/assets/optimized/menu-archive.webp'} alt="" loading="eager" decoding="async" onError={() => setFallbackArt(true)}/>
+        {!fallbackArt && <source media="(orientation: portrait), (max-width: 700px)" srcSet="/assets/menu-approved-portrait.png"/>}
+        <img src={fallbackArt ? '/assets/optimized/menu-archive.webp' : '/assets/menu-approved-landscape.png'} alt="" loading="eager" fetchPriority="high" decoding="async" onError={() => setFallbackArt(true)}/>
       </picture>
     </div>
     <div className="aa-home-shade" aria-hidden="true"/>
-    <div className="aa-home-grid" aria-hidden="true"/>
-    <div className="aa-home-constellation" aria-hidden="true"><span/><span/><span/><span/><span/></div>
 
     <header className="aa-home-header">
       <div className="aa-home-identity"><ArchiveMark small/><span><strong>THE ASTRAL ARCHIVES</strong><small>TECHYON / INTERACTIVE EXPERIENCE</small></span></div>
@@ -123,7 +124,7 @@ export default function HomeScreen() {
         </div>
       </div>
       <div className="aa-home-hero-space" aria-hidden="true">
-        <div className="aa-home-art-caption"><span>01 / THE STATION</span><strong>ARCHIVE ACCESS</strong><small>SCIENCE · EVIDENCE · INVESTIGATION</small></div>
+        <div className="aa-home-art-caption"><span>01 / MARS SURFACE</span><strong>FIELD ARCHIVE</strong><small>EXPLORATION · ENGINEERING · DISCOVERY</small></div>
       </div>
     </section>
 
