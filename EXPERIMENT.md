@@ -62,7 +62,7 @@
 
 - Active branch: `experiment/room-case-library-layout-fix-2026-11-14`.
 - Latest deployed commit: `ec5379c3b58cf6c3f51e7c36774e3c65db66afff`.
-- Vercel preview: `https://astral-archives-2raqtvldm-mahmooud-kun.vercel.app`.
+- Vercel preview: `https://astral-archives-8igs468df-mahmooud-kun.vercel.app`.
 - Vercel status: **READY**. Build ran `tsc -b && vite build` successfully.
 - Existing Vite warning: the separate `Investigation360` chunk is 564.63 kB minified; it did not fail this build.
 - `npm run test:studio` / focused Node suites were not run in this session.
