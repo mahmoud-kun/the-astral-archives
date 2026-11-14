@@ -14,7 +14,7 @@
 .aa-home button:disabled{opacity:.45;cursor:not-allowed}
 .aa-home-art{position:absolute;inset:0;z-index:-4;overflow:hidden}
 .aa-home-art picture,.aa-home-art img{display:block;width:100%;height:100%}
-.aa-home-art img{object-fit:cover;object-position:50% 50%;filter:saturate(.96) brightness(.92);transform:scale(1.025);animation:aa-art-breathe 32s ease-in-out infinite alternate}
+.aa-home-art img{object-fit:cover;object-position:50% 50%;filter:saturate(1.03) brightness(1);transform:scale(1.025);animation:aa-art-breathe 32s ease-in-out infinite alternate}
 .aa-home-shade{position:absolute;inset:0;z-index:-3;pointer-events:none;
   background:
   linear-gradient(90deg,#06152208 0%,#06152212 30%,#06152255 48%,#061522d9 69%,#04111ff5 100%),
@@ -79,10 +79,6 @@
 .aa-home-minor-actions button{display:flex;align-items:center;gap:8px;border:0;background:transparent;color:#c1d1dc;font:600 11px "IBM Plex Mono",monospace;letter-spacing:.1em;padding:9px}
 .aa-home-minor-actions button:hover{color:#fff}
 .aa-home-hero-space{position:relative;grid-column:1;grid-row:1;align-self:stretch;min-width:0;pointer-events:none;z-index:0}
-.aa-home-art-caption{position:absolute;left:0;right:auto;bottom:6%;display:grid;gap:5px;border-left:2px solid #f0a970;background:#071e31a9;backdrop-filter:blur(8px);padding:11px 15px;text-align:left;min-width:238px}
-.aa-home-art-caption span{font:600 10px "IBM Plex Mono",monospace;letter-spacing:.17em;color:#f4b775}
-.aa-home-art-caption strong{font:600 13px "Orbitron",sans-serif;letter-spacing:.09em}
-.aa-home-art-caption small{font:500 9px "IBM Plex Mono",monospace;letter-spacing:.05em;color:#9dc4d3}
 .aa-home-footer{min-height:63px;display:flex;justify-content:space-between;gap:14px;align-items:center;border-top:1px solid #87afc125;background:#0615227e;font:600 10px "IBM Plex Mono",monospace;letter-spacing:.095em;color:#a9c3cf}
 .aa-home-footer b{color:#edaf75;margin:0 4px;font-weight:400}
 .aa-home-footer-diamond{display:inline-block;width:8px;height:8px;transform:rotate(45deg);border:1px solid #ebbb8c;margin-right:9px}
@@ -156,7 +152,6 @@
   .aa-home-hero-copy{grid-column:2;grid-row:1;max-width:540px}
   .aa-home-shade{background:linear-gradient(90deg,#06152208 0%,#06152225 25%,#061522a8 48%,#061522f0 75%,#04111ff7 100%),linear-gradient(180deg,#04111f80,transparent 34%,#061522bb)}
   .aa-home-title h1{font-size:clamp(53px,7vw,79px)}
-  .aa-home-art-caption{display:none}
   .aa-home-footer{font-size:8px}
 }
 @media(max-width:700px){
@@ -171,7 +166,6 @@
   .aa-home-hero{grid-template-columns:1fr;align-items:end;min-height:calc(100dvh - 124px);padding:30px 19px 34px}
   .aa-home-hero-copy{grid-column:1;grid-row:1;justify-self:stretch;max-width:520px;padding-top:24px}
   .aa-home-hero-space{grid-column:1;grid-row:1;min-height:100%}
-  .aa-home-art-caption{display:none}
   .aa-home-overline{font-size:9px;gap:8px;letter-spacing:.12em}
   .aa-home-overline>span:first-child{width:17px}
   .aa-home-hero-copy>.home-emblem{width:54px;height:54px;margin-top:18px}
@@ -265,7 +259,7 @@
   .aa-home-minor-actions button{font-size:9px;min-height:31px;gap:5px;letter-spacing:.05em;padding:3px 6px}
   .aa-home-minor-actions button svg{width:14px;height:14px}
   .aa-home-minor-actions>span{height:13px}
-  .aa-home-art-caption,.aa-home-footer{display:none}
+  .aa-home-footer{display:none}
   .aa-home-scrim{padding:6px max(10px,env(safe-area-inset-right)) 6px max(10px,env(safe-area-inset-left))}
   .aa-home-dialog{width:min(900px,100%);max-height:calc(100dvh - 12px)}
   .aa-home-dialog-head,.aa-home-dialog-footer{padding:8px 14px}
