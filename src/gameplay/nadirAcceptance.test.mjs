@@ -3,9 +3,9 @@ import assert from 'node:assert/strict'
 import { EVIDENCE_RECORDS } from '../archive/evidenceRecords.ts'
 import { countRequiredEvidence, discoverEvidence, emptyArchiveState, fileEvidence, rescueIsReady } from '../archive/archiveState.ts'
 import { NADIR_CHALLENGES, NADIR_ROOM, REQUIRED_NADIR, emptyNadir, solveNadir,
-  restoreNadir, verifyRescuePlan, type NadirAnswer } from './nadirEngine.ts'
+  restoreNadir, verifyRescuePlan } from './nadirEngine.ts'
 
-const correct:Record<string,NadirAnswer>={
+const correct={
   'NAD-06': {proof:'rerun',risk:'administrative'},
   'NAD-02': {source:'lbfs',target:'ns',converted:'53.37865938'},
   'NAD-01': {hypothesis:'units',rerun:'53.37865938',comparison:'same'},
@@ -25,13 +25,13 @@ test('Nadir investigation spans all four rooms without invented evidence',()=>{
 
 test('Multi-room correlated analysis cannot skip prerequisite evidence checks',()=>{
   const start=emptyNadir()
-  for(const id of ['NAD-01','NAD-03','NAD-05'] as const){
+  for(const id of ['NAD-01','NAD-03','NAD-05']){
     const attempt=solveNadir(start,id,correct[id])
     assert.equal(attempt.ok,false,`must block ${id} without correlated record`)
     assert.equal(attempt.next.solved.length,0)
   }
   let progress=start
-  for(const id of ['NAD-06','NAD-05','NAD-02','NAD-01','NAD-04','NAD-03'] as const){
+  for(const id of ['NAD-06','NAD-05','NAD-02','NAD-01','NAD-04','NAD-03']){
     const attempt=solveNadir(progress,id,correct[id])
     assert.equal(attempt.ok,true,`expected an evidence-supported outcome for ${id}`)
     progress=attempt.next
