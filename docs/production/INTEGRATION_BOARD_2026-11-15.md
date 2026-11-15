@@ -9,20 +9,20 @@
 
 | Stream | Owner | Start | Last handoff commit | Main verdict | P0 blocker |
 | --- | --- | --- | --- | --- | --- |
-| A — Case/Assets/Rooms | Specialist Chat A | PARTIAL HANDOFF received | `5843ba14`, `5aa87974` | HOLD (Main integration incomplete) | New four-case source index not yet wired into supporting present-room props; clean plates/past landscape need designer approval |
+| A — Case/Assets/Rooms | Specialist Chat A | IMPLEMENTATION + physical source rooms + Past hub integrated | current working branch | TECHNICAL FLOW REVIEWED / ART APPROVAL HOLD | Source desks and gated Past Timeline now wired; designer cleanup of plates and landscape visual review still pending |
 | B — Audio/Voice/SFX/Cinematics | Specialist Chat B | OWNED ASSETS + CODE COMPLETE | 5 source-exact MP3 + 20 SFX + 17 designer MP4; CI #43693601655 | **ACCEPT in specialist scope / game media QA HOLD** | 5 voices/cinematics awaiting Main browser + actual mobile listening, caption/script approval, KES art hold, AST 472W inconsistency |
-| C — Science/Puzzles | Specialist Chat C | SCOPED CODE COMPLETE | `a43ea2b` CI #85 | **ACCEPT in scope / Game HOLD** | 4 case modules implemented and scientifically audited; mounted gameplay and fresh full-case E2E are still pending |
-| Main — Integration/QA | Main Chat | Media integration wired, end-to-end audit in progress | `1fe67d2`–`36538da`, plus Main visual QA additions | NOT YET RELEASED | Browser media integration run pending, all-five-case complete E2E and real-device listening, landscape Past art, content rights and final presentation still pending |
+| C — Science/Puzzles | Specialist Chat C | CODE COMPLETE + NORMAL UI END-TO-END | `a43ea2b` + [CI #145](https://github.com/mahmoud-kun/the-astral-archives/actions/runs/43697949431) | **ACCEPT 4/4 integrated case paths / release HOLD** | Four Cases playable via original physical UI with no debug; Nadir fifth E2E and actual mobile/device approval outstanding |
+| Main — Integration/QA | Main Chat | Media 69-screen QA green; four full case E2E green | [CI #144](https://github.com/mahmoud-kun/the-astral-archives/actions/runs/43697185560), [CI #145](https://github.com/mahmoud-kun/the-astral-archives/actions/runs/43697949431) | INTEGRATION PASS IN CHECKED SCOPE / NO RELEASE | Nadir fifth browser E2E running in CI #146; device listening, content/art rights, Vercel preview and presentation remain |
 
 ## Five-case truth / proof matrix
 
 | Case ID | Name | Registration in UI | Confirmed interactive puzzles | Confirmed playable Rescue | Science signoff | Main acceptance |
 | --- | --- | --- | --- | --- | --- | --- |
-| KES | Kestrel | yes | 8 C-coded; Investigation source index mounted | Rescue route mounted; full normal-room path NOT VERIFIED | SCOPED C ACCEPT | HOLD |
+| KES | Kestrel | yes | 6 required analyzed/collected through real Archive/Recordings/Investigation UI | 6/6 → Past → diagnosis → engineering sign → reload **PASS** CI #145 | SCOPED C ACCEPT | ENGINEERING PASS / KES INTRO & OUTCOME ART HOLD |
 | NAD | Nadir | yes | Nadir vertical slice exists | Nadir rescue exists | PENDING INDEPENDENT AUDIT | HOLD |
-| LUM | Lumen | yes | 8 C-coded; Investigation source index mounted | Rescue route mounted; full normal-room path NOT VERIFIED | SCOPED C ACCEPT; optical tolerance open | HOLD |
-| ORI | Oriole | yes | 8 C-coded; Investigation source index mounted | Rescue route mounted; full normal-room path NOT VERIFIED | SCOPED C ACCEPT | HOLD |
-| AST | Asterion | yes | 8 C-coded; Investigation source index mounted | Rescue route mounted; full normal-room path NOT VERIFIED | SCOPED C ACCEPT; Phase B label corrected by Main | HOLD |
+| LUM | Lumen | yes | 6 required analyzed/collected through real UI | 6/6 → Past → diagnosis → engineering sign → outcome film → reload **PASS** CI #145 | SCOPED C ACCEPT; no invented flight tolerance | GAMEPLAY PASS / DEVICE HOLD |
+| ORI | Oriole | yes | 6 required analyzed/collected through real UI | 6/6 → Past → diagnosis → sensor filter → engineering sign → outcome film → reload **PASS** CI #145 | SCOPED C ACCEPT | GAMEPLAY PASS / DEVICE HOLD |
+| AST | Asterion | yes | 6 required analyzed/collected through real UI | 6/6 → Past → diagnosis → power replay → signed success → reload **PASS** CI #145 | SCOPED C ACCEPT; current Phase B | GAMEPLAY PASS / 472 W VIDEO CONTENT HOLD |
 
 **Proof requirement:** a case is PLAYABLE only if a clean save can navigate, inspect evidence, solve independent analysis, explicitly collect, move file, correctly unlock rescue, make engineering decisions, receive a case outcome and return — with no developer/debug bypass. Current case text/registry is not such proof.
 
@@ -54,7 +54,14 @@
 - Established new browser QA media scenarios and contact sheet in `tools/visual-qa.mjs` and `tools/visual-contact-sheet.py`; final integrated run still must be reviewed at its exact SHA before PASS is recorded.
 - A concurrent Chat A edit reintroduced a JS string apostrophe Syntax Error, now fixed narrowly on the latest shared file SHA at `36538da`; collaboration documented in [Issue #2](https://github.com/mahmoud-kun/the-astral-archives/issues/2#issuecomment-6891818060). Continue to respect active Chat A file ownership/reconcile changes.
 
-**Acceptance still pending:** actual desktop/mobile media playback, subtitles and speaker labels, NASA/third-party footage/music rights, Kestrel visual/story fit, incorrect Asterion outcome, optional Return-to-Present/Closing, four complete other-case E2E successes/reload/cross-filing, all new Past landscape art and designer clean plates, and presentation/deployment. Historical Sound Lab/CI proof is not an integrated playable-case acceptance.
+**Acceptance still pending:** subjective audio audition on Android/desktop, captions/speakers, NASA/third-party rights, Kestrel visual/story alignment, incorrect Asterion 472 W outcome, optional Return-to-Present/Closing, Nadir fifth full browser UI proof, artist-approved Past/clean plates, presentation and up-to-date Vercel deployment. Four new cases E2E and 69 Chrome screenshots are now **proven** at CI #145, not pending.
+
+## Verified release evidence — full four-case browser acceptance
+
+- [Chrome 69-scenario integrated media QA #144](https://github.com/mahmoud-kun/the-astral-archives/actions/runs/43697185560) SUCCESS, 69 screenshots, 0 console errors/missing captures/broken images/clipping/overflow, H.264 opening decoded in branded Chrome; source tests and Vite build PASS.
+- [No-debug gameplay QA #145](https://github.com/mahmoud-kun/the-astral-archives/actions/runs/43697949431) SUCCESS; [exact machine report](../../visual-qa/four-case-e2e-report.json). **KES, LUM, ORI, AST each PASS** complete browser journey: physical-source inspections in canonical rooms → authentic six analyzed → six explicit user collect → wrong folder and correction → 6/6 persisted over reload → portal video → four-stage Past Timeline → evidence-cited causal diagnosis → specialized verified engineering simulation → signed rescue → reload. LUM/ORI approved outcome videos also tested. **Not a bypass using pre-seeded localStorage or debug flags.**
+- [Fifth-case Nadir browser acceptance #146](https://github.com/mahmoud-kun/the-astral-archives/actions/runs/43698623376) is **IN PROGRESS** at board update, no verdict. Dedicated different custom UI includes NAV-042 ticket, chronology sorting, trajectory reruns, producer/parser physical chips, independent engineering unit checks. A separate [Nadir E2E report](../../visual-qa/nadir-e2e-report.json) will be generated if that CI stage executes.
+- **DO NOT merge to historical `main` or claim deployed release yet.** Vercel last checked READY deployment targets an older SHA, not this accepted integration. Full content/audio/art/release acceptance remains gated.
 
 ## Main Chat review checkpoints
 
