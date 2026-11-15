@@ -19,6 +19,7 @@ export default function CasePuzzle({id,onClose}:{id:OtherRecordId;onClose:()=>vo
  const collected=archive.discovered.includes(id)
  const [answer,setAnswer]=useState<CaseAnswer>({})
  const [submitted,setSubmitted]=useState(false)
+ const [sourceInspected,setSourceInspected]=useState(false)
  const [message,setMessage]=useState('')
  const [step,setStep]=useState<'inspect'|'analyze'>('inspect')
  const dialogRef=useRef<HTMLElement>(null)
@@ -49,7 +50,7 @@ export default function CasePuzzle({id,onClose}:{id:OtherRecordId;onClose:()=>vo
  const attempts=progress.attempts[id]??0
  const hints=progress.hints[id]??0
  const available=attempts>=4?2:attempts>=2?1:0
- const ready=missing.length===0&&task.fields.every(field=>answer[field.key]?.trim())
+ const ready=sourceInspected&&missing.length===0&&task.fields.every(field=>answer[field.key]?.trim())
  function chooseStep(next:'inspect'|'analyze'){
   setStep(next)
   if(scrollRef.current)scrollRef.current.scrollTop=0
@@ -92,7 +93,7 @@ export default function CasePuzzle({id,onClose}:{id:OtherRecordId;onClose:()=>vo
       <h3>{task.optional?'MEMORY FRAGMENT':'CASE INSTRUMENT'}</h3>
       <p className="cw-scene">{task.scene}</p>
       <CaseEvidenceExhibit id={id} answer={answer}/>
-      <details className="np-source-drawer">
+      <details className="np-source-drawer" onToggle={event=>{if(event.currentTarget.open)setSourceInspected(true)}}>
        <summary><span>OPEN RECORD FRAGMENTS</span><small>{task.fragments.length} INSPECTABLE SIGNALS</small></summary>
        <div className="np-source-drawer-body">{task.fragments.map((text,i)=>
         <div className="np-fragment" key={i}><b>TRACE {String(i+1).padStart(2,'0')}</b><p>{text}</p></div>)}</div>
@@ -104,6 +105,7 @@ export default function CasePuzzle({id,onClose}:{id:OtherRecordId;onClose:()=>vo
      </section>
      <section className="np-workbench">
       <h3>RECONSTRUCTION / ACTIVE WORKBENCH</h3>
+      {!solved&&!sourceInspected&&<p className="cw-inspect-first" role="status">FIRST: open the primary record fragments in the INSPECT panel. Verification requires an actual source review, not an unsupported guess.</p>}
       {missing.length>0&&<div className="np-dependency" role="status"><b>CORRELATED EVIDENCE REQUIRED</b><p>Check {missing.join(', ')} before verifying this record. You may inspect these sources now, but cannot certify a dependent inference in isolation.</p></div>}
       <form id={'cw-analyze-'+id} onSubmit={submit}>
        {task.fields.map(field=><label className="np-field" key={field.key}><span>{field.label}</span>
