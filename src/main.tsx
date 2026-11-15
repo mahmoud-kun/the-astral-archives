@@ -4,6 +4,7 @@ import HomeScreen from './HomeScreen'
 import LandscapeGuard from './LandscapeGuard'
 import { GAME_ROUTE_EVENT } from './gameNavigation'
 import { installGameAudio } from './audio/gameAudio'
+import { isOtherCaseId } from './gameplay/caseContext'
 import './styles.css'
 
 // Load each scene only when the player visits it. In particular, legacy
@@ -16,6 +17,7 @@ const ArchiveFolderLab = lazy(() => import('./archive/ArchiveFolderLab'))
 const StationRoom = lazy(() => import('./gameplay/StationRoom'))
 const EvidenceTray = lazy(() => import('./gameplay/EvidenceTray'))
 const NadirRescue = lazy(() => import('./gameplay/NadirRescue'))
+const CaseRescue = lazy(() => import('./gameplay/CaseRescue'))
 const AudioReviewLab = lazy(() => import('./audio/AudioReviewLab'))
 
 function AstralArchives() {
@@ -42,7 +44,9 @@ function AstralArchives() {
   const isOldFixedRoom = params.get('old-room') === '1'
   const roomParam = params.get('station')
   const station = roomParam === 'signal' || roomParam === 'archive' || roomParam === 'recordings' ? roomParam : null
-  const nadirRescue = params.get('rescue') === 'NAD'
+  const rescueCase = params.get('rescue')
+  const nadirRescue = rescueCase === 'NAD'
+  const otherCaseRescue = isOtherCaseId(rescueCase) ? rescueCase : null
 
   return <>
     <LandscapeGuard />
@@ -50,6 +54,7 @@ function AstralArchives() {
     {isAudioLab ? <AudioReviewLab /> :
       isArchiveFolderLab ? <ArchiveFolderLab /> :
       nadirRescue ? <NadirRescue /> :
+      otherCaseRescue ? <CaseRescue key={otherCaseRescue} caseId={otherCaseRescue}/> :
       isFixedRoom ? <InvestigationDesignerScene /> :
       station ? <StationRoom station={station} /> :
       isOldFixedRoom ? <FixedRoomAdventure /> :
