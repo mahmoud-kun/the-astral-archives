@@ -180,7 +180,7 @@ export const CASE_EVIDENCE_TASKS:Record<OtherRecordId,CaseTask>={
   'The Rescue intervention belongs in a preflight alternative-history branch, not an impossible last-second Earth command.',
   ['Consider light-time and onboard autonomy.','A safe trigger needs a safe response when one sensor fails.'],['ORI-03']),
  'ORI-07':t('Recordings','The flight director speaks only after the buffered data arrived.',
-  'Keep the causal clock honest.',
+  'Rebuild the causal event clock without confusing delayed reception with live control.',
   ['OPERATIONS / Contradictory telemetry found in delayed feed','The autonomous command sequence had already executed.'],
   [choice('timeline','What does this recording demonstrate?', 'after',['after','Post-event diagnosis, not an instantaneous intervention'],['before','Direct control of the last touchdown millisecond'],['proof','Proof every sensor was functioning'])],
   'Ground analysts can learn from the failure; delayed telemetry cannot retroactively stop an onboard event.',
