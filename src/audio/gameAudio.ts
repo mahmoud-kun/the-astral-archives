@@ -1,4 +1,4 @@
-import {playAstralSynth,silenceAstralSynth} from './astralSynth'
+import {playAstralSynth,silenceAstralSynth} from './astralSynth.ts'
 
 /**
  * The Astral Archives — optional, lazy, low-bandwidth game audio.
