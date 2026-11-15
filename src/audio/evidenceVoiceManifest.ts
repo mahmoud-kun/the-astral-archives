@@ -53,12 +53,13 @@ export const EVIDENCE_VOICE = {
 
 export type EvidenceVoiceId = keyof typeof EVIDENCE_VOICE
 
-/** Gains are informed by ffmpeg loudnorm measured I-LUFS (all ~-25.8 at 100% master); 
- * preview-only attenuation, source MP3s remain unchanged. Verify by ear on final device.
+/** The earlier extra attenuation made the spoken evidence barely audible at
+ * default settings. Balance each original MP3 toward understandable dialogue;
+ * preserve exact source bytes, user mute and the master level.
  */
 export function evidenceVoiceVolume(id:EvidenceVoiceId,masterVolume:number):number{
  const master=Number.isFinite(masterVolume)?Math.max(0,Math.min(100,masterVolume)):0
- return Number((master/100*EVIDENCE_VOICE[id].mixGain).toFixed(4))
+ return Number(Math.min(.94,master/40*(.49+.48*EVIDENCE_VOICE[id].mixGain)).toFixed(4))
 }
 
 export function isEvidenceVoiceId(id:unknown):id is EvidenceVoiceId{
