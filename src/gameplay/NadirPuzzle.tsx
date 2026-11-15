@@ -73,6 +73,8 @@ export default function NadirPuzzle({id,onClose}:{id:NadirRecord;onClose:()=>voi
  const attempts=progress.attempts[id]??0
  const hintCount=progress.hints[id]??0
  const possibleHints=attempts>=4?2:attempts>=2?1:0
+ const cannotVerify=locked.length>0||challenge.fields.some(field=>!answer[field.key]?.trim())||
+  (id==='NAD-01'&&(!answer.rawReplay||!answer.correctedReplay))
 
  function submit(event:FormEvent){
   event.preventDefault()
@@ -169,7 +171,7 @@ export default function NadirPuzzle({id,onClose}:{id:NadirRecord;onClose:()=>voi
        <b>DEPENDENCY NOT RESOLVED</b>
        <p>Complete the correlated investigation: {locked.join(', ')}. The record can be inspected now, but it cannot be validated until you have the supporting analysis.</p>
       </div>:null}
-      <form onSubmit={submit}>
+      <form id={'np-analyze-'+id} onSubmit={submit}>
        {id==='NAD-05'?<div className="np-timeline" aria-label="Reconstruct the historical order using move buttons">
          <p>MOVE THE EVENTS INTO CAUSAL ORDER. The order you build is submitted as your evidence timeline.</p>
          {timeline.map((eventId,index)=>{
@@ -192,8 +194,7 @@ export default function NadirPuzzle({id,onClose}:{id:NadirRecord;onClose:()=>voi
             {field.choices?.map(opt=><option key={opt.value} value={opt.value}>{opt.label}</option>)}
            </select>}
        </label>})}
-       {!solved&&<button className="np-primary" type="submit" disabled={locked.length>0||challenge.fields.some(field=>!answer[field.key]?.trim())||
-        (id==='NAD-01'&&(!answer.rawReplay||!answer.correctedReplay))}>VERIFY ANALYSIS</button>}
+       {!solved&&<button className="np-primary np-form-submit" type="submit" disabled={cannotVerify}>VERIFY ANALYSIS</button>}
       </form>
       {submitted&&!solved&&feedback&&<p className="np-error" role="status">{feedback} · Attempt {attempts}</p>}
       {solved&&<div className="np-success" role="status"><strong>ANALYSIS VERIFIED</strong><p>You've reconstructed the evidence chain. Collection is a separate, deliberate step.</p></div>}
@@ -208,8 +209,9 @@ export default function NadirPuzzle({id,onClose}:{id:NadirRecord;onClose:()=>voi
      </section>
     </div>
    </div>
-   <footer className={'np-foot'+(!solved||collected?' np-foot-nonaction':'')}>
+   <footer className={'np-foot'+(!solved||collected?' np-foot-nonaction':'')+(mobileStep==='analyze'?' np-step-analyze':'')}>
     <span>{collected?'COLLECTED · UNFILED OR FILED':solved?'READY FOR COLLECTION':'ANALYSIS IN PROGRESS'}</span>
+    {!solved&&<button type="submit" form={'np-analyze-'+id} disabled={cannotVerify} className="np-primary np-mobile-verify">VERIFY ANALYSIS</button>}
     {solved&&!collected&&<button className="np-primary" onClick={collect}>COLLECT EVIDENCE · {id}</button>}
     {collected&&<strong>✓ EVIDENCE COLLECTED</strong>}
     <button className="np-secondary" onClick={onClose}>RETURN TO STATION</button>
