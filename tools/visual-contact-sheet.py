@@ -51,6 +51,8 @@ sheet("mobile-review", [
  ("NADIR / FILED 1 OF 6 / 915×412","nadir-filed-folder-915x412.png"),
  ("RETURN TO SIGNAL / 915×412","nadir-collect-and-file-915x412.png"),
  ("FOLDERS / 915×412","folder-915x412.png"),
+ ("AUDIO SETTINGS / 915×412","audio-settings-915x412.png"),
+ ("SOUND LAB / 915×412","audio-lab-915x412.png"),
 ], (790,357))
 # Exact fullscreen viewport and left-side inventory placement comparisons.
 sheet("fullscreen-layout-review", [
