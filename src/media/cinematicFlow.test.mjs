@@ -3,6 +3,7 @@ import assert from 'node:assert/strict'
 import {
   CINEMATIC_FINISHED_EVENT,
   CINEMATIC_REQUEST_EVENT,
+  requestCinematic,
 } from './cinematicManifest.ts'
 import { clearCinematicFlow, requestCinematicFlow } from './cinematicFlow.ts'
 
@@ -104,4 +105,22 @@ test('cancelled listener never advances after a late cinematic event', () => {
   clearCinematicFlow()
   finished('opening', 'completed')
   assert.equal(advanced, false)
+})
+
+test('AST 472W outcome is blocked at the direct API and flow layer, not just in UI',()=>{
+ setup()
+ const calls=[]
+ let canStartCalled=false
+ let advanced=false
+ window.addEventListener(CINEMATIC_REQUEST_EVENT,event=>calls.push(event.detail.id))
+ requestCinematic('case5Outcome')
+ assert.deepEqual(calls,[])
+ assert.equal(requestCinematicFlow('case5Outcome',{
+  canStart:()=>{canStartCalled=true;return true},
+  onAdvance:()=>{advanced=true},
+ }),false)
+ assert.equal(canStartCalled,false)
+ finished('case5Outcome','completed')
+ assert.equal(advanced,false)
+ assert.deepEqual(calls,[])
 })
