@@ -1,5 +1,5 @@
 import {useEffect,useRef,useState} from 'react'
-import {AUDIO_SETTINGS_EVENT,claimCinematicAudioFocus,getAudioSettings} from './gameAudio'
+import {AUDIO_SETTINGS_EVENT,EVIDENCE_VOICE_STOP_EVENT,claimCinematicAudioFocus,getAudioSettings} from './gameAudio'
 import {EVIDENCE_VOICE,evidenceVoiceVolume,type EvidenceVoiceId} from './evidenceVoiceManifest'
 
 /** Prevent overlapping spoken evidence playback in one open game tab. */
@@ -22,8 +22,13 @@ export default function EvidenceVoicePlayer({id}:{id:EvidenceVoiceId}){
    const active=(event as CustomEvent<{id:EvidenceVoiceId}>).detail?.id
    if(active&&active!==id)audioRef.current?.pause()
   }
+  const stopForCinematic=()=>audioRef.current?.pause()
   window.addEventListener(EVIDENCE_VOICE_PLAY_EVENT,onVoiceStart)
-  return()=>window.removeEventListener(EVIDENCE_VOICE_PLAY_EVENT,onVoiceStart)
+  window.addEventListener(EVIDENCE_VOICE_STOP_EVENT,stopForCinematic)
+  return()=>{
+   window.removeEventListener(EVIDENCE_VOICE_PLAY_EVENT,onVoiceStart)
+   window.removeEventListener(EVIDENCE_VOICE_STOP_EVENT,stopForCinematic)
+  }
  },[id])
  useEffect(()=>{
   const update=()=>setSettings(getAudioSettings())
