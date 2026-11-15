@@ -8,17 +8,17 @@ import {readPastChoices} from './pastInterventionSave'
  * NASA telemetry, a technical sign-off, or any evidence/folder progress.
  * A prior one-button story completion does not bypass the new four repairs.
  */
-const KEY='astral-story-rescue-v1'
-type StorySave={version:1;completed:ArchiveCaseId[]}
+const KEY='astral-story-rescue-v2'
+type StorySave={version:2;completed:ArchiveCaseId[]}
 const CASES:readonly ArchiveCaseId[]=['KES','NAD','LUM','ORI','AST']
 function read():StorySave{
  try{
   const raw=JSON.parse(window.localStorage.getItem(KEY)??'null') as Partial<StorySave>|null
-  if(raw?.version===1&&Array.isArray(raw.completed)){
-   return {version:1,completed:[...new Set(raw.completed.filter((c):c is ArchiveCaseId=>CASES.includes(c as ArchiveCaseId)))]}
+  if(raw?.version===2&&Array.isArray(raw.completed)){
+   return {version:2,completed:[...new Set(raw.completed.filter((c):c is ArchiveCaseId=>CASES.includes(c as ArchiveCaseId)))]}
   }
  }catch{/* Private storage / malformed previous save. */}
- return {version:1,completed:[]}
+ return {version:2,completed:[]}
 }
 export function isStoryRescueComplete(id:ArchiveCaseId):boolean{
  return read().completed.includes(id)&&rescueIsReady(readArchive(),id)&&allStagesStable(id,readPastChoices(id))
@@ -28,7 +28,7 @@ export function completeStoryRescue(id:ArchiveCaseId):boolean{
  if(!rescueIsReady(readArchive(),id)||!allStagesStable(id,readPastChoices(id)))return false
  const save=read()
  if(!save.completed.includes(id)){
-  try{window.localStorage.setItem(KEY,JSON.stringify({version:1,completed:[...save.completed,id]}))}catch{/* Visible completion survives current session. */}
+  try{window.localStorage.setItem(KEY,JSON.stringify({version:2,completed:[...save.completed,id]}))}catch{/* Visible completion survives current session. */}
   window.dispatchEvent(new Event('astral:story-rescue-change'))
  }
  return true
