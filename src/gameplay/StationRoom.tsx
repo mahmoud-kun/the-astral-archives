@@ -129,7 +129,7 @@ export default function StationRoom({ station }: { station: OtherStation }) {
   useEffect(() => {
     if (!selected && !inspecting) return
     const onKey = (event: KeyboardEvent) => {
-      if (event.key === 'Escape') { setSelected(null); setInspecting(null) }
+      if (event.key === 'Escape' && !document.querySelector('.cm-backdrop')) { setSelected(null); setInspecting(null) }
     }
     window.addEventListener('keydown', onKey)
     return () => window.removeEventListener('keydown', onKey)
