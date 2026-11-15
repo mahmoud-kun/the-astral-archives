@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState, type KeyboardEvent as ReactKeyboardEvent } from 'react'
 import { createPortal } from 'react-dom'
-import { CASE_META, EVIDENCE_RECORDS, type ArchiveRoom } from '../archive/evidenceRecords'
+import { CASE_META, EVIDENCE_RECORDS } from '../archive/evidenceRecords'
+import { recordsAtObject, type EvidenceStation } from './evidencePlacement'
 import { countCaseCollectedEvidence } from '../archive/archiveState'
 import { navigateGame } from '../gameNavigation'
 import { useArchiveSave } from './gameSave'
@@ -13,11 +14,11 @@ function initialSelection(station:'investigation'|'archive'|'signal'|'recordings
  if(explicit)return explicit
  return readActiveCase()??(station==='signal'?'LUM':'KES')
 }
-/** A source browser attaches to one physical in-room instrument, not 32 new floating hotspots.
- * Chat A/Main mount this on existing non-Nadir supporting objects while Nadir stays unchanged.
+/** Each physical instrument exposes only its own assigned case documents.
+ * Sorting, case ownership, ID-based saves and collection behavior are unchanged.
  */
-export default function CaseStationDesk({station,onClose,initialCase}:{
- station:'investigation'|'archive'|'signal'|'recordings';onClose:()=>void;initialCase?:OtherCaseId
+export default function CaseStationDesk({station,onClose,initialCase,sourceObjectId}:{
+ station:EvidenceStation;onClose:()=>void;initialCase?:OtherCaseId;sourceObjectId?:string
 }){
  const [caseId,setCaseId]=useState<OtherCaseId>(()=>initialSelection(station,initialCase))
  const [selected,setSelected]=useState<OtherRecordId|null>(null)
@@ -45,10 +46,10 @@ export default function CaseStationDesk({station,onClose,initialCase}:{
   if(event.shiftKey&&document.activeElement===first){event.preventDefault();last.focus()}
   else if(!event.shiftKey&&document.activeElement===last){event.preventDefault();first.focus()}
  }
- const room=(station[0].toUpperCase()+station.slice(1)) as ArchiveRoom
- const alternateRooms=[...new Set(EVIDENCE_RECORDS.filter(r=>r.caseId===caseId).map(r=>r.room))]
- const items=EVIDENCE_RECORDS.filter(record=>
-  record.room===room&&record.caseId===caseId).sort((a,b)=>Number(b.required)-Number(a.required))
+ const room=station[0].toUpperCase()+station.slice(1)
+ const availableIds=sourceObjectId?new Set<string>(recordsAtObject(station,sourceObjectId)):null
+ const items=EVIDENCE_RECORDS.filter(record=>record.caseId===caseId && record.room===room && (!availableIds||availableIds.has(record.id)))
+  .sort((a,b)=>Number(b.required)-Number(a.required))
  function chooseCase(next:OtherCaseId){
   setCaseId(next)
   setSelected(null)
@@ -62,7 +63,7 @@ export default function CaseStationDesk({station,onClose,initialCase}:{
   <section className="cw-desk" ref={deskRef} role="dialog" aria-modal="true" aria-labelledby="cw-desk-heading" onKeyDown={trapTab}>
    <header className="cw-desk-head">
     <div><small>THE ASTRAL ARCHIVES / PHYSICAL STATION TERMINAL / {room.toUpperCase()}</small>
-     <h2 id="cw-desk-heading">SOURCE INDEX · {CASE_META[caseId].name.toUpperCase()}</h2></div>
+     <h2 id="cw-desk-heading">RECOVERED FILES · {CASE_META[caseId].name.toUpperCase()}</h2></div>
     <button ref={closer} type="button" onClick={onClose}>RETURN TO ROOM ×</button>
    </header>
    <div className="cw-desk-body">
@@ -70,7 +71,7 @@ export default function CaseStationDesk({station,onClose,initialCase}:{
      {OTHER_CASE_IDS.map(c=><button key={c} type="button" aria-current={c===caseId?'page':undefined} onClick={()=>chooseCase(c)}>
       <b>{c}</b><span>{CASE_META[c].name}</span></button>)}
     </nav>
-    <p className="cw-desk-story">Choose a recovered document from this room. Read the evidence, watch or listen to attached media, then press COLLECT EVIDENCE. No questions or quizzes. You choose the Mission Folder yourself.</p>
+    <p className="cw-desk-story">This equipment contains its own recovered records. Explore other objects and rooms to discover the remaining sources. Read, watch or listen, and press COLLECT EVIDENCE directly. Mission Folders and the six-of-eight Rescue rule are unchanged.</p>
     <div className="cw-desk-progress"><span>RESCUE UNLOCKS AFTER ANY SIX RECORDS COLLECTED</span>
      <strong>{Math.min(countCaseCollectedEvidence(archive,caseId),6)} / 6</strong><button type="button" onClick={openFolders}>OPEN MISSION FOLDERS</button></div>
     <div className="cw-desk-records">
@@ -83,7 +84,7 @@ export default function CaseStationDesk({station,onClose,initialCase}:{
        <small>{collected?'COLLECTED · FILING IS PLAYER-CONTROLLED':'OPEN EVIDENCE · READ & COLLECT'}</small>
       </button>
      })}
-     {!items.length&&<p className="cw-desk-empty">No {CASE_META[caseId].name} records are stored in {room}. Its source trail is in {alternateRooms.join(', ')}. Use that physical station or choose another case.</p>}
+     {!items.length&&<p className="cw-desk-empty">No {CASE_META[caseId].name} records are stored at this particular instrument. Explore other equipment to discover more sources.</p>}
     </div>
     <p className="cw-desk-disclaimer">ALL CASES AND MEASUREMENTS ARE FICTIONAL SIMULATIONS. NASA REFERENCE MISSIONS ARE NOT RECREATED AS TELEMETRY.</p>
    </div>
