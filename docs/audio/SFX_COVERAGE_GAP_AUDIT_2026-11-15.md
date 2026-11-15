@@ -55,3 +55,16 @@
 **No essential new downloadable SFX asset is missing for current prototype.** For the polished release, prioritize one distinct rescue completion cue and optionally the two interaction variants above *after* owner agrees. User/designer need not create them immediately; the remaining six already-sourced cues should be wired first.
 
 **Not verified:** actual first-gesture playback on the user's Android/Brave or Chrome device, final subjective loudness mix with the incoming voice-over, immersive spatial quality, and every Main-owned trigger in the final integrated game. Do not treat CI 19/19 source verification as subjective audio-quality approval.
+
+
+## Post-audit SFX implementation update (2026-11-15)
+
+The above 19-cue inventory/13-used/6-staged numbers refer to **the pre-fix baseline**. After the user's authorization, Chat B implemented the sound system changes on the same working branch: the **19 original WAV/M4A cues remain immutable**, and **one original 60,020-byte PCM WAV `rescue_completed_original_v1.wav` was added**. The engine now registers **20** playable one-shot cues.
+
+- **DONE:** all five recognized Rescue routes select `rescue` ambient scene rather than falling back to Home; verified Rescue success uses original `rescueComplete` chime while Archive 6/6 unlocking keeps the exact legacy `rescue` cue. This uses only the existing, authoritative gameplay sound calls: no save/diagnosis/unlock modifications.
+- **DONE (explicit hotspot buttons):** `signal` now replaces default scanner for a real existing case evidence hotspot in Signal Room; plain room entry, wrong folder filing and non-evidence equipment do not receive an alert.
+- **DONE:** sound audit and QA add source-exact Git blob SHA check, 20 binary signatures, action/context regression cases, and separate Sound Lab preview.
+- **Still staged / Main-owned:** the real-time portal initiation, mechanical/energy/metal/thruster one-shots, and first-party cinematic root/event hooks need exact Main event triggers; no filename-only or all-click inference is allowed.
+- **Not objectively approved:** subjective headphone/mobile listening or Voice Over balance.
+
+The authoritative final instructions, WAV provenance and minimal Main integration contract are in [SFX Finalization and Main Patch](SFX_FINALIZATION_AND_MAIN_PATCH_2026-11-15.md). Do not read the earlier recommendation “no new files” as an unfulfilled gap: the requested distinct Rescue completion is now produced and pushed.
