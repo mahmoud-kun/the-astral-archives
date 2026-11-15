@@ -10,12 +10,13 @@
     "typecheck": "tsc -b",
     "test:rescue": "node --test src/rescueEngine.test.mjs",
     "test:fixedroom": "node --test src/fixedRoomEvidence.test.mjs",
-    "test:studio": "npm run test:investigation && npm run test:fixedroom && npm run test:rescue && npm run test:archive && npm run test:navigation && npm run test:layers && npm run test:nadir",
+    "test:studio": "npm run test:investigation && npm run test:fixedroom && npm run test:rescue && npm run test:archive && npm run test:navigation && npm run test:layers && npm run test:nadir && npm run test:audio",
     "test:investigation": "node --test src/investigationCases.test.mjs",
     "test:archive": "node --test src/archive/archiveState.test.mjs",
     "test:navigation": "node --experimental-strip-types --test src/gameNavigation.test.mjs",
     "test:layers": "node --test src/investigationLayers.test.mjs",
-    "test:nadir": "node --experimental-strip-types --test src/gameplay/nadirEngine.test.mjs src/gameplay/nadirAcceptance.test.mjs"
+    "test:nadir": "node --experimental-strip-types --test src/gameplay/nadirEngine.test.mjs src/gameplay/nadirAcceptance.test.mjs",
+    "test:audio": "node --experimental-strip-types --test src/audio/gameAudio.test.mjs"
   },
   "dependencies": {
     "react": "^19.2.0",
