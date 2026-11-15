@@ -33,7 +33,7 @@ export default function CasePuzzle({id,onClose}:{id:OtherRecordId;onClose:()=>vo
   const before=document.activeElement instanceof HTMLElement?document.activeElement:null
   closeRef.current?.focus()
   const escape=(event:globalThis.KeyboardEvent)=>{
-   if(event.key==='Escape'){event.preventDefault();event.stopPropagation();onCloseRef.current()}
+   if(event.key==='Escape'&&!document.querySelector('.cm-backdrop')){event.preventDefault();event.stopPropagation();onCloseRef.current()}
   }
   window.addEventListener('keydown',escape,true)
   return ()=>{window.removeEventListener('keydown',escape,true);before?.focus()}
