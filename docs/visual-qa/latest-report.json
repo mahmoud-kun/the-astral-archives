@@ -1,24 +1,12 @@
 {
-  "run_on": "2026-11-15T09:51:35.440Z",
-  "screenshots": 70,
+  "run_on": "2026-11-15T09:57:22.200Z",
+  "screenshots": 71,
   "console_errors": 0,
   "broken_images": 0,
   "clipped_controls": 0,
   "overflows": 0,
-  "errors": [
-    {
-      "label": "kestrel-film-content-hold",
-      "viewport": {
-        "width": 915,
-        "height": 412
-      },
-      "error": "AssertionError [ERR_ASSERTION]: The input did not match the regular expression /awaits the approved visual/. Input:\n\n'CASE STATUS KES / INVESTIGATIONREQUIRED EVIDENCE0/ 06MISSION BRIEFING FILMPROJECT BRIEF / Early-phase design trade: the original payload, power and cost no longer fit the mission plan. Investigate the actual source records; no launch or assembly footage is represented as historical proof.DIAGNOSISINSIDE RESCUETechnical cause \u2192 process failure \u2192 consequence. Submit and verify the causal chain in the Rescue workstation after filing six required records.RESCUE MISSIONLOCKEDFile the six required evidence records in the correct mission folder to unlock.FICTIONAL CASE RECORDS. NOT AUTHENTIC NASA TELEMETRY.'\n",
-      "faults": []
-    }
-  ],
-  "missing_screenshots": [
-    "qa-artifacts/kestrel-film-content-hold-915x412.png"
-  ],
+  "errors": [],
+  "missing_screenshots": [],
   "image_transfer_bytes_by_route": [
     {
       "route": "/",
@@ -549,6 +537,15 @@
         "height": 412
       },
       "label": "lumen-briefing-film",
+      "bytes": 0
+    },
+    {
+      "route": "/?folder-lab=1",
+      "viewport": {
+        "width": 915,
+        "height": 412
+      },
+      "label": "kestrel-film-content-hold",
       "bytes": 0
     },
     {
