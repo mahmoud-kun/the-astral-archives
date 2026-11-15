@@ -60,3 +60,9 @@ background:radial-gradient(ellipse at 75% -20%,#16374e,#071424 68%);font-family:
 .al-cinema-cue button:hover{background:#f3c995}
 .al-cinema-cue button:focus-visible{outline:2px solid #9df4fa;outline-offset:2px}
 @media(orientation:landscape) and (max-height:600px){.al-cinema-cue{min-height:43px;padding:5px 8px;gap:5px}.al-cinema-cue strong{font-size:10px}.al-cinema-cue small{font-size:9px}.al-cinema-cue button{min-width:51px;min-height:29px;font-size:9px;padding:3px 5px}}
+
+/* Spoken case evidence is NOT one of the 19 original sound-effect rows. */
+.al-evidence-voice{display:grid;gap:8px;padding:13px;border-top:1px solid #2b5366;color:#e7f0f3}
+.al-evidence-voice strong{font:700 13px 'IBM Plex Sans',sans-serif}
+.al-evidence-voice small{color:#b1cad5;font:400 11px/1.5 'IBM Plex Sans',sans-serif}
+.al-evidence-voice audio{width:100%;height:38px;max-width:560px}
