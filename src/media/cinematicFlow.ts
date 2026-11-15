@@ -1,6 +1,7 @@
 import {
   CINEMATIC_FINISHED_EVENT,
   isCinematicId,
+  isLiveCinematicAllowed,
   requestCinematic,
   type CinematicFinished,
   type CinematicId,
@@ -33,7 +34,7 @@ let activeFlow: { id: CinematicId; listener: (event: Event) => void } | null = n
  * Skip advances only the presentation: authorization always belongs to Main.
  */
 export function requestCinematicFlow(id: CinematicId, options: CinematicFlowOptions): boolean {
-  if (typeof window === 'undefined' || activeFlow || !isCinematicId(id)) return false
+  if (typeof window === 'undefined' || activeFlow || !isCinematicId(id) || !isLiveCinematicAllowed(id)) return false
   if (!options.canStart()) return false
 
   const handleFinished = (event: Event) => {
