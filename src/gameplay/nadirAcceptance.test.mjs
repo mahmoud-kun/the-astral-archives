@@ -48,17 +48,17 @@ test('Numerical challenge rejects wrong impulse even with plausible theory',()=>
   assert.equal(valid.ok,true)
 })
 
-test('Manual collection and correct filing are separate Rescue prerequisites',()=>{
+test('Collecting any six case records unlocks Rescue; filing remains optional',()=>{
   let state=emptyArchiveState()
   for(const id of REQUIRED_NADIR)state=discoverEvidence(state,id)
   assert.equal(countRequiredEvidence(state,'NAD'),0)
-  assert.equal(rescueIsReady(state,'NAD'),false)
+  assert.equal(rescueIsReady(state,'NAD'),true)
   for(const id of REQUIRED_NADIR)state=fileEvidence(state,id,'KES')
   assert.equal(countRequiredEvidence(state,'NAD'),0)
-  assert.equal(rescueIsReady(state,'NAD'),false)
+  assert.equal(rescueIsReady(state,'NAD'),true)
   for(const id of REQUIRED_NADIR)state=fileEvidence(state,id,'NAD')
   assert.equal(countRequiredEvidence(state,'NAD'),6)
-  assert.equal(rescueIsReady(state,'NAD'),true,'user-approved rule: 6 correctly filed unlocks rescue; diagnosis is INSIDE rescue')
+  assert.equal(rescueIsReady(state,'NAD'),true,'six collected records unlock regardless of filing')
 })
 
 test('Rescue engineering rerun uses two independent numeric vectors and actual checks',()=>{
@@ -115,7 +115,7 @@ test('Nadir full state journey: six analyzed records, deliberate collect, wrong 
     first:'53.37865938',second:'0.8',
   }).passed,false,'one correct vector cannot conceal a wrong second vector')
   archive=fileEvidence(archive,'NAD-03',null)
-  assert.equal(rescueIsReady(archive,'NAD'),false,'moving any required record away relocks Rescue')
+  assert.equal(rescueIsReady(archive,'NAD'),true,'filing changes never erase collected evidence or relock Rescue')
   assert.equal(diagnosisIsSupported(archive,'NAD'),false,'accepted review must not appear verified with 5/6')
   archive=fileEvidence(archive,'NAD-03','NAD')
   assert.equal(rescueIsReady(archive,'NAD'),true,'returning record restores legitimate progress')
