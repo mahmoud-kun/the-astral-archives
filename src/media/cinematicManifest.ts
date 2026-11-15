@@ -107,6 +107,13 @@ export const CINEMATICS = {
  },
 } as const
 export type CinematicId=keyof typeof CINEMATICS
+export const CINEMATIC_LIVE_HOLDS={
+ case5Outcome:'Designer film shows 472 W verified, but the current Asterion rescue requires 450 W replay and target <=460 W. Preview only pending correction.',
+} as const
+export function isLiveCinematicAllowed(id:CinematicId):boolean{
+ return !Object.prototype.hasOwnProperty.call(CINEMATIC_LIVE_HOLDS,id)
+}
+
 export type CinematicOutcome='completed'|'skipped'|'returned'|'unavailable'
 export type CinematicFinished={id:CinematicId;outcome:CinematicOutcome}
 export function isCinematicId(id:unknown):id is CinematicId{
@@ -119,6 +126,8 @@ export function cinematicVolume(id:CinematicId,masterVolume:number):number{
 }
 /** Request only; evidence/route/rescue state remain controlled by Main. */
 export function requestCinematic(id:CinematicId):void{
+ // Silent deny for unapproved outcomes, even if a caller bypasses the catalog.
+ if(!isLiveCinematicAllowed(id))return
  if(typeof window!=='undefined')window.dispatchEvent(new CustomEvent(CINEMATIC_REQUEST_EVENT,{detail:{id}}))
 }
 export function dispatchCinematicFinished(result:CinematicFinished):void{
