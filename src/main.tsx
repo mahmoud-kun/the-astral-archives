@@ -5,6 +5,7 @@ import LandscapeGuard from './LandscapeGuard'
 import { GAME_ROUTE_EVENT } from './gameNavigation'
 import { installGameAudio } from './audio/gameAudio'
 import { isOtherCaseId } from './gameplay/caseContext'
+import CinematicOverlay from './media/CinematicOverlay'
 import './styles.css'
 
 // Load each scene only when the player visits it. In particular, legacy
@@ -62,6 +63,7 @@ function AstralArchives() {
       isLegacyView ? <App /> : <HomeScreen />}
     {(isFixedRoom || station) && <EvidenceTray room={isFixedRoom ? 'investigation' : station!}/>}
     </Suspense>
+    <CinematicOverlay />
   </>
 }
 
