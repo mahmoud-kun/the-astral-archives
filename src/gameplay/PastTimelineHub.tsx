@@ -6,7 +6,7 @@ import {playGameSound} from '../audio/gameAudio'
 import {readArchive,useArchiveSave} from './gameSave'
 import {PastStaticRoom} from './StationRoom'
 import {PAST_STAGES,pastRoute,type PastRoomId} from './pastTimeline'
-import {allStagesStable,interventionFor,isStageStable,stableStageCount} from './pastInterventions'
+import {allStagesStable,countConfiguredStages,evaluateRepairPlan,interventionFor} from './pastInterventions'
 import {readPastChoices,savePastChoice} from './pastInterventionSave'
 import './pastTimelineHub.css'
 
@@ -35,34 +35,41 @@ export default function PastTimelineHub({room,caseId}:{room:PastRoomId;caseId:Ar
  const [choices,setChoices]=useState(()=>readPastChoices(caseId))
  const [selected,setSelected]=useState<{id:string;target:string}|null>(null)
  const [controlsOpen,setControlsOpen]=useState(false)
+ const [reviewOpen,setReviewOpen]=useState(false)
  const [warning,setWarning]=useState('')
- useEffect(()=>{setChoices(readPastChoices(caseId));setSelected(null);setControlsOpen(false);setWarning('')},[room,caseId])
+ useEffect(()=>{
+  setChoices(readPastChoices(caseId));setSelected(null)
+  setControlsOpen(false);setReviewOpen(false);setWarning('')
+ },[room,caseId])
  const stage=PAST_STAGES.find(s=>s.id===room)!
+ const stageIndex=PAST_STAGES.findIndex(s=>s.id===room)
+ const nextStage=PAST_STAGES[(stageIndex+1)%PAST_STAGES.length]
  const intervention=interventionFor(caseId,room)
  const chosen=intervention.options.find(o=>o.id===choices[room])
- const isStable=isStageStable(caseId,room,choices[room])
- const stableCount=stableStageCount(caseId,choices)
+ const configured=countConfiguredStages(choices)
+ const issues=evaluateRepairPlan(caseId,choices)
  const readyToComplete=allStagesStable(caseId,choices)
- const nextUnstable=PAST_STAGES.find(s=>!isStageStable(caseId,s.id,choices[s.id]))
  function openEquipment(){
   setSelected({id:intervention.objectId,target:intervention.objectId})
-  setControlsOpen(true)
-  setWarning('')
+  setControlsOpen(true);setReviewOpen(false);setWarning('')
  }
  function applyChoice(id:string){
   if(!rescueIsReady(readArchive(),caseId)){setWarning('Collect six of the mission’s eight records first.');return}
   setChoices(savePastChoice(caseId,room,id))
-  setWarning('')
+  setReviewOpen(false);setWarning('')
   playGameSound('terminal')
  }
+ function reviewMission(){
+  setSelected(null);setControlsOpen(false);setWarning('')
+  setChoices(readPastChoices(caseId));setReviewOpen(true)
+ }
  function enterRescue(){
-  if(!rescueIsReady(readArchive(),caseId)){setWarning('Collect any six of eight case records to travel into the past.');return}
+  if(!rescueIsReady(readArchive(),caseId)){
+   setWarning('Collect any six of eight case records to enter the Past.');return
+  }
   if(!allStagesStable(caseId,readPastChoices(caseId))){
-   const missing=PAST_STAGES.find(s=>!isStageStable(caseId,s.id,readPastChoices(caseId)[s.id]))
-   setWarning('Stabilize all four mission systems before the rescue can succeed.'+(missing?' Next: '+missing.label+'.':''))
-   if(missing&&missing.id!==room)navigateGame(pastRoute(caseId,missing.id))
-   else openEquipment()
-   return
+   setWarning('The combined plan still contains engineering risks. Review your four systems.')
+   reviewMission();return
   }
   navigateGame('/?rescue='+encodeURIComponent(caseId))
  }
@@ -77,72 +84,95 @@ export default function PastTimelineHub({room,caseId}:{room:PastRoomId;caseId:Ar
  </main>
  return <div className="pt-root" role="region" aria-label={'Past Timeline — '+CASE_META[caseId].name}>
   <PastStaticRoom key={room} room={room} onBack={returnToDossiers}
-   onInspect={(target,id)=>{setSelected({target,id});setControlsOpen(id===intervention.objectId);setWarning('')}}/>
+   onInspect={(target,id)=>{setSelected({target,id});setControlsOpen(id===intervention.objectId);setReviewOpen(false);setWarning('')}}/>
   <header className="pt-top">
    <div className="pt-brand"><strong>PAST TIMELINE</strong><span>{caseId} · {CASE_META[caseId].name} / FICTIONAL SIMULATION</span></div>
    <nav className="pt-nav" aria-label="Past mission engineering stages">
     {PAST_STAGES.map(item=><button type="button" key={item.id}
      aria-current={item.id===room?'page':undefined}
-     className={(item.id===room?'pt-current ':'')+(isStageStable(caseId,item.id,choices[item.id])?'pt-stage-cleared':'')}
+     className={(item.id===room?'pt-current ':'')+(choices[item.id]?'pt-stage-configured':'')}
      onClick={()=>navigateGame(pastRoute(caseId,item.id))}>
-     {isStageStable(caseId,item.id,choices[item.id])?'✓ ':''}{item.label}
+     {choices[item.id]?'• ':''}{item.label}
     </button>)}
    </nav>
   </header>
   <footer className="pt-bottom">
    <button type="button" className="pt-return" onClick={returnToDossiers}>← ARCHIVES</button>
    <div className="pt-inspection" aria-live="polite">
-    <strong>{stableCount}/4 SYSTEMS STABILIZED · {stage.label}</strong>
-    <span>{isStable?chosen?.readout:'Operate '+intervention.system+' to change the mission.'}</span>
+    <strong>{configured}/4 CONFIGURATIONS APPLIED · {stage.label}</strong>
+    <span>{chosen?.readout??'Operate '+intervention.system+' and compare the outcomes.'}</span>
     {warning&&<em role="alert">{warning}</em>}
    </div>
-   <button type="button" className="pt-rescue" onClick={readyToComplete?enterRescue:openEquipment}>
-    {readyToComplete?'FINALIZE RESCUE →':isStable?'REVIEW SYSTEM ✓':'OPERATE SYSTEM →'}
-   </button>
+   <button type="button" className="pt-rescue" onClick={reviewMission}>REVIEW MISSION PLAN →</button>
   </footer>
   {selected&&<section className="pt-object-panel pt-intervention-panel" role="dialog" aria-modal="false"
     aria-label={'Past room equipment: '+selected.id.replaceAll('_',' ')}>
     <div className="pt-object-head">
-      <small>PAST · {stage.label} / {caseId}</small>
-      <button type="button" onClick={()=>{setSelected(null);setControlsOpen(false)}} aria-label="Close inspected object">CLOSE ×</button>
+     <small>PAST · {stage.label} / {caseId}</small>
+     <button type="button" onClick={()=>{setSelected(null);setControlsOpen(false)}} aria-label="Close inspected object">CLOSE ×</button>
     </div>
     <h2>{selected.id.replaceAll('_',' ').toUpperCase()}</h2>
     <p>{DETAILS[selected.target]??'Inspect the fictional mission system.'}</p>
     {!controlsOpen?<div className="pt-object-context">
       <strong>Engineering controls</strong>
-      <p>This room contains a repairable system. Use what you learned during the investigation to modify its configuration.</p>
+      <p>This room contains a configurable system. Consider the design trade-off before applying a change.</p>
       <button type="button" onClick={openEquipment}>OPERATE {intervention.system.toUpperCase()} →</button>
     </div>:<div className="pt-engineering">
       <div className="pt-system-status"><small>LIVE SYSTEM</small><strong>{intervention.system.toUpperCase()}</strong>
-        <p>{intervention.condition}</p>
+       <p>{intervention.condition}</p>
       </div>
-      <div className="pt-repair-choices" aria-label="Engineering configuration changes">
-       {intervention.options.map(option=><button key={option.id} type="button"
+      <div className={'pt-repair-choices pt-choices-'+intervention.options.length} aria-label="Engineering configuration choices">
+       {intervention.options.map((option,i)=><button key={option.id} type="button"
          aria-pressed={chosen?.id===option.id}
          className={(chosen?.id===option.id?'pt-option-selected ':'')+'pt-repair-option'}
          onClick={()=>applyChoice(option.id)}>
-          <span>{option.action}</span>
-          <small>{chosen?.id===option.id?'CURRENT CONFIGURATION':'APPLY CHANGE'}</small>
+         <small>CONFIGURATION {String(i+1).padStart(2,'0')}</small>
+         <span>{option.action}</span>
+         <small>{chosen?.id===option.id?'CURRENT PLAN':'APPLY THIS CONFIGURATION'}</small>
        </button>)}
       </div>
-      {chosen&&<div className={'pt-decision-effect '+(chosen.restores?'pt-decision-good':'pt-decision-risk')} role="status">
-        <small>{chosen.restores?'SYSTEM STABILIZED · VERIFIED FICTIONAL RESULT':'SYSTEM STILL AT RISK · ADJUST THE CONFIGURATION'}</small>
+      {chosen&&<div className="pt-decision-effect" role="status">
+        <small>SIMULATED SYSTEM RESPONSE · CONFIGURATION RECORDED</small>
         <strong>{chosen.readout}</strong>
         <p>{chosen.consequence}</p>
       </div>}
       <p className="pt-tradeoff"><strong>Engineering trade-off:</strong> {intervention.tradeoff}</p>
       <div className="pt-object-actions">
        <button type="button" onClick={()=>{setSelected(null);setControlsOpen(false)}}>BACK TO ROOM</button>
-       {isStable&&nextUnstable&&<button type="button" onClick={()=>navigateGame(pastRoute(caseId,nextUnstable.id))}>
-         NEXT REPAIR · {nextUnstable.label} →
-       </button>}
-       {readyToComplete&&<button type="button" onClick={enterRescue}>FINALIZE RESCUE →</button>}
+       <button type="button" onClick={()=>navigateGame(pastRoute(caseId,nextStage.id))}>NEXT ROOM · {nextStage.label} →</button>
+       <button type="button" onClick={reviewMission}>REVIEW COMBINED PLAN →</button>
       </div>
     </div>}
-    <small>Change your decision at any time. No quiz, penalty, or numerical answer is required.</small>
+    <small>You can revise any choice later. Some approaches work differently, and the overall result depends on your complete design.</small>
   </section>}
-  {!selected&&<button type="button" className="pt-floating-system" onClick={openEquipment}>
-    {isStable?'✓ SYSTEM STABILIZED · REVIEW':'OPERATE '+intervention.system.toUpperCase()}
+  {reviewOpen&&<section className="pt-object-panel pt-review-panel" role="dialog" aria-modal="false" aria-label="Mission engineering review">
+    <div className="pt-object-head"><small>{caseId} · ALTERNATE HISTORY DESIGN REVIEW</small>
+      <button type="button" onClick={()=>setReviewOpen(false)} aria-label="Close mission review">CLOSE ×</button>
+    </div>
+    <h2>ENGINEERING REVIEW · {configured}/4 CONFIGURED</h2>
+    <p>{readyToComplete?'The four system changes form a consistent fictional rescue plan. Review the trade-offs and finalize the alternate outcome.':'The combined mission plan still needs attention. Review the systems below, change configurations, and compare their consequences. More than one technical approach may work.'}</p>
+    <div className="pt-review-list">
+      {PAST_STAGES.map(item=>{
+        const current=choices[item.id]
+        const issue=issues.find(x=>x.room===item.id)
+        const plan=interventionFor(caseId,item.id)
+        const applied=plan.options.find(x=>x.id===current)
+        return <div key={item.id} className="pt-review-line">
+          <strong>{item.label} · {plan.system}</strong>
+          <p>{applied?applied.readout:'No configuration selected yet'}</p>
+          {issue&&<small>{issue.message}</small>}
+          <button type="button" onClick={()=>navigateGame(pastRoute(caseId,item.id))}>{issue?'REVISIT SYSTEM':'REVIEW CONFIGURATION'} →</button>
+        </div>
+      })}
+    </div>
+    <div className="pt-object-actions">
+     <button type="button" onClick={()=>setReviewOpen(false)}>CONTINUE EXPLORING</button>
+     {readyToComplete&&<button type="button" onClick={enterRescue}>FINALIZE RESCUE →</button>}
+    </div>
+    <small>All parameters and results are fictional design simulations, not authentic flight data.</small>
+  </section>}
+  {!selected&&!reviewOpen&&<button type="button" className="pt-floating-system" onClick={openEquipment}>
+    {chosen?'CHANGE '+intervention.system.toUpperCase():'OPERATE '+intervention.system.toUpperCase()}
   </button>}
  </div>
 }
