@@ -1,24 +1,12 @@
 {
-  "run_on": "2026-11-15T03:57:03.123Z",
-  "screenshots": 43,
+  "run_on": "2026-11-15T04:01:13.849Z",
+  "screenshots": 44,
   "console_errors": 0,
   "broken_images": 0,
   "clipped_controls": 0,
   "overflows": 0,
-  "errors": [
-    {
-      "label": "audio-lab",
-      "viewport": {
-        "width": 915,
-        "height": 412
-      },
-      "error": "AssertionError [ERR_ASSERTION]: Sound Lab must expose all 19 source cues\n\n23 !== 19\n",
-      "faults": []
-    }
-  ],
-  "missing_screenshots": [
-    "qa-artifacts/audio-lab-915x412.png"
-  ],
+  "errors": [],
+  "missing_screenshots": [],
   "image_transfer_bytes_by_route": [
     {
       "route": "/",
@@ -397,6 +385,15 @@
       },
       "label": "audio-settings",
       "bytes": 140166
+    },
+    {
+      "route": "/?audio-lab=1",
+      "viewport": {
+        "width": 915,
+        "height": 412
+      },
+      "label": "audio-lab",
+      "bytes": 0
     },
     {
       "route": "/",
