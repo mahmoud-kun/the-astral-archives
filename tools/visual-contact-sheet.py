@@ -78,6 +78,19 @@ sheet("case-integration-review", [
  ("PRODUCTION DEBUG GUARD", "production-debug-guard-915x412.png"),
 ], (790,357))
 
+# First browser capture set for media entry points and scientific holds.
+sheet("media-integration-review", [
+ ("OPENING / REAL PLAYER", "cinematic-opening-active-915x412.png"),
+ ("SOURCE INDEX / ARCHIVE", "source-desk-archive-915x412.png"),
+ ("SOURCE INDEX / SIGNAL", "source-desk-signal-915x412.png"),
+ ("SOURCE INDEX / RECORDINGS", "source-desk-recordings-915x412.png"),
+ ("NAD-07 / VOICE INSPECTOR", "nadir-voice-inspector-915x412.png"),
+ ("KES-05 / VOICE INSPECTOR", "kestrel-voice-inspector-915x412.png"),
+ ("NAD-02 / VIDEO INSPECTOR", "nadir-evidence-video-915x412.png"),
+ ("LUMEN / PLAY INTRO", "cinematic-lumen-intro-915x412.png"),
+ ("KESTREL / CONTENT HOLD", "kestrel-film-content-hold-915x412.png"),
+], (790,357))
+
 report=json.loads((SRC/"report.json").read_text())
 summary={
  "run_on":report["started"],
