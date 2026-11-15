@@ -1,5 +1,8 @@
 # The Astral Archives — Team and Chat Workflow
 
+> **CURRENT OPERATING MODEL — 2026-11-15:** The user approved a **five-hour, three-specialist-chat parallel release sprint**, replacing the historical two-chat model below for the active release. **Main Chat** is Production Lead, single final acceptance/release owner and presentation/QA coordinator. Specialist **A = Cases/Assets/Room Integration**, **B = Audio/Cinematics/Media**, **C = Science/Puzzles/Rescue Audit**. Read [the authoritative sprint plan](production/PARALLEL_RELEASE_PLAN_2026-11-15.md) and its three work orders before editing. The older October "one repo, two chats", portrait assumptions and other conflicting statements below remain historical only. The approved working branch remains `experiment/room-case-library-layout-fix-2026-11-14`; do not create branches, merge to `main`, or alter overlapping files without owner approval. All specialist results are reviewed by Main, then integrated QA determines release readiness.
+
+
 Last updated: 2026-10-30
 
 ## Team ownership
