@@ -132,3 +132,9 @@ with Image.open(source_plate) as original:
         assert average_error<6, "Compressed background diverges visibly from approved art; reject optimization"
         (OUT/"background-optimization.json").write_text(json.dumps(metrics,indent=2))
         print("[VISUAL-QA] Optimized approved clean plate:",metrics)
+
+# Generate a review-only, unbranded Mission Target candidate from the exact
+# immutable runtime source. CI publishes it under docs/visual-qa first; the
+# integration specialist must inspect it before using it in gameplay.
+import subprocess,sys
+subprocess.run([sys.executable,"tools/patch-mission-target-art.py"],check=True)
