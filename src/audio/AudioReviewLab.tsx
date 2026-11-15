@@ -5,6 +5,7 @@ import './audioReviewLab.css'
 import {CinematicPlayer} from '../media/CinematicOverlay'
 import {CINEMATICS,isLiveCinematicAllowed,type CinematicId} from '../media/cinematicManifest'
 import EvidenceVoicePlayer from './EvidenceVoicePlayer'
+import {EVIDENCE_VOICE,type EvidenceVoiceId} from './evidenceVoiceManifest'
 
 const ORIGINAL:readonly {cue:GameSound;label:string;use:string}[]=[
  {cue:'hover',label:'UI Hover',use:'Quiet pointer feedback · 0.10s'},
@@ -91,8 +92,10 @@ export default function AudioReviewLab(){
    </div>)}
   </section>
   <section className="al-list" aria-label="Designer spoken evidence review" style={{margin:'18px auto',maxWidth:'900px'}}>
-   <header><h2>DESIGNER VOICE · KES-05</h2><small>1 MP3 · RECORDINGS ROOM · PUBLISHING PENDING</small></header>
-   <EvidenceVoicePlayer id="KES-05"/>
+   <header><h2>DESIGNER VOICE · FIVE CASES</h2><small>5 MP3 · RECORDINGS ROOM · SOURCE VERIFIED</small></header>
+   {(Object.keys(EVIDENCE_VOICE) as EvidenceVoiceId[]).map(id=>
+    <EvidenceVoicePlayer key={id} id={id}/>)}
+   <p className="al-license">All files are fictional case evidence. KES-07 and ORI-08 are optional text/visual memories, not missing mandatory audio. Captions and speaker identity require final script review.</p>
   </section>
   {previewClip&&<CinematicPlayer id={previewClip} onFinish={()=>setPreviewClip(null)}/>}
   <footer>PRODUCTION AUDIO PREVIEW · ORIGINAL FILES PRESERVED · ZERO PAID SERVICES</footer>
