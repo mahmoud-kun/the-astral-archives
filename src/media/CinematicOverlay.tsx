@@ -12,14 +12,16 @@ export function CinematicPlayer({id,onFinish}:{id:CinematicId;onFinish:(outcome:
  const skipRef=useRef<HTMLButtonElement|null>(null)
  const doneRef=useRef(false)
  const [settings,setSettings]=useState(getAudioSettings)
+ const [movieVolume,setMovieVolume]=useState(()=>getAudioSettings().volume)
  const [soundMuted,setSoundMuted]=useState(false)
+ const [autoplayBlocked,setAutoplayBlocked]=useState(false)
  const [reducedMotion]=useState(()=>typeof window!=='undefined'&&typeof window.matchMedia==='function'&&window.matchMedia('(prefers-reduced-motion: reduce)').matches)
  const [status,setStatus]=useState<ClipStatus>(reducedMotion?'reduced-motion':'loading')
  const [duration,setDuration]=useState<number>(clip.duration)
  const [position,setPosition]=useState(0)
  const [fullscreenError,setFullscreenError]=useState(false)
  const [attempted,setAttempted]=useState(false)
- const volume=cinematicVolume(id,settings.volume)
+ const volume=cinematicVolume(id,movieVolume)
  const allowedSound=volume>0
  const muted=soundMuted||!allowedSound
 
@@ -38,6 +40,7 @@ export function CinematicPlayer({id,onFinish}:{id:CinematicId;onFinish:(outcome:
   }
  },[])
 
+ useEffect(()=>{setMovieVolume(settings.volume)},[settings.volume])
  useEffect(()=>{
   const video=videoRef.current
   if(!video)return
@@ -61,7 +64,10 @@ export function CinematicPlayer({id,onFinish}:{id:CinematicId;onFinish:(outcome:
   // policy blocks unmuted playback, offer PLAY; do not silently mute it.
   setAttempted(true)
   const playback=video.play()
-  if(playback)void playback.catch(()=>setStatus(s=>s==='loading'?'paused':s))
+  if(playback)void playback.catch((error:unknown)=>{
+   if((error as DOMException)?.name==='NotAllowedError')setAutoplayBlocked(true)
+   setStatus(s=>s==='loading'?'paused':s)
+  })
  },[id,reducedMotion])
 
  const finish=useCallback((outcome:CinematicOutcome)=>{
@@ -84,9 +90,13 @@ export function CinematicPlayer({id,onFinish}:{id:CinematicId;onFinish:(outcome:
   if(!video)return
   if(video.ended||status==='ended')video.currentTime=0
   setAttempted(true)
+  setAutoplayBlocked(false)
   setStatus('loading')
   const result=video.play()
-  if(result)void result.catch(()=>setStatus('paused'))
+  if(result)void result.catch((error:unknown)=>{
+   if((error as DOMException)?.name==='NotAllowedError')setAutoplayBlocked(true)
+   setStatus('paused')
+  })
  }
  const replay=()=>{
   const video=videoRef.current
@@ -118,7 +128,7 @@ export function CinematicPlayer({id,onFinish}:{id:CinematicId;onFinish:(outcome:
      controls={false} muted={muted} disablePictureInPicture
      onLoadedMetadata={e=>{const d=e.currentTarget.duration;if(Number.isFinite(d)&&d>0)setDuration(d)}}
      onTimeUpdate={e=>setPosition(e.currentTarget.currentTime)}
-     onPlaying={()=>setStatus('playing')}
+     onPlaying={()=>{setAutoplayBlocked(false);setStatus('playing')}}
      onPause={()=>setStatus(s=>s==='playing'?'paused':s)}
      onWaiting={()=>setStatus(s=>s==='ended'?s:'loading')}
      onEnded={()=>setStatus('ended')}
@@ -128,10 +138,11 @@ export function CinematicPlayer({id,onFinish}:{id:CinematicId;onFinish:(outcome:
       {unavailable?<><strong>VIDEO UNAVAILABLE</strong><p>This designer clip did not load. Your investigation save is unchanged.</p></>:
        isDone?<><strong>RECORDING COMPLETE</strong><p>Replay the clip or continue.</p></>:
        status==='reduced-motion'?<><strong>REDUCED MOTION ENABLED</strong><p>Playback starts only after you select Play.</p></>:
-       <><strong>PLAYBACK PAUSED</strong><p>Select Play to resume this recording.</p></>}
-      {!unavailable&&!isDone&&<button type="button" data-sfx="none" onClick={play}>PLAY RECORDING</button>}
+       <><strong>{autoplayBlocked?'TAP TO PLAY WITH SOUND':'PLAYBACK PAUSED'}</strong><p>{autoplayBlocked?'Your browser blocked automatic playback with audio. Press Play With Sound to start the original video with sound enabled.':'Select Play to resume this recording.'}</p></>}
+      {!unavailable&&!isDone&&<button type="button" data-sfx="none" onClick={play}>{muted?'PLAY RECORDING':'PLAY WITH SOUND'}</button>}
      </div>}
     {status==='loading'&&attempted&&<span className="cm-loading" role="status">LOADING RECORDING…</span>}
+    <div className="cm-playback-progress" role="progressbar" aria-label="Video playback progress" aria-valuemin={0} aria-valuemax={100} aria-valuenow={Math.min(100,Math.round(duration>0?position/duration*100:0))}><span style={{width:(duration>0?Math.min(100,position/duration*100):0)+'%'}}/></div>
    </div>
    <footer className="cm-controls">
     <div className="cm-transport">
@@ -140,14 +151,18 @@ export function CinematicPlayer({id,onFinish}:{id:CinematicId;onFinish:(outcome:
      <span className="cm-time" aria-label="Playback progress">{Math.floor(position)} / {Math.ceil(duration)}s</span>
     </div>
     <div className="cm-actions">
-     <button data-sfx="none" type="button" disabled={unavailable} onClick={()=>setSoundMuted(v=>!v)} aria-pressed={muted}>{muted?'UNMUTE VIDEO':'MUTE VIDEO'}</button>
+     <label className="cm-volume"><span>VIDEO VOL {movieVolume}%</span><input type="range" min="0" max="100" step="5" value={movieVolume} aria-label="Video audio volume" onChange={e=>{const next=Number(e.target.value);setMovieVolume(next);if(next>0)setSoundMuted(false)}}/></label>
+     <button data-sfx="none" type="button" disabled={unavailable} onClick={()=>{
+       if(muted&&movieVolume===0){setMovieVolume(70);setSoundMuted(false)}
+       else setSoundMuted(v=>!v)
+     }} aria-pressed={muted}>{muted?'UNMUTE VIDEO':'MUTE VIDEO'}</button>
      <button data-sfx="none" type="button" disabled={unavailable} onClick={toggleFullscreen}>FULLSCREEN</button>
      <button data-sfx="none" type="button" onClick={()=>finish('returned')}>RETURN</button>
      <button data-sfx="none" type="button" className="cm-primary" onClick={()=>finish(unavailable?'unavailable':isDone?'completed':'skipped')}>{unavailable?'CONTINUE WITHOUT VIDEO':isDone?'CONTINUE':'SKIP & CONTINUE'}</button>
     </div>
    </footer>
    {fullscreenError&&<p className="cm-info" role="status">Fullscreen is unavailable in this browser. Inline playback remains available.</p>}
-   <p className="cm-info">Sound is on by default. Mute and Skip are optional · Video playback never changes evidence or rescue gates.</p>
+   <p className="cm-info">Audio is on by default. Browsers may require one explicit Play With Sound tap. Mute, volume, and Skip are optional; film playback never changes evidence or rescue gates.</p>
   </section>
  </div>
 }
