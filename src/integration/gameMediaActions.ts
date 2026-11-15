@@ -1,9 +1,7 @@
-import { diagnosisIsSupported, rescueIsReady } from '../archive/archiveState'
+import { rescueIsReady } from '../archive/archiveState'
 import { findEvidence, type ArchiveCaseId } from '../archive/evidenceRecords'
 import { navigateGame } from '../gameNavigation'
-import { readArchive, readNadir } from '../gameplay/gameSave'
-import { readOtherProgress } from '../gameplay/caseSave'
-import { otherRescueCompleted } from '../gameplay/caseRescueEngine'
+import { readArchive } from '../gameplay/gameSave'
 import { isStoryRescueComplete } from '../gameplay/storyRescueState'
 import { caseIntroCinematic, evidenceContextCinematic, verifiedCaseOutcomeCinematic } from '../media/caseCinematicCatalog'
 import { requestCinematicFlow } from '../media/cinematicFlow'
@@ -58,16 +56,9 @@ export function playEvidenceContext(evidenceId:string):boolean {
 
 /** Only the real engineering state may authorize a verified alternate outcome. */
 export function verifiedRescueState(caseId:ArchiveCaseId):boolean {
- // Story-mode outcomes are authorized by the real six-file gate and the player's
- // completed in-past rescue sequence, never by obsolete quiz/test flags.
- if(isStoryRescueComplete(caseId))return true
- const archive=readArchive()
- if(caseId==='NAD'){
-  const nadir=readNadir()
-  return rescueIsReady(archive,'NAD')&&diagnosisIsSupported(archive,'NAD')&&
-   nadir.rescue.submitted&&nadir.rescue.rerunPassed
- }
- return otherRescueCompleted(archive,readOtherProgress(),caseId)
+ // Only the real six-evidence gate and four repaired Past systems authorize
+ // a fictional outcome; legacy quiz/test saves never bypass the new path.
+ return isStoryRescueComplete(caseId)
 }
 
 /** The UI may display a verified-outcome film action only when its content is releasable. */
