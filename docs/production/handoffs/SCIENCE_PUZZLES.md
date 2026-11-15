@@ -54,7 +54,9 @@ Per case, 8 authored records = **6 required + 2 optional**; 5 cases = **40**. Th
 
 - Actual GitHub Actions runs on the shared branch execute `npm run build`, which runs `npm run test:studio`, then TypeScript build and Vite bundle, then desktop/mobile Chromium visual tests when compilation passes.
 - [Run #43673780381](https://github.com/mahmoud-kun/the-astral-archives/actions/runs/43673780381) **FAILED** at `test:nadir` 13/14, due to one legacy assertion expecting two unearned hints on restore. The assertion was corrected in commit `4a7dbe3` rather than weakening the new invariant.
-- [Run #43673995391](https://github.com/mahmoud-kun/the-astral-archives/actions/runs/43673995391) on state-journey commit `2a3f3e9` — **PENDING RESULT AT FIRST REPORT**; inspect current run before Main accepts. Do not equate a prior run's success with these commits.
+- [Run #43673995391](https://github.com/mahmoud-kun/the-astral-archives/actions/runs/43673995391) on state-journey commit `2a3f3e9` — **CANCELLED** by a concurrent newer push, no final QA result.
+- [Run #43674140140](https://github.com/mahmoud-kun/the-astral-archives/actions/runs/43674140140) at `13e19b4` (includes all three Chat C code commits) — **43/43 unit tests PASS** across 8 test suites: investigation 3, fixed room 4, rescue 6, archive 6, navigation 3, layers 3, Nadir 15, audio 3. TypeScript and Vite build **PASS**. Its Chromium visual QA was **CANCELLED** after a subsequent concurrent branch push, so the full run did not pass.
+- [Run #43674281572](https://github.com/mahmoud-kun/the-astral-archives/actions/runs/43674281572) on further audio/media changes was **IN PROGRESS** at this documentation update. Main must review latest HEAD and the final uncancelled full run, not reuse old screenshots as proof.
 - New physical-device QA, complete Nadir browser E2E, all-four remaining case rescues, 1366×768 / 915×412 per-case screenshot captures and actual designer media playback: **NOT VERIFIED by Chat C**.
 
 ## Blockers, exact requests, and reproduction
