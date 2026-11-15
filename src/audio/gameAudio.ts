@@ -9,6 +9,8 @@
  */
 export const AUDIO_SETTINGS_KEY = 'astral-audio-settings-v1'
 export const AUDIO_SETTINGS_EVENT = 'astral:audio-settings-change'
+/** Explicit speech interruption when a cinematic opens (not a gameplay event). */
+export const EVIDENCE_VOICE_STOP_EVENT='astral:evidence-voice-stop'
 
 export type GameAudioSettings = {
   effects: boolean
