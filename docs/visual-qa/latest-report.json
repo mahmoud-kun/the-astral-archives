@@ -1,24 +1,12 @@
 {
-  "run_on": "2026-11-15T03:16:42.250Z",
-  "screenshots": 43,
+  "run_on": "2026-11-15T03:19:56.010Z",
+  "screenshots": 44,
   "console_errors": 0,
   "broken_images": 0,
   "clipped_controls": 0,
   "overflows": 0,
-  "errors": [
-    {
-      "label": "audio-lab",
-      "viewport": {
-        "width": 915,
-        "height": 412
-      },
-      "error": "AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n\nfalse !== true\n",
-      "faults": []
-    }
-  ],
-  "missing_screenshots": [
-    "qa-artifacts/audio-lab-915x412.png"
-  ],
+  "errors": [],
+  "missing_screenshots": [],
   "image_transfer_bytes_by_route": [
     {
       "route": "/",
@@ -397,6 +385,15 @@
       },
       "label": "audio-settings",
       "bytes": 140166
+    },
+    {
+      "route": "/?audio-lab=1",
+      "viewport": {
+        "width": 915,
+        "height": 412
+      },
+      "label": "audio-lab",
+      "bytes": 0
     },
     {
       "route": "/",
