@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
+import { lazy, Suspense, useEffect, useRef, useState } from 'react'
 import archiveManifest from '../../public/assets/rooms/archive/layers/original/manifest.json'
 import signalManifest from '../../public/assets/rooms/signal/layers/original/manifest.json'
 import recordingsManifest from '../../public/assets/rooms/recordings/layers/original/manifest.json'
@@ -11,7 +11,12 @@ import { useArchiveSave, useNadirSave } from './gameSave'
 import { NADIR_ROOM, stationLabel, stationRoute, type NadirRecord, type StationId } from './nadirEngine'
 import './stationRoom.css'
 
+const CaseStationDesk = lazy(() => import('./CaseStationDesk'))
+
 type OtherStation = Exclude<StationId, 'investigation'>
+const SOURCE_DESK_OBJECT: Record<OtherStation,string> = {
+  archive:'archive_shelving', signal:'telemetry_console_left', recordings:'audio_analysis_terminal',
+}
 type RoomManifest = typeof archiveManifest | typeof signalManifest | typeof recordingsManifest
 type Scene = {
   manifest: RoomManifest
@@ -32,7 +37,7 @@ const ROOM_SCENES: Record<OtherStation, Scene> = {
       receiver_rack: 'NAD-02',
     },
     context: {
-      telemetry_console_left: 'The left telemetry station is a supporting instrument. Nadir navigation evidence is collected at the main signal display and receiver rack; this workstation has no separate collectible yet.',
+      telemetry_console_left: 'The left telemetry station provides an index of source signals for the other four investigations. Inspect its records in the interactive analyzer; Nadir evidence remains available at its original instruments.',
       telemetry_console_right: 'The right telemetry station is a supporting instrument. No independent evidence recording or analysis puzzle has been approved for this workstation.',
     },
   },
@@ -46,7 +51,7 @@ const ROOM_SCENES: Record<OtherStation, Scene> = {
       archive_filing_drawers: 'NAD-08',
     },
     context: {
-      archive_shelving: 'The shelving holds the wider mission collection. Use Mission Folders to inspect and file evidence you have already collected; this shelving overlay does not create a new record.',
+      archive_shelving: 'The archive shelving hosts a case source index for four additional mission investigations. Opening an analyzer never automatically collects or files evidence. Mission Folders remain available separately.',
     },
   },
   recordings: {
@@ -58,7 +63,7 @@ const ROOM_SCENES: Record<OtherStation, Scene> = {
       recording_equipment_rack: 'NAD-07',
     },
     context: {
-      audio_analysis_terminal: 'This audio terminal is a supporting source-art object. It has no separately authored or verified clip; inspect the recording rack for the optional Nadir review memory.',
+      audio_analysis_terminal: 'The audio analysis terminal provides recordings and investigative records for the other four missions. Optional voice playback is inside the original evidence inspector; Nadir's review memory stays on the rack.',
       video_playback_console: 'Playback controls are represented in the source artwork. The authored Nadir chronology evidence is available on the main video display; no independent clip is connected to this console.',
       headphones_dock: 'The headphones are an inspectable art prop. No independent recording is attached to this object.',
     },
@@ -75,6 +80,7 @@ export default function StationRoom({ station }: { station: OtherStation }) {
   const [hovered, setHovered] = useState<string | null>(null)
   const [selected, setSelected] = useState<NadirRecord | null>(null)
   const [inspecting, setInspecting] = useState<string | null>(null)
+  const [sourceDeskOpen, setSourceDeskOpen] = useState(false)
   const [plateSrc, setPlateSrc] = useState(scene.asset)
   const archive = useArchiveSave()
   const research = useNadirSave()
@@ -82,6 +88,7 @@ export default function StationRoom({ station }: { station: OtherStation }) {
   useEffect(() => {
     setSelected(null)
     setInspecting(null)
+    setSourceDeskOpen(false)
     setHovered(null)
     setPlateSrc(scene.asset)
     maskCache.current = {}
@@ -202,7 +209,7 @@ export default function StationRoom({ station }: { station: OtherStation }) {
             data-sfx="scanner"
             className={id ? 'sr-hotspot sr-anchor-target' : 'sr-prop-target sr-anchor-target'}
             title={object.interaction.label}
-            aria-label={object.interaction.label + (record ? ': ' + record.title : ': equipment inspection only') +
+            aria-label={object.interaction.label + (record ? ': ' + record.title : object.id===SOURCE_DESK_OBJECT[station] ? ': mission source index' : ': equipment inspection only') +
               (collected ? ', evidence collected' : solved ? ', analyzed' : '')}
             onFocus={() => setHovered(object.id)}
             onBlur={() => setHovered(null)}
@@ -236,7 +243,7 @@ export default function StationRoom({ station }: { station: OtherStation }) {
       <span>Investigative tools · all records are fictional training simulations</span>
     </div>
     <footer className="sr-foot">
-      <span>NADIR / EVIDENCE INVESTIGATION</span>
+      <span>FIVE CASES / EVIDENCE INVESTIGATION</span>
       <span>INSPECT → ANALYZE → MANUALLY COLLECT → FILE</span>
     </footer>
     {inspectedObject && <div className="sr-inspection-shade" role="presentation">
@@ -246,6 +253,10 @@ export default function StationRoom({ station }: { station: OtherStation }) {
         <h2>{inspectedObject.interaction.label}</h2>
         <p>{scene.context[inspectedObject.id] ?? 'No additional verified case record is connected to this equipment.'}</p>
         <div className="sr-inspection-actions">
+          {inspectedObject.id === SOURCE_DESK_OBJECT[station] &&
+            <button onClick={() => {setInspecting(null);setSourceDeskOpen(true)}}>
+              OPEN MISSION SOURCE INDEX
+            </button>}
           {inspectedObject.id === 'archive_shelving' &&
             <button onClick={() => navigateGame('/?folder-lab=1&return=archive')}>
               OPEN MISSION FOLDERS
@@ -256,5 +267,8 @@ export default function StationRoom({ station }: { station: OtherStation }) {
     </div>}
     {selected && NADIR_ROOM[selected] === station &&
       <NadirPuzzle key={selected} id={selected} onClose={() => setSelected(null)}/>}
+    {sourceDeskOpen && <Suspense fallback={<div className="aa-route-loading" role="status">ACCESSING MISSION SOURCES…</div>}>
+      <CaseStationDesk station={station} onClose={()=>setSourceDeskOpen(false)}/>
+    </Suspense>}
   </main>
 }
