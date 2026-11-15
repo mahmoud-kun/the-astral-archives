@@ -12,7 +12,7 @@ export function CinematicPlayer({id,onFinish}:{id:CinematicId;onFinish:(outcome:
  const skipRef=useRef<HTMLButtonElement|null>(null)
  const doneRef=useRef(false)
  const [settings,setSettings]=useState(getAudioSettings)
- const [soundRequested,setSoundRequested]=useState(false)
+ const [soundMuted,setSoundMuted]=useState(false)
  const [reducedMotion]=useState(()=>typeof window!=='undefined'&&typeof window.matchMedia==='function'&&window.matchMedia('(prefers-reduced-motion: reduce)').matches)
  const [status,setStatus]=useState<ClipStatus>(reducedMotion?'reduced-motion':'loading')
  const [duration,setDuration]=useState<number>(clip.duration)
@@ -20,8 +20,8 @@ export function CinematicPlayer({id,onFinish}:{id:CinematicId;onFinish:(outcome:
  const [fullscreenError,setFullscreenError]=useState(false)
  const [attempted,setAttempted]=useState(false)
  const volume=cinematicVolume(id,settings.volume)
- const allowedSound=settings.effects&&volume>0
- const muted=!soundRequested||!allowedSound
+ const allowedSound=volume>0
+ const muted=soundMuted||!allowedSound
 
  useEffect(()=>{
   const previous=document.activeElement instanceof HTMLElement?document.activeElement:null
@@ -57,7 +57,8 @@ export function CinematicPlayer({id,onFinish}:{id:CinematicId;onFinish:(outcome:
   if(reducedMotion)return
   const video=videoRef.current
   if(!video)return
-  // Muted autoplay only. If blocked, the explicit Play control remains.
+  // Start WITH SOUND on user-initiated video requests. If browser autoplay
+  // policy blocks unmuted playback, offer PLAY; do not silently mute it.
   setAttempted(true)
   const playback=video.play()
   if(playback)void playback.catch(()=>setStatus(s=>s==='loading'?'paused':s))
@@ -139,14 +140,14 @@ export function CinematicPlayer({id,onFinish}:{id:CinematicId;onFinish:(outcome:
      <span className="cm-time" aria-label="Playback progress">{Math.floor(position)} / {Math.ceil(duration)}s</span>
     </div>
     <div className="cm-actions">
-     <button data-sfx="none" type="button" disabled={!allowedSound||unavailable} onClick={()=>setSoundRequested(v=>!v)} aria-pressed={soundRequested&&allowedSound}>{soundRequested&&allowedSound?'MUTE VIDEO':'ENABLE VIDEO SOUND'}</button>
+     <button data-sfx="none" type="button" disabled={unavailable} onClick={()=>setSoundMuted(v=>!v)} aria-pressed={muted}>{muted?'UNMUTE VIDEO':'MUTE VIDEO'}</button>
      <button data-sfx="none" type="button" disabled={unavailable} onClick={toggleFullscreen}>FULLSCREEN</button>
      <button data-sfx="none" type="button" onClick={()=>finish('returned')}>RETURN</button>
      <button data-sfx="none" type="button" className="cm-primary" onClick={()=>finish(unavailable?'unavailable':isDone?'completed':'skipped')}>{unavailable?'CONTINUE WITHOUT VIDEO':isDone?'CONTINUE':'SKIP & CONTINUE'}</button>
     </div>
    </footer>
    {fullscreenError&&<p className="cm-info" role="status">Fullscreen is unavailable in this browser. Inline playback remains available.</p>}
-   <p className="cm-info">Optional playback · Master volume and Sound Effects toggle apply · This player never changes evidence or rescue gates.</p>
+   <p className="cm-info">Sound is on by default. Mute and Skip are optional · Video playback never changes evidence or rescue gates.</p>
   </section>
  </div>
 }
