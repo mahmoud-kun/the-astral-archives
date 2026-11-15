@@ -158,3 +158,10 @@ These are **content handoff instructions, not claims that a video or audio clip 
 
 **Updated room-selection UX:** the selected KES/LUM/ORI/AST case now persists across room terminals with a separate, presentation-only localStorage key astral-active-mission-v1; explicit Main-provided initialCase overrides it. An empty current-room source index tells the player which actual physical rooms contain that case's authored records. This change needs final latest-code CI and new mounted browser QA.
 
+
+### Final regression after station-to-station case continuity
+
+[**GitHub Actions run #43677635915 — SUCCESS**](https://github.com/mahmoud-kun/the-astral-archives/actions/runs/43677635915), exact application code SHA **63666c19**: **60/60 unit tests PASS**, TypeScript/Vite Build PASS; **44 historical-route Chromium screenshots PASS**, 0 broken images, clipped controls, overflows or browser console errors. This run includes the station-to-station selected-case persistence correction. No subsequent Chat C application-code modifications. Documentation and cross-team issue comments are not runtime changes.
+
+**Release interpretation remains HOLD:** new non-Nadir case overlays and rescue routes are not yet mounted by A/Main, so those 44 screenshots contain **no successful non-Nadir Rescue walk-through**. The production debug-intake bypass still requires Main's patch; four-case browser gameplay end-to-end and designer approval remain pending.
+
