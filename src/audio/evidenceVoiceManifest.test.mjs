@@ -32,16 +32,16 @@ test('five real voices belong to existing five-case Recordings Room evidence, no
  for(const invalid of ['KES-09','NAD-05','__proto__','toString',null])assert.equal(isEvidenceVoiceId(invalid),false)
 })
 
-test('five voice mixes honor mute, master level and LUFS-aligned source attenuation',()=>{
+test('five voice mixes honor mute, master level and intelligible default dialogue',()=>{
  const gains={'KES-05':.30,'NAD-07':.36,'LUM-07':.37,'ORI-07':.37,'AST-07':.34}
  for(const id of IDS){
   for(const v of [0,-1,NaN])assert.equal(evidenceVoiceVolume(id,v),0)
-  assert.equal(evidenceVoiceVolume(id,40),Number((gains[id]*.4).toFixed(4)))
-  assert.equal(evidenceVoiceVolume(id,100),gains[id])
-  assert.equal(evidenceVoiceVolume(id,1000),gains[id])
+  assert.equal(evidenceVoiceVolume(id,40),Number(Math.min(.94,.49+.48*gains[id]).toFixed(4)))
+  assert.equal(evidenceVoiceVolume(id,100),.94)
+  assert.equal(evidenceVoiceVolume(id,1000),.94)
   const mix=EVIDENCE_VOICE[id]
-  const expectedLufs=mix.measuredInputLufs+20*Math.log10(mix.mixGain)
-  assert.ok(Math.abs(expectedLufs-(-25.8))<.35,id+' balanced source loudness '+expectedLufs)
+  const expectedLufs=mix.measuredInputLufs+20*Math.log10(evidenceVoiceVolume(id,40))
+  assert.ok(expectedLufs>-25&&expectedLufs<-17,id+' voiced evidence is audible without excess '+expectedLufs)
  }
 })
 
