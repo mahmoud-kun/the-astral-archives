@@ -265,6 +265,78 @@ await check(mobile,'/?folder-lab=1&debug=1','production-debug-guard',async page=
  assert.equal(await page.locator('.af-reset').count(),0)
  assert.ok(await page.locator('.af-intake').isVisible())
 })
+// Real Main media wiring: these checks exercise UI entry points, not only
+// Chat B's standalone Sound Lab. They do not certify human-audible output.
+await check(mobile,'/','opening-to-investigation',async page=>{
+ await page.locator('.aa-home-cta').click()
+ await page.locator('.cm-backdrop').waitFor({state:'visible',timeout:7000})
+ assert.match(await page.locator('.cm-panel').textContent(),/The Astral Archives — Opening/)
+ const src=await page.locator('.cm-video').getAttribute('src')
+ assert.equal(src,'/assets/video/designer-game-opening-v1.mp4')
+ const head=await page.evaluate(async path=>{
+  const r=await fetch(path,{method:'HEAD'})
+  return {status:r.status,type:r.headers.get('content-type')}
+ },src)
+ assert.equal(head.status,200,'Opening video must be served')
+ assert.ok(head.type?.includes('video/mp4'),'Opening video MIME type must be MP4')
+ await page.screenshot({path:`${output}/cinematic-opening-active-915x412.png`,animations:'disabled'})
+ await page.getByRole('button',{name:'SKIP & CONTINUE'}).click()
+ await page.locator('.idr-root').waitFor({state:'visible'})
+ assert.equal(await page.locator('.cm-backdrop').count(),0)
+})
+for(const [station,object] of [
+ ['archive','archive_shelving'],
+ ['signal','telemetry_console_left'],
+ ['recordings','audio_analysis_terminal'],
+]){
+ await check(mobile,'/?station='+station,'source-desk-'+station,async page=>{
+  await page.locator('.sr-prop-target[data-object-id="'+object+'"]').click()
+  await page.getByRole('button',{name:'OPEN MISSION SOURCE INDEX'}).click()
+  await page.locator('.cw-desk').waitFor({state:'visible'})
+  assert.equal(await page.locator('.cw-case-tabs button').count(),4)
+ })
+}
+await check(mobile,'/?station=recordings','nadir-voice-inspector',async page=>{
+ await page.locator('.sr-hotspot[data-evidence-id="NAD-07"]').click()
+ await page.locator('.np-dialog').waitFor({state:'visible'})
+ assert.match(await page.locator('.im-evidence-media audio').getAttribute('src'),/designer-nad-07-engineer-review-v1.mp3/)
+ assert.equal(await page.locator('.im-evidence-media audio').getAttribute('preload'),'none')
+ assert.equal(await page.getByRole('button',{name:/COLLECT EVIDENCE · NAD-07/}).count(),0)
+})
+await check(mobile,'/?station=recordings','kestrel-voice-inspector',async page=>{
+ await page.locator('.sr-prop-target[data-object-id="audio_analysis_terminal"]').click()
+ await page.getByRole('button',{name:'OPEN MISSION SOURCE INDEX'}).click()
+ await page.locator('.cw-desk-record').filter({hasText:'KES-05'}).click()
+ await page.locator('.np-dialog').waitFor({state:'visible'})
+ assert.match(await page.locator('.im-evidence-media audio').getAttribute('src'),/designer-kes-05-analyst-review-v1.mp3/)
+ assert.equal(await page.getByRole('button',{name:/COLLECT EVIDENCE · KES-05/}).count(),0)
+})
+await check(mobile,'/?station=signal','nadir-evidence-video',async page=>{
+ await page.locator('.sr-hotspot[data-evidence-id="NAD-02"]').click()
+ await page.locator('.np-dialog').waitFor({state:'visible'})
+ await page.locator('.im-media-video button').click()
+ await page.locator('.cm-backdrop').waitFor({state:'visible'})
+ assert.equal(await page.locator('.cm-video').getAttribute('src'),'/assets/video/designer-case-2-units-mismatch-evidence-v1.mp4')
+ await page.getByRole('button',{name:'SKIP & CONTINUE'}).click()
+ await page.locator('.np-dialog').waitFor({state:'visible'})
+ assert.equal(await page.getByRole('button',{name:/COLLECT EVIDENCE · NAD-02/}).count(),0,
+  'Skipping the film must never grant collection before analysis')
+})
+await check(mobile,'/?folder-lab=1','lumen-briefing-film',async page=>{
+ await page.locator('.af-folder-choice').filter({hasText:'Lumen'}).click()
+ await page.getByRole('button',{name:'PLAY LUMEN INTRO'}).click()
+ await page.locator('.cm-backdrop').waitFor({state:'visible'})
+ assert.equal(await page.locator('.cm-video').getAttribute('src'),'/assets/video/designer-case-3-intro-v1.mp4')
+ await page.screenshot({path:`${output}/cinematic-lumen-intro-915x412.png`,animations:'disabled'})
+ await page.getByRole('button',{name:'RETURN',exact:true}).click()
+ assert.match(page.url(),/folder-lab=1/)
+ assert.match(await page.locator('.af-workhead h1').textContent(),/LUMEN/)
+})
+await check(mobile,'/?folder-lab=1','kestrel-film-content-hold',async page=>{
+ await page.locator('.af-folder-choice').filter({hasText:'Kestrel'}).click()
+ assert.equal(await page.getByRole('button',{name:'PLAY KESTREL INTRO'}).count(),0)
+ assert.match(await page.locator('.af-status').textContent(),/awaits the approved visual/)
+})
 await check({width:390,height:844},'/','portrait-guard')
 await writeFile(`${output}/report.json`, JSON.stringify(report,null,2))
 await browser.close()
