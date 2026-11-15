@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { navigateGame } from './gameNavigation'
+import { requestCinematicFlow } from './media/cinematicFlow'
 import { getAudioSettings, setAudioSettings, playGameSound, type GameAudioSettings } from './audio/gameAudio'
 import './homeScreen.css'
 
@@ -10,7 +11,7 @@ const CASE_PREVIEWS = [
   { code: 'NAD', name: 'Nadir', title: 'Two Numbers for One Interface', phase: 'PHASE B', hook: 'Two engineering teams cannot reconcile the same spacecraft navigation results.' },
   { code: 'LUM', name: 'Lumen', title: 'The Telescope That Passed', phase: 'PHASE C / D', hook: 'A telescope passes inspection, yet its first images raise difficult questions.' },
   { code: 'ORI', name: 'Oriole', title: 'The Landing Signal', phase: 'PHASE D / E', hook: 'The landing sequence ends with a signal that does not match the mission timeline.' },
-  { code: 'AST', name: 'Asterion', title: 'The Stamp in the Archive', phase: 'CROSS-PHASE / ACTIVE', hook: 'A current mission faces an urgent review as unexpected changes appear in its archive.' },
+  { code: 'AST', name: 'Asterion', title: 'The Stamp in the Archive', phase: 'PHASE B / PDR', hook: 'A development-stage mission faces an urgent preliminary design review as unexplained power-test records appear in its archive.' },
 ] as const
 
 function MiniSymbol({ kind, size = 20 }: { kind: 'play' | 'folder' | 'settings' | 'info' | 'close' | 'arrow' | 'expand' | 'back' | 'check'; size?: number }) {
@@ -78,7 +79,14 @@ export default function HomeScreen() {
   }, [reduceMotion])
 
   function enterInvestigation() {
-    navigateGame('/?room=1')
+    // Returning players continue at their saved evidence; new players see
+    // the authored opening only after explicitly pressing Start.
+    if(hasSave){navigateGame('/?room=1');return}
+    requestCinematicFlow('opening',{
+      canStart:()=>true,
+      onAdvance:()=>navigateGame('/?room=1'),
+      onReturn:()=>{},
+    })
   }
   async function toggleFullscreen() {
     try {
