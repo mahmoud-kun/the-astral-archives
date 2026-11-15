@@ -16,6 +16,7 @@ const ArchiveFolderLab = lazy(() => import('./archive/ArchiveFolderLab'))
 const StationRoom = lazy(() => import('./gameplay/StationRoom'))
 const EvidenceTray = lazy(() => import('./gameplay/EvidenceTray'))
 const NadirRescue = lazy(() => import('./gameplay/NadirRescue'))
+const AudioReviewLab = lazy(() => import('./audio/AudioReviewLab'))
 
 function AstralArchives() {
   const [route, setRoute] = useState(() => window.location.pathname + window.location.search)
@@ -33,6 +34,7 @@ function AstralArchives() {
   }, [])
 
   const params = new URLSearchParams(route.split('?')[1] ?? '')
+  const isAudioLab = params.get('audio-lab') === '1'
   const isArchiveFolderLab = params.get('folder-lab') === '1'
   const isRescueWorkbench = params.get('workbench') === '1'
   const isFixedRoom = params.get('room') === '1'
@@ -45,7 +47,8 @@ function AstralArchives() {
   return <>
     <LandscapeGuard />
     <Suspense fallback={<div className="aa-route-loading" role="status" aria-live="polite"><span>THE ASTRAL ARCHIVES</span><strong>ACCESSING STATION RECORDS…</strong></div>}>
-    {isArchiveFolderLab ? <ArchiveFolderLab /> :
+    {isAudioLab ? <AudioReviewLab /> :
+      isArchiveFolderLab ? <ArchiveFolderLab /> :
       nadirRescue ? <NadirRescue /> :
       isFixedRoom ? <InvestigationDesignerScene /> :
       station ? <StationRoom station={station} /> :
