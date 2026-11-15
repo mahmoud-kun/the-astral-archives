@@ -2,27 +2,41 @@
 
 **Owner:** Chat B, Audio/Cinematics; **date:** 2026-11-15.
 **Branch:** `experiment/room-case-library-layout-fix-2026-11-14`.
-**Status:** CODE/PATCH READY; **NOT live-wired or film-deployed**, awaiting Main's shared-file edits, video upload, case-identity and art approval. This document is the definitive *placement request* for the four actually delivered clips only. Future footage will get its own versioned additions.
+**Status:** CODE/PATCH READY; **NOT live-wired or film-deployed**, awaiting Main's shared-file edits, video upload and artistic footage approval. **Case identities/sequence are already settled by Evidence Bible v2.** This document is the definitive *placement request* for the four actually delivered clips only. Future footage will get its own versioned additions.
+
+## Authoritative case numbering (verified directly from designer's Evidence file)
+
+Source: [Cases Evidence Production Bible v2.docx](https://docs.google.com/document/d/1lGpnlCkWYZowYNge9Fcd14wGeZH3FdWr/edit) in NASA Drive, section sequence `KES · Kestrel`, `NAD · Nadir`, `LUM · Lumen`, `ORI · Oriole`, `AST · Asterion`. This also matches `CASE_CODES` in `src/archive/evidenceRecords.ts`, `INVESTIGATION_CASES`, and `HomeScreen` previews.
+
+| Official # | Case | Code |
+| --- | --- | --- |
+| **01** | Kestrel — The Mission That Outgrew Its Plan | **KES** |
+| **02** | Nadir — Two Numbers for One Interface | **NAD** |
+| **03** | Lumen — The Telescope That Passed | **LUM** |
+| **04** | Oriole — The Landing Signal | **ORI** |
+| **05** | Asterion — The Stamp in the Archive | **AST** |
+
+This order is **LOCKED by the user** for cinematic IDs, evidence grouping, case folders, UI, and future video delivery. `case1Intro` and `case1Outcome` map **only to KES**, never NAD. Audio manifest now includes `caseId:'KES'` for these clips. Source/story accuracy remains a separate approval step, not a reason to renumber cases.
 
 ## 1. Verified game topology — important before wiring
 
 - `/` — `src/HomeScreen.tsx`: START INVESTIGATION / CONTINUE INVESTIGATION currently call `enterInvestigation()` -> `navigateGame('/?room=1')`.
 - `/?room=1` — `src/InvestigationDesignerScene.tsx`: Investigation Room; Mission Briefing, Evidence Board, Room Door, Rescue Console. Briefing opens mission folders at `/?folder-lab=1&return=investigation`.
-- `/?folder-lab=1&return=investigation` — `src/archive/ArchiveFolderLab.tsx`: 5 mission dossier tabs; component initially selects **NAD**, *not* case #1. The first registered case is **KES — Kestrel** (see `src/investigationCases.ts` / `src/HomeScreen.tsx`), followed by NAD, LUM, ORI, AST.
+- `/?folder-lab=1&return=investigation` — `src/archive/ArchiveFolderLab.tsx`: five dossier tabs are ordered **KES, NAD, LUM, ORI, AST**. The current view restores the saved active case if present, otherwise falls back to **NAD**; this initial selection is a UI default, **not** a change in case numbering. Main may set a new-save default to KES without renumbering any files.
 - `/?station=recordings` — `src/gameplay/StationRoom.tsx`: physical Recordings Room with `main_video_display` currently bound to **NAD-05** and `recording_equipment_rack` to **NAD-07**. Neither is a generic KES cinematics hook; do not overwrite their evidence or pretend a designer movie verifies a fictional analysis.
 - `/?rescue=NAD` — `src/gameplay/NadirRescue.tsx`: functioning Nadir engineering rescue. Enter access is guarded by `rescueIsReady(archive,'NAD')`, six correctly filed records; within rescue, diagnosis and rerun remain mandatory.
-- KES/LUM/ORI/AST pure puzzle/rescue engines exist in `src/gameplay/caseEvidenceEngine.ts` / `caseRescueEngine.ts` and acceptance tests, but current case-folder UI explicitly says their rescue execution is **not yet integrated**. Do not show KES success simply because a test or cinematic exists.
+- KES/LUM/ORI/AST rescue execution **has since been integrated** through `src/gameplay/CaseRescue.tsx` and `/?rescue=KES|LUM|ORI|AST` routing. This supersedes the prior pre-integration note. Do not show success merely because the route is open: the game must pass `otherRescueCompleted` and video content signoff.
 
 ## 2. Asset-by-asset placement (these are source clips, NOT playable URLs yet)
 
 | Manifest ID / original Drive video | Intended physical presentation | Authorized trigger & actual game location | On completed / skipped / user-acknowledged unavailable | On Return | Status |
 | --- | --- | --- | --- | --- | --- |
 | `opening` — `game opening.mp4` (10.005 s) | Full-screen cinematic overlay on Home, after Start click; signal/mission montage before station entry | `src/HomeScreen.tsx` `enterInvestigation()`. **Fresh Start only**; Continue on existing investigation save should navigate directly by default. Never autoplay on Home load. | Navigate `/?room=1`. This is presentation only: no save flags/evidence added. | Remain on Home. | Placement confirmed; media file missing on GitHub |
-| `case1Intro` — `case 1 intro .mp4` (7.125 s) | Optional **PLAY CASE RECORDING** / introductory footage on **KES** mission dossier or KES briefing after Main/designer mapping confirmation. Do **not** replace NAD-05 evidence. | `src/archive/ArchiveFolderLab.tsx` while selected `caseId==='KES'`, only upon explicit user click; alternatively KES-specific briefing in Investigation, once added. Don't trigger when opening the folder view (defaults NAD). | Remain on KES briefing/dossier; don't auto-collect evidence, mark puzzles solved, or change timeline. | Remain in current dossier. | **CONTENT HOLD**: video shows lander-like hardware undergoing testing, whereas KES is an early-stage observatory proposal; do not bind as canonical KES footage without approval |
+| `case1Intro` — `case 1 intro .mp4` (7.125 s) | Optional **PLAY CASE RECORDING** / introductory footage on **KES** mission dossier or KES briefing with Case 01 identity fixed as KES by Evidence Bible v2; visual-content approval remains separate. Do **not** replace NAD-05 evidence. | `src/archive/ArchiveFolderLab.tsx` while selected `caseId==='KES'`, only upon explicit user click; alternatively KES-specific briefing in Investigation, once added. Don't trigger merely when opening the folder view; it restores the selected case or defaults to NAD. | Remain on KES briefing/dossier; don't auto-collect evidence, mark puzzles solved, or change timeline. | Remain in current dossier. | **CONTENT HOLD**: video shows lander-like hardware undergoing testing, whereas KES is an early-stage observatory proposal; do not bind as canonical KES footage without approval |
 | `portalPast` — `time travel to the past .mp4` (8.000 s) | Entering time portal from **Rescue Console** in Investigation Room | `src/InvestigationDesignerScene.tsx` Rescue button, after re-reading `rescueIsReady(readArchive(),'NAD')` and only when the player actually chooses ENTRY. Any other case may use same generic portal later after its authorized gate. **Do not trigger at 6/6 evidence completion itself.** | Navigate to already-authorized `/?rescue=NAD` (or the exact future case-specific past route). Skip never makes a locked rescue available. | Remain at Rescue Console; no travel. | Placement confirmed; **visual approval needed** for the portal/Henda style; binary absent |
-| `case1Outcome` — `case 1 outcome.mp4` (5.970 s) | KES Rescue result/alternate-history visual; footage appears to depict reactivation/unveiling of built craft | Only AFTER Main has implemented playable KES Rescue **and** `otherRescueCompleted(archive, progress, 'KES')===true`. Invoke once per successful user-requested outcome view, with replay option; not on opening Rescue and not for NAD. | Continue to KES's verified result/return-to-present screen (route must be specified by Main); no additional success mutation from cinema. | Stay on result page; don't reverse verified rescue. | **BLOCKED ON KES CONTENT APPROVAL AND PLAYABLE UI**: KES production phase may not justify the built hardware footage; no success trigger exists in current UI |
+| `case1Outcome` — `case 1 outcome.mp4` (5.970 s) | KES Rescue result/alternate-history visual; footage appears to depict reactivation/unveiling of built craft | Only AFTER the player has completed the already-integrated KES Rescue **and** `otherRescueCompleted(archive, progress, 'KES')===true`. Invoke once per successful user-requested outcome view, with replay option; not on opening Rescue and not for NAD. | Continue to KES's verified result/return-to-present screen (route must be specified by Main); no additional success mutation from cinema. | Stay on result page; don't reverse verified rescue. | **BLOCKED ON KES VISUAL CONTENT APPROVAL AND FINAL EVENT WIRING**: KES production phase may not justify the built hardware footage; no success trigger exists in current UI |
 
-**Why the Case 1 identity needs review:** The UI's case #1 is Kestrel/KES, **a pre-Phase-A/Phase-A proposal**. Designer `case 1 intro` and `case 1 outcome` contain a spacecraft on an industrial assembly stand; one outcome frame reads "PROJECT REACTIVATED". These observations cannot establish that the fictional scene matches Kestrel's approved scientific narrative. Keep the clips in Sound Lab preview, but leave canonical KES triggers disabled until the designer/content owner and Main confirm/remap them. **Never silently assign them to Lumen, Oriole, Nadir or another case just because the hardware looks more plausible.**
+**Case 01 identity is NOT ambiguous:** `Cases Evidence Production Bible v2.docx` explicitly begins with **KES / Kestrel** and places NAD, LUM, ORI, AST after it. Thus the existing `case1Intro` and `case1Outcome` are registered to **KES** by number, not to NAD. **Separate artistic caveat:** Designer footage depicts craft on an industrial assembly stand (the outcome includes "PROJECT REACTIVATED") whereas KES is a pre-Phase-A/Phase-A observatory concept. The footage's story fit requires designer/content signoff before publication; do not relabel Case 01 or silently remap the clip to another case to avoid the mismatch.
 
 ## 3. Files and existing callable API
 
@@ -106,7 +120,7 @@ The second recheck is deliberate: wrong-folder refiling or a save update during 
 
 ### Main Patch D — KES briefing video (hold before binding)
 
-When KES mapping is explicitly approved, offer an opt-in `PLAY CASE 1 INTRO` in the **KES-specific** briefing/dossier action. Use:
+With the KES case mapping **already established**, once the depicted footage is approved for the KES Phase A story, offer an opt-in `PLAY CASE 1 INTRO` in the **KES-specific** briefing/dossier action. Use:
 
 ```tsx
 requestCinematicFlow('case1Intro', {
@@ -120,19 +134,19 @@ Do **not** set the guard to true today solely because of the filename. This foot
 
 ### Main Patch E — KES outcome (hold until verified rescue)
 
-After the playable KES Rescue UI is integrated, use the actual authority function from `src/gameplay/caseRescueEngine.ts`:
+The KES Rescue UI is now implemented in `src/gameplay/CaseRescue.tsx`. Upon its actual verified success (and footage signoff), use the authority function from `src/gameplay/caseRescueEngine.ts`:
 
 ```tsx
 import { otherRescueCompleted } from './gameplay/caseRescueEngine'
 // call from a KES rescue/result component, using fresh archive/progress state:
 requestCinematicFlow('case1Outcome', {
-  canStart: () => /* CASE1==KES approved AND otherRescueCompleted(freshArchive, freshOtherProgress, 'KES') */,
+  canStart: () => /* footage approved AND otherRescueCompleted(freshArchive, freshOtherProgress, 'KES') */,
   onAdvance: () => { /* Main-controlled KES result/return route */ },
   onReturn: () => {}, // remain on verified KES result
 })
 ```
 
-This is a contract sketch, **not** copy-paste compilable until Main supplies the actual KES component/state readers and approved result route. The KES outcome must not run on Nadir's `/?rescue=NAD` or after only `rescueIsReady`/6-of-6 evidence.
+This is a contract sketch, **not** copy-paste compilable until Main wires `CaseRescue.tsx` to fresh case progress and an approved post-success result route. The KES outcome must not run on Nadir's `/?rescue=NAD` or after only `rescueIsReady`/6-of-6 evidence.
 
 ## 4. Exact end-of-video contract and controls
 
@@ -155,12 +169,12 @@ Current staging: 4/4 clip **metadata/code present**; **0/4 playable MP4 binaries
 
 ## 6. Main integration acceptance checklist
 
-1. Confirm **Case 1 really is KES and footage matches its approved Phase A storyline** (or hold/remap with designer approval).
+1. **Case 01 = KES is confirmed by Evidence Bible v2**; obtain designer/content confirmation that the KES introduction and outcome footage visually fit the approved Phase A storyline before enabling the clips.
 2. Merge the small patches above in **Main-owned shared files**; verify each route remains accessible by normal clicks.
 3. Upload and hash-check all 4 MP4 binaries, verify HTTP 200/206, media types, byte ranges, 16:9 contain and loading/error paths.
 4. Test **fresh Start -> opening -> Investigation**, **saved Continue -> Investigation without forced replay**.
 5. Test NAD **5/6 -> no portal**, **6/6 correctly filed -> portal -> Rescue**, **Return -> no route**, **Skip -> only authorized route**, and independently verify diagnosis + unit rerun still required after skip.
-6. Do NOT test case1Outcome as live production until actual verified KES rescue UI and source approval.
+6. KES Rescue UI and route now exist; test a real authorized KES rescue through `otherRescueCompleted`, but do NOT enable `case1Outcome` for release until matching visual footage is approved and the actual result event is wired.
 7. Test mute/volume, reduced motion, slow network, file missing, Escape, mobile landscape, Android Brave/iOS Safari and actual speakers/headphones. No actual physical-device playback is claimed yet.
 8. Main remains sole final signoff authority; specialist and CI proof must not be confused with release approval.
 
