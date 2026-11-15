@@ -9,7 +9,7 @@ import './roomTutorial.css'
  */
 const STORE='astral-room-tutorial-v3'
 const PREVIOUS='astral-room-tutorial-v2'
-type TourKey='investigation'|'archive'|'signal'|'recordings'|'past-manufacturing'|'past-mission_target'|'past-data_analysis'|'past-resources_review'
+type TourKey='investigation'|'archive'|'signal'|'recordings'|'folders'|'past-manufacturing'|'past-mission_target'|'past-data_analysis'|'past-resources_review'
 type TourSave={seen:TourKey[];skipAll:boolean}
 type Tip={title:string;copy:string;target:string;label:string}
 const obj=(id:string)=>'.idr-layer-object[data-tutorial-target="'+id+'"]'
@@ -17,22 +17,32 @@ const prop=(id:string)=>'.sr-anchor-target[data-object-id="'+id+'"]'
 const past=(id:string)=>'.sr-past-target[data-object-id="'+id+'"]'
 const TOURS:Record<Exclude<TourKey,`past-${string}`>,readonly Tip[]>={
  investigation:[
-  {title:'YOUR FIRST ASSIGNMENT',label:'Center terminal',target:obj('center_terminal'),copy:'You are Henda, an aerospace investigator. Open this terminal to learn why five missions need your help.'},
-  {title:'EVIDENCE BOARD',label:'Evidence board',target:obj('evidence_board'),copy:'Inspect this board to recover a real case document from the fictional archive. Read it, listen or watch if media is available, then collect it immediately.'},
-  {title:'MISSION FILES',label:'Mission file cabinet',target:obj('mission_files'),copy:'Use the folders to organize collected sheets. The locations of undiscovered clues remain secret. Collect any six of a case’s eight records to unlock its Rescue.'},
-  {title:'EXPLORE THE STATION',label:'Station door',target:obj('station_door'),copy:'The door leads to Archive, Signal and Recordings. Each room contains clues to uncover. You can skip every tutorial at any time.'},
+  {title:'YOUR FIRST ASSIGNMENT',label:'Center terminal',target:obj('center_terminal'),copy:'You are Henda. Your job is to uncover the science behind five fictional mission failures, then travel back and make engineering decisions that could change their outcomes.'},
+  {title:'EXAMINE AND COLLECT',label:'Evidence board',target:obj('evidence_board'),copy:'Tap this board to open recovered case documents. Each source is a sheet you can read, play, or listen to. Press COLLECT EVIDENCE to keep it — no questions or calculations.'},
+  {title:'SORT YOUR FINDINGS',label:'Mission file cabinet',target:obj('mission_files'),copy:'Every collected sheet can be filed or moved between Mission Folders. Wrong filing is reversible. Collecting any six of the eight records belonging to one case unlocks its Rescue.'},
+  {title:'KNOW WHEN TO RESCUE',label:'Rescue console',target:obj('right_console'),copy:'This console opens the rescue when the case is ready. Before time travel you’ll see a short interactive recap of what you learned from your collected evidence.'},
+  {title:'FOLLOW THE CLUES',label:'Station door',target:obj('station_door'),copy:'Explore Archive, Signal and Recordings. Evidence is spread across multiple real objects, not stored in one terminal. Follow the highlights to discover more.'},
  ],
  archive:[
-  {title:'MISSION ARCHIVE',label:'Archive shelves',target:prop('archive_shelving'),copy:'This shelving holds recovered mission documents. Open the source index and collect the records directly. There are no quizzes.'},
-  {title:'ARCHIVE TERMINAL',label:'Archive main terminal',target:prop('archive_main_terminal'),copy:'This terminal also contains a Nadir record. Inspect equipment to learn the story, then return to the station whenever you want.'},
+  {title:'EXPLORE ARCHIVED FILES',label:'Archive shelves',target:prop('archive_shelving'),copy:'This shelf contains one set of physical case records. Pick a mission, inspect the sheets and collect them without solving a quiz.'},
+  {title:'NOT EVERY SOURCE IS ON THE SAME DEVICE',label:'Archive main terminal',target:prop('archive_main_terminal'),copy:'Archive instruments can contain different records. The main terminal holds a Nadir record while the shelves host other missions. Try separate hotspots.'},
+  {title:'RETURN WITH WHAT YOU FOUND',label:'Station navigation',target:'.sr-nav',copy:'You can visit the other rooms in any order. Collected evidence stays saved, and you can file it in a Mission Folder whenever you want.'},
  ],
  signal:[
-  {title:'SIGNAL RECORDS',label:'Signal display',target:prop('main_signal_display'),copy:'The display contains technical signals. Read the context and collect the document; no calculations or numerical answers.'},
-  {title:'MISSION SIGNAL INDEX',label:'Telemetry workstation',target:prop('telemetry_console_left'),copy:'The left workstation contains signal files from other missions. Follow the room hotspots to inspect and collect more evidence.'},
+  {title:'READ THE TELEMETRY',label:'Signal display',target:prop('main_signal_display'),copy:'Read the signal as part of the mission story, not a math exam. The first display holds one Nadir source.'},
+  {title:'INSPECT INDEPENDENT SIGNALS',label:'Telemetry workstation',target:prop('telemetry_console_left'),copy:'The left workstation contains a separate set of other-case records. Open the recovered files and collect what you need.'},
+  {title:'ANOTHER SIGNAL SOURCE',label:'Right telemetry workstation',target:prop('telemetry_console_right'),copy:'This second workstation has different source records. Look around the whole room rather than assuming all signals are in the first display.'},
+ ],
+ folders:[
+  {title:'CHOOSE A CASE',label:'Mission folders',target:'.af-folder-choice',copy:'Each folder belongs to one fictional space mission. You can open them in any order and return to a case whenever you want.'},
+  {title:'YOUR COLLECTED SHEETS',label:'Dossier contents',target:'.af-sheet-area',copy:'The sheets visible in the folder are the records you chose to file here. You can open any one to review it, and you can move a misplaced sheet later.'},
+  {title:'FILE THE RECOVERED EVIDENCE',label:'Unfiled tray',target:'.af-bottom button',copy:'Use this tray to sort newly collected sheets. Filing is optional for the Rescue gate, and no filing mistake destroys a record.'},
+  {title:'PREPARE FOR THE PAST',label:'Rescue status',target:'.af-status',copy:'When you collect six of this case’s eight records, Rescue unlocks. Press its button for an interactive summary of what you learned, then choose when to travel to the past.'},
  ],
  recordings:[
-  {title:'PLAYBACK ARCHIVE',label:'Video display',target:prop('main_video_display'),copy:'The display contains recovered event records. Play video or audio if attached and collect the sheet when ready.'},
-  {title:'AUDIO ANALYSIS TERMINAL',label:'Audio terminal',target:prop('audio_analysis_terminal'),copy:'Use the audio terminal to browse other mission recordings. Mute, replay and skip controls are optional; collection is immediate.'},
+  {title:'WATCH THE CHRONOLOGY',label:'Video display',target:prop('main_video_display'),copy:'Inspect the recovered event sequence. When a video or voice clip is attached, use the player; listening is optional and never blocks collection.'},
+  {title:'HEAR THE OTHER MISSIONS',label:'Audio terminal',target:prop('audio_analysis_terminal'),copy:'The audio terminal holds separate mission records. Play, pause or mute at your own pace, then collect the evidence directly.'},
+  {title:'EXPLORE A SECOND PLAYBACK STATION',label:'Playback controls',target:prop('video_playback_console'),copy:'The video console has more recovered records that are not all listed at the audio terminal. Explore different objects to complete your case.'},
  ],
 }
 function currentTour(key:TourKey,caseId?:ArchiveCaseId|null):readonly Tip[]{
@@ -42,8 +52,10 @@ function currentTour(key:TourKey,caseId?:ArchiveCaseId|null):readonly Tip[]{
  const label=target?.system??'Engineering equipment'
  const anchor=target?.objectId??(room==='manufacturing'?'materials_structure':room==='mission_target'?'mission_constraints':room==='data_analysis'?'analysis_console':'resource_allocation')
  return [
-  {title:'BACK BEFORE THE FAILURE',label,target:past(anchor),copy:'You have traveled into the mission’s past. Instead of answering a quiz, operate the equipment highlighted here and make an engineering change based on what you learned.'},
-  {title:'DECISIONS HAVE CONSEQUENCES',label,target:past(anchor),copy:'Each configuration has advantages and risks. Try a plan, observe the system response, and revisit other rooms. You can change decisions freely before reviewing the complete rescue.'},
+  {title:'THE MISSION IS STILL IN YOUR HANDS',label,target:past(anchor),copy:'You are now before the fictional mission failure. Tap this system to change its configuration using the science you learned in the archive.'},
+  {title:'EACH CHOICE HAS A TRADE-OFF',label,target:past(anchor),copy:'Different solutions can work and each changes the system in a different way. Read the consequence, and change your configuration again whenever you want.'},
+  {title:'FOUR CONNECTED SYSTEMS',label:'Past room stages',target:'.pt-nav',copy:'Travel freely between the four Past rooms. Your design choices are saved, and the right plan is more than four unrelated clicks.'},
+  {title:'REVIEW THE WHOLE MISSION',label:'Mission review console',target:'.pt-rescue',copy:'When ready, review your combined engineering plan. The report shows any remaining risks before you finalize the alternate Rescue.'},
  ]
 }
 function read():TourSave{
