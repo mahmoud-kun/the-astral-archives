@@ -156,12 +156,20 @@ export function diagnosisIsSupported(state: ArchiveState, caseId: ArchiveCaseId)
   })
 }
 
-/** Rescue access is earned by correctly filing all six required records.
- * Diagnostic reasoning and engineering verification take place inside Rescue.
- * An existing diagnosis record is retained as a separate result, not an unlock gate.
+/** Count ANY recovered records belonging to the given case, required or optional.
+ * Folders stay editable for storytelling but are not a rescue prerequisite.
+ * This accepts existing saves immediately without migration or resetting progress.
+ */
+export function countCaseCollectedEvidence(state: ArchiveState, caseId: ArchiveCaseId): number {
+  return EVIDENCE_RECORDS.filter(item => item.caseId === caseId && state.discovered.includes(item.id)).length
+}
+
+/** The first six of the case's eight records unlock the rescue.
+ * No required-only, quiz, filing, or diagnosis prerequisites.
+ * Records from other missions never count toward this case.
  */
 export function rescueIsReady(state: ArchiveState, caseId: ArchiveCaseId): boolean {
-  return countRequiredEvidence(state, caseId) === 6
+  return countCaseCollectedEvidence(state, caseId) >= 6
 }
 
 export function updateDiagnosis(state: ArchiveState, caseId: ArchiveCaseId, diagnosis: CaseDiagnosis): ArchiveState {
