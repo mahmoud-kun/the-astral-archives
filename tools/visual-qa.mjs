@@ -216,7 +216,10 @@ await check(mobile,'/?audio-lab=1','audio-lab',async page=>{
   await assertCueAndAsset(page,'/assets/audio/kenney/computer-noise-002.m4a','m4a')
   await page.getByLabel('Ambient scene').selectOption('signal')
   assert.match(page.url(),/audio-lab=1.*station=signal/)
-  assert.equal(await page.getByRole('button',{name:'Play Equipment Scanner'}).isVisible(),true)
+  // Route changes can suspend/re-render the lazy Sound Lab briefly.
+  // Wait for its UI rather than observing a transient hidden/not-mounted state.
+  await page.getByRole('button',{name:'Play Equipment Scanner'}).waitFor({state:'visible',timeout:7000})
+  assert.equal(await page.locator('.al-cue').count(),19,'Sound Lab must retain all cues after scene switching')
 })
 await check({width:390,height:844},'/','portrait-guard')
 await writeFile(`${output}/report.json`, JSON.stringify(report,null,2))
