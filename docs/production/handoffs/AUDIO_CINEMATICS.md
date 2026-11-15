@@ -4,7 +4,9 @@
 **Owner:** Chat B — Sound Effects, Cinematics & Media Integration  
 **Authority:** [Work Order B](../WORK_ORDER_B_AUDIO_CINEMATICS.md) and [parallel sprint plan](../PARALLEL_RELEASE_PLAN_2026-11-15.md)  
 **Approved branch:** `experiment/room-case-library-layout-fix-2026-11-14` (no new branch, no merge to main)  
-**Delivery verdict: PARTIAL — audio code and independent cinematic interface implemented; binary films, shared-root triggers and physical audition remain BLOCKED / NOT VERIFIED.** Main Chat is the acceptance authority; this is not a release approval.
+**CURRENT verdict (2026-11-15): ALL SOURCE BINARIES UPLOADED & VERIFIED — 17/17 original designer MP4 videos, 1/1 KES-05 MP3, plus the 19 unmodified SFX are physically on the authorized branch. All five cases have source-grounded cinematic mappings and 5 original evidence-context visual associations. Main's scene-trigger wiring, physical mobile playback, captions/license approvals and the AST 472 W scientific correction are STILL OPEN. No main merge; this is not final release approval.**
+
+*Sections 1–8 below retain historical implementation chronology. Their statements that only four clips exist or that MP4s were not uploaded are superseded by Sections 9–10 and the up-to-date verdict above.*
 
 ## 1. Completed owned work
 
