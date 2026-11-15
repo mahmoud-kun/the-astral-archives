@@ -113,7 +113,9 @@ The `CINEMATICS` manifest intentionally references:
 | [GitHub Actions #55](https://github.com/mahmoud-kun/the-astral-archives/actions/runs/43674791473) | **SEE LIVE RUN FOR FINAL CONCLUSION.** Triggered by `98df1bc`. Update this handoff only after result is independently read. |
 | Physical speaker/headphone audition, iOS Safari and Android Brave | **NOT VERIFIED** — no physical device available to Chat B |
 | Actual MP4 transport/playback, Skip/Replay/Return on deployed URLs, offline fallback | **NOT VERIFIED end-to-end** — video binaries absent from GitHub and root cinematic event integration belongs to Main. Programmatic manifest/settings tests do not substitute for live browser playback. |
-| 1366×768 and 915×412 UI capture | Prior Visual QA #54 exercised 43 scenarios with 0 broken images/clipped/overflow/console; 1 selector-count assertion failed as noted. New #55 must establish final success. Cinematic overlay itself is not currently exercised by that route-level QA. |
+| 1366×768 and 915×412 UI capture | Prior Visual QA #54 exercised 43 scenarios with 0 broken images/clipped/overflow/console; 1 selector-count assertion failed as noted. #55 subsequently established successful existing-route Visual QA at its exact commit, but did not exercise the unmounted cinematic overlay. Cinematic overlay itself is not currently exercised by that route-level QA. |
+
+**Run #55 is verified successful; the media-runtime proof gap remains OPEN.**
 
 ### Manual/QA procedure for Main once files and root wiring land
 
