@@ -41,8 +41,8 @@ export const INVESTIGATION_CASES = [
   {
     code: 'AST', id: 'AST', name: 'Asterion',
     title: 'The Stamp in the Archive',
-    phase: 'LIVE MISSION / CROSS-PHASE',
-    description: 'An active observatory mission approaches a major review while an archive discrepancy demands attention.',
+    phase: 'PHASE B / PRELIMINARY DESIGN REVIEW',
+    description: 'An observatory project still in preliminary design approaches its PDR as unexplained power-test and revision records require independent review.',
     objective: 'Understand the outstanding risk and examine the reliability of the mission record.',
     leadRoom: 'Archive Room',
   },
