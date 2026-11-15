@@ -14,3 +14,13 @@
 .se-scroll .im-evidence-media{flex-shrink:0}
 @media(max-height:480px){.se-scroll{padding:8px 14px;gap:8px}.se-paper{padding:12px}.se-foot{padding:7px 10px}.se-foot .np-primary{min-height:36px}}
 @media(max-width:620px){.se-dialog{width:100vw;max-height:100dvh}.se-scroll{padding:12px}.se-paper{padding:13px}.se-foot{justify-content:center}.se-foot .np-primary{flex:1}}
+
+/* Collecting a physical sheet feels tactile, not like completing a form. */
+.se-dialog{animation:astral-sheet-open .27s cubic-bezier(.18,.92,.21,1) both}
+.se-paper{position:relative;transform-origin:top left;animation:astral-sheet-reveal .42s ease-out both}
+.se-paper::before{content:'✦';position:absolute;right:13px;top:9px;font-size:13px;color:#ac9161;opacity:.52;pointer-events:none}
+.se-foot .np-primary{transition:transform .16s,filter .16s}
+.se-foot .np-primary:hover{transform:translateY(-2px);filter:brightness(1.05)}
+@keyframes astral-sheet-open{from{opacity:0;transform:scale(.98)}to{opacity:1;transform:scale(1)}}
+@keyframes astral-sheet-reveal{from{opacity:.25;transform:translateY(8px) rotate(-.55deg)}to{opacity:1;transform:translateY(0) rotate(0)}}
+@media(prefers-reduced-motion:reduce){.se-dialog,.se-paper{animation:none}.se-foot .np-primary{transition:none}}
