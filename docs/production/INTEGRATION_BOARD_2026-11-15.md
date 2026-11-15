@@ -39,7 +39,7 @@
 - `34f4fdd` — `src/InvestigationDesignerScene.tsx`: secondary physical source index for the four cases while retaining Nadir and Mission Folders.
 - `fece39b`, `5356089` — Visual QA includes new Investigation source/puzzle, all four locked rescue routes and production debug guard, with separate case-integration screenshot contact sheet.
 - [Issue #2 Main coordination comment](https://github.com/mahmoud-kun/the-astral-archives/issues/2#issuecomment-6889445734): directed Chat A to connect three existing supporting room props without touching Main-owned files.
-- **Fresh integrated QA:** pending at this update. Earlier 61-test green CI at C SHA is not proof for Main's newly mounted routes. No five-case completed journey has been independently accepted yet.
+- **First integrated root QA:** [GitHub Actions Run #90](https://github.com/mahmoud-kun/the-astral-archives/actions/runs/43679019455) **SUCCESS** at SHA `5356089cec250f8440144ea11c102c03cbbcc162`; `npm run build` (including test suites, TypeScript and Vite) + browser checks + contact sheets passed. The published `docs/visual-qa/latest-report.json` shows **52 screenshots**, 0 errors/missing captures/broken images/clipped controls/overflows/browser console errors. New tests covered Investigation Case Source Index (desktop/mobile), a four-case sample puzzle, all four **locked** Rescue URLs, and the `?debug=1` production-intake guard. These are **smoke/layout/gating tests, not four complete case journeys or successful Rescue outcomes**. Asterion story metadata changed after this run (`1762e64`), so do not label the later HEAD itself fully reverified. No five-case completed journey accepted yet.
 
 ## Main Chat review checkpoints
 
