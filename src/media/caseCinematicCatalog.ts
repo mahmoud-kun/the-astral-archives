@@ -22,8 +22,18 @@ export const CASE_CINEMATIC_CATALOG={
 export function caseIntroCinematic(caseId:ArchiveCaseId):CinematicId{
  return CASE_CINEMATIC_CATALOG[caseId].intro
 }
-export function verifiedCaseOutcomeCinematic(caseId:ArchiveCaseId):CinematicId{
+/** Active scientific story hold: the delivered AST outcome says 472 W as
+ * verified, but AST rescue requires an independent 450 W retest (target <=460 W).
+ * Keep the original in the designer review lab, never emit in live story.
+ */
+export const CASE_OUTCOME_REVIEW_HOLDS={
+ AST:'Designer outcome displays 472 W verified; rescue engine requires 450 W (target <=460 W). Correct scene before release.',
+} as const
+
+export function verifiedCaseOutcomeCinematic(caseId:ArchiveCaseId):CinematicId|null{
  // This only selects a clip. Caller MUST independently prove verified rescue.
+ // An unapproved clip must NEVER play as the canonical verified outcome.
+ if(Object.prototype.hasOwnProperty.call(CASE_OUTCOME_REVIEW_HOLDS,caseId))return null
  return CASE_CINEMATIC_CATALOG[caseId].outcome
 }
 export function evidenceContextCinematic(evidenceId:string):CinematicId|null{
