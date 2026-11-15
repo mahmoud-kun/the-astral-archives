@@ -73,6 +73,10 @@ for(const viewport of [mobile,phone,small]){
   assert.equal(await page.locator('.np-scroll').evaluate(el=>el.scrollTop),0)
   assert.equal(await page.locator('.np-workbench').isVisible(),true)
   assert.equal(await page.locator('.np-sources').isVisible(),false)
+  assert.equal(await page.locator('.np-mobile-verify').isVisible(),true)
+  const verifyRect=await page.locator('.np-mobile-verify').boundingBox()
+  assert.ok(verifyRect && verifyRect.y>=0 && verifyRect.y+verifyRect.height<=viewport.height,
+    'Mobile Verify Analysis must be fully visible in the viewport')
   assert.equal(await page.locator('.np-mobile-steps button').nth(1).getAttribute('aria-current'),'step')
  })
 }
