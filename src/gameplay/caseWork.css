@@ -190,3 +190,11 @@
 @media(orientation:landscape) and (max-height:600px){.cw-control-board{padding:7px}.cw-option-cards button{min-height:75px;padding:6px;gap:3px}
  .cw-option-cards button>strong,.cw-option-cards button>b{font-size:9px}.cw-option-cards button>small{font-size:8px}
  .cw-control-board>p{font-size:9px}.cw-adjuster button{min-height:32px}.cw-filter-stats strong{font-size:14px}}
+
+/* A source must actually be opened before verification; do not leak a shortcut via trivia alone. */
+.cw-inspect-first{border-left:3px solid #e1b57f;background:#29382f;color:#f0d9aa;margin:0 0 10px;
+ padding:10px;font:600 11px/1.6 'IBM Plex Sans',sans-serif}
+/* Original Nadir fieldset rules assume a two-column diagnosis. Full-width physical controls override it. */
+.cw-rescue .nr-work .cw-control-board{display:block;grid-template-columns:none}
+.cw-rescue .nr-work .cw-control-board>.cw-option-cards{margin-top:8px}
+.cw-rescue .nr-work .cw-control-board button:disabled{opacity:.5;cursor:not-allowed}
