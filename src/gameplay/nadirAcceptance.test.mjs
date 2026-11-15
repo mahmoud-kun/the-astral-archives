@@ -121,3 +121,6 @@ test('Nadir full state journey: six analyzed records, deliberate collect, wrong 
   assert.equal(rescueIsReady(archive,'NAD'),true,'returning record restores legitimate progress')
   assert.equal(diagnosisIsSupported(archive,'NAD'),true)
 })
+
+// Keep this suite under the existing test:nadir command until Main owns package scripts.
+import './otherCaseAcceptance.test.mjs'
