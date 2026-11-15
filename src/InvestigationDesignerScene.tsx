@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { lazy, Suspense, useEffect, useState } from 'react'
 import { navigateGame, onGameLinkClick } from './gameNavigation'
 import { playGameSound } from './audio/gameAudio'
 import InvestigationLayeredScene, { type RoomObjectTarget } from './InvestigationLayeredScene'
@@ -7,6 +7,8 @@ import { stationRoute, type NadirRecord } from './gameplay/nadirEngine'
 import { useArchiveSave } from './gameplay/gameSave'
 import { countRequiredEvidence, rescueIsReady } from './archive/archiveState'
 import './investigationDesignerScene.css'
+
+const CaseStationDesk = lazy(() => import('./gameplay/CaseStationDesk'))
 
 type Interaction = 'briefing' | 'evidence' | 'door' | 'rescue' | 'help'
 type Panel = Interaction | null
@@ -33,6 +35,7 @@ export default function InvestigationDesignerScene() {
   const [panel, setPanel] = useState<Panel>(null)
   const [showHint, setShowHint] = useState(true)
   const [puzzleId,setPuzzleId] = useState<NadirRecord|null>(null)
+  const [caseSourceOpen,setCaseSourceOpen] = useState(false)
   const archive = useArchiveSave()
   const nadirRequired = countRequiredEvidence(archive,'NAD')
   const nadirReady = rescueIsReady(archive,'NAD')
@@ -48,6 +51,10 @@ export default function InvestigationDesignerScene() {
 
   function openCaseLibrary() {
     navigateGame('/?folder-lab=1&return=investigation')
+  }
+  function openCaseSources() {
+    setPanel(null)
+    setCaseSourceOpen(true)
   }
 
   function open(target: Interaction) {
@@ -112,6 +119,7 @@ export default function InvestigationDesignerScene() {
             <div><span>03</span><strong>RESCUE</strong><small>Once all six required records are correctly filed, unlock the Rescue Mission and defend your engineering repair.</small></div>
           </div>
           <button className="idr-primary" onClick={openCaseLibrary}>OPEN MISSION FILES <SmallIcon type="arrow"/></button>
+          <button className="idr-primary" onClick={openCaseSources}>OPEN CASE SOURCE INDEX <SmallIcon type="arrow"/></button>
         </div>}
 
         {panel === 'evidence' && <div className="idr-single-view">
@@ -122,6 +130,7 @@ export default function InvestigationDesignerScene() {
           <div className="idr-interface-message"><span>OPEN INVESTIGATION / CASE NADIR</span><strong>NAV-042 CLOSED WITHOUT A DOCUMENTED RERUN</strong><small>Audit the actual ticket. Identify whether the administrative stamp is supported by a reproduced navigation check.</small></div>
           <button className="idr-primary" onClick={()=>{setPanel(null);setPuzzleId('NAD-06')}}>EXAMINE NAV-042 · NAD-06 <SmallIcon type="arrow"/></button>
           <button className="idr-primary" onClick={openCaseLibrary}>VIEW MISSION FILES <SmallIcon type="arrow"/></button>
+          <button className="idr-primary" onClick={openCaseSources}>INSPECT OTHER CASE SOURCES <SmallIcon type="arrow"/></button>
         </div>}
 
         {panel === 'door' && <div className="idr-single-view">
@@ -158,5 +167,8 @@ export default function InvestigationDesignerScene() {
       </div>
     </div>}
     {puzzleId && <NadirPuzzle id={puzzleId} onClose={()=>setPuzzleId(null)}/>}
+    {caseSourceOpen && <Suspense fallback={<div className="aa-route-loading" role="status">ACCESSING CASE SOURCES…</div>}>
+      <CaseStationDesk station="investigation" onClose={()=>setCaseSourceOpen(false)}/>
+    </Suspense>}
   </main>
 }
