@@ -64,7 +64,7 @@ function AstralArchives() {
       <HomeScreen />}
     {(isFixedRoom || station) && <EvidenceTray room={isFixedRoom ? 'investigation' : station!}/>}
     </Suspense>
-    <RoomTutorial roomKey={tutorialRoom}/>
+    <RoomTutorial roomKey={tutorialRoom} caseId={pastCase}/>
     <CinematicOverlay />
   </>
 }
