@@ -145,3 +145,14 @@
 .sr-past-preview-state{position:absolute;z-index:3;bottom:12px;left:50%;transform:translateX(-50%);width:max-content;max-width:95%;padding:8px 11px;background:rgba(9,17,29,.94);border:1px solid rgba(255,205,124,.55);border-radius:5px;display:flex;flex-direction:column;gap:3px;font-size:clamp(10px,1.1vw,13px);text-align:center}
 .sr-past-asset-error{display:grid;place-items:center;width:100%;height:100%;color:#fff}
 @media (prefers-reduced-motion:reduce){.sr-past-target{transition:none}}
+
+/* Subtle signal life: breathing findable evidence without noisy flashing. */
+.sr-layer-object:not(.sr-collected) .sr-beacon::after{content:'';position:absolute;inset:-7px;border:1px solid #80d5e2;border-radius:50%;pointer-events:none;opacity:0;animation:astral-signal-ping 4.7s ease-out infinite}
+.sr-layer-object:nth-child(3n) .sr-beacon::after{animation-delay:1.7s}
+.sr-layer-object:nth-child(4n) .sr-beacon::after{animation-delay:3.1s}
+.sr-layer-object.sr-lit .sr-layer-glow{transition:opacity .25s ease;filter:drop-shadow(0 0 9px #5edeeabc)}
+.sr-inspection-note{animation:astral-inspector-arrive .27s cubic-bezier(.2,.9,.2,1) both}
+.sr-stage::after{content:'';position:absolute;inset:0;pointer-events:none;z-index:1;background:repeating-linear-gradient(to bottom,transparent 0 6px,#b0d7dc07 7px);opacity:.23}
+@keyframes astral-signal-ping{0%,72%,100%{opacity:0;transform:scale(.92)}78%{opacity:.57}92%{opacity:0;transform:scale(1.55)}}
+@keyframes astral-inspector-arrive{from{opacity:0;transform:translateY(12px) scale(.98)}to{opacity:1;transform:translateY(0) scale(1)}}
+@media(prefers-reduced-motion:reduce){.sr-layer-object .sr-beacon::after,.sr-inspection-note{animation:none!important}}
