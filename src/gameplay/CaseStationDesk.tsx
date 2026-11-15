@@ -4,8 +4,7 @@ import { CASE_META, EVIDENCE_RECORDS, type ArchiveRoom } from '../archive/eviden
 import { countRequiredEvidence } from '../archive/archiveState'
 import { navigateGame } from '../gameNavigation'
 import { useArchiveSave } from './gameSave'
-import { CASE_EVIDENCE_TASKS, OTHER_CASE_IDS, type OtherCaseId, type OtherRecordId } from './caseEvidenceEngine'
-import { useOtherProgress } from './caseSave'
+import { OTHER_CASE_IDS, type OtherCaseId, type OtherRecordId } from './caseEvidenceEngine'
 import { readActiveCase, setActiveCase } from './caseContext'
 import CasePuzzle from './CasePuzzle'
 import './caseWork.css'
@@ -22,7 +21,6 @@ export default function CaseStationDesk({station,onClose,initialCase}:{
 }){
  const [caseId,setCaseId]=useState<OtherCaseId>(()=>initialSelection(station,initialCase))
  const [selected,setSelected]=useState<OtherRecordId|null>(null)
- const progress=useOtherProgress()
  useEffect(()=>{if(initialCase){setCaseId(initialCase);setActiveCase(initialCase)}},[initialCase])
  const archive=useArchiveSave()
  const closer=useRef<HTMLButtonElement>(null)
@@ -72,19 +70,17 @@ export default function CaseStationDesk({station,onClose,initialCase}:{
      {OTHER_CASE_IDS.map(c=><button key={c} type="button" aria-current={c===caseId?'page':undefined} onClick={()=>chooseCase(c)}>
       <b>{c}</b><span>{CASE_META[c].name}</span></button>)}
     </nav>
-    <p className="cw-desk-story">Select an original source from this physical room. Each record has a distinct analysis instrument. Only a verified reconstruction may be collected, and collection does not automatically file anything.</p>
+    <p className="cw-desk-story">Choose a recovered document from this room. Read the evidence, watch or listen to attached media, then press COLLECT EVIDENCE. No questions or quizzes. You choose the Mission Folder yourself.</p>
     <div className="cw-desk-progress"><span>REQUIRED RECORDS CORRECTLY FILED</span>
      <strong>{countRequiredEvidence(archive,caseId)} / 6</strong><button type="button" onClick={openFolders}>OPEN MISSION FOLDERS</button></div>
     <div className="cw-desk-records">
      {items.map(record=>{
-      const task=CASE_EVIDENCE_TASKS[record.id as OtherRecordId]
-      const solved=progress.solved.includes(record.id as OtherRecordId)
       const collected=archive.discovered.includes(record.id)
       return <button type="button" className="cw-desk-record" key={record.id} onClick={()=>setSelected(record.id as OtherRecordId)}>
        <div className="cw-desk-record-top"><span>{record.id} / {record.kind.toUpperCase()}</span><b>{record.required?'REQUIRED':'OPTIONAL'}</b></div>
-       <strong>{task.scene}</strong>
-       <p>{task.objective}</p>
-       <small>{collected?'COLLECTED · FILING IS PLAYER-CONTROLLED':solved?'ANALYZED · READY TO COLLECT':'UNVERIFIED SOURCE / INSPECT'}</small>
+       <strong>{record.title}</strong>
+       <p>{record.content}</p>
+       <small>{collected?'COLLECTED · FILING IS PLAYER-CONTROLLED':'OPEN EVIDENCE · READ & COLLECT'}</small>
       </button>
      })}
      {!items.length&&<p className="cw-desk-empty">No {CASE_META[caseId].name} records are stored in {room}. Its source trail is in {alternateRooms.join(', ')}. Use that physical station or choose another case.</p>}
