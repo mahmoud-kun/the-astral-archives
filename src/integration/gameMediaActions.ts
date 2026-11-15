@@ -4,6 +4,7 @@ import { navigateGame } from '../gameNavigation'
 import { readArchive, readNadir } from '../gameplay/gameSave'
 import { readOtherProgress } from '../gameplay/caseSave'
 import { otherRescueCompleted } from '../gameplay/caseRescueEngine'
+import { isStoryRescueComplete } from '../gameplay/storyRescueState'
 import { caseIntroCinematic, evidenceContextCinematic, verifiedCaseOutcomeCinematic } from '../media/caseCinematicCatalog'
 import { requestCinematicFlow } from '../media/cinematicFlow'
 
@@ -46,6 +47,9 @@ export function playEvidenceContext(evidenceId:string):boolean {
 
 /** Only the real engineering state may authorize a verified alternate outcome. */
 export function verifiedRescueState(caseId:ArchiveCaseId):boolean {
+ // Story-mode outcomes are authorized by the real six-file gate and the player's
+ // completed in-past rescue sequence, never by obsolete quiz/test flags.
+ if(isStoryRescueComplete(caseId))return true
  const archive=readArchive()
  if(caseId==='NAD'){
   const nadir=readNadir()
