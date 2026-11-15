@@ -1,0 +1,121 @@
+{
+  "schemaVersion": 1,
+  "roomId": "mission_target",
+  "timeline": "past",
+  "variant": "landscape-static-v2-logo-corrected",
+  "renderMode": "BAKED_ART_WITH_SEPARATE_HOTSPOTS",
+  "artSource": {
+    "sourceBranch": "experiment/past-landscape-art-production-v1",
+    "sourceCommit": "92a94f889e19f9370d3e54ea49143284904a9935",
+    "originalManifest": "public/assets/rooms/past/mission_target/layers/landscape-v1/manifest.json",
+    "uncorrectedGitBlob": "37b1ebebd0f425e58a53250b086ee69762feaa93",
+    "correctedGitBlob": "a905614db4b230744eab23bb21ffeabc43be1197",
+    "correctionScript": "tools/patch-mission-target-art.py",
+    "beforeAfterReview": "docs/visual-qa/mission-target-logo-before-after.webp"
+  },
+  "background": "/assets/rooms/past/mission_target/layers/static-v2/room_visible.webp",
+  "coordinateSystem": {
+    "width": 1920,
+    "height": 1080
+  },
+  "objects": [
+    {
+      "id": "mission_objectives",
+      "interaction": {
+        "target": "mission_objectives",
+        "label": "Review mission objectives"
+      },
+      "hitArea": {
+        "x": 140,
+        "y": 435,
+        "width": 185,
+        "height": 185
+      },
+      "hitShape": "rect",
+      "sourceFullLayerPosition": {
+        "x": 53,
+        "y": 363,
+        "width": 341,
+        "height": 507
+      },
+      "reviewStatus": "VISUAL_PROVISIONAL"
+    },
+    {
+      "id": "target_destination",
+      "interaction": {
+        "target": "target_destination",
+        "label": "Inspect target destination"
+      },
+      "hitArea": {
+        "x": 445,
+        "y": 448,
+        "width": 202,
+        "height": 185
+      },
+      "hitShape": "rect",
+      "sourceFullLayerPosition": {
+        "x": 403,
+        "y": 396,
+        "width": 310,
+        "height": 444
+      },
+      "reviewStatus": "VISUAL_PROVISIONAL"
+    },
+    {
+      "id": "scientific_priorities",
+      "interaction": {
+        "target": "scientific_priorities",
+        "label": "Review scientific priorities"
+      },
+      "hitArea": {
+        "x": 1260,
+        "y": 442,
+        "width": 190,
+        "height": 190
+      },
+      "hitShape": "rect",
+      "sourceFullLayerPosition": {
+        "x": 1210,
+        "y": 398,
+        "width": 311,
+        "height": 439
+      },
+      "reviewStatus": "VISUAL_PROVISIONAL"
+    },
+    {
+      "id": "mission_constraints",
+      "interaction": {
+        "target": "mission_constraints",
+        "label": "Review mission constraints"
+      },
+      "hitArea": {
+        "x": 1600,
+        "y": 420,
+        "width": 185,
+        "height": 190
+      },
+      "hitShape": "rect",
+      "sourceFullLayerPosition": {
+        "x": 1532,
+        "y": 363,
+        "width": 340,
+        "height": 505
+      },
+      "reviewStatus": "VISUAL_PROVISIONAL"
+    }
+  ],
+  "assetCapabilities": {
+    "objectSpritesNotUsed": true,
+    "requiresCleanPlate": false,
+    "independentObjectAnimation": false,
+    "keyboardAndTouchHotspots": true
+  },
+  "qa": {
+    "assetFormat": "PASS",
+    "hitAreaGeometry": "PASS_INSET_AND_NO_OVERLAP",
+    "manualPixelReview": "LOGO_PANEL_VISUALLY_REVIEWED",
+    "browserTouchRuntime": "AWAITING_TEST",
+    "artApproval": "PENDING_EXTERNAL_DESIGNER",
+    "notes": "Unauthorized NASA mark replaced by neutral fictional compass. Original 16:9 scene and four interaction regions unchanged. Static-v1 kept unchanged."
+  }
+}

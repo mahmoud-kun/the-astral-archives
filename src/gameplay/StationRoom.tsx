@@ -1,5 +1,5 @@
 import pastStatic_manufacturing from '../../public/assets/rooms/past/manufacturing/layers/static-v1/manifest.json'
-import pastStatic_mission_target from '../../public/assets/rooms/past/mission_target/layers/static-v1/manifest.json'
+import pastStatic_mission_target from '../../public/assets/rooms/past/mission_target/layers/static-v2/manifest.json'
 import pastStatic_data_analysis from '../../public/assets/rooms/past/data_analysis/layers/static-v1/manifest.json'
 import pastStatic_resources_review from '../../public/assets/rooms/past/resources_review/layers/static-v1/manifest.json'
 import { lazy, Suspense, useEffect, useRef, useState } from 'react'
