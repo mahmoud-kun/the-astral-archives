@@ -57,7 +57,7 @@ export default function SimpleEvidenceInspector({id,scene,fragments,onClose}:{
        {fragments.map((line,i)=><p key={i}><b>{String(i+1).padStart(2,'0')}</b> {line}</p>)}
      </div>}
     </div>
-    <EvidenceStoryThread caseId={record.caseId} discovered={archive.discovered} focusId={justCollected||collected?id:undefined}/>
+    <EvidenceStoryThread caseId={record.caseId} discovered={archive.discovered} focusId={justCollected?id:undefined}/>
     <EvidenceMediaPanel evidenceId={id}/>
     <p className="se-guidance">Listen or watch the attached source media if available. Collect this record directly, then decide which Mission Folder it belongs to. No questions or calculations are required.</p>
     {justCollected&&<p role="status" className="np-success"><strong>EVIDENCE COLLECTED</strong> Your case thread has been updated. This record is saved in the Unfiled Evidence Tray; you can sort it whenever you want.</p>}
