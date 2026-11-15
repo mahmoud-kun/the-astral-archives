@@ -1,7 +1,7 @@
 /**
- * Actual designer deliveries, not proof that binary media have been deployed.
- * Paths become playable after Main verifies and installs the original MP4s.
- * Never stream private Google Drive URLs directly from the game.
+ * Designer video manifest. Every registered MP4 is source-SHA-verified by
+ * cinematicManifest.test.mjs; game playback still requires Main scene wiring.
+ * Always serve versioned local paths, never Google Drive URLs.
  */
 export const CINEMATIC_REQUEST_EVENT = 'astral:cinematic-request'
 export const CINEMATIC_FINISHED_EVENT = 'astral:cinematic-finished'
@@ -74,6 +74,36 @@ export const CINEMATICS = {
   path:'/assets/video/designer-case-3-outcome-v1.mp4',
   source:'case 3 outcome.mp4',driveId:'1e2P5Sy-VbuVVciKvIR06IEw8qIhBnWaT',
   duration:7,bytes:5161082,mixGain:.9,
+ },
+ case4Intro: {
+  title:'Case 04 — Oriole / Mission Introduction',caseId:'ORI',mediaRole:'cinematic',
+  path:'/assets/video/designer-case-4-intro-v1.mp4',
+  source:'case 4 intro.mp4',driveId:'1m26-oAVSeoUcjjHdQl5yGs8eiIRByaJF',
+  duration:5.97,bytes:2690338,mixGain:.35,
+ },
+ case4TestingEvidence: {
+  title:'Case 04 — Oriole / Omitted Landing Test Context',caseId:'ORI',mediaRole:'evidence-context',recordContext:'ORI-05',
+  path:'/assets/video/designer-case-4-testing-evidence-v1.mp4',
+  source:'case 4 testing evidence.mp4',driveId:'1vRnALp59GC4dmjy6M_J8E-UOiMU_KaCZ',
+  duration:6.083333,bytes:5860199,mixGain:.8,
+ },
+ case4Outcome: {
+  title:'Case 04 — Oriole / Verified Rescue Outcome',caseId:'ORI',mediaRole:'cinematic',
+  path:'/assets/video/designer-case-4-outcome-v1.mp4',
+  source:'case 4 outcome.mp4',driveId:'1EwYPPQ3krHm9qAV26jwt57-8xBoy0OXX',
+  duration:5.97,bytes:3792082,mixGain:.3,
+ },
+ case5Intro: {
+  title:'Case 05 — Asterion / Mission Introduction',caseId:'AST',mediaRole:'cinematic',
+  path:'/assets/video/designer-case-5-intro-v1.mp4',
+  source:'case 5 intro .mp4',driveId:'1MbdBmI2Xd2nZBNDiUh0u6dO07EYTwt5r',
+  duration:7.93,bytes:5027110,mixGain:.8,
+ },
+ case5Outcome: {
+  title:'Case 05 — Asterion / Verified Rescue Outcome',caseId:'AST',mediaRole:'cinematic',
+  path:'/assets/video/designer-case-5-outcome-v1.mp4',
+  source:'case 5 outcome.mp4',driveId:'1nRPdau6afLiszCLV43HqYN3GSj0-MF09',
+  duration:7.93,bytes:5404764,mixGain:.8,
  },
 } as const
 export type CinematicId=keyof typeof CINEMATICS
