@@ -186,6 +186,7 @@ export default function HomeScreen() {
           <p>Step into a futuristic investigation station as Henda, an aerospace engineer uncovering the lessons hidden in five fictional mission files. Explore evidence, understand the engineering trade-offs and attempt alternate-history rescue scenarios.</p>
           <div className="aa-home-about-grid"><div><small>EXPERIENCE</small><strong>First-person point-and-click</strong></div><div><small>PRODUCTION</small><strong>TECHYON · 2026</strong></div></div>
           <p className="aa-home-disclaimer">The cases are fictional educational scenarios inspired by publicly documented NASA engineering lessons. NASA does not endorse this game. Numerical examples and mission records are simulated and must not be confused with authentic NASA telemetry.</p>
+           <p className="aa-home-disclaimer">Audio credits: original project-supplied effects and <a href="https://kenney.nl/assets/sci-fi-sounds" target="_blank" rel="noopener noreferrer">Kenney Sci-fi Sounds (CC0)</a>. Project-provided voice recordings and cinematics are fictional dramatizations, not authentic NASA mission media. Source and licensing review is documented separately.</p>
         </div>}
         <footer className="aa-home-dialog-footer"><span>THE ASTRAL ARCHIVES</span><span>PROTOTYPE DESIGN REVIEW / V1</span></footer>
       </section>
