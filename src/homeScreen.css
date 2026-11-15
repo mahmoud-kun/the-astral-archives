@@ -295,3 +295,25 @@
   .aa-home-secondary{min-height:35px}
   .aa-home-minor-actions button{min-height:28px}
 }
+
+/* Fullscreen-safe home composition: the 108px viewport-scaled title overflowed
+   its actual 650px copy column at 1536–1920px and the archive background
+   zoomed an additional 2.5%. Limit the title by its COLUMN, not screen width.
+   Keep the approved art and all menu actions unchanged. */
+@media screen and (min-width:1200px) and (min-height:781px){
+  .aa-home-title h1{
+    font-size:clamp(65px,5.05vw,84px);
+    letter-spacing:.045em;
+    overflow-wrap:normal;
+  }
+}
+/* Fullscreen is requested on the document element, not the Home component. */
+:root:fullscreen .aa-home-art img{
+  animation:none;
+  transform:none;
+}
+:root:fullscreen .aa-home{
+  height:100dvh;
+  min-height:0;
+  overflow:hidden;
+}
