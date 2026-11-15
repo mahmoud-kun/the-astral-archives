@@ -3,6 +3,7 @@ import { EVIDENCE_RECORDS } from '../archive/evidenceRecords'
 import { DIAGNOSIS_PROMPTS, countRequiredEvidence, diagnosisIsSupported, rescueIsReady, submitDiagnosis, updateDiagnosis, type CaseDiagnosis, type DiagnosticPart } from '../archive/archiveState'
 import { navigateGame } from '../gameNavigation'
 import { playGameSound } from '../audio/gameAudio'
+import { isVerifiedOutcomeFilmAvailable, playVerifiedRescueOutcome } from '../integration/gameMediaActions'
 import { updateArchive, useArchiveSave } from './gameSave'
 import { REQUIRED_OTHER_IDS, type OtherCaseId } from './caseEvidenceEngine'
 import { updateOtherProgress, useOtherProgress } from './caseSave'
@@ -128,6 +129,9 @@ export default function CaseRescue({caseId}:{caseId:OtherCaseId}){
      </div>}
      {tested&&stillTested&&tested.result.pass&&!completed&&<button className="nr-action" type="button" onClick={signDecision}>SUBMIT ENGINEERING REVIEW DECISION</button>}
      {completed&&<div className="cw-outcome" role="status"><strong>ALTERNATE BRANCH / VERIFIED IN SIMULATION</strong><p>{content.completion}</p><p>{content.limitations}</p>
+      {isVerifiedOutcomeFilmAvailable(caseId)
+       ? <button className="nr-action" type="button" data-sfx="none" onClick={()=>playVerifiedRescueOutcome(caseId)}>WATCH VERIFIED {caseId} OUTCOME</button>
+       : <p className="cw-limit" role="status">OUTCOME FILM ON CONTENT/SCIENCE HOLD. Your verified simulation result is saved; no incorrect footage will be presented as a success.</p>}
       <button className="nr-action" type="button" onClick={()=>navigateGame('/?folder-lab=1&return=investigation')}>RETURN TO CASE FILES</button></div>}
     </section>
    </>}
