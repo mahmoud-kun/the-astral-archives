@@ -7,6 +7,7 @@ import { ARCHIVE_PROGRESS_EVENT, stationRoute, type StationId } from '../gamepla
 import { isOtherCaseId, readActiveCase, setActiveCase } from '../gameplay/caseContext'
 import { enterRescueThroughPortal, playCaseIntroduction, KESTREL_FOOTAGE_PENDING_APPROVAL } from '../integration/gameMediaActions'
 import {isStoryRescueComplete} from '../gameplay/storyRescueState'
+import RescueRecap from '../gameplay/RescueRecap'
 import './archiveFolderLab.css'
 
 function initialState(): ArchiveState {
@@ -70,6 +71,7 @@ export default function ArchiveFolderLab() {
   const [open,setOpen]=useState(true)
   const [inspectedId,setInspectedId]=useState<string|null>(null)
   const [intake,setIntake]=useState(false)
+  const [recapCase,setRecapCase]=useState<ArchiveCaseId|null>(null)
   const locationParam = new URLSearchParams(window.location.search)
   const from = locationParam.get('return')
   const origin:StationId = from==='signal'||from==='archive'||from==='recordings'?from:'investigation'
@@ -156,11 +158,16 @@ export default function ArchiveFolderLab() {
           ? <small>PROJECT BRIEF / Early-phase design trade: the original payload, power and cost no longer fit the mission plan. Investigate the actual source records; no launch or assembly footage is represented as historical proof.</small>
           : <button className="af-side-action" type="button" data-sfx="none" onClick={()=>playCaseIntroduction(caseId)}>PLAY {meta.name.toUpperCase()} INTRO</button>}</div>
         <div className="af-status-section"><span>YOUR MISSION</span><strong>{storyComplete?'RESCUED IN THE STORY':'COLLECT ANY SIX OF EIGHT'}</strong><p>Explore the station and collect six distinct documents from this case. Filing them into Mission Folders is optional and can be corrected later.</p></div>
-        <div className="af-status-section"><span>RESCUE MISSION</span><strong className={ready?'af-ready':''}>{ready?'UNLOCKED':'LOCKED'}</strong><p>{ready?'Six case records collected! Travel into the past and rescue the mission.':'Collect any six of this mission’s eight records to unlock. Filing is optional.'}</p>{caseId==='NAD'&&ready&&<button className="af-side-action" onClick={()=>enterRescueThroughPortal('NAD')}>ENTER NADIR RESCUE →</button>}{isOtherCaseId(caseId)&&ready&&<button className="af-side-action" onClick={()=>enterRescueThroughPortal(caseId)}>ENTER {meta.name.toUpperCase()} RESCUE →</button>}</div>
+        <div className="af-status-section"><span>RESCUE MISSION</span><strong className={ready?'af-ready':''}>{ready?'UNLOCKED':'LOCKED'}</strong><p>{ready?'Six case records collected! Travel into the past and rescue the mission.':'Collect any six of this mission’s eight records to unlock. Filing is optional.'}</p>{ready&&<button className="af-side-action" onClick={()=>setRecapCase(caseId)}>REVIEW YOUR FINDINGS · ENTER RESCUE →</button>}</div>
         <div className="af-status-source">FICTIONAL CASE RECORDS. NOT AUTHENTIC NASA TELEMETRY.</div>
         {debug&&<button className="af-reset" onClick={reset}>RESET DEBUG PREVIEW</button>}
       </aside>
     </div>
     {inspected&&<DocumentViewer key={inspected.id} record={inspected} archive={archive} onDiscover={id=>setArchive(current=>discoverEvidence(current,id))} onFile={file} onClose={()=>setInspectedId(null)}/>}
+    {recapCase&&<RescueRecap key={recapCase} caseId={recapCase} onClose={()=>setRecapCase(null)} onBegin={()=>{
+      const started=enterRescueThroughPortal(recapCase)
+      if(started)setRecapCase(null)
+      return started
+    }}/>}
   </main>
 }
