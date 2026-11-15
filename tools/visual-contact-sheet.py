@@ -65,6 +65,19 @@ sheet("fullscreen-layout-review", [
  ("INVENTORY LEFT / DESKTOP 1366×768","inventory-left-1366x768.png"),
  ("INVENTORY LEFT / MOBILE 915×412","inventory-left-915x412.png"),
 ], (880,495))
+# Independent Main integration evidence for the four newly mounted Rescue
+# routes and the source-index analyzer, separate from the historical review.
+sheet("case-integration-review", [
+ ("CASE SOURCE INDEX / DESKTOP", "case-source-index-1366x768.png"),
+ ("CASE SOURCE INDEX / MOBILE", "case-source-index-915x412.png"),
+ ("CASE PUZZLE / MOBILE", "case-puzzle-915x412.png"),
+ ("KES RESCUE GATE", "case-rescue-kes-915x412.png"),
+ ("LUM RESCUE GATE", "case-rescue-lum-915x412.png"),
+ ("ORI RESCUE GATE", "case-rescue-ori-915x412.png"),
+ ("AST RESCUE GATE", "case-rescue-ast-915x412.png"),
+ ("PRODUCTION DEBUG GUARD", "production-debug-guard-915x412.png"),
+], (790,357))
+
 report=json.loads((SRC/"report.json").read_text())
 summary={
  "run_on":report["started"],
