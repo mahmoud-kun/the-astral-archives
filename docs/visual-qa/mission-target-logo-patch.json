@@ -1,0 +1,35 @@
+{
+  "source": "public/assets/rooms/past/mission_target/layers/static-v1/room_visible.webp",
+  "generatedCandidate": "docs/visual-qa/mission-target-logo-free-candidate.webp",
+  "beforeAfter": "docs/visual-qa/mission-target-logo-before-after.webp",
+  "dimensions": [
+    1920,
+    1080
+  ],
+  "affectedRegion": {
+    "polygon": [
+      [
+        225,
+        134
+      ],
+      [
+        361,
+        167
+      ],
+      [
+        364,
+        307
+      ],
+      [
+        224,
+        277
+      ]
+    ],
+    "includesMissionHotspots": false
+  },
+  "sourcePreserved": true,
+  "fullRoomRegeneration": false,
+  "automaticArtifactChecks": "PASS",
+  "humanArtReview": "PENDING",
+  "physicalTouchQA": "NOT_VERIFIED"
+}

@@ -1,0 +1,140 @@
+/* Standalone 360° seated camera prototype; shared station UI is unchanged. */
+.investigation360 {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background: #061627;
+  isolation: isolate;
+  overflow: hidden;
+  --glass: #061f30e3;
+  --line: #4f889a;
+  color: #e7f3ed;
+}
+.investigation360-renderer { position: absolute; inset: 0; }
+.investigation360-canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+  outline: none;
+  touch-action: none;
+  user-select: none;
+}
+.investigation360-meta {
+  position: absolute;
+  z-index: 2;
+  pointer-events: none;
+  top: clamp(90px, 11vh, 112px);
+  left: clamp(18px, 2.8vw, 46px);
+  font: 9px 'IBM Plex Mono', monospace;
+  letter-spacing: .14em;
+  color: #a8d1da;
+  text-shadow: 0 2px 8px #000b;
+}
+.investigation360-meta b { color: #ffac69; }
+.investigation360-reticle {
+  position: absolute; z-index: 3; pointer-events: none;
+  left: 50%; top: 50%; transform: translate(-50%, -50%);
+  width: 23px; height: 23px; display: grid; place-items: center;
+  opacity: .65; transition: opacity .17s;
+}
+.investigation360-reticle > span {
+  width: 17px; height: 17px; border: 1px solid #d1e8e6;
+  border-radius: 50%; box-shadow: 0 0 0 4px #0715228a,0 0 13px #22d4dd88;
+}
+.investigation360-reticle > span:after {
+  content: ''; display: block; background: #f5b57d;
+  border-radius: 50%; width: 3px; height: 3px; margin: 6px;
+}
+.investigation360-reticle.is-target > span {
+  border-color: #ffb77c; box-shadow: 0 0 0 4px #0715228a, 0 0 16px #ffb073c7;
+}
+.investigation360-reticle.is-locked, .investigation360-reticle.is-target { opacity: 1; }
+.investigation360-reticle small {
+  position: absolute; top: 37px; left: 50%; transform: translateX(-50%);
+  white-space: nowrap; background: #061e31ee; border: 1px solid #74b4b6;
+  color: #f3e5cf; padding: 8px 10px;
+  font: 9px 'IBM Plex Mono', monospace; letter-spacing: .08em;
+}
+.investigation360-enable {
+  position: absolute; z-index: 5; bottom: 92px; left: 50%;
+  transform: translateX(-50%); display: flex; flex-direction: column;
+  align-items: center; justify-content: center; gap: 6px;
+  padding: 14px 18px; width: min(280px, calc(100% - 35px));
+  background: #061f33ec; border: 1px solid #6abfc5;
+  color: #edf8f3; box-shadow: 0 8px 24px #000b;
+  font: 600 11px 'IBM Plex Mono', monospace; letter-spacing: .08em;
+  backdrop-filter: blur(7px);
+}
+.investigation360-enable:hover { background: #19465b; border-color: #ffb475; }
+.investigation360-enable small {
+  font: 10px 'IBM Plex Sans', sans-serif; letter-spacing: .02em;
+  color: #bad7dc;
+}
+.investigation360-actions {
+  position: absolute; z-index: 4; left: clamp(16px, 2vw, 32px);
+  bottom: 47px; display: flex; flex-direction: column; gap: 5px;
+  width: min(180px, 29vw);
+}
+.investigation360-actions button {
+  display: flex; align-items: center; gap: 10px;
+  padding: 7px 10px; background: #061725a6; border: 1px solid #326075a8;
+  color: #c1d8d8; text-align: left; font: 9px 'IBM Plex Mono', monospace;
+  letter-spacing: .07em; backdrop-filter: blur(4px);
+}
+.investigation360-actions button:hover,.investigation360-actions button:focus-visible {
+  color: #fff1d9; border-color: #ffb578; background: #12354ad9;
+}
+.investigation360-actions span {
+  color: #ffb579; border: 1px solid #7a7971; padding: 2px 5px;
+}
+.investigation360-help-trigger {
+  position: absolute; z-index: 6; top: clamp(91px, 11vh, 113px);
+  right: clamp(16px, 2.8vw, 46px);
+  width: 36px; height: 36px;
+  border: 1px solid #6fa2b1; border-radius: 50%;
+  color: #e8f7ec; background: #061b2ad9; font: 15px 'IBM Plex Mono', monospace;
+}
+.investigation360-help {
+  position: absolute; z-index: 8; top: clamp(137px, 16vh, 164px);
+  right: clamp(16px, 2.8vw, 46px); width: min(365px, calc(100% - 32px));
+  background: #071c2ef5; border: 1px solid #3d7b8f; padding: 23px;
+  color: #d8e5e7; font-size: 12px; line-height: 1.6;
+  box-shadow: 0 15px 30px #0009;
+}
+.investigation360-help > button {
+  float: right; border: 1px solid #548d9b; color: white;
+  background: #163c51; padding: 2px 9px;
+}
+.investigation360-help strong {
+  font: 11px 'Orbitron', sans-serif; letter-spacing: .06em; color: #e9e2c9;
+}
+.investigation360-help p { margin: 10px 0 0; }
+.investigation360-pointer-note {
+  position: absolute; z-index: 6; left: 50%; bottom: 39px;
+  transform: translateX(-50%); padding: 10px;
+  background: #071b2bcc; text-align: center; font-size: 11px;
+  width: min(340px, 90vw);
+}
+.investigation360-unavailable {
+  position: absolute; z-index: 7; top: 50%; left: 50%;
+  width: min(390px, calc(100% - 32px)); transform: translate(-50%, -50%);
+  color: #f3e9d9; background: #081e2fea; padding: 25px;
+  border: 1px solid #c28061; box-shadow: 0 10px 40px #000a;
+}
+.investigation360-unavailable strong { font: 15px 'Orbitron', sans-serif; }
+.investigation360-unavailable p { font-size: 13px; line-height: 1.6; color: #bed5d6; margin-top: 13px; }
+.investigation360-unavailable button { padding: 10px; border: 1px solid #59c6ce; background: #163d51; color: #fff; }
+@media (hover: none), (pointer: coarse) {
+  .investigation360-enable { display: none; }
+}
+@media (max-width: 720px) {
+  .investigation360-meta { top: 82px; font-size: 7px; left: 12px; }
+  .investigation360-help-trigger { top: 76px; right: 12px; }
+  .investigation360-help { top: 114px; right: 12px; }
+  .investigation360-actions { left: 8px; bottom: 35px; width: 148px; }
+  .investigation360-actions button { font-size: 8px; padding: 7px; }
+  .investigation360-enable { bottom: 68px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .investigation360-reticle { transition: none; }
+}

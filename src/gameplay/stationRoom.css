@@ -1,0 +1,158 @@
+.sr-root{position:relative;isolation:isolate;display:flex;align-items:center;justify-content:center;width:100%;height:100dvh;min-height:0;overflow:hidden;background:#04111f;color:#e8e6df;font-family:'IBM Plex Sans',sans-serif}
+.sr-space{position:absolute;inset:0;z-index:-1;background:radial-gradient(ellipse at center,#133c53,#030c17 70%)}
+.sr-stage{position:relative;flex:none;width:min(100vw,177.68dvh);aspect-ratio:1672/941;max-height:100dvh;overflow:hidden;border:1px solid #244653;box-shadow:0 0 50px #000a}
+.sr-plate{position:absolute;inset:0;width:100%;height:100%;object-fit:fill;pointer-events:none;user-select:none}
+.sr-hotspot{position:absolute;display:block;appearance:none;padding:0;border:1px solid transparent;background:transparent;color:#d9f6f5;cursor:pointer;outline:0;touch-action:manipulation;-webkit-tap-highlight-color:transparent}
+.sr-hotspot:is(:hover,:focus-visible,:active){border-color:#8de6ebaa;box-shadow:0 0 17px #54cfef83,inset 0 0 32px #5acfe526;transition:box-shadow .18s,border-color .18s}
+.sr-hotspot-label{position:absolute;left:50%;bottom:6%;transform:translateX(-50%) translateY(8px);white-space:nowrap;max-width:96%;overflow:hidden;text-overflow:ellipsis;pointer-events:none;color:#d8f7fc;background:#061a2add;border:1px solid #65b8c8;padding:7px 11px;font:700 9px 'IBM Plex Mono',monospace;letter-spacing:.05em;opacity:0;transition:.18s}
+.sr-hotspot:is(:hover,:focus-visible,:active) .sr-hotspot-label{opacity:1;transform:translateX(-50%) translateY(0)}
+.sr-collected:is(:hover,:focus-visible) .sr-hotspot-label{border-color:#e6b079}
+.sr-head{position:absolute;z-index:8;top:0;left:0;right:0;display:flex;align-items:center;gap:15px;padding:10px max(15px,env(safe-area-inset-right)) 10px max(15px,env(safe-area-inset-left));height:64px;background:linear-gradient(180deg,#031322ee,#0a223980);border-bottom:1px solid #42627d}
+.sr-head button{cursor:pointer}.sr-back{min-height:34px;background:#102b40;border:1px solid #648796;color:#cae9ee;padding:7px 12px;font:700 10px 'IBM Plex Mono',monospace}
+.sr-heading{display:grid;gap:3px;min-width:0}.sr-heading small{color:#d9b88d;font:700 9px 'IBM Plex Mono',monospace;letter-spacing:.1em}.sr-heading strong{font:700 14px 'Orbitron',sans-serif;letter-spacing:.04em}
+.sr-nav{display:flex;gap:5px;margin-left:auto;margin-right:72px}.sr-nav button{background:#0c2636db;color:#b8d8e0;border:1px solid #3f6879;padding:8px 9px;font:700 10px 'IBM Plex Mono',monospace;cursor:pointer}
+.sr-nav button:is(.current,:disabled){border-color:#d1a473;color:#f1cfab;background:#30404a;cursor:default}
+.sr-instruction{z-index:5;position:absolute;top:74px;left:max(14px,env(safe-area-inset-left));display:grid;gap:4px;background:#071e2eb8;border-left:2px solid #c79a73;padding:8px 11px}
+.sr-instruction strong{font:700 9px 'IBM Plex Mono',monospace;color:#dceef1;letter-spacing:.06em}.sr-instruction span{font-size:10px;color:#9eb8c5}
+.sr-foot{position:absolute;bottom:0;left:0;right:0;padding:10px 21px;background:linear-gradient(0deg,#03111fef,#03111f44);display:flex;justify-content:space-between;gap:20px;color:#d7d7d0;font:700 9px 'IBM Plex Mono',monospace;letter-spacing:.08em;pointer-events:none}
+.sr-head button:focus-visible,.sr-hotspot:focus-visible{outline:2px solid #a4f3fa;outline-offset:3px}
+@media (orientation:landscape) and (max-width:1000px) and (max-height:600px){
+ .sr-head{height:38px;padding:3px max(7px,env(safe-area-inset-right)) 3px max(7px,env(safe-area-inset-left));gap:6px}
+ .sr-back{min-height:26px;font-size:8px;padding:4px 7px}.sr-heading small{font-size:7px}.sr-heading strong{font-size:10px}
+ .sr-nav{gap:3px;margin-right:52px}.sr-nav button{font-size:8px;padding:5px 6px}
+ .sr-instruction{top:42px;padding:4px 7px;left:max(6px,env(safe-area-inset-left));gap:1px}
+ .sr-instruction strong{font-size:8px}.sr-instruction span{font-size:8px}
+ .sr-foot{padding:4px 10px;font-size:7px}
+ .sr-hotspot-label{padding:4px 6px;font-size:7px}
+}
+@media(orientation:landscape) and (max-width:620px) and (max-height:430px){
+ .sr-heading small{display:none}.sr-heading strong{font-size:9px}.sr-nav button{font-size:7px;padding:4px}
+}
+@media(prefers-reduced-motion:reduce){.sr-hotspot,.sr-hotspot-label{transition:none!important}}
+
+/* Evidence beacons are tied to actual clickable scene equipment, not decorative HUD clutter. */
+.sr-beacon{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);display:grid;place-items:center;
+ width:35px;height:35px;border-radius:50%;background:#06182bab;border:1px solid #7ac5d59c;
+ box-shadow:0 0 0 6px #67d2e21e,0 0 16px #5acfe550;pointer-events:none;opacity:.78;transition:transform .2s ease,opacity .2s ease}
+.sr-beacon .eg-glyph{width:25px;height:25px;background:transparent;border:0;box-shadow:none}
+.sr-beacon .eg-glyph svg{width:18px;height:18px;filter:drop-shadow(0 0 4px #61d5ecaa)}
+.sr-hotspot:is(:hover,:focus-visible,:active) .sr-beacon{transform:translate(-50%,-50%) scale(1.13);opacity:1;background:#0a304be9;box-shadow:0 0 0 9px #67d2e22a,0 0 28px #56eeffe8}
+.sr-hotspot.sr-collected .sr-beacon{border-color:#daa16b;box-shadow:0 0 0 6px #d3a77225,0 0 15px #e4b884a1}
+@media(orientation:landscape) and (max-width:1000px) and (max-height:600px){
+ .sr-beacon{width:26px;height:26px;box-shadow:0 0 0 3px #67d2e21e}
+ .sr-beacon .eg-glyph{width:21px;height:21px}.sr-beacon .eg-glyph svg{width:15px;height:15px}
+}
+@media(prefers-reduced-motion:reduce){.sr-beacon{transition:none}}
+
+/* Mobile horizontal HUD: the back button already reaches Investigation.
+   Remove that duplicate from the compact room switcher; don't cover room art
+   with two explanatory bars when the bottom status line is sufficient. */
+@media (orientation:landscape) and (max-height:600px) and (max-width:1000px){
+ .sr-nav button:first-child{display:none}
+ .sr-nav{margin-right:51px;gap:5px}
+ .sr-instruction{display:none}
+ .sr-head{background:linear-gradient(180deg,#031322ed,#0a2239bc);border-bottom-color:#355366}
+ .sr-foot{background:linear-gradient(0deg,#03111fe9,#03111f66);gap:8px}
+ .sr-beacon{min-width:26px;min-height:26px}
+}
+@media (orientation:landscape) and (max-height:400px) and (max-width:800px){
+ .sr-heading small{display:none}
+ .sr-nav button{padding:5px 6px;font-size:9px}
+ .sr-foot span:first-child{display:none}
+ .sr-foot{justify-content:flex-end}
+}
+
+
+/* Work Order A — source-plate-safe layered interactions.
+   Mask PNGs select true object pixels; overlapping rectangular bounds do not block
+   a lower physical object. Focus stays on real keyboard-accessible buttons. */
+.sr-stage{cursor:default}
+.sr-stage.sr-stage-interactive{cursor:pointer}
+.sr-hotspot.sr-layer-target{pointer-events:none;border:0;box-shadow:none}
+.sr-hotspot.sr-layer-target:is(:hover,:focus-visible,:active){border:0;box-shadow:none}
+.sr-layer-target img{position:absolute;inset:0;display:block;width:100%;height:100%;pointer-events:none;user-select:none;-webkit-user-drag:none}
+.sr-layer-screen{opacity:1}
+.sr-layer-glow{opacity:0;transition:opacity .16s ease;filter:drop-shadow(0 0 4px #72e9fb)}
+.sr-layer-target:is(.sr-lit,:focus-visible) .sr-layer-glow{opacity:1}
+.sr-layer-target:focus-visible{outline:2px solid #a4f3fa;outline-offset:-2px}
+.sr-layer-target:is(.sr-lit,:focus-visible) .sr-hotspot-label{opacity:1;transform:translateX(-50%) translateY(0)}
+.sr-layer-target:is(.sr-lit,:focus-visible) .sr-beacon{
+ transform:translate(-50%,-50%) scale(1.13);opacity:1;
+ background:#0a304be9;box-shadow:0 0 0 8px #67d2e22a,0 0 24px #56eeffe8}
+.sr-inspection-shade{position:absolute;z-index:14;inset:0;display:grid;place-items:center;padding:65px 18px 36px;background:#020b17c9}
+.sr-inspection-note{width:min(520px,95vw);max-height:100%;overflow:auto;border:1px solid #56869b;
+ background:linear-gradient(150deg,#112f43,#051522);box-shadow:0 20px 65px #000a;
+ padding:22px;color:#e1edf0}
+.sr-inspection-note small{color:#d6ac77;font:700 10px 'IBM Plex Mono',monospace;letter-spacing:.06em}
+.sr-inspection-note h2{font:700 18px 'Orbitron',sans-serif;margin:12px 0}
+.sr-inspection-note p{font:400 13px/1.65 'IBM Plex Sans',sans-serif;color:#c9dce3}
+.sr-inspection-actions{display:flex;gap:10px;justify-content:flex-end;flex-wrap:wrap;margin-top:18px}
+.sr-inspection-actions button{background:#143a50;border:1px solid #78bcc5;color:#e8f4f6;
+ padding:9px 14px;cursor:pointer;font:700 10px 'IBM Plex Mono',monospace}
+.sr-inspection-actions button:focus-visible{outline:2px solid #b8f4ff;outline-offset:3px}
+@media (orientation:landscape) and (max-width:1000px) and (max-height:600px){
+ .sr-inspection-shade{padding:40px 12px 16px}
+ .sr-inspection-note{padding:13px 16px}
+ .sr-inspection-note h2{font-size:13px;margin:5px 0}
+ .sr-inspection-note p{font-size:11px;line-height:1.45;margin:5px 0}
+ .sr-inspection-actions{margin-top:7px}
+ .sr-inspection-actions button{padding:6px 9px;font-size:9px}
+ .sr-inspection-note small{font-size:8px}
+}
+@media(prefers-reduced-motion:reduce){.sr-layer-glow{transition:none}}
+
+
+/* One small real button per object is keyboard/tab accessible and can be clicked by
+   browser automation; mask-based pointer selection still works over the entire art. */
+.sr-layer-object{position:absolute;display:block;pointer-events:none}
+.sr-layer-object>img{position:absolute;inset:0;display:block;width:100%;height:100%;
+ pointer-events:none;user-select:none;-webkit-user-drag:none}
+.sr-layer-object .sr-layer-glow{opacity:0;transition:opacity .16s}
+.sr-layer-object.sr-lit .sr-layer-glow,
+.sr-layer-object:focus-within .sr-layer-glow{opacity:1}
+.sr-anchor-target,.sr-hotspot.sr-anchor-target{
+ position:absolute;left:50%;top:50%;width:40px;height:40px;
+ transform:translate(-50%,-50%);pointer-events:auto;touch-action:manipulation;
+ border:1px solid #7ac5d56b;background:#06182b55;border-radius:50%;
+ display:grid;place-items:center;color:#aaf4ff;cursor:pointer;padding:0;
+ outline:0}
+.sr-hotspot.sr-anchor-target:focus-visible,
+.sr-prop-target.sr-anchor-target:focus-visible{outline:2px solid #a4f3fa;outline-offset:3px}
+.sr-layer-object .sr-beacon{width:34px;height:34px;top:50%;left:50%}
+.sr-layer-object .sr-hotspot-label{left:50%;bottom:4%;max-width:94%;
+ white-space:normal;text-align:center;line-height:1.4}
+.sr-layer-object:is(.sr-lit,:focus-within) .sr-hotspot-label{opacity:1;transform:translateX(-50%) translateY(0)}
+.sr-prop-target{opacity:.3;transition:opacity .15s}
+.sr-prop-target:is(:focus-visible,:hover),.sr-layer-object.sr-lit .sr-prop-target{opacity:.95}
+.sr-prop-mark{font:700 17px 'IBM Plex Mono',monospace;color:#95e8ee}
+@media(orientation:landscape) and (max-width:1000px) and (max-height:600px){
+ .sr-anchor-target,.sr-hotspot.sr-anchor-target{width:32px;height:32px}
+ .sr-layer-object .sr-beacon{width:26px;height:26px}
+ .sr-layer-object .sr-hotspot-label{font-size:7px;padding:4px 5px}
+}
+@media(prefers-reduced-motion:reduce){.sr-prop-target,.sr-layer-object .sr-layer-glow{transition:none}}
+
+/* Versioned static Past environment previews. No clean-plate or object-base compositing. */
+.sr-past-root{position:relative;isolation:isolate;display:flex;align-items:center;justify-content:center;width:100%;height:100dvh;min-height:0;overflow:hidden;background:#0a101d;color:#fff;font-family:'IBM Plex Sans',sans-serif}
+.sr-past-stage{position:relative;width:min(100vw,177.7778dvh);aspect-ratio:16/9;max-height:100dvh;overflow:hidden;background:#191326}
+.sr-past-background{display:block;width:100%;height:100%;object-fit:contain}
+.sr-past-target{position:absolute;z-index:2;display:block;border:1px solid transparent;border-radius:5px;padding:0;appearance:none;background:transparent;color:#fff;cursor:pointer;-webkit-tap-highlight-color:transparent}
+.sr-past-target:is(:hover,:focus-visible,[aria-pressed="true"]){border-color:#f9cb76;background:rgba(255,173,54,.13);box-shadow:inset 0 0 18px rgba(252,168,60,.26),0 0 12px rgba(252,168,60,.2)}
+.sr-past-target:focus-visible{outline:2px solid #fff;outline-offset:2px}
+.sr-past-target-name{position:absolute;bottom:100%;left:50%;min-width:max-content;max-width:220px;transform:translate(-50%,-3px);background:rgba(13,20,33,.95);color:#fff;border:1px solid rgba(255,190,85,.5);border-radius:4px;padding:4px 7px;font-size:clamp(9px,1.05vw,13px);line-height:1.25;opacity:0;pointer-events:none;white-space:nowrap}
+.sr-past-target:is(:hover,:focus-visible,[aria-pressed="true"]) .sr-past-target-name{opacity:1}
+.sr-past-back{position:absolute;left:12px;top:12px;z-index:3;background:rgba(9,17,29,.86);border:1px solid rgba(255,205,124,.6);border-radius:4px;color:#fff;padding:9px 12px;cursor:pointer;font:700 12px 'IBM Plex Sans',sans-serif}
+.sr-past-preview-state{position:absolute;z-index:3;bottom:12px;left:50%;transform:translateX(-50%);width:max-content;max-width:95%;padding:8px 11px;background:rgba(9,17,29,.94);border:1px solid rgba(255,205,124,.55);border-radius:5px;display:flex;flex-direction:column;gap:3px;font-size:clamp(10px,1.1vw,13px);text-align:center}
+.sr-past-asset-error{display:grid;place-items:center;width:100%;height:100%;color:#fff}
+@media (prefers-reduced-motion:reduce){.sr-past-target{transition:none}}
+
+/* Subtle signal life: breathing findable evidence without noisy flashing. */
+.sr-layer-object:not(.sr-collected) .sr-beacon::after{content:'';position:absolute;inset:-7px;border:1px solid #80d5e2;border-radius:50%;pointer-events:none;opacity:0;animation:astral-signal-ping 4.7s ease-out infinite}
+.sr-layer-object:nth-child(3n) .sr-beacon::after{animation-delay:1.7s}
+.sr-layer-object:nth-child(4n) .sr-beacon::after{animation-delay:3.1s}
+.sr-layer-object.sr-lit .sr-layer-glow{transition:opacity .25s ease;filter:drop-shadow(0 0 9px #5edeeabc)}
+.sr-inspection-note{animation:astral-inspector-arrive .27s cubic-bezier(.2,.9,.2,1) both}
+.sr-stage::after{content:'';position:absolute;inset:0;pointer-events:none;z-index:1;background:repeating-linear-gradient(to bottom,transparent 0 6px,#b0d7dc07 7px);opacity:.23}
+@keyframes astral-signal-ping{0%,72%,100%{opacity:0;transform:scale(.92)}78%{opacity:.57}92%{opacity:0;transform:scale(1.55)}}
+@keyframes astral-inspector-arrive{from{opacity:0;transform:translateY(12px) scale(.98)}to{opacity:1;transform:translateY(0) scale(1)}}
+@media(prefers-reduced-motion:reduce){.sr-layer-object .sr-beacon::after,.sr-inspection-note{animation:none!important}}

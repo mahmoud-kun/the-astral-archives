@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1920" height="824" viewBox="0 0 1920 824" fill="none" aria-hidden="true"><defs>
+<linearGradient id="steel" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#4b7286"/><stop offset=".35" stop-color="#1b4157"/><stop offset="1" stop-color="#061b2e"/></linearGradient>
+<linearGradient id="dark" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#203b51"/><stop offset="1" stop-color="#061724"/></linearGradient>
+<linearGradient id="panel" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#1c5067"/><stop offset=".45" stop-color="#0b3043"/><stop offset="1" stop-color="#051b2c"/></linearGradient>
+<linearGradient id="glass" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#206a7a"/><stop offset=".5" stop-color="#0b3e55"/><stop offset="1" stop-color="#081d34"/></linearGradient>
+<linearGradient id="cyan"><stop stop-color="#06899c"/><stop offset=".5" stop-color="#1ceaff"/><stop offset="1" stop-color="#95f8fa"/></linearGradient>
+<linearGradient id="orange"><stop stop-color="#8d4b20"/><stop offset=".5" stop-color="#ff9a42"/><stop offset="1" stop-color="#ffc46b"/></linearGradient>
+<radialGradient id="cold"><stop stop-color="#1cdaf6" stop-opacity=".31"/><stop offset=".3" stop-color="#0ae0f9" stop-opacity=".11"/><stop offset="1" stop-color="#1ce6f9" stop-opacity="0"/></radialGradient>
+<radialGradient id="warm"><stop stop-color="#ffa454" stop-opacity=".31"/><stop offset=".5" stop-color="#ffa454" stop-opacity=".07"/><stop offset="1" stop-color="#ffa454" stop-opacity="0"/></radialGradient>
+</defs>
+<polygon points="0,643 109,621 177,660 174,824 0,824" fill="#0d293c" stroke="#536a75" stroke-width="7"/>
+<polygon points="0,642 104,620 176,659 64,684" fill="#2f4758" stroke="#8a8a7d" stroke-width="5"/>
+<polygon points="73,691 176,665 174,824 70,824" fill="#102e42" stroke="#4b6577" stroke-width="4"/>
+<polygon points="5,695 69,684 70,823 0,823" fill="#142f44" stroke="#537187" stroke-width="3"/>
+<path d="M37 656L109 635 138 652 65 676Z" fill="#d48b4b"  />
+<polygon points="80,687 135,673 142,681 87,699" fill="#f5a658" />
+<polygon points="173,704 243,688 279,714 275,824 172,824" fill="#18384b" stroke="#67818d" stroke-width="5"/>
+<polygon points="174,704 244,684 279,712 212,728" fill="#395164" stroke="#91a1a1" stroke-width="3"/>
+<path d="M183 742L269 722" fill="none" stroke="#ffa458" stroke-width="6" />
+<polygon points="1762,682 1859,640 1920,668 1920,824 1754,824" fill="#17384c" stroke="#587a89" stroke-width="6"/>
+<polygon points="1762,682 1859,640 1920,665 1819,709" fill="#37576a" stroke="#91a6a6" stroke-width="4"/>
+<polygon points="1820,714 1920,672 1920,823 1825,824" fill="#0c2b42" stroke="#4a7784" stroke-width="3"/>
+<path d="M1831 744L1904 717" fill="none" stroke="#ff9e4a" stroke-width="7" />
+<polygon points="0,812 1920,813 1920,824 0,824" fill="#02111f" />
+</svg>

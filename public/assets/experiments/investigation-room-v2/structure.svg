@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1920" height="824" viewBox="0 0 1920 824" fill="none" role="img">
+
+<defs><linearGradient id="steel" x1="0" y1="0" x2="1" y2="0"><stop stop-color="#0a2134"/><stop offset=".5" stop-color="#31586a"/><stop offset="1" stop-color="#061927"/></linearGradient></defs>
+
+<path d="M133 128L168 127 178 618 144 630Z" fill="url(#steel)" stroke="#3e6d80" stroke-width="4"/>
+<path d="M145 166L154 586" stroke="#68acb3" stroke-width="3" opacity=".34"/>
+
+<path d="M553 128L588 127 598 618 564 630Z" fill="url(#steel)" stroke="#3e6d80" stroke-width="4"/>
+<path d="M565 166L574 586" stroke="#68acb3" stroke-width="3" opacity=".34"/>
+
+<path d="M1269 128L1304 127 1314 618 1280 630Z" fill="url(#steel)" stroke="#3e6d80" stroke-width="4"/>
+<path d="M1281 166L1290 586" stroke="#68acb3" stroke-width="3" opacity=".34"/>
+
+<path d="M1735 128L1770 127 1780 618 1746 630Z" fill="url(#steel)" stroke="#3e6d80" stroke-width="4"/>
+<path d="M1747 166L1756 586" stroke="#68acb3" stroke-width="3" opacity=".34"/>
+<path d="M147 118L1767 108 1757 143 155 149Z" fill="#0a2637" stroke="#426d7c" stroke-width="4"/>
+<path d="M154 154L1760 143" stroke="#92d4d2" stroke-width="2" opacity=".27"/>
+<path d="M158 618L1766 610 1780 636 143 645Z" fill="#0a1e30" stroke="#496c7d" stroke-width="4"/>
+<path d="M150 644L1772 635" stroke="#c88f63" stroke-width="2" opacity=".33"/>
+<path d="M380 170L1160 170 1179 197 378 206Z" fill="#091b2b" stroke="#345c73" stroke-width="3"/>
+<path d="M480 178V190" stroke="#5a99a1" stroke-width="4" opacity=".26"/>
+<path d="M600 178V190" stroke="#5a99a1" stroke-width="4" opacity=".26"/>
+<path d="M720 178V190" stroke="#5a99a1" stroke-width="4" opacity=".26"/>
+<path d="M840 178V190" stroke="#5a99a1" stroke-width="4" opacity=".26"/>
+<path d="M960 178V190" stroke="#5a99a1" stroke-width="4" opacity=".26"/>
+<path d="M1080 178V190" stroke="#5a99a1" stroke-width="4" opacity=".26"/>
+<path d="M1287 180H1361V566H1287Z" fill="#0a2334" stroke="#416c7a" stroke-width="4"/>
+<path d="M1306 208V550M1340 208V550" stroke="#51a5aa" stroke-width="3" opacity=".25"/>
+
+</svg>

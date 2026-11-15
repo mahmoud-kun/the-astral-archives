@@ -1,0 +1,26 @@
+.story-rescue .nr-content{gap:16px;align-items:start}
+.story-rescue .nr-work{min-width:0}
+.story-rescue .nr-work h2{font-size:clamp(19px,2.1vw,29px);line-height:1.25}
+.story-rescue .nr-work p{font-size:clamp(13px,1.25vw,16px);line-height:1.65}
+.story-step-indicator{display:flex;gap:7px;margin:14px 0 18px}
+.story-step-indicator span{width:36px;height:5px;border-radius:8px;background:#3b5267}
+.story-step-indicator span.current{background:#80d1df}
+.story-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:20px}
+.story-actions .nr-action{min-height:46px;font-size:13px}
+.story-evidence-list{margin-top:15px;padding:12px;border:1px solid #436175;border-radius:6px}
+.story-evidence-list summary{cursor:pointer;font-size:12px;letter-spacing:.06em}
+.story-evidence-list p{font-size:12px;line-height:1.5}
+.story-outcome{border-color:#679b8b}
+@media(max-width:720px){.story-rescue .nr-content{display:flex;flex-direction:column}.story-rescue .nr-work,.story-rescue .nr-summary{width:100%}.story-actions .nr-action{flex:1;min-width:150px}}
+
+/* Outcome dashboard: no auto-next story or quiz panels. */
+.story-repair-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:18px 0}
+.story-repair-link{display:flex;flex-direction:column;gap:6px;align-items:flex-start;text-align:left;background:#172a3d;border:1px solid #658396;color:#f5e7cc;padding:13px 14px;cursor:pointer;min-height:100px;font-family:inherit}
+.story-repair-link span{font:700 11px 'IBM Plex Mono',monospace;color:#dca971;letter-spacing:.04em}
+.story-repair-link strong{font-size:15px;line-height:1.35}
+.story-repair-link small{font-size:10px;color:#b9cbd7}
+.story-repair-link.story-repaired{background:rgba(33,85,68,.35);border-color:#86be9b}
+.story-repair-link.story-repaired span{color:#adf4cb}
+.story-repair-link:hover,.story-repair-link:focus-visible{outline:2px solid #a6dbe4;outline-offset:2px}
+@media(max-width:700px){.story-repair-list{grid-template-columns:1fr}.story-repair-link{min-height:65px;padding:9px 11px}}
+@media(max-height:510px){.story-repair-link{min-height:61px}.story-repair-list{margin:8px 0;gap:6px}}

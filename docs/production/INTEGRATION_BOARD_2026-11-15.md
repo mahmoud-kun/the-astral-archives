@@ -1,0 +1,125 @@
+# The Astral Archives — Main Chat Integration & Release Board
+
+**Date:** 2026-11-15 | **Sprint budget:** T+0 to T+300 (clock begins at real kickoff only)  
+**Governance:** [Parallel release plan](PARALLEL_RELEASE_PLAN_2026-11-15.md) | **Current accepted gameplay branch:** `experiment/room-case-library-layout-fix-2026-11-14`.
+
+> This document is a **live acceptance log to be updated by Main Chat**, not a list of already completed deliverables. A specialist's claim of done means *awaiting* independent Main acceptance.
+
+## Owner handoff registry
+
+| Stream | Owner | Start | Last handoff commit | Main verdict | P0 blocker |
+| --- | --- | --- | --- | --- | --- |
+| A — Case/Assets/Rooms | Specialist Chat A | **FINAL HANDOFF ACCEPTED IN SCOPE** | `14beba8` code/art + `b466e717` docs; [CI #150](https://github.com/mahmoud-kun/the-astral-archives/actions/runs/43699268899) | **ACCEPT asset/route integration; public release HOLD** | Physical Android touch, designer signoff and cleanup of unused public legacy NASA-mark image; broken clean plates/masks excluded, NOT required |
+| B — Audio/Voice/SFX/Cinematics | Specialist Chat B | SPECIALIST DELIVERED + MAIN BROWSER INTEGRATED | 5 MP3, 20 SFX, 17 MP4; [CI #150](https://github.com/mahmoud-kun/the-astral-archives/actions/runs/43699268899) | **ACCEPT browser/media integration / phone & rights HOLD** | Real device audition, verbatim captions/speaker approval, rights; KES/AST source films remain intentionally blocked with truthful in-game text alternatives |
+| C — Science/Puzzles | Specialist Chat C | CODE COMPLETE + ALL FIVE NORMAL UI E2E | `a43ea2b`; [CI #150](https://github.com/mahmoud-kun/the-astral-archives/actions/runs/43699268899) | **ACCEPT scientific/code and 5/5 playable browser pathways** | Independent human source-quality/VO/design approval and real device verification remain release tasks, not missing C gameplay |
+| Main — Integration/QA | Main Chat | 5/5 browser gameplay + 71 screenshots PASS on approved art; release fixes applied | [CI #150](https://github.com/mahmoud-kun/the-astral-archives/actions/runs/43699268899), release code SHA `3e37b536` | **READY Preview / public-release approval HOLD** | Review new focused copy and public image exclusion, Android speaker/touch, art/rights, transcripts; actual slide export and pitch rehearsal pending |
+
+## Five-case truth / proof matrix
+
+| Case ID | Name | Registration in UI | Confirmed interactive puzzles | Confirmed playable Rescue | Science signoff | Main acceptance |
+| --- | --- | --- | --- | --- | --- | --- |
+| KES | Kestrel | yes | 6 required analyzed/collected through real Archive/Recordings/Investigation UI | 6/6 → Past → diagnosis → engineering sign → reload **PASS** CI #145 | SCOPED C ACCEPT | ENGINEERING PASS / KES INTRO & OUTCOME ART HOLD |
+| NAD | Nadir | yes | 6 distinct physical Nadir puzzles incl. NAV-042, timeline, two-run trajectory, interface chips | 6/6 → Past → causal review → two independent unit vectors → verified outcome film → reload **PASS CI #147** | SCIENCE ACCEPT | GAMEPLAY PASS / DEVICE HOLD |
+| LUM | Lumen | yes | 6 required analyzed/collected through real UI | 6/6 → Past → diagnosis → engineering sign → outcome film → reload **PASS** CI #145 | SCOPED C ACCEPT; no invented flight tolerance | GAMEPLAY PASS / DEVICE HOLD |
+| ORI | Oriole | yes | 6 required analyzed/collected through real UI | 6/6 → Past → diagnosis → sensor filter → engineering sign → outcome film → reload **PASS** CI #145 | SCOPED C ACCEPT | GAMEPLAY PASS / DEVICE HOLD |
+| AST | Asterion | yes | 6 required analyzed/collected through real UI | 6/6 → Past → diagnosis → power replay → signed success → reload **PASS** CI #145 | SCOPED C ACCEPT; current Phase B | GAMEPLAY PASS / 472 W VIDEO CONTENT HOLD |
+
+**Proof requirement:** a case is PLAYABLE only if a clean save can navigate, inspect evidence, solve independent analysis, explicitly collect, move file, correctly unlock rescue, make engineering decisions, receive a case outcome and return — with no developer/debug bypass. Current case text/registry is not such proof.
+
+## Baseline evidence (verified before sprint kickoff)
+
+- [GitHub Visual QA run #46](https://github.com/mahmoud-kun/the-astral-archives/actions/runs/43671815584): completed SUCCESS; 44 screenshots / 0 browser-visible issues, on its checked commit. Does **not** certify later edits, actual mobile listening or completion of five cases.
+- [Codex assets handoff branch](https://github.com/mahmoud-kun/the-astral-archives/tree/experiment/remaining-rooms-layered-assets-v1-2026-11-14): seven layered packs and 28 interactive items exist. Clean background plates need designer cleanup; original sources preserved.
+- [Audio source documentation](../audio/AUDIO_SOURCES_AND_INTEGRATION_V1.md): 19 source cues, with device listening and final cinematic transitions still outstanding.
+
+## Main integration log — 2026-11-15
+
+- `dc9b01a` — `src/main.tsx`: four allowlisted Rescue workbenches; Nadir remains separate.
+- `29f17d6` — `src/archive/ArchiveFolderLab.tsx`: 6/6 rescue buttons, case preference, diagnosis within Rescue, `import.meta.env.DEV` production debug gate.
+- `34f4fdd` — `src/InvestigationDesignerScene.tsx`: secondary physical source index for the four cases while retaining Nadir and Mission Folders.
+- `fece39b`, `5356089` — Visual QA includes new Investigation source/puzzle, all four locked rescue routes and production debug guard, with separate case-integration screenshot contact sheet.
+- [Issue #2 Main coordination comment](https://github.com/mahmoud-kun/the-astral-archives/issues/2#issuecomment-6889445734): directed Chat A to connect three existing supporting room props without touching Main-owned files.
+- **First integrated root QA:** [GitHub Actions Run #90](https://github.com/mahmoud-kun/the-astral-archives/actions/runs/43679019455) **SUCCESS** at SHA `5356089cec250f8440144ea11c102c03cbbcc162`; `npm run build` (including test suites, TypeScript and Vite) + browser checks + contact sheets passed. The published `docs/visual-qa/latest-report.json` shows **52 screenshots**, 0 errors/missing captures/broken images/clipped controls/overflows/browser console errors. New tests covered Investigation Case Source Index (desktop/mobile), a four-case sample puzzle, all four **locked** Rescue URLs, and the `?debug=1` production-intake guard. These are **smoke/layout/gating tests, not four complete case journeys or successful Rescue outcomes**. Asterion story metadata changed after this run (`1762e64`), so do not label the later HEAD itself fully reverified. No five-case completed journey accepted yet.
+
+## 2026-11-15 — Chat B handoff reviewed by Main
+
+**Independent confirmed baseline:** [Audio+Media CI run #43693601655](https://github.com/mahmoud-kun/the-astral-archives/actions/runs/43693601655) SUCCESS at its source SHA; 28/28 tests, 52 pre-integration screenshot scenarios, production build. Recursive GitHub tree confirms 5/5 original designer MP3s under `public/assets/audio/voice/`, 17/17 MP4s under `public/assets/video/`, and 20 registered SFX (11 designer, 8 Kenney CC0, 1 original completion chime). The new `game demo.mp4` in Drive is an 18th reference file, **not an approved gameplay clip**.
+
+**Main integration now committed** to canonical working branch:
+- Mounted one persistent `CinematicOverlay` at the root; fresh Start -> optional Opening, saved Continue direct -> Investigation; no automatic browser audio or evidence change.
+- Added `src/integration/gameMediaActions.ts`: live read-back of 6/6 unlock on *both sides* of the portal movie, outcomes from the authoritative real Rescue state (NAD rerun or four-case signed tests), explicit no-progress visual completion. Preserves hard Asterion `case5Outcome` scientific hold (film 472 W vs verified 450 W) and Main-imposed Kestrel introduction/outcome content hold pending pre-Phase-A art review. No unapproved NASA claim.
+- Bound five original voice records and the five available evidence-context movies **inside the pre-existing Nadir/Four-Case evidence analyzers**, as optional `EvidenceMediaPanel`; no auto-solving, filing, collecting, playlist/voice overlaps or substitute for source analysis. KES-07, ORI-08 still text-only and optional.
+- Connected `CaseStationDesk` to physical Archive shelving, Signal telemetry console left and Recordings audio terminal, preserving Nadir's established hotspots and manual Mission Folders.
+- Mounted explicit playable non-KES mission intros in case dossiers, gated portal transition from both Investigation NAD Rescue Console and all five dossier Rescue buttons, and verified-only outcome film replay actions in existing Rescue workbenches; Return/Skip never alters save.
+- Established new browser QA media scenarios and contact sheet in `tools/visual-qa.mjs` and `tools/visual-contact-sheet.py`; final integrated run still must be reviewed at its exact SHA before PASS is recorded.
+- A concurrent Chat A edit reintroduced a JS string apostrophe Syntax Error, now fixed narrowly on the latest shared file SHA at `36538da`; collaboration documented in [Issue #2](https://github.com/mahmoud-kun/the-astral-archives/issues/2#issuecomment-6891818060). Continue to respect active Chat A file ownership/reconcile changes.
+
+**Acceptance still pending:** subjective audio audition and real mobile touch on Android/desktop, captions/speakers, NASA/third-party rights, Kestrel visual/story alignment, incorrect Asterion 472 W outcome, optional Return-to-Present/Closing, artist-approved Past/clean plates, presentation and up-to-date Vercel preview. **All five actual case UIs now PASS on branded Chrome**, independently of unverified artistic/release sign-off. A subsequent Escape/overlay edge-case fix remains subject to its own fresh CI.
+
+## Verified release evidence — full four-case browser acceptance
+
+- [Chrome 69-scenario integrated media QA #144](https://github.com/mahmoud-kun/the-astral-archives/actions/runs/43697185560) SUCCESS, 69 screenshots, 0 console errors/missing captures/broken images/clipping/overflow, H.264 opening decoded in branded Chrome; source tests and Vite build PASS.
+- [No-debug gameplay QA #145](https://github.com/mahmoud-kun/the-astral-archives/actions/runs/43697949431) SUCCESS; [exact machine report](../../visual-qa/four-case-e2e-report.json). **KES, LUM, ORI, AST each PASS** complete browser journey: physical-source inspections in canonical rooms → authentic six analyzed → six explicit user collect → wrong folder and correction → 6/6 persisted over reload → portal video → four-stage Past Timeline → evidence-cited causal diagnosis → specialized verified engineering simulation → signed rescue → reload. LUM/ORI approved outcome videos also tested. **Not a bypass using pre-seeded localStorage or debug flags.**
+- [Fifth-case Nadir browser acceptance #147](https://github.com/mahmoud-kun/the-astral-archives/actions/runs/43698641507) **SUCCESS** at source SHA `0ed40b01c0bed3affcca344e3bf2077669a11e57`; [exact Nadir E2E report](../../visual-qa/nadir-e2e-report.json) status PASS. Six physical puzzles include NAV-042 ticket, manual causal timeline, two-run trajectory replay, producer/parser chips; then wrong filing/correction, 6/6, portal, gated Past, diagnosis, two independent unit-check engineering reruns, save/reload and approved Nadir result movie. **No debug or injected save state.** Screenshot QA in the same run: 69/69 screenshots, 0 errors/console/broken/clipping/overflows.
+- **DO NOT merge to historical `main` or claim deployed release yet.** Vercel last checked READY deployment targets an older SHA, not this accepted integration. Full content/audio/art/release acceptance remains gated.
+
+## Verified deployment preview / five-case regression (2026-11-15)
+
+- [GitHub Actions #150](https://github.com/mahmoud-kun/the-astral-archives/actions/runs/43699268899) **SUCCESS** at source SHA `14beba8fca90235986f09f3047b3c25c6761a13a`; Chrome screenshot report now **71/71 scenarios, 0 browser/page errors, 0 broken images, 0 clipping, 0 overflows, 0 console faults**. Both mandatory [four-case](../../visual-qa/four-case-e2e-report.json) and [Nadir](../../visual-qa/nadir-e2e-report.json) physical GUI E2E checks passed in the same run, no `debug=1`.
+- Vercel **Preview READY** deployment `dpl_Fw96PzmM4GzKen2dxdHsK9DwsPx1`, exact source SHA `14beba8f`, URL: https://astral-archives-ixu0h5ll8-mahmooud-kun.vercel.app . Framework Vite; explicit preview deployment, **NOT** production/main promotion. Vercel API confirmed READY; public anonymous browser access and every streamed video range request have **not** been independently validated from an external device. A web inspection attempt could not reach the preview URL, which may reflect deployment protection or web-tool access.
+- Chat A's Mission Target `static-v2` 1920×1080 art replaces the earlier generated NASA logo with neutral geometric mark and is in tested runtime. Static first-person Past stage and touch/mask interactions are sampled in automated browser emulation; full visual/rights/user approval still separate. The erroneous clean plate candidates in Draft PR #7 remain **excluded and unmerged**.
+- `src/gameplay/StationRoom.tsx` prevents Escape on a cinematic from dismissing its underlying evidence inspector; QA now checks Escape playback return. Run #150 includes this fix.
+- **Release HOLD remains:** real mobile hardware playback/touch/audio mixing, exact VO captions/speaker labels, content/rights/endorsement checklist, Kestrel Phase-A footage mismatch, Asterion 472 W outcome vs 450 W accepted rescue, designer visual sign-off, pitch/demo/closing assets as approved. Do not treat READY preview as final release approval.
+
+## Main verdict on Chat A final handoff — 2026-11-15
+
+**ACCEPT specialist scope (not full release).** Independently read [final Chat A report](handoffs/CASES_ASSETS_FINAL_2026-11-15.md) and checked source SHA `14beba8fca90235986f09f3047b3c25c6761a13a`, [CI #150](https://github.com/mahmoud-kun/the-astral-archives/actions/runs/43699268899) SUCCESS, 71/71 screenshots with 0 errors and **5/5 no-debug full case E2E PASS**. Live Past scenes use corrected `mission_target/static-v2`, neutral fictional emblem, four rooms and fifteen hotspots. No clean-v2 / broken masks are in runtime; Draft PR #7 must remain unmerged.
+
+**Residuals:** (1) genuine Android touch and speaker/headphone audition, (2) independent designer art approval, (3) old unused `public/assets/rooms/past/mission_target/layers/static-v1/room_visible.webp` contains obsolete generated NASA logo and remains copyable in public build, so remove from deploy bundle or relocate to non-public provenance before public promotion, (4) content/media final gates are separate: KES Phase-A clip mismatch, AST 472 W vs verified 450 W, VO captions/speakers and footage rights, (5) final eight-slide presentation, pitch, demo walkthrough and release checklist are not delivered as final artifacts. Do not treat code acceptance as final public release acceptance.
+
+## Main's rapid release fixes — November 15, 2026 (do not mislabel as full regression)
+
+**User direction:** ship safe, minimal changes quickly; avoid manually rerunning all 5 complete journeys. Baseline [#150](https://github.com/mahmoud-kun/the-astral-archives/actions/runs/43699268899) already had 5/5 case no-debug E2E and 71/71 Chrome screenshots, on `14beba8`.
+
+- **Removed obsolete NASA-branded binary from the PUBLIC deploy tree:** `public/assets/rooms/past/mission_target/layers/static-v1/room_visible.webp` deletion `04120f76`; its orphaned manifest deletion `320dac85`. Original source remains recoverable by immutable Git history/blob `37b1ebebd0f425e58a53250b086ee69762feaa93`; the active static-v2 correct neutral art remains unmodified. Independently re-listed current Git tree and confirmed old paths absent and correct v2 present.
+- **KES misleading footage handled as approved text fallback:** `src/archive/ArchiveFolderLab.tsx` `a49bf7e` tells the actual early-design mass/power/launch trade without implying assembled hardware is authentic early flight footage. Kestrel intro/outcome MP4 stay authoring HOLD and cannot play in the game.
+- **AST 472 W film vs verified 450 W resolved in playable UI without falsifying the MP4:** `src/gameplay/CaseRescue.tsx` `695851d` shows the post-success **450 W simulated independent rerun** below the 460 W review target, while the incompatible 472 W source clip remains disabled by `isLiveCinematicAllowed`. Kestrel's own post-success simulation displays its conditional, not certified, outcome. Neither fallback changes save/gameplay/science logic.
+- **Public credits and clear media provenance:** `src/HomeScreen.tsx` `3e37b53` visibly credits Kenney CC0, preserves explicit NASA non-endorsement and identifies project-supplied videos/VO as fictional dramatizations. Rights signoff is NOT claimed.
+- **Judge package text created:** [eight-slide structure, 90-second draft pitch, demo route and science/credits](JUDGE_DEMO_PITCH_AND_CREDITS_2026-11-15.md) at `4145fa4`. **Actual slide deck/export or team rehearsal NOT done**.
+- **Updated Preview:** Vercel deployment `dpl_83zjUTj1msCxJMNrACkJkEi7VJRB`, URL https://astral-archives-7atx7hzyl-mahmooud-kun.vercel.app, READY verified by Vercel API at exact code SHA `3e37b53677c3a27b9dcb4de1b6f9382a409984ec`. This is a **preview, not a public competition release**. Vercel READY confirms successful platform build, NOT external-device playback or public unauthenticated access.
+- **Tests:** no manual full 5-case E2E repeated per user request. GitHub automatically queued CI [#153](https://github.com/mahmoud-kun/the-astral-archives/actions/runs/43701151029) for the latest code SHA; record its exact conclusion separately, never borrow previous green run for modified code. Last complete baseline #150 remains good for unchanged underlying engine and source asset geometry.
+
+**Only genuine human/owner gates remain:** playback + UI touch on real Android, designer art approval, accurate speaker/word-for-word subtitles, media distribution/license authorization, final slide export, pitch rehearsal and smoke test on the Preview. Old PR #7 clean plate/mask candidates remain excluded. KES and AST unsafe video claims never appear as success in the shipped story.
+
+## Fast QA diagnosis after content clean-up
+
+- [Auto CI #153](https://github.com/mahmoud-kun/the-astral-archives/actions/runs/43701151029) **FAILED**, *not a gameplay-engine failure*: the test asserted an old `awaits the approved visual` Kestrel warning after Main replaced it with a truthful playable briefing, and `tools/visual-contact-sheet.py` attempted to regenerate a review image from the deliberately deleted old logo-bearing `static-v1` source. Build/unit suite completed before the visual/test-generation steps.
+- **Fixes:** `fdc56a11` makes the art-candidate generation conditional when the retired public source no longer exists; neutral `static-v2` remains the runtime asset. `7a430cbb` updates the exact Kestrel Browser QA assertion to the new briefing text; film-playback prohibition stays tested.
+- [Auto CI #155](https://github.com/mahmoud-kun/the-astral-archives/actions/runs/43701610936) was **IN PROGRESS when logged**, not a claimed PASS; no additional manual full 5-case E2E was requested. Last verified 5/5 full playable baseline: #150. Newly READY Vercel Preview `3e37b536` includes the actual gameplay fixes, but the CI script/test fixes are separate commits and not reflected in that preview (they do not change built gameplay).
+
+## Main Chat review checkpoints
+
+| Gate | Required review output | Decision |
+| --- | --- | --- |
+| T+60 | Receive A full case+asset inventory, B actual SFX/video inventory, C scientific/case gap matrix | PENDING |
+| T+150 | Review real playable scenes, audio/media integration API, scientific repair/tests | PENDING |
+| T+195 (FEATURE FREEZE) | Accept/return each independent specialist handoff; integrate only approved patches | PENDING |
+| T+255 | Full QA verdict: build, unit, 5-case E2E, desktop/mobile landscape, sound and cinematics | PENDING |
+| T+300 | Deployment, presentation, credits, pitch, demo and known limitations | PENDING |
+
+## Release acceptance ledger (must have evidence links/commit hashes)
+
+- [ ] Four present rooms connected to correct media and still accessible after route changes
+- [ ] All five cases audited; exactly which are playable truthfully disclosed
+- [ ] Correct evidence collection, save/reload, reversible wrong filing and 6/6 rescue gates
+- [ ] Rescue engineering logic and outcomes per actually playable case
+- [ ] Sound effects and ambience correct, mute/volume saved, visual media/video skip works
+- [ ] Landscape desktop/phone UI and real-device sampling; no clipped controls
+- [ ] `npm run build` + relevant tests + final visual QA PASS at the actual **release** commit
+- [ ] Source/asset licenses, simulated-vs-NASA facts and credits accurate
+- [ ] Presentation (8-slide target), pitch script, live demo route and fallback prepared
+- [ ] Stable release URL, backup, screenshot evidence, user visual signoff and known-issues list
+
+## Review rule
+
+Main evaluates a handoff as **ACCEPT**, **CHANGES REQUIRED** with reproducible failures, or **HOLD** for missing content/unsafe/untested work. Update this board **only with proven results**; preserve old SHA and evidence links. Never backfill a PASS from a CI run on a different commit or a hypothetical designer delivery.

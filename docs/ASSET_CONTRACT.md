@@ -1,5 +1,19 @@
 # The Astral Archives — Asset Handoff Contract (DRAFT)
 
+> **LATEST 360° USER APPROVAL / 2026-11-13 (supersedes older camera and 2D-only status below):** Mahmoud authorized a **fixed seated first-person 360° look camera**, including optional lightweight 3D, for a separate Investigation Room experiment. The currently active experiment uses Three.js procedural geometry and preserves the previous 2.5D as a comparison fallback. No free-roam or movement. This does not approve final art, modify NASA mission/evidence rules, or authorize merge to `main`. See [Seated 360° experimental checkpoint](SEATED_360_PROTOTYPE_2026-11-13.md). Player/browser/mobile/FPS validation remains pending.
+
+
+> **CURRENT V2.2 / 2026-11-13 (latest; overrides historical preview status below):** Mahmoud requested a designer-reference-faithful, **separately authored 2D reconstruction**. V2.1 raster/background and cutout rendering was explicitly rejected and is **not active**. The current experiment uses **20 independent SVG scene assets** in `public/assets/experiments/investigation-room-v2-2/`, with **zero direct reference-image rendering** in `Investigation25D.tsx`. Camera V3 control feel was user-accepted and behavior is preserved; player/designer validation of V2.2 visuals, real browser/mobile tests and measured performance remain **pending**. Report: [V2.2 designer-faithful layered scene](DESIGNER_FAITHFUL_LAYERED_V2_2_2026-11-13.md). This status applies only to `experiment/interactive-investigation-v2-2026-11-13`; no merge to main or original asset replacement is authorized.
+
+
+> **CURRENT EXPERIMENT / 2026-11-13 — supersedes older status statements below:** Camera V3 mouse-look was positively accepted by the player for control feel. Its independent browser/device/FPS testing remains open. The first layered Mission Files corner was also positively assessed for depth, but the remaining flat room was rejected. **Layered Investigation Room V2** was tested as a nine-layer SVG experiment. In response to user visual feedback, the current **Designer Fidelity V2.1** replaces the invented SVG visuals with designer-reference-derived cutout planes; artist acceptance remains pending on `experiment/interactive-investigation-v2-2026-11-13`; its Vercel build is READY and **player visual approval is pending**. See [Layered Room V2 verification](LAYERED_ROOM_V2_2026-11-13.md). This is not approval of production artwork, new gameplay, 3D, audio or changes to `main`.
+
+
+> **Current 2026-11-13 handoff:** [Camera V2 rejected / Camera V3 next](CHECKPOINT_2026-11-13_INTERACTIVE_INVESTIGATION.md). Bounded first-person 2.5D **without 3D, 360° or free roam**. V3 not coded. Current Nov 9 evidence/Rescue approvals supersede incompatible older rules; use experiment branch only, not main.
+
+> **2026-11-09 gameplay update:** See [Gameplay & UX Decisions (2026-11-09)](GAMEPLAY_DESIGN_2026-11-09.md) for the newer designer-approved first-person investigation, folder-based evidence progress, contextual robot assistance, past engineering interaction, and per-mission outcomes. It **supersedes conflicting older gameplay directions**, especially mandatory deduction-board gating and collective-only result reveal. Shared Global Budget, observer-only flashbacks, historical content and responsive orientation have unresolved reconciliation points; do not treat old conflicting prescriptions as simultaneous requirements. Documentation update only; no gameplay implementation.
+
+
 Last updated: 2026-10-30
 
 **Status: INTERFACE PROPOSAL ONLY.** Exact resolutions, color tokens, image format choices and file list are not final.
@@ -47,3 +61,12 @@ Production asset files, final visual formats/resolutions, naming conventions, UI
 
 - Prepare visual concepts and eventually individually addressable background/hotspot assets for four **core present station rooms**: (1) Investigation Office — main starting hub, all five dossier stories, evidence sorting/board and Rescue Mission entry; (2) File Archives; (3) Recordings Room; (4) Signal Room. Fixed-view portrait-first point-and-click presentation applies; specific counts of views, objects and animations are pending.
 - **Alternate-history past scenes use a hybrid environment set:** reusable shared location types and distinctive mission-specific locations with historical-era variations. Scene count and case-specific deliverables depend on Content Owner's finalized missions. Flashback assets are distinct observer-only reconstructions.
+
+## Current experimental asset inventory and separate proposed art direction — 2026-11-13
+
+Contrary to original pre-production assumptions, the experiment branch contains actual **preview** assets:
+- `public/assets/optimized/investigation-panorama-hq.webp` and `investigation-close-hq.webp` — static full-scene stills used by the rejected Camera V2, **not true panoramic or final approved scene**.
+- `public/assets/optimized/henda-portrait-alpha.webp` and `henda-full-alpha.webp` — real-alpha cutouts from a Henda reference; transparency tested, but cleaned silhouette, precise character look and production approval not established.
+- Existing optimized menu and other room WebPs remain experimental placeholders.
+
+Player rejected the flat/mismatched static close-up experience. **Next proposed art batch (AFTER Camera V3 accepts):** one Investigation Room corner using **designer-authored separate stylized 2D** background architecture, furniture, clickable prop states, foreground/lighting and a dedicated object-inspection illustration. Final layer counts, source files, dimensions, safe zones, and transparency must be reviewed with Designer. Never treat a zoomed low-res image or AI-generated elements as automatically approved. No 3D export, 360 background or music/SFX deliverable is authorized.

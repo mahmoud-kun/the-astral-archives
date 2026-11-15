@@ -1,0 +1,106 @@
+name: Visual QA — Astral Archives
+
+on:
+  push:
+    branches:
+      - experiment/room-case-library-layout-fix-2026-11-14
+    paths:
+      - "src/gameplay/**"
+      - "src/audio/**"
+      - "src/HomeScreen.tsx"
+      - "src/homeScreen.css"
+      - "src/main.tsx"
+      - "src/archive/ArchiveFolderLab.tsx"
+      - "public/assets/audio/**"
+      - "package.json"
+      - "src/InvestigationLayeredScene.tsx"
+      - "src/InvestigationDesignerScene.tsx"
+      - "src/investigationDesignerScene.css"
+      - "tools/visual-qa.mjs"
+      - "tools/e2e-four-cases.mjs"
+      - "tools/e2e-nadir.mjs"
+      - "tools/visual-contact-sheet.py"
+      - ".github/workflows/visual-qa.yml"
+  workflow_dispatch:
+
+concurrency:
+  group: astral-visual-qa-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: write
+
+jobs:
+  screenshots:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Install project dependencies
+        run: npm install
+      - name: Install browser tooling for CI only
+        run: |
+          npm install --no-save --no-package-lock playwright@1.56.1
+          npx playwright install --with-deps chromium
+      - name: Compile and run existing unit suites
+        run: npm run build
+      - name: Start local Vite preview
+        run: |
+          npm run preview -- --host 127.0.0.1 > /tmp/astral-preview.log 2>&1 &
+          for n in $(seq 1 50); do
+            if curl -fsS http://127.0.0.1:4173/ >/dev/null; then break; fi
+            sleep 1
+          done
+          curl --fail http://127.0.0.1:4173/ -o /dev/null
+      - name: Capture desktop and phone layouts and audit clipping
+        run: VISUAL_QA_URL=http://127.0.0.1:4173 node tools/visual-qa.mjs
+      - name: Execute real four-case end-to-end UI journey without debug
+        run: VISUAL_QA_URL=http://127.0.0.1:4173 node --experimental-strip-types tools/e2e-four-cases.mjs
+      - name: Execute Nadir's full physical puzzle-to-rescue journey
+        run: VISUAL_QA_URL=http://127.0.0.1:4173 node --experimental-strip-types tools/e2e-nadir.mjs
+      - name: Preserve four-case end-to-end audit report
+        if: always()
+        run: |
+          if [ -f qa-artifacts/four-case-e2e-report.json ]; then
+            cp qa-artifacts/four-case-e2e-report.json docs/visual-qa/four-case-e2e-report.json
+          fi
+          if [ -f qa-artifacts/nadir-e2e-report.json ]; then
+            cp qa-artifacts/nadir-e2e-report.json docs/visual-qa/nadir-e2e-report.json
+          fi
+      - name: Prepare compact visual review sheets
+        if: always()
+        run: |
+          if [ -f qa-artifacts/report.json ]; then
+            python3 -m pip install --break-system-packages --quiet Pillow
+            python3 tools/visual-contact-sheet.py
+          fi
+      - name: Preserve contact sheets and optimized artwork on approved branch
+        if: always()
+        run: |
+          if [ -f docs/visual-qa/latest-report.json ]; then
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            mkdir -p /tmp/astral-review
+            cp -r docs/visual-qa /tmp/astral-review/
+            cp public/assets/rooms/investigation/layers/wide/background/investigation_room_bg_clean.webp /tmp/astral-review/clean.webp
+            success=0
+            for retry in 1 2 3 4; do
+              git fetch origin "${GITHUB_REF_NAME}"
+              git reset --hard "origin/${GITHUB_REF_NAME}"
+              mkdir -p docs/visual-qa
+              cp -r /tmp/astral-review/visual-qa/* docs/visual-qa/
+              cp /tmp/astral-review/clean.webp public/assets/rooms/investigation/layers/wide/background/investigation_room_bg_clean.webp
+              git add docs/visual-qa/ public/assets/rooms/investigation/layers/wide/background/investigation_room_bg_clean.webp
+              if git diff --cached --quiet; then success=1; break; fi
+              git commit -m "test(visual): update compact screenshot QA evidence [skip ci]"
+              if git push origin "HEAD:${GITHUB_REF_NAME}"; then success=1; break; fi
+              sleep 2
+            done
+            if [ "$success" != "1" ]; then
+              echo "Unable to publish visual QA after four safe retries" >&2
+              exit 1
+            fi
+          fi

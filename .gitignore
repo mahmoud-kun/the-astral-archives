@@ -24,3 +24,6 @@ Thumbs.db
 *.log
 .tmp/
 .temp/
+
+# Optional read-only local upstream Game Studios study clone (never auto-run hooks)
+.studio-reference/

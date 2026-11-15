@@ -1,0 +1,149 @@
+{
+  "version": 1,
+  "variant": "original",
+  "sourceArt": "/assets/rooms/Investigation_Original_REFERENCE.png",
+  "coordinateSystem": {
+    "width": 1752,
+    "height": 897
+  },
+  "background": "/assets/rooms/investigation/layers/original/background/investigation_room_bg_clean.png",
+  "objects": [
+    {
+      "id": "evidence_board",
+      "sourceArt": "/assets/rooms/Investigation_Original_REFERENCE.png",
+      "position": {
+        "x": 565,
+        "y": 302,
+        "width": 272,
+        "height": 161
+      },
+      "zIndex": 1,
+      "assets": {
+        "base": "/assets/rooms/investigation/layers/original/evidence_board/evidence_board_base.png",
+        "glow": "/assets/rooms/investigation/layers/original/evidence_board/evidence_board_glow.png",
+        "mask": "/assets/rooms/investigation/layers/original/evidence_board/evidence_board_mask.png"
+      },
+      "interaction": {
+        "target": "evidence",
+        "label": "Inspect Evidence Board",
+        "mask": "/assets/rooms/investigation/layers/original/evidence_board/evidence_board_mask.png"
+      },
+      "states": [
+        "idle",
+        "hover",
+        "focus",
+        "touch"
+      ]
+    },
+    {
+      "id": "station_door",
+      "sourceArt": "/assets/rooms/Investigation_Original_REFERENCE.png",
+      "position": {
+        "x": 1380,
+        "y": 202,
+        "width": 326,
+        "height": 410
+      },
+      "zIndex": 2,
+      "assets": {
+        "base": "/assets/rooms/investigation/layers/original/station_door/station_door_base.png",
+        "glow": "/assets/rooms/investigation/layers/original/station_door/station_door_glow.png",
+        "mask": "/assets/rooms/investigation/layers/original/station_door/station_door_mask.png"
+      },
+      "interaction": {
+        "target": "door",
+        "label": "Open Station Door directory",
+        "mask": "/assets/rooms/investigation/layers/original/station_door/station_door_mask.png"
+      },
+      "states": [
+        "idle",
+        "hover",
+        "focus",
+        "touch"
+      ]
+    },
+    {
+      "id": "mission_files",
+      "sourceArt": "/assets/rooms/Investigation_Original_REFERENCE.png",
+      "position": {
+        "x": 83,
+        "y": 211,
+        "width": 276,
+        "height": 445
+      },
+      "zIndex": 3,
+      "assets": {
+        "base": "/assets/rooms/investigation/layers/original/mission_files/mission_files_base.png",
+        "glow": "/assets/rooms/investigation/layers/original/mission_files/mission_files_glow.png",
+        "mask": "/assets/rooms/investigation/layers/original/mission_files/mission_files_mask.png"
+      },
+      "interaction": {
+        "target": "cases",
+        "label": "Open Mission Files cabinet",
+        "mask": "/assets/rooms/investigation/layers/original/mission_files/mission_files_mask.png"
+      },
+      "states": [
+        "idle",
+        "hover",
+        "focus",
+        "touch"
+      ]
+    },
+    {
+      "id": "right_console",
+      "sourceArt": "/assets/rooms/Investigation_Original_REFERENCE.png",
+      "position": {
+        "x": 1602,
+        "y": 449,
+        "width": 117,
+        "height": 181
+      },
+      "zIndex": 4,
+      "assets": {
+        "base": "/assets/rooms/investigation/layers/original/right_console/right_console_base.png",
+        "glow": "/assets/rooms/investigation/layers/original/right_console/right_console_glow.png",
+        "mask": "/assets/rooms/investigation/layers/original/right_console/right_console_mask.png"
+      },
+      "interaction": {
+        "target": "rescue",
+        "label": "Inspect Rescue Console",
+        "mask": "/assets/rooms/investigation/layers/original/right_console/right_console_mask.png"
+      },
+      "states": [
+        "idle",
+        "hover",
+        "focus",
+        "touch"
+      ]
+    },
+    {
+      "id": "center_terminal",
+      "sourceArt": "/assets/rooms/Investigation_Original_REFERENCE.png",
+      "position": {
+        "x": 574,
+        "y": 425,
+        "width": 633,
+        "height": 323
+      },
+      "zIndex": 5,
+      "assets": {
+        "base": "/assets/rooms/investigation/layers/original/center_terminal/center_terminal_base.png",
+        "glow": "/assets/rooms/investigation/layers/original/center_terminal/center_terminal_glow.png",
+        "mask": "/assets/rooms/investigation/layers/original/center_terminal/center_terminal_mask.png",
+        "screen": "/assets/rooms/investigation/layers/original/center_terminal/center_terminal_screen.png",
+        "foreground": "/assets/rooms/investigation/layers/original/center_terminal/center_terminal_foreground.png"
+      },
+      "interaction": {
+        "target": "briefing",
+        "label": "Read Mission Briefing at center terminal",
+        "mask": "/assets/rooms/investigation/layers/original/center_terminal/center_terminal_mask.png"
+      },
+      "states": [
+        "idle",
+        "hover",
+        "focus",
+        "touch"
+      ]
+    }
+  ]
+}

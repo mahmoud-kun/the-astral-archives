@@ -1,0 +1,351 @@
+/* The Astral Archives — isolated Home Screen visual pilot.
+   Source: designer's station palette and existing Archive reference artwork.
+   This module does not alter the existing fixed-room gameplay. */
+.aa-home{
+  --aa-cream:#f2e8d2;--aa-ice:#c6e5ed;--aa-soft:#abc8d6;--aa-orange:#f4a261;--aa-cyan:#2ec4c3;
+  --aa-deep:#061522;--aa-panel:#102c3d;--aa-purple:#8a6cff;
+  position:relative;isolation:isolate;min-height:100dvh;width:100%;color:var(--aa-cream);
+  background:#061522;overflow-x:hidden;font-family:"IBM Plex Sans",Arial,sans-serif;
+  font-synthesis:none;
+}
+.aa-home *{box-sizing:border-box}
+.aa-home button{font-family:inherit;cursor:pointer}
+.aa-home button:focus-visible{outline:2px solid #f4d7a9;outline-offset:4px}
+.aa-home button:disabled{opacity:.45;cursor:not-allowed}
+.aa-home-art{position:absolute;inset:0;z-index:-4;overflow:hidden}
+.aa-home-art picture,.aa-home-art img{display:block;width:100%;height:100%}
+.aa-home-art img{object-fit:cover;object-position:50% 50%;filter:saturate(1.03) brightness(1);transform:scale(1.025);animation:aa-art-breathe 32s ease-in-out infinite alternate}
+.aa-home-shade{position:absolute;inset:0;z-index:-3;pointer-events:none;
+  background:
+  linear-gradient(90deg,#06152208 0%,#06152210 30%,#06152234 48%,#06152296 69%,#04111fb0 100%),
+  linear-gradient(180deg,#05152282 0%,transparent 18%,transparent 76%,#030f1bdc 100%),
+  radial-gradient(ellipse at 23% 70%,#e9a0642b,transparent 42%)}
+.aa-home-grid{position:absolute;inset:0;z-index:-2;pointer-events:none;opacity:.09;
+  background:linear-gradient(90deg,transparent 99.8%,#62d4e6 99.9%) 0 0/90px 90px,
+             linear-gradient(0deg,transparent 99.8%,#62d4e6 99.9%) 0 0/90px 90px}
+.aa-home-constellation{position:absolute;inset:0;pointer-events:none;z-index:-1}
+.aa-home-constellation span{position:absolute;width:4px;height:4px;border-radius:50%;background:#96e3ef;box-shadow:0 0 17px #55e0ed;opacity:.75;animation:aa-star-breathe 6s ease-in-out infinite alternate}
+.aa-home-constellation span:nth-child(1){left:73%;top:14%;animation-delay:.2s}
+.aa-home-constellation span:nth-child(2){left:92%;top:28%;animation-delay:2s}
+.aa-home-constellation span:nth-child(3){left:76%;top:69%;animation-delay:3s}
+.aa-home-constellation span:nth-child(4){left:57%;top:38%;animation-delay:1.8s}
+.aa-home-constellation span:nth-child(5){left:96%;top:83%;animation-delay:4s}
+.aa-home-header,.aa-home-footer{padding-inline:clamp(23px,5.1vw,94px);position:relative;z-index:3}
+.aa-home-header{height:89px;display:flex;align-items:center;justify-content:space-between;gap:18px;border-bottom:1px solid #8ab0c11f}
+.aa-home-identity{display:flex;align-items:center;gap:13px;font-size:13px;letter-spacing:.14em;line-height:1.4;font-family:"IBM Plex Mono",monospace}
+.aa-home-identity strong{font-weight:600}
+.aa-home-identity small{display:block;font-size:9px;color:#a9bacb;letter-spacing:.13em;padding-top:4px}
+.aa-home-emblem,.home-emblem{position:relative;width:73px;height:73px;display:grid;place-items:center;flex-shrink:0;color:var(--aa-orange)}
+.home-emblem-small{width:37px;height:37px}
+.home-emblem::before,.home-emblem::after{content:"";position:absolute;inset:6px;border:1px solid #f4a2619c;border-radius:50%}
+.home-emblem::after{inset:24px;border:1px solid #4de4ec;transform:rotate(45deg);border-radius:2px}
+.home-emblem-small::before{inset:3px}
+.home-emblem-small::after{inset:12px}
+.home-emblem-orbit{position:absolute;border:1px solid #57b6c6;border-radius:50%;height:90%;width:45%;opacity:.8}
+.home-emblem-one{transform:rotate(38deg)}
+.home-emblem-two{transform:rotate(-38deg)}
+.home-emblem-center{font-size:24px;text-shadow:0 0 18px #e59a56}
+.home-emblem-small .home-emblem-center{font-size:12px}
+.aa-home-header-right{display:flex;gap:18px;align-items:center}
+.aa-home-prototype{display:flex;align-items:center;gap:9px;font:600 10px "IBM Plex Mono",monospace;letter-spacing:.11em;color:#c6d6dd;white-space:nowrap}
+.aa-home-prototype i{height:6px;width:6px;background:#5fd8c8;border-radius:50%;box-shadow:0 0 9px #46d4c6}
+.aa-home-icon-button{height:39px;width:39px;display:grid;place-items:center;color:#c9e3ed;background:#092437bf;border:1px solid #658a9b;border-radius:5px}
+.aa-home-icon-button:hover{background:#24465a;color:#fff}
+.aa-home-hero{position:relative;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,600px);align-items:center;padding:32px clamp(23px,5.1vw,94px) 39px;min-height:calc(100dvh - 152px)}
+.aa-home-hero-copy{position:relative;z-index:2;grid-column:2;grid-row:1;justify-self:end;width:100%;max-width:570px}
+.aa-home-overline{font:600 11px "IBM Plex Mono",monospace;letter-spacing:.18em;color:#f0af72;display:flex;align-items:center;gap:12px}
+.aa-home-overline>span:first-child{display:inline-block;width:33px;height:1px;background:#e4a66a;box-shadow:0 0 10px #edab67}
+.aa-home-index{color:#92b7c7}
+.aa-home-hero-copy>.home-emblem{margin:18px 0 0}
+.aa-home-title{padding-top:14px}
+.aa-home-title>span{font:500 15px "Orbitron",sans-serif;letter-spacing:.66em;color:#f2e8d2}
+.aa-home-title h1{font:600 clamp(57px,6.55vw,108px)/.98 "Orbitron",sans-serif;letter-spacing:.065em;color:#f2e8d2;margin:3px 0 0;text-shadow:0 4px 28px #0007}
+.aa-home-title h1 strong{font-weight:600;color:#f3c18c}
+.aa-home-tagline{font:500 clamp(18px,2.1vw,26px)/1.25 "IBM Plex Sans",sans-serif;letter-spacing:.01em;margin:21px 0 6px;color:#f7f1e8}
+.aa-home-description{font:400 clamp(13px,1.16vw,16px)/1.6 "IBM Plex Sans",sans-serif;max-width:490px;color:#b3cbd7;margin:0 0 25px}
+.aa-home-actions{display:grid;width:min(410px,100%);gap:10px}
+.aa-home-cta{min-height:68px;border:1px solid #ffdaa9;background:linear-gradient(105deg,#e8ae75 0%,#f6ca93 60%,#e7a76e 100%);color:#142a39;padding:10px 18px;display:flex;align-items:center;gap:15px;text-align:left;box-shadow:0 8px 36px #f7a85c1f;transition:transform .18s,filter .18s}
+.aa-home-cta:hover{transform:translateY(-2px);filter:brightness(1.08)}
+.aa-home-cta-symbol{display:grid;place-items:center;border:1px solid #3b5864;border-radius:50%;height:38px;width:38px;flex:none}
+.aa-home-cta-label{display:grid;gap:3px;flex:1}
+.aa-home-cta-label strong{font:700 14px "IBM Plex Sans",sans-serif;letter-spacing:.1em}
+.aa-home-cta-label small{font:600 10px "IBM Plex Mono",monospace;letter-spacing:.13em;color:#405665}
+.aa-home-secondary{min-height:57px;border:1px solid #56889a;color:#eff6f5;background:#0a253bdb;padding:12px 18px;display:flex;align-items:center;gap:15px;text-align:left;font-size:13px;letter-spacing:.1em;font-weight:650;transition:background .18s}
+.aa-home-secondary:hover{background:#1a4056}
+.aa-home-secondary>span:nth-child(2){flex:1}
+.aa-home-secondary-tail{font:600 11px "IBM Plex Mono",monospace;color:#9ce0e3}
+.aa-home-minor-actions{display:flex;align-items:center;gap:20px;justify-content:center;padding:8px 0 0}
+.aa-home-minor-actions>span{width:1px;height:15px;background:#497588}
+.aa-home-minor-actions button{display:flex;align-items:center;gap:8px;border:0;background:transparent;color:#c1d1dc;font:600 11px "IBM Plex Mono",monospace;letter-spacing:.1em;padding:9px}
+.aa-home-minor-actions button:hover{color:#fff}
+.aa-home-hero-space{position:relative;grid-column:1;grid-row:1;align-self:stretch;min-width:0;pointer-events:none;z-index:0}
+.aa-home-footer{min-height:63px;display:flex;justify-content:space-between;gap:14px;align-items:center;border-top:1px solid #87afc125;background:#0615227e;font:600 10px "IBM Plex Mono",monospace;letter-spacing:.095em;color:#a9c3cf}
+.aa-home-footer b{color:#edaf75;margin:0 4px;font-weight:400}
+.aa-home-footer-diamond{display:inline-block;width:8px;height:8px;transform:rotate(45deg);border:1px solid #ebbb8c;margin-right:9px}
+
+/* Panels: readable, accessible and game-like without becoming a second scene. */
+.aa-home-scrim{position:fixed;inset:0;z-index:50;background:#020b15d9;backdrop-filter:blur(9px);display:grid;place-items:center;padding:20px}
+.aa-home-dialog{display:flex;flex-direction:column;width:min(1050px,100%);max-height:calc(100dvh - 40px);overflow:auto;background:linear-gradient(130deg,#143249,#0a1d30 72%);border:1px solid #6c97ab;box-shadow:0 35px 110px #000a;color:#f2e8d2}
+.aa-home-dialog-head,.aa-home-dialog-footer{padding:15px clamp(20px,3vw,35px);display:flex;justify-content:space-between;align-items:center;gap:20px;background:#0a2032c5}
+.aa-home-dialog-head{border-bottom:1px solid #537487}
+.aa-home-dialog-head span{font:600 11px "IBM Plex Mono",monospace;letter-spacing:.13em;color:#b6d6df}
+.aa-home-dialog-head i{color:#f2ae73;font-style:normal;margin:0 6px}
+.aa-home-dialog-head button{display:grid;place-items:center;border:1px solid #5b8096;background:#17394d;color:#e1f2f5;padding:8px}
+.aa-home-dialog-head button:hover{background:#32647c}
+.aa-home-dialog-footer{border-top:1px solid #537487;font:600 9px "IBM Plex Mono",monospace;color:#90b8c7;letter-spacing:.1em;margin-top:auto}
+.aa-home-files-content{padding:clamp(22px,3vw,34px)}
+.aa-home-files-heading h2,.aa-home-simple-panel h2{font:600 clamp(26px,3vw,40px) "Orbitron",sans-serif;letter-spacing:.07em;margin:12px 0 9px}
+.aa-home-files-heading>p:last-child,.aa-home-simple-panel>p:not(.aa-home-overline){color:#c1d8df;line-height:1.65;font-size:15px}
+.aa-home-files-columns{display:grid;grid-template-columns:minmax(200px,.76fr) minmax(0,1.24fr);gap:18px;margin-top:23px}
+.aa-home-case-list{display:grid;gap:8px;align-content:start}
+.aa-home-case-list button{display:flex;gap:13px;align-items:center;text-align:left;padding:13px 15px;background:#10283d;border:1px solid #476e83;color:#d7e7ee;transition:background .15s}
+.aa-home-case-list button:hover{background:#24485f}
+.aa-home-case-list button.is-selected{border-color:#9de7ed;background:#225169;box-shadow:inset 3px 0 #f1b878}
+.aa-home-case-list button span,.aa-home-case-list button small{font:600 10px "IBM Plex Mono",monospace;color:#e5ae78}
+.aa-home-case-list button strong{font:600 16px "IBM Plex Sans",sans-serif;flex:1}
+.aa-home-case-preview{min-height:358px;padding:23px 28px 21px;border:1px solid #538195;background:radial-gradient(circle at 78% 25%,#275d7044,transparent 45%),linear-gradient(145deg,#163952,#0b2135);display:flex;flex-direction:column;position:relative;overflow:hidden}
+.aa-home-case-preview-head{display:flex;justify-content:space-between;gap:10px;font:600 10px "IBM Plex Mono",monospace;letter-spacing:.1em;color:#a7dce3}
+.aa-home-case-preview-head span:last-child{color:#f2bf82}
+.aa-home-case-orbit{position:absolute;right:12%;top:19%;width:120px;height:120px;border-radius:50%;border:1px solid #447d99a0;display:grid;place-items:center;box-shadow:0 0 25px #29b1d91f;pointer-events:none;opacity:.62}
+.aa-home-case-orbit::after{content:"";position:absolute;inset:25px;border:1px solid #e5a673;transform:rotate(45deg)}
+.aa-home-case-orbit span{font-size:34px;color:#e8b17b}
+.aa-home-case-phase{font:600 11px "IBM Plex Mono",monospace;letter-spacing:.15em;color:#9cdde3;margin-top:42px}
+.aa-home-case-preview h3{font:600 36px "Orbitron",sans-serif;letter-spacing:.05em;margin:9px 0 0}
+.aa-home-case-preview h4{font:500 17px "IBM Plex Sans",sans-serif;color:#f0bb83;margin:3px 0 13px}
+.aa-home-case-preview p{color:#c3d5e1;font-size:15px;line-height:1.65;max-width:400px}
+.aa-home-case-bottom{display:flex;gap:14px;justify-content:space-between;align-items:end;margin-top:auto;padding-top:19px}
+.aa-home-case-bottom>span{font:600 9px "IBM Plex Mono",monospace;letter-spacing:.06em;color:#a7c1ce;max-width:205px}
+.aa-home-case-bottom button{display:flex;align-items:center;gap:8px;white-space:nowrap;color:#122637;background:#f1c08a;border:1px solid #ffe0b6;padding:10px 12px;font:700 11px "IBM Plex Mono",monospace;letter-spacing:.04em}
+.aa-home-case-bottom button:hover{background:#ffe1b5}
+.aa-home-simple-panel{padding:clamp(24px,4vw,46px);display:flex;flex-direction:column;gap:20px;max-width:770px;min-height:420px}
+.aa-home-simple-panel h2{margin:0}
+.aa-home-setting-row{display:flex;justify-content:space-between;align-items:center;gap:22px;border:1px solid #496d82;padding:18px 21px;background:#123047}
+.aa-home-setting-row span{display:grid;gap:6px}
+.aa-home-setting-row strong{font-size:16px}
+.aa-home-setting-row small{font-size:13px;color:#b0cbd9;line-height:1.5}
+.aa-home-setting-row input{accent-color:#7fd6da;height:24px;width:24px;cursor:pointer;flex:none}
+.aa-home-setting-row button{font:600 12px "IBM Plex Mono",monospace;color:#e6f4f5;border:1px solid #79a4b3;padding:10px;background:#214d65;white-space:nowrap}
+.aa-home-setting-row button:hover{background:#366b80}
+.aa-home-about-grid{display:grid;grid-template-columns:1fr 1fr;gap:15px}
+.aa-home-about-grid>div{display:grid;gap:7px;border:1px solid #45677f;background:#133348;padding:18px}
+.aa-home-about-grid small{font:600 10px "IBM Plex Mono",monospace;letter-spacing:.1em;color:#90d6e4}
+.aa-home-about-grid strong{font-size:15px}
+.aa-home-disclaimer{font-size:13px!important;color:#a9c5cf!important;border-left:2px solid #f1b981;padding:9px 0 9px 15px;background:#20314470}
+
+@keyframes aa-art-breathe{from{transform:scale(1.035)}to{transform:scale(1.075) translateX(-.6%)}}
+@keyframes aa-star-breathe{from{opacity:.18;transform:scale(.6)}to{opacity:.9;transform:scale(1.12)}}
+
+@media(min-width:1600px){.aa-home-hero{grid-template-columns:minmax(0,1fr) minmax(0,700px)}.aa-home-hero-copy{max-width:650px}}
+@media(max-height:780px) and (min-width:800px){
+  .aa-home-header{height:70px}
+  .aa-home-hero{min-height:calc(100dvh - 124px);padding-top:20px;padding-bottom:20px}
+  .aa-home-hero-copy>.home-emblem{width:58px;height:58px;margin-top:12px}
+  .aa-home-title{padding-top:7px}
+  .aa-home-title h1{font-size:clamp(52px,5.6vw,80px)}
+  .aa-home-tagline{margin-top:12px}
+  .aa-home-description{margin-bottom:15px}
+  .aa-home-cta{min-height:58px}
+  .aa-home-footer{min-height:54px}
+}
+@media(max-width:950px){
+  .aa-home-hero{grid-template-columns:minmax(0,1fr) minmax(0,540px)}
+  .aa-home-hero-copy{grid-column:2;grid-row:1;max-width:540px}
+  .aa-home-shade{background:linear-gradient(90deg,#06152208 0%,#0615221b 25%,#06152258 48%,#061522a0 75%,#04111fb0 100%),linear-gradient(180deg,#04111f80,transparent 34%,#061522bb)}
+  .aa-home-title h1{font-size:clamp(53px,7vw,79px)}
+  .aa-home-footer{font-size:8px}
+}
+@media(max-width:700px){
+  .aa-home-header{height:74px;padding-inline:18px}
+  .aa-home-identity{font-size:10px;letter-spacing:.06em;gap:8px}
+  .aa-home-identity small{font-size:8px}
+  .aa-home-header-right{gap:10px}
+  .aa-home-prototype{font-size:8px}
+  .aa-home-icon-button{width:34px;height:34px}
+  .aa-home-art img{object-position:50% 36%}
+  .aa-home-shade{background:linear-gradient(180deg,#04111f35 0%,#06152218 25%,#06152272 48%,#04111feF 78%,#04111ffb 100%),linear-gradient(90deg,#06152255,#06152220)}
+  .aa-home-hero{grid-template-columns:1fr;align-items:end;min-height:calc(100dvh - 124px);padding:30px 19px 34px}
+  .aa-home-hero-copy{grid-column:1;grid-row:1;justify-self:stretch;max-width:520px;padding-top:24px}
+  .aa-home-hero-space{grid-column:1;grid-row:1;min-height:100%}
+  .aa-home-overline{font-size:9px;gap:8px;letter-spacing:.12em}
+  .aa-home-overline>span:first-child{width:17px}
+  .aa-home-hero-copy>.home-emblem{width:54px;height:54px;margin-top:18px}
+  .aa-home-title{padding-top:12px}
+  .aa-home-title>span{font-size:13px}
+  .aa-home-title h1{font-size:clamp(44px,9.8vw,68px);letter-spacing:.05em}
+  .aa-home-tagline{font-size:18px;margin-top:21px}
+  .aa-home-description{font-size:13px;line-height:1.6;margin-bottom:20px}
+  .aa-home-actions{width:min(440px,100%)}
+  .aa-home-cta{min-height:63px}
+  .aa-home-footer{min-height:50px;padding-inline:19px;justify-content:space-between}
+  .aa-home-footer>span:nth-child(2){display:none}
+  .aa-home-files-content{padding:20px 14px}
+  .aa-home-files-columns{grid-template-columns:1fr}
+  .aa-home-case-list{display:flex;overflow-x:auto;gap:8px;padding:3px 0 6px;scrollbar-width:thin}
+  .aa-home-case-list button{flex:0 0 125px;padding:11px 10px;display:grid;gap:5px}
+  .aa-home-case-list button strong{font-size:14px}
+  .aa-home-case-list button small{font-size:9px}
+  .aa-home-case-preview{min-height:340px;padding:19px}
+  .aa-home-case-orbit{width:80px;height:80px;right:7%;top:18%}
+  .aa-home-case-orbit::after{inset:15px}
+  .aa-home-case-phase{margin-top:35px}
+  .aa-home-case-preview h3{font-size:27px}
+  .aa-home-case-preview h4{font-size:15px}
+  .aa-home-case-preview p{font-size:13px}
+  .aa-home-dialog-head{padding:10px 14px}
+  .aa-home-dialog-head span{font-size:9px;letter-spacing:.05em}
+  .aa-home-dialog-footer{font-size:8px;gap:10px;padding:10px 14px}
+  .aa-home-simple-panel{min-height:0;padding:23px 18px}
+  .aa-home-about-grid{grid-template-columns:1fr}
+}
+@media(max-width:400px){
+  .aa-home-prototype{display:none}
+  .aa-home-title h1{font-size:42px}
+  .aa-home-cta-label strong{font-size:12px}
+  .aa-home-dialog-head>span{max-width:210px}
+  .aa-home-setting-row{flex-wrap:wrap}
+  .aa-home-case-bottom{flex-wrap:wrap}
+}
+@media(prefers-reduced-motion:reduce){
+  .aa-home-art img{animation:none!important;transform:none!important}
+  .aa-home button{transition:none!important}
+}
+.aa-home.aa-home-still .aa-home-art img{animation:none!important;transform:none!important}
+.aa-home.aa-home-still button{transition:none!important}
+
+
+/* Phone landscape is the primary mobile presentation — preserve the laptop's
+   artwork-left, menu-right composition rather than stacking the title over art. */
+@media screen and (orientation:landscape) and (max-width:1000px) and (max-height:600px){
+  .aa-home{height:100dvh;min-height:0;overflow:hidden}
+  .aa-home-art img{object-fit:cover;object-position:37% center}
+  .aa-home-shade{background:
+    linear-gradient(90deg,#06152200 0%,#06152212 30%,#06152245 47%,#061522a0 67%,#04111fba 100%),
+    linear-gradient(180deg,#03111c8b,transparent 28%,transparent 77%,#030f1bd0)}
+  .aa-home-header{height:38px;min-height:0;padding:0 max(13px,env(safe-area-inset-right)) 0 max(13px,env(safe-area-inset-left))}
+  .aa-home-identity{font-size:9px;gap:8px;letter-spacing:.05em}
+  .aa-home-identity .home-emblem-small{width:24px;height:24px}
+  .aa-home-identity small{display:none}
+  .aa-home-prototype{display:none}
+  .aa-home-icon-button{width:28px;height:28px}
+  .aa-home-icon-button svg{width:16px;height:16px}
+  .aa-home-hero{display:grid;grid-template-columns:minmax(0,51%) minmax(0,49%);
+    min-height:0;height:calc(100dvh - 38px);padding:3px max(14px,env(safe-area-inset-right)) 7px max(14px,env(safe-area-inset-left));
+    align-items:center;gap:0}
+  .aa-home-hero-space{grid-column:1;grid-row:1;align-self:stretch;min-height:0}
+  .aa-home-hero-copy{grid-column:2;grid-row:1;justify-self:end;align-self:center;
+    padding:0;max-width:440px;min-width:0;width:100%}
+  .aa-home-overline{font-size:7px;letter-spacing:.08em;gap:6px;margin:0}
+  .aa-home-overline>span:first-child{width:13px}
+  .aa-home-index{display:none}
+  .aa-home-hero-copy>.home-emblem{display:none}
+  .aa-home-title{padding-top:5px}
+  .aa-home-title>span{font-size:8px;letter-spacing:.3em}
+  .aa-home-title h1{font-size:clamp(28px,4.8vw,45px);letter-spacing:.01em;line-height:.95;margin:1px 0 0}
+  .aa-home-tagline{font-size:clamp(10px,1.5vw,14px);line-height:1.15;margin:7px 0 3px}
+  .aa-home-description{font-size:clamp(9px,1.15vw,11px);line-height:1.35;margin:0 0 7px;max-width:360px}
+  .aa-home-description br{display:none}
+  .aa-home-actions{width:100%;max-width:375px;gap:5px}
+  .aa-home-cta{min-height:42px;padding:5px 9px;gap:8px}
+  .aa-home-cta-symbol{width:27px;height:27px}
+  .aa-home-cta-symbol svg{width:17px;height:17px}
+  .aa-home-cta>svg{width:18px;height:18px}
+  .aa-home-cta-label{gap:1px}
+  .aa-home-cta-label strong{font-size:10px;letter-spacing:.05em}
+  .aa-home-cta-label small{font-size:7px;letter-spacing:.09em}
+  .aa-home-secondary{min-height:38px;padding:6px 10px;gap:9px;font-size:10px;letter-spacing:.05em}
+  .aa-home-secondary svg{width:17px;height:17px}
+  .aa-home-secondary-tail{font-size:9px}
+  .aa-home-minor-actions{gap:10px;padding:0;justify-content:center}
+  .aa-home-minor-actions button{font-size:9px;min-height:31px;gap:5px;letter-spacing:.05em;padding:3px 6px}
+  .aa-home-minor-actions button svg{width:14px;height:14px}
+  .aa-home-minor-actions>span{height:13px}
+  .aa-home-footer{display:none}
+  .aa-home-scrim{padding:6px max(10px,env(safe-area-inset-right)) 6px max(10px,env(safe-area-inset-left))}
+  .aa-home-dialog{width:min(900px,100%);max-height:calc(100dvh - 12px)}
+  .aa-home-dialog-head,.aa-home-dialog-footer{padding:8px 14px}
+  .aa-home-files-content{padding:12px}
+  .aa-home-files-heading h2{font-size:19px;margin:4px 0}
+  .aa-home-files-heading>p:last-child{font-size:11px;line-height:1.3}
+  .aa-home-files-columns{grid-template-columns:minmax(150px,.7fr) minmax(0,1.3fr);gap:9px;margin-top:10px}
+  .aa-home-case-list{display:grid;overflow:auto;max-height:180px;gap:4px}
+  .aa-home-case-list button{display:flex;flex:initial;min-height:30px;padding:5px 7px;gap:6px}
+  .aa-home-case-list button strong{font-size:11px}
+  .aa-home-case-preview{min-height:200px;padding:12px}
+  .aa-home-case-phase{margin-top:10px;font-size:9px}
+  .aa-home-case-preview h3{font-size:23px}
+  .aa-home-case-preview h4{font-size:12px;margin-bottom:4px}
+  .aa-home-case-preview p{font-size:11px;line-height:1.4}
+  .aa-home-case-bottom{gap:5px;padding-top:8px}
+  .aa-home-case-bottom button{font-size:9px;padding:7px}
+  .aa-home-simple-panel{min-height:0;padding:13px;gap:10px}
+  .aa-home-simple-panel h2{font-size:22px}
+  .aa-home-setting-row{padding:9px 12px;gap:10px}
+  .aa-home-setting-row strong{font-size:12px}
+  .aa-home-setting-row small{font-size:10px}
+  .aa-home-setting-row button{font-size:10px}
+  .aa-home-about-grid{grid-template-columns:1fr 1fr}
+}
+@media screen and (orientation:landscape) and (max-height:380px) and (max-width:1000px){
+  .aa-home-header{height:32px}
+  .aa-home-hero{height:calc(100dvh - 32px)}
+  .aa-home-title h1{font-size:clamp(27px,4.1vw,36px)}
+  .aa-home-description{font-size:9px;line-height:1.25;margin-bottom:5px}
+  .aa-home-tagline{margin-top:4px}
+  .aa-home-cta{min-height:38px}
+  .aa-home-secondary{min-height:35px}
+  .aa-home-minor-actions button{min-height:28px}
+}
+
+/* Fullscreen-safe home composition: the 108px viewport-scaled title overflowed
+   its actual 650px copy column at 1536–1920px and the archive background
+   zoomed an additional 2.5%. Limit the title by its COLUMN, not screen width.
+   Keep the approved art and all menu actions unchanged. */
+@media screen and (min-width:1200px) and (min-height:781px){
+  .aa-home-title h1{
+    font-size:clamp(65px,5.05vw,84px);
+    letter-spacing:.045em;
+    overflow-wrap:normal;
+  }
+}
+/* Fullscreen is requested on the document element, not the Home component. */
+:root:fullscreen .aa-home-art img{
+  animation:none;
+  transform:none;
+}
+:root:fullscreen .aa-home{
+  height:100dvh;
+  min-height:0;
+  overflow:hidden;
+}
+
+/* Keep audio preferences compact on landscape phones; do not clip the panel. */
+.aa-home-setting-row.aa-home-audio-volume input[type="range"]{
+ width:clamp(115px,24vw,205px);height:24px;accent-color:#8cdee6;cursor:pointer;
+}
+.aa-home-preview-sound{
+ align-self:flex-start;background:#174357;border:1px solid #73b3c0;
+ color:#e2f7f8;padding:9px 14px;font:700 11px "IBM Plex Mono",monospace;
+ cursor:pointer;min-height:39px;
+}
+.aa-home-preview-sound:focus-visible{outline:2px solid #8cdee6;outline-offset:3px}
+@media screen and (orientation:landscape) and (max-width:1000px) and (max-height:600px){
+ .aa-home-simple-panel:has(.aa-home-audio-volume){gap:7px;padding:9px 13px}
+ .aa-home-simple-panel:has(.aa-home-audio-volume)>p:not(.aa-home-overline){
+   font-size:10px;line-height:1.35;margin:0;
+ }
+ .aa-home-simple-panel:has(.aa-home-audio-volume) .aa-home-setting-row{
+  padding:6px 10px;gap:10px;min-height:37px
+ }
+ .aa-home-simple-panel:has(.aa-home-audio-volume) .aa-home-setting-row small{
+  font-size:9px;line-height:1.2
+ }
+ .aa-home-simple-panel:has(.aa-home-audio-volume) .aa-home-setting-row strong{font-size:11px}
+ .aa-home-simple-panel:has(.aa-home-audio-volume) .aa-home-setting-row input[type="checkbox"]{height:17px;width:17px}
+ .aa-home-simple-panel:has(.aa-home-audio-volume) .aa-home-setting-row input[type="range"]{width:140px}
+ .aa-home-preview-sound{font-size:9px;padding:5px 9px;min-height:30px}
+}
+
+.aa-home-audio-actions{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+@media screen and (orientation:landscape) and (max-width:1000px) and (max-height:600px){
+ .aa-home-audio-actions{gap:6px}
+}

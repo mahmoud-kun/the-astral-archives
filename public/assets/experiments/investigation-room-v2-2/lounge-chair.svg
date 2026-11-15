@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1920" height="824" viewBox="0 0 1920 824" fill="none" aria-hidden="true"><defs>
+<linearGradient id="steel" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#4b7286"/><stop offset=".35" stop-color="#1b4157"/><stop offset="1" stop-color="#061b2e"/></linearGradient>
+<linearGradient id="dark" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#203b51"/><stop offset="1" stop-color="#061724"/></linearGradient>
+<linearGradient id="panel" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#1c5067"/><stop offset=".45" stop-color="#0b3043"/><stop offset="1" stop-color="#051b2c"/></linearGradient>
+<linearGradient id="glass" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#206a7a"/><stop offset=".5" stop-color="#0b3e55"/><stop offset="1" stop-color="#081d34"/></linearGradient>
+<linearGradient id="cyan"><stop stop-color="#06899c"/><stop offset=".5" stop-color="#1ceaff"/><stop offset="1" stop-color="#95f8fa"/></linearGradient>
+<linearGradient id="orange"><stop stop-color="#8d4b20"/><stop offset=".5" stop-color="#ff9a42"/><stop offset="1" stop-color="#ffc46b"/></linearGradient>
+<radialGradient id="cold"><stop stop-color="#1cdaf6" stop-opacity=".31"/><stop offset=".3" stop-color="#0ae0f9" stop-opacity=".11"/><stop offset="1" stop-color="#1ce6f9" stop-opacity="0"/></radialGradient>
+<radialGradient id="warm"><stop stop-color="#ffa454" stop-opacity=".31"/><stop offset=".5" stop-color="#ffa454" stop-opacity=".07"/><stop offset="1" stop-color="#ffa454" stop-opacity="0"/></radialGradient>
+</defs>
+<ellipse cx="603" cy="537" rx="91" ry="11" fill="#020e1a" />
+<polygon points="563,452 617,443 660,470 672,516 566,516 548,487" fill="url(#steel)" stroke="#5c7e8a" stroke-width="4"/>
+<polygon points="571,463 619,457 645,473 650,496 579,499" fill="#18384c" stroke="#688698" stroke-width="3"/>
+<polygon points="555,487 570,478 578,514 565,520" fill="#1d3a4a" stroke="#4c7285" stroke-width="3"/>
+<polygon points="649,479 671,478 677,512 662,519" fill="#152f45" stroke="#41677e" stroke-width="3"/>
+<polygon points="567,501 654,499 669,521 570,524" fill="#223c4f" stroke="#3f6c7a" stroke-width="3"/>
+<path d="M575 524L575 535" stroke="#3a6275" stroke-width="6" opacity="1"/>
+<path d="M662 519L659 532" stroke="#3a6275" stroke-width="6" opacity="1"/>
+<path d="M674 513l20 0 0-34" fill="none" stroke="#b36f41" stroke-width="3" />
+<circle cx="691" cy="464" r="20" fill="none" stroke="#f5a451" stroke-width="3"/>
+<ellipse cx="691" cy="467" rx="30" ry="9" fill="none" stroke="#f6af5b" stroke-width="2.2"/>
+</svg>

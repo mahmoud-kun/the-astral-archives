@@ -1,0 +1,17 @@
+.rt-bubble{position:fixed;z-index:8500;width:min(340px,calc(100vw - 20px));max-height:min(58dvh,420px);overflow:auto;box-sizing:border-box;pointer-events:auto;background:rgba(8,27,45,.97);border:1px solid rgba(142,211,224,.92);border-radius:10px;color:#f3f7fa;padding:12px 14px;box-shadow:0 14px 40px #000b;font-family:'IBM Plex Sans',sans-serif}
+.rt-anchored{transition:left .16s ease,top .16s ease}
+.rt-finding{left:0;top:0;visibility:hidden;pointer-events:none}
+.rt-bubble header,.rt-bubble footer{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.rt-bubble header small,.rt-bubble footer span{font-size:10px;letter-spacing:.05em;color:#aac7d5}
+.rt-bubble .rt-target-label{display:inline-block;font:700 10px 'IBM Plex Mono',monospace;letter-spacing:.08em;color:#f4cb8e;margin:11px 0 0}
+.rt-bubble h2{font-size:15px;letter-spacing:.04em;line-height:1.3;margin:6px 0}
+.rt-bubble p{font-size:12px;line-height:1.55;margin:0 0 12px}
+.rt-bubble button{border:1px solid #6696a7;background:#204c62;color:#fff;border-radius:5px;padding:6px 9px;cursor:pointer;font-size:11px;min-height:33px;white-space:nowrap}
+.rt-bubble header button{background:transparent;color:#d1e6ed;border-color:transparent}
+.rt-bubble button:hover,.rt-bubble button:focus-visible{background:#31728b;outline:2px solid #f3ce97;outline-offset:1px}
+.rt-target-ring{position:fixed;z-index:8499;pointer-events:none;border:2px solid #ffce7a;border-radius:7px;box-shadow:0 0 0 4px #0b1d2b8c,0 0 22px #ffc9789a;transition:all .16s ease}
+.rt-side-top::after,.rt-side-bottom::after{position:absolute;left:calc(50% - 8px);content:'';width:0;height:0;border-left:8px solid transparent;border-right:8px solid transparent}
+.rt-side-top::after{bottom:-10px;border-top:10px solid #8ed3e0}
+.rt-side-bottom::after{top:-10px;border-bottom:10px solid #8ed3e0}
+@media(max-height:510px){.rt-bubble{width:min(300px,calc(100vw - 16px));max-height:calc(100dvh - 18px);padding:8px 10px}.rt-bubble h2{font-size:12px;margin:3px 0}.rt-bubble p{font-size:11px;line-height:1.35;margin-bottom:7px}.rt-bubble button{min-height:28px;padding:4px 6px}.rt-bubble .rt-target-label{margin-top:5px;font-size:9px}}
+@media(prefers-reduced-motion:reduce){.rt-bubble,.rt-target-ring{transition:none}}

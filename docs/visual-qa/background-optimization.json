@@ -1,0 +1,10 @@
+{
+  "input": "public/assets/rooms/investigation/layers/wide/background/investigation_room_bg_clean.png",
+  "output": "public/assets/rooms/investigation/layers/wide/background/investigation_room_bg_clean.webp",
+  "pixel_width": 1916,
+  "pixel_height": 821,
+  "original_bytes": 2011145,
+  "optimized_bytes": 263208,
+  "saved_percent": 86.9,
+  "mean_absolute_rgb_error": 2.743
+}

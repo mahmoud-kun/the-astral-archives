@@ -1,0 +1,300 @@
+/* 2.5D investigation-room camera rig. Layered near/far movement is bounded;
+   the room artwork is not represented as a true 180° panorama. */
+.exploration25d {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  isolation: isolate;
+  touch-action: none;
+  user-select: none;
+  cursor: default;
+  --aim-x: 50%;
+  --aim-y: 50%;
+  --far-motion: 0px;
+  --near-motion: 0px;
+  --near-rotation: 0deg;
+  background: radial-gradient(ellipse at 52% 40%,#18384b,#071321);
+}
+.exploration25d.is-locked,
+.exploration25d.is-locked .object-hotspot { cursor: none; }
+.exploration-depth-world {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: max(100%, 233.4vh);
+  height: 100%;
+  z-index: 0;
+  transform-origin: 50% 51%;
+  will-change: transform;
+  perspective: 1300px;
+  pointer-events: none;
+}
+.exploration-far-wall { position: absolute; inset: 0; overflow: hidden; }
+.exploration-far-wall::after {
+  content: ''; position: absolute; inset: 0; pointer-events: none;
+  background:
+    linear-gradient(180deg,#06111e66 0%,transparent 20%, transparent 72%,#07172566 100%),
+    radial-gradient(ellipse at 55% 50%,transparent 53%,#03101b7c 100%);
+}
+.exploration-far-wall picture { position: absolute; inset: 0; display: block; transform: translate3d(var(--far-motion),0,-80px) scale(1.065); will-change: transform; }
+.exploration-far-wall img {
+  display: block; width: 100%; height: 100%;
+  object-fit: cover; object-position: 50% 50%;
+  user-select: none; -webkit-user-drag: none;
+  filter: saturate(1.04) contrast(1.035);
+}
+.exploration-atmospheric-glow {
+  position: absolute; inset: 0; pointer-events: none;
+  background:
+    radial-gradient(ellipse at 51% 53%,#f4a26110,transparent 27%),
+    radial-gradient(ellipse at 17% 41%,#11c8e00c,transparent 34%),
+    radial-gradient(ellipse at 82% 38%,#26a3e00a,transparent 36%);
+  mix-blend-mode: screen; animation: atmosphereBreathe 10s ease-in-out infinite alternate;
+}
+.exploration-dust { position:absolute; inset:0; overflow:hidden; pointer-events:none; }
+.exploration-dust i {
+  position: absolute;
+  width: 2px; height: 2px; border-radius: 50%;
+  background: #bfe9ee; opacity: .38;
+  box-shadow: 0 0 9px #f3b97c;
+  animation: driftParticle 16s linear infinite;
+}
+.exploration-dust i:nth-child(1) { top: 28%; left: 24%; animation-delay: -1s; }
+.exploration-dust i:nth-child(2) { top: 63%; left: 39%; animation-delay: -7s; }
+.exploration-dust i:nth-child(3) { top: 45%; left: 67%; animation-delay: -13s; }
+.exploration-dust i:nth-child(4) { top: 35%; left: 86%; animation-delay: -4s; }
+.exploration-dust i:nth-child(5) { top: 72%; left: 20%; animation-delay: -11s; }
+.exploration-dust i:nth-child(6) { top: 80%; left: 72%; animation-delay: -3s; }
+.exploration-dust i:nth-child(7) { top: 55%; left: 52%; animation-delay: -15s; }
+.exploration-dust i:nth-child(8) { top: 24%; left: 53%; animation-delay: -8s; }
+
+.exploration-surfaces { position:absolute; inset: 0; pointer-events:none; }
+.object-hotspot {
+  position: absolute;
+  pointer-events: auto;
+  display: grid; place-items:center;
+  border: 0; background: transparent; color:#ecf6f3;
+  min-width: 66px; min-height: 66px; cursor: pointer;
+  padding: 0; touch-action: manipulation;
+}
+.object-hotspot:focus-visible { outline: 2px solid #f4a261; outline-offset: 2px; }
+.hotspot-reticle {
+  display: block; width:26px; height:26px; border:1px solid #5be7e4b8;
+  transform:rotate(45deg); box-shadow:0 0 14px #2ec4c344,0 0 1px #2ec4c3 inset;
+  background:#061a26a8; opacity:.65; transition:opacity .18s ease,transform .24s,box-shadow .24s;
+  animation: reticleBreathe 3.8s ease-in-out infinite;
+}
+.hotspot-reticle span { display:block; width:5px; height:5px; background:#f4a261; margin:9px; border-radius:50%; box-shadow:0 0 7px #ffca83; }
+.object-hotspot:hover .hotspot-reticle,
+.object-hotspot:focus-visible .hotspot-reticle {
+  transform:rotate(45deg) scale(1.2); opacity:1;
+  box-shadow:0 0 19px #f4a2616b,0 0 35px #2ec4c33d;
+  animation-play-state: paused;
+}
+.object-tag {
+  position:absolute; left:50%; bottom:calc(100% - 10px);
+  transform:translate(-50%,-8px);
+  width:max-content; white-space:nowrap;
+  background:#071b2be9; color:#eaf0e9;
+  border:1px solid #4ba4ac; box-shadow:0 10px 25px #010a17a8;
+  padding:10px 12px; letter-spacing:.12em;
+  font:500 10px 'IBM Plex Mono',monospace;
+  opacity:0; pointer-events:none; transition:opacity .2s,transform .2s;
+}
+.object-tag b { color:#f4a261; font-weight:500; }
+.object-hotspot:hover .object-tag,
+.object-hotspot:focus-visible .object-tag {
+  opacity:1; transform:translate(-50%,-11px);
+}
+.object-files { left:14%; top:34%; width:15%; height:30%; }
+.object-evidence { left:31%; top:34%; width:20%; height:23%; }
+.object-desk { left:38%; top:56%; width:25%; height:23%; }
+.object-door { left:74%; top:29%; width:16%; height:43%; }
+
+/* These are independent foreground planes. As the camera looks around they
+   travel farther than the image plane to give real depth displacement. */
+.exploration-near-left, .exploration-near-right {
+  position:absolute; z-index:1; pointer-events:none; width:94px; height:120vh; top:-8%;
+  transform:translate3d(var(--near-motion),0,0) rotateY(var(--near-rotation));
+  transition:opacity .3s;
+}
+.exploration-near-left { left:-68px; }
+.exploration-near-right { right:-68px; transform:translate3d(var(--near-motion-right),0,0) rotateY(var(--near-rotation)); }
+.near-strut {
+  position:absolute; left:0; top:0; height:100%; width:100%; opacity:.67;
+  border:1px solid #2c6d83;
+  background:linear-gradient(90deg,#030c17bb 0%,#0b2133e7 35%,#1a3d52b5 72%,#071928c6 100%);
+  box-shadow:2px 0 28px #010b19ac, inset -7px 0 12px #081b2b;
+}
+.near-illumination {
+  position:absolute; left:65%; top:12%; width:4px; height:68%; opacity:.55;
+  background:linear-gradient(180deg,transparent,#2ec4c3cc 25%,#f4a261ad 46%,#2ec4c3ad 78%,transparent);
+  box-shadow:0 0 19px #2ec4c358;
+}
+.exploration-near-right .near-illumination { left:27%; }
+
+/* In-world camera UI remains small, and is not a waypoint list. */
+.exploration-top-note {
+  position:absolute; top:100px; left:clamp(18px,2.8vw,46px); z-index:2;
+  color:#aacbd5; font: 9px 'IBM Plex Mono',monospace; letter-spacing:.16em;
+  text-shadow:0 2px 5px #001019; pointer-events:none;
+}
+.exploration-top-note span { color:#f4a261; }
+.exploration-help-button {
+  position:absolute; z-index:5;
+  top:98px; right:clamp(14px,2.8vw,46px);
+  display:grid; place-items:center;
+  width:36px; height:36px;
+  border:1px solid #498095; border-radius:50%;
+  color:#d2e9e9; background:#091e2bc9;
+  font:15px 'IBM Plex Mono',monospace;
+  cursor:pointer; touch-action:manipulation;
+  backdrop-filter:blur(8px);
+}
+.exploration-help-button:hover,.exploration-help-button:focus-visible {
+  border-color:#f4a261; background:#153a4e;
+}
+.exploration-help-button:focus-visible { outline:2px solid #f4a261; outline-offset:3px; }
+.exploration-guide {
+  position:absolute; z-index:3; bottom:44px; left:50%; transform:translateX(-50%);
+  font:9px 'IBM Plex Mono',monospace; color:#b7d4d9;
+  letter-spacing:.12em; text-align:center; white-space:nowrap;
+  text-shadow:0 2px 6px #000; animation:guideFade 1.3s .8s both;
+}
+.exploration-guide .touch-note { display:none; }
+.exploration-guide .desktop-note { color:#b7d4d9; }
+.exploration-help {
+  position:absolute; z-index:10; top:141px; right:clamp(14px,2.8vw,46px);
+  padding:23px; width:min(375px,calc(100% - 30px));
+  background:#081e31ef; border:1px solid #418397;
+  box-shadow:0 15px 50px #000b; color:#eaf2ee;
+}
+.exploration-help > button { float:right; background:#16364b; border:1px solid #4a8e9a; color:#eaf2ee; padding:3px 10px; font-size:18px; }
+.exploration-help strong { display:block; font:13px 'Orbitron',sans-serif; letter-spacing:.09em; }
+.exploration-help p { margin:13px 0; line-height:1.6; font-size:13px; color:#c1dae0; }
+.exploration-help small { display:block; font-size:11px; color:#8cabb9; }
+.exploration-focus-state {
+  position:absolute; z-index:7; bottom:112px; left:50%; transform:translateX(-50%);
+  color:#f2e8d2; font:10px 'IBM Plex Mono',monospace; letter-spacing:.11em;
+  padding:12px 17px; background:#061c2ad9; border-left:2px solid #f4a261; white-space:nowrap;
+  animation:focusStatus .3s both;
+}
+
+@keyframes atmosphereBreathe { from { opacity:.5; } to { opacity:1; } }
+@keyframes driftParticle { 0% { transform:translate3d(0,0,0); opacity:0; } 30% { opacity:.3; } 100% { transform:translate3d(28px,-60px,0); opacity:0; } }
+@keyframes reticleBreathe { 0%,100% { opacity:.39; } 50% { opacity:.75; } }
+@keyframes guideFade { from { opacity:0; transform:translate(-50%,8px); } to { opacity:1; transform:translate(-50%,0); } }
+@keyframes focusStatus { from { opacity:0; transform:translate(-50%,12px); } to { opacity:1; transform:translate(-50%,0); } }
+
+@media(max-width:720px) {
+  /* Keep hotspot locations anchored to the same image coordinates on touch screens. */
+  .exploration-top-note { top:78px; left:12px; font-size:7px; }
+  .exploration-help-button { top:77px; right:12px; width:34px; height:34px; }
+  .exploration-help { top:119px; right:12px; }
+  .exploration-guide { bottom:38px; max-width:90vw; line-height:1.7; font-size:8px; white-space:normal; }
+  .exploration-near-left { left:-84px; }
+  .exploration-near-right { right:-84px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .exploration-depth-world { will-change:auto; }
+  .exploration-atmospheric-glow,
+  .exploration-dust i,.hotspot-reticle,.exploration-guide,.exploration-focus-state { animation:none !important; }
+}
+
+/* Pointer Lock is entered only by a user gesture; the look control never
+   grabs the cursor automatically or blocks touch / keyboard navigation. */
+.exploration-look-toggle {
+  position: absolute; z-index: 5;
+  left: 50%; bottom: 89px; transform: translateX(-50%);
+  display: flex; flex-direction: column; align-items: center; gap: 5px;
+  width: min(244px, calc(100% - 36px));
+  padding: 13px 17px;
+  border: 1px solid #73ced0; background: #071e2de8; color: #e8f5ef;
+  box-shadow: 0 8px 27px #010913a8, inset 0 0 14px #2ec4c31b;
+  font: 600 11px 'IBM Plex Mono',monospace; letter-spacing: .12em;
+  backdrop-filter: blur(8px);
+}
+.exploration-look-toggle:hover,.exploration-look-toggle:focus-visible {
+  border-color: #f4a261; background: #123246;
+}
+.exploration-look-toggle small {
+  font: 10px 'IBM Plex Sans',sans-serif;
+  letter-spacing: .03em; color: #c3d7da;
+}
+.exploration-aim {
+  position: absolute; z-index: 4; pointer-events: none;
+  left: var(--aim-x); top: var(--aim-y);
+  transform: translate(-50%, -50%);
+  width: 23px; height: 23px; display: grid; place-items: center;
+}
+.aim-ring {
+  display: block; width: 18px; height: 18px;
+  border: 1px solid #b7e8e9; border-radius: 50%;
+  box-shadow: 0 0 0 3px #071b2788,0 0 12px #21c6c677;
+}
+.aim-ring::after {
+  content: ''; display: block; width: 3px; height: 3px;
+  border-radius: 50%; background: #f2e8d2; margin: 6.5px;
+}
+.exploration-aim.has-target .aim-ring {
+  border-color: #ffbc7b; box-shadow: 0 0 0 3px #071b2788,0 0 16px #f4a261aa;
+}
+.aim-label {
+  position: absolute; top: 32px; left: 50%; transform: translateX(-50%);
+  padding: 6px 9px; width: max-content; max-width: 75vw;
+  color: #f2e8d2; background: #071b2bef;
+  border: 1px solid #4ba4ac;
+  font: 9px 'IBM Plex Mono',monospace; letter-spacing: .12em;
+}
+.exploration-lock-fallback {
+  position: absolute; z-index: 5; bottom: 18px;
+  left: 50%; transform: translateX(-50%);
+  width: min(400px, 90vw); text-align: center;
+  font: 10px/1.5 'IBM Plex Sans',sans-serif; color: #e4d8c5;
+  text-shadow: 0 2px 8px #000;
+}
+@media (hover: none), (pointer: coarse) {
+  .exploration-look-toggle { display: none; }
+  .exploration-guide .desktop-note { display: none; }
+  .exploration-guide .touch-note { display: inline; color:#b7d4d9; }
+  .exploration-lock-fallback { display: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .exploration-aim .aim-ring { transition: none; }
+}
+
+/* V2.2: Each visible room prop is a separate original SVG. The designer
+   reference remains in the repository but is NOT rendered by Investigation25D.
+   1920:824 art coordinates match the 2.5D world aspect ratio.
+   Camera V3 pan/zoom/Pointer Lock logic stays unchanged. */
+.exploration-faithful-room {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  z-index: 1;
+  pointer-events: none;
+}
+.exploration-faithful-asset {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: fill;
+  pointer-events: none;
+  user-select: none;
+  -webkit-user-drag: none;
+  will-change: transform;
+}
+.exploration-faithful-back { transform: none; }
+.exploration-faithful-far { transform: translate3d(var(--faithful-far), 0, 0); }
+.exploration-faithful-mid { transform: translate3d(var(--faithful-mid), 0, 0); }
+.exploration-faithful-near { transform: translate3d(var(--faithful-near), 0, 0); }
+.exploration-faithful-front { transform: translate3d(var(--faithful-front), 0, 0); }
+.exploration-faithful-light { transform: none; }
+.exploration-atmospheric-glow, .exploration-dust { z-index: 2; }
+.exploration-surfaces { z-index: 3; }
+@media (prefers-reduced-motion: reduce) {
+  .exploration-faithful-asset { will-change: auto; }
+}

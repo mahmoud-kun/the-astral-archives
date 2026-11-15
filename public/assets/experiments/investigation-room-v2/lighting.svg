@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1920" height="824" viewBox="0 0 1920 824" fill="none" role="img">
+
+<defs>
+  <radialGradient id="c"><stop stop-color="#65d6d2" stop-opacity=".26"/><stop offset=".5" stop-color="#2ec4c3" stop-opacity=".07"/><stop offset="1" stop-color="#2ec4c3" stop-opacity="0"/></radialGradient>
+  <radialGradient id="o"><stop stop-color="#ffb27f" stop-opacity=".22"/><stop offset="1" stop-color="#f4a261" stop-opacity="0"/></radialGradient>
+</defs>
+<ellipse cx="821" cy="266" rx="345" ry="260" fill="url(#c)"/>
+<ellipse cx="1610" cy="404" rx="250" ry="360" fill="url(#o)"/>
+<ellipse cx="370" cy="327" rx="225" ry="330" fill="url(#o)"/>
+<path d="M610 194L978 184" stroke="#87e0d8" stroke-width="3" opacity=".59"/>
+<path d="M610 194L978 184" stroke="#6cd5cf" stroke-width="13" opacity=".12"/>
+<path d="M1418 226V613" stroke="#67d4cc" stroke-width="4" opacity=".35"/>
+<path d="M1405 226V613" stroke="#67d4cc" stroke-width="15" opacity=".06"/>
+<path d="M223 258L224 595" stroke="#fab47f" stroke-width="3" opacity=".54"/>
+<path d="M216 258L215 595" stroke="#fab47f" stroke-width="15" opacity=".07"/>
+
+</svg>

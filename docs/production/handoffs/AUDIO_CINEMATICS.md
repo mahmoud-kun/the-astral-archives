@@ -1,0 +1,273 @@
+# The Astral Archives — Chat B Final Handoff: Sound Effects & Cinematics
+
+**Report date:** 2026-11-15  
+**Owner:** Chat B — Sound Effects, Cinematics & Media Integration  
+**Authority:** [Work Order B](../WORK_ORDER_B_AUDIO_CINEMATICS.md) and [parallel sprint plan](../PARALLEL_RELEASE_PLAN_2026-11-15.md)  
+**Approved branch:** `experiment/room-case-library-layout-fix-2026-11-14` (no new branch, no merge to main)  
+**CURRENT verdict (2026-11-15): ALL SOURCE BINARIES UPLOADED & VERIFIED — 17/17 original designer MP4 videos, 1/1 KES-05 MP3, plus the 19 unmodified SFX are physically on the authorized branch. All five cases have source-grounded cinematic mappings and 5 original evidence-context visual associations. Main's scene-trigger wiring, physical mobile playback, captions/license approvals and the AST 472 W scientific correction are STILL OPEN. No main merge; this is not final release approval.**
+
+*Sections 1–8 below retain historical implementation chronology. Their statements that only four clips exist or that MP4s were not uploaded are superseded by Sections 9–10 and the up-to-date verdict above.*
+
+## 1. Completed owned work
+
+- Inspected GitHub's **19 original source cues** (11 project designer WAV + 8 Kenney CC0 M4A), their registered paths, sizes, upstream rights documentation, in-game trigger locations, and the existing audio controls. **No designer or Kenney binary was changed.** Total 19 source files: **782,108 bytes** (388,562 designer WAV + 393,546 Kenney M4A).
+- Fixed `src/audio/gameAudio.ts`: bounded 8 concurrent one-shots (hover suppressed at 6), added cooldown for repeated folder/door clicks, applied saved master-volume changes immediately to already-playing SFX, stopped SFX when effects disabled / volume zero / tab hidden / unmounted, gesture-unlocked ambience with pointer and keyboard activation, and exposed idempotent `claimCinematicAudioFocus()` to duck station ambience and stop one-shots during a cinematic.
+- Built `src/media/cinematicManifest.ts` for **exactly four delivered clips**, including actual Drive IDs, measured source sizes, durations, versioned local path targets and per-clip video mix gains. Added explicit `requestCinematic(id)` and `CINEMATIC_FINISHED_EVENT` contract, without changing gameplay state.
+- Built `src/media/CinematicOverlay.tsx` + CSS: responsive 16:9 contain (not stretched), no forced audio on autoplay, Play/Pause/Skip/Replay/Return, reduced-motion no-autoplay, keyboard Escape, metadata progress, a safe unavailable-video state, user-gesture fullscreen (may be refused), tab-background pause, independent audio focus and master volume. The overlay **does not file evidence, change saves, unlock rescue, or navigate**.
+- Added a cinematic-source preview section to existing `/?audio-lab=1` with distinct `.al-cinema-cue` rows; preserved precisely 19 `.al-cue` source-audio rows.
+- Added `src/audio/audioRuntime.test.mjs` (mocked live volume/mute/background/audio focus), `src/media/cinematicManifest.test.mjs` (four real keys, paths, gain bounds), and extended `src/audio/gameAudio.test.mjs` to run them.
+- Audited the **actual four** MP4 files from the approved NASA Drive `videos` folder using ffprobe/ffmpeg and visual frame sampling. Preserved exact source bytes, made an offline zip of versioned names and SHA-256 hashes for Main. No originals were altered. The **MP4 bytes were not successfully pushed to GitHub**; the connector returned an HTTP/2 upload body error on a 4.38 MB blob. See the issue below.
+- Published source-ledger documentation at `docs/audio/VIDEO_ASSET_LEDGER_2026-11-15.md`.
+
+### GitHub owned commits (chronological)
+
+| Commit | Owned change |
+| --- | --- |
+| [13e19b4](https://github.com/mahmoud-kun/the-astral-archives/commit/13e19b430b0f7848f7a6c0cab24c685e99303020) | Playback concurrency, live settings, focus and gesture handling |
+| [85b6c64](https://github.com/mahmoud-kun/the-astral-archives/commit/85b6c645c1447be23b2162e89d90d791a9df75fa) | Four-source cinematic manifest and event API |
+| [66730ea](https://github.com/mahmoud-kun/the-astral-archives/commit/66730eadbc63c13626381aca37cd16a0d3a3208f) | Isolated video overlay, styles, Lab previews and tests |
+| [6cb2a8a](https://github.com/mahmoud-kun/the-astral-archives/commit/6cb2a8a898b022dfb54c8dfe93377c9e991c8e53) | Fix TypeScript media duration inference |
+| [6eea7fc](https://github.com/mahmoud-kun/the-astral-archives/commit/6eea7fc949f733f0b9995d09e437af5497c94a7b) | Runtime unit tests for mute, persistence, focus and tab state |
+| [7c33ff8](https://github.com/mahmoud-kun/the-astral-archives/commit/7c33ff814abdec49be616232a7a02d56144260db) | Verified MP4 provenance, AV-format and SHA ledger |
+| [98df1bc](https://github.com/mahmoud-kun/the-astral-archives/commit/98df1bc373790de05f1c8cb00b0f415e76069b34) | Separate video rows from the 19 SFX rows in Visual QA |
+
+**Owned changed files:** `src/audio/gameAudio.ts`, `src/audio/AudioReviewLab.tsx`, `src/audio/audioReviewLab.css`, `src/audio/gameAudio.test.mjs`, `src/audio/audioRuntime.test.mjs`, `src/media/cinematicManifest.ts`, `src/media/cinematicManifest.test.mjs`, `src/media/CinematicOverlay.tsx`, `src/media/cinematicOverlay.css`, `docs/audio/VIDEO_ASSET_LEDGER_2026-11-15.md`, and this handoff. No other owner's source file was edited by B.
+
+## 2. Detailed 19-cue and event ledger
+
+### Original 11 designer WAV (project library; **NOT** asserted CC0)
+
+| Game cue | Registered file under `public/assets/audio/sfx/` | Bytes | Present game event / limitation |
+| --- | --- | ---: | --- |
+| `hover` | ui_hover.wav | 8,864 | Delegated mouse/pen hover over active controls; rate-limited |
+| `click` | ui_click.wav | 12,392 | Delegated click on active UI controls |
+| `panelOpen` | panel_open.wav | 26,504 | Home panel, briefing/library and evidence tray open |
+| `panelClose` | panel_close.wav | 21,212 | Close inspector and Home panel |
+| `folderMove` | folder_move.wav | 30,032 | Unfile / move evidence in folder UI |
+| `file` | folder_file.wav | 29,150 | Both correct and incorrect folder filing play the **same cue** (no answer leak) |
+| `evidence` | evidence_collected.wav | 23,856 | Manual evidence COLLECT after analysis |
+| `error` | error_soft.wav | 45,908 | Failed technical analysis/rejected rescue verification |
+| `signal` | signal_alert.wav | 35,324 | Staged; signal event needs dedicated event dispatch integration, not falsely auto-wired |
+| `portal` | portal_transition.wav | 79,424 | Staged; portal cutscene trigger is pending Main |
+| `rescue` | rescue_unlocked.wav | 75,896 | Six correctly filed required records unlock; rescue rerun success |
+
+### Supplemental 8 Kenney CC0 M4A
+
+Publisher: [Kenney Sci-fi Sounds](https://kenney.nl/assets/sci-fi-sounds), asset license **CC0**. Source mirror and full license explanation in `docs/audio/AUDIO_SOURCES_AND_INTEGRATION_V1.md`. M4A AAC codec compatibility should be auditioned on target devices.
+
+| Game cue | Registered file under `public/assets/audio/kenney/` | Bytes | Present game event / limitation |
+| --- | --- | ---: | --- |
+| `scanner` | computer-noise-002.m4a | 86,314 | Station hotspot/tool inspection |
+| `terminal` | computer-noise-000.m4a | 86,731 | Correct analysis / verified diagnosis |
+| `doorOpen` | door-open-000.m4a | 9,477 | Home enter and room navigation |
+| `doorClose` | door-close-000.m4a | 9,463 | Station return / exit |
+| `engine` | space-engine-low-000.m4a | 81,356 | Reserved for engineering scene; not connected to an authorized gameplay event |
+| `energy` | force-field-000.m4a | 15,996 | Reserved for time-travel device; not connected |
+| `metal` | impact-metal-000.m4a | 11,128 | Reserved for material inspection; not connected |
+| `thruster` | thruster-fire-000.m4a | 93,081 | Reserved for engineering simulation; not connected |
+
+**Ambient sound:** Synthesized, not sampled, quiet interior mechanical equipment across home, investigation, archive, signal, recordings and rescue scenes. `SFX` and `Ambience` toggles are independent. Settings use stable `astral-audio-settings-v1` localStorage key (defaults SFX on, Ambience on, 40/100). Persistence parser tolerates corrupt/private storage. Main must audibly evaluate final mix; no physical listening claimed.
+
+## 3. Actual delivered designer film inventory
+
+[Source folder](https://drive.google.com/drive/folders/1LIRtkA0Re_yJ-VpIU0PAIc2Whlm80-sX), exact hashes, technical measurement details and browser notes: [Video Asset Ledger](https://github.com/mahmoud-kun/the-astral-archives/blob/experiment/room-case-library-layout-fix-2026-11-14/docs/audio/VIDEO_ASSET_LEDGER_2026-11-15.md).
+
+| Clip key / intended phase | Actual filename | Measured dimensions and codecs | Duration | Bytes | Runtime gain at full master |
+| --- | --- | --- | ---: | ---: | ---: |
+| `opening` / Game intro | game opening.mp4 | 1920×1080 H.264 High/AAC-LC stereo 48 kHz | 10.005 s | 12,567,554 | 0.90 |
+| `case1Intro` / Case 1 briefing | case 1 intro .mp4 | 1920×1080 H.264 High/AAC-LC stereo 48 kHz | 7.125 s | 6,436,608 | 0.70 |
+| `portalPast` / Travel to past | time travel to the past .mp4 | 1920×1080 H.264 High/AAC-LC stereo 48 kHz | 8.000 s | 10,181,404 | 0.30 |
+| `case1Outcome` / Outcome | case 1 outcome.mp4 | 1920×1080 H.264 High/AAC-LC stereo 48 kHz | 5.970 s | 4,375,281 | 0.80 |
+
+**Total 33,560,847 bytes** of genuine designer-delivered video. Runtime volume values are attenuation coefficients * master volume, not loudness-normalized file edits. Portal is loudest source (ffmpeg mean -15.0 dBFS / peak -0.7 dBFS), so gain is lowered. Frame sampling and ffprobe passed; subjective audio/video artistic review is outstanding. Opening footage has approximately 2.97 s dark/black frames at the start; confirm artistic intent. Three clips have `moov` atom after `mdat`, which may slow startup on weak mobile networks; original-byte preservation takes precedence until a versioned remux is approved.
+
+**No video subtitles/captions file received, no independent third-party music/footage rights clearance, no NASA endorsement asserted.** This Drive folder contains no verified separate return-to-present clip or four additional case cinematic sets. The case number in a filename does not establish its case ID; Main/content must approve.
+
+### Video staging truth
+
+The `CINEMATICS` manifest intentionally references:
+- `public/assets/video/designer-game-opening-v1.mp4`
+- `public/assets/video/designer-case-1-intro-v1.mp4`
+- `public/assets/video/designer-time-travel-past-v1.mp4`
+- `public/assets/video/designer-case-1-outcome-v1.mp4`
+
+**These binary files are NOT in GitHub as of this handoff.** Upload through connected GitHub create_blob failed with `h2 protocol error: error reading a body from connection`. Exact-byte copies, hashes and a ready-to-upload ZIP were prepared locally for Main/user; a ZIP in this chat does not itself integrate with the deployed web app. Until binaries are staged, the player deliberately shows `VIDEO UNAVAILABLE` and offers Continue Without Video without state changes. Only a verified post-upload browser smoke can move video availability to DONE.
+
+## 4. Shared-owner Integration Request (do not implement in Chat B)
+
+**Main tracking:** [GitHub Issue #4 — Chat B Integration Request](https://github.com/mahmoud-kun/the-astral-archives/issues/4) (includes exact shared-file contract; published early).
+
+1. **Mount only in Main-owned `src/main.tsx`**: import default `CinematicOverlay` from `./media/CinematicOverlay`; render one `<CinematicOverlay />` inside the existing persistent app root. Do not replace document on route change; fullscreen document persists.
+2. **Trigger only from authorized events** by importing `requestCinematic` from `src/media/cinematicManifest.ts`. Keys: `opening`, `case1Intro`, `portalPast`, `case1Outcome`. Main chooses Home start timing and case-1 mapping. Portal can be requested only after the existing save/unlock gate, case1Outcome only after a real completed engineering rescue; no clip itself grants progression.
+3. **Outcome event:** listen to `CINEMATIC_FINISHED_EVENT` = `astral:cinematic-finished`, detail `{id,outcome}`. Outcomes: `completed`, `skipped`, `returned`, `unavailable`. Main handles routes and case state; `returned` does not advance; `skipped` skips presentation only and must **not** bypass evidence, puzzle, diagnosis or rescue requirements.
+4. **Upload exact originals as separately versioned MP4s**, with SHA-256 comparison to `docs/audio/VIDEO_ASSET_LEDGER_2026-11-15.md`. Preserve Drive originals. Then verify HTTP 200/206, MIME, byte ranges, codec browser playback, audio mute, 16:9 sizing, skip, replay, resume and error handling on actual served assets.
+5. **Before release** obtain user/designer approval of portal Henda style, intro black frames, rights/caption treatment, missing case clips/return transitions and any proposed new source. Don't manufacture new clips.
+
+## 5. Testing performed and outcomes
+
+| Evidence / command | Exact environment and result |
+| --- | --- |
+| Source files/signatures | GitHub directory entries: 11 WAV + 8 M4A, unique paths, sizes; automated test checks RIFF/WAVE and ftyp signatures |
+| Source MP4s | Drive originals fetched, ffprobe/ffmpeg codecs/dimensions/duration/audio-volume inspected, representative frames sampled, SHA-256 computed; 4/4 decodable |
+| `node --experimental-strip-types --test src/media/cinematicManifest.test.mjs` | Local source-equivalent pure test: **3/3 PASS** |
+| [GitHub Actions #53](https://github.com/mahmoud-kun/the-astral-archives/actions/runs/43674281572) | Sound source/manifest **7/7 PASS**; Build **FAILED** at TS2345 (`useState` duration literal type); fixed by commit `6cb2a8a` |
+| [GitHub Actions #54](https://github.com/mahmoud-kun/the-astral-archives/actions/runs/43674525154) | `npm run build` **PASS**, including `npm run test:studio`, `npm run test:audio`, TypeScript and Vite build. Visual QA **FAILED** at Sound Lab count 23 vs 19, since four video preview rows shared SFX class; fixed in commit `98df1bc`. Other screenshot scenarios displayed broken=0, clipped=0, overflow=0, console=0. |
+| [GitHub Actions #55](https://github.com/mahmoud-kun/the-astral-archives/actions/runs/43674791473) | **PASS** at code commit `98df1bc373790de05f1c8cb00b0f415e76069b34`: `npm run build` PASS (studio suites, TypeScript, Vite); `npm run test:audio` **8/8 PASS**; Visual QA **44 screenshots, 0 broken images, 0 clipped controls, 0 scenario errors, 0 console errors**. The CI did not play the four uncommitted videos. |
+| Physical speaker/headphone audition, iOS Safari and Android Brave | **NOT VERIFIED** — no physical device available to Chat B |
+| Actual MP4 transport/playback, Skip/Replay/Return on deployed URLs, offline fallback | **NOT VERIFIED end-to-end** — video binaries absent from GitHub and root cinematic event integration belongs to Main. Programmatic manifest/settings tests do not substitute for live browser playback. |
+| 1366×768 and 915×412 UI capture | Prior Visual QA #54 exercised 43 scenarios with 0 broken images/clipped/overflow/console; 1 selector-count assertion failed as noted. #55 subsequently established successful existing-route Visual QA at its exact commit, but did not exercise the unmounted cinematic overlay. Cinematic overlay itself is not currently exercised by that route-level QA. |
+
+**Run #55 is verified successful; the media-runtime proof gap remains OPEN.**
+
+### Manual/QA procedure for Main once files and root wiring land
+
+1. Fresh browser session and saved session; open Home. Check first user gesture activation and that no music/video plays with audio before explicit permission. Open Settings, set master 0, disable SFX, disable ambience separately; visit room and verify no audio. Reload to verify persisted settings and 40% default for fresh session.
+2. Open `/?audio-lab=1`. Count 19 sound rows; play WAV and M4A one by one, check no overlap clipping and low volume; test rapid hover and repeated scanner. Change volume *while a longer SFX plays*; verify live gain.
+3. After approved upload, preview each of the four real files in Sound Lab; test muted startup, explicit Enable Video Sound, Pause/Play, Replay after ended, Skip, Return, browser back/forward, keyboard Escape, 16:9 contain at 1366×768 and 915×412, reduced-motion, fullscreen or graceful refusal, tab hide/show, video load-error and connectivity loss.
+4. In actual gameplay, start a verified case and confirm cinematic outcome event is routed by Main. File evidence to an intentionally wrong folder and ensure no audio reveals correctness; refile correctly to advance. Skip the portal clip before evidence gate and prove it does not unlock rescue. Complete real engineering rescue before outcome clip; repeat from saved state without losing evidence.
+5. Check physical Android Brave and iOS Safari with headphones and speaker, including AAC playback, mobile unlock latency, saved Mute and full controls; obtain user artistic approval and captions/rights decision.
+
+## 6. Explicit remaining issues / acceptance blockers
+
+**P0 — GitHub media not staged:** Four MP4 originals (33.6 MB total) remain only in Drive/verified ZIP; GitHub blob upload failed. Main must stage exact-byte originals and verify integrity.
+
+**P0 — Root events not integrated:** `CinematicOverlay` and four keys are callable independently, but no gameplay trigger has been added to Main-owned `src/main.tsx`, Home or rescue/room owner paths. Main must implement Issue #4 or delegate exact approved patch.
+
+**P0 / product — Actual event/case correspondence:** Case 1 identity, rescue completion ownership and cinematic acceptance need verified mapping before showing outcome. Cinematic Skip never substitutes for rescue. Four other cases' end-to-end playability is owned by A/C/Main and cannot be declared complete from audio tests.
+
+**P1 — User/Designer approvals and rights:** Portal heroine look, intro dark lead-in, soundtrack/footage rights, accessibility captions, missing return/case clips, and optional faststart remux approval.
+
+**P1 — Physical media QA:** No actual device listening, video URL playback or disabled-network Skip/Replay tested; browser media support and real timing remain unknown.
+
+**Final recommendation:** Main may review audio/playback **code** and manifest as a candidate; do **not** mark cinematic feature/release ACCEPTED until exact binaries, shared integration, browser + physical-device QA, and artistic/rights approvals are verified.
+
+
+## 7. User-approved continuation: four available clips only (2026-11-15)
+
+The user explicitly approved a **staged integration plan now**, with video-binary upload handled later and missing clips added only when designer delivery actually occurs. The new detailed, exact per-view Main patch/handoff is:
+
+**[Cinematic Placement & Main Patch V1](../../audio/CINEMATIC_PLACEMENT_AND_MAIN_PATCH_V1.md)**
+
+- `src/media/cinematicFlow.ts` — gated one-shot request + outcome listener bridge; no save changes/navigation, no duplicate pending requests, Return separate from video completion. `src/media/cinematicFlow.test.mjs` covers blocked gates, concurrent requests, wrong-ID events, Skip, Return, unavailable fallback and listener cancellation. These tests were added to the existing `test:audio` entrypoint.
+- Home first Start -> `opening` -> Investigation. Saved Continue should skip cinematic by default.
+- Investigation Rescue Console and Case Folder alternate NAD entry -> `portalPast` -> `/?rescue=NAD`, with **fresh 6/6 evidence authorization check both before launch and before route advance**.
+- `case1Intro` is staged for KES (Case 1) dossier on explicit view-only request, **but hold canonical binding** pending visual/source alignment signoff; the 7-second video shows hardware in assembly, while KES is a pre-Phase-A/Phase-A observatory concept. Video content is not evidence.
+- `case1Outcome` **must not** play on NAD, after just 6/6 or simply on clicking Rescue. Intended only for KES's verified alternate outcome, after actual integrated KES rescue UI and `otherRescueCompleted(...,'KES')` pass, and confirmation that its industrial hangar visuals fit source narrative.
+- Four original clip binaries are **still not in GitHub**. This document adds no invented footage and is not Main acceptance. New designer clips will be audited/versioned when delivered.
+
+## 8. Authoritative case order — user-confirmed after direct Evidence file review (2026-11-15)
+
+Source: [Cases Evidence Production Bible v2.docx](https://docs.google.com/document/d/1lGpnlCkWYZowYNge9Fcd14wGeZH3FdWr/edit) from the approved NASA Drive. The explicit order is **01 KES / Kestrel → 02 NAD / Nadir → 03 LUM / Lumen → 04 ORI / Oriole → 05 AST / Asterion**. This matches the source's five section headings and `CASE_CODES` in `src/archive/evidenceRecords.ts`, `INVESTIGATION_CASES`, and Home previews.
+
+**Decided:** `case1Intro` / `case1Outcome` are definitively **Case 01 = KES**, not Nadir. Updated `src/media/cinematicManifest.ts` titles with explicit `caseId:'KES'`; `src/media/cinematicManifest.test.mjs` asserts the five-code order and both clips' association. The separate concern about whether supplied industrial spacecraft footage accurately depicts the pre-Phase-A Kestrel concept **remains subject to artistic/story approval**, but must not trigger re-numbering or silent video remapping.
+
+During same review, Main/Chat C had advanced the shared game: `src/gameplay/CaseRescue.tsx` and routing `/?rescue=KES|LUM|ORI|AST` now exist. Our old handoff sentence saying KES Rescue was not exposed in UI is superseded. **Only Main** wires the KES-success cinematic based on `otherRescueCompleted(...,'KES')`. `ArchiveFolderLab` restores the active case and otherwise defaults to NAD, but **visible dossier order is correct**. Refer to updated [Cinematic Placement & Main Patch V1](../../audio/CINEMATIC_PLACEMENT_AND_MAIN_PATCH_V1.md).
+
+The four MP4s remain subject to separate upload and eventual physical playback QA. New case video deliveries will be reviewed and registered independently, following this fixed case order.
+
+
+## 9. New delivered media: 8 MP4 clips + one Kestrel voice (2026-11-15)
+
+The user uploaded new files into NASA Drive while existing first-four video binary delivery remains pending. Full technical details, source hashes, all 9 new source identities and **per-Evidence-ID gameplay patch** are in:
+
+**[New Media Delivery Audit — 2026-11-15](../../audio/NEW_MEDIA_DELIVERY_AUDIT_2026-11-15.md)**.
+
+- **8 new 1080p H.264/AAC MP4 videos decoded end-to-end 8/8**, from Cases 01–03: `case1Evidence`, `case2Intro`, `case2EmailEvidence`, `case2UnitsMismatchEvidence`, `case2Outcome`, `case3Intro`, `case3ApprovalEvidence`, `case3Outcome`. `CINEMATICS` now registers **12 delivered clips** total. 4 are evidence-context visuals mapped to existing registered records KES-02, NAD-05, NAD-02 and LUM-05; **no new evidence or auto-success** was created. Their manifest entries remain staged, not physically deployed.
+- **New KES-05 spoken audio** (314,523-byte ElevenLabs Morgan MP3, 18.599 sec, 44.1 kHz mono, -15.2 mean / -0.3 dBFS peak) corresponds closely to the **existing required KES-05 Analyst Audio Transcript**. `src/audio/evidenceVoiceManifest.ts` and `src/audio/EvidenceVoicePlayer.tsx` stage a lower-volume, explicitly controlled player; Sound Lab previews it in its own section without inflating the original **19 SFX**. Source was actually transcribed via Descript. Human verification of two dialogue speakers, an ASR-vs-spoken possible "crew/cruise" terminology issue, captions and distribution license is pending.
+- The 8 source MP4 + 1 MP3 binary copies and SHA manifest have been packed into a **verified local delta ZIP** for the user and Main. This ZIP is not in GitHub. Source files and previous four MP4s remain immutable. **No production playback of these nine new files is possible until the source-exact binaries are installed on their manifest paths.**
+- New audio/video tests are included in `npm run test:audio`. Main must root-wire individual footage using [New Media Delivery Audit](../../audio/NEW_MEDIA_DELIVERY_AUDIT_2026-11-15.md) and run independent build, browser and mobile QA. Main owns all shared component edits; no cross-owner file changed.
+
+**Acceptance verdict remains PARTIAL:** audio/video source inventory, source-derived manifest, preview and QA plan prepared; physical binaries, game trigger integration, caption/rights review and real-device playback not yet complete.
+
+### Verified post-delivery code CI
+
+[GitHub Actions run #43680990923](https://github.com/mahmoud-kun/the-astral-archives/actions/runs/43680990923) **SUCCESS** at `952146971fc875a05a235ce139856398f1f39dae`: `npm run build` passes unit suites + TypeScript + Vite; `npm run test:audio` **17/17 PASS**; Visual QA **52 screenshots, 0 broken, 0 clipped, 0 scenario errors, 0 console errors**. This includes code and Sound Lab previews for all 12 media keys and KES-05 voice, **not media playback** (MP4/MP3 binaries are absent from GitHub). The 8 new designer MP4 source originals separately passed full ffmpeg decoding **8/8**; Source-exact ZIP integrity verified locally. Pending Main's root/event mounting, online media file availability, human art/speech review, real-browser playback and physical-device audition.
+
+
+## Final binary upload resolution — VERIFIED on GitHub (15 November 2026)
+
+**This section supersedes all earlier "MP4/MP3 not deployed to GitHub" warnings in this historical audit.** User authorized another upload attempt. The initial direct `create_blob` upload repeatedly failed with HTTP/2 on multi-MB MP4s. We successfully uploaded the 314,523-byte exact KES-05 MP3 via the Git Data API ([commit 6fe5482](https://github.com/mahmoud-kun/the-astral-archives/commit/6fe5482491143b4d48d2b2298b871248f2106a72)). A temporary, branch-scoped GitHub Actions uploader then downloaded all 12 original MP4 files **from the supplied public Drive IDs**; each full binary passed an independently configured exact SHA-256 check before commit.
+
+- **GitHub Actions run #43682242118:** SUCCESS. https://github.com/mahmoud-kun/the-astral-archives/actions/runs/43682242118
+- **All-12 MP4 commit:** `b3bb9b4f2e0681a1f6d6c67c8561ffd0609d6c08`, message `assets(video): upload twelve SHA-verified original designer films`, with exactly 12 files added under `public/assets/video/`.
+- **One MP3 commit:** `6fe5482491143b4d48d2b2298b871248f2106a72` at `public/assets/audio/voice/designer-kes-05-analyst-review-v1.mp3`.
+- **Post-push remote readback:** GitHub's recursive tree lists all **13/13 exact paths** with **13/13 Git Blob SHA-1 and byte lengths matching the original local source bytes**, total **73,742,154 bytes**. These are repository objects now, not just remote jobs, download links or staging ZIPs.
+- **No new case IDs/evidence/rescue progress introduced. No main merge.** Branch remains `experiment/room-case-library-layout-fix-2026-11-14`. The temporary upload workflow is intended for removal once verification/handoff is complete.
+- **Still pending:** Main trigger/scene wiring, story approval for Kestrel industrial visuals, verified subtitles and rights, post-upload application build and browser/device playback QA. Physical bytes on GitHub do **not** prove that all cinematic events are wired or rendered in the playable experience.
+
+### Final post-upload independent GitHub Actions QA — PASS
+
+[Visual QA workflow #43682463236](https://github.com/mahmoud-kun/the-astral-archives/actions/runs/43682463236) completed **SUCCESS** on the media-populated branch (`c39fbef52b99c41badcc20508cf1ef1cf854196c`):
+
+- `npm run test:audio` **19/19 PASS** including **all 12 physically committed MP4 exact SHA-256/size checks** and **physical KES-05 MP3 exact SHA-256/size check**.
+- All other unit suites **PASS**; TypeScript compile and Vite production build **PASS**.
+- Visual QA **52 screenshots**, **0 broken assets**, **0 clipped**, **0 scenario errors**, **0 console errors**.
+- The validated Git tree has all **13/13 source-identical video/voice blobs** (12 videos + 1 MP3) and the temporary one-shot import workflow has been removed.
+
+**Upload: COMPLETE & verified.** Still **not** evidence of final movie playback at live game triggers, human-approved captions/license, physical phone listening or Main review/merge.
+
+
+## 10. Complete cases media delivery — Oriole & Asterion (2026-11-15)
+
+**Updated official case order: KES → NAD → LUM → ORI → AST.** The previously missing five last-case videos are now physically uploaded as source-exact binaries to the authorized working branch. Full source metadata, SHA-256 hashes, target paths and scientific constraints:
+
+**[Final Cases ORI/AST Video Handoff](../../audio/FINAL_CASES_ORI_AST_VIDEO_HANDOFF_2026-11-15.md)**.
+
+- **Case 04 Oriole:** `case4Intro` (Briefing), `case4TestingEvidence` (existing **ORI-05** missed landing test, NOT a new evidence record), `case4Outcome` (after verified **ORI** rescue success).
+- **Case 05 Asterion:** `case5Intro` (Briefing), `case5Outcome` (**SCIENTIFIC HOLD**: designer shows `472 W VERIFIED`, whereas authentic `src/gameplay/caseRescueEngine.ts` requires independent **450 W** simulated replay meeting target `<=460 W` and original 480 W cap; preview-only until video corrected).
+- All **five** new 1920×1080 H.264/AAC video source files fully decoded 5/5 PASS, with hash/size checked; source-exact GitHub upload action [#43684530377](https://github.com/mahmoud-kun/the-astral-archives/actions/runs/43684530377) **SUCCESS**.
+- Source-exact video Commit [`b6b88be`](https://github.com/mahmoud-kun/the-astral-archives/commit/b6b88be7c9c7a430f1e571cc97a320f3a28dfae6) verified by independent GitHub recursive tree: **5/5 new exact blob SHA-1+size**, **17 total videos** and **1 existing KES-05 MP3** in repo. Total video **96,202,124 bytes**; voice **314,523**.
+- Added `src/media/caseCinematicCatalog.ts` and its tests: stable typed per-case intro/outcome and per-existing-evidence video association. The safe `verifiedCaseOutcomeCinematic('AST')` returns `null` until scientific hold is resolved. Main still must own all actual story hooks and independently verify evidence and Rescue gates.
+- Source files and all legacy 19 SFX unchanged; no main merge. The temporary GitHub Actions uploader should be deleted after verification. Need non-endorsement/logo review, subtitles, and physical playback on mobile before release.
+
+**Updated Chat B status:** **ALL 17 DELIVERED MP4s + KES-05 VOICE PHYSICALLY PRESENT**, case mapping and preview prepared, scientific approval hold on one AST outcome; **Main root/event integration and final release/device QA remain pending**.
+
+
+### Final post-upload QA for ALL 17 cinematics — PASS
+
+[GitHub Actions run #43685165238](https://github.com/mahmoud-kun/the-astral-archives/actions/runs/43685165238) **SUCCESS** on `96b521acff9c4deef5b39ddb1d0798d12965a0b8` after final five MP4s were installed, all **17 exact source MP4 SHA256+size tests** included and the Asterion science hold was enforced centrally. `npm run test:audio`: **24/24 PASS** (including API/flow/overlay AST guard and five-case catalog). TypeScript and Vite production build **PASS**; all other unit suites **PASS**. Automated visual audit **52 screenshot scenarios / 0 broken / 0 clipped / 0 scenario errors / 0 console errors**. Media file SHA and size are verified; independent phone physical playback and actual gameplay trigger wiring are still not verified.
+
+Asterion release block is **code enforced**, not just documented: `CINEMATIC_LIVE_HOLDS.case5Outcome` rejects Main-origin requests at `requestCinematic`, `requestCinematicFlow`, and overlay event handling; Sound Lab alone can preview the original. Main must request a scientifically corrected designer scene showing the successful **450 W** independent replay meeting **<=460 W** target, or obtain an explicit canonical scientific revision, *before* release.
+
+
+## 11. Sound Effects Finalization — 20 Registered Cues (2026-11-15)
+
+**After the 17 designer MP4s and 1 KES-05 voice were committed**, Chat B finalized core SFX presentation. **11 original designer WAV + 8 Kenney M4A files remain source-unaltered.** One original 22.05 kHz/16-bit/mono generated chime `public/assets/audio/sfx/rescue_completed_original_v1.wav` (60,020 bytes, Git blob SHA `eb2b01e5b755f35d9fc2a5aedbf7c0c8965ae0d3`) was added under versioned filename; registered cue `rescueComplete`. This yields **20 original-plus-new registered effects**, without introducing new external music licenses.
+
+- `src/audio/gameAudio.ts`: correct quiet `rescue` ambience for KES/NAD/LUM/ORI/AST; the historical `playGameSound('rescue')` now selects `rescueComplete` **only** on a recognized Rescue route, so false/misfiled dossier confirmations cannot masquerade as final success. Archive required-evidence unlock retains the existing `rescue` source.
+- Existing `data-evidence-id` hotspots in Signal Room now select `signal` when inspecting an actual mission record; other scanner clicks remain ordinary. This is feedback only and creates no evidence or progress.
+- `src/audio/AudioReviewLab.tsx` has a separate preview row for new original completion chime. The 19 historical source SFX remain 19 distinct `.al-cue` QA rows.
+- `src/audio/gameAudio.test.mjs` and `src/audio/audioRuntime.test.mjs` add all-route, correct/wrong-cue, binary SHA and live audio-volume/mute tests.
+- **No shared-owner `main.tsx`, Room, Rescue, Puzzle or Home files were changed** by Chat B. For real portal and engineering simulation sequences, Main must add legitimate authorized hooks; avoid placing engine noise on every click and avoid layering SFX over films.
+- Full audit and exact Main integration patch: [`docs/audio/SFX_FINALIZATION_AND_MAIN_PATCH_2026-11-15.md`](../../audio/SFX_FINALIZATION_AND_MAIN_PATCH_2026-11-15.md).
+
+**Outstanding acceptance:** latest GitHub Actions source tests + screenshot QA, physical Android headset/browser audible mix and fully Main-owned narrative/cinematic triggers. New chime itself was synthetically generated and binary-verified, but its subjective mix quality has not been approved.
+
+### Final SFX pass (after new original rescue completion asset)
+
+[GitHub Actions #43688210176](https://github.com/mahmoud-kun/the-astral-archives/actions/runs/43688210176) **SUCCESS**: all 20 source cues (11 unchanged designer WAV + 8 unchanged Kenney M4A + 1 original Rescue Complete WAV, 842,128 bytes), audio suite **28/28 PASS**, production build and other suites **PASS**, **52 browser screenshot scenarios / 0 broken / 0 clipped / 0 errors / 0 console errors**. The source chime has a Git-verified blob SHA and its own user-controlled preview in the Sound Lab; original 19 source rows and all gameplay saves remain intact. See [SFX Main Patch](../../audio/SFX_FINALIZATION_AND_MAIN_PATCH_2026-11-15.md).
+
+**SFX specialist finish:** COMPLETE for owned source code, binary production, trigger-safe audio behavior, testing and documentation. **Integration/release outstanding:** Main-owned portal and real engineering simulation trigger hooks, actual mobile/headphone listening, final incoming Voice Over loudness/captions, and cinema integration/Asterion outcome scientific correction. No main merge or shared-file edit.
+
+
+## 12. Final Five-Voice Delivery — Complete in Chat B Scope (2026-11-15)
+
+The **current authoritative update** for spoken evidence supersedes Sections 1–11 references to only one KES-05 MP3. All five supplied canonical Recordings Room evidence voices **are physically on GitHub, source-exact, and available to the audio runtime**:
+
+- KES-05 — 314,523 bytes (previously installed).
+- NAD-07 — 277,325 bytes.
+- LUM-07 — 299,059 bytes.
+- ORI-07 — 395,190 bytes.
+- AST-07 — 556,522 bytes.
+
+**Total voice 1,842,619 bytes.** Exact SHA256 and Git blob SHA1 values are embedded in `src/audio/evidenceVoiceManifest.ts` and checked by `src/audio/evidenceVoiceManifest.test.mjs`. New exact-original four-media upload commit: [`95d266d`](https://github.com/mahmoud-kun/the-astral-archives/commit/95d266d1d47abfdd716234de0df9a254dfc4116b). All five map only to already-existing canonically numbered `Recordings` evidence; KES-07 and ORI-08 remain optional text/visual evidence without provided MP3.
+
+**Completed in audio-owned files:** `EVIDENCE_VOICE` 5-entry manifest; `EvidenceVoicePlayer` single-voice playback, native controls, mutually exclusive playback, audio focus, source fallback and master volume; Sound Lab `5 MP3` preview; five-source SHA tests. Voice preview mix controls use measured original LUFS and do not alter the MP3 bytes. The 20 registered SFX and 17 approved cinema assets remain intact.
+
+**Final verified CI:** [GitHub Actions run #43693601655](https://github.com/mahmoud-kun/the-astral-archives/actions/runs/43693601655) **SUCCESS**, including `npm run test:audio` **28/28 PASS**, all production build suites and TypeScript/Vite **PASS**, and desktop/phone visual audit **52 screenshots, zero broken/clipped/errors/console errors**. This is automated source/build/screenshot validation and **does not prove audible physical mobile playback or actual in-game inspector entry points**. The voice-source exact byte sizes and SHA256 were additionally calculated from the physical downloaded Google Drive originals and matched the source ledger.
+
+**Main Chat REQUIRED:** mount `<EvidenceVoicePlayer id={record.id}/>` inside only the **authoritatively accessible Recordings Room evidence inspector**, guarded by `record.room === 'Recordings' && isEvidenceVoiceId(record.id)`; do not alter collecting, filing, puzzle solving, six-record gate or rescue verification. Full minimal patch, five source hashes, exclusive-play contract, accessibility and manual test: [Voice Over Final Handoff](../../audio/VOICE_OVER_FINAL_HANDOFF_2026-11-15.md).
+
+**Publication dependencies:** approve verbatim audio transcripts/speaker labels for captions, physically listen on desktop and Android, verify non-overlap with cinematic soundtrack, ensure Main's cinematic root/event integration; Asterion incorrect 472 W outcome remains live-blocked pending 450 W correction; 18th Drive `game demo.mp4` is a newly detected visual demo/reference, **not an approved cinematic**, and is not silently registered. No distinct Return to Present or Closing file is present in the latest Drive `videos` inventory. No source media files were overwritten and no Main-owned files were modified.
+
+**Final Chat B verdict: SOURCE ASSET PREP + ALL OWNED AUDIO/CINEMATIC CODE/TESTS = DONE. MAIN GAMEPLAY MEDIA WIRING + FINAL DEVICE/CONTENT QA = PENDING. NO MAIN MERGE.**

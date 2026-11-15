@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 440 560" role="img" aria-label="Closed vintage kraft archive folder">
+<defs><linearGradient id="kraft" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#cc9a65"/><stop offset=".53" stop-color="#b98250"/><stop offset="1" stop-color="#8c592e"/></linearGradient><filter id="noise"><feTurbulence baseFrequency=".03" numOctaves="3" seed="15" type="fractalNoise" result="n"/><feColorMatrix in="n" type="saturate" values="0"/><feComponentTransfer><feFuncA type="linear" slope=".16"/></feComponentTransfer><feBlend in="SourceGraphic" mode="multiply"/></filter></defs>
+<path d="M40 56H348l40 32v435q0 14-16 14H31q-15 0-15-16V81q0-25 24-25Z" fill="#070606" opacity=".25" transform="translate(10 9)"/>
+<path d="M33 43H321l42 40v39l38-1v92h-38v305q0 19-18 19H30q-17 0-17-17V65q0-22 20-22Z" fill="url(#kraft)" stroke="#724627" stroke-width="5" filter="url(#noise)"/>
+<path d="M30 66H338v447H29Z" fill="none" stroke="#e5b47d" stroke-width="3" opacity=".3"/>
+<path d="M61 112h266v159H61z" fill="#eedbb1" stroke="#7f613f" stroke-width="3"/>
+<path d="M73 124h240v135H73z" fill="none" stroke="#b19a71" stroke-width="2"/>
+<path d="M53 293h298" stroke="#734930" stroke-width="2" opacity=".28"/>
+<g stroke="#7e5436" fill="none" opacity=".48"><path d="M32 348l29 3M33 500l24-18M337 71l-19 16M337 517l-26-13"/></g>
+<g transform="translate(164 9)" fill="#89847e" stroke="#514b42" stroke-width="3"><rect x="-35" y="18" width="91" height="18" rx="3" fill="#b9b7ad"/><path d="M4 18V7q0-17 15-17t15 17v11" fill="none"/><circle cx="18" cy="7" r="9" fill="#c7c6bb"/></g>
+<path d="M340 463l22 25-22 20" fill="none" stroke="#6d482e" stroke-width="2" opacity=".42"/>
+</svg>

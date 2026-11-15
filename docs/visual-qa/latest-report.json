@@ -1,0 +1,673 @@
+{
+  "run_on": "2026-11-15T15:42:12.443Z",
+  "screenshots": 45,
+  "console_errors": 0,
+  "broken_images": 0,
+  "clipped_controls": 0,
+  "overflows": 0,
+  "errors": [
+    {
+      "label": "nadir-puzzle",
+      "viewport": {
+        "width": 915,
+        "height": 412
+      },
+      "error": "TimeoutError: locator.click: Timeout 30000ms exceeded.\nCall log:\n  - waiting for locator('.sr-hotspot').nth(1)\n    - locator resolved to <button type=\"button\" data-sfx=\"scanner\" data-evidence-id=\"NAD-02\" data-object-id=\"receiver_rack\" title=\"Tune signal receiver rack\" class=\"sr-hotspot sr-anchor-target\" aria-label=\"Tune signal receiver rack: Raw Impulse Data Fragment\">\u2026</button>\n  - attempting click action\n    2 \u00d7 waiting for element to be visible, enabled and stable\n      - element is visible, enabled and stable\n      - scrolling into view if needed\n      - done scrolling\n      - <h2>READ THE TELEMETRY</h2> from <aside role=\"complementary\" aria-label=\"Optional room tutorial\" class=\"rt-bubble rt-anchored rt-side-bottom\">\u2026</aside> subtree intercepts pointer events\n    - retrying click action\n    - waiting 20ms\n    2 \u00d7 waiting for element to be visible, enabled and stable\n      - element is visible, enabled and stable\n      - scrolling into view if needed\n      - done scrolling\n      - <h2>READ THE TELEMETRY</h2> from <aside role=\"complementary\" aria-label=\"Optional room tutorial\" class=\"rt-bubble rt-anchored rt-side-bottom\">\u2026</aside> subtree intercepts pointer events\n    - retrying click action\n      - waiting 100ms\n    56 \u00d7 waiting for element to be visible, enabled and stable\n       - element is visible, enabled and stable\n       - scrolling into view if needed\n       - done scrolling\n       - <h2>READ THE TELEMETRY</h2> from <aside role=\"complementary\" aria-label=\"Optional room tutorial\" class=\"rt-bubble rt-anchored rt-side-bottom\">\u2026</aside> subtree intercepts pointer events\n     - retrying click action\n       - waiting 500ms\n",
+      "faults": []
+    },
+    {
+      "label": "nadir-puzzle",
+      "viewport": {
+        "width": 800,
+        "height": 360
+      },
+      "error": "TimeoutError: locator.click: Timeout 30000ms exceeded.\nCall log:\n  - waiting for locator('.sr-hotspot').nth(1)\n    - locator resolved to <button type=\"button\" data-sfx=\"scanner\" data-evidence-id=\"NAD-02\" data-object-id=\"receiver_rack\" title=\"Tune signal receiver rack\" class=\"sr-hotspot sr-anchor-target\" aria-label=\"Tune signal receiver rack: Raw Impulse Data Fragment\">\u2026</button>\n  - attempting click action\n    2 \u00d7 waiting for element to be visible, enabled and stable\n      - element is visible, enabled and stable\n      - scrolling into view if needed\n      - done scrolling\n      - <aside role=\"complementary\" aria-label=\"Optional room tutorial\" class=\"rt-bubble rt-anchored rt-side-bottom\">\u2026</aside> intercepts pointer events\n    - retrying click action\n    - waiting 20ms\n    2 \u00d7 waiting for element to be visible, enabled and stable\n      - element is visible, enabled and stable\n      - scrolling into view if needed\n      - done scrolling\n      - <aside role=\"complementary\" aria-label=\"Optional room tutorial\" class=\"rt-bubble rt-anchored rt-side-bottom\">\u2026</aside> intercepts pointer events\n    - retrying click action\n      - waiting 100ms\n    56 \u00d7 waiting for element to be visible, enabled and stable\n       - element is visible, enabled and stable\n       - scrolling into view if needed\n       - done scrolling\n       - <aside role=\"complementary\" aria-label=\"Optional room tutorial\" class=\"rt-bubble rt-anchored rt-side-bottom\">\u2026</aside> intercepts pointer events\n     - retrying click action\n       - waiting 500ms\n",
+      "faults": []
+    },
+    {
+      "label": "nadir-puzzle",
+      "viewport": {
+        "width": 740,
+        "height": 360
+      },
+      "error": "TimeoutError: locator.click: Timeout 30000ms exceeded.\nCall log:\n  - waiting for locator('.sr-hotspot').nth(1)\n    - locator resolved to <button type=\"button\" data-sfx=\"scanner\" data-evidence-id=\"NAD-02\" data-object-id=\"receiver_rack\" title=\"Tune signal receiver rack\" class=\"sr-hotspot sr-anchor-target\" aria-label=\"Tune signal receiver rack: Raw Impulse Data Fragment\">\u2026</button>\n  - attempting click action\n    2 \u00d7 waiting for element to be visible, enabled and stable\n      - element is visible, enabled and stable\n      - scrolling into view if needed\n      - done scrolling\n      - <aside role=\"complementary\" aria-label=\"Optional room tutorial\" class=\"rt-bubble rt-anchored rt-side-bottom\">\u2026</aside> intercepts pointer events\n    - retrying click action\n    - waiting 20ms\n    2 \u00d7 waiting for element to be visible, enabled and stable\n      - element is visible, enabled and stable\n      - scrolling into view if needed\n      - done scrolling\n      - <aside role=\"complementary\" aria-label=\"Optional room tutorial\" class=\"rt-bubble rt-anchored rt-side-bottom\">\u2026</aside> intercepts pointer events\n    - retrying click action\n      - waiting 100ms\n    56 \u00d7 waiting for element to be visible, enabled and stable\n       - element is visible, enabled and stable\n       - scrolling into view if needed\n       - done scrolling\n       - <aside role=\"complementary\" aria-label=\"Optional room tutorial\" class=\"rt-bubble rt-anchored rt-side-bottom\">\u2026</aside> intercepts pointer events\n     - retrying click action\n       - waiting 500ms\n",
+      "faults": []
+    },
+    {
+      "label": "nadir-analysis",
+      "viewport": {
+        "width": 915,
+        "height": 412
+      },
+      "error": "TimeoutError: locator.click: Timeout 30000ms exceeded.\nCall log:\n  - waiting for locator('.sr-hotspot').nth(1)\n    - locator resolved to <button type=\"button\" data-sfx=\"scanner\" data-evidence-id=\"NAD-02\" data-object-id=\"receiver_rack\" title=\"Tune signal receiver rack\" class=\"sr-hotspot sr-anchor-target\" aria-label=\"Tune signal receiver rack: Raw Impulse Data Fragment\">\u2026</button>\n  - attempting click action\n    2 \u00d7 waiting for element to be visible, enabled and stable\n      - element is visible, enabled and stable\n      - scrolling into view if needed\n      - done scrolling\n      - <h2>READ THE TELEMETRY</h2> from <aside role=\"complementary\" aria-label=\"Optional room tutorial\" class=\"rt-bubble rt-anchored rt-side-bottom\">\u2026</aside> subtree intercepts pointer events\n    - retrying click action\n    - waiting 20ms\n    2 \u00d7 waiting for element to be visible, enabled and stable\n      - element is visible, enabled and stable\n      - scrolling into view if needed\n      - done scrolling\n      - <h2>READ THE TELEMETRY</h2> from <aside role=\"complementary\" aria-label=\"Optional room tutorial\" class=\"rt-bubble rt-anchored rt-side-bottom\">\u2026</aside> subtree intercepts pointer events\n    - retrying click action\n      - waiting 100ms\n    56 \u00d7 waiting for element to be visible, enabled and stable\n       - element is visible, enabled and stable\n       - scrolling into view if needed\n       - done scrolling\n       - <h2>READ THE TELEMETRY</h2> from <aside role=\"complementary\" aria-label=\"Optional room tutorial\" class=\"rt-bubble rt-anchored rt-side-bottom\">\u2026</aside> subtree intercepts pointer events\n     - retrying click action\n       - waiting 500ms\n",
+      "faults": []
+    },
+    {
+      "label": "nadir-analysis",
+      "viewport": {
+        "width": 800,
+        "height": 360
+      },
+      "error": "TimeoutError: locator.click: Timeout 30000ms exceeded.\nCall log:\n  - waiting for locator('.sr-hotspot').nth(1)\n    - locator resolved to <button type=\"button\" data-sfx=\"scanner\" data-evidence-id=\"NAD-02\" data-object-id=\"receiver_rack\" title=\"Tune signal receiver rack\" class=\"sr-hotspot sr-anchor-target\" aria-label=\"Tune signal receiver rack: Raw Impulse Data Fragment\">\u2026</button>\n  - attempting click action\n    2 \u00d7 waiting for element to be visible, enabled and stable\n      - element is visible, enabled and stable\n      - scrolling into view if needed\n      - done scrolling\n      - <aside role=\"complementary\" aria-label=\"Optional room tutorial\" class=\"rt-bubble rt-anchored rt-side-bottom\">\u2026</aside> intercepts pointer events\n    - retrying click action\n    - waiting 20ms\n    2 \u00d7 waiting for element to be visible, enabled and stable\n      - element is visible, enabled and stable\n      - scrolling into view if needed\n      - done scrolling\n      - <aside role=\"complementary\" aria-label=\"Optional room tutorial\" class=\"rt-bubble rt-anchored rt-side-bottom\">\u2026</aside> intercepts pointer events\n    - retrying click action\n      - waiting 100ms\n    56 \u00d7 waiting for element to be visible, enabled and stable\n       - element is visible, enabled and stable\n       - scrolling into view if needed\n       - done scrolling\n       - <aside role=\"complementary\" aria-label=\"Optional room tutorial\" class=\"rt-bubble rt-anchored rt-side-bottom\">\u2026</aside> intercepts pointer events\n     - retrying click action\n       - waiting 500ms\n",
+      "faults": []
+    },
+    {
+      "label": "nadir-analysis",
+      "viewport": {
+        "width": 740,
+        "height": 360
+      },
+      "error": "TimeoutError: locator.click: Timeout 30000ms exceeded.\nCall log:\n  - waiting for locator('.sr-hotspot').nth(1)\n    - locator resolved to <button type=\"button\" data-sfx=\"scanner\" data-evidence-id=\"NAD-02\" data-object-id=\"receiver_rack\" title=\"Tune signal receiver rack\" class=\"sr-hotspot sr-anchor-target\" aria-label=\"Tune signal receiver rack: Raw Impulse Data Fragment\">\u2026</button>\n  - attempting click action\n    2 \u00d7 waiting for element to be visible, enabled and stable\n      - element is visible, enabled and stable\n      - scrolling into view if needed\n      - done scrolling\n      - <aside role=\"complementary\" aria-label=\"Optional room tutorial\" class=\"rt-bubble rt-anchored rt-side-bottom\">\u2026</aside> intercepts pointer events\n    - retrying click action\n    - waiting 20ms\n    2 \u00d7 waiting for element to be visible, enabled and stable\n      - element is visible, enabled and stable\n      - scrolling into view if needed\n      - done scrolling\n      - <aside role=\"complementary\" aria-label=\"Optional room tutorial\" class=\"rt-bubble rt-anchored rt-side-bottom\">\u2026</aside> intercepts pointer events\n    - retrying click action\n      - waiting 100ms\n    56 \u00d7 waiting for element to be visible, enabled and stable\n       - element is visible, enabled and stable\n       - scrolling into view if needed\n       - done scrolling\n       - <aside role=\"complementary\" aria-label=\"Optional room tutorial\" class=\"rt-bubble rt-anchored rt-side-bottom\">\u2026</aside> intercepts pointer events\n     - retrying click action\n       - waiting 500ms\n",
+      "faults": []
+    },
+    {
+      "label": "nadir-collect-and-file",
+      "viewport": {
+        "width": 915,
+        "height": 412
+      },
+      "error": "TimeoutError: locator.click: Timeout 30000ms exceeded.\nCall log:\n  - waiting for locator('.sr-hotspot').nth(1)\n    - locator resolved to <button type=\"button\" data-sfx=\"scanner\" data-evidence-id=\"NAD-02\" data-object-id=\"receiver_rack\" title=\"Tune signal receiver rack\" class=\"sr-hotspot sr-anchor-target\" aria-label=\"Tune signal receiver rack: Raw Impulse Data Fragment\">\u2026</button>\n  - attempting click action\n    2 \u00d7 waiting for element to be visible, enabled and stable\n      - element is visible, enabled and stable\n      - scrolling into view if needed\n      - done scrolling\n      - <h2>READ THE TELEMETRY</h2> from <aside role=\"complementary\" aria-label=\"Optional room tutorial\" class=\"rt-bubble rt-anchored rt-side-bottom\">\u2026</aside> subtree intercepts pointer events\n    - retrying click action\n    - waiting 20ms\n    2 \u00d7 waiting for element to be visible, enabled and stable\n      - element is visible, enabled and stable\n      - scrolling into view if needed\n      - done scrolling\n      - <h2>READ THE TELEMETRY</h2> from <aside role=\"complementary\" aria-label=\"Optional room tutorial\" class=\"rt-bubble rt-anchored rt-side-bottom\">\u2026</aside> subtree intercepts pointer events\n    - retrying click action\n      - waiting 100ms\n    56 \u00d7 waiting for element to be visible, enabled and stable\n       - element is visible, enabled and stable\n       - scrolling into view if needed\n       - done scrolling\n       - <h2>READ THE TELEMETRY</h2> from <aside role=\"complementary\" aria-label=\"Optional room tutorial\" class=\"rt-bubble rt-anchored rt-side-bottom\">\u2026</aside> subtree intercepts pointer events\n     - retrying click action\n       - waiting 500ms\n",
+      "faults": []
+    },
+    {
+      "label": "audio-settings",
+      "viewport": {
+        "width": 915,
+        "height": 412
+      },
+      "error": "TimeoutError: page.waitForFunction: Timeout 5000ms exceeded.",
+      "faults": []
+    },
+    {
+      "label": "audio-lab",
+      "viewport": {
+        "width": 915,
+        "height": 412
+      },
+      "error": "TimeoutError: page.waitForFunction: Timeout 5000ms exceeded.",
+      "faults": []
+    },
+    {
+      "label": "case-source-index",
+      "viewport": {
+        "width": 1366,
+        "height": 768
+      },
+      "error": "TimeoutError: locator.click: Timeout 30000ms exceeded.\nCall log:\n  - waiting for getByRole('button', { name: 'OPEN CASE SOURCE INDEX' })\n",
+      "faults": []
+    },
+    {
+      "label": "case-source-index",
+      "viewport": {
+        "width": 915,
+        "height": 412
+      },
+      "error": "TimeoutError: locator.click: Timeout 30000ms exceeded.\nCall log:\n  - waiting for getByRole('button', { name: 'OPEN CASE SOURCE INDEX' })\n",
+      "faults": []
+    },
+    {
+      "label": "case-puzzle",
+      "viewport": {
+        "width": 915,
+        "height": 412
+      },
+      "error": "TimeoutError: locator.click: Timeout 30000ms exceeded.\nCall log:\n  - waiting for getByRole('button', { name: 'OPEN CASE SOURCE INDEX' })\n",
+      "faults": []
+    },
+    {
+      "label": "case-rescue-kes",
+      "viewport": {
+        "width": 915,
+        "height": 412
+      },
+      "error": "TimeoutError: locator.waitFor: Timeout 30000ms exceeded.\nCall log:\n  - waiting for locator('.cw-rescue') to be visible\n",
+      "faults": []
+    },
+    {
+      "label": "case-rescue-lum",
+      "viewport": {
+        "width": 915,
+        "height": 412
+      },
+      "error": "TimeoutError: locator.waitFor: Timeout 30000ms exceeded.\nCall log:\n  - waiting for locator('.cw-rescue') to be visible\n",
+      "faults": []
+    },
+    {
+      "label": "case-rescue-ori",
+      "viewport": {
+        "width": 915,
+        "height": 412
+      },
+      "error": "TimeoutError: locator.waitFor: Timeout 30000ms exceeded.\nCall log:\n  - waiting for locator('.cw-rescue') to be visible\n",
+      "faults": []
+    },
+    {
+      "label": "case-rescue-ast",
+      "viewport": {
+        "width": 915,
+        "height": 412
+      },
+      "error": "TimeoutError: locator.waitFor: Timeout 30000ms exceeded.\nCall log:\n  - waiting for locator('.cw-rescue') to be visible\n",
+      "faults": []
+    },
+    {
+      "label": "source-desk-archive",
+      "viewport": {
+        "width": 915,
+        "height": 412
+      },
+      "error": "TimeoutError: locator.click: Timeout 30000ms exceeded.\nCall log:\n  - waiting for getByRole('button', { name: 'OPEN MISSION SOURCE INDEX' })\n",
+      "faults": []
+    },
+    {
+      "label": "source-desk-signal",
+      "viewport": {
+        "width": 915,
+        "height": 412
+      },
+      "error": "TimeoutError: locator.click: Timeout 30000ms exceeded.\nCall log:\n  - waiting for getByRole('button', { name: 'OPEN MISSION SOURCE INDEX' })\n",
+      "faults": []
+    },
+    {
+      "label": "source-desk-recordings",
+      "viewport": {
+        "width": 915,
+        "height": 412
+      },
+      "error": "TimeoutError: locator.click: Timeout 30000ms exceeded.\nCall log:\n  - waiting for getByRole('button', { name: 'OPEN MISSION SOURCE INDEX' })\n",
+      "faults": []
+    },
+    {
+      "label": "nadir-voice-inspector",
+      "viewport": {
+        "width": 915,
+        "height": 412
+      },
+      "error": "AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n\n1 !== 0\n",
+      "faults": []
+    },
+    {
+      "label": "kestrel-voice-inspector",
+      "viewport": {
+        "width": 915,
+        "height": 412
+      },
+      "error": "TimeoutError: locator.click: Timeout 30000ms exceeded.\nCall log:\n  - waiting for getByRole('button', { name: 'OPEN MISSION SOURCE INDEX' })\n",
+      "faults": []
+    },
+    {
+      "label": "nadir-evidence-video",
+      "viewport": {
+        "width": 915,
+        "height": 412
+      },
+      "error": "TimeoutError: locator.click: Timeout 30000ms exceeded.\nCall log:\n  - waiting for locator('.sr-hotspot[data-evidence-id=\"NAD-02\"]')\n    - locator resolved to <button type=\"button\" data-sfx=\"scanner\" data-evidence-id=\"NAD-02\" data-object-id=\"receiver_rack\" title=\"Tune signal receiver rack\" class=\"sr-hotspot sr-anchor-target\" aria-label=\"Tune signal receiver rack: Raw Impulse Data Fragment\">\u2026</button>\n  - attempting click action\n    2 \u00d7 waiting for element to be visible, enabled and stable\n      - element is visible, enabled and stable\n      - scrolling into view if needed\n      - done scrolling\n      - <h2>READ THE TELEMETRY</h2> from <aside role=\"complementary\" aria-label=\"Optional room tutorial\" class=\"rt-bubble rt-anchored rt-side-bottom\">\u2026</aside> subtree intercepts pointer events\n    - retrying click action\n    - waiting 20ms\n    2 \u00d7 waiting for element to be visible, enabled and stable\n      - element is visible, enabled and stable\n      - scrolling into view if needed\n      - done scrolling\n      - <h2>READ THE TELEMETRY</h2> from <aside role=\"complementary\" aria-label=\"Optional room tutorial\" class=\"rt-bubble rt-anchored rt-side-bottom\">\u2026</aside> subtree intercepts pointer events\n    - retrying click action\n      - waiting 100ms\n    56 \u00d7 waiting for element to be visible, enabled and stable\n       - element is visible, enabled and stable\n       - scrolling into view if needed\n       - done scrolling\n       - <h2>READ THE TELEMETRY</h2> from <aside role=\"complementary\" aria-label=\"Optional room tutorial\" class=\"rt-bubble rt-anchored rt-side-bottom\">\u2026</aside> subtree intercepts pointer events\n     - retrying click action\n       - waiting 500ms\n",
+      "faults": []
+    },
+    {
+      "label": "lumen-briefing-film",
+      "viewport": {
+        "width": 915,
+        "height": 412
+      },
+      "error": "TimeoutError: locator.click: Timeout 30000ms exceeded.\nCall log:\n  - waiting for locator('.af-folder-choice').filter({ hasText: 'Lumen' })\n    - locator resolved to <button aria-pressed=\"false\" class=\"af-folder-choice \">\u2026</button>\n  - attempting click action\n    2 \u00d7 waiting for element to be visible, enabled and stable\n      - element is visible, enabled and stable\n      - scrolling into view if needed\n      - done scrolling\n      - <h2>CHOOSE A CASE</h2> from <aside role=\"complementary\" aria-label=\"Optional room tutorial\" class=\"rt-bubble rt-anchored rt-side-bottom\">\u2026</aside> subtree intercepts pointer events\n    - retrying click action\n    - waiting 20ms\n    2 \u00d7 waiting for element to be visible, enabled and stable\n      - element is visible, enabled and stable\n      - scrolling into view if needed\n      - done scrolling\n      - <h2>CHOOSE A CASE</h2> from <aside role=\"complementary\" aria-label=\"Optional room tutorial\" class=\"rt-bubble rt-anchored rt-side-bottom\">\u2026</aside> subtree intercepts pointer events\n    - retrying click action\n      - waiting 100ms\n    58 \u00d7 waiting for element to be visible, enabled and stable\n       - element is visible, enabled and stable\n       - scrolling into view if needed\n       - done scrolling\n       - <h2>CHOOSE A CASE</h2> from <aside role=\"complementary\" aria-label=\"Optional room tutorial\" class=\"rt-bubble rt-anchored rt-side-bottom\">\u2026</aside> subtree intercepts pointer events\n     - retrying click action\n       - waiting 500ms\n",
+      "faults": []
+    },
+    {
+      "label": "past-portal-to-rescue",
+      "viewport": {
+        "width": 915,
+        "height": 412
+      },
+      "error": "TimeoutError: locator.click: Timeout 30000ms exceeded.\nCall log:\n  - waiting for getByRole('button', { name: /ENTER NADIR RESCUE/ })\n",
+      "faults": []
+    },
+    {
+      "label": "past-mobile-touch-target",
+      "viewport": {
+        "width": 915,
+        "height": 412
+      },
+      "error": "AssertionError [ERR_ASSERTION]: The input did not match the regular expression /TARGET DESTINATION/. Input:\n\n'0/4 CONFIGURATIONS APPLIED \u00b7 MISSION TARGET'\n",
+      "faults": []
+    },
+    {
+      "label": "past-desktop-keyboard",
+      "viewport": {
+        "width": 1366,
+        "height": 768
+      },
+      "error": "AssertionError [ERR_ASSERTION]: The input did not match the regular expression /ROCKET DESIGN/. Input:\n\n'0/4 CONFIGURATIONS APPLIED \u00b7 MANUFACTURING'\n",
+      "faults": []
+    }
+  ],
+  "missing_screenshots": [
+    "qa-artifacts/nadir-puzzle-915x412.png",
+    "qa-artifacts/nadir-analysis-915x412.png",
+    "qa-artifacts/nadir-filed-folder-915x412.png",
+    "qa-artifacts/nadir-collect-and-file-915x412.png",
+    "qa-artifacts/audio-settings-915x412.png",
+    "qa-artifacts/audio-lab-915x412.png",
+    "qa-artifacts/case-source-index-1366x768.png",
+    "qa-artifacts/case-source-index-915x412.png",
+    "qa-artifacts/case-puzzle-915x412.png",
+    "qa-artifacts/case-rescue-kes-915x412.png",
+    "qa-artifacts/case-rescue-lum-915x412.png",
+    "qa-artifacts/case-rescue-ori-915x412.png",
+    "qa-artifacts/case-rescue-ast-915x412.png",
+    "qa-artifacts/source-desk-archive-915x412.png",
+    "qa-artifacts/source-desk-signal-915x412.png",
+    "qa-artifacts/source-desk-recordings-915x412.png",
+    "qa-artifacts/nadir-voice-inspector-915x412.png",
+    "qa-artifacts/kestrel-voice-inspector-915x412.png",
+    "qa-artifacts/nadir-evidence-video-915x412.png",
+    "qa-artifacts/cinematic-lumen-intro-915x412.png"
+  ],
+  "image_transfer_bytes_by_route": [
+    {
+      "route": "/",
+      "viewport": {
+        "width": 1366,
+        "height": 768
+      },
+      "label": "home",
+      "bytes": 140166
+    },
+    {
+      "route": "/?room=1",
+      "viewport": {
+        "width": 1366,
+        "height": 768
+      },
+      "label": "investigation",
+      "bytes": 899502
+    },
+    {
+      "route": "/?station=signal",
+      "viewport": {
+        "width": 1366,
+        "height": 768
+      },
+      "label": "signal",
+      "bytes": 499890
+    },
+    {
+      "route": "/?station=archive",
+      "viewport": {
+        "width": 1366,
+        "height": 768
+      },
+      "label": "archive",
+      "bytes": 365024
+    },
+    {
+      "route": "/?station=recordings",
+      "viewport": {
+        "width": 1366,
+        "height": 768
+      },
+      "label": "recordings",
+      "bytes": 376722
+    },
+    {
+      "route": "/?station=signal",
+      "viewport": {
+        "width": 1366,
+        "height": 768
+      },
+      "label": "nadir-puzzle",
+      "bytes": 499890
+    },
+    {
+      "route": "/?station=signal",
+      "viewport": {
+        "width": 1366,
+        "height": 768
+      },
+      "label": "tray-open",
+      "bytes": 499890
+    },
+    {
+      "route": "/?folder-lab=1&return=signal",
+      "viewport": {
+        "width": 1366,
+        "height": 768
+      },
+      "label": "folder",
+      "bytes": 0
+    },
+    {
+      "route": "/",
+      "viewport": {
+        "width": 915,
+        "height": 412
+      },
+      "label": "home",
+      "bytes": 140166
+    },
+    {
+      "route": "/?room=1",
+      "viewport": {
+        "width": 915,
+        "height": 412
+      },
+      "label": "investigation",
+      "bytes": 899502
+    },
+    {
+      "route": "/?station=signal",
+      "viewport": {
+        "width": 915,
+        "height": 412
+      },
+      "label": "signal",
+      "bytes": 499890
+    },
+    {
+      "route": "/?station=archive",
+      "viewport": {
+        "width": 915,
+        "height": 412
+      },
+      "label": "archive",
+      "bytes": 365024
+    },
+    {
+      "route": "/?station=recordings",
+      "viewport": {
+        "width": 915,
+        "height": 412
+      },
+      "label": "recordings",
+      "bytes": 376722
+    },
+    {
+      "route": "/?station=signal",
+      "viewport": {
+        "width": 915,
+        "height": 412
+      },
+      "label": "tray-open",
+      "bytes": 499890
+    },
+    {
+      "route": "/?folder-lab=1&return=signal",
+      "viewport": {
+        "width": 915,
+        "height": 412
+      },
+      "label": "folder",
+      "bytes": 0
+    },
+    {
+      "route": "/",
+      "viewport": {
+        "width": 800,
+        "height": 360
+      },
+      "label": "home",
+      "bytes": 140166
+    },
+    {
+      "route": "/?room=1",
+      "viewport": {
+        "width": 800,
+        "height": 360
+      },
+      "label": "investigation",
+      "bytes": 899502
+    },
+    {
+      "route": "/?station=signal",
+      "viewport": {
+        "width": 800,
+        "height": 360
+      },
+      "label": "signal",
+      "bytes": 499890
+    },
+    {
+      "route": "/?station=archive",
+      "viewport": {
+        "width": 800,
+        "height": 360
+      },
+      "label": "archive",
+      "bytes": 365024
+    },
+    {
+      "route": "/?station=recordings",
+      "viewport": {
+        "width": 800,
+        "height": 360
+      },
+      "label": "recordings",
+      "bytes": 376722
+    },
+    {
+      "route": "/?station=signal",
+      "viewport": {
+        "width": 800,
+        "height": 360
+      },
+      "label": "tray-open",
+      "bytes": 499890
+    },
+    {
+      "route": "/?folder-lab=1&return=signal",
+      "viewport": {
+        "width": 800,
+        "height": 360
+      },
+      "label": "folder",
+      "bytes": 0
+    },
+    {
+      "route": "/",
+      "viewport": {
+        "width": 740,
+        "height": 360
+      },
+      "label": "home",
+      "bytes": 140166
+    },
+    {
+      "route": "/?room=1",
+      "viewport": {
+        "width": 740,
+        "height": 360
+      },
+      "label": "investigation",
+      "bytes": 899502
+    },
+    {
+      "route": "/?station=signal",
+      "viewport": {
+        "width": 740,
+        "height": 360
+      },
+      "label": "signal",
+      "bytes": 499890
+    },
+    {
+      "route": "/?station=archive",
+      "viewport": {
+        "width": 740,
+        "height": 360
+      },
+      "label": "archive",
+      "bytes": 365024
+    },
+    {
+      "route": "/?station=recordings",
+      "viewport": {
+        "width": 740,
+        "height": 360
+      },
+      "label": "recordings",
+      "bytes": 376722
+    },
+    {
+      "route": "/?station=signal",
+      "viewport": {
+        "width": 740,
+        "height": 360
+      },
+      "label": "tray-open",
+      "bytes": 499890
+    },
+    {
+      "route": "/?folder-lab=1&return=signal",
+      "viewport": {
+        "width": 740,
+        "height": 360
+      },
+      "label": "folder",
+      "bytes": 0
+    },
+    {
+      "route": "/",
+      "viewport": {
+        "width": 1650,
+        "height": 927
+      },
+      "label": "home-fullscreen",
+      "bytes": 140166
+    },
+    {
+      "route": "/",
+      "viewport": {
+        "width": 1920,
+        "height": 1080
+      },
+      "label": "home-fullscreen",
+      "bytes": 140166
+    },
+    {
+      "route": "/?room=1",
+      "viewport": {
+        "width": 1366,
+        "height": 768
+      },
+      "label": "inventory-left",
+      "bytes": 899502
+    },
+    {
+      "route": "/?room=1",
+      "viewport": {
+        "width": 915,
+        "height": 412
+      },
+      "label": "inventory-left",
+      "bytes": 899502
+    },
+    {
+      "route": "/?room=1",
+      "viewport": {
+        "width": 740,
+        "height": 360
+      },
+      "label": "inventory-left",
+      "bytes": 899502
+    },
+    {
+      "route": "/?folder-lab=1&debug=1",
+      "viewport": {
+        "width": 915,
+        "height": 412
+      },
+      "label": "production-debug-guard",
+      "bytes": 0
+    },
+    {
+      "route": "/",
+      "viewport": {
+        "width": 915,
+        "height": 412
+      },
+      "label": "opening-to-investigation",
+      "bytes": 1039668
+    },
+    {
+      "route": "/?folder-lab=1",
+      "viewport": {
+        "width": 915,
+        "height": 412
+      },
+      "label": "kestrel-film-content-hold",
+      "bytes": 0
+    },
+    {
+      "route": "/?past=manufacturing&case=NAD",
+      "viewport": {
+        "width": 915,
+        "height": 412
+      },
+      "label": "past-direct-route-locked",
+      "bytes": 0
+    },
+    {
+      "route": "/?past=manufacturing&case=NAD",
+      "viewport": {
+        "width": 915,
+        "height": 412
+      },
+      "label": "past-manufacturing-unlocked",
+      "bytes": 313022
+    },
+    {
+      "route": "/?past=mission_target&case=NAD",
+      "viewport": {
+        "width": 915,
+        "height": 412
+      },
+      "label": "past-mission_target-unlocked",
+      "bytes": 371674
+    },
+    {
+      "route": "/?past=data_analysis&case=NAD",
+      "viewport": {
+        "width": 915,
+        "height": 412
+      },
+      "label": "past-data_analysis-unlocked",
+      "bytes": 299390
+    },
+    {
+      "route": "/?past=resources_review&case=NAD",
+      "viewport": {
+        "width": 915,
+        "height": 412
+      },
+      "label": "past-resources_review-unlocked",
+      "bytes": 338360
+    },
+    {
+      "route": "/?past=resources_review&case=NAD",
+      "viewport": {
+        "width": 1366,
+        "height": 768
+      },
+      "label": "past-resources-responsive",
+      "bytes": 338360
+    },
+    {
+      "route": "/?past=resources_review&case=NAD",
+      "viewport": {
+        "width": 800,
+        "height": 360
+      },
+      "label": "past-resources-responsive",
+      "bytes": 338360
+    },
+    {
+      "route": "/",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "label": "portrait-guard",
+      "bytes": 140166
+    }
+  ]
+}

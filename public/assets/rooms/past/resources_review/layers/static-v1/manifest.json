@@ -1,0 +1,138 @@
+{
+  "schemaVersion": 1,
+  "roomId": "resources_review",
+  "timeline": "past",
+  "variant": "landscape-static-v1",
+  "renderMode": "BAKED_ART_WITH_SEPARATE_HOTSPOTS",
+  "artSource": {
+    "sourceBranch": "experiment/past-landscape-art-production-v1",
+    "sourceCommit": "92a94f889e19f9370d3e54ea49143284904a9935",
+    "originalManifest": "public/assets/rooms/past/resources_review/layers/landscape-v1/manifest.json"
+  },
+  "background": "/assets/rooms/past/resources_review/layers/static-v1/room_visible.webp",
+  "coordinateSystem": {
+    "width": 1920,
+    "height": 1080
+  },
+  "objects": [
+    {
+      "id": "hardware_inventory",
+      "interaction": {
+        "target": "hardware_inventory",
+        "label": "Inspect hardware inventory"
+      },
+      "hitArea": {
+        "x": 220,
+        "y": 245,
+        "width": 267,
+        "height": 120
+      },
+      "hitShape": "rect",
+      "sourceFullLayerPosition": {
+        "x": 129,
+        "y": 210,
+        "width": 445,
+        "height": 290
+      },
+      "reviewStatus": "VISUAL_PROVISIONAL"
+    },
+    {
+      "id": "power_energy",
+      "interaction": {
+        "target": "power_energy",
+        "label": "Inspect power and energy"
+      },
+      "hitArea": {
+        "x": 190,
+        "y": 548,
+        "width": 305,
+        "height": 140
+      },
+      "hitShape": "rect",
+      "sourceFullLayerPosition": {
+        "x": 118,
+        "y": 502,
+        "width": 463,
+        "height": 362
+      },
+      "reviewStatus": "VISUAL_PROVISIONAL"
+    },
+    {
+      "id": "personnel_roles",
+      "interaction": {
+        "target": "personnel_roles",
+        "label": "Inspect personnel and roles"
+      },
+      "hitArea": {
+        "x": 1430,
+        "y": 245,
+        "width": 275,
+        "height": 117
+      },
+      "hitShape": "rect",
+      "sourceFullLayerPosition": {
+        "x": 1350,
+        "y": 208,
+        "width": 440,
+        "height": 292
+      },
+      "reviewStatus": "VISUAL_PROVISIONAL"
+    },
+    {
+      "id": "supplies_logistics",
+      "interaction": {
+        "target": "supplies_logistics",
+        "label": "Inspect supplies and logistics"
+      },
+      "hitArea": {
+        "x": 1425,
+        "y": 550,
+        "width": 300,
+        "height": 145
+      },
+      "hitShape": "rect",
+      "sourceFullLayerPosition": {
+        "x": 1347,
+        "y": 502,
+        "width": 459,
+        "height": 361
+      },
+      "reviewStatus": "VISUAL_PROVISIONAL"
+    },
+    {
+      "id": "resource_allocation",
+      "interaction": {
+        "target": "resource_allocation",
+        "label": "Inspect resource allocation table"
+      },
+      "hitArea": {
+        "x": 845,
+        "y": 375,
+        "width": 260,
+        "height": 255
+      },
+      "hitShape": "rect",
+      "sourceFullLayerPosition": {
+        "x": 660,
+        "y": 310,
+        "width": 600,
+        "height": 611
+      },
+      "reviewStatus": "VISUAL_PROVISIONAL"
+    }
+  ],
+  "assetCapabilities": {
+    "objectSpritesNotUsed": true,
+    "requiresCleanPlate": false,
+    "independentObjectAnimation": false,
+    "keyboardAndTouchHotspots": true
+  },
+  "qa": {
+    "assetFormat": "PASS",
+    "hitAreaGeometry": "PASS_INSET_AND_NO_OVERLAP",
+    "manualPixelReview": "PENDING",
+    "browserTouchRuntime": "NOT_VERIFIED",
+    "artApproval": "PENDING",
+    "notes": "Static scene does not rely on failed masks or hidden clean plates."
+  }
+}
