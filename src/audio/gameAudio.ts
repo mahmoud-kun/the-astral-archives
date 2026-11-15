@@ -1,3 +1,5 @@
+import {playAstralSynth,silenceAstralSynth} from './astralSynth'
+
 /**
  * The Astral Archives — optional, lazy, low-bandwidth game audio.
  *
@@ -49,7 +51,7 @@ const LEVEL:Record<GameSound,number>={
   portal:.26, rescue:.25, rescueComplete:.22, scanner:.16, terminal:.12,
   doorOpen:.17, doorClose:.15, engine:.09, energy:.15, metal:.15,thruster:.12,
 }
-const RATE_LIMIT:Partial<Record<GameSound,number>>={hover:110,click:45,scanner:120,signal:900,folderMove:90,file:80,doorOpen:120,doorClose:120,rescueComplete:800}
+const RATE_LIMIT:Partial<Record<GameSound,number>>={hover:280,click:70,scanner:170,signal:900,folderMove:170,file:210,doorOpen:200,doorClose:200,rescueComplete:1200}
 
 /** Pure gain helper. Browser playback and slider use the same bounded calculation. */
 export function gameSoundVolume(cue:GameSound,masterVolume:number):number{
@@ -93,6 +95,7 @@ let cinematicFocusCount=0
 export function claimCinematicAudioFocus():()=>void{
  cinematicFocusCount++
  stopAllSounds()
+ silenceAstralSynth(context)
  updateAmbience()
  let released=false
  return ()=>{
@@ -135,6 +138,7 @@ export function sceneFromSearch(search:string):SoundScene{
  const q=new URLSearchParams(search.startsWith('?')?search.slice(1):search)
  if(isRescueAudioRoute(search))return 'rescue'
  if(q.get('folder-lab')==='1')return 'archive'
+ if(q.get('past'))return 'rescue'
  if(q.get('station')==='signal')return 'signal'
  if(q.get('station')==='archive')return 'archive'
  if(q.get('station')==='recordings')return 'recordings'
@@ -226,8 +230,14 @@ export function playGameSound(cue:GameSound){
   if(oldest){oldest.pause();activeSounds.delete(oldest)}
  }
  lastPlayed.set(selected,now)
+ // A quiet, original synthesized soundscape replaces noisy repetitive UI
+ // samples when Web Audio is available. The old file remains a fallback.
+ if(context&&playAstralSynth(context,selected,gameSoundVolume(selected,prefs.volume))){
+  soundSerial++
+  return
+ }
  try{
-  // Lazy: no network request until the actual cue is triggered.
+  // Lazy fallback: no request until a cue is triggered on unsupported devices.
   const audio=new Audio(SOUND_PATHS[selected])
   audio.preload='none'
   audio.volume=gameSoundVolume(selected,prefs.volume)
@@ -305,6 +315,7 @@ export function installGameAudio():()=>void{
   window.removeEventListener('astral:route-change',onNavigate)
   window.removeEventListener('popstate',onNavigate)
   stopAllSounds()
+  silenceAstralSynth(context)
   if(ambianceGain&&context)ambianceGain.gain.setTargetAtTime(0,context.currentTime,.05)
  }
 }
