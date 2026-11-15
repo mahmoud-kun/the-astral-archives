@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState, type FormEvent } from 'react'
 import { createPortal } from 'react-dom'
+import EvidenceMediaPanel from '../integration/EvidenceMediaPanel'
 import { discoverEvidence } from '../archive/archiveState'
 import { findEvidence } from '../archive/evidenceRecords'
 import { hintNadir, inspectNadir, NADIR_CHALLENGES, solveNadir, type NadirAnswer, type NadirRecord } from './nadirEngine'
@@ -141,6 +142,7 @@ export default function NadirPuzzle({id,onClose}:{id:NadirRecord;onClose:()=>voi
      <section className="np-sources">
       <h3>INVESTIGATION INSTRUMENT</h3>
       <EvidenceMachine id={id} answer={answer} onChange={change} disabled={solved||locked.length>0}/>
+       <EvidenceMediaPanel evidenceId={id}/>
       <details className="np-source-drawer">
        <summary><span>OPEN PRIMARY RECORDS</span><small>{challenge.fragments.length} SOURCE FRAGMENTS</small></summary>
        <div className="np-source-drawer-body">
