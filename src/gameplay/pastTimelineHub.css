@@ -65,3 +65,15 @@
 .pt-review-line button{width:100%;margin-top:7px;text-align:center}
 @media(max-width:740px){.pt-repair-choices.pt-choices-3{grid-template-columns:repeat(2,minmax(0,1fr))}.pt-review-list{grid-template-columns:1fr}}
 @media(max-width:620px){.pt-repair-choices.pt-choices-3,.pt-repair-choices.pt-choices-4{grid-template-columns:1fr}}
+
+/* Make engineering decisions feel like live workstation changes. */
+.pt-object-panel{animation:astral-machine-activate .28s cubic-bezier(.21,.83,.35,1) both}
+.pt-repair-option:active{transform:scale(.985)}
+.pt-option-selected{box-shadow:inset 4px 0 #f0c78e,0 0 20px #5a9aac17}
+.pt-system-status{position:relative;overflow:hidden}
+.pt-system-status::after{content:'';position:absolute;top:0;bottom:0;left:-70%;width:45%;pointer-events:none;background:linear-gradient(110deg,transparent,#c1ebf21b,transparent);animation:astral-data-scan 7s ease-in-out infinite}
+.pt-decision-effect{animation:astral-machine-result .33s ease-out both}
+@keyframes astral-machine-activate{from{opacity:0;transform:translate(-50%,-47%) scale(.985)}to{opacity:1;transform:translate(-50%,-50%) scale(1)}}
+@keyframes astral-machine-result{from{opacity:0;transform:translateY(9px)}to{opacity:1;transform:translateY(0)}}
+@keyframes astral-data-scan{0%,78%{left:-70%}100%{left:140%}}
+@media(prefers-reduced-motion:reduce){.pt-object-panel,.pt-decision-effect,.pt-system-status::after{animation:none!important}}
