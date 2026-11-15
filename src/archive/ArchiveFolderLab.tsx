@@ -1,11 +1,12 @@
 import { useEffect, useState, type CSSProperties } from 'react'
 import { CASE_CODES, CASE_META, EVIDENCE_RECORDS, findEvidence, type ArchiveCaseId, type ArchiveEvidence } from './evidenceRecords'
-import { ARCHIVE_SAVE_KEY, countInFolder, countRequiredEvidence, diagnosisIsSupported, discoverEvidence, emptyArchiveState, fileEvidence, rescueIsReady, restoreArchiveState, type ArchiveState } from './archiveState'
+import { ARCHIVE_SAVE_KEY, countInFolder, countRequiredEvidence, discoverEvidence, emptyArchiveState, fileEvidence, rescueIsReady, restoreArchiveState, type ArchiveState } from './archiveState'
 import { navigateGame, onGameLinkClick } from '../gameNavigation'
 import { playGameSound } from '../audio/gameAudio'
 import { ARCHIVE_PROGRESS_EVENT, stationRoute, type StationId } from '../gameplay/nadirEngine'
 import { isOtherCaseId, readActiveCase, setActiveCase } from '../gameplay/caseContext'
 import { enterRescueThroughPortal, playCaseIntroduction, KESTREL_FOOTAGE_PENDING_APPROVAL } from '../integration/gameMediaActions'
+import {isStoryRescueComplete} from '../gameplay/storyRescueState'
 import './archiveFolderLab.css'
 
 function initialState(): ArchiveState {
@@ -78,7 +79,7 @@ export default function ArchiveFolderLab() {
   const filed=EVIDENCE_RECORDS.filter(record=>archive.filed[record.id]===caseId)
   const required=countRequiredEvidence(archive,caseId)
   const ready=rescueIsReady(archive,caseId)
-  const verifiedDiagnosis=diagnosisIsSupported(archive,caseId)
+  const storyComplete=isStoryRescueComplete(caseId)
   const unseen=EVIDENCE_RECORDS.filter(record=>record.caseId===caseId&&!archive.discovered.includes(record.id))
   const unfiled=EVIDENCE_RECORDS.filter(record=>archive.discovered.includes(record.id)&&!archive.filed[record.id])
   useEffect(()=>{try{localStorage.setItem(ARCHIVE_SAVE_KEY,JSON.stringify(archive))}catch{/* session-only fallback */}
@@ -124,7 +125,7 @@ export default function ArchiveFolderLab() {
             <img className="af-open-base" src="/assets/archive/folder-open.svg" alt=""/>
             <div className="af-inner-cover"><small>THE ASTRAL ARCHIVES / {caseId}</small><h2>{meta.name}</h2><em>{meta.subtitle}</em>
               <div className="af-cover-stamp"><strong>CASE FILE</strong><span>{filed.length} ATTACHMENTS REGISTERED</span><span>{meta.phase}</span></div>
-              <div className="af-cover-note"><strong>INVESTIGATOR NOTES</strong><p>Review original records. Compare decisions. Document what the evidence supports.</p></div>
+              <div className="af-cover-note"><strong>INVESTIGATOR NOTES</strong><p>Collect recovered documents and arrange them in the right Mission Folder.</p></div>
             </div>
             <div className="af-sheet-area">
               {filed.length===0&&<div className="af-empty"><strong>NO RECORDS FILED</strong><span>Collected evidence will form a visible stack here.</span></div>}
@@ -150,8 +151,8 @@ export default function ArchiveFolderLab() {
         <div className="af-status-section"><span>MISSION BRIEFING FILM</span>{caseId==='KES'&&KESTREL_FOOTAGE_PENDING_APPROVAL
           ? <small>PROJECT BRIEF / Early-phase design trade: the original payload, power and cost no longer fit the mission plan. Investigate the actual source records; no launch or assembly footage is represented as historical proof.</small>
           : <button className="af-side-action" type="button" data-sfx="none" onClick={()=>playCaseIntroduction(caseId)}>PLAY {meta.name.toUpperCase()} INTRO</button>}</div>
-        <div className="af-status-section"><span>DIAGNOSIS</span><strong>{verifiedDiagnosis?'VERIFIED':'INSIDE RESCUE'}</strong><p>Technical cause → process failure → consequence. Submit and verify the causal chain in the Rescue workstation after filing six required records.</p></div>
-        <div className="af-status-section"><span>RESCUE MISSION</span><strong className={ready?'af-ready':''}>{ready?'UNLOCKED':'LOCKED'}</strong><p>{ready?'Six correctly filed required records. The causal and engineering work happens inside Rescue.':'File the six required evidence records in the correct mission folder to unlock.'}</p>{caseId==='NAD'&&ready&&<button className="af-side-action" onClick={()=>enterRescueThroughPortal('NAD')}>ENTER NADIR RESCUE →</button>}{isOtherCaseId(caseId)&&ready&&<button className="af-side-action" onClick={()=>enterRescueThroughPortal(caseId)}>ENTER {meta.name.toUpperCase()} RESCUE →</button>}</div>
+        <div className="af-status-section"><span>YOUR MISSION</span><strong>{storyComplete?'RESCUED IN THE STORY':'RECOVER SIX EVIDENCE SHEETS'}</strong><p>Explore the station, collect the records directly and file them in the correct mission dossier. No quizzes or technical exams.</p></div>
+        <div className="af-status-section"><span>RESCUE MISSION</span><strong className={ready?'af-ready':''}>{ready?'UNLOCKED':'LOCKED'}</strong><p>{ready?'Your evidence is complete. Travel into the past to follow the Rescue story.':'File the six required evidence records in the correct mission folder to unlock.'}</p>{caseId==='NAD'&&ready&&<button className="af-side-action" onClick={()=>enterRescueThroughPortal('NAD')}>ENTER NADIR RESCUE →</button>}{isOtherCaseId(caseId)&&ready&&<button className="af-side-action" onClick={()=>enterRescueThroughPortal(caseId)}>ENTER {meta.name.toUpperCase()} RESCUE →</button>}</div>
         <div className="af-status-source">FICTIONAL CASE RECORDS. NOT AUTHENTIC NASA TELEMETRY.</div>
         {debug&&<button className="af-reset" onClick={reset}>RESET DEBUG PREVIEW</button>}
       </aside>
