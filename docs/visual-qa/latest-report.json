@@ -1,18 +1,27 @@
 {
-  "run_on": "2026-11-15T13:19:35.990Z",
-  "screenshots": 56,
+  "run_on": "2026-11-15T13:53:48.067Z",
+  "screenshots": 53,
   "console_errors": 0,
   "broken_images": 0,
   "clipped_controls": 0,
   "overflows": 0,
   "errors": [
     {
+      "label": "nadir-puzzle",
+      "viewport": {
+        "width": 915,
+        "height": 412
+      },
+      "error": "TimeoutError: locator.click: Timeout 30000ms exceeded.\nCall log:\n  - waiting for locator('.sr-hotspot').nth(1)\n    - locator resolved to <button type=\"button\" data-sfx=\"scanner\" data-evidence-id=\"NAD-02\" data-object-id=\"receiver_rack\" title=\"Tune signal receiver rack\" class=\"sr-hotspot sr-anchor-target\" aria-label=\"Tune signal receiver rack: Raw Impulse Data Fragment\">\u2026</button>\n  - attempting click action\n    2 \u00d7 waiting for element to be visible, enabled and stable\n      - element is visible, enabled and stable\n      - scrolling into view if needed\n      - done scrolling\n      - <h2>SIGNAL RECORDS</h2> from <aside role=\"complementary\" aria-label=\"Optional room tutorial\" class=\"rt-bubble rt-anchored rt-side-bottom\">\u2026</aside> subtree intercepts pointer events\n    - retrying click action\n    - waiting 20ms\n    2 \u00d7 waiting for element to be visible, enabled and stable\n      - element is visible, enabled and stable\n      - scrolling into view if needed\n      - done scrolling\n      - <h2>SIGNAL RECORDS</h2> from <aside role=\"complementary\" aria-label=\"Optional room tutorial\" class=\"rt-bubble rt-anchored rt-side-bottom\">\u2026</aside> subtree intercepts pointer events\n    - retrying click action\n      - waiting 100ms\n    58 \u00d7 waiting for element to be visible, enabled and stable\n       - element is visible, enabled and stable\n       - scrolling into view if needed\n       - done scrolling\n       - <h2>SIGNAL RECORDS</h2> from <aside role=\"complementary\" aria-label=\"Optional room tutorial\" class=\"rt-bubble rt-anchored rt-side-bottom\">\u2026</aside> subtree intercepts pointer events\n     - retrying click action\n       - waiting 500ms\n",
+      "faults": []
+    },
+    {
       "label": "nadir-analysis",
       "viewport": {
         "width": 915,
         "height": 412
       },
-      "error": "TimeoutError: locator.evaluate: Timeout 30000ms exceeded.\nCall log:\n  - waiting for locator('.np-scroll')\n",
+      "error": "TimeoutError: locator.click: Timeout 30000ms exceeded.\nCall log:\n  - waiting for locator('.sr-hotspot').nth(1)\n    - locator resolved to <button type=\"button\" data-sfx=\"scanner\" data-evidence-id=\"NAD-02\" data-object-id=\"receiver_rack\" title=\"Tune signal receiver rack\" class=\"sr-hotspot sr-anchor-target\" aria-label=\"Tune signal receiver rack: Raw Impulse Data Fragment\">\u2026</button>\n  - attempting click action\n    2 \u00d7 waiting for element to be visible, enabled and stable\n      - element is visible, enabled and stable\n      - scrolling into view if needed\n      - done scrolling\n      - <h2>SIGNAL RECORDS</h2> from <aside role=\"complementary\" aria-label=\"Optional room tutorial\" class=\"rt-bubble rt-anchored rt-side-bottom\">\u2026</aside> subtree intercepts pointer events\n    - retrying click action\n    - waiting 20ms\n    2 \u00d7 waiting for element to be visible, enabled and stable\n      - element is visible, enabled and stable\n      - scrolling into view if needed\n      - done scrolling\n      - <h2>SIGNAL RECORDS</h2> from <aside role=\"complementary\" aria-label=\"Optional room tutorial\" class=\"rt-bubble rt-anchored rt-side-bottom\">\u2026</aside> subtree intercepts pointer events\n    - retrying click action\n      - waiting 100ms\n    58 \u00d7 waiting for element to be visible, enabled and stable\n       - element is visible, enabled and stable\n       - scrolling into view if needed\n       - done scrolling\n       - <h2>SIGNAL RECORDS</h2> from <aside role=\"complementary\" aria-label=\"Optional room tutorial\" class=\"rt-bubble rt-anchored rt-side-bottom\">\u2026</aside> subtree intercepts pointer events\n     - retrying click action\n       - waiting 500ms\n",
       "faults": []
     },
     {
@@ -39,7 +48,7 @@
         "width": 915,
         "height": 412
       },
-      "error": "TimeoutError: locator.click: Timeout 30000ms exceeded.\nCall log:\n  - waiting for locator('.np-mobile-steps button').nth(1)\n",
+      "error": "TimeoutError: locator.click: Timeout 30000ms exceeded.\nCall log:\n  - waiting for locator('.sr-hotspot').nth(1)\n    - locator resolved to <button type=\"button\" data-sfx=\"scanner\" data-evidence-id=\"NAD-02\" data-object-id=\"receiver_rack\" title=\"Tune signal receiver rack\" class=\"sr-hotspot sr-anchor-target\" aria-label=\"Tune signal receiver rack: Raw Impulse Data Fragment\">\u2026</button>\n  - attempting click action\n    2 \u00d7 waiting for element to be visible, enabled and stable\n      - element is visible, enabled and stable\n      - scrolling into view if needed\n      - done scrolling\n      - <h2>SIGNAL RECORDS</h2> from <aside role=\"complementary\" aria-label=\"Optional room tutorial\" class=\"rt-bubble rt-anchored rt-side-bottom\">\u2026</aside> subtree intercepts pointer events\n    - retrying click action\n    - waiting 20ms\n    2 \u00d7 waiting for element to be visible, enabled and stable\n      - element is visible, enabled and stable\n      - scrolling into view if needed\n      - done scrolling\n      - <h2>SIGNAL RECORDS</h2> from <aside role=\"complementary\" aria-label=\"Optional room tutorial\" class=\"rt-bubble rt-anchored rt-side-bottom\">\u2026</aside> subtree intercepts pointer events\n    - retrying click action\n      - waiting 100ms\n    58 \u00d7 waiting for element to be visible, enabled and stable\n       - element is visible, enabled and stable\n       - scrolling into view if needed\n       - done scrolling\n       - <h2>SIGNAL RECORDS</h2> from <aside role=\"complementary\" aria-label=\"Optional room tutorial\" class=\"rt-bubble rt-anchored rt-side-bottom\">\u2026</aside> subtree intercepts pointer events\n     - retrying click action\n       - waiting 500ms\n",
       "faults": []
     },
     {
@@ -88,6 +97,24 @@
       "faults": []
     },
     {
+      "label": "source-desk-signal",
+      "viewport": {
+        "width": 915,
+        "height": 412
+      },
+      "error": "TimeoutError: locator.click: Timeout 30000ms exceeded.\nCall log:\n  - waiting for getByRole('button', { name: 'OPEN MISSION SOURCE INDEX' })\n    - locator resolved to <button>OPEN MISSION SOURCE INDEX</button>\n  - attempting click action\n    2 \u00d7 waiting for element to be visible, enabled and stable\n      - element is visible, enabled and stable\n      - scrolling into view if needed\n      - done scrolling\n      - <aside role=\"complementary\" aria-label=\"Optional room tutorial\" class=\"rt-bubble rt-anchored rt-side-bottom\">\u2026</aside> intercepts pointer events\n    - retrying click action\n    - waiting 20ms\n    2 \u00d7 waiting for element to be visible, enabled and stable\n      - element is visible, enabled and stable\n      - scrolling into view if needed\n      - done scrolling\n      - <aside role=\"complementary\" aria-label=\"Optional room tutorial\" class=\"rt-bubble rt-anchored rt-side-bottom\">\u2026</aside> intercepts pointer events\n    - retrying click action\n      - waiting 100ms\n    58 \u00d7 waiting for element to be visible, enabled and stable\n       - element is visible, enabled and stable\n       - scrolling into view if needed\n       - done scrolling\n       - <aside role=\"complementary\" aria-label=\"Optional room tutorial\" class=\"rt-bubble rt-anchored rt-side-bottom\">\u2026</aside> intercepts pointer events\n     - retrying click action\n       - waiting 500ms\n",
+      "faults": []
+    },
+    {
+      "label": "source-desk-recordings",
+      "viewport": {
+        "width": 915,
+        "height": 412
+      },
+      "error": "TimeoutError: locator.click: Timeout 30000ms exceeded.\nCall log:\n  - waiting for getByRole('button', { name: 'OPEN MISSION SOURCE INDEX' })\n    - locator resolved to <button>OPEN MISSION SOURCE INDEX</button>\n  - attempting click action\n    2 \u00d7 waiting for element to be visible, enabled and stable\n      - element is visible, enabled and stable\n      - scrolling into view if needed\n      - done scrolling\n      - <p>The display contains recovered event records. Pla\u2026</p> from <aside role=\"complementary\" aria-label=\"Optional room tutorial\" class=\"rt-bubble rt-anchored rt-side-bottom\">\u2026</aside> subtree intercepts pointer events\n    - retrying click action\n    - waiting 20ms\n    2 \u00d7 waiting for element to be visible, enabled and stable\n      - element is visible, enabled and stable\n      - scrolling into view if needed\n      - done scrolling\n      - <p>The display contains recovered event records. Pla\u2026</p> from <aside role=\"complementary\" aria-label=\"Optional room tutorial\" class=\"rt-bubble rt-anchored rt-side-bottom\">\u2026</aside> subtree intercepts pointer events\n    - retrying click action\n      - waiting 100ms\n    58 \u00d7 waiting for element to be visible, enabled and stable\n       - element is visible, enabled and stable\n       - scrolling into view if needed\n       - done scrolling\n       - <p>The display contains recovered event records. Pla\u2026</p> from <aside role=\"complementary\" aria-label=\"Optional room tutorial\" class=\"rt-bubble rt-anchored rt-side-bottom\">\u2026</aside> subtree intercepts pointer events\n     - retrying click action\n       - waiting 500ms\n",
+      "faults": []
+    },
+    {
       "label": "nadir-voice-inspector",
       "viewport": {
         "width": 915,
@@ -102,7 +129,7 @@
         "width": 915,
         "height": 412
       },
-      "error": "AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n\n1 !== 0\n",
+      "error": "TimeoutError: locator.click: Timeout 30000ms exceeded.\nCall log:\n  - waiting for getByRole('button', { name: 'OPEN MISSION SOURCE INDEX' })\n    - locator resolved to <button>OPEN MISSION SOURCE INDEX</button>\n  - attempting click action\n    2 \u00d7 waiting for element to be visible, enabled and stable\n      - element is visible, enabled and stable\n      - scrolling into view if needed\n      - done scrolling\n      - <p>The display contains recovered event records. Pla\u2026</p> from <aside role=\"complementary\" aria-label=\"Optional room tutorial\" class=\"rt-bubble rt-anchored rt-side-bottom\">\u2026</aside> subtree intercepts pointer events\n    - retrying click action\n    - waiting 20ms\n    2 \u00d7 waiting for element to be visible, enabled and stable\n      - element is visible, enabled and stable\n      - scrolling into view if needed\n      - done scrolling\n      - <p>The display contains recovered event records. Pla\u2026</p> from <aside role=\"complementary\" aria-label=\"Optional room tutorial\" class=\"rt-bubble rt-anchored rt-side-bottom\">\u2026</aside> subtree intercepts pointer events\n    - retrying click action\n      - waiting 100ms\n    58 \u00d7 waiting for element to be visible, enabled and stable\n       - element is visible, enabled and stable\n       - scrolling into view if needed\n       - done scrolling\n       - <p>The display contains recovered event records. Pla\u2026</p> from <aside role=\"complementary\" aria-label=\"Optional room tutorial\" class=\"rt-bubble rt-anchored rt-side-bottom\">\u2026</aside> subtree intercepts pointer events\n     - retrying click action\n       - waiting 500ms\n",
       "faults": []
     },
     {
@@ -111,7 +138,7 @@
         "width": 915,
         "height": 412
       },
-      "error": "AssertionError [ERR_ASSERTION]: Skipping the film must never grant collection before analysis\n\n1 !== 0\n",
+      "error": "TimeoutError: locator.click: Timeout 30000ms exceeded.\nCall log:\n  - waiting for locator('.sr-hotspot[data-evidence-id=\"NAD-02\"]')\n    - locator resolved to <button type=\"button\" data-sfx=\"scanner\" data-evidence-id=\"NAD-02\" data-object-id=\"receiver_rack\" title=\"Tune signal receiver rack\" class=\"sr-hotspot sr-anchor-target\" aria-label=\"Tune signal receiver rack: Raw Impulse Data Fragment\">\u2026</button>\n  - attempting click action\n    2 \u00d7 waiting for element to be visible, enabled and stable\n      - element is visible, enabled and stable\n      - scrolling into view if needed\n      - done scrolling\n      - <h2>SIGNAL RECORDS</h2> from <aside role=\"complementary\" aria-label=\"Optional room tutorial\" class=\"rt-bubble rt-anchored rt-side-bottom\">\u2026</aside> subtree intercepts pointer events\n    - retrying click action\n    - waiting 20ms\n    2 \u00d7 waiting for element to be visible, enabled and stable\n      - element is visible, enabled and stable\n      - scrolling into view if needed\n      - done scrolling\n      - <h2>SIGNAL RECORDS</h2> from <aside role=\"complementary\" aria-label=\"Optional room tutorial\" class=\"rt-bubble rt-anchored rt-side-bottom\">\u2026</aside> subtree intercepts pointer events\n    - retrying click action\n      - waiting 100ms\n    58 \u00d7 waiting for element to be visible, enabled and stable\n       - element is visible, enabled and stable\n       - scrolling into view if needed\n       - done scrolling\n       - <h2>SIGNAL RECORDS</h2> from <aside role=\"complementary\" aria-label=\"Optional room tutorial\" class=\"rt-bubble rt-anchored rt-side-bottom\">\u2026</aside> subtree intercepts pointer events\n     - retrying click action\n       - waiting 500ms\n",
       "faults": []
     },
     {
@@ -129,7 +156,7 @@
         "width": 915,
         "height": 412
       },
-      "error": "AssertionError [ERR_ASSERTION]: The input did not match the regular expression /TARGET DESTINATION/. Input:\n\n'0/4 SYSTEMS STABILIZED \u00b7 MISSION TARGET'\n",
+      "error": "AssertionError [ERR_ASSERTION]: The input did not match the regular expression /TARGET DESTINATION/. Input:\n\n'0/4 CONFIGURATIONS APPLIED \u00b7 MISSION TARGET'\n",
       "faults": []
     },
     {
@@ -138,11 +165,12 @@
         "width": 1366,
         "height": 768
       },
-      "error": "AssertionError [ERR_ASSERTION]: The input did not match the regular expression /ROCKET DESIGN/. Input:\n\n'0/4 SYSTEMS STABILIZED \u00b7 MANUFACTURING'\n",
+      "error": "AssertionError [ERR_ASSERTION]: The input did not match the regular expression /ROCKET DESIGN/. Input:\n\n'0/4 CONFIGURATIONS APPLIED \u00b7 MANUFACTURING'\n",
       "faults": []
     }
   ],
   "missing_screenshots": [
+    "qa-artifacts/nadir-puzzle-915x412.png",
     "qa-artifacts/nadir-analysis-915x412.png",
     "qa-artifacts/nadir-filed-folder-915x412.png",
     "qa-artifacts/nadir-collect-and-file-915x412.png",
@@ -151,6 +179,8 @@
     "qa-artifacts/case-rescue-lum-915x412.png",
     "qa-artifacts/case-rescue-ori-915x412.png",
     "qa-artifacts/case-rescue-ast-915x412.png",
+    "qa-artifacts/source-desk-signal-915x412.png",
+    "qa-artifacts/source-desk-recordings-915x412.png",
     "qa-artifacts/nadir-voice-inspector-915x412.png",
     "qa-artifacts/kestrel-voice-inspector-915x412.png",
     "qa-artifacts/nadir-evidence-video-915x412.png"
@@ -272,15 +302,6 @@
       },
       "label": "recordings",
       "bytes": 376722
-    },
-    {
-      "route": "/?station=signal",
-      "viewport": {
-        "width": 915,
-        "height": 412
-      },
-      "label": "nadir-puzzle",
-      "bytes": 499890
     },
     {
       "route": "/?station=signal",
@@ -551,24 +572,6 @@
       },
       "label": "source-desk-archive",
       "bytes": 365024
-    },
-    {
-      "route": "/?station=signal",
-      "viewport": {
-        "width": 915,
-        "height": 412
-      },
-      "label": "source-desk-signal",
-      "bytes": 499890
-    },
-    {
-      "route": "/?station=recordings",
-      "viewport": {
-        "width": 915,
-        "height": 412
-      },
-      "label": "source-desk-recordings",
-      "bytes": 376722
     },
     {
       "route": "/?folder-lab=1",
