@@ -242,3 +242,9 @@ Asterion release block is **code enforced**, not just documented: `CINEMATIC_LIV
 - Full audit and exact Main integration patch: [`docs/audio/SFX_FINALIZATION_AND_MAIN_PATCH_2026-11-15.md`](../../audio/SFX_FINALIZATION_AND_MAIN_PATCH_2026-11-15.md).
 
 **Outstanding acceptance:** latest GitHub Actions source tests + screenshot QA, physical Android headset/browser audible mix and fully Main-owned narrative/cinematic triggers. New chime itself was synthetically generated and binary-verified, but its subjective mix quality has not been approved.
+
+### Final SFX pass (after new original rescue completion asset)
+
+[GitHub Actions #43688210176](https://github.com/mahmoud-kun/the-astral-archives/actions/runs/43688210176) **SUCCESS**: all 20 source cues (11 unchanged designer WAV + 8 unchanged Kenney M4A + 1 original Rescue Complete WAV, 842,128 bytes), audio suite **28/28 PASS**, production build and other suites **PASS**, **52 browser screenshot scenarios / 0 broken / 0 clipped / 0 errors / 0 console errors**. The source chime has a Git-verified blob SHA and its own user-controlled preview in the Sound Lab; original 19 source rows and all gameplay saves remain intact. See [SFX Main Patch](../../audio/SFX_FINALIZATION_AND_MAIN_PATCH_2026-11-15.md).
+
+**SFX specialist finish:** COMPLETE for owned source code, binary production, trigger-safe audio behavior, testing and documentation. **Integration/release outstanding:** Main-owned portal and real engineering simulation trigger hooks, actual mobile/headphone listening, final incoming Voice Over loudness/captions, and cinema integration/Asterion outcome scientific correction. No main merge or shared-file edit.
