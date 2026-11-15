@@ -27,9 +27,19 @@ test('inspection and hints do not automatically collect or solve any record',()=
  const next=inspectNadir(empty,'NAD-02')
  assert.deepEqual(next.inspected,['NAD-02'])
  assert.deepEqual(next.solved,[])
- const hint=hintNadir(hintNadir(hintNadir(empty,'NAD-02'),'NAD-02'),'NAD-02')
- assert.equal(hint.hints['NAD-02'],2)
- assert.equal(hint.solved.length,0)
+ assert.equal(hintNadir(empty,'NAD-02'),empty,'no hints before failed attempts')
+ let failed=empty
+ for(let n=0;n<2;n++)failed=solveNadir(failed,'NAD-02',{source:'lbfs',target:'ns',converted:'12'}).next
+ const first=hintNadir(failed,'NAD-02')
+ assert.equal(first.hints['NAD-02'],1,'first hint after two misses')
+ assert.equal(hintNadir(first,'NAD-02'),first,'second hint still locked')
+ failed=first
+ for(let n=0;n<2;n++)failed=solveNadir(failed,'NAD-02',{source:'lbfs',target:'ns',converted:'12'}).next
+ const second=hintNadir(failed,'NAD-02')
+ assert.equal(second.hints['NAD-02'],2,'second hint after four misses')
+ assert.equal(hintNadir(second,'NAD-02'),second,'never exceed two')
+ assert.equal(restoreNadir(JSON.stringify(second)).hints['NAD-02'],2,'earned hints survive reload')
+ assert.equal(second.solved.length,0)
 })
 
 test('impulse requires proper dimensional conversion, not numeric copy or wrong units',()=>{
@@ -100,4 +110,6 @@ test('saved investigation is constrained to known ids, valid hints and booleans'
  assert.equal(x.hints['NAD-04'],2)
  assert.equal(x.rescue.submitted,false)
  assert.equal(x.rescue.rerunPassed,true)
+ const forged=restoreNadir(JSON.stringify({version:1,attempts:{'NAD-02':1},hints:{'NAD-02':2}}))
+ assert.equal(forged.hints['NAD-02'],undefined,'unearned hints are not restored from a bad save')
 })

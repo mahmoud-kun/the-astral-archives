@@ -15,6 +15,10 @@ export interface NadirProgress {
   rescue: {submitted:boolean; rerunPassed:boolean}
 }
 export const NADIR_IDS: readonly NadirRecord[] = ['NAD-01','NAD-02','NAD-03','NAD-04','NAD-05','NAD-06','NAD-07','NAD-08']
+/** Hint gating is a game-state invariant, not just a disabled UI button. */
+export function allowedNadirHints(attempts:number):0|1|2 {
+ return attempts>=4?2:attempts>=2?1:0
+}
 export const REQUIRED_NADIR: readonly NadirRecord[] = ['NAD-01','NAD-02','NAD-03','NAD-04','NAD-05','NAD-06']
 export const NADIR_ROOM: Record<NadirRecord,StationId> = {
   'NAD-01':'signal','NAD-02':'signal','NAD-03':'archive','NAD-04':'archive',
@@ -131,7 +135,7 @@ export function restoreNadir(raw:string|null):NadirProgress {
    const a=(d.attempts as Record<string,unknown>|undefined)?.[k]
    const h=(d.hints as Record<string,unknown>|undefined)?.[k]
    if(typeof a==='number'&&Number.isInteger(a)&&a>=0&&a<=10000)attempts[k]=a
-   if(typeof h==='number'&&Number.isInteger(h)&&h>=0&&h<=2)hints[k]=h
+   if(typeof h==='number'&&Number.isInteger(h)&&h>=0&&h<=allowedNadirHints(attempts[k]??0))hints[k]=h
   }
   const rawRescue=d.rescue as Record<string,unknown>|undefined
   return {version:1,inspected:[...new Set([...inspected,...solved])],solved,attempts,hints,
@@ -142,7 +146,9 @@ export function inspectNadir(s:NadirProgress,id:NadirRecord):NadirProgress {
  return s.inspected.includes(id)?s:{...s,inspected:[...s.inspected,id]}
 }
 export function hintNadir(s:NadirProgress,id:NadirRecord):NadirProgress {
- return {...s,hints:{...s.hints,[id]:Math.min(2,(s.hints[id]??0)+1)}}
+ const used=s.hints[id]??0
+ if(s.solved.includes(id)||used>=allowedNadirHints(s.attempts[id]??0))return s
+ return {...s,hints:{...s.hints,[id]:used+1}}
 }
 export function solveNadir(s:NadirProgress,id:NadirRecord,answer:NadirAnswer):{next:NadirProgress;ok:boolean;reason:string}{
  if(s.solved.includes(id))return {next:s,ok:true,reason:'Already analyzed. You can manually collect the record.'}

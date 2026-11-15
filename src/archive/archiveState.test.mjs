@@ -66,6 +66,8 @@ test('Rescue unlocks at 6/6 correct filing; diagnosis is an independent in-rescu
   assert.equal(rescueIsReady(moved,'NAD'),false)
   assert.equal(diagnosisIsSupported(moved,'NAD'),false)
   assert.equal(rescueIsReady(fileEvidence(moved,'NAD-02','NAD'),'NAD'),true)
+  const otherMoved = fileEvidence(state, 'NAD-03', 'KES') // Not cited in the three-part diagnosis.
+  assert.equal(diagnosisIsSupported(otherMoved, 'NAD'), false, 'losing any required evidence invalidates the review')
 })
 
 test('unsupported diagnosis never passes review, but does not relock an available rescue', () => {
@@ -92,4 +94,10 @@ test('save restoration validates discovered IDs, folder references and submissio
   assert.deepEqual(loaded.discovered,['NAD-01'])
   assert.deepEqual(loaded.filed,{'NAD-01':'KES'})
   assert.deepEqual(loaded.submitted,['NAD'])
+  let partial = emptyArchiveState()
+  for(const id of ['NAD-01','NAD-02','NAD-06'])partial=fileEvidence(discoverEvidence(partial,id),id,'NAD')
+  const forged = restoreArchiveState(JSON.stringify({
+    ...partial, diagnosis: {NAD: diagnosis}, submitted: ['NAD']
+  }))
+  assert.equal(diagnosisIsSupported(forged,'NAD'),false,'a forged partial save cannot verify a diagnosis without 6/6')
 })

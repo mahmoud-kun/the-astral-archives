@@ -23,7 +23,7 @@ export default function NadirRescue(){
  const [plan,setPlan]=useState<Plan>(INITIAL)
  const [message,setMessage]=useState('')
  const [testResults,setTestResults]=useState<string[]>([])
- const completed=progress.rescue.rerunPassed&&unlocked
+ const completed=progress.rescue.submitted&&progress.rescue.rerunPassed&&unlocked&&diagnosed
  const sources=EVIDENCE_RECORDS.filter(e=>e.caseId==='NAD'&&e.required&&archive.filed[e.id]==='NAD')
  function amend(part:DiagnosticPart,key:'answer'|'evidenceId',value:string){
   setDraft(s=>({...s,[part]:{...s[part],[key]:value}}));setMessage('')

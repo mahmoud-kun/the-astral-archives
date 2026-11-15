@@ -129,7 +129,7 @@ export function discoverEvidence(state: ArchiveState, id: string): ArchiveState 
 }
 
 export function fileEvidence(state: ArchiveState, id: string, folder: ArchiveCaseId | null): ArchiveState {
-  if (!state.discovered.includes(id) || (folder !== null && !isCaseId(folder))) return state
+  if (!state.discovered.includes(id) || (folder !== null && !isCaseId(folder)) || (state.filed[id] ?? null) === folder) return state
   const filed = { ...state.filed }
   if (folder === null) delete filed[id]
   else filed[id] = folder
@@ -146,7 +146,7 @@ export function countInFolder(state: ArchiveState, caseId: ArchiveCaseId): numbe
 
 export function diagnosisIsSupported(state: ArchiveState, caseId: ArchiveCaseId): boolean {
   const entry = state.diagnosis[caseId]
-  if (!entry || !state.submitted.includes(caseId)) return false
+  if (!entry || !state.submitted.includes(caseId) || countRequiredEvidence(state, caseId) !== 6) return false
   const prompts = DIAGNOSIS_PROMPTS[caseId]
   return (['technical','process','consequence'] as const).every(part => {
     const choice = entry[part]
