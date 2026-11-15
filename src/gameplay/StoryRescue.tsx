@@ -1,6 +1,6 @@
 import {useEffect,useState} from 'react'
 import {CASE_META,EVIDENCE_RECORDS,type ArchiveCaseId} from '../archive/evidenceRecords'
-import {countRequiredEvidence,rescueIsReady} from '../archive/archiveState'
+import {countCaseCollectedEvidence,rescueIsReady} from '../archive/archiveState'
 import {navigateGame} from '../gameNavigation'
 import {playGameSound} from '../audio/gameAudio'
 import {isVerifiedOutcomeFilmAvailable,playVerifiedRescueOutcome} from '../integration/gameMediaActions'
@@ -72,15 +72,15 @@ const STORIES:Record<ArchiveCaseId,Story>={
 export default function StoryRescue({caseId}:{caseId:ArchiveCaseId}){
  const archive=useArchiveSave()
  const ready=rescueIsReady(archive,caseId)
- const count=countRequiredEvidence(archive,caseId)
+ const count=countCaseCollectedEvidence(archive,caseId)
  const story=STORIES[caseId]
  const [index,setIndex]=useState(0)
  const [finished,setFinished]=useState(()=>isStoryRescueComplete(caseId))
  const [warning,setWarning]=useState('')
  useEffect(()=>{setIndex(0);setFinished(isStoryRescueComplete(caseId));setWarning('')},[caseId])
- const sources=EVIDENCE_RECORDS.filter(r=>r.caseId===caseId&&r.required&&archive.filed[r.id]===caseId)
+ const sources=EVIDENCE_RECORDS.filter(r=>r.caseId===caseId&&archive.discovered.includes(r.id))
  function advance(){
-  if(!rescueIsReady(archive,caseId)){setWarning('Six correctly filed records are required. Restore the case folder first.');return}
+  if(!rescueIsReady(archive,caseId)){setWarning('Collect any six of this mission’s eight records to continue the rescue.');return}
   if(index<story.steps.length-1){setIndex(n=>n+1);playGameSound('terminal');return}
   if(completeStoryRescue(caseId)){
    setFinished(true)
@@ -96,14 +96,14 @@ export default function StoryRescue({caseId}:{caseId:ArchiveCaseId}){
    <section className="nr-summary">
     <small>MISSION {caseId} / YOUR EVIDENCE</small><h2>CHANGE THE MISSION'S FUTURE</h2>
     <p>{story.opening}</p>
-    <div className="nr-progress"><span>REQUIRED EVIDENCE FILED</span><strong>{count}/6</strong><div><i style={{width:count/6*100+'%'}}/></div></div>
+    <div className="nr-progress"><span>CASE RECORDS COLLECTED</span><strong>{Math.min(count,6)}/6</strong><div><i style={{width:Math.min(count,6)/6*100+'%'}}/></div></div>
     <p className="nr-note">The records you collected guide this fictional rescue. No quizzes, calculations or engineering forms are required.</p>
-    {ready&&<details className="story-evidence-list"><summary>VIEW YOUR SIX RECOVERED RECORDS</summary>
+    {ready&&<details className="story-evidence-list"><summary>VIEW YOUR {sources.length} RECOVERED RECORDS</summary>
      <div>{sources.map(source=><p key={source.id}><b>{source.id}</b> · {source.title}</p>)}</div>
     </details>}
    </section>
    {!ready?<section className="nr-work"><h2>RESCUE NOT YET UNLOCKED</h2>
-     <p>Collect the six required records and file each one in the correct Mission Folder. Incorrect filings are saved and can be moved at any time.</p>
+     <p>Collect any six different evidence records from this mission. Mission Folders remain available, but sorting is not a requirement for Rescue.</p>
      <button type="button" className="nr-action" onClick={()=>navigateGame('/?folder-lab=1&return=investigation')}>OPEN MISSION FOLDERS</button>
     </section>:finished?
     <section className="nr-work story-outcome" role="status">
