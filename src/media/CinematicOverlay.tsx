@@ -1,6 +1,6 @@
 import {useCallback,useEffect,useRef,useState} from 'react'
 import {AUDIO_SETTINGS_EVENT,claimCinematicAudioFocus,getAudioSettings} from '../audio/gameAudio'
-import {CINEMATICS,CINEMATIC_REQUEST_EVENT,cinematicVolume,dispatchCinematicFinished,isCinematicId,type CinematicId,type CinematicOutcome} from './cinematicManifest'
+import {CINEMATICS,CINEMATIC_REQUEST_EVENT,cinematicVolume,dispatchCinematicFinished,isCinematicId,isLiveCinematicAllowed,type CinematicId,type CinematicOutcome} from './cinematicManifest'
 import './cinematicOverlay.css'
 
 type ClipStatus='loading'|'paused'|'playing'|'ended'|'error'|'reduced-motion'
@@ -156,7 +156,7 @@ export default function CinematicOverlay(){
  useEffect(()=>{
   const onRequest=(event:Event)=>{
    const id=(event as CustomEvent<{id?:unknown}>).detail?.id
-   if(!isCinematicId(id)||activeRef.current)return
+   if(!isCinematicId(id)||!isLiveCinematicAllowed(id)||activeRef.current)return
    activeRef.current=id
    setActive(id)
   }
