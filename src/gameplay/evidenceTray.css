@@ -57,3 +57,18 @@
  .et-record-copy strong{font-size:10px}.et-preview-title{gap:7px}
  .et-record-copy em{font-size:8px}
 }
+
+/* Investigation Room HUD: keep the inventory beside the left edge, under
+   the Back/room title band. Do not cover Help or Rescue at the right edge. */
+.et-trigger.et-trigger--investigation{
+  right:auto;
+  left:max(24px,env(safe-area-inset-left));
+  top:max(118px,calc(env(safe-area-inset-top) + 106px));
+}
+@media screen and (orientation:landscape) and (max-width:1000px) and (max-height:600px){
+  .et-trigger.et-trigger--investigation{
+    right:auto;
+    left:max(12px,env(safe-area-inset-left));
+    top:max(48px,calc(env(safe-area-inset-top) + 42px));
+  }
+}
