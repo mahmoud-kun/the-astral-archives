@@ -3,6 +3,7 @@ import {createPortal} from 'react-dom'
 import {discoverEvidence} from '../archive/archiveState'
 import {findEvidence} from '../archive/evidenceRecords'
 import EvidenceMediaPanel from '../integration/EvidenceMediaPanel'
+import EvidenceStoryThread from './EvidenceStoryThread'
 import {playGameSound} from '../audio/gameAudio'
 import {updateArchive,useArchiveSave} from './gameSave'
 import './nadirPuzzle.css'
@@ -56,9 +57,10 @@ export default function SimpleEvidenceInspector({id,scene,fragments,onClose}:{
        {fragments.map((line,i)=><p key={i}><b>{String(i+1).padStart(2,'0')}</b> {line}</p>)}
      </div>}
     </div>
+    <EvidenceStoryThread caseId={record.caseId} discovered={archive.discovered} focusId={justCollected||collected?id:undefined}/>
     <EvidenceMediaPanel evidenceId={id}/>
     <p className="se-guidance">Listen or watch the attached source media if available. Collect this record directly, then decide which Mission Folder it belongs to. No questions or calculations are required.</p>
-    {justCollected&&<p role="status" className="np-success"><strong>EVIDENCE COLLECTED</strong> Saved in your Unfiled Evidence Tray. You decide where to file it.</p>}
+    {justCollected&&<p role="status" className="np-success"><strong>EVIDENCE COLLECTED</strong> Your case thread has been updated. This record is saved in the Unfiled Evidence Tray; you can sort it whenever you want.</p>}
    </div>
    <footer className="np-foot se-foot">
     <span>{collected?'COLLECTED · READY FOR FILING':'READY TO COLLECT'}</span>
