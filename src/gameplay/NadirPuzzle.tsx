@@ -1,4 +1,4 @@
-import { useEffect, useState, type FormEvent } from 'react'
+import { useEffect, useRef, useState, type FormEvent } from 'react'
 import { createPortal } from 'react-dom'
 import { discoverEvidence } from '../archive/archiveState'
 import { findEvidence } from '../archive/evidenceRecords'
@@ -47,6 +47,21 @@ export default function NadirPuzzle({id,onClose}:{id:NadirRecord;onClose:()=>voi
  const [feedback,setFeedback]=useState('')
  const [submitted,setSubmitted]=useState(false)
  const [mobileStep,setMobileStep]=useState<'inspect'|'analyze'>('inspect')
+ const closeButtonRef=useRef<HTMLButtonElement>(null)
+ useEffect(()=>{
+  const previous=document.activeElement instanceof HTMLElement ? document.activeElement : null
+  closeButtonRef.current?.focus()
+  const escape=(event:KeyboardEvent)=>{
+   if(event.key==='Escape'){
+    event.preventDefault()
+    event.stopPropagation()
+    onClose()
+   }
+  }
+  window.addEventListener('keydown',escape,true)
+  return ()=>{window.removeEventListener('keydown',escape,true);previous?.focus()}
+ },[onClose])
+
  const locked=challenge.requires.filter(prerequisite=>!progress.solved.includes(prerequisite))
  const attempts=progress.attempts[id]??0
  const hintCount=progress.hints[id]??0
@@ -96,7 +111,7 @@ export default function NadirPuzzle({id,onClose}:{id:NadirRecord;onClose:()=>voi
   <section className="np-dialog" role="dialog" aria-modal="true" aria-labelledby="np-title">
    <header className="np-head">
     <div><small>THE ASTRAL ARCHIVES / INVESTIGATIVE ANALYZER</small><strong id="np-title">{id} · {record?.title??'Record'}</strong></div>
-    <button onClick={onClose} aria-label="Close evidence analyzer">BACK TO ROOM ×</button>
+    <button ref={closeButtonRef} onClick={onClose} aria-label="Close evidence analyzer">BACK TO ROOM ×</button>
    </header>
    <div className="np-scroll">
     <div className="np-meta"><span>{challenge.discipline}</span><span>FICTIONAL SIMULATION</span></div>
@@ -186,7 +201,7 @@ export default function NadirPuzzle({id,onClose}:{id:NadirRecord;onClose:()=>voi
      </section>
     </div>
    </div>
-   <footer className="np-foot">
+   <footer className={'np-foot'+(!solved||collected?' np-foot-nonaction':'')}>
     <span>{collected?'COLLECTED · UNFILED OR FILED':solved?'READY FOR COLLECTION':'ANALYSIS IN PROGRESS'}</span>
     {solved&&!collected&&<button className="np-primary" onClick={collect}>COLLECT EVIDENCE · {id}</button>}
     {collected&&<strong>✓ EVIDENCE COLLECTED</strong>}
