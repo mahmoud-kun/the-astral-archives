@@ -1,5 +1,15 @@
 # Active working branch — The Astral Archives
 
+## Latest UI feedback — Fullscreen & Investigation HUD (2026-11-15)
+
+User-approved combined review:
+1. **Home fullscreen:** previously the title grew to 108px, clipping the ARCHIVES line. The 1650×927 and 1920×1080 layouts now constrain headline size to the available right column; art zoom animation is suppressed only while fullscreen, preserving approved art.
+2. **Investigation Room inventory:** left edge, below Back/room header, away from Help at upper right. The condition is scoped to `room==='investigation'`; other room tray positions are unchanged.
+3. **Nadir Analyzer:** its artwork, interactions, and animation are explicitly liked and must **not** be redesigned based on this review. One further puzzle note is pending from the user.
+
+Validation: Vercel build READY; GitHub Actions Chromium captures 42 viewport/route cases including real fullscreen, 0 clipping, 0 broken images, 0 JS errors. Review `docs/visual-qa/fullscreen-layout-review.webp`. Real Android physical-device testing remains pending.
+
+
 
 > **Authoritative project baseline (user approval, 2026-11-15):** `experiment/room-case-library-layout-fix-2026-11-14` is now treated as the project's canonical main *working branch*. Keep committing here. This is distinct from GitHub's configured default branch, which remains named `main` until a separate explicit repository-setting operation. Do not overwrite that older branch or erase its history. Review Codex's asset outputs separately and integrate only the approved files into this canonical branch.
 
