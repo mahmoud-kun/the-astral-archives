@@ -367,7 +367,7 @@ await check(mobile,'/?folder-lab=1','lumen-briefing-film',async page=>{
 await check(mobile,'/?folder-lab=1','kestrel-film-content-hold',async page=>{
  await page.locator('.af-folder-choice').filter({hasText:'Kestrel'}).click()
  assert.equal(await page.getByRole('button',{name:'PLAY KESTREL INTRO'}).count(),0)
- assert.match(await page.locator('.af-status').textContent(),/awaits the approved visual/)
+ assert.match(await page.locator('.af-status').textContent(),/PROJECT BRIEF \/ Early-phase design trade/)
 })
 // Past visual integration acceptance: use an isolated, valid six-record QA save
 // in each disposable browser context. This is NOT player-facing debug intake.
