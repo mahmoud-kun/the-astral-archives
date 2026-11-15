@@ -29,6 +29,18 @@ const CUES:Record<GameSound,Cue>={
  metal:{duration:.46,filter:1800,voices:[{hz:313,end:308,wave:'sine',gain:.28,length:.39},{hz:523,end:519,wave:'triangle',gain:.18,delay:.013,length:.31}]},
  thruster:{duration:.73,filter:750,voices:[{hz:105,end:70,wave:'sine',gain:.43,length:.66},{hz:210,end:140,wave:'triangle',gain:.17,delay:.02,length:.58}]},
 }
+const activeGains=new Set<GainNode>()
+/** A movie or source voice takes exclusive audio focus. */
+export function silenceAstralSynth(ctx:AudioContext|null):void{
+ if(!ctx)return
+ for(const node of activeGains){
+  try{
+   node.gain.cancelScheduledValues(ctx.currentTime)
+   node.gain.setTargetAtTime(0,ctx.currentTime,.018)
+  }catch{/* Unsupported automation */ }
+ }
+ activeGains.clear()
+}
 export function playAstralSynth(ctx:AudioContext,cue:GameSound,volume:number):boolean{
  if(ctx.state!=='running'||!Number.isFinite(volume)||volume<=0)return false
  const patch=CUES[cue]
@@ -42,6 +54,8 @@ export function playAstralSynth(ctx:AudioContext,cue:GameSound,volume:number):bo
   lowpass.frequency.value=patch.filter??1900
   lowpass.Q.value=.45
   master.connect(lowpass).connect(ctx.destination)
+  activeGains.add(master)
+  let remaining=patch.voices.length
   for(const voice of patch.voices){
    const start=now+(voice.delay??0)
    const length=voice.length??patch.duration
@@ -58,7 +72,11 @@ export function playAstralSynth(ctx:AudioContext,cue:GameSound,volume:number):bo
    oscillator.connect(envelope).connect(master)
    oscillator.start(start)
    oscillator.stop(start+length+.012)
-   oscillator.onended=()=>{oscillator.disconnect();envelope.disconnect()}
+   oscillator.onended=()=>{
+    oscillator.disconnect();envelope.disconnect()
+    remaining--
+    if(remaining===0){activeGains.delete(master);master.disconnect();lowpass.disconnect()}
+   }
   }
   return true
  }catch{
