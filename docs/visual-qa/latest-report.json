@@ -1,7 +1,7 @@
 {
-  "run_on": "2026-11-15T08:51:43.898Z",
-  "screenshots": 61,
-  "console_errors": 33,
+  "run_on": "2026-11-15T08:56:13.139Z",
+  "screenshots": 69,
+  "console_errors": 38,
   "broken_images": 0,
   "clipped_controls": 0,
   "overflows": 0,
@@ -547,6 +547,78 @@
       },
       "label": "kestrel-film-content-hold",
       "bytes": 0
+    },
+    {
+      "route": "/?past=manufacturing&case=NAD",
+      "viewport": {
+        "width": 915,
+        "height": 412
+      },
+      "label": "past-direct-route-locked",
+      "bytes": 0
+    },
+    {
+      "route": "/?past=manufacturing&case=NAD",
+      "viewport": {
+        "width": 915,
+        "height": 412
+      },
+      "label": "past-manufacturing-unlocked",
+      "bytes": 313022
+    },
+    {
+      "route": "/?past=mission_target&case=NAD",
+      "viewport": {
+        "width": 915,
+        "height": 412
+      },
+      "label": "past-mission_target-unlocked",
+      "bytes": 329940
+    },
+    {
+      "route": "/?past=data_analysis&case=NAD",
+      "viewport": {
+        "width": 915,
+        "height": 412
+      },
+      "label": "past-data_analysis-unlocked",
+      "bytes": 299390
+    },
+    {
+      "route": "/?past=resources_review&case=NAD",
+      "viewport": {
+        "width": 915,
+        "height": 412
+      },
+      "label": "past-resources_review-unlocked",
+      "bytes": 338360
+    },
+    {
+      "route": "/?past=resources_review&case=NAD",
+      "viewport": {
+        "width": 1366,
+        "height": 768
+      },
+      "label": "past-resources-responsive",
+      "bytes": 338360
+    },
+    {
+      "route": "/?past=resources_review&case=NAD",
+      "viewport": {
+        "width": 800,
+        "height": 360
+      },
+      "label": "past-resources-responsive",
+      "bytes": 338360
+    },
+    {
+      "route": "/?folder-lab=1",
+      "viewport": {
+        "width": 915,
+        "height": 412
+      },
+      "label": "past-portal-to-rescue",
+      "bytes": 651382
     },
     {
       "route": "/",
