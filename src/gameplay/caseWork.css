@@ -1,0 +1,62 @@
+/* Chat C production: distinctive case instruments without touching Nadir's approved styling. */
+.cw-scene{margin:0 0 12px;padding:12px;background:linear-gradient(125deg,#15384b,#0a2230);border-left:3px solid #e4b17a;
+ color:#e6d9c5;font:600 13px/1.5 'IBM Plex Sans',system-ui,sans-serif}
+.cw-instrument{border:1px solid #497084;background:linear-gradient(170deg,#0b2031,#0b1722);padding:clamp(9px,1.5vw,15px);
+ margin:9px 0;min-width:0;color:#d4e7e9;display:grid;gap:10px}
+.cw-instrument-head{display:flex;gap:8px;align-items:center;justify-content:space-between;flex-wrap:wrap;padding-bottom:8px;
+ border-bottom:1px solid #38617a}
+.cw-instrument-head b{color:#eac197;font:700 11px 'IBM Plex Mono',monospace;letter-spacing:.06em}
+.cw-instrument-head small{color:#90bcc6;font:700 9px 'IBM Plex Mono',monospace}
+.cw-instrument p{margin:5px 0 0;font:600 10px/1.5 'IBM Plex Sans',sans-serif;color:#aac7d0}
+.cw-meter{display:grid;gap:5px;min-width:0}
+.cw-meter-head{display:flex;flex-wrap:wrap;gap:8px;justify-content:space-between;align-items:center;
+ font:700 10px 'IBM Plex Mono',monospace;color:#c9e4e6}
+.cw-meter-head strong{font-weight:700;color:#e1b98a}.cw-meter-head small{font-weight:400;color:#9dbac4}
+.cw-meter-track{height:10px;position:relative;background:#173546;border:1px solid #345b6d}
+.cw-meter-track i{display:block;height:100%;background:linear-gradient(90deg,#4e9eac,#8bd8dd)}
+.cw-meter-track i.cw-over{background:linear-gradient(90deg,#b78466,#e8a280)}
+.cw-meter-track b{position:absolute;top:-4px;height:16px;border-left:2px solid #eae0bd}
+.cw-optic-readings{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}
+.cw-optic-readings span{background:#113448;border:1px solid #416779;padding:9px 6px;
+ font:700 9px 'IBM Plex Mono',monospace;color:#b1d0da;display:grid;gap:7px;min-width:0}
+.cw-optic-readings strong{font:700 clamp(13px,1.5vw,18px) 'IBM Plex Mono',monospace;color:#eed0a7}
+.cw-optic-axis{height:44px;position:relative;margin:4px 5px 0;background:linear-gradient(90deg,#0b2332,#1c4960);
+ border:1px solid #5a8692}
+.cw-optic-axis b,.cw-optic-axis i{position:absolute;top:0;bottom:0;width:3px}
+.cw-optic-axis .cw-nominal{background:#7de5cd}.cw-optic-axis .cw-original{background:#f39b8e}
+.cw-optic-axis i{background:#f7dca7;box-shadow:0 0 9px #fff8}
+.cw-instrument>small{font:500 10px/1.4 'IBM Plex Sans',sans-serif;color:#9cbac3}
+.cw-instrument svg{display:block;width:100%;max-height:160px}
+.cw-caution{border:1px solid #a17e60;background:#392d25;color:#f3d2ac;padding:10px;font:600 12px/1.6 'IBM Plex Sans',sans-serif}
+.cw-method{margin:0 0 9px;color:#acc9d3;font:500 12px/1.65 'IBM Plex Sans',sans-serif}
+.cw-rescue .nr-summary .cw-limit{display:grid;gap:7px;background:#0b2433;border-left:3px solid #9acfd4;
+ padding:10px;font-size:11px;line-height:1.55}
+.cw-limit strong{font:700 10px 'IBM Plex Mono',monospace;color:#e3b37f}
+.cw-rescue .nr-summary .cw-instrument{margin-top:11px}
+.cw-rescue-fields{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.cw-rescue-fields>label{min-width:0}
+.cw-test-result{display:grid;gap:5px;padding:8px 6px;border-bottom:1px solid #345268}
+.cw-test-result b{font:700 10px 'IBM Plex Mono',monospace;line-height:1.4;color:#f3a58b}
+.cw-test-result.passed b{color:#98e1cc}
+.cw-test-result span{font:500 11px/1.5 'IBM Plex Sans',sans-serif;color:#c7d9dd}
+.cw-outcome{padding:13px;border:1px solid #5baf9d;background:linear-gradient(110deg,#123a38,#092b35)}
+.cw-outcome>strong{font:700 11px 'IBM Plex Mono',monospace;color:#9ff0ce}
+.cw-outcome p{font:500 12px/1.65 'IBM Plex Sans',sans-serif;color:#dae5e2}
+.cw-outcome button{width:100%;margin-top:7px}
+@media(max-width:620px){
+ .cw-rescue-fields{grid-template-columns:1fr}
+ .cw-optic-readings span{padding:5px}
+ .cw-optic-readings strong{font-size:11px}
+}
+@media(orientation:landscape) and (max-height:600px){
+ .cw-instrument{padding:7px;gap:5px}
+ .cw-instrument-head{padding-bottom:4px}
+ .cw-instrument-head b,.cw-meter-head{font-size:9px}
+ .cw-instrument-head small{font-size:8px}
+ .cw-scene{font-size:11px;padding:8px}
+ .cw-rescue-fields{gap:7px}
+ .cw-instrument svg{max-height:100px}
+ .cw-optic-axis{height:29px}
+ .cw-rescue .nr-summary .cw-limit{font-size:10px}
+}
+@media(prefers-reduced-motion:reduce){.cw-meter-track i,.cw-optic-axis i{transition:none}}
