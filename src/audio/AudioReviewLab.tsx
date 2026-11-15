@@ -2,6 +2,8 @@ import {useState} from 'react'
 import {navigateGame} from '../gameNavigation'
 import {getAudioSettings,setAudioSettings,playGameSound,sceneFromSearch,type GameSound,type SoundScene} from './gameAudio'
 import './audioReviewLab.css'
+import {CinematicPlayer} from '../media/CinematicOverlay'
+import {CINEMATICS,type CinematicId} from '../media/cinematicManifest'
 
 const ORIGINAL:readonly {cue:GameSound;label:string;use:string}[]=[
  {cue:'hover',label:'UI Hover',use:'Quiet pointer feedback · 0.10s'},
@@ -37,6 +39,7 @@ const SCENES:readonly {value:SoundScene;label:string;route:string}[]=[
 export default function AudioReviewLab(){
  const [settings,setSettings]=useState(getAudioSettings)
  const [lastSound,setLastSound]=useState<GameSound|null>(null)
+ const [previewClip,setPreviewClip]=useState<CinematicId|null>(null)
  const scene=sceneFromSearch(window.location.search)
  const change=(values:Partial<typeof settings>)=>setSettings(setAudioSettings(values))
  return <main className="al-root">
@@ -71,6 +74,14 @@ export default function AudioReviewLab(){
     </p>
    </section>
   </div>
+  <section className="al-list" aria-label="Designer cinematic review" style={{margin:'18px auto',maxWidth:'900px'}}>
+   <header><h2>DESIGNER CINEMATICS</h2><small>4 MP4 DELIVERED IN DRIVE · PUBLISHING PENDING</small></header>
+   {Object.entries(CINEMATICS).map(([id,clip])=><div className="al-cue" key={id}>
+    <div><strong>{clip.title}</strong><small>{clip.duration}s · Original preserved in Drive · Local clip required for playback</small></div>
+    <button type="button" data-sfx="none" onClick={()=>setPreviewClip(id as CinematicId)}>REVIEW</button>
+   </div>)}
+  </section>
+  {previewClip&&<CinematicPlayer id={previewClip} onFinish={()=>setPreviewClip(null)}/>}
   <footer>PRODUCTION AUDIO PREVIEW · ORIGINAL FILES PRESERVED · ZERO PAID SERVICES</footer>
  </main>
 }

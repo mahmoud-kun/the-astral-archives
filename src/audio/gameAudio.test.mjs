@@ -1,7 +1,7 @@
 import {test} from 'node:test'
 import assert from 'node:assert/strict'
 import {readFileSync,statSync} from 'node:fs'
-import {SOUND_PATHS,parseAudioSettings,sceneFromSearch,AUDIO_SETTINGS_KEY} from './gameAudio.ts'
+import {SOUND_PATHS,parseAudioSettings,sceneFromSearch,AUDIO_SETTINGS_KEY,gameSoundVolume} from './gameAudio.ts'
 
 test('audio settings are versioned, private-safe and bounded',()=>{
  assert.equal(AUDIO_SETTINGS_KEY,'astral-audio-settings-v1')
@@ -38,4 +38,14 @@ test('every registered sound has a real nonempty local binary file',()=>{
   bytes+=stat.size
  }
  assert.ok(bytes<1_100_000,'Audio is too heavy for low-bandwidth experience: '+bytes)
+})
+
+import '../media/cinematicManifest.test.mjs'
+
+test('every cue remains quiet at 40 percent and fully mutes at zero',()=>{
+ for(const cue of Object.keys(SOUND_PATHS)){
+  assert.equal(gameSoundVolume(cue,0),0)
+  assert.ok(gameSoundVolume(cue,40)>0&&gameSoundVolume(cue,40)<0.2)
+  assert.ok(gameSoundVolume(cue,100)<=1)
+ }
 })
