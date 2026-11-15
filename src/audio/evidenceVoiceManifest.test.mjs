@@ -1,34 +1,61 @@
-import { test } from 'node:test'
+import {test} from 'node:test'
 import assert from 'node:assert/strict'
 import {readFileSync} from 'node:fs'
 import {createHash} from 'node:crypto'
 import {EVIDENCE_RECORDS} from '../archive/evidenceRecords.ts'
 import {EVIDENCE_VOICE,isEvidenceVoiceId,evidenceVoiceVolume} from './evidenceVoiceManifest.ts'
-test('one KES-05 source voice accompanies a real preexisting evidence record, not a new collectible',()=>{
- assert.deepEqual(Object.keys(EVIDENCE_VOICE),['KES-05'])
- const voice=EVIDENCE_VOICE['KES-05']
- const canonical=EVIDENCE_RECORDS.find(r=>r.id===voice.evidenceId)
- assert.ok(canonical)
- assert.equal(canonical.caseId,'KES')
- assert.equal(voice.mediaRole,'existing-evidence-audio')
- assert.equal(voice.driveId,'1VwTSpTqpfOUPcEDt4Z8VA3MHel6B_5pa')
- assert.match(voice.path,/^\/assets\/audio\/voice\/designer-[a-z0-9-]+-v1\.mp3$/)
- assert.equal(voice.bytes,314523)
- assert.ok(voice.duration>18&&voice.duration<19)
- assert.equal(isEvidenceVoiceId('KES-05'),true)
- for(const bad of ['KES-09','NAD-05','__proto__','toString',null])assert.equal(isEvidenceVoiceId(bad),false)
-})
-test('source recording respects master volume and is quieter than original peak',()=>{
- for(const volume of [0,-1,NaN])assert.equal(evidenceVoiceVolume('KES-05',volume),0)
- assert.equal(evidenceVoiceVolume('KES-05',40),0.12)
- assert.equal(evidenceVoiceVolume('KES-05',100),0.3)
- assert.equal(evidenceVoiceVolume('KES-05',1000),0.3)
+
+const IDS=['KES-05','NAD-07','LUM-07','ORI-07','AST-07']
+
+test('five real voices belong to existing five-case Recordings Room evidence, no new collectibles',()=>{
+ assert.deepEqual(Object.keys(EVIDENCE_VOICE),IDS)
+ assert.equal(new Set(IDS).size,5)
+ for(const id of IDS){
+  const voice=EVIDENCE_VOICE[id]
+  const record=EVIDENCE_RECORDS.find(r=>r.id===id)
+  assert.ok(record,id+' must be present in canonical source')
+  assert.equal(record.caseId,voice.caseId)
+  assert.equal(record.room,'Recordings')
+  assert.equal(record.kind,'recording')
+  assert.equal(voice.evidenceId,id)
+  assert.equal(voice.mediaRole,'existing-evidence-audio')
+  assert.equal(voice.codec,'mp3')
+  assert.equal(voice.channels,1)
+  assert.equal(voice.sampleRate,44100)
+  assert.match(voice.path,/^\/assets\/audio\/voice\/designer-[a-z0-9-]+-v1\.mp3$/)
+  assert.equal(isEvidenceVoiceId(id),true)
+ }
+ for(const optional of ['KES-07','ORI-08']){
+  assert.ok(EVIDENCE_RECORDS.some(r=>r.id===optional&&r.kind==='recording'))
+  assert.equal(isEvidenceVoiceId(optional),false,'no invented audio for '+optional)
+ }
+ for(const invalid of ['KES-09','NAD-05','__proto__','toString',null])assert.equal(isEvidenceVoiceId(invalid),false)
 })
 
-test('KES-05 MP3 binary is physically committed and source-exact',()=>{
- const voice=EVIDENCE_VOICE['KES-05']
- const bytes=readFileSync('public'+voice.path)
- assert.equal(bytes.byteLength,voice.bytes)
- assert.equal(bytes.toString('ascii',0,3),'ID3')
- assert.equal(createHash('sha256').update(bytes).digest('hex'),'371cc159f1d5216eac22cefcb0a792e1fa3625187312a46950c332f4a074bfd5')
+test('all five source recordings honor mute and independent master-volume limits',()=>{
+ for(const id of IDS){
+  for(const v of [0,-1,NaN])assert.equal(evidenceVoiceVolume(id,v),0)
+  assert.equal(evidenceVoiceVolume(id,40),.12)
+  assert.equal(evidenceVoiceVolume(id,100),.3)
+  assert.equal(evidenceVoiceVolume(id,1000),.3)
+ }
+})
+
+test('all five source MP3 files physically exist with exact Drive SHA256 and Git blob SHA1',()=>{
+ let bytes=0
+ const paths=new Set()
+ for(const id of IDS){
+  const voice=EVIDENCE_VOICE[id]
+  assert.ok(!paths.has(voice.path),'each recording must be unique')
+  paths.add(voice.path)
+  const buffer=readFileSync('public'+voice.path)
+  assert.equal(buffer.length,voice.bytes,id+' exact original file size')
+  assert.equal(buffer.toString('ascii',0,3),'ID3',id+' MP3 ID3 header')
+  assert.equal(createHash('sha256').update(buffer).digest('hex'),voice.sha256,id+' source SHA256')
+  const prefix=Buffer.concat([Buffer.from('blob '+buffer.length),Buffer.from([0])])
+  assert.equal(createHash('sha1').update(prefix).update(buffer).digest('hex'),voice.gitBlobSha,id+' Git blob SHA1')
+  assert.ok(voice.duration>10&&voice.duration<40)
+  bytes+=buffer.length
+ }
+ assert.equal(bytes,1842619,'exact total original voice bytes')
 })
