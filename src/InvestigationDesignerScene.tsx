@@ -5,7 +5,7 @@ import InvestigationLayeredScene, { type RoomObjectTarget } from './Investigatio
 import NadirPuzzle from './gameplay/NadirPuzzle'
 import { stationRoute, type NadirRecord } from './gameplay/nadirEngine'
 import { useArchiveSave } from './gameplay/gameSave'
-import { countRequiredEvidence, rescueIsReady } from './archive/archiveState'
+import { countCaseCollectedEvidence, rescueIsReady } from './archive/archiveState'
 import { enterRescueThroughPortal } from './integration/gameMediaActions'
 import './investigationDesignerScene.css'
 
@@ -38,7 +38,7 @@ export default function InvestigationDesignerScene() {
   const [puzzleId,setPuzzleId] = useState<NadirRecord|null>(null)
   const [caseSourceOpen,setCaseSourceOpen] = useState(false)
   const archive = useArchiveSave()
-  const nadirRequired = countRequiredEvidence(archive,'NAD')
+  const nadirCollected = countCaseCollectedEvidence(archive,'NAD')
   const nadirReady = rescueIsReady(archive,'NAD')
 
   useEffect(() => {
@@ -117,7 +117,7 @@ export default function InvestigationDesignerScene() {
           <div className="idr-briefing-steps">
             <div><span>01</span><strong>REVIEW</strong><small>Open a mission file to understand what happened and what remains unexplained.</small></div>
             <div><span>02</span><strong>INVESTIGATE</strong><small>Inspect records, recordings and signal data in the station's rooms.</small></div>
-            <div><span>03</span><strong>RESCUE</strong><small>Once all six required records are correctly filed, unlock Rescue, travel to the past and follow the alternate mission story.</small></div>
+            <div><span>03</span><strong>RESCUE</strong><small>Collect any six of a mission’s eight evidence records, then travel into the past to follow its Rescue story.</small></div>
           </div>
           <button className="idr-primary" onClick={openCaseLibrary}>OPEN MISSION FILES <SmallIcon type="arrow"/></button>
           <button className="idr-primary" onClick={openCaseSources}>OPEN CASE SOURCE INDEX <SmallIcon type="arrow"/></button>
@@ -151,8 +151,8 @@ export default function InvestigationDesignerScene() {
           <span className="idr-eyebrow">ENGINEERING / RESCUE CONSOLE</span>
           <h2>THE RESCUE CONSOLE</h2>
           <p className="idr-lead">Understand the mission before changing its future.</p>
-          <p>For Nadir, filing six required records in the correct Mission Folder unlocks Rescue. Travel into the past and see the alternate mission unfold — no quizzes or calculations.</p>
-          <div className="idr-interface-message"><span>CASE NAD / ACCESS STATUS</span><strong>{nadirReady?'RESCUE UNLOCKED':'RESCUE LOCKED · '+nadirRequired+'/6 REQUIRED'}</strong><small>Wrongly filed evidence is retained but does not increase the mission progress. Move records freely between folders.</small></div>
+          <p>For Nadir, collecting any six of its eight records unlocks Rescue. Travel into the past and see the alternate story — no quizzes, calculations or mandatory filing.</p>
+          <div className="idr-interface-message"><span>CASE NAD / ACCESS STATUS</span><strong>{nadirReady?'RESCUE UNLOCKED':'RESCUE LOCKED · '+nadirCollected+'/6 COLLECTED'}</strong><small>Collect any six Nadir records to unlock. The Mission Folders are still available for sorting, but filing never blocks Rescue.</small></div>
           {nadirReady?<button className="idr-primary" onClick={()=>enterRescueThroughPortal('NAD')}>ENTER NADIR RESCUE <SmallIcon type="arrow"/></button>
             :<button className="idr-primary" onClick={openCaseLibrary}>REVIEW MISSION FOLDERS <SmallIcon type="arrow"/></button>}
         </div>}
