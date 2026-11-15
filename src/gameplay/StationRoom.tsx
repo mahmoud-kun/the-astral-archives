@@ -55,7 +55,7 @@ export default function StationRoom({station}:{station:OtherStation}){
     const collected=archive.discovered.includes(spot.id)
     return <button key={spot.id} className={'sr-hotspot'+(collected?' sr-collected':'')} style={{
       left:spot.rect[0]+'%',top:spot.rect[1]+'%',width:spot.rect[2]+'%',height:spot.rect[3]+'%',
-     }} title={spot.hint} aria-label={spot.name+(collected?', evidence collected':solved?', analyzed':'')}
+     }} data-sfx="scanner" title={spot.hint} aria-label={spot.name+(collected?', evidence collected':solved?', analyzed':'')}
       onClick={()=>setSelected(spot.id)}>
       <span className="sr-beacon"><EvidenceGlyph kind={findEvidence(spot.id)?.kind??'document'}/></span>
       <span className="sr-hotspot-label">{spot.name}{collected?' · COLLECTED':solved?' · READY TO COLLECT':''}</span>
@@ -63,10 +63,10 @@ export default function StationRoom({station}:{station:OtherStation}){
    })}
   </section>
   <header className="sr-head">
-   <button className="sr-back" onClick={()=>navigateGame(stationRoute('investigation'))}>← INVESTIGATION</button>
+   <button className="sr-back" data-sfx="doorClose" onClick={()=>navigateGame(stationRoute('investigation'))}>← INVESTIGATION</button>
    <div className="sr-heading"><small>STATION / PRESENT TIMELINE / {stationLabel(station).toUpperCase()}</small><strong>{stationLabel(station).toUpperCase()} ROOM</strong></div>
    <nav className="sr-nav" aria-label="Station rooms">
-    {(['investigation','archive','signal','recordings'] as const).map(item=><button key={item} className={station===item?'current':''} disabled={station===item} onClick={()=>navigateGame(stationRoute(item))}>{stationLabel(item)}</button>)}
+    {(['investigation','archive','signal','recordings'] as const).map(item=><button key={item} className={station===item?'current':''} data-sfx="doorOpen" disabled={station===item} onClick={()=>navigateGame(stationRoute(item))}>{stationLabel(item)}</button>)}
    </nav>
   </header>
   <div className="sr-instruction"><strong>HOVER / TAP THE EQUIPMENT</strong><span>Investigative tools · all records are fictional training simulations</span></div>
