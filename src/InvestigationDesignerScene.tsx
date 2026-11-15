@@ -7,6 +7,7 @@ import { stationRoute, type NadirRecord } from './gameplay/nadirEngine'
 import { useArchiveSave } from './gameplay/gameSave'
 import { countCaseCollectedEvidence, rescueIsReady } from './archive/archiveState'
 import { enterRescueThroughPortal } from './integration/gameMediaActions'
+import RescueRecap from './gameplay/RescueRecap'
 import './investigationDesignerScene.css'
 
 const CaseStationDesk = lazy(() => import('./gameplay/CaseStationDesk'))
@@ -38,6 +39,7 @@ export default function InvestigationDesignerScene() {
   const [puzzleId,setPuzzleId] = useState<NadirRecord|null>(null)
   const [caseSourceOpen,setCaseSourceOpen] = useState(false)
   const [sourceObjectId,setSourceObjectId] = useState('center_terminal')
+  const [rescueRecapOpen,setRescueRecapOpen] = useState(false)
   const archive = useArchiveSave()
   const nadirCollected = countCaseCollectedEvidence(archive,'NAD')
   const nadirReady = rescueIsReady(archive,'NAD')
@@ -155,7 +157,7 @@ export default function InvestigationDesignerScene() {
           <p className="idr-lead">Understand the mission before changing its future.</p>
           <p>For Nadir, collecting any six of its eight records unlocks Rescue. Travel into the past and see the alternate story — no quizzes, calculations or mandatory filing.</p>
           <div className="idr-interface-message"><span>CASE NAD / ACCESS STATUS</span><strong>{nadirReady?'RESCUE UNLOCKED':'RESCUE LOCKED · '+nadirCollected+'/6 COLLECTED'}</strong><small>Collect any six Nadir records to unlock. The Mission Folders are still available for sorting, but filing never blocks Rescue.</small></div>
-          {nadirReady?<button className="idr-primary" onClick={()=>enterRescueThroughPortal('NAD')}>ENTER NADIR RESCUE <SmallIcon type="arrow"/></button>
+          {nadirReady?<button className="idr-primary" onClick={()=>{setPanel(null);setRescueRecapOpen(true)}}>REVIEW FINDINGS · ENTER NADIR RESCUE <SmallIcon type="arrow"/></button>
             :<button className="idr-primary" onClick={openCaseLibrary}>REVIEW MISSION FOLDERS <SmallIcon type="arrow"/></button>}
         </div>}
 
@@ -171,6 +173,11 @@ export default function InvestigationDesignerScene() {
       </div>
     </div>}
     {puzzleId && <NadirPuzzle id={puzzleId} onClose={()=>setPuzzleId(null)}/>}
+    {rescueRecapOpen&&<RescueRecap caseId="NAD" onClose={()=>setRescueRecapOpen(false)} onBegin={()=>{
+      const started=enterRescueThroughPortal('NAD')
+      if(started)setRescueRecapOpen(false)
+      return started
+    }}/>} 
     {caseSourceOpen && <Suspense fallback={<div className="aa-route-loading" role="status">ACCESSING CASE SOURCES…</div>}>
       <CaseStationDesk station="investigation" sourceObjectId={sourceObjectId} onClose={()=>setCaseSourceOpen(false)}/>
     </Suspense>}
