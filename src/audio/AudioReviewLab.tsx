@@ -3,7 +3,7 @@ import {navigateGame} from '../gameNavigation'
 import {getAudioSettings,setAudioSettings,playGameSound,sceneFromSearch,type GameSound,type SoundScene} from './gameAudio'
 import './audioReviewLab.css'
 import {CinematicPlayer} from '../media/CinematicOverlay'
-import {CINEMATICS,type CinematicId} from '../media/cinematicManifest'
+import {CINEMATICS,isLiveCinematicAllowed,type CinematicId} from '../media/cinematicManifest'
 import EvidenceVoicePlayer from './EvidenceVoicePlayer'
 
 const ORIGINAL:readonly {cue:GameSound;label:string;use:string}[]=[
@@ -78,7 +78,7 @@ export default function AudioReviewLab(){
   <section className="al-list" aria-label="Designer cinematic review" style={{margin:'18px auto',maxWidth:'900px'}}>
    <header><h2>DESIGNER CINEMATICS</h2><small>17 MP4 · SOURCE-VERIFIED IN GITHUB · INTEGRATION PENDING</small></header>
    {Object.entries(CINEMATICS).map(([id,clip])=><div className="al-cinema-cue" key={id}>
-    <div><strong>{clip.title}</strong><small>{clip.duration}s · SHA-verified GitHub source · Loads on demand</small></div>
+    <div><strong>{clip.title}</strong><small>{clip.duration}s · SHA-verified GitHub source · Loads on demand</small>{!isLiveCinematicAllowed(id as CinematicId)&&<small role="status">SCIENTIFIC HOLD · 472 W in source, but verified Asterion rescue requires 450 W and target ≤460 W. Preview only.</small>}</div>
     <button type="button" data-sfx="none" onClick={()=>setPreviewClip(id as CinematicId)}>REVIEW</button>
    </div>)}
   </section>
