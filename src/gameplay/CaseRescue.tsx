@@ -131,7 +131,7 @@ export default function CaseRescue({caseId}:{caseId:OtherCaseId}){
      {completed&&<div className="cw-outcome" role="status"><strong>ALTERNATE BRANCH / VERIFIED IN SIMULATION</strong><p>{content.completion}</p><p>{content.limitations}</p>
       {isVerifiedOutcomeFilmAvailable(caseId)
        ? <button className="nr-action" type="button" data-sfx="none" onClick={()=>playVerifiedRescueOutcome(caseId)}>WATCH VERIFIED {caseId} OUTCOME</button>
-       : <p className="cw-limit" role="status">OUTCOME FILM ON CONTENT/SCIENCE HOLD. Your verified simulation result is saved; no incorrect footage will be presented as a success.</p>}
+       : <p className="cw-limit" role="status">{caseId==='AST' ? 'VERIFIED ENGINEERING REPORT · Independent fictional rerun: 450 W after staggered operations, below the 460 W review target. This is a simulated Phase B design outcome, not real flight telemetry.' : 'CONDITIONAL DESIGN REVIEW · The smaller Kestrel configuration fits the simulated resource envelope; a new launch allocation and cruise study remain hypothetical. No unsupported launch footage is required for the rescue result.'}</p>}
       <button className="nr-action" type="button" onClick={()=>navigateGame('/?folder-lab=1&return=investigation')}>RETURN TO CASE FILES</button></div>}
     </section>
    </>}
