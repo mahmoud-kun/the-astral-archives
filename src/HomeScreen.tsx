@@ -166,7 +166,10 @@ export default function HomeScreen() {
           <label className="aa-home-setting-row"><span><strong>Sound effects</strong><small>Buttons, evidence, scanning and investigation feedback.</small></span><input type="checkbox" checked={audioSettings.effects} onChange={event=>changeAudio({effects:event.target.checked})}/></label>
           <label className="aa-home-setting-row"><span><strong>Station ambience</strong><small>Quiet mechanical room atmosphere; no music or autoplay.</small></span><input type="checkbox" checked={audioSettings.ambient} onChange={event=>changeAudio({ambient:event.target.checked})}/></label>
           <label className="aa-home-setting-row aa-home-audio-volume"><span><strong>Master volume · {audioSettings.volume}%</strong><small>Shared level for all sounds; preference is saved.</small></span><input type="range" min="0" max="100" step="5" value={audioSettings.volume} onChange={event=>changeAudio({volume:Number(event.target.value)})} aria-label="Master audio volume"/></label>
-          <button type="button" className="aa-home-preview-sound" data-sfx="none" onClick={()=>playGameSound('panelOpen')}>TEST SOUND EFFECT</button>
+          <div className="aa-home-audio-actions">
+            <button type="button" className="aa-home-preview-sound" data-sfx="none" onClick={()=>playGameSound('panelOpen')}>TEST SOUND EFFECT</button>
+            <button type="button" className="aa-home-preview-sound" data-sfx="doorOpen" onClick={()=>navigateGame('/?audio-lab=1')}>OPEN SOUND LAB · 19 CUES</button>
+          </div>
           <label className="aa-home-setting-row"><span><strong>Reduce ambient motion</strong><small>Disable decorative background movement and animated transitions.</small></span><input type="checkbox" checked={reduceMotion} onChange={event => setReduceMotion(event.target.checked)}/></label>
           <div className="aa-home-setting-row"><span><strong>Fullscreen display</strong><small>Use the available screen area when supported by your browser.</small></span><button onClick={toggleFullscreen}>{fullscreen ? 'EXIT FULLSCREEN' : 'ENTER FULLSCREEN'}</button></div>
         </div>}
