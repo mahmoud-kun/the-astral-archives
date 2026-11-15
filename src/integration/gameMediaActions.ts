@@ -35,10 +35,11 @@ export function playCaseIntroduction(caseId: ArchiveCaseId): boolean {
 /** Record-context film: references an already opened physical evidence inspector. */
 export function playEvidenceContext(evidenceId:string):boolean {
  const record=findEvidence(evidenceId)
- const film=record?evidenceContextCinematic(record.id):null
- if(!film)return false
+ const id=record?.id
+ const film=id?evidenceContextCinematic(id):null
+ if(!film||!id)return false
  return requestCinematicFlow(film,{
-  canStart:()=>!!findEvidence(record.id),
+  canStart:()=>!!findEvidence(id),
   onAdvance:()=>{},
  })
 }
