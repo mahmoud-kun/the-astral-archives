@@ -63,7 +63,7 @@ const ROOM_SCENES: Record<OtherStation, Scene> = {
       recording_equipment_rack: 'NAD-07',
     },
     context: {
-      audio_analysis_terminal: 'The audio analysis terminal provides recordings and investigative records for the other four missions. Optional voice playback is inside the original evidence inspector; Nadir's review memory stays on the rack.',
+      audio_analysis_terminal: 'The audio analysis terminal provides recordings and investigative records for the other four missions. Optional voice playback is inside the original evidence inspector; The Nadir review memory stays on the rack.',
       video_playback_console: 'Playback controls are represented in the source artwork. The authored Nadir chronology evidence is available on the main video display; no independent clip is connected to this console.',
       headphones_dock: 'The headphones are an inspectable art prop. No independent recording is attached to this object.',
     },
