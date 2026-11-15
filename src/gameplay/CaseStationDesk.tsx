@@ -9,15 +9,25 @@ import { useOtherProgress } from './caseSave'
 import CasePuzzle from './CasePuzzle'
 import './caseWork.css'
 
+const ACTIVE_CASE_KEY='astral-active-mission-v1'
+function initialSelection(station:'investigation'|'archive'|'signal'|'recordings',explicit?:OtherCaseId):OtherCaseId{
+ if(explicit)return explicit
+ try{
+  const saved=window.localStorage.getItem(ACTIVE_CASE_KEY)
+  if(OTHER_CASE_IDS.some(c=>c===saved))return saved as OtherCaseId
+ }catch{/* Storage is optional. */}
+ return station==='signal'?'LUM':'KES' // KES has no Signal records; show an inspectable case.
+}
 /** A source browser attaches to one physical in-room instrument, not 32 new floating hotspots.
  * Chat A/Main mount this on existing non-Nadir supporting objects while Nadir stays unchanged.
  */
-export default function CaseStationDesk({station,onClose,initialCase='KES'}:{
+export default function CaseStationDesk({station,onClose,initialCase}:{
  station:'investigation'|'archive'|'signal'|'recordings';onClose:()=>void;initialCase?:OtherCaseId
 }){
- const [caseId,setCaseId]=useState<OtherCaseId>(initialCase)
+ const [caseId,setCaseId]=useState<OtherCaseId>(()=>initialSelection(station,initialCase))
  const [selected,setSelected]=useState<OtherRecordId|null>(null)
  const progress=useOtherProgress()
+ useEffect(()=>{if(initialCase)setCaseId(initialCase)},[initialCase])
  const archive=useArchiveSave()
  const closer=useRef<HTMLButtonElement>(null)
  const deskRef=useRef<HTMLElement>(null)
@@ -42,8 +52,14 @@ export default function CaseStationDesk({station,onClose,initialCase='KES'}:{
   else if(!event.shiftKey&&document.activeElement===last){event.preventDefault();first.focus()}
  }
  const room=(station[0].toUpperCase()+station.slice(1)) as ArchiveRoom
+ const alternateRooms=[...new Set(EVIDENCE_RECORDS.filter(r=>r.caseId===caseId).map(r=>r.room))]
  const items=EVIDENCE_RECORDS.filter(record=>
   record.room===room&&record.caseId===caseId).sort((a,b)=>Number(b.required)-Number(a.required))
+ function chooseCase(next:OtherCaseId){
+  setCaseId(next)
+  setSelected(null)
+  try{window.localStorage.setItem(ACTIVE_CASE_KEY,next)}catch{/* Continue without persistence. */}
+ }
  function openFolders(){
   navigateGame('/?folder-lab=1&return='+station)
   onClose()
@@ -57,7 +73,7 @@ export default function CaseStationDesk({station,onClose,initialCase='KES'}:{
    </header>
    <div className="cw-desk-body">
     <nav className="cw-case-tabs" aria-label="Select investigated mission">
-     {OTHER_CASE_IDS.map(c=><button key={c} type="button" aria-current={c===caseId?'page':undefined} onClick={()=>setCaseId(c)}>
+     {OTHER_CASE_IDS.map(c=><button key={c} type="button" aria-current={c===caseId?'page':undefined} onClick={()=>chooseCase(c)}>
       <b>{c}</b><span>{CASE_META[c].name}</span></button>)}
     </nav>
     <p className="cw-desk-story">Select an original source from this physical room. Each record has a distinct analysis instrument. Only a verified reconstruction may be collected, and collection does not automatically file anything.</p>
@@ -75,7 +91,7 @@ export default function CaseStationDesk({station,onClose,initialCase='KES'}:{
        <small>{collected?'COLLECTED · FILING IS PLAYER-CONTROLLED':solved?'ANALYZED · READY TO COLLECT':'UNVERIFIED SOURCE / INSPECT'}</small>
       </button>
      })}
-     {!items.length&&<p className="cw-desk-empty">No {caseId} records were authored for this room. Open another physical station or select a different case.</p>}
+     {!items.length&&<p className="cw-desk-empty">No {CASE_META[caseId].name} records are stored in {room}. Its source trail is in {alternateRooms.join(', ')}. Use that physical station or choose another case.</p>}
     </div>
     <p className="cw-desk-disclaimer">ALL CASES AND MEASUREMENTS ARE FICTIONAL SIMULATIONS. NASA REFERENCE MISSIONS ARE NOT RECREATED AS TELEMETRY.</p>
    </div>
