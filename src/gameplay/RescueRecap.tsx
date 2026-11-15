@@ -4,6 +4,7 @@ import {CASE_META,EVIDENCE_RECORDS,type ArchiveCaseId} from '../archive/evidence
 import {rescueIsReady} from '../archive/archiveState'
 import {useArchiveSave} from './gameSave'
 import {CASE_KNOWLEDGE} from './rescueKnowledge'
+import {CASE_STORY_ARCS,getRevealedConnections} from './caseStoryThreads'
 import './rescueRecap.css'
 
 type Tab='findings'|'application'|'records'
@@ -16,8 +17,10 @@ export default function RescueRecap({caseId,onClose,onBegin}:{
 }){
  const archive=useArchiveSave()
  const knowledge=CASE_KNOWLEDGE[caseId]
+ const story=CASE_STORY_ARCS[caseId]
  const recovered=EVIDENCE_RECORDS.filter(record=>record.caseId===caseId&&archive.discovered.includes(record.id))
  const findings=knowledge.sections.filter(item=>item.sourceIds.some(id=>archive.discovered.includes(id)))
+ const connections=getRevealedConnections(caseId,archive.discovered)
  const [tab,setTab]=useState<Tab>('findings')
  const [active,setActive]=useState(0)
  const [visited,setVisited]=useState<readonly number[]>([])
@@ -56,7 +59,7 @@ export default function RescueRecap({caseId,onClose,onBegin}:{
     <button ref={closeRef} type="button" onClick={onClose} aria-label="Close case recap">CLOSE ×</button>
    </header>
    <div className="rr-intro">
-    <p>{knowledge.opening}</p>
+    <p><strong>{story.title}</strong> {story.opening} <span className="rr-story-count">{connections.length} connections reconstructed</span></p>
     <div className="rr-progress"><strong>{recovered.length}/8</strong><span>EVIDENCE RECOVERED</span></div>
    </div>
    <nav className="rr-tabs" aria-label="Explore your investigation conclusions">
