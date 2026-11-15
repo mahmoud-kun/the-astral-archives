@@ -1,6 +1,6 @@
 {
-  "run_on": "2026-11-15T09:19:56.843Z",
-  "screenshots": 69,
+  "run_on": "2026-11-15T09:28:19.197Z",
+  "screenshots": 71,
   "console_errors": 0,
   "broken_images": 0,
   "clipped_controls": 0,
@@ -573,7 +573,7 @@
         "height": 412
       },
       "label": "past-mission_target-unlocked",
-      "bytes": 329940
+      "bytes": 371674
     },
     {
       "route": "/?past=data_analysis&case=NAD",
@@ -619,6 +619,24 @@
       },
       "label": "past-portal-to-rescue",
       "bytes": 651382
+    },
+    {
+      "route": "/?past=mission_target&case=NAD",
+      "viewport": {
+        "width": 915,
+        "height": 412
+      },
+      "label": "past-mobile-touch-target",
+      "bytes": 710034
+    },
+    {
+      "route": "/?past=manufacturing&case=NAD",
+      "viewport": {
+        "width": 1366,
+        "height": 768
+      },
+      "label": "past-desktop-keyboard",
+      "bytes": 313022
     },
     {
       "route": "/",
