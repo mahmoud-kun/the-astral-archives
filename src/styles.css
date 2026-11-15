@@ -444,3 +444,11 @@ button:disabled { cursor: not-allowed; }
 }
 
 .investigation360-loading { position:absolute; inset:0; display:grid; place-items:center; background:#061525; color:#a8d7dc; font:11px 'IBM Plex Mono', monospace; letter-spacing:.16em; }
+
+/* Game route chunks download on demand; never imply a made-up loading percentage. */
+.aa-route-loading{position:fixed;inset:0;z-index:35;display:flex;flex-direction:column;
+  justify-content:center;align-items:center;gap:13px;padding:22px;
+  background:radial-gradient(ellipse at 50% 42%,#143a4c,#061321 70%);
+  text-align:center;color:#e4e9e5}
+.aa-route-loading span{font:700 11px 'IBM Plex Mono',monospace;letter-spacing:.19em;color:#ecba80}
+.aa-route-loading strong{font:600 clamp(12px,2vw,18px) 'Orbitron',sans-serif;letter-spacing:.085em;color:#a5d9e2}
