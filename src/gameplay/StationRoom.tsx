@@ -41,7 +41,7 @@ const ROOM_SCENES: Record<OtherStation, Scene> = {
       receiver_rack: 'NAD-02',
     },
     context: {
-      telemetry_console_left: 'The left telemetry station provides recovered signal records for the other four missions. Open and collect a record directly; Nadir's files remain at their original instruments.',
+      telemetry_console_left: 'The left telemetry station provides recovered signal records for the other four missions. Open and collect a record directly; The Nadir files remain at their original instruments.',
       telemetry_console_right: 'The right telemetry station is a supporting instrument. No separate recovered evidence recording is assigned to this workstation.',
     },
   },
