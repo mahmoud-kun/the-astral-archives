@@ -1,0 +1,135 @@
+{
+  "version": 1,
+  "roomId": "archive",
+  "timeline": "present",
+  "variant": "original",
+  "sourceArt": "/assets/rooms/Archive_Original_REFERENCE.png",
+  "coordinateSystem": {
+    "width": 1672,
+    "height": 941
+  },
+  "background": "/assets/rooms/archive/layers/original/background/room_bg_clean.png",
+  "objects": [
+    {
+      "id": "archive_filing_drawers",
+      "sourceArt": "/assets/rooms/Archive_Original_REFERENCE.png",
+      "position": {
+        "x": 0,
+        "y": 550,
+        "width": 263,
+        "height": 281
+      },
+      "zIndex": 1,
+      "assets": {
+        "base": "/assets/rooms/archive/layers/original/archive_filing_drawers/archive_filing_drawers_base.png",
+        "glow": "/assets/rooms/archive/layers/original/archive_filing_drawers/archive_filing_drawers_glow.png",
+        "mask": "/assets/rooms/archive/layers/original/archive_filing_drawers/archive_filing_drawers_mask.png"
+      },
+      "interaction": {
+        "target": "physical_records",
+        "label": "Open archive filing drawers",
+        "mask": "/assets/rooms/archive/layers/original/archive_filing_drawers/archive_filing_drawers_mask.png"
+      },
+      "states": [
+        "idle",
+        "hover",
+        "focus",
+        "touch"
+      ],
+      "extractionMode": "fully_layered",
+      "cleanPlateExtractionComplete": false,
+      "designerCleanupRequired": true
+    },
+    {
+      "id": "archive_processing_desk",
+      "sourceArt": "/assets/rooms/Archive_Original_REFERENCE.png",
+      "position": {
+        "x": 364,
+        "y": 475,
+        "width": 481,
+        "height": 253
+      },
+      "zIndex": 2,
+      "assets": {
+        "base": "/assets/rooms/archive/layers/original/archive_processing_desk/archive_processing_desk_base.png",
+        "glow": "/assets/rooms/archive/layers/original/archive_processing_desk/archive_processing_desk_glow.png",
+        "mask": "/assets/rooms/archive/layers/original/archive_processing_desk/archive_processing_desk_mask.png"
+      },
+      "interaction": {
+        "target": "document_review",
+        "label": "Review archive documents",
+        "mask": "/assets/rooms/archive/layers/original/archive_processing_desk/archive_processing_desk_mask.png"
+      },
+      "states": [
+        "idle",
+        "hover",
+        "focus",
+        "touch"
+      ],
+      "extractionMode": "fully_layered",
+      "cleanPlateExtractionComplete": false,
+      "designerCleanupRequired": true
+    },
+    {
+      "id": "archive_shelving",
+      "sourceArt": "/assets/rooms/Archive_Original_REFERENCE.png",
+      "position": {
+        "x": 319,
+        "y": 316,
+        "width": 838,
+        "height": 323
+      },
+      "zIndex": 3,
+      "assets": {
+        "base": "/assets/rooms/archive/layers/original/archive_shelving/archive_shelving_base.png",
+        "glow": "/assets/rooms/archive/layers/original/archive_shelving/archive_shelving_glow.png",
+        "mask": "/assets/rooms/archive/layers/original/archive_shelving/archive_shelving_mask.png"
+      },
+      "interaction": {
+        "target": "archive_shelves",
+        "label": "Inspect archive shelving",
+        "mask": "/assets/rooms/archive/layers/original/archive_shelving/archive_shelving_mask.png"
+      },
+      "states": [
+        "idle",
+        "hover",
+        "focus",
+        "touch"
+      ],
+      "extractionMode": "overlay_only",
+      "cleanPlateExtractionComplete": false,
+      "designerCleanupRequired": true
+    },
+    {
+      "id": "archive_main_terminal",
+      "sourceArt": "/assets/rooms/Archive_Original_REFERENCE.png",
+      "position": {
+        "x": 1118,
+        "y": 218,
+        "width": 554,
+        "height": 642
+      },
+      "zIndex": 4,
+      "assets": {
+        "base": "/assets/rooms/archive/layers/original/archive_main_terminal/archive_main_terminal_base.png",
+        "glow": "/assets/rooms/archive/layers/original/archive_main_terminal/archive_main_terminal_glow.png",
+        "mask": "/assets/rooms/archive/layers/original/archive_main_terminal/archive_main_terminal_mask.png",
+        "screen": "/assets/rooms/archive/layers/original/archive_main_terminal/archive_main_terminal_screen.png"
+      },
+      "interaction": {
+        "target": "archive",
+        "label": "Open Mission Archive terminal",
+        "mask": "/assets/rooms/archive/layers/original/archive_main_terminal/archive_main_terminal_mask.png"
+      },
+      "states": [
+        "idle",
+        "hover",
+        "focus",
+        "touch"
+      ],
+      "extractionMode": "fully_layered",
+      "cleanPlateExtractionComplete": false,
+      "designerCleanupRequired": true
+    }
+  ]
+}

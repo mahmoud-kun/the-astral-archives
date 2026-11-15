@@ -6,6 +6,7 @@ coverage/
 .vitest/
 .vite/
 *.tsbuildinfo
+__pycache__/
 
 # Secrets and local credentials
 .env
