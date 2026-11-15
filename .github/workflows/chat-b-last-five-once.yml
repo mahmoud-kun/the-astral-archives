@@ -1,0 +1,76 @@
+name: Chat B - final five verified designer video import
+on:
+  push:
+    branches:
+      - experiment/room-case-library-layout-fix-2026-11-14
+    paths:
+      - .github/workflows/chat-b-last-five-once.yml
+permissions:
+  contents: write
+concurrency:
+  group: chat-b-final-five-media-upload
+  cancel-in-progress: false
+jobs:
+  upload:
+    if: github.ref == 'refs/heads/experiment/room-case-library-layout-fix-2026-11-14'
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Checkout authorized working branch only
+        uses: actions/checkout@v4
+        with:
+          ref: experiment/room-case-library-layout-fix-2026-11-14
+          fetch-depth: 1
+          persist-credentials: true
+      - name: Download and verify source originals; refuse any mismatch
+        shell: bash
+        run: |
+          python -m pip install --disable-pip-version-check --quiet gdown==5.2.0
+          python - <<'PY'
+          import hashlib, os, pathlib, tempfile, gdown
+          entries = [["1m26-oAVSeoUcjjHdQl5yGs8eiIRByaJF","public/assets/video/designer-case-4-intro-v1.mp4","b99b015b271bf83aa57977d607a753324708f9e2dcab160528140afb4ffc3c91",2690338],["1vRnALp59GC4dmjy6M_J8E-UOiMU_KaCZ","public/assets/video/designer-case-4-testing-evidence-v1.mp4","681e2e5765ececff5ce2c38b7d68977445d8f0aa2e974ed361ccaa9f5db60bd9",5860199],["1EwYPPQ3krHm9qAV26jwt57-8xBoy0OXX","public/assets/video/designer-case-4-outcome-v1.mp4","3f3e1349d064a1ff2dcc39f7d5ff492e5a81a8f4664eba746e9060064a5fbd1c",3792082],["1MbdBmI2Xd2nZBNDiUh0u6dO07EYTwt5r","public/assets/video/designer-case-5-intro-v1.mp4","685921ef1bda6bd544e62e2769b87160b24e2aaa816782068b22e9aadef00a78",5027110],["1nRPdau6afLiszCLV43HqYN3GSj0-MF09","public/assets/video/designer-case-5-outcome-v1.mp4","2682925c5f46cb878143363d7c6b40e306073e0f9326a14840c52d5b9198b27f",5404764]]
+          for index, (file_id, path, expected, size) in enumerate(entries, start=1):
+              target = pathlib.Path(path)
+              target.parent.mkdir(parents=True, exist_ok=True)
+              if target.exists():
+                  actual = target.read_bytes()
+                  if len(actual)==size and hashlib.sha256(actual).hexdigest()==expected:
+                      print(f'[{index}/5] exact source already installed: {path}', flush=True)
+                      continue
+                  raise RuntimeError(f'Refusing to overwrite a non-identical file: {path}')
+              with tempfile.TemporaryDirectory() as folder:
+                  temp = pathlib.Path(folder) / 'original.mp4'
+                  result = gdown.download(id=file_id, output=str(temp), quiet=False)
+                  if not result or not temp.is_file(): raise RuntimeError(f'Drive file unavailable: {file_id}')
+                  content = temp.read_bytes()
+                  digest = hashlib.sha256(content).hexdigest()
+                  if len(content)!=size or digest!=expected:
+                      raise RuntimeError(f'Source mismatch {path}: length={len(content)}, sha256={digest}')
+                  os.replace(temp,target)
+                  print(f'[{index}/5] SHA256 VERIFIED bytes={size} sha256={digest} path={path}',flush=True)
+          print('FIVE OUT OF FIVE ORIGINAL SOURCES PASSED SIZE AND SHA256 VALIDATION')
+          PY
+      - name: Commit only five source-exact MP4s, safe on concurrent updates
+        shell: bash
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add public/assets/video/designer-case-4-intro-v1.mp4
+          git add public/assets/video/designer-case-4-testing-evidence-v1.mp4
+          git add public/assets/video/designer-case-4-outcome-v1.mp4
+          git add public/assets/video/designer-case-5-intro-v1.mp4
+          git add public/assets/video/designer-case-5-outcome-v1.mp4
+          if git diff --cached --quiet; then echo 'Files already uploaded'; exit 0; fi
+          git commit -m 'assets(video): install five source-verified Oriole and Asterion films'
+          for attempt in 1 2 3 4 5 6; do
+            git fetch origin experiment/room-case-library-layout-fix-2026-11-14
+            git rebase FETCH_HEAD
+            if git push origin HEAD:experiment/room-case-library-layout-fix-2026-11-14; then
+              echo 'Five source-exact MP4s are now committed on GitHub'
+              exit 0
+            fi
+            echo "Another writer advanced the branch; retrying after fresh fetch #$attempt"
+            sleep 3
+          done
+          echo 'Unable to obtain fast-forward after six safe attempts' >&2
+          exit 1
