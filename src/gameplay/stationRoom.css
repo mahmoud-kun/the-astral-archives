@@ -43,3 +43,21 @@
  .sr-beacon .eg-glyph{width:21px;height:21px}.sr-beacon .eg-glyph svg{width:15px;height:15px}
 }
 @media(prefers-reduced-motion:reduce){.sr-beacon{transition:none}}
+
+/* Mobile horizontal HUD: the back button already reaches Investigation.
+   Remove that duplicate from the compact room switcher; don't cover room art
+   with two explanatory bars when the bottom status line is sufficient. */
+@media (orientation:landscape) and (max-height:600px) and (max-width:1000px){
+ .sr-nav button:first-child{display:none}
+ .sr-nav{margin-right:51px;gap:5px}
+ .sr-instruction{display:none}
+ .sr-head{background:linear-gradient(180deg,#031322ed,#0a2239bc);border-bottom-color:#355366}
+ .sr-foot{background:linear-gradient(0deg,#03111fe9,#03111f66);gap:8px}
+ .sr-beacon{min-width:26px;min-height:26px}
+}
+@media (orientation:landscape) and (max-height:400px) and (max-width:800px){
+ .sr-heading small{display:none}
+ .sr-nav button{padding:5px 6px;font-size:9px}
+ .sr-foot span:first-child{display:none}
+ .sr-foot{justify-content:flex-end}
+}
