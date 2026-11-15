@@ -44,6 +44,7 @@ async function check(viewport, route, label, action){
    const item={label,viewport,route,metrics,faults,imagesRequested:responses}
    report.pages.push(item)
    console.log(`[VISUAL-QA] ${label} ${viewport.width}x${viewport.height}: broken=${metrics.images.filter(x=>!x.ok).length} clipped=${metrics.clippedControls.length} overflow=${metrics.overflow.length} console=${faults.length} imageBytes=${responses.reduce((n,x)=>n+x.bytes,0)}`)
+   if(faults.length)console.log('[VISUAL-QA-FAULT] '+label+' '+JSON.stringify(faults.slice(0,5)))
  }catch(e){const err={label,viewport,error:String(e),faults};report.errors.push(err);console.error(err)}
  finally{await context.close()}
 }
