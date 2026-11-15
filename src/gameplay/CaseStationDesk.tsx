@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState, type KeyboardEvent as ReactKeyboardEvent } from 'react'
 import { createPortal } from 'react-dom'
 import { CASE_META, EVIDENCE_RECORDS, type ArchiveRoom } from '../archive/evidenceRecords'
-import { countRequiredEvidence } from '../archive/archiveState'
+import { countCaseCollectedEvidence } from '../archive/archiveState'
 import { navigateGame } from '../gameNavigation'
 import { useArchiveSave } from './gameSave'
 import { OTHER_CASE_IDS, type OtherCaseId, type OtherRecordId } from './caseEvidenceEngine'
@@ -71,8 +71,8 @@ export default function CaseStationDesk({station,onClose,initialCase}:{
       <b>{c}</b><span>{CASE_META[c].name}</span></button>)}
     </nav>
     <p className="cw-desk-story">Choose a recovered document from this room. Read the evidence, watch or listen to attached media, then press COLLECT EVIDENCE. No questions or quizzes. You choose the Mission Folder yourself.</p>
-    <div className="cw-desk-progress"><span>REQUIRED RECORDS CORRECTLY FILED</span>
-     <strong>{countRequiredEvidence(archive,caseId)} / 6</strong><button type="button" onClick={openFolders}>OPEN MISSION FOLDERS</button></div>
+    <div className="cw-desk-progress"><span>RESCUE UNLOCKS AFTER ANY SIX RECORDS COLLECTED</span>
+     <strong>{Math.min(countCaseCollectedEvidence(archive,caseId),6)} / 6</strong><button type="button" onClick={openFolders}>OPEN MISSION FOLDERS</button></div>
     <div className="cw-desk-records">
      {items.map(record=>{
       const collected=archive.discovered.includes(record.id)
