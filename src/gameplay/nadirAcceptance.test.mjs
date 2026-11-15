@@ -1,7 +1,7 @@
 import test from 'node:test'
 import assert from 'node:assert/strict'
 import { EVIDENCE_RECORDS } from '../archive/evidenceRecords.ts'
-import { countRequiredEvidence, discoverEvidence, emptyArchiveState, fileEvidence, rescueIsReady } from '../archive/archiveState.ts'
+import { countRequiredEvidence, diagnosisIsSupported, discoverEvidence, emptyArchiveState, fileEvidence, rescueIsReady, restoreArchiveState, submitDiagnosis, updateDiagnosis } from '../archive/archiveState.ts'
 import { NADIR_CHALLENGES, NADIR_ROOM, REQUIRED_NADIR, emptyNadir, solveNadir,
   restoreNadir, verifyRescuePlan } from './nadirEngine.ts'
 
@@ -77,4 +77,47 @@ test('Restore of corrupted or forged Nadir progress is constrained to known IDs'
   assert.equal(r.attempts['NAD-01'],undefined)
   assert.equal(r.hints['NAD-02'],undefined)
   assert.equal(restoreNadir('broken').solved.length,0)
+})
+
+test('Nadir full state journey: six analyzed records, deliberate collect, wrong filing, refile, rescue and reload',()=>{
+  let progress=emptyNadir()
+  let archive=emptyArchiveState()
+  const order=['NAD-06','NAD-05','NAD-02','NAD-01','NAD-04','NAD-03']
+  for(const id of order){
+    const verified=solveNadir(progress,id,correct[id])
+    assert.equal(verified.ok,true,id+' must be solvable after its prerequisites')
+    progress=restoreNadir(JSON.stringify(verified.next))
+    assert.equal(archive.discovered.includes(id),false,'solving must not auto-collect '+id)
+    const before=countRequiredEvidence(archive,'NAD')
+    archive=discoverEvidence(archive,id) // deliberate user COLLECT
+    assert.equal(countRequiredEvidence(archive,'NAD'),before,'collection cannot auto-file')
+    archive=fileEvidence(archive,id,'KES') // reversible mistake
+    assert.equal(countRequiredEvidence(archive,'NAD'),before,'wrong folder cannot grant progress')
+    archive=fileEvidence(archive,id,'NAD')
+    archive=restoreArchiveState(JSON.stringify(archive))
+    assert.equal(countRequiredEvidence(archive,'NAD'),before+1,'re-file must grant exactly one progress point')
+  }
+  assert.equal(rescueIsReady(archive,'NAD'),true)
+  assert.equal(diagnosisIsSupported(archive,'NAD'),false,'diagnosis happens inside Rescue')
+  archive=submitDiagnosis(updateDiagnosis(archive,'NAD',{
+    technical:{answer:'units',evidenceId:'NAD-02'},
+    process:{answer:'no-rerun',evidenceId:'NAD-06'},
+    consequence:{answer:'divergence',evidenceId:'NAD-01'},
+  }),'NAD')
+  assert.equal(diagnosisIsSupported(archive,'NAD'),true)
+  const engineering=verifyRescuePlan({
+    canonical:'ns',converter:'producer',guard:'automated',
+    first:'53.37865938',second:'3.558577292',
+  })
+  assert.equal(engineering.passed,true)
+  assert.equal(verifyRescuePlan({
+    canonical:'ns',converter:'producer',guard:'automated',
+    first:'53.37865938',second:'0.8',
+  }).passed,false,'one correct vector cannot conceal a wrong second vector')
+  archive=fileEvidence(archive,'NAD-03',null)
+  assert.equal(rescueIsReady(archive,'NAD'),false,'moving any required record away relocks Rescue')
+  assert.equal(diagnosisIsSupported(archive,'NAD'),false,'accepted review must not appear verified with 5/6')
+  archive=fileEvidence(archive,'NAD-03','NAD')
+  assert.equal(rescueIsReady(archive,'NAD'),true,'returning record restores legitimate progress')
+  assert.equal(diagnosisIsSupported(archive,'NAD'),true)
 })
