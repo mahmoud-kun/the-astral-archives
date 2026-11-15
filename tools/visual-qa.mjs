@@ -279,6 +279,15 @@ await check(mobile,'/','opening-to-investigation',async page=>{
  },src)
  assert.equal(head.status,200,'Opening video must be served')
  assert.ok(head.type?.includes('video/mp4'),'Opening video MIME type must be MP4')
+ const browserCodec=await page.locator('.cm-video').evaluate(video=>({
+  mp4:video.canPlayType('video/mp4'),
+  h264:video.canPlayType('video/mp4; codecs="avc1.640028, mp4a.40.2"'),
+  mediaError:video.error?.code??null,
+  mediaMessage:video.error?.message??null,
+  networkState:video.networkState,
+  readyState:video.readyState,
+ }))
+ console.log('[MEDIA-CODEC-QA] opening '+JSON.stringify(browserCodec))
  await page.screenshot({path:`${output}/cinematic-opening-active-915x412.png`,animations:'disabled'})
  // The 10s opening may already have ended by the time the HTTP HEAD check finishes.
  // Either SKIP & CONTINUE or CONTINUE must advance to Investigation.
