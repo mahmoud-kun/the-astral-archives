@@ -76,7 +76,7 @@ export default function AudioReviewLab(){
   </div>
   <section className="al-list" aria-label="Designer cinematic review" style={{margin:'18px auto',maxWidth:'900px'}}>
    <header><h2>DESIGNER CINEMATICS</h2><small>4 MP4 DELIVERED IN DRIVE · PUBLISHING PENDING</small></header>
-   {Object.entries(CINEMATICS).map(([id,clip])=><div className="al-cue" key={id}>
+   {Object.entries(CINEMATICS).map(([id,clip])=><div className="al-cinema-cue" key={id}>
     <div><strong>{clip.title}</strong><small>{clip.duration}s · Original preserved in Drive · Local clip required for playback</small></div>
     <button type="button" data-sfx="none" onClick={()=>setPreviewClip(id as CinematicId)}>REVIEW</button>
    </div>)}
