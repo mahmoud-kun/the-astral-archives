@@ -365,6 +365,65 @@ await check(mobile,'/?folder-lab=1','kestrel-film-content-hold',async page=>{
  assert.equal(await page.getByRole('button',{name:'PLAY KESTREL INTRO'}).count(),0)
  assert.match(await page.locator('.af-status').textContent(),/awaits the approved visual/)
 })
+// Past visual integration acceptance: use an isolated, valid six-record QA save
+// in each disposable browser context. This is NOT player-facing debug intake.
+const pastQaSave={version:1,
+ discovered:['NAD-01','NAD-02','NAD-03','NAD-04','NAD-05','NAD-06'],
+ filed:{'NAD-01':'NAD','NAD-02':'NAD','NAD-03':'NAD','NAD-04':'NAD','NAD-05':'NAD','NAD-06':'NAD'},
+ diagnosis:{},submitted:[]}
+async function seedPastQaSave(page){
+ await page.evaluate(value=>localStorage.setItem('astral-archive-folder-v1',JSON.stringify(value)),pastQaSave)
+ await page.reload({waitUntil:'networkidle'})
+}
+await check(mobile,'/?past=manufacturing&case=NAD','past-direct-route-locked',async page=>{
+ await page.locator('.pt-locked').waitFor({state:'visible'})
+ assert.equal(await page.locator('.sr-past-background').count(),0,
+  'A direct Past URL cannot bypass missing evidence')
+ assert.match(await page.locator('.pt-locked').textContent(),/0\/6/)
+})
+for(const [room,count] of [['manufacturing',3],['mission_target',4],['data_analysis',3],['resources_review',5]]){
+ await check(mobile,'/?past='+room+'&case=NAD','past-'+room+'-unlocked',async page=>{
+  await seedPastQaSave(page)
+  await page.locator('.pt-root').waitFor({state:'visible'})
+  const image=page.locator('.sr-past-background')
+  await image.waitFor({state:'visible'})
+  const dims=await image.evaluate(img=>({w:img.naturalWidth,h:img.naturalHeight,complete:img.complete}))
+  assert.deepEqual(dims,{w:1920,h:1080,complete:true})
+  assert.equal(await page.locator('.sr-past-target').count(),count,
+   'All 15 stable hotspots must be distributed across four Past rooms')
+  await page.locator('.sr-past-target').first().click()
+  assert.ok((await page.locator('.pt-inspection strong').textContent()||'').trim().length>0)
+  assert.equal(await page.locator('.pt-rescue').isEnabled(),true)
+ })
+}
+for(const viewport of [laptop,phone]){
+ await check(viewport,'/?past=resources_review&case=NAD','past-resources-responsive',async page=>{
+  await seedPastQaSave(page)
+  await page.locator('.sr-past-background').waitFor({state:'visible'})
+  assert.equal(await page.locator('.sr-past-target').count(),5)
+  const controls=await page.locator('.pt-bottom button').evaluateAll(nodes=>nodes.map(node=>{
+   const r=node.getBoundingClientRect();return {left:r.left,right:r.right,top:r.top,bottom:r.bottom}
+  }))
+  for(const bounds of controls)assert.ok(bounds.left>=-2&&bounds.right<=viewport.width+2&&
+   bounds.top>=-2&&bounds.bottom<=viewport.height+2,'Past footer must fit the landscape viewport')
+ })
+}
+await check(mobile,'/?folder-lab=1','past-portal-to-rescue',async page=>{
+ await seedPastQaSave(page)
+ await page.locator('.af-folder-choice').filter({hasText:'Nadir'}).click()
+ await page.getByRole('button',{name:/ENTER NADIR RESCUE/}).click()
+ await page.locator('.cm-backdrop').waitFor({state:'visible'})
+ assert.match(await page.locator('.cm-panel').textContent(),/Journey to the Past/)
+ await page.locator('.cm-actions .cm-primary').click()
+ await page.locator('.pt-root').waitFor({state:'visible'})
+ assert.match(page.url(),/past=manufacturing/)
+ await page.locator('.pt-nav button').filter({hasText:'RESOURCES'}).click()
+ await page.locator('.sr-past-target[data-object-id="resource_allocation"]').click()
+ await page.locator('.pt-rescue').click()
+ await page.locator('.nr-root').waitFor({state:'visible'})
+ assert.match(page.url(),/rescue=NAD/)
+ assert.match(await page.locator('.nr-progress').textContent(),/6\/6/)
+})
 await check({width:390,height:844},'/','portrait-guard')
 await writeFile(`${output}/report.json`, JSON.stringify(report,null,2))
 await browser.close()
