@@ -27,7 +27,7 @@ function DossierSheet({ record, index, onClick }: { record: ArchiveEvidence; ind
   const slot = index % 7
   const style: CSSProperties = { left:(14+slot*5.5)+'%', top:(9+(slot%3)*7)+'%', transform:'rotate('+[-8,5,-5,7,-3,4,-7][slot]+'deg)', zIndex:10+index }
   return <button className={'af-dossier-sheet af-sheet-'+record.kind} style={style} onClick={onClick} aria-label={'Inspect '+record.id+' '+record.title}>
-    <span className="af-sheet-id">{record.id} / {record.room.toUpperCase()}</span><strong>{record.title}</strong>
+    <span className="af-sheet-id">{record.id} / ARCHIVED</span><strong>{record.title}</strong>
     <PaperGraphic kind={record.kind}/><span className="af-sheet-footer">ARCHIVE / {record.id}</span><em>REVIEW COPY</em>
   </button>
 }
@@ -43,7 +43,7 @@ function DocumentViewer({ record, archive, onDiscover, onFile, onClose }: {recor
     <section className="af-document-modal" role="dialog" aria-modal="true" aria-labelledby="af-document-title">
       <div className="af-modal-bar"><span>DOCUMENT INSPECTION / {record.id}</span><button onClick={onClose}>CLOSE ×</button></div>
       <div className="af-document-scroll"><article className="af-document-paper">
-        <div className="af-document-letterhead"><span>THE ASTRAL ARCHIVES / {record.room.toUpperCase()}</span><span>{record.id} / ARCHIVED COPY</span></div>
+        <div className="af-document-letterhead"><span>THE ASTRAL ARCHIVES / RECOVERED RECORD</span><span>{record.id} / ARCHIVED COPY</span></div>
         <span className="af-document-kind">{record.kind.toUpperCase()} / FICTIONAL RECORD</span>
         <h2 id="af-document-title">{record.title}</h2>
         <div className="af-hero-graphic"><PaperGraphic kind={record.kind}/></div>
@@ -80,7 +80,6 @@ export default function ArchiveFolderLab() {
   const collectedCount=countCaseCollectedEvidence(archive,caseId)
   // Any six distinct collected records of the current mission unlock Rescue.
   // Sorting remains editable and optional for unlocking.
-  const uncollected=EVIDENCE_RECORDS.filter(record=>record.caseId===caseId&&!archive.discovered.includes(record.id))
   const ready=rescueIsReady(archive,caseId)
   const storyComplete=isStoryRescueComplete(caseId)
   const unseen=EVIDENCE_RECORDS.filter(record=>record.caseId===caseId&&!archive.discovered.includes(record.id))
@@ -139,7 +138,7 @@ export default function ArchiveFolderLab() {
         {intake&&<section className="af-intake"><div className="af-intake-head"><strong>{debug?'DEBUG RECORD INTAKE':'UNFILED EVIDENCE / SELECT & FILE'}</strong><button onClick={()=>setIntake(false)} aria-label="Close intake">×</button></div>
           <p>Evidence must be discovered and manually collected in station rooms before it can be filed. Select a collected record, then choose its mission folder.</p>
           <div className="af-intake-items">
-            {debug&&unseen.map(record=><button key={record.id} onClick={()=>setInspectedId(record.id)}><small>{record.id} / {record.room}</small><strong>{record.title}</strong><span>DEBUG COLLECT</span></button>)}
+            {debug&&unseen.map(record=><button key={record.id} onClick={()=>setInspectedId(record.id)}><small>{record.id} / UNCOLLECTED</small><strong>{record.title}</strong><span>DEBUG COLLECT</span></button>)}
             {unfiled.map(record=><button key={record.id} onClick={()=>setInspectedId(record.id)}><small>{record.id} / COLLECTED</small><strong>{record.title}</strong><span>FILE INTO A MISSION</span></button>)}
             {filed.map(record=><button key={'filed-'+record.id} onClick={()=>setInspectedId(record.id)}><small>{record.id} / FILED IN {caseId}</small><strong>{record.title}</strong><span>INSPECT / MOVE SHEET</span></button>)}
           </div>
@@ -148,22 +147,10 @@ export default function ArchiveFolderLab() {
       <aside className="af-status" aria-label="Case investigation status">
         <h2>CASE STATUS <small>{caseId} / INVESTIGATION</small></h2>
         <div className="af-status-section"><span>EVIDENCE COLLECTED · ANY SIX OF EIGHT</span><div className="af-count"><strong>{Math.min(collectedCount,6)}</strong><em>/ 06 TO UNLOCK</em></div><div className="af-meter" role="progressbar" aria-label="Distinct mission evidence collected toward Rescue" aria-valuemin={0} aria-valuemax={6} aria-valuenow={Math.min(collectedCount,6)}><i style={{width:(Math.min(collectedCount,6)/6*100)+'%'}}/></div><small>{collectedCount} of 8 collected · Folders are for optional organization</small></div>
-        {!ready&&<div className="af-status-section af-missing-required" aria-label="Mission evidence not yet collected">
-          <span>FIND MORE EVIDENCE TO UNLOCK</span>
-          <p>Collect <strong>{6-collectedCount}</strong> more evidence sheet{6-collectedCount===1?'':'s'} from this mission. <strong>Any 6 of the 8</strong> unlock Rescue immediately; filing and refiling do not affect progress.</p>
-          <div className="af-missing-list">
-            {uncollected.map(record=>{
-              const location=record.room.toLowerCase() as StationId
-              return <div className="af-missing-item" key={record.id}>
-                <strong>{record.id} · {record.title}</strong>
-                <small>NOT YET COLLECTED · {record.room.toUpperCase()} ROOM · {record.required?'CORE':'BONUS'} RECORD</small>
-                <button type="button" onClick={()=>navigateGame(stationRoute(location))}>
-                  GO TO {record.room.toUpperCase()} ROOM →
-                </button>
-              </div>
-            })}
-          </div>
-          <small>Collect any six of the eight case records. No questions, answers or correct folder placements are needed.</small>
+        {!ready&&<div className="af-status-section af-missing-required" aria-label="Rescue collection progress">
+          <span>MORE EVIDENCE TO UNCOVER</span>
+          <p>Explore the station independently. Collect <strong>{6-collectedCount}</strong> more record{6-collectedCount===1?'':'s'} from this mission to unlock Rescue. Undiscovered titles, IDs and locations stay hidden.</p>
+          <small>Any six of eight count. Sorting is optional and never changes rescue progress.</small>
         </div>}
         <div className="af-status-section"><span>MISSION BRIEFING FILM</span>{caseId==='KES'&&KESTREL_FOOTAGE_PENDING_APPROVAL
           ? <small>PROJECT BRIEF / Early-phase design trade: the original payload, power and cost no longer fit the mission plan. Investigate the actual source records; no launch or assembly footage is represented as historical proof.</small>
