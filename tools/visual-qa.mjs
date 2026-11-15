@@ -5,7 +5,11 @@ import assert from 'node:assert/strict'
 const origin = process.env.VISUAL_QA_URL ?? 'http://127.0.0.1:5173'
 const output = 'qa-artifacts'
 await mkdir(output, {recursive:true})
-const browser = await chromium.launch({headless:true, args:['--no-sandbox']})
+// Branded Chrome supports licensed H.264/AAC designer MP4s; bundled Chromium
+// headless shell may report MEDIA_ERR_SRC_NOT_SUPPORTED for valid films.
+const browserChannel=process.env.VISUAL_QA_BROWSER_CHANNEL || 'chrome'
+console.log('[VISUAL-QA] Browser channel '+browserChannel)
+const browser = await chromium.launch({channel:browserChannel,headless:true, args:['--no-sandbox']})
 const report = {version:1,origin,started:new Date().toISOString(),pages:[],errors:[]}
 
 async function check(viewport, route, label, action){
@@ -288,6 +292,19 @@ await check(mobile,'/','opening-to-investigation',async page=>{
   readyState:video.readyState,
  }))
  console.log('[MEDIA-CODEC-QA] opening '+JSON.stringify(browserCodec))
+ await page.waitForFunction(()=>{
+  const v=document.querySelector('.cm-video')
+  return !!v&&(v.readyState>=2||!!v.error)
+ },null,{timeout:18000})
+ const playback=await page.locator('.cm-video').evaluate(video=>({
+  errorCode:video.error?.code??null,
+  errorText:video.error?.message??null,
+  ready:video.readyState,
+  width:video.videoWidth,height:video.videoHeight,
+ }))
+ assert.equal(playback.errorCode,null,'Branded Chrome must decode the authored H.264/AAC opening '+JSON.stringify(playback))
+ assert.ok(playback.ready>=2&&playback.width>0&&playback.height>0,
+  'Opening must expose decoded video frames in Chrome: '+JSON.stringify(playback))
  await page.screenshot({path:`${output}/cinematic-opening-active-915x412.png`,animations:'disabled'})
  // The 10s opening may already have ended by the time the HTTP HEAD check finishes.
  // Either SKIP & CONTINUE or CONTINUE must advance to Investigation.
@@ -328,7 +345,7 @@ await check(mobile,'/?station=signal','nadir-evidence-video',async page=>{
  await page.locator('.im-media-video button').click()
  await page.locator('.cm-backdrop').waitFor({state:'visible'})
  assert.equal(await page.locator('.cm-video').getAttribute('src'),'/assets/video/designer-case-2-units-mismatch-evidence-v1.mp4')
- await page.getByRole('button',{name:'SKIP & CONTINUE'}).click()
+ await page.locator('.cm-actions .cm-primary').click()
  await page.locator('.np-dialog').waitFor({state:'visible'})
  assert.equal(await page.getByRole('button',{name:/COLLECT EVIDENCE · NAD-02/}).count(),0,
   'Skipping the film must never grant collection before analysis')
