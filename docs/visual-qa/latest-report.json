@@ -1,6 +1,6 @@
 {
-  "run_on": "2026-11-15T04:44:01.359Z",
-  "screenshots": 44,
+  "run_on": "2026-11-15T04:59:18.815Z",
+  "screenshots": 52,
   "console_errors": 0,
   "broken_images": 0,
   "clipped_controls": 0,
@@ -393,6 +393,78 @@
         "height": 412
       },
       "label": "audio-lab",
+      "bytes": 0
+    },
+    {
+      "route": "/?room=1",
+      "viewport": {
+        "width": 1366,
+        "height": 768
+      },
+      "label": "case-source-index",
+      "bytes": 899502
+    },
+    {
+      "route": "/?room=1",
+      "viewport": {
+        "width": 915,
+        "height": 412
+      },
+      "label": "case-source-index",
+      "bytes": 899502
+    },
+    {
+      "route": "/?room=1",
+      "viewport": {
+        "width": 915,
+        "height": 412
+      },
+      "label": "case-puzzle",
+      "bytes": 899502
+    },
+    {
+      "route": "/?rescue=KES",
+      "viewport": {
+        "width": 915,
+        "height": 412
+      },
+      "label": "case-rescue-kes",
+      "bytes": 0
+    },
+    {
+      "route": "/?rescue=LUM",
+      "viewport": {
+        "width": 915,
+        "height": 412
+      },
+      "label": "case-rescue-lum",
+      "bytes": 0
+    },
+    {
+      "route": "/?rescue=ORI",
+      "viewport": {
+        "width": 915,
+        "height": 412
+      },
+      "label": "case-rescue-ori",
+      "bytes": 0
+    },
+    {
+      "route": "/?rescue=AST",
+      "viewport": {
+        "width": 915,
+        "height": 412
+      },
+      "label": "case-rescue-ast",
+      "bytes": 0
+    },
+    {
+      "route": "/?folder-lab=1&debug=1",
+      "viewport": {
+        "width": 915,
+        "height": 412
+      },
+      "label": "production-debug-guard",
       "bytes": 0
     },
     {
