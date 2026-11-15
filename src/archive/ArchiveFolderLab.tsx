@@ -2,6 +2,7 @@ import { useEffect, useState, type CSSProperties } from 'react'
 import { CASE_CODES, CASE_META, EVIDENCE_RECORDS, findEvidence, type ArchiveCaseId, type ArchiveEvidence } from './evidenceRecords'
 import { ARCHIVE_SAVE_KEY, DIAGNOSIS_PROMPTS, countInFolder, countRequiredEvidence, diagnosisIsSupported, discoverEvidence, emptyArchiveState, fileEvidence, rescueIsReady, restoreArchiveState, submitDiagnosis, updateDiagnosis, type ArchiveState, type CaseDiagnosis, type DiagnosticPart } from './archiveState'
 import { navigateGame, onGameLinkClick } from '../gameNavigation'
+import { playGameSound } from '../audio/gameAudio'
 import { ARCHIVE_PROGRESS_EVENT, stationRoute, type StationId } from '../gameplay/nadirEngine'
 import './archiveFolderLab.css'
 
@@ -57,7 +58,7 @@ function DocumentViewer({ record, archive, onDiscover, onFile, onClose }: {recor
               <select value={destination} onChange={event=>setDestination(event.target.value)}>
                 <option value="">UNFILED INVENTORY</option>{CASE_CODES.map(code=><option key={code} value={code}>{code} — {CASE_META[code].name}</option>)}
               </select>
-            </label><button className="af-primary" onClick={()=>onFile(record.id,destination?destination as ArchiveCaseId:null)} disabled={destination===(archive.filed[record.id]??'')}>{destination?'FILE HERE':'MOVE TO UNFILED'}</button></>
+            </label><button className="af-primary" data-sfx="none" onClick={()=>onFile(record.id,destination?destination as ArchiveCaseId:null)} disabled={destination===(archive.filed[record.id]??'')}>{destination?'FILE HERE':'MOVE TO UNFILED'}</button></>
           : <button className="af-primary" onClick={()=>onDiscover(record.id)}>COLLECT EVIDENCE</button>}
         <span>{found?'SELECT & FILE / MOVE WITHOUT PENALTY':'DEVELOPMENT MODE ONLY'}</span>
       </div>
@@ -89,7 +90,18 @@ export default function ArchiveFolderLab() {
     window.dispatchEvent(new Event(ARCHIVE_PROGRESS_EVENT))
   },[archive])
   function chooseCase(code:ArchiveCaseId){setCaseId(code);setOpen(true);setDiagnose(false);setReviewMessage('');setDraft(archive.diagnosis[code]??EMPTY_ANSWER)}
-  function file(id:string,target:ArchiveCaseId|null){setArchive(current=>fileEvidence(current,id,target));setInspectedId(null)}
+  function file(id:string,target:ArchiveCaseId|null){
+    const next=fileEvidence(archive,id,target)
+    if(next!==archive){
+      // A mistaken filing makes the SAME sound as a correct one; no answer leakage.
+      playGameSound(target?'file':'folderMove')
+      if(!rescueIsReady(archive,caseId)&&rescueIsReady(next,caseId)){
+        window.setTimeout(()=>playGameSound('rescue'),350)
+      }
+    }
+    setArchive(next)
+    setInspectedId(null)
+  }
   function changeAnswer(part:DiagnosticPart,key:'answer'|'evidenceId',value:string){setDraft(prev=>({...prev,[part]:{...prev[part],[key]:value}}))}
   function submit(){
     const next=submitDiagnosis(updateDiagnosis(archive,caseId,draft),caseId)
