@@ -180,6 +180,20 @@ await check(mobile,'/','audio-settings',async page=>{
   assert.equal(await page.locator('.aa-home-audio-volume input').inputValue(),'100')
   // Leave this isolated browser context muted; other QA contexts are unaffected.
 })
+// Low-bandwidth sound preview: no room images, no sound preloading, real file fetch.
+await check(mobile,'/?audio-lab=1','audio-lab',async page=>{
+  assert.equal(await page.locator('.al-cue').count(),19,'Sound Lab must expose all 19 source cues')
+  assert.equal(await page.locator('.al-root img').count(),0,'Sound Lab must avoid heavy game images')
+  const prefetched=await page.evaluate(()=>performance.getEntriesByType('resource').filter(r=>
+    new URL(r.name).pathname.startsWith('/assets/audio/')).length)
+  assert.equal(prefetched,0,'Audio Lab must not automatically download clips')
+  const responsePromise=page.waitForResponse(r=>r.url().includes('/assets/audio/kenney/computer-noise-002.m4a')&&r.status()===200,{timeout:15000})
+  await page.getByRole('button',{name:'Play Equipment Scanner'}).click()
+  await responsePromise
+  await page.getByLabel('Ambient scene').selectOption('signal')
+  assert.match(page.url(),/audio-lab=1.*station=signal/)
+  assert.equal(await page.getByRole('button',{name:'Play Equipment Scanner'}).isVisible(),true)
+})
 await check({width:390,height:844},'/','portrait-guard')
 await writeFile(`${output}/report.json`, JSON.stringify(report,null,2))
 await browser.close()
