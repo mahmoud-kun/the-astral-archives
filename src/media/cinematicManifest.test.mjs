@@ -5,10 +5,10 @@ import {createHash} from 'node:crypto'
 import { CASE_CODES, EVIDENCE_RECORDS } from '../archive/evidenceRecords.ts'
 import { INVESTIGATION_CASES } from '../investigationCases.ts'
 import {CINEMATICS,CINEMATIC_REQUEST_EVENT,CINEMATIC_FINISHED_EVENT,isCinematicId,cinematicVolume} from './cinematicManifest.ts'
-test('only twelve actually delivered designer films are registered',()=>{
- assert.deepEqual(Object.keys(CINEMATICS),['opening','case1Intro','portalPast','case1Outcome','case1Evidence','case2Intro','case2EmailEvidence','case2UnitsMismatchEvidence','case2Outcome','case3Intro','case3ApprovalEvidence','case3Outcome'])
+test('exactly seventeen Drive-delivered designer films are registered',()=>{
+ assert.deepEqual(Object.keys(CINEMATICS),['opening','case1Intro','portalPast','case1Outcome','case1Evidence','case2Intro','case2EmailEvidence','case2UnitsMismatchEvidence','case2Outcome','case3Intro','case3ApprovalEvidence','case3Outcome','case4Intro','case4TestingEvidence','case4Outcome','case5Intro','case5Outcome'])
  assert.equal(isCinematicId('portalPast'),true)
- for(const bad of ['returnPresent','case4Intro','case5Outcome','__proto__','toString',null,undefined,4])assert.equal(isCinematicId(bad),false)
+ for(const bad of ['returnPresent','case6Intro','case6Outcome','__proto__','toString',null,undefined,4])assert.equal(isCinematicId(bad),false)
  assert.equal(CINEMATIC_REQUEST_EVENT,'astral:cinematic-request')
  assert.equal(CINEMATIC_FINISHED_EVENT,'astral:cinematic-finished')
 })
@@ -43,6 +43,10 @@ test('Evidence Production Bible v2 defines the stable mission order and Case 01 
  assert.equal(CINEMATICS.case2Outcome.caseId,CASE_CODES[1])
  assert.equal(CINEMATICS.case3Intro.caseId,CASE_CODES[2])
  assert.equal(CINEMATICS.case3Outcome.caseId,CASE_CODES[2])
+ assert.equal(CINEMATICS.case4Intro.caseId,CASE_CODES[3])
+ assert.equal(CINEMATICS.case4Outcome.caseId,CASE_CODES[3])
+ assert.equal(CINEMATICS.case5Intro.caseId,CASE_CODES[4])
+ assert.equal(CINEMATICS.case5Outcome.caseId,CASE_CODES[4])
 })
 
 test('new evidence-context videos only point at already registered evidence, never new IDs',()=>{
@@ -51,6 +55,7 @@ test('new evidence-context videos only point at already registered evidence, nev
   case2EmailEvidence:'NAD-05',
   case2UnitsMismatchEvidence:'NAD-02',
   case3ApprovalEvidence:'LUM-05',
+  case4TestingEvidence:'ORI-05',
  }
  const registered=new Set(EVIDENCE_RECORDS.map(record=>record.id))
  for(const [key,record] of Object.entries(contexts)){
@@ -60,10 +65,10 @@ test('new evidence-context videos only point at already registered evidence, nev
   assert.ok(registered.has(record))
   assert.equal(clip.caseId,record.slice(0,3))
  }
- assert.equal(new Set(Object.values(contexts)).size,4)
+ assert.equal(new Set(Object.values(contexts)).size,5)
 })
 
-test('all twelve MP4 binaries exist in Git and match the exact designer source hashes',()=>{
+test('all seventeen MP4 binaries exist in Git and match the exact designer source hashes',()=>{
  const sha256={
   opening:'d9901146f958577c2bc1aaea065f5fab42c04d5c8f1903a1d67bd038a2604a7d',
   case1Intro:'104f1d20ec8a414a25dc415528d08cf7befe88b005ce7359a4331541aa5003dc',
@@ -77,6 +82,11 @@ test('all twelve MP4 binaries exist in Git and match the exact designer source h
   case3Intro:'a6d90fbe74e441e78c53c5bc2824a96b4b642eef522ff5f34c1b74def42f07c1',
   case3ApprovalEvidence:'fc096e2d5fa1776505c9802641e2fe91d70fa627220853bcfa0cee2e837b6a64',
   case3Outcome:'40f68475ec9f61f7c08dbf963cc4afcd63b2e11ed54f7e4d422dc2cc83141881',
+  case4Intro:'b99b015b271bf83aa57977d607a753324708f9e2dcab160528140afb4ffc3c91',
+  case4TestingEvidence:'681e2e5765ececff5ce2c38b7d68977445d8f0aa2e974ed361ccaa9f5db60bd9',
+  case4Outcome:'3f3e1349d064a1ff2dcc39f7d5ff492e5a81a8f4664eba746e9060064a5fbd1c',
+  case5Intro:'685921ef1bda6bd544e62e2769b87160b24e2aaa816782068b22e9aadef00a78',
+  case5Outcome:'2682925c5f46cb878143363d7c6b40e306073e0f9326a14840c52d5b9198b27f',
  }
  assert.deepEqual(Object.keys(CINEMATICS),Object.keys(sha256))
  for(const [id,info] of Object.entries(CINEMATICS)){
