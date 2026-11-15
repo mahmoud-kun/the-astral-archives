@@ -21,3 +21,8 @@
 @media(prefers-reduced-motion:reduce){
   .idr-layer-object,.idr-layer-object img{transition:none!important;animation:none!important}
 }
+
+/* Interactive object feedback without altering the approved static art. */
+.idr-layer-object:is(.idr-layer-object-lit,:focus-visible) .idr-layer-glow{filter:drop-shadow(0 0 9px #73e4eda3);animation:astral-interaction-glow 1.8s ease-in-out infinite alternate}
+@keyframes astral-interaction-glow{from{opacity:.63}to{opacity:1}}
+@media(prefers-reduced-motion:reduce){.idr-layer-object .idr-layer-glow{animation:none!important}}
