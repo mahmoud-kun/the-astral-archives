@@ -1,0 +1,66 @@
+# The Astral Archives — Judging Presentation, Pitch & Release Credits
+**Date:** 2026-11-15 · **Owner:** Main Chat · **Status:** Judge-ready content script; slides/physical rehearsal **NOT yet confirmed**.
+
+## Eight-slide deck — final content structure
+
+| # | Slide headline | Show (real product capture) | Spoken core claim (not an unverified metric) |
+|---|---|---|---|
+| 1 | THE ASTRAL ARCHIVES | Original Home Screen, game logo and team **TECHYON** | A first-person cinematic investigation where evidence, not guessing, drives the outcome. |
+| 2 | THE PROBLEM — FAILURE IS A CHAIN | A split view: technical discrepancy, inadequate review and consequence | Space-engineering decisions involve interfaces, trade-offs and verification. A single signed memo is not independent proof. |
+| 3 | OUR SOLUTION — INVESTIGATE BEFORE YOU RESCUE | Four present-day station rooms and Mission Folders | Explore an archive, investigate real engineering concepts through fictional records, and diagnose an alternate-history mission failure. |
+| 4 | THE REAL GAMEPLAY LOOP | Six required/2 optional record cards, physical folder, rescue console | Inspect → interactive analysis → **manual** evidence collection → choose folder → 6/6 correctly filed → Rescue diagnosis → engineering simulation → verified outcome. Wrong filings are reversible and do not gain progress. |
+| 5 | FIVE MISSIONS, FIVE ENGINEERING DISCIPLINES | One case artwork/card each: **KES, NAD, LUM, ORI, AST** | Kestrel: mass/power/budget trade and launch window; Nadir: mixed impulse units and missing rerun; Lumen: raw metrology vs compensated nominal result; Oriole: landing signal/debounce and independent sensors; Asterion: power budgeting, source provenance and re-test. |
+| 6 | NASA DATA VS FICTIONAL SIMULATIONS | Source links/labels, one real methods reference, explicit fiction badge | NASA engineering resources inform the **method**; the five cases, characters, decisions and numeric rescue results are **fictional training simulations**, not real NASA flight records, endorsements or historical rescues. |
+| 7 | LIVE DEMO — PROVE THE ROOT CAUSE | Nadir Evidence Machine, completed dossier, physical Past, final two-vector rerun | A Nadir impulse of **12 lbf·s** is **53.37865938 N·s**; interpreting 12 as N·s breaks a simulated navigation interface. Closing a ticket without the independent rerun does not fix the error. |
+| 8 | IMPACT, LIMITS AND TEAM | Tested game preview + team/credits | Five complete browser-playable cases. We teach evidence-based scientific reasoning and responsible engineering trade-offs through a cinematic interface. The project is not NASA-endorsed; no claims of published educational outcomes without testing. |
+
+## 90-second English pitch (spoken, approximately)
+
+"Space exploration isn't just about the missions that succeed. It is also about the engineering decisions, missed signals, and verification steps that determine whether a mission succeeds at all.
+
+This is **The Astral Archives**. You become Henda, an aerospace investigator inside a station that houses five mysterious mission case files.
+
+Instead of reading a long report, you inspect signals, recordings, and engineering records across four rooms. Each case contains six essential clues and two optional leads. You must analyze the evidence, collect it deliberately, and file it into the right mission folder. Filing it incorrectly does not punish you, but it also does not move the investigation forward.
+
+Once you establish the evidence chain, you can enter the past and attempt a rescue. Here, an engineering choice is never enough on its own: you must defend the diagnosis and pass independent tests.
+
+For example, our Nadir case explores what happens when one engineering system exports an impulse in pound-force seconds, and another interprets it in newton-seconds. The player has to correct the interface and verify it with a new test, instead of trusting an administrative stamp.
+
+The technical principles are grounded in public NASA engineering resources. The individual cases and alternate outcomes are fictional educational simulations, not NASA history.
+
+Our team TECHYON built this as a way to make systems thinking, evidence evaluation, and the discipline of verification interactive. **The future is hidden in the evidence.**"
+
+> Rehearse and time this script with the actual speakers. Do not claim it is exactly 90 seconds until timed.
+
+## Safe live demo route (one judge segment, ~60–90 seconds)
+
+**Default:** Show the Home Screen and Mission Folders, enter Nadir's physical evidence inspector, demonstrate the unit discrepancy and two-run comparison; then show the validated end-to-end proof screenshot/report and **a legitimate recorded run**, or proceed through a previously saved legitimate Nadir game session. **Never use** `?debug=1` or inject an artificial `localStorage` completion on stage.
+
+If judges have time, use the Nadir completed save naturally generated by the game. From Mission Folder → ready 6/6 → Portal → Past Manufacturing → other Past stages → verified Rescue. If starting from a clean save, **do not pretend a full six-evidence playthrough can be completed in 60 seconds**; demonstrate one genuine analysis, then show a separate pre-recorded complete route openly as a demonstration recording.
+
+**Fallback:** Open [live integration screenshot sheet](../visual-qa/media-integration-review.webp), [Past static art sheet](../visual-qa/past-landscape-review.webp) if that verified file exists, [five-case E2E machine report](../visual-qa/four-case-e2e-report.json) and [Nadir report](../visual-qa/nadir-e2e-report.json); show the saved 71-screen QA evidence from source commit `14beba8` if the browser/device fails. Verify each file path and video before presenting.
+
+## Scientific and data provenance — links for slide 6
+
+- NASA: [Design and Develop Science Missions](https://www.nasa.gov/wp-content/uploads/2025/04/250323-design-and-develop-science-mission.pdf) — mission systems engineering, requirements and verification.
+- NASA: [CubeSat 101](https://www.nasa.gov/sites/default/files/atoms/files/nasa_csli_cubesat_101_508.pdf) — mission concept, design, systems and operational lifecycle; **reference only**, no claim all five scenarios are CubeSat missions.
+- NASA/JPL: [Concept Maturity Levels](https://dataverse.jpl.nasa.gov/dataset.xhtml?persistentId=hdl:2014/44299) — concept maturity and review process.
+- Official NASA mission pages and datasets cited in the project case bible should be shown case by case where an individual datum is actually sourced. **Do not fabricate or relabel fictional case numbers as NASA observations.**
+
+## Credits and distribution/rights decision log
+
+- **Game:** The Astral Archives · Team **TECHYON** · created for NASA Space Apps Challenge 2026.
+- **NASA:** Engineering educational reference materials where credited above. **NASA does not endorse this game**, its producers, or simulated events.
+- **Third-party SFX:** Kenney Sci-fi Sounds, CC0 (source: https://kenney.nl/assets/sci-fi-sounds); thank/credit Kenney voluntarily. Check `docs/audio/AUDIO_SOURCES_AND_INTEGRATION_V1.md` for source mapping.
+- **Designer-supplied SFX/voices/cinematics:** Project-supplied audio/video assets. **Distribution/attribution rights and any synthetic voice or source footage licenses remain to be verified by the team**; project possession is not the same as a confirmed redistribution license.
+- **Captions:** Five recorded evidence voices have not received word-for-word designer-approved transcripts/speaker labels. Retain the full written evidence in the inspector as an **alternative text source**, but do not claim it is a verbatim subtitle track.
+- **No unsupported scientific film:** Kestrel early-Phase-A assembly footage kept out of game story; Asterion 472 W cinematic never shown as a verified 450 W replay. In-game verified text outcome is a usable and scientifically honest fallback.
+- **Retired generated NASA mark:** Previous Mission Target `static-v1` binary was deleted from `public/` on the authorized working branch; its Git history/source SHA is preserved. Only neutral `static-v2` is shipped.
+- **Open approvals:** Real Android touch/audio/MP4 audition; designer review; third-party and project footage rights; exact VOs transcript/speaker signoff; any final Closing or Return-to-Present scenes. **No public release claim until these are resolved or explicitly scoped out.**
+
+## Minimal final gate — avoid rerunning every long scenario
+
+1. Identify exact source SHA. Check the two changed outcome/briefing screens and absence of retired static-v1 from the **built** `dist` tree; verify `static-v2` exists.
+2. Run focused `npm run typecheck`, media manifest tests and relevant case tests only if there are code changes. The last **five-case full E2E** proof is CI #150 for its exact commit; don't transfer that PASS label uncritically to a later SHA.
+3. Deploy **one** Vercel preview at the frozen release-candidate SHA. Check public accessibility, Home, evidence, one Portal transition, Nadir outcome, KES/AST truthful fallback, mobile MP4 and sound.
+4. Get the designer + device operator's signoff and the competition slide/pitch final export. Keep previous READY Vercel preview available as rollback; no production promotion before signoff.
