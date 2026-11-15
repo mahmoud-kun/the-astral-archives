@@ -78,6 +78,9 @@ export default function ArchiveFolderLab() {
   const meta=CASE_META[caseId], inspected=inspectedId?findEvidence(inspectedId):undefined
   const filed=EVIDENCE_RECORDS.filter(record=>archive.filed[record.id]===caseId)
   const required=countRequiredEvidence(archive,caseId)
+  // A dossier may hold seven sheets while one of its SIX required records is
+  // still unfiled or filed under another case. Explain the real gate clearly.
+  const missingRequired=EVIDENCE_RECORDS.filter(record=>record.caseId===caseId&&record.required&&archive.filed[record.id]!==caseId)
   const ready=rescueIsReady(archive,caseId)
   const storyComplete=isStoryRescueComplete(caseId)
   const unseen=EVIDENCE_RECORDS.filter(record=>record.caseId===caseId&&!archive.discovered.includes(record.id))
@@ -148,6 +151,25 @@ export default function ArchiveFolderLab() {
       <aside className="af-status" aria-label="Case investigation status">
         <h2>CASE STATUS <small>{caseId} / INVESTIGATION</small></h2>
         <div className="af-status-section"><span>REQUIRED EVIDENCE</span><div className="af-count"><strong>{required}</strong><em>/ 06</em></div><div className="af-meter" role="progressbar" aria-label="Correctly filed required evidence" aria-valuemin={0} aria-valuemax={6} aria-valuenow={required}><i style={{width:(required/6*100)+'%'}}/></div></div>
+        {missingRequired.length>0&&<div className="af-status-section af-missing-required" aria-label="Evidence still required to unlock Rescue">
+          <span>WHAT'S MISSING FOR RESCUE</span>
+          <p>{filed.length} sheet{filed.length===1?'':'s'} in this folder, but only <strong>{required}/6</strong> required Kestrel-style mission records count toward Rescue. Optional sheets and records filed in the wrong dossier do not unlock it.</p>
+          <div className="af-missing-list">
+            {missingRequired.map(record=>{
+              const collected=archive.discovered.includes(record.id)
+              const elsewhere=archive.filed[record.id]
+              const location=record.room.toLowerCase() as StationId
+              return <div className="af-missing-item" key={record.id}>
+                <strong>{record.id} · {record.title}</strong>
+                <small>{!collected?'NOT YET COLLECTED · '+record.room+' ROOM':elsewhere?'COLLECTED · CURRENTLY FILED IN '+elsewhere:'COLLECTED · STILL UNFILED'}</small>
+                <button type="button" onClick={()=>collected?setInspectedId(record.id):navigateGame(stationRoute(location))}>
+                  {collected?'OPEN SHEET TO REFILE':'GO TO '+record.room.toUpperCase()+' ROOM'} →
+                </button>
+              </div>
+            })}
+          </div>
+          <small>Collect each required sheet and file it in this dossier. No quiz is needed.</small>
+        </div>}
         <div className="af-status-section"><span>MISSION BRIEFING FILM</span>{caseId==='KES'&&KESTREL_FOOTAGE_PENDING_APPROVAL
           ? <small>PROJECT BRIEF / Early-phase design trade: the original payload, power and cost no longer fit the mission plan. Investigate the actual source records; no launch or assembly footage is represented as historical proof.</small>
           : <button className="af-side-action" type="button" data-sfx="none" onClick={()=>playCaseIntroduction(caseId)}>PLAY {meta.name.toUpperCase()} INTRO</button>}</div>
