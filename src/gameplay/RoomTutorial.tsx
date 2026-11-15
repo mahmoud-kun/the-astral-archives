@@ -75,6 +75,15 @@ export default function RoomTutorial({roomKey,caseId}:{roomKey:TourKey|null;case
   setVisible(true)
  },[roomKey])
  useEffect(()=>{
+  const replay=()=>{
+   if(!roomKey)return
+   save({seen:[roomKey],skipAll:false})
+   setStep(0);setPosition(null);setVisible(true)
+  }
+  window.addEventListener('astral:replay-tutorial',replay)
+  return ()=>window.removeEventListener('astral:replay-tutorial',replay)
+ },[roomKey])
+ useEffect(()=>{
   if(!visible||!targetSelector){setPosition(null);return}
   let frame=0
   let target:HTMLElement|null=null
