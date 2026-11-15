@@ -1,9 +1,12 @@
 import type {ArchiveCaseId} from '../archive/evidenceRecords'
 import {rescueIsReady} from '../archive/archiveState'
 import {readArchive} from './gameSave'
+import {allStagesStable} from './pastInterventions'
+import {readPastChoices} from './pastInterventionSave'
 
 /** Independent story completion save. Never forges the retired engineering tests,
  * NASA telemetry, a technical sign-off, or any evidence/folder progress.
+ * A prior one-button story completion does not bypass the new four repairs.
  */
 const KEY='astral-story-rescue-v1'
 type StorySave={version:1;completed:ArchiveCaseId[]}
@@ -18,11 +21,11 @@ function read():StorySave{
  return {version:1,completed:[]}
 }
 export function isStoryRescueComplete(id:ArchiveCaseId):boolean{
- return read().completed.includes(id)&&rescueIsReady(readArchive(),id)
+ return read().completed.includes(id)&&rescueIsReady(readArchive(),id)&&allStagesStable(id,readPastChoices(id))
 }
 export function completeStoryRescue(id:ArchiveCaseId):boolean{
  // Check any six distinct collected records of this case at the exact final action.
- if(!rescueIsReady(readArchive(),id))return false
+ if(!rescueIsReady(readArchive(),id)||!allStagesStable(id,readPastChoices(id)))return false
  const save=read()
  if(!save.completed.includes(id)){
   try{window.localStorage.setItem(KEY,JSON.stringify({version:1,completed:[...save.completed,id]}))}catch{/* Visible completion survives current session. */}
