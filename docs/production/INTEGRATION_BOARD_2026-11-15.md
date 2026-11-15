@@ -9,7 +9,7 @@
 
 | Stream | Owner | Start | Last handoff commit | Main verdict | P0 blocker |
 | --- | --- | --- | --- | --- | --- |
-| A — Case/Assets/Rooms | Specialist Chat A | IMPLEMENTATION + physical source rooms + Past hub integrated | current working branch | TECHNICAL FLOW REVIEWED / ART APPROVAL HOLD | Source desks and gated Past Timeline now wired; designer cleanup of plates and landscape visual review still pending |
+| A — Case/Assets/Rooms | Specialist Chat A | **FINAL HANDOFF ACCEPTED IN SCOPE** | `14beba8` code/art + `b466e717` docs; [CI #150](https://github.com/mahmoud-kun/the-astral-archives/actions/runs/43699268899) | **ACCEPT asset/route integration; public release HOLD** | Physical Android touch, designer signoff and cleanup of unused public legacy NASA-mark image; broken clean plates/masks excluded, NOT required |
 | B — Audio/Voice/SFX/Cinematics | Specialist Chat B | OWNED ASSETS + CODE COMPLETE | 5 source-exact MP3 + 20 SFX + 17 designer MP4; CI #43693601655 | **ACCEPT in specialist scope / game media QA HOLD** | 5 voices/cinematics awaiting Main browser + actual mobile listening, caption/script approval, KES art hold, AST 472W inconsistency |
 | C — Science/Puzzles | Specialist Chat C | CODE COMPLETE + NORMAL UI END-TO-END | `a43ea2b` + [CI #145](https://github.com/mahmoud-kun/the-astral-archives/actions/runs/43697949431) | **ACCEPT 4/4 integrated case paths / release HOLD** | Four Cases playable via original physical UI with no debug; Nadir fifth E2E and actual mobile/device approval outstanding |
 | Main — Integration/QA | Main Chat | ALL FIVE browser gameplay paths PASS, 69 media screen PASS | [CI #147](https://github.com/mahmoud-kun/the-astral-archives/actions/runs/43698641507) | **5/5 PLAYABILITY PASS / RELEASE STILL HOLD** | Device listening/touch, art sign-off, KES/AST footage mismatches, rights, up-to-date deployment and pitch still pending |
@@ -70,6 +70,12 @@
 - Chat A's Mission Target `static-v2` 1920×1080 art replaces the earlier generated NASA logo with neutral geometric mark and is in tested runtime. Static first-person Past stage and touch/mask interactions are sampled in automated browser emulation; full visual/rights/user approval still separate. The erroneous clean plate candidates in Draft PR #7 remain **excluded and unmerged**.
 - `src/gameplay/StationRoom.tsx` prevents Escape on a cinematic from dismissing its underlying evidence inspector; QA now checks Escape playback return. Run #150 includes this fix.
 - **Release HOLD remains:** real mobile hardware playback/touch/audio mixing, exact VO captions/speaker labels, content/rights/endorsement checklist, Kestrel Phase-A footage mismatch, Asterion 472 W outcome vs 450 W accepted rescue, designer visual sign-off, pitch/demo/closing assets as approved. Do not treat READY preview as final release approval.
+
+## Main verdict on Chat A final handoff — 2026-11-15
+
+**ACCEPT specialist scope (not full release).** Independently read [final Chat A report](handoffs/CASES_ASSETS_FINAL_2026-11-15.md) and checked source SHA `14beba8fca90235986f09f3047b3c25c6761a13a`, [CI #150](https://github.com/mahmoud-kun/the-astral-archives/actions/runs/43699268899) SUCCESS, 71/71 screenshots with 0 errors and **5/5 no-debug full case E2E PASS**. Live Past scenes use corrected `mission_target/static-v2`, neutral fictional emblem, four rooms and fifteen hotspots. No clean-v2 / broken masks are in runtime; Draft PR #7 must remain unmerged.
+
+**Residuals:** (1) genuine Android touch and speaker/headphone audition, (2) independent designer art approval, (3) old unused `public/assets/rooms/past/mission_target/layers/static-v1/room_visible.webp` contains obsolete generated NASA logo and remains copyable in public build, so remove from deploy bundle or relocate to non-public provenance before public promotion, (4) content/media final gates are separate: KES Phase-A clip mismatch, AST 472 W vs verified 450 W, VO captions/speakers and footage rights, (5) final eight-slide presentation, pitch, demo walkthrough and release checklist are not delivered as final artifacts. Do not treat code acceptance as final public release acceptance.
 
 ## Main Chat review checkpoints
 
