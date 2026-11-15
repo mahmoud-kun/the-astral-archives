@@ -1,5 +1,9 @@
 # Active working branch — The Astral Archives
 
+
+> **Authoritative project baseline (user approval, 2026-11-15):** `experiment/room-case-library-layout-fix-2026-11-14` is now treated as the project's canonical main *working branch*. Keep committing here. This is distinct from GitHub's configured default branch, which remains named `main` until a separate explicit repository-setting operation. Do not overwrite that older branch or erase its history. Review Codex's asset outputs separately and integrate only the approved files into this canonical branch.
+
+
 **Branch:** `experiment/room-case-library-layout-fix-2026-11-14`  
 **Status:** Active integration and visual-playtest branch. This is the branch the user selected for continued work.
 
