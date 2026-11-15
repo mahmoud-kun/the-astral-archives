@@ -1,5 +1,7 @@
 import { test } from 'node:test'
 import assert from 'node:assert/strict'
+import {readFileSync} from 'node:fs'
+import {createHash} from 'node:crypto'
 import {EVIDENCE_RECORDS} from '../archive/evidenceRecords.ts'
 import {EVIDENCE_VOICE,isEvidenceVoiceId,evidenceVoiceVolume} from './evidenceVoiceManifest.ts'
 test('one KES-05 source voice accompanies a real preexisting evidence record, not a new collectible',()=>{
@@ -21,4 +23,12 @@ test('source recording respects master volume and is quieter than original peak'
  assert.equal(evidenceVoiceVolume('KES-05',40),0.12)
  assert.equal(evidenceVoiceVolume('KES-05',100),0.3)
  assert.equal(evidenceVoiceVolume('KES-05',1000),0.3)
+})
+
+test('KES-05 MP3 binary is physically committed and source-exact',()=>{
+ const voice=EVIDENCE_VOICE['KES-05']
+ const bytes=readFileSync('public'+voice.path)
+ assert.equal(bytes.byteLength,voice.bytes)
+ assert.equal(bytes.toString('ascii',0,3),'ID3')
+ assert.equal(createHash('sha256').update(bytes).digest('hex'),'371cc159f1d5216eac22cefcb0a792e1fa3625187312a46950c332f4a074bfd5')
 })
