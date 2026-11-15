@@ -49,7 +49,7 @@ function AstralArchives() {
   const rescueCase = params.get('rescue')
   const nadirRescue = rescueCase === 'NAD'
   const otherCaseRescue = isOtherCaseId(rescueCase) ? rescueCase : null
-  const tutorialRoom:TourKey|null = isFixedRoom?'investigation':station?station:pastRoom&&pastCase?('past-'+pastRoom) as TourKey:null
+  const tutorialRoom:TourKey|null = isArchiveFolderLab?'folders':isFixedRoom?'investigation':station?station:pastRoom&&pastCase?('past-'+pastRoom) as TourKey:null
 
   return <>
     <LandscapeGuard />
