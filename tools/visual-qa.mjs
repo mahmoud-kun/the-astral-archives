@@ -43,6 +43,33 @@ async function check(viewport, route, label, action){
  }catch(e){const err={label,viewport,error:String(e),faults};report.errors.push(err);console.error(err)}
  finally{await context.close()}
 }
+// Headless Chromium can reject or defer audible playback without an output device.
+// Assert that the real click invokes Audio.play() for the correct cue, then verify
+// its served binary separately. This is not a substitute for human listening QA.
+async function observeAudioAttempts(page) {
+ await page.evaluate(() => {
+  const nativePlay = HTMLMediaElement.prototype.play
+  window.__astralAudioAttempts = []
+  HTMLMediaElement.prototype.play = function(...args) {
+   window.__astralAudioAttempts.push(new URL(this.src).pathname)
+   return nativePlay.apply(this, args)
+  }
+ })
+}
+async function assertCueAndAsset(page, path, format) {
+ await page.waitForFunction(expected =>
+  (window.__astralAudioAttempts || []).includes(expected), path, {timeout:5000})
+ const asset = await page.evaluate(async url => {
+  const response = await fetch(url, {cache:'no-store'})
+  const bytes = new Uint8Array(await response.arrayBuffer())
+  const ascii = (start,end) => String.fromCharCode(...bytes.slice(start,end))
+  return {status:response.status, size:bytes.length, riff:ascii(0,4), ftyp:ascii(4,8)}
+ }, path)
+ assert.equal(asset.status,200, path+' must be served successfully')
+ assert.ok(asset.size>1500, path+' must contain nonempty audio')
+ assert.equal(format==='wav'?asset.riff:asset.ftyp,format==='wav'?'RIFF':'ftyp',
+  path+' must contain the expected audio container')
+}
 const laptop={width:1366,height:768}
 const mobile={width:915,height:412}
 const phone={width:800,height:360}
@@ -158,12 +185,9 @@ for(const viewport of [laptop,mobile,small]){
 await check(mobile,'/','audio-settings',async page=>{
   const initial=await page.evaluate(()=>performance.getEntriesByType('resource').filter(r=>new URL(r.name).pathname.startsWith('/assets/audio/')).length)
   assert.equal(initial,0,'Home must not preload any audio files')
-  const loaded=[]
-  page.on('response',r=>{if(new URL(r.url()).pathname.startsWith('/assets/audio/'))loaded.push({url:r.url(),status:r.status()})})
+  await observeAudioAttempts(page)
   await page.getByRole('button',{name:'SETTINGS'}).click()
-  await page.waitForTimeout(650)
-  assert.ok(loaded.some(x=>x.url.includes('/audio/sfx/panel_open.wav')&&x.status===200),
-    'Settings click should load the original designer panel-open cue')
+  await assertCueAndAsset(page,'/assets/audio/sfx/panel_open.wav','wav')
   const fx=page.locator('.aa-home-setting-row input[type="checkbox"]').nth(0)
   const ambient=page.locator('.aa-home-setting-row input[type="checkbox"]').nth(1)
   assert.equal(await fx.isChecked(),true)
@@ -187,9 +211,9 @@ await check(mobile,'/?audio-lab=1','audio-lab',async page=>{
   const prefetched=await page.evaluate(()=>performance.getEntriesByType('resource').filter(r=>
     new URL(r.name).pathname.startsWith('/assets/audio/')).length)
   assert.equal(prefetched,0,'Audio Lab must not automatically download clips')
-  const responsePromise=page.waitForResponse(r=>r.url().includes('/assets/audio/kenney/computer-noise-002.m4a')&&r.status()===200,{timeout:15000})
+  await observeAudioAttempts(page)
   await page.getByRole('button',{name:'Play Equipment Scanner'}).click()
-  await responsePromise
+  await assertCueAndAsset(page,'/assets/audio/kenney/computer-noise-002.m4a','m4a')
   await page.getByLabel('Ambient scene').selectOption('signal')
   assert.match(page.url(),/audio-lab=1.*station=signal/)
   assert.equal(await page.getByRole('button',{name:'Play Equipment Scanner'}).isVisible(),true)
