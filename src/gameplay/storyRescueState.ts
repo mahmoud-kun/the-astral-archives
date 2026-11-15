@@ -21,7 +21,7 @@ export function isStoryRescueComplete(id:ArchiveCaseId):boolean{
  return read().completed.includes(id)&&rescueIsReady(readArchive(),id)
 }
 export function completeStoryRescue(id:ArchiveCaseId):boolean{
- // Check the six correctly filed documents at the exact final action.
+ // Check any six distinct collected records of this case at the exact final action.
  if(!rescueIsReady(readArchive(),id))return false
  const save=read()
  if(!save.completed.includes(id)){
