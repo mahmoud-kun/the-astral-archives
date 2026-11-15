@@ -153,7 +153,7 @@ export default function ArchiveFolderLab() {
         <div className="af-status-section"><span>REQUIRED EVIDENCE</span><div className="af-count"><strong>{required}</strong><em>/ 06</em></div><div className="af-meter" role="progressbar" aria-label="Correctly filed required evidence" aria-valuemin={0} aria-valuemax={6} aria-valuenow={required}><i style={{width:(required/6*100)+'%'}}/></div></div>
         {missingRequired.length>0&&<div className="af-status-section af-missing-required" aria-label="Evidence still required to unlock Rescue">
           <span>WHAT'S MISSING FOR RESCUE</span>
-          <p>{filed.length} sheet{filed.length===1?'':'s'} in this folder, but only <strong>{required}/6</strong> required Kestrel-style mission records count toward Rescue. Optional sheets and records filed in the wrong dossier do not unlock it.</p>
+          <p>{filed.length} sheet{filed.length===1?'':'s'} in this folder, but only <strong>{required}/6</strong> correctly filed required mission records count toward Rescue. Optional sheets and records filed in the wrong dossier do not unlock it.</p>
           <div className="af-missing-list">
             {missingRequired.map(record=>{
               const collected=archive.discovered.includes(record.id)
