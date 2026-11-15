@@ -1,6 +1,6 @@
 import type {ArchiveCaseId} from '../archive/evidenceRecords'
 import type {PastRoomId} from './pastTimeline'
-import {INTERVENTIONS,type InterventionChoices} from './pastInterventions'
+import {interventionFor,type InterventionChoices} from './pastInterventions'
 
 /** New, independent intervention save; never edits existing evidence or folder data.
  * Only valid authored options can be restored or persisted. Old saves remain intact.
@@ -20,7 +20,7 @@ function parseStore():Persisted{
    const safe:InterventionChoices={}
    for(const room of ROOMS){
     const choice=input[room]
-    if(typeof choice==='string'&&INTERVENTIONS[caseId][room].options.some(o=>o.id===choice))safe[room]=choice
+    if(typeof choice==='string'&&interventionFor(caseId,room).options.some(o=>o.id===choice))safe[room]=choice
    }
    empty.byCase[caseId]=safe
   }
@@ -31,7 +31,7 @@ export function readPastChoices(caseId:ArchiveCaseId):InterventionChoices{
  return {...(parseStore().byCase[caseId]??{})}
 }
 export function savePastChoice(caseId:ArchiveCaseId,room:PastRoomId,optionId:string):InterventionChoices{
- if(!INTERVENTIONS[caseId][room].options.some(o=>o.id===optionId))return readPastChoices(caseId)
+ if(!interventionFor(caseId,room).options.some(o=>o.id===optionId))return readPastChoices(caseId)
  const next=parseStore()
  next.byCase[caseId]={...(next.byCase[caseId]??{}),[room]:optionId}
  try{localStorage.setItem(KEY,JSON.stringify(next))}catch{/* keep app usable if storage is unavailable */}
