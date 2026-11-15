@@ -40,7 +40,7 @@ export default function EvidenceTray({room}:{room:StationId}){
      <button className={tab==='collected'?'active':''} onClick={()=>{setTab('collected');setReview(null)}}>ALL COLLECTED <b>{collected.length}</b></button>
     </div>
     <div className="et-list">
-     {!showing.length&&<div className="et-empty"><strong>{tab==='unfiled'?'NO UNFILED EVIDENCE':'NO EVIDENCE COLLECTED'}</strong><p>Inspect a room object, complete its investigation when required, then manually collect the evidence.</p></div>}
+     {!showing.length&&<div className="et-empty"><strong>{tab==='unfiled'?'NO UNFILED EVIDENCE':'NO EVIDENCE COLLECTED'}</strong><p>Inspect a room object, read the record and collect the evidence directly. Any six collected records from one mission unlock its Rescue.</p></div>}
      {showing.map(record=><button className={'et-record '+(review===record.id?'active':'')} key={record.id} onClick={()=>setReview(record.id)}>
        <EvidenceGlyph kind={record.kind}/>
        <span className="et-record-copy"><small>{record.id} · {record.room.toUpperCase()}</small><strong>{record.title}</strong><em>{archive.filed[record.id]?'FILED · '+CASE_META[archive.filed[record.id]].name.toUpperCase():'UNFILED'}</em></span>
