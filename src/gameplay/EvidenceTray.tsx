@@ -27,7 +27,7 @@ export default function EvidenceTray({room}:{room:StationId}){
   navigateGame('/?folder-lab=1&return='+encodeURIComponent(room))
  }
  return <>
-  <button className="et-trigger" type="button" onClick={()=>setOpen(!open)} aria-label={'Open evidence tray, '+unfiled.length+' unfiled'} aria-expanded={open} title="Quick Evidence Tray">
+  <button className={'et-trigger'+(room==='investigation'?' et-trigger--investigation':'')} type="button" onClick={()=>setOpen(!open)} aria-label={'Open evidence tray, '+unfiled.length+' unfiled'} aria-expanded={open} title="Quick Evidence Tray">
    <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="1.7" aria-hidden="true"><rect x="3" y="6" width="18" height="14" rx="1"/><path d="M3 10h18M8 6V4h8v2M9 14h6"/></svg>
    <span>{unfiled.length}</span>
   </button>
