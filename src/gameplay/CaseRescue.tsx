@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { EVIDENCE_RECORDS } from '../archive/evidenceRecords'
 import { DIAGNOSIS_PROMPTS, countRequiredEvidence, diagnosisIsSupported, rescueIsReady, submitDiagnosis, updateDiagnosis, type CaseDiagnosis, type DiagnosticPart } from '../archive/archiveState'
 import { navigateGame } from '../gameNavigation'
@@ -30,6 +30,15 @@ export default function CaseRescue({caseId}:{caseId:OtherCaseId}){
  const [form,setForm]=useState<RescueInputs>({})
  const [tested,setTested]=useState<{signature:string;result:RescueEvaluation}|null>(null)
  const [message,setMessage]=useState('')
+ // Main may swap case routes in a mounted SPA without remounting this component.
+ // Never carry another mission's form or verified test artifacts across a case switch.
+ useEffect(()=>{
+  setReview(archive.diagnosis[caseId]??emptyReview())
+  setForm({})
+  setTested(null)
+  setMessage('')
+ // eslint-disable-next-line react-hooks/exhaustive-deps
+ },[caseId])
  const sources=EVIDENCE_RECORDS.filter(r=>r.caseId===caseId&&r.required&&archive.filed[r.id]===caseId)
  const filled=content.fields.every(field=>typeof form[field.key]==='string'&&form[field.key].trim().length>0)
  const stillTested=tested?.signature===JSON.stringify(form)
