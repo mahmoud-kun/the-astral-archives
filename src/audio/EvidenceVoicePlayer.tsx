@@ -43,7 +43,8 @@ export default function EvidenceVoicePlayer({id}:{id:EvidenceVoiceId}){
   const audio=audioRef.current
   if(!audio)return
   audio.volume=evidenceVoiceVolume(id,settings.volume)
-  audio.muted=!settings.effects||settings.volume===0
+  // Narration is independent of the optional interface SFX toggle.
+  audio.muted=settings.volume===0
  },[id,settings])
  const stopFocus=()=>{
   releaseRef.current?.()
