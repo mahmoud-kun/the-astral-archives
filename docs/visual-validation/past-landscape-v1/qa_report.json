@@ -11,6 +11,7 @@
         "max_channel_error": 0
       },
       "clean_plate_visual_status": "FAIL",
+      "full_clean_candidate_visual_status": "NOT VERIFIED",
       "mask_visual_status": "FAIL",
       "art_review_note": "Manual inspection found hard donor seams or exposed equipment remnants in the hidden plate, and polygon masks include adjacent architecture.",
       "images": {
@@ -31,6 +32,12 @@
           "height": 1080,
           "mode": "RGB",
           "bytes": 2155206
+        },
+        "full_clean_candidate": {
+          "width": 1920,
+          "height": 1080,
+          "mode": "RGB",
+          "bytes": 2145195
         }
       },
       "objects": [
@@ -47,7 +54,7 @@
               "width": 544,
               "height": 501,
               "mode": "RGBA",
-              "bytes": 424593
+              "bytes": 357473
             },
             "mask": {
               "width": 544,
@@ -59,13 +66,13 @@
               "width": 544,
               "height": 501,
               "mode": "RGBA",
-              "bytes": 6331
+              "bytes": 6600
             },
             "screen": {
               "width": 544,
               "height": 501,
               "mode": "RGBA",
-              "bytes": 55263
+              "bytes": 55976
             }
           }
         },
@@ -82,7 +89,7 @@
               "width": 407,
               "height": 453,
               "mode": "RGBA",
-              "bytes": 298808
+              "bytes": 248213
             },
             "mask": {
               "width": 407,
@@ -94,13 +101,13 @@
               "width": 407,
               "height": 453,
               "mode": "RGBA",
-              "bytes": 3874
+              "bytes": 3686
             },
             "screen": {
               "width": 407,
               "height": 453,
               "mode": "RGBA",
-              "bytes": 52646
+              "bytes": 53203
             }
           }
         },
@@ -117,7 +124,7 @@
               "width": 555,
               "height": 494,
               "mode": "RGBA",
-              "bytes": 404923
+              "bytes": 183072
             },
             "mask": {
               "width": 555,
@@ -129,13 +136,13 @@
               "width": 555,
               "height": 494,
               "mode": "RGBA",
-              "bytes": 8608
+              "bytes": 9038
             },
             "screen": {
               "width": 555,
               "height": 494,
               "mode": "RGBA",
-              "bytes": 199564
+              "bytes": 200659
             }
           }
         }
@@ -178,6 +185,7 @@
         "max_channel_error": 0
       },
       "clean_plate_visual_status": "FAIL",
+      "full_clean_candidate_visual_status": "NOT VERIFIED",
       "mask_visual_status": "FAIL",
       "art_review_note": "Manual inspection found hard donor seams or exposed equipment remnants in the hidden plate, and polygon masks include adjacent architecture.",
       "images": {
@@ -198,6 +206,12 @@
           "height": 1080,
           "mode": "RGB",
           "bytes": 2417548
+        },
+        "full_clean_candidate": {
+          "width": 1920,
+          "height": 1080,
+          "mode": "RGB",
+          "bytes": 2257509
         }
       },
       "objects": [
@@ -214,7 +228,7 @@
               "width": 341,
               "height": 507,
               "mode": "RGBA",
-              "bytes": 256107
+              "bytes": 147014
             },
             "mask": {
               "width": 341,
@@ -226,13 +240,13 @@
               "width": 341,
               "height": 507,
               "mode": "RGBA",
-              "bytes": 7163
+              "bytes": 7012
             },
             "screen": {
               "width": 341,
               "height": 507,
               "mode": "RGBA",
-              "bytes": 101008
+              "bytes": 101640
             }
           }
         },
@@ -249,7 +263,7 @@
               "width": 310,
               "height": 444,
               "mode": "RGBA",
-              "bytes": 215878
+              "bytes": 116592
             },
             "mask": {
               "width": 310,
@@ -261,13 +275,13 @@
               "width": 310,
               "height": 444,
               "mode": "RGBA",
-              "bytes": 7218
+              "bytes": 7253
             },
             "screen": {
               "width": 310,
               "height": 444,
               "mode": "RGBA",
-              "bytes": 92792
+              "bytes": 93443
             }
           }
         },
@@ -284,7 +298,7 @@
               "width": 311,
               "height": 439,
               "mode": "RGBA",
-              "bytes": 210861
+              "bytes": 103565
             },
             "mask": {
               "width": 311,
@@ -296,13 +310,13 @@
               "width": 311,
               "height": 439,
               "mode": "RGBA",
-              "bytes": 7891
+              "bytes": 7919
             },
             "screen": {
               "width": 311,
               "height": 439,
               "mode": "RGBA",
-              "bytes": 97618
+              "bytes": 96240
             }
           }
         },
@@ -319,7 +333,7 @@
               "width": 340,
               "height": 505,
               "mode": "RGBA",
-              "bytes": 256424
+              "bytes": 145495
             },
             "mask": {
               "width": 340,
@@ -331,13 +345,13 @@
               "width": 340,
               "height": 505,
               "mode": "RGBA",
-              "bytes": 7739
+              "bytes": 6548
             },
             "screen": {
               "width": 340,
               "height": 505,
               "mode": "RGBA",
-              "bytes": 101297
+              "bytes": 101130
             }
           }
         }
@@ -380,6 +394,7 @@
         "max_channel_error": 0
       },
       "clean_plate_visual_status": "FAIL",
+      "full_clean_candidate_visual_status": "NOT VERIFIED",
       "mask_visual_status": "FAIL",
       "art_review_note": "Manual inspection found hard donor seams or exposed equipment remnants in the hidden plate, and polygon masks include adjacent architecture.",
       "images": {
@@ -400,6 +415,12 @@
           "height": 1080,
           "mode": "RGB",
           "bytes": 2288449
+        },
+        "full_clean_candidate": {
+          "width": 1920,
+          "height": 1080,
+          "mode": "RGB",
+          "bytes": 2377249
         }
       },
       "objects": [
@@ -416,7 +437,7 @@
               "width": 597,
               "height": 381,
               "mode": "RGBA",
-              "bytes": 343615
+              "bytes": 82748
             },
             "mask": {
               "width": 597,
@@ -428,13 +449,13 @@
               "width": 597,
               "height": 381,
               "mode": "RGBA",
-              "bytes": 1498
+              "bytes": 1496
             },
             "screen": {
               "width": 597,
               "height": 381,
               "mode": "RGBA",
-              "bytes": 267760
+              "bytes": 268748
             }
           }
         },
@@ -451,7 +472,7 @@
               "width": 588,
               "height": 381,
               "mode": "RGBA",
-              "bytes": 350840
+              "bytes": 79645
             },
             "mask": {
               "width": 588,
@@ -463,13 +484,13 @@
               "width": 588,
               "height": 381,
               "mode": "RGBA",
-              "bytes": 1485
+              "bytes": 1482
             },
             "screen": {
               "width": 588,
               "height": 381,
               "mode": "RGBA",
-              "bytes": 278440
+              "bytes": 279314
             }
           }
         },
@@ -486,7 +507,7 @@
               "width": 899,
               "height": 449,
               "mode": "RGBA",
-              "bytes": 546528
+              "bytes": 316911
             },
             "mask": {
               "width": 899,
@@ -498,13 +519,13 @@
               "width": 899,
               "height": 449,
               "mode": "RGBA",
-              "bytes": 15524
+              "bytes": 14254
             },
             "screen": {
               "width": 899,
               "height": 449,
               "mode": "RGBA",
-              "bytes": 112571
+              "bytes": 113501
             }
           }
         }
@@ -547,6 +568,7 @@
         "max_channel_error": 0
       },
       "clean_plate_visual_status": "FAIL",
+      "full_clean_candidate_visual_status": "NOT VERIFIED",
       "mask_visual_status": "FAIL",
       "art_review_note": "Manual inspection found hard donor seams or exposed equipment remnants in the hidden plate, and polygon masks include adjacent architecture.",
       "images": {
@@ -567,6 +589,12 @@
           "height": 1080,
           "mode": "RGB",
           "bytes": 2404654
+        },
+        "full_clean_candidate": {
+          "width": 1920,
+          "height": 1080,
+          "mode": "RGB",
+          "bytes": 2434357
         }
       },
       "objects": [
@@ -583,7 +611,7 @@
               "width": 445,
               "height": 290,
               "mode": "RGBA",
-              "bytes": 198555
+              "bytes": 101312
             },
             "mask": {
               "width": 445,
@@ -595,13 +623,13 @@
               "width": 445,
               "height": 290,
               "mode": "RGBA",
-              "bytes": 5912
+              "bytes": 5378
             },
             "screen": {
               "width": 445,
               "height": 290,
               "mode": "RGBA",
-              "bytes": 94980
+              "bytes": 95955
             }
           }
         },
@@ -618,7 +646,7 @@
               "width": 463,
               "height": 362,
               "mode": "RGBA",
-              "bytes": 248170
+              "bytes": 146752
             },
             "mask": {
               "width": 463,
@@ -630,13 +658,13 @@
               "width": 463,
               "height": 362,
               "mode": "RGBA",
-              "bytes": 6073
+              "bytes": 5375
             },
             "screen": {
               "width": 463,
               "height": 362,
               "mode": "RGBA",
-              "bytes": 99116
+              "bytes": 100179
             }
           }
         },
@@ -653,7 +681,7 @@
               "width": 440,
               "height": 292,
               "mode": "RGBA",
-              "bytes": 196173
+              "bytes": 100064
             },
             "mask": {
               "width": 440,
@@ -665,13 +693,13 @@
               "width": 440,
               "height": 292,
               "mode": "RGBA",
-              "bytes": 5737
+              "bytes": 5849
             },
             "screen": {
               "width": 440,
               "height": 292,
               "mode": "RGBA",
-              "bytes": 93344
+              "bytes": 94257
             },
             "closeup": {
               "width": 1672,
@@ -694,7 +722,7 @@
               "width": 459,
               "height": 361,
               "mode": "RGBA",
-              "bytes": 256916
+              "bytes": 143894
             },
             "mask": {
               "width": 459,
@@ -706,13 +734,13 @@
               "width": 459,
               "height": 361,
               "mode": "RGBA",
-              "bytes": 6410
+              "bytes": 5797
             },
             "screen": {
               "width": 459,
               "height": 361,
               "mode": "RGBA",
-              "bytes": 109897
+              "bytes": 110988
             },
             "closeup": {
               "width": 1672,
@@ -735,7 +763,7 @@
               "width": 600,
               "height": 611,
               "mode": "RGBA",
-              "bytes": 573915
+              "bytes": 231136
             },
             "mask": {
               "width": 600,
@@ -747,13 +775,13 @@
               "width": 600,
               "height": 611,
               "mode": "RGBA",
-              "bytes": 13387
+              "bytes": 15300
             },
             "screen": {
               "width": 600,
               "height": 611,
               "mode": "RGBA",
-              "bytes": 278380
+              "bytes": 279135
             }
           }
         }
@@ -801,9 +829,19 @@
         "mode": "RGB",
         "bytes": 2044800
       },
+      "exact_recompose_candidate": {
+        "width": 1672,
+        "height": 941,
+        "mode": "RGB",
+        "bytes": 1924890
+      },
+      "exact_recompose_result": {
+        "mae_rgb": 0.0,
+        "max_channel_error": 0
+      },
       "idle_recomposition_status": "FAIL",
       "idle_recomposition": {
-        "mae_rgb": 14.62197,
+        "mae_rgb": 10.78981,
         "max_channel_error": 255
       },
       "clean_plate_visual_status": "NOT VERIFIED",
@@ -824,9 +862,19 @@
         "mode": "RGB",
         "bytes": 1872269
       },
+      "exact_recompose_candidate": {
+        "width": 1672,
+        "height": 941,
+        "mode": "RGB",
+        "bytes": 1738497
+      },
+      "exact_recompose_result": {
+        "mae_rgb": 0.0,
+        "max_channel_error": 0
+      },
       "idle_recomposition_status": "FAIL",
       "idle_recomposition": {
-        "mae_rgb": 12.85913,
+        "mae_rgb": 6.32318,
         "max_channel_error": 255
       },
       "clean_plate_visual_status": "NOT VERIFIED",
@@ -847,9 +895,19 @@
         "mode": "RGB",
         "bytes": 1847690
       },
+      "exact_recompose_candidate": {
+        "width": 1672,
+        "height": 941,
+        "mode": "RGB",
+        "bytes": 1709431
+      },
+      "exact_recompose_result": {
+        "mae_rgb": 0.0,
+        "max_channel_error": 0
+      },
       "idle_recomposition_status": "FAIL",
       "idle_recomposition": {
-        "mae_rgb": 18.56786,
+        "mae_rgb": 13.26264,
         "max_channel_error": 255
       },
       "clean_plate_visual_status": "NOT VERIFIED",

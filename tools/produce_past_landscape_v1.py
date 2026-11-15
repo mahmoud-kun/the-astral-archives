@@ -10,7 +10,7 @@ from __future__ import annotations
 import json
 from pathlib import Path
 
-from PIL import Image, ImageDraw, ImageFilter, ImageFont
+from PIL import Image, ImageChops, ImageDraw, ImageFilter
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -118,19 +118,24 @@ def build_room(room, spec):
         mask_crop = mask.crop(bbox)
         object_folder = folder / object_id
         object_folder.mkdir(parents=True, exist_ok=True)
-        rgba = visible.crop(bbox).convert("RGBA")
-        rgba.putalpha(mask_crop)
+        sbox = resize_box(spec["screens"][object_id])
+        sx0, sy0, sx1, sy1 = sbox
+        screen_mask = Image.new("L", (W, H))
+        ImageDraw.Draw(screen_mask).rectangle(sbox, fill=255)
+        screen_mask = ImageChops.darker(screen_mask, mask).crop(bbox)
+        base_mask = ImageChops.subtract(mask_crop, screen_mask)
+        source_crop = visible.crop(bbox).convert("RGB")
+        rgba = Image.composite(source_crop, Image.new("RGB", source_crop.size), base_mask).convert("RGBA")
+        rgba.putalpha(base_mask)
         rgba.save(object_folder / f"{object_id}_base.png", optimize=True)
         mask_crop.save(object_folder / f"{object_id}_mask.png", optimize=True)
-        glow_alpha = mask_crop.filter(ImageFilter.GaussianBlur(15)).point(lambda v: round(v * 0.22))
+        edge = ImageChops.subtract(mask_crop.filter(ImageFilter.MaxFilter(21)), mask_crop)
+        glow_alpha = edge.filter(ImageFilter.GaussianBlur(6)).point(lambda v: round(v * 0.35))
         glow = Image.new("RGBA", rgba.size, (255, 179, 87, 0))
         glow.putalpha(glow_alpha)
         glow.save(object_folder / f"{object_id}_glow.png", optimize=True)
-        screen = Image.new("RGBA", rgba.size)
-        sbox = resize_box(spec["screens"][object_id])
-        sx0, sy0, sx1, sy1 = sbox
-        sr = visible.crop(sbox).convert("RGBA")
-        screen.paste(sr, (sx0 - x0, sy0 - y0))
+        screen = Image.composite(source_crop, Image.new("RGB", source_crop.size), screen_mask).convert("RGBA")
+        screen.putalpha(screen_mask)
         screen.save(object_folder / f"{object_id}_screen.png", optimize=True)
         base_url = f"/assets/rooms/past/{room}/layers/landscape-v1/{object_id}/{object_id}"
         old = originals[object_id]
@@ -151,7 +156,7 @@ def build_room(room, spec):
             "designerCleanupRequired": True,
         })
         masks.append(mask)
-        isolation.append(rgba)
+        isolation.append(Image.alpha_composite(rgba, screen))
     manifest = {
         "version": 1, "roomId": room, "timeline": "past", "variant": "landscape-v1",
         "sourceArt": f"/assets/rooms/past/{room}/layers/landscape-v1/background/room_visible.png",
@@ -174,8 +179,21 @@ def build_room(room, spec):
         path = PUBLIC / obj["assets"]["base"].lstrip("/")
         rgba = Image.open(path).convert("RGBA")
         composite.alpha_composite(rgba, (obj["position"]["x"], obj["position"]["y"]))
+        screen_path = PUBLIC / obj["assets"]["screen"].lstrip("/")
+        composite.alpha_composite(Image.open(screen_path).convert("RGBA"), (obj["position"]["x"], obj["position"]["y"]))
     composite.convert("RGB").save(review / "final_composite.webp", quality=88, method=6)
     labeled_sheet(isolation, list(spec["objects"]), columns=2, thumb=(640, 360)).save(review / "object_isolation.webp", quality=86, method=6)
+    hover_images = []
+    for obj in objects:
+        hovered = composite.copy()
+        glow_path = PUBLIC / obj["assets"]["glow"].lstrip("/")
+        hovered.alpha_composite(Image.open(glow_path).convert("RGBA"), (obj["position"]["x"], obj["position"]["y"]))
+        hover_images.append(hovered)
+    labeled_sheet(hover_images, list(spec["objects"]), columns=2, thumb=(640, 360)).save(review / "hover_focus_review.webp", quality=86, method=6)
+    full_clean_path = folder / "background/room_bg_clean_full_candidate.png"
+    if full_clean_path.is_file():
+        full_clean = Image.open(full_clean_path).convert("RGB")
+        labeled_sheet([clean, full_clean], ["exact idle recomposition: seam defects", "full reconstructed candidate: alignment differs"], columns=2).save(review / "clean_plate_compare.webp", quality=86, method=6)
     for size in [(1920, 1080), (1366, 768), (915, 412), (800, 360)]:
         contain(composite.convert("RGB"), size).save(review / f"preview_{size[0]}x{size[1]}.webp", quality=86, method=6)
     return visible, clean, composite.convert("RGB")

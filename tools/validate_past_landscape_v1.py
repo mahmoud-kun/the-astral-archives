@@ -70,6 +70,7 @@ def validate_room(room):
         "visible": check_image(visible_path, (1920, 1080)),
         "runtime_webp": check_image(folder / "background/room_visible.webp", (1920, 1080)),
         "clean": check_image(clean_path, (1920, 1080)),
+        "full_clean_candidate": check_image(folder / "background/room_bg_clean_full_candidate.png", (1920, 1080)),
     }
     composite = clean.convert("RGBA")
     details = []
@@ -87,12 +88,17 @@ def validate_room(room):
         if obj["interaction"]["mask"] != obj["assets"]["mask"]:
             raise ValueError(f"{room}/{obj['id']}: interaction mask mismatch")
         base = Image.open(url_path(obj["assets"]["base"])).convert("RGBA")
+        screen = Image.open(url_path(obj["assets"]["screen"])).convert("RGBA")
         mask = Image.open(url_path(obj["assets"]["mask"])).convert("L")
-        if ImageChops.difference(base.getchannel("A"), mask).getbbox():
-            raise ValueError(f"{room}/{obj['id']}: base alpha differs from hit mask")
+        combined_alpha = ImageChops.lighter(base.getchannel("A"), screen.getchannel("A"))
+        if ImageChops.difference(combined_alpha, mask).getbbox():
+            raise ValueError(f"{room}/{obj['id']}: base/screen alpha differs from hit mask")
+        if ImageChops.darker(base.getchannel("A"), screen.getchannel("A")).getbbox():
+            raise ValueError(f"{room}/{obj['id']}: base and screen overlap")
         if not mask.getbbox():
             raise ValueError(f"{room}/{obj['id']}: empty mask")
         composite.alpha_composite(base, (x, y))
+        composite.alpha_composite(screen, (x, y))
         details.append({"id": obj["id"], "position": obj["position"], "files": sizes})
     diff = error_stats(visible, composite)
     preview_checks = {}
@@ -107,6 +113,7 @@ def validate_room(room):
         "idle_recomposition_status": "PASS" if diff["max_channel_error"] == 0 else "FAIL",
         "idle_recomposition": diff,
         "clean_plate_visual_status": "FAIL",
+        "full_clean_candidate_visual_status": "NOT VERIFIED",
         "mask_visual_status": "FAIL",
         "art_review_note": "Manual inspection found hard donor seams or exposed equipment remnants in the hidden plate, and polygon masks include adjacent architecture.",
         "images": image_checks,
@@ -122,15 +129,24 @@ def present_check(room):
     source = Image.open(url_path(old_manifest["sourceArt"])).convert("RGB")
     old = check_image(url_path(old_manifest["background"]), source.size)
     new = check_image(url_path(new_manifest["background"]), source.size)
-    composite = Image.open(url_path(new_manifest["background"])).convert("RGBA")
-    for obj in sorted(new_manifest["objects"], key=lambda o: o["zIndex"]):
-        x, y = obj["position"]["x"], obj["position"]["y"]
-        composite.alpha_composite(Image.open(url_path(obj["assets"]["base"])).convert("RGBA"), (x, y))
-    diff = error_stats(source, composite)
+    exact_path = PUBLIC / f"assets/rooms/{room}/layers/clean-v2/background/room_bg_exact_recompose.png"
+    exact_info = check_image(exact_path, source.size)
+    def recompose(plate):
+        composite = Image.open(plate).convert("RGBA")
+        for obj in sorted(new_manifest["objects"], key=lambda o: o["zIndex"]):
+            x, y = obj["position"]["x"], obj["position"]["y"]
+            composite.alpha_composite(Image.open(url_path(obj["assets"]["base"])).convert("RGBA"), (x, y))
+            if "screen" in obj["assets"]:
+                composite.alpha_composite(Image.open(url_path(obj["assets"]["screen"])).convert("RGBA"), (x, y))
+        return error_stats(source, composite)
+    diff = recompose(url_path(new_manifest["background"]))
+    exact_diff = recompose(exact_path)
     return {
         "room": room,
         "old_clean": old,
         "new_clean_candidate": new,
+        "exact_recompose_candidate": exact_info,
+        "exact_recompose_result": exact_diff,
         "idle_recomposition_status": "PASS" if diff["max_channel_error"] == 0 else "FAIL",
         "idle_recomposition": diff,
         "clean_plate_visual_status": "NOT VERIFIED",
