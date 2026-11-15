@@ -1,6 +1,6 @@
 import { useEffect, useState, type CSSProperties } from 'react'
 import { CASE_CODES, CASE_META, EVIDENCE_RECORDS, findEvidence, type ArchiveCaseId, type ArchiveEvidence } from './evidenceRecords'
-import { ARCHIVE_SAVE_KEY, countInFolder, countRequiredEvidence, discoverEvidence, emptyArchiveState, fileEvidence, rescueIsReady, restoreArchiveState, type ArchiveState } from './archiveState'
+import { ARCHIVE_SAVE_KEY, countInFolder, countCaseCollectedEvidence, discoverEvidence, emptyArchiveState, fileEvidence, rescueIsReady, restoreArchiveState, type ArchiveState } from './archiveState'
 import { navigateGame, onGameLinkClick } from '../gameNavigation'
 import { playGameSound } from '../audio/gameAudio'
 import { ARCHIVE_PROGRESS_EVENT, stationRoute, type StationId } from '../gameplay/nadirEngine'
@@ -77,10 +77,10 @@ export default function ArchiveFolderLab() {
   const debug = import.meta.env.DEV && locationParam.get('debug')==='1'
   const meta=CASE_META[caseId], inspected=inspectedId?findEvidence(inspectedId):undefined
   const filed=EVIDENCE_RECORDS.filter(record=>archive.filed[record.id]===caseId)
-  const required=countRequiredEvidence(archive,caseId)
-  // A dossier may hold seven sheets while one of its SIX required records is
-  // still unfiled or filed under another case. Explain the real gate clearly.
-  const missingRequired=EVIDENCE_RECORDS.filter(record=>record.caseId===caseId&&record.required&&archive.filed[record.id]!==caseId)
+  const collectedCount=countCaseCollectedEvidence(archive,caseId)
+  // Any six distinct collected records of the current mission unlock Rescue.
+  // Sorting remains editable and optional for unlocking.
+  const uncollected=EVIDENCE_RECORDS.filter(record=>record.caseId===caseId&&!archive.discovered.includes(record.id))
   const ready=rescueIsReady(archive,caseId)
   const storyComplete=isStoryRescueComplete(caseId)
   const unseen=EVIDENCE_RECORDS.filter(record=>record.caseId===caseId&&!archive.discovered.includes(record.id))
@@ -97,9 +97,6 @@ export default function ArchiveFolderLab() {
     if(next!==archive){
       // A mistaken filing makes the SAME sound as a correct one; no answer leakage.
       playGameSound(target?'file':'folderMove')
-      if(!rescueIsReady(archive,caseId)&&rescueIsReady(next,caseId)){
-        window.setTimeout(()=>playGameSound('rescue'),350)
-      }
     }
     setArchive(next)
     setInspectedId(null)
@@ -138,7 +135,7 @@ export default function ArchiveFolderLab() {
             <div className="af-front-flap" aria-hidden="true"/><span className="af-tab">{caseId} / EVIDENCE</span>
           </div> : <div className="af-large-closed"><img src="/assets/archive/folder-closed.svg" alt=""/><div><small>MISSION FILE</small><h2>{meta.name}</h2><p>{filed.length} ATTACHMENTS</p></div></div>}
         </div>
-        <div className="af-bottom"><div><small>ARCHIVED MATERIAL</small><strong>{filed.length} FILED SHEETS</strong></div><div><small>REQUIRED EVIDENCE</small><strong>{required}/6</strong></div><button onClick={()=>setIntake(value=>!value)}>{intake?'CLOSE UNFILED TRAY':'OPEN UNFILED EVIDENCE'} ({unfiled.length})</button></div>
+        <div className="af-bottom"><div><small>ARCHIVED MATERIAL</small><strong>{filed.length} FILED SHEETS</strong></div><div><small>RESCUE PROGRESS</small><strong>{Math.min(collectedCount,6)}/6 COLLECTED</strong></div><button onClick={()=>setIntake(value=>!value)}>{intake?'CLOSE UNFILED TRAY':'OPEN UNFILED EVIDENCE'} ({unfiled.length})</button></div>
         {intake&&<section className="af-intake"><div className="af-intake-head"><strong>{debug?'DEBUG RECORD INTAKE':'UNFILED EVIDENCE / SELECT & FILE'}</strong><button onClick={()=>setIntake(false)} aria-label="Close intake">×</button></div>
           <p>Evidence must be discovered and manually collected in station rooms before it can be filed. Select a collected record, then choose its mission folder.</p>
           <div className="af-intake-items">
@@ -150,31 +147,29 @@ export default function ArchiveFolderLab() {
       </section>
       <aside className="af-status" aria-label="Case investigation status">
         <h2>CASE STATUS <small>{caseId} / INVESTIGATION</small></h2>
-        <div className="af-status-section"><span>REQUIRED EVIDENCE</span><div className="af-count"><strong>{required}</strong><em>/ 06</em></div><div className="af-meter" role="progressbar" aria-label="Correctly filed required evidence" aria-valuemin={0} aria-valuemax={6} aria-valuenow={required}><i style={{width:(required/6*100)+'%'}}/></div></div>
-        {missingRequired.length>0&&<div className="af-status-section af-missing-required" aria-label="Evidence still required to unlock Rescue">
-          <span>WHAT'S MISSING FOR RESCUE</span>
-          <p>{filed.length} sheet{filed.length===1?'':'s'} in this folder, but only <strong>{required}/6</strong> correctly filed required mission records count toward Rescue. Optional sheets and records filed in the wrong dossier do not unlock it.</p>
+        <div className="af-status-section"><span>EVIDENCE COLLECTED · ANY SIX OF EIGHT</span><div className="af-count"><strong>{Math.min(collectedCount,6)}</strong><em>/ 06 TO UNLOCK</em></div><div className="af-meter" role="progressbar" aria-label="Distinct mission evidence collected toward Rescue" aria-valuemin={0} aria-valuemax={6} aria-valuenow={Math.min(collectedCount,6)}><i style={{width:(Math.min(collectedCount,6)/6*100)+'%'}}/></div><small>{collectedCount} of 8 collected · Folders are for optional organization</small></div>
+        {!ready&&<div className="af-status-section af-missing-required" aria-label="Mission evidence not yet collected">
+          <span>FIND MORE EVIDENCE TO UNLOCK</span>
+          <p>Collect <strong>{6-collectedCount}</strong> more evidence sheet{6-collectedCount===1?'':'s'} from this mission. <strong>Any 6 of the 8</strong> unlock Rescue immediately; filing and refiling do not affect progress.</p>
           <div className="af-missing-list">
-            {missingRequired.map(record=>{
-              const collected=archive.discovered.includes(record.id)
-              const elsewhere=archive.filed[record.id]
+            {uncollected.map(record=>{
               const location=record.room.toLowerCase() as StationId
               return <div className="af-missing-item" key={record.id}>
                 <strong>{record.id} · {record.title}</strong>
-                <small>{!collected?'NOT YET COLLECTED · '+record.room+' ROOM':elsewhere?'COLLECTED · CURRENTLY FILED IN '+elsewhere:'COLLECTED · STILL UNFILED'}</small>
-                <button type="button" onClick={()=>collected?setInspectedId(record.id):navigateGame(stationRoute(location))}>
-                  {collected?'OPEN SHEET TO REFILE':'GO TO '+record.room.toUpperCase()+' ROOM'} →
+                <small>NOT YET COLLECTED · {record.room.toUpperCase()} ROOM · {record.required?'CORE':'BONUS'} RECORD</small>
+                <button type="button" onClick={()=>navigateGame(stationRoute(location))}>
+                  GO TO {record.room.toUpperCase()} ROOM →
                 </button>
               </div>
             })}
           </div>
-          <small>Collect each required sheet and file it in this dossier. No quiz is needed.</small>
+          <small>Collect any six of the eight case records. No questions, answers or correct folder placements are needed.</small>
         </div>}
         <div className="af-status-section"><span>MISSION BRIEFING FILM</span>{caseId==='KES'&&KESTREL_FOOTAGE_PENDING_APPROVAL
           ? <small>PROJECT BRIEF / Early-phase design trade: the original payload, power and cost no longer fit the mission plan. Investigate the actual source records; no launch or assembly footage is represented as historical proof.</small>
           : <button className="af-side-action" type="button" data-sfx="none" onClick={()=>playCaseIntroduction(caseId)}>PLAY {meta.name.toUpperCase()} INTRO</button>}</div>
-        <div className="af-status-section"><span>YOUR MISSION</span><strong>{storyComplete?'RESCUED IN THE STORY':'RECOVER SIX EVIDENCE SHEETS'}</strong><p>Explore the station, collect the records directly and file them in the correct mission dossier. No quizzes or technical exams.</p></div>
-        <div className="af-status-section"><span>RESCUE MISSION</span><strong className={ready?'af-ready':''}>{ready?'UNLOCKED':'LOCKED'}</strong><p>{ready?'Your evidence is complete. Travel into the past to follow the Rescue story.':'File the six required evidence records in the correct mission folder to unlock.'}</p>{caseId==='NAD'&&ready&&<button className="af-side-action" onClick={()=>enterRescueThroughPortal('NAD')}>ENTER NADIR RESCUE →</button>}{isOtherCaseId(caseId)&&ready&&<button className="af-side-action" onClick={()=>enterRescueThroughPortal(caseId)}>ENTER {meta.name.toUpperCase()} RESCUE →</button>}</div>
+        <div className="af-status-section"><span>YOUR MISSION</span><strong>{storyComplete?'RESCUED IN THE STORY':'COLLECT ANY SIX OF EIGHT'}</strong><p>Explore the station and collect six distinct documents from this case. Filing them into Mission Folders is optional and can be corrected later.</p></div>
+        <div className="af-status-section"><span>RESCUE MISSION</span><strong className={ready?'af-ready':''}>{ready?'UNLOCKED':'LOCKED'}</strong><p>{ready?'Six case records collected! Travel into the past and rescue the mission.':'Collect any six of this mission’s eight records to unlock. Filing is optional.'}</p>{caseId==='NAD'&&ready&&<button className="af-side-action" onClick={()=>enterRescueThroughPortal('NAD')}>ENTER NADIR RESCUE →</button>}{isOtherCaseId(caseId)&&ready&&<button className="af-side-action" onClick={()=>enterRescueThroughPortal(caseId)}>ENTER {meta.name.toUpperCase()} RESCUE →</button>}</div>
         <div className="af-status-source">FICTIONAL CASE RECORDS. NOT AUTHENTIC NASA TELEMETRY.</div>
         {debug&&<button className="af-reset" onClick={reset}>RESET DEBUG PREVIEW</button>}
       </aside>
