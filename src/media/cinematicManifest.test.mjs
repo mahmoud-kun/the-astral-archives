@@ -22,12 +22,12 @@ test('all cinema metadata uses local versioned MP4 paths and authentic source ID
   assert.ok(info.bytes>1000000)
  }
 })
-test('cinematic gain obeys master mute, bounds, and attenuates loud portal',()=>{
+test('cinematic gain obeys master mute, audible default level, bounds, and attenuates loud portal',()=>{
  for(const id of Object.keys(CINEMATICS)){
   assert.equal(cinematicVolume(id,0),0)
   assert.equal(cinematicVolume(id,-10),0)
   assert.equal(cinematicVolume(id,NaN),0)
-  assert.ok(cinematicVolume(id,40)>0&&cinematicVolume(id,40)<0.4)
+  assert.ok(cinematicVolume(id,40)>.35&&cinematicVolume(id,40)<.95,'Audible default movie mix without clipping')
   assert.ok(cinematicVolume(id,1000)<=1)
  }
  assert.ok(cinematicVolume('portalPast',40)<cinematicVolume('case1Intro',40))
