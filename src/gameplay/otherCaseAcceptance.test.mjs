@@ -3,6 +3,7 @@ import assert from 'node:assert/strict'
 import { EVIDENCE_RECORDS } from '../archive/evidenceRecords.ts'
 import { DIAGNOSIS_PROMPTS, countRequiredEvidence, diagnosisIsSupported, discoverEvidence, emptyArchiveState, fileEvidence, rescueIsReady, submitDiagnosis, updateDiagnosis } from '../archive/archiveState.ts'
 import { CASE_EVIDENCE_TASKS, OTHER_RECORD_IDS, OTHER_CASE_IDS, REQUIRED_OTHER_IDS, allowedOtherHints, caseTaskIntegrity, emptyOtherProgress, hintOther, inspectOther, restoreOtherProgress, solveOther } from './caseEvidenceEngine.ts'
+import { isOtherCaseId, readActiveCase } from './caseContext.ts'
 import { CASE_RESCUE_COPY, otherRescueCompleted, recordVerifiedRescue, verifyOtherRescue } from './caseRescueEngine.ts'
 
 const happy={
@@ -158,4 +159,13 @@ test('Save restoration prunes a forged dependent analysis chain but retains comp
  assert.deepEqual(forged.solved,[],'KES-05 needs launcher warning; KES-06 then loses both prerequisites')
  const valid=restoreOtherProgress(JSON.stringify({...base,solved:['KES-02','KES-05','KES-06']}))
  assert.deepEqual(valid.solved,['KES-02','KES-05','KES-06'])
+})
+
+test('Case navigation preference is a whitelisted UI context, never a forged Rescue or evidence ID',()=>{
+ assert.equal(readActiveCase(),null,'Node test environment without window must be safe')
+ for(const code of OTHER_CASE_IDS)assert.equal(isOtherCaseId(code),true)
+ assert.equal(isOtherCaseId('NAD'),false,'dedicated Nadir evidence remains on original route')
+ assert.equal(isOtherCaseId('KES-06'),false)
+ assert.equal(isOtherCaseId('__proto__'),false)
+ assert.equal(isOtherCaseId(null),false)
 })
