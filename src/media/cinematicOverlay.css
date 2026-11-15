@@ -20,3 +20,14 @@
 .cm-info{font-size:10px;line-height:1.4;color:#a5c1d0;margin:0}
 @media(max-height:460px){.cm-panel{gap:5px}.cm-header{min-height:36px}.cm-header small{display:none}.cm-header button,.cm-controls button{padding:5px 9px;min-height:30px}.cm-stage{max-height:calc(100dvh - 120px)}.cm-video{max-height:calc(100dvh - 120px)}.cm-info{display:none}}
 @media(max-width:620px){.cm-backdrop{padding:6px}.cm-panel{max-height:calc(100dvh - 12px)}.cm-controls{align-items:stretch}.cm-actions{width:100%}.cm-header h2{font-size:16px}.cm-info{display:none}}
+
+/* Cinematics launch as immersive full-viewport movies, without a second click.
+ * Native fullscreen remains an optional browser control due activation policy. */
+.cm-backdrop{padding:0;place-items:stretch}
+.cm-panel{width:100vw;height:100dvh;max-height:100dvh;gap:0}
+.cm-header{padding:8px 16px;min-height:44px;background:#05101d;flex-shrink:0}
+.cm-stage{flex:1;min-height:0;aspect-ratio:auto;border:0;border-radius:0}
+.cm-video{width:100%;height:100%;max-height:none;object-fit:contain}
+.cm-controls{padding:7px 12px;background:#061423;flex-shrink:0}
+.cm-panel>.cm-info{padding:2px 12px;background:#061423}
+@media(max-height:480px){.cm-header{min-height:30px;padding:3px 10px}.cm-stage,.cm-video{max-height:none}.cm-controls{padding:4px 8px}.cm-controls button{min-height:29px}}
