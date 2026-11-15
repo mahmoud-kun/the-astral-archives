@@ -1,5 +1,5 @@
 import {useCallback,useEffect,useRef,useState} from 'react'
-import {AUDIO_SETTINGS_EVENT,claimCinematicAudioFocus,getAudioSettings} from '../audio/gameAudio'
+import {AUDIO_SETTINGS_EVENT,EVIDENCE_VOICE_STOP_EVENT,claimCinematicAudioFocus,getAudioSettings} from '../audio/gameAudio'
 import {CINEMATICS,CINEMATIC_REQUEST_EVENT,cinematicVolume,dispatchCinematicFinished,isCinematicId,isLiveCinematicAllowed,type CinematicId,type CinematicOutcome} from './cinematicManifest'
 import './cinematicOverlay.css'
 
@@ -26,6 +26,8 @@ export function CinematicPlayer({id,onFinish}:{id:CinematicId;onFinish:(outcome:
  useEffect(()=>{
   const previous=document.activeElement instanceof HTMLElement?document.activeElement:null
   skipRef.current?.focus()
+  // Pause source testimony before starting the film; never layer two spoken tracks.
+  window.dispatchEvent(new Event(EVIDENCE_VOICE_STOP_EVENT))
   const releaseFocus=claimCinematicAudioFocus()
   const onSettings=()=>setSettings(getAudioSettings())
   window.addEventListener(AUDIO_SETTINGS_EVENT,onSettings)
