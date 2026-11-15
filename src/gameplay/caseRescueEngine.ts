@@ -84,7 +84,7 @@ export function verifyOtherRescue(caseId:OtherCaseId,form:RescueInputs):RescueEv
   const config=form.architecture==='descope'?{mass:890,power:590,cost:239,loss:true}:
    form.architecture==='heavy'?{mass:1010,power:690,cost:316,loss:false}:{mass:1010,power:690,cost:278,loss:false}
   reports=[
-   row('PAYLOAD LIMIT',config.mass<=900,config.mass+' kg / 900 kg permitted'),
+   row('PAYLOAD LIMIT',form.architecture!=='heavy'&&config.mass<=900,form.architecture==='heavy'?'A different heavy launcher requires a newly documented payload ceiling; old 900 kg limit is not transferred automatically':config.mass+' kg / 900 kg permitted'),
    row('POWER LIMIT',config.power<=600,config.power+' W / 600 W supplied'),
    row('COST ENVELOPE',config.cost<=240,'$'+config.cost+'m / $240m planning envelope'),
    row('LAUNCH AND CRUISE',eq(form.window,'replanned')&&eq(form.slotEvidence,'verified')&&eq(form.trajectory,'recalculated'),'Original slot unavailable; require a new simulated allocation AND trajectory trade'),
