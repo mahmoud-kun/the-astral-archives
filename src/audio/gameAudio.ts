@@ -29,6 +29,7 @@ export const SOUND_PATHS = {
   signal:'/assets/audio/sfx/signal_alert.wav',
   portal:'/assets/audio/sfx/portal_transition.wav',
   rescue:'/assets/audio/sfx/rescue_unlocked.wav',
+  rescueComplete:'/assets/audio/sfx/rescue_completed_original_v1.wav',
   scanner:'/assets/audio/kenney/computer-noise-002.m4a',
   terminal:'/assets/audio/kenney/computer-noise-000.m4a',
   doorOpen:'/assets/audio/kenney/door-open-000.m4a',
@@ -43,10 +44,10 @@ export type GameSound = keyof typeof SOUND_PATHS
 const LEVEL:Record<GameSound,number>={
   hover:.085, click:.22, panelOpen:.22, panelClose:.2,
   folderMove:.18, file:.22, evidence:.25, error:.1, signal:.07,
-  portal:.26, rescue:.25, scanner:.16, terminal:.12,
+  portal:.26, rescue:.25, rescueComplete:.22, scanner:.16, terminal:.12,
   doorOpen:.17, doorClose:.15, engine:.09, energy:.15, metal:.15,thruster:.12,
 }
-const RATE_LIMIT:Partial<Record<GameSound,number>>={hover:110,click:45,scanner:120,signal:900,folderMove:90,file:80,doorOpen:120,doorClose:120}
+const RATE_LIMIT:Partial<Record<GameSound,number>>={hover:110,click:45,scanner:120,signal:900,folderMove:90,file:80,doorOpen:120,doorClose:120,rescueComplete:800}
 
 /** Pure gain helper. Browser playback and slider use the same bounded calculation. */
 export function gameSoundVolume(cue:GameSound,masterVolume:number):number{
@@ -122,15 +123,40 @@ const SCENE_TONES={
  rescue:{low:57,high:102,level:.18},
 } as const
 export type SoundScene=keyof typeof SCENE_TONES
+const VERIFIED_RESCUE_ROUTES=new Set(['KES','NAD','LUM','ORI','AST'])
+/** The URL selects audio ambience only; it is never permission to rescue. */
+export function isRescueAudioRoute(search:string):boolean{
+ const q=new URLSearchParams(search.startsWith('?')?search.slice(1):search)
+ return VERIFIED_RESCUE_ROUTES.has(q.get('rescue')??'')
+}
 export function sceneFromSearch(search:string):SoundScene{
  const q=new URLSearchParams(search.startsWith('?')?search.slice(1):search)
- if(q.get('rescue')==='NAD')return 'rescue'
+ if(isRescueAudioRoute(search))return 'rescue'
  if(q.get('folder-lab')==='1')return 'archive'
  if(q.get('station')==='signal')return 'signal'
  if(q.get('station')==='archive')return 'archive'
  if(q.get('station')==='recordings')return 'recordings'
  if(q.get('room')==='1')return 'investigation'
  return 'home'
+}
+
+/** Map a specific on-screen interaction to an existing cue without touching Main-owned views.
+ * No inferred success from evidence: audio is feedback only and cannot change saves.
+ * 
+ * 'rescue' is the legacy cue emitted only after authoritative success handlers
+ * in CaseRescue/NadirRescue, or after evidence filing unlock in ArchiveFolderLab.
+ * Route separation allows distinct sounds while preserving those state guards.
+ */
+export function soundForInteraction(cue:GameSound,search:string,evidenceId?:string):GameSound{
+ const params=new URLSearchParams(search.startsWith('?')?search.slice(1):search)
+ // Sound Lab must preview the actual original clip even on rescue-scene preview.
+ if(params.get('audio-lab')==='1')return cue
+ if(cue==='rescue'&&isRescueAudioRoute(search))return 'rescueComplete'
+ // Telemetry hotspots already carry real existing evidence IDs in StationRoom.
+ // This marks inspection only: it never awards evidence or implies a valid signal.
+ if(cue==='scanner'&&sceneFromSearch(search)==='signal'&&
+  /^(KES|NAD|LUM|ORI|AST)-\d{2}$/.test(evidenceId??''))return 'signal'
+ return cue
 }
 
 function initializeAmbience(){
@@ -186,24 +212,25 @@ function activateFromGesture(){
 }
 export function playGameSound(cue:GameSound){
  if(typeof window==='undefined'||typeof Audio==='undefined')return
+ const selected=soundForInteraction(cue,window.location?.search??'')
  const prefs=getAudioSettings()
  if(!prefs.effects||prefs.volume<=0||document.hidden||cinematicFocusCount>0)return
  const now=performance.now()
- const limit=RATE_LIMIT[cue]??0
- if(limit>0&&now-(lastPlayed.get(cue)??-Infinity)<limit)return
- if(activeSounds.size>=6&&cue==='hover')return
+ const limit=RATE_LIMIT[selected]??0
+ if(limit>0&&now-(lastPlayed.get(selected)??-Infinity)<limit)return
+ if(activeSounds.size>=6&&selected==='hover')return
  if(activeSounds.size>=8){
   const oldest=activeSounds.keys().next().value
   if(oldest){oldest.pause();activeSounds.delete(oldest)}
  }
- lastPlayed.set(cue,now)
+ lastPlayed.set(selected,now)
  try{
   // Lazy: no network request until the actual cue is triggered.
-  const audio=new Audio(SOUND_PATHS[cue])
+  const audio=new Audio(SOUND_PATHS[selected])
   audio.preload='none'
-  audio.volume=gameSoundVolume(cue,prefs.volume)
-  audio.dataset.astralSound=cue
-  activeSounds.set(audio,cue)
+  audio.volume=gameSoundVolume(selected,prefs.volume)
+  audio.dataset.astralSound=selected
+  activeSounds.set(audio,selected)
   const cleanup=()=>{activeSounds.delete(audio);audio.removeEventListener('ended',cleanup);audio.removeEventListener('error',cleanup)}
   audio.addEventListener('ended',cleanup,{once:true})
   audio.addEventListener('error',cleanup,{once:true})
@@ -230,7 +257,8 @@ export function installGameAudio():()=>void{
   const raw=control.dataset.sfx
   if(raw==='none')return
   const sound=raw&&Object.prototype.hasOwnProperty.call(SOUND_PATHS,raw)?raw as GameSound:'click'
-  playGameSound(sound)
+  const actual=soundForInteraction(sound,window.location?.search??'',control.dataset.evidenceId)
+  playGameSound(actual)
  }
  const onHover=(event:PointerEvent)=>{
   if(event.pointerType!=='mouse'&&event.pointerType!=='pen')return
