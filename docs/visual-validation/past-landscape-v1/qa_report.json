@@ -1,0 +1,860 @@
+{
+  "past": {
+    "manufacturing": {
+      "room": "manufacturing",
+      "source_sha256": "BCD0404CBCE74AC5137AA00395ED1119844FE28D091B7578553B7FC243A767BB",
+      "manifest": "public/assets/rooms/past/manufacturing/layers/landscape-v1/manifest.json",
+      "file_and_contract_status": "PASS",
+      "idle_recomposition_status": "PASS",
+      "idle_recomposition": {
+        "mae_rgb": 0.0,
+        "max_channel_error": 0
+      },
+      "clean_plate_visual_status": "FAIL",
+      "mask_visual_status": "FAIL",
+      "art_review_note": "Manual inspection found hard donor seams or exposed equipment remnants in the hidden plate, and polygon masks include adjacent architecture.",
+      "images": {
+        "visible": {
+          "width": 1920,
+          "height": 1080,
+          "mode": "RGB",
+          "bytes": 2505521
+        },
+        "runtime_webp": {
+          "width": 1920,
+          "height": 1080,
+          "mode": "RGB",
+          "bytes": 313022
+        },
+        "clean": {
+          "width": 1920,
+          "height": 1080,
+          "mode": "RGB",
+          "bytes": 2155206
+        }
+      },
+      "objects": [
+        {
+          "id": "materials_structure",
+          "position": {
+            "x": 98,
+            "y": 394,
+            "width": 544,
+            "height": 501
+          },
+          "files": {
+            "base": {
+              "width": 544,
+              "height": 501,
+              "mode": "RGBA",
+              "bytes": 424593
+            },
+            "mask": {
+              "width": 544,
+              "height": 501,
+              "mode": "L",
+              "bytes": 1096
+            },
+            "glow": {
+              "width": 544,
+              "height": 501,
+              "mode": "RGBA",
+              "bytes": 6331
+            },
+            "screen": {
+              "width": 544,
+              "height": 501,
+              "mode": "RGBA",
+              "bytes": 55263
+            }
+          }
+        },
+        {
+          "id": "motors_energy",
+          "position": {
+            "x": 754,
+            "y": 378,
+            "width": 407,
+            "height": 453
+          },
+          "files": {
+            "base": {
+              "width": 407,
+              "height": 453,
+              "mode": "RGBA",
+              "bytes": 298808
+            },
+            "mask": {
+              "width": 407,
+              "height": 453,
+              "mode": "L",
+              "bytes": 833
+            },
+            "glow": {
+              "width": 407,
+              "height": 453,
+              "mode": "RGBA",
+              "bytes": 3874
+            },
+            "screen": {
+              "width": 407,
+              "height": 453,
+              "mode": "RGBA",
+              "bytes": 52646
+            }
+          }
+        },
+        {
+          "id": "rocket_design",
+          "position": {
+            "x": 1278,
+            "y": 388,
+            "width": 555,
+            "height": 494
+          },
+          "files": {
+            "base": {
+              "width": 555,
+              "height": 494,
+              "mode": "RGBA",
+              "bytes": 404923
+            },
+            "mask": {
+              "width": 555,
+              "height": 494,
+              "mode": "L",
+              "bytes": 1216
+            },
+            "glow": {
+              "width": 555,
+              "height": 494,
+              "mode": "RGBA",
+              "bytes": 8608
+            },
+            "screen": {
+              "width": 555,
+              "height": 494,
+              "mode": "RGBA",
+              "bytes": 199564
+            }
+          }
+        }
+      ],
+      "previews": {
+        "preview_1920x1080.webp": {
+          "width": 1920,
+          "height": 1080,
+          "mode": "RGB",
+          "bytes": 285126
+        },
+        "preview_1366x768.webp": {
+          "width": 1366,
+          "height": 768,
+          "mode": "RGB",
+          "bytes": 184052
+        },
+        "preview_915x412.webp": {
+          "width": 915,
+          "height": 412,
+          "mode": "RGB",
+          "bytes": 69998
+        },
+        "preview_800x360.webp": {
+          "width": 800,
+          "height": 360,
+          "mode": "RGB",
+          "bytes": 57536
+        }
+      }
+    },
+    "mission_target": {
+      "room": "mission_target",
+      "source_sha256": "F6F5A90DC73C5690C515EC444E2ED9C4B080C8115FEE4F50104066C2AFB335EE",
+      "manifest": "public/assets/rooms/past/mission_target/layers/landscape-v1/manifest.json",
+      "file_and_contract_status": "PASS",
+      "idle_recomposition_status": "PASS",
+      "idle_recomposition": {
+        "mae_rgb": 0.0,
+        "max_channel_error": 0
+      },
+      "clean_plate_visual_status": "FAIL",
+      "mask_visual_status": "FAIL",
+      "art_review_note": "Manual inspection found hard donor seams or exposed equipment remnants in the hidden plate, and polygon masks include adjacent architecture.",
+      "images": {
+        "visible": {
+          "width": 1920,
+          "height": 1080,
+          "mode": "RGB",
+          "bytes": 2611298
+        },
+        "runtime_webp": {
+          "width": 1920,
+          "height": 1080,
+          "mode": "RGB",
+          "bytes": 329940
+        },
+        "clean": {
+          "width": 1920,
+          "height": 1080,
+          "mode": "RGB",
+          "bytes": 2417548
+        }
+      },
+      "objects": [
+        {
+          "id": "mission_objectives",
+          "position": {
+            "x": 53,
+            "y": 363,
+            "width": 341,
+            "height": 507
+          },
+          "files": {
+            "base": {
+              "width": 341,
+              "height": 507,
+              "mode": "RGBA",
+              "bytes": 256107
+            },
+            "mask": {
+              "width": 341,
+              "height": 507,
+              "mode": "L",
+              "bytes": 946
+            },
+            "glow": {
+              "width": 341,
+              "height": 507,
+              "mode": "RGBA",
+              "bytes": 7163
+            },
+            "screen": {
+              "width": 341,
+              "height": 507,
+              "mode": "RGBA",
+              "bytes": 101008
+            }
+          }
+        },
+        {
+          "id": "target_destination",
+          "position": {
+            "x": 403,
+            "y": 396,
+            "width": 310,
+            "height": 444
+          },
+          "files": {
+            "base": {
+              "width": 310,
+              "height": 444,
+              "mode": "RGBA",
+              "bytes": 215878
+            },
+            "mask": {
+              "width": 310,
+              "height": 444,
+              "mode": "L",
+              "bytes": 909
+            },
+            "glow": {
+              "width": 310,
+              "height": 444,
+              "mode": "RGBA",
+              "bytes": 7218
+            },
+            "screen": {
+              "width": 310,
+              "height": 444,
+              "mode": "RGBA",
+              "bytes": 92792
+            }
+          }
+        },
+        {
+          "id": "scientific_priorities",
+          "position": {
+            "x": 1210,
+            "y": 398,
+            "width": 311,
+            "height": 439
+          },
+          "files": {
+            "base": {
+              "width": 311,
+              "height": 439,
+              "mode": "RGBA",
+              "bytes": 210861
+            },
+            "mask": {
+              "width": 311,
+              "height": 439,
+              "mode": "L",
+              "bytes": 937
+            },
+            "glow": {
+              "width": 311,
+              "height": 439,
+              "mode": "RGBA",
+              "bytes": 7891
+            },
+            "screen": {
+              "width": 311,
+              "height": 439,
+              "mode": "RGBA",
+              "bytes": 97618
+            }
+          }
+        },
+        {
+          "id": "mission_constraints",
+          "position": {
+            "x": 1532,
+            "y": 363,
+            "width": 340,
+            "height": 505
+          },
+          "files": {
+            "base": {
+              "width": 340,
+              "height": 505,
+              "mode": "RGBA",
+              "bytes": 256424
+            },
+            "mask": {
+              "width": 340,
+              "height": 505,
+              "mode": "L",
+              "bytes": 1007
+            },
+            "glow": {
+              "width": 340,
+              "height": 505,
+              "mode": "RGBA",
+              "bytes": 7739
+            },
+            "screen": {
+              "width": 340,
+              "height": 505,
+              "mode": "RGBA",
+              "bytes": 101297
+            }
+          }
+        }
+      ],
+      "previews": {
+        "preview_1920x1080.webp": {
+          "width": 1920,
+          "height": 1080,
+          "mode": "RGB",
+          "bytes": 299614
+        },
+        "preview_1366x768.webp": {
+          "width": 1366,
+          "height": 768,
+          "mode": "RGB",
+          "bytes": 193298
+        },
+        "preview_915x412.webp": {
+          "width": 915,
+          "height": 412,
+          "mode": "RGB",
+          "bytes": 72438
+        },
+        "preview_800x360.webp": {
+          "width": 800,
+          "height": 360,
+          "mode": "RGB",
+          "bytes": 58452
+        }
+      }
+    },
+    "data_analysis": {
+      "room": "data_analysis",
+      "source_sha256": "0384FCDDEED42C7D9F00A39B746FEDDE29AE5BC2D3E414009C400111B605D58D",
+      "manifest": "public/assets/rooms/past/data_analysis/layers/landscape-v1/manifest.json",
+      "file_and_contract_status": "PASS",
+      "idle_recomposition_status": "PASS",
+      "idle_recomposition": {
+        "mae_rgb": 0.0,
+        "max_channel_error": 0
+      },
+      "clean_plate_visual_status": "FAIL",
+      "mask_visual_status": "FAIL",
+      "art_review_note": "Manual inspection found hard donor seams or exposed equipment remnants in the hidden plate, and polygon masks include adjacent architecture.",
+      "images": {
+        "visible": {
+          "width": 1920,
+          "height": 1080,
+          "mode": "RGB",
+          "bytes": 2476125
+        },
+        "runtime_webp": {
+          "width": 1920,
+          "height": 1080,
+          "mode": "RGB",
+          "bytes": 299390
+        },
+        "clean": {
+          "width": 1920,
+          "height": 1080,
+          "mode": "RGB",
+          "bytes": 2288449
+        }
+      },
+      "objects": [
+        {
+          "id": "mission_files",
+          "position": {
+            "x": 374,
+            "y": 255,
+            "width": 597,
+            "height": 381
+          },
+          "files": {
+            "base": {
+              "width": 597,
+              "height": 381,
+              "mode": "RGBA",
+              "bytes": 343615
+            },
+            "mask": {
+              "width": 597,
+              "height": 381,
+              "mode": "L",
+              "bytes": 737
+            },
+            "glow": {
+              "width": 597,
+              "height": 381,
+              "mode": "RGBA",
+              "bytes": 1498
+            },
+            "screen": {
+              "width": 597,
+              "height": 381,
+              "mode": "RGBA",
+              "bytes": 267760
+            }
+          }
+        },
+        {
+          "id": "dataset_viewer",
+          "position": {
+            "x": 970,
+            "y": 255,
+            "width": 588,
+            "height": 381
+          },
+          "files": {
+            "base": {
+              "width": 588,
+              "height": 381,
+              "mode": "RGBA",
+              "bytes": 350840
+            },
+            "mask": {
+              "width": 588,
+              "height": 381,
+              "mode": "L",
+              "bytes": 733
+            },
+            "glow": {
+              "width": 588,
+              "height": 381,
+              "mode": "RGBA",
+              "bytes": 1485
+            },
+            "screen": {
+              "width": 588,
+              "height": 381,
+              "mode": "RGBA",
+              "bytes": 278440
+            }
+          }
+        },
+        {
+          "id": "analysis_console",
+          "position": {
+            "x": 511,
+            "y": 614,
+            "width": 899,
+            "height": 449
+          },
+          "files": {
+            "base": {
+              "width": 899,
+              "height": 449,
+              "mode": "RGBA",
+              "bytes": 546528
+            },
+            "mask": {
+              "width": 899,
+              "height": 449,
+              "mode": "L",
+              "bytes": 1582
+            },
+            "glow": {
+              "width": 899,
+              "height": 449,
+              "mode": "RGBA",
+              "bytes": 15524
+            },
+            "screen": {
+              "width": 899,
+              "height": 449,
+              "mode": "RGBA",
+              "bytes": 112571
+            }
+          }
+        }
+      ],
+      "previews": {
+        "preview_1920x1080.webp": {
+          "width": 1920,
+          "height": 1080,
+          "mode": "RGB",
+          "bytes": 271804
+        },
+        "preview_1366x768.webp": {
+          "width": 1366,
+          "height": 768,
+          "mode": "RGB",
+          "bytes": 173382
+        },
+        "preview_915x412.webp": {
+          "width": 915,
+          "height": 412,
+          "mode": "RGB",
+          "bytes": 67858
+        },
+        "preview_800x360.webp": {
+          "width": 800,
+          "height": 360,
+          "mode": "RGB",
+          "bytes": 54810
+        }
+      }
+    },
+    "resources_review": {
+      "room": "resources_review",
+      "source_sha256": "7D10ACD8D7F9EC3B93AFF3ECDB9C17785F7AAC1B7E28CB1D2CF304F841CBABBE",
+      "manifest": "public/assets/rooms/past/resources_review/layers/landscape-v1/manifest.json",
+      "file_and_contract_status": "PASS",
+      "idle_recomposition_status": "PASS",
+      "idle_recomposition": {
+        "mae_rgb": 0.0,
+        "max_channel_error": 0
+      },
+      "clean_plate_visual_status": "FAIL",
+      "mask_visual_status": "FAIL",
+      "art_review_note": "Manual inspection found hard donor seams or exposed equipment remnants in the hidden plate, and polygon masks include adjacent architecture.",
+      "images": {
+        "visible": {
+          "width": 1920,
+          "height": 1080,
+          "mode": "RGB",
+          "bytes": 2673420
+        },
+        "runtime_webp": {
+          "width": 1920,
+          "height": 1080,
+          "mode": "RGB",
+          "bytes": 338360
+        },
+        "clean": {
+          "width": 1920,
+          "height": 1080,
+          "mode": "RGB",
+          "bytes": 2404654
+        }
+      },
+      "objects": [
+        {
+          "id": "hardware_inventory",
+          "position": {
+            "x": 129,
+            "y": 210,
+            "width": 445,
+            "height": 290
+          },
+          "files": {
+            "base": {
+              "width": 445,
+              "height": 290,
+              "mode": "RGBA",
+              "bytes": 198555
+            },
+            "mask": {
+              "width": 445,
+              "height": 290,
+              "mode": "L",
+              "bytes": 775
+            },
+            "glow": {
+              "width": 445,
+              "height": 290,
+              "mode": "RGBA",
+              "bytes": 5912
+            },
+            "screen": {
+              "width": 445,
+              "height": 290,
+              "mode": "RGBA",
+              "bytes": 94980
+            }
+          }
+        },
+        {
+          "id": "power_energy",
+          "position": {
+            "x": 118,
+            "y": 502,
+            "width": 463,
+            "height": 362
+          },
+          "files": {
+            "base": {
+              "width": 463,
+              "height": 362,
+              "mode": "RGBA",
+              "bytes": 248170
+            },
+            "mask": {
+              "width": 463,
+              "height": 362,
+              "mode": "L",
+              "bytes": 767
+            },
+            "glow": {
+              "width": 463,
+              "height": 362,
+              "mode": "RGBA",
+              "bytes": 6073
+            },
+            "screen": {
+              "width": 463,
+              "height": 362,
+              "mode": "RGBA",
+              "bytes": 99116
+            }
+          }
+        },
+        {
+          "id": "personnel_roles",
+          "position": {
+            "x": 1350,
+            "y": 208,
+            "width": 440,
+            "height": 292
+          },
+          "files": {
+            "base": {
+              "width": 440,
+              "height": 292,
+              "mode": "RGBA",
+              "bytes": 196173
+            },
+            "mask": {
+              "width": 440,
+              "height": 292,
+              "mode": "L",
+              "bytes": 790
+            },
+            "glow": {
+              "width": 440,
+              "height": 292,
+              "mode": "RGBA",
+              "bytes": 5737
+            },
+            "screen": {
+              "width": 440,
+              "height": 292,
+              "mode": "RGBA",
+              "bytes": 93344
+            },
+            "closeup": {
+              "width": 1672,
+              "height": 941,
+              "mode": "RGB",
+              "bytes": 1929112
+            }
+          }
+        },
+        {
+          "id": "supplies_logistics",
+          "position": {
+            "x": 1347,
+            "y": 502,
+            "width": 459,
+            "height": 361
+          },
+          "files": {
+            "base": {
+              "width": 459,
+              "height": 361,
+              "mode": "RGBA",
+              "bytes": 256916
+            },
+            "mask": {
+              "width": 459,
+              "height": 361,
+              "mode": "L",
+              "bytes": 805
+            },
+            "glow": {
+              "width": 459,
+              "height": 361,
+              "mode": "RGBA",
+              "bytes": 6410
+            },
+            "screen": {
+              "width": 459,
+              "height": 361,
+              "mode": "RGBA",
+              "bytes": 109897
+            },
+            "closeup": {
+              "width": 1672,
+              "height": 941,
+              "mode": "RGB",
+              "bytes": 1812259
+            }
+          }
+        },
+        {
+          "id": "resource_allocation",
+          "position": {
+            "x": 660,
+            "y": 310,
+            "width": 600,
+            "height": 611
+          },
+          "files": {
+            "base": {
+              "width": 600,
+              "height": 611,
+              "mode": "RGBA",
+              "bytes": 573915
+            },
+            "mask": {
+              "width": 600,
+              "height": 611,
+              "mode": "L",
+              "bytes": 1845
+            },
+            "glow": {
+              "width": 600,
+              "height": 611,
+              "mode": "RGBA",
+              "bytes": 13387
+            },
+            "screen": {
+              "width": 600,
+              "height": 611,
+              "mode": "RGBA",
+              "bytes": 278380
+            }
+          }
+        }
+      ],
+      "previews": {
+        "preview_1920x1080.webp": {
+          "width": 1920,
+          "height": 1080,
+          "mode": "RGB",
+          "bytes": 310200
+        },
+        "preview_1366x768.webp": {
+          "width": 1366,
+          "height": 768,
+          "mode": "RGB",
+          "bytes": 196116
+        },
+        "preview_915x412.webp": {
+          "width": 915,
+          "height": 412,
+          "mode": "RGB",
+          "bytes": 73148
+        },
+        "preview_800x360.webp": {
+          "width": 800,
+          "height": 360,
+          "mode": "RGB",
+          "bytes": 58194
+        }
+      }
+    }
+  },
+  "present": {
+    "archive": {
+      "room": "archive",
+      "old_clean": {
+        "width": 1672,
+        "height": 941,
+        "mode": "RGB",
+        "bytes": 1928561
+      },
+      "new_clean_candidate": {
+        "width": 1672,
+        "height": 941,
+        "mode": "RGB",
+        "bytes": 2044800
+      },
+      "idle_recomposition_status": "FAIL",
+      "idle_recomposition": {
+        "mae_rgb": 14.62197,
+        "max_channel_error": 255
+      },
+      "clean_plate_visual_status": "NOT VERIFIED",
+      "integration_status": "BLOCKED",
+      "note": "Versioned alternative only; source artwork remains the runtime fallback."
+    },
+    "signal": {
+      "room": "signal",
+      "old_clean": {
+        "width": 1672,
+        "height": 941,
+        "mode": "RGB",
+        "bytes": 1760608
+      },
+      "new_clean_candidate": {
+        "width": 1672,
+        "height": 941,
+        "mode": "RGB",
+        "bytes": 1872269
+      },
+      "idle_recomposition_status": "FAIL",
+      "idle_recomposition": {
+        "mae_rgb": 12.85913,
+        "max_channel_error": 255
+      },
+      "clean_plate_visual_status": "NOT VERIFIED",
+      "integration_status": "BLOCKED",
+      "note": "Versioned alternative only; source artwork remains the runtime fallback."
+    },
+    "recordings": {
+      "room": "recordings",
+      "old_clean": {
+        "width": 1672,
+        "height": 941,
+        "mode": "RGB",
+        "bytes": 1668624
+      },
+      "new_clean_candidate": {
+        "width": 1672,
+        "height": 941,
+        "mode": "RGB",
+        "bytes": 1847690
+      },
+      "idle_recomposition_status": "FAIL",
+      "idle_recomposition": {
+        "mae_rgb": 18.56786,
+        "max_channel_error": 255
+      },
+      "clean_plate_visual_status": "NOT VERIFIED",
+      "integration_status": "BLOCKED",
+      "note": "Versioned alternative only; source artwork remains the runtime fallback."
+    }
+  }
+}

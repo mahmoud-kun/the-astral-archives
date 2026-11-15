@@ -1,0 +1,168 @@
+{
+  "version": 1,
+  "roomId": "recordings",
+  "timeline": "present",
+  "variant": "clean-v2-review-candidate",
+  "sourceArt": "/assets/rooms/Recordings_Original_REFERENCE.png",
+  "coordinateSystem": {
+    "width": 1672,
+    "height": 941
+  },
+  "background": "/assets/rooms/recordings/layers/clean-v2/background/room_bg_clean_candidate.png",
+  "objects": [
+    {
+      "id": "recording_equipment_rack",
+      "sourceArt": "/assets/rooms/Recordings_Original_REFERENCE.png",
+      "position": {
+        "x": 173,
+        "y": 343,
+        "width": 311,
+        "height": 213
+      },
+      "zIndex": 1,
+      "assets": {
+        "base": "/assets/rooms/recordings/layers/original/recording_equipment_rack/recording_equipment_rack_base.png",
+        "glow": "/assets/rooms/recordings/layers/original/recording_equipment_rack/recording_equipment_rack_glow.png",
+        "mask": "/assets/rooms/recordings/layers/original/recording_equipment_rack/recording_equipment_rack_mask.png"
+      },
+      "interaction": {
+        "target": "recording_archive",
+        "label": "Inspect recording equipment rack",
+        "mask": "/assets/rooms/recordings/layers/original/recording_equipment_rack/recording_equipment_rack_mask.png"
+      },
+      "states": [
+        "idle",
+        "hover",
+        "focus",
+        "touch"
+      ],
+      "extractionMode": "fully_layered",
+      "cleanPlateExtractionComplete": false,
+      "designerCleanupRequired": true
+    },
+    {
+      "id": "headphones_dock",
+      "sourceArt": "/assets/rooms/Recordings_Original_REFERENCE.png",
+      "position": {
+        "x": 67,
+        "y": 499,
+        "width": 108,
+        "height": 137
+      },
+      "zIndex": 2,
+      "assets": {
+        "base": "/assets/rooms/recordings/layers/original/headphones_dock/headphones_dock_base.png",
+        "glow": "/assets/rooms/recordings/layers/original/headphones_dock/headphones_dock_glow.png",
+        "mask": "/assets/rooms/recordings/layers/original/headphones_dock/headphones_dock_mask.png"
+      },
+      "interaction": {
+        "target": "headphones",
+        "label": "Use headphones dock",
+        "mask": "/assets/rooms/recordings/layers/original/headphones_dock/headphones_dock_mask.png"
+      },
+      "states": [
+        "idle",
+        "hover",
+        "focus",
+        "touch"
+      ],
+      "extractionMode": "fully_layered",
+      "cleanPlateExtractionComplete": false,
+      "designerCleanupRequired": true
+    },
+    {
+      "id": "audio_analysis_terminal",
+      "sourceArt": "/assets/rooms/Recordings_Original_REFERENCE.png",
+      "position": {
+        "x": 173,
+        "y": 464,
+        "width": 246,
+        "height": 150
+      },
+      "zIndex": 3,
+      "assets": {
+        "base": "/assets/rooms/recordings/layers/original/audio_analysis_terminal/audio_analysis_terminal_base.png",
+        "glow": "/assets/rooms/recordings/layers/original/audio_analysis_terminal/audio_analysis_terminal_glow.png",
+        "mask": "/assets/rooms/recordings/layers/original/audio_analysis_terminal/audio_analysis_terminal_mask.png",
+        "screen": "/assets/rooms/recordings/layers/original/audio_analysis_terminal/audio_analysis_terminal_screen.png"
+      },
+      "interaction": {
+        "target": "audio_analysis",
+        "label": "Inspect audio analysis terminal",
+        "mask": "/assets/rooms/recordings/layers/original/audio_analysis_terminal/audio_analysis_terminal_mask.png"
+      },
+      "states": [
+        "idle",
+        "hover",
+        "focus",
+        "touch"
+      ],
+      "extractionMode": "fully_layered",
+      "cleanPlateExtractionComplete": false,
+      "designerCleanupRequired": true
+    },
+    {
+      "id": "main_video_display",
+      "sourceArt": "/assets/rooms/Recordings_Original_REFERENCE.png",
+      "position": {
+        "x": 1158,
+        "y": 91,
+        "width": 514,
+        "height": 480
+      },
+      "zIndex": 4,
+      "assets": {
+        "base": "/assets/rooms/recordings/layers/original/main_video_display/main_video_display_base.png",
+        "glow": "/assets/rooms/recordings/layers/original/main_video_display/main_video_display_glow.png",
+        "mask": "/assets/rooms/recordings/layers/original/main_video_display/main_video_display_mask.png",
+        "screen": "/assets/rooms/recordings/layers/original/main_video_display/main_video_display_screen.png"
+      },
+      "interaction": {
+        "target": "video_recordings",
+        "label": "View video recordings",
+        "mask": "/assets/rooms/recordings/layers/original/main_video_display/main_video_display_mask.png"
+      },
+      "states": [
+        "idle",
+        "hover",
+        "focus",
+        "touch"
+      ],
+      "extractionMode": "fully_layered",
+      "cleanPlateExtractionComplete": false,
+      "designerCleanupRequired": true
+    },
+    {
+      "id": "video_playback_console",
+      "sourceArt": "/assets/rooms/Recordings_Original_REFERENCE.png",
+      "position": {
+        "x": 1098,
+        "y": 543,
+        "width": 574,
+        "height": 255
+      },
+      "zIndex": 5,
+      "assets": {
+        "base": "/assets/rooms/recordings/layers/original/video_playback_console/video_playback_console_base.png",
+        "glow": "/assets/rooms/recordings/layers/original/video_playback_console/video_playback_console_glow.png",
+        "mask": "/assets/rooms/recordings/layers/original/video_playback_console/video_playback_console_mask.png"
+      },
+      "interaction": {
+        "target": "video_controls",
+        "label": "Operate video playback controls",
+        "mask": "/assets/rooms/recordings/layers/original/video_playback_console/video_playback_console_mask.png"
+      },
+      "states": [
+        "idle",
+        "hover",
+        "focus",
+        "touch"
+      ],
+      "extractionMode": "fully_layered",
+      "cleanPlateExtractionComplete": false,
+      "designerCleanupRequired": true
+    }
+  ],
+  "qualityStatus": "FAIL",
+  "qualityNote": "Hidden plate visually improved, but normal recomposition and edge quality still require repair and review."
+}
