@@ -1,0 +1,138 @@
+{
+  "version": 1,
+  "roomId": "mission_target",
+  "timeline": "past",
+  "variant": "portrait",
+  "sourceArt": "/assets/rooms/past/sources/02_Mission_Target_1080x1920.png",
+  "coordinateSystem": {
+    "width": 1080,
+    "height": 1920
+  },
+  "background": "/assets/rooms/past/mission_target/layers/portrait/background/room_bg_clean.png",
+  "objects": [
+    {
+      "id": "mission_objectives",
+      "sourceArt": "/assets/rooms/past/sources/02_Mission_Target_1080x1920.png",
+      "position": {
+        "x": 18,
+        "y": 550,
+        "width": 246,
+        "height": 426
+      },
+      "zIndex": 1,
+      "assets": {
+        "base": "/assets/rooms/past/mission_target/layers/portrait/mission_objectives/mission_objectives_base.png",
+        "glow": "/assets/rooms/past/mission_target/layers/portrait/mission_objectives/mission_objectives_glow.png",
+        "mask": "/assets/rooms/past/mission_target/layers/portrait/mission_objectives/mission_objectives_mask.png",
+        "screen": "/assets/rooms/past/mission_target/layers/portrait/mission_objectives/mission_objectives_screen.png"
+      },
+      "interaction": {
+        "target": "mission_objectives",
+        "label": "Review mission objectives",
+        "mask": "/assets/rooms/past/mission_target/layers/portrait/mission_objectives/mission_objectives_mask.png"
+      },
+      "states": [
+        "idle",
+        "hover",
+        "focus",
+        "touch"
+      ],
+      "extractionMode": "fully_layered",
+      "cleanPlateExtractionComplete": false,
+      "designerCleanupRequired": true
+    },
+    {
+      "id": "target_destination",
+      "sourceArt": "/assets/rooms/past/sources/02_Mission_Target_1080x1920.png",
+      "position": {
+        "x": 256,
+        "y": 536,
+        "width": 824,
+        "height": 560
+      },
+      "zIndex": 2,
+      "assets": {
+        "base": "/assets/rooms/past/mission_target/layers/portrait/target_destination/target_destination_base.png",
+        "glow": "/assets/rooms/past/mission_target/layers/portrait/target_destination/target_destination_glow.png",
+        "mask": "/assets/rooms/past/mission_target/layers/portrait/target_destination/target_destination_mask.png",
+        "screen": "/assets/rooms/past/mission_target/layers/portrait/target_destination/target_destination_screen.png"
+      },
+      "interaction": {
+        "target": "target_destination",
+        "label": "Inspect target destination",
+        "mask": "/assets/rooms/past/mission_target/layers/portrait/target_destination/target_destination_mask.png"
+      },
+      "states": [
+        "idle",
+        "hover",
+        "focus",
+        "touch"
+      ],
+      "extractionMode": "fully_layered",
+      "cleanPlateExtractionComplete": false,
+      "designerCleanupRequired": true
+    },
+    {
+      "id": "scientific_priorities",
+      "sourceArt": "/assets/rooms/past/sources/02_Mission_Target_1080x1920.png",
+      "position": {
+        "x": 11,
+        "y": 978,
+        "width": 332,
+        "height": 477
+      },
+      "zIndex": 3,
+      "assets": {
+        "base": "/assets/rooms/past/mission_target/layers/portrait/scientific_priorities/scientific_priorities_base.png",
+        "glow": "/assets/rooms/past/mission_target/layers/portrait/scientific_priorities/scientific_priorities_glow.png",
+        "mask": "/assets/rooms/past/mission_target/layers/portrait/scientific_priorities/scientific_priorities_mask.png",
+        "screen": "/assets/rooms/past/mission_target/layers/portrait/scientific_priorities/scientific_priorities_screen.png"
+      },
+      "interaction": {
+        "target": "scientific_priorities",
+        "label": "Review scientific priorities",
+        "mask": "/assets/rooms/past/mission_target/layers/portrait/scientific_priorities/scientific_priorities_mask.png"
+      },
+      "states": [
+        "idle",
+        "hover",
+        "focus",
+        "touch"
+      ],
+      "extractionMode": "fully_layered",
+      "cleanPlateExtractionComplete": false,
+      "designerCleanupRequired": true
+    },
+    {
+      "id": "mission_constraints",
+      "sourceArt": "/assets/rooms/past/sources/02_Mission_Target_1080x1920.png",
+      "position": {
+        "x": 737,
+        "y": 978,
+        "width": 343,
+        "height": 476
+      },
+      "zIndex": 4,
+      "assets": {
+        "base": "/assets/rooms/past/mission_target/layers/portrait/mission_constraints/mission_constraints_base.png",
+        "glow": "/assets/rooms/past/mission_target/layers/portrait/mission_constraints/mission_constraints_glow.png",
+        "mask": "/assets/rooms/past/mission_target/layers/portrait/mission_constraints/mission_constraints_mask.png",
+        "screen": "/assets/rooms/past/mission_target/layers/portrait/mission_constraints/mission_constraints_screen.png"
+      },
+      "interaction": {
+        "target": "mission_constraints",
+        "label": "Review mission constraints",
+        "mask": "/assets/rooms/past/mission_target/layers/portrait/mission_constraints/mission_constraints_mask.png"
+      },
+      "states": [
+        "idle",
+        "hover",
+        "focus",
+        "touch"
+      ],
+      "extractionMode": "fully_layered",
+      "cleanPlateExtractionComplete": false,
+      "designerCleanupRequired": true
+    }
+  ]
+}
