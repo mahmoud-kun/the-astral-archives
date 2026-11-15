@@ -168,3 +168,16 @@ These are **content handoff instructions, not claims that a video or audio clip 
 
 **IMPORTANT validated integration refinement (source-readback):** In InvestigationDesignerScene.tsx, the physical cases target currently calls openCaseLibrary() and routes directly to folder-lab. Do **not** replace that action with CaseStationDesk: instead add a secondary OPEN CASE SOURCE INDEX action inside the existing panel==='briefing' or panel==='evidence' inspector (preserving both Mission Folders and NAD-06). In ArchiveFolderLab.tsx, its chooseCase(code) should import isOtherCaseId/setActiveCase from the new pure module src/gameplay/caseContext.ts and call setActiveCase(code) for non-Nadir cases; the selected-case preference then follows the player across all four physical rooms. See [exact non-owner patches in Issue #2](https://github.com/mahmoud-kun/the-astral-archives/issues/2#issuecomment-6889314614). These modifications belong to Main/Chat A, not Chat C.
 
+
+### Current final source verification — active dossier shared with Main
+
+[**GitHub Actions run #43677975229 — SUCCESS**](https://github.com/mahmoud-kun/the-astral-archives/actions/runs/43677975229) on exact code SHA **a43ea2b3979c78bf49f7fb7e6ef05dc12620a408**:
+
+- **61/61 tests PASS, 0 failed** (3 + 4 + 6 + 6 + 3 + 3 + 23 Nadir/new-four-case tests + 13 audio tests).
+- **TypeScript/Vite build PASS**.
+- **44 existing-route Chromium screenshots PASS**, 0 broken images/clipping/overflow/browser errors in the inspected 44.
+- Includes the dedicated shared src/gameplay/caseContext.ts active-case API, CaseStationDesk refactor and its whitelist regression test. Import is available to Main-owned ArchiveFolderLab chooseCase() to keep active dossier consistent across physical rooms, without altering gameplay/save integrity.
+- **Explicit limit:** KES/LUM/ORI/AST routes and in-room source terminals remain **unmounted** until Main/A integration. These 44 screenshots do not display the new component surfaces and **do not certify** four playable Rescue journeys. Main acceptance, new screen-specific visual/E2E, and production debug bypass fix still required.
+
+**Chat C scoped code deliverables are complete and verified at this SHA. Status remains HOLD FOR MAIN INTEGRATION/QA, not final game release.** 
+
