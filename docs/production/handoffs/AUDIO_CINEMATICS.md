@@ -162,3 +162,17 @@ Source: [Cases Evidence Production Bible v2.docx](https://docs.google.com/docume
 During same review, Main/Chat C had advanced the shared game: `src/gameplay/CaseRescue.tsx` and routing `/?rescue=KES|LUM|ORI|AST` now exist. Our old handoff sentence saying KES Rescue was not exposed in UI is superseded. **Only Main** wires the KES-success cinematic based on `otherRescueCompleted(...,'KES')`. `ArchiveFolderLab` restores the active case and otherwise defaults to NAD, but **visible dossier order is correct**. Refer to updated [Cinematic Placement & Main Patch V1](../../audio/CINEMATIC_PLACEMENT_AND_MAIN_PATCH_V1.md).
 
 The four MP4s remain subject to separate upload and eventual physical playback QA. New case video deliveries will be reviewed and registered independently, following this fixed case order.
+
+
+## 9. New delivered media: 8 MP4 clips + one Kestrel voice (2026-11-15)
+
+The user uploaded new files into NASA Drive while existing first-four video binary delivery remains pending. Full technical details, source hashes, all 9 new source identities and **per-Evidence-ID gameplay patch** are in:
+
+**[New Media Delivery Audit — 2026-11-15](../../audio/NEW_MEDIA_DELIVERY_AUDIT_2026-11-15.md)**.
+
+- **8 new 1080p H.264/AAC MP4 videos decoded end-to-end 8/8**, from Cases 01–03: `case1Evidence`, `case2Intro`, `case2EmailEvidence`, `case2UnitsMismatchEvidence`, `case2Outcome`, `case3Intro`, `case3ApprovalEvidence`, `case3Outcome`. `CINEMATICS` now registers **12 delivered clips** total. 4 are evidence-context visuals mapped to existing registered records KES-02, NAD-05, NAD-02 and LUM-05; **no new evidence or auto-success** was created. Their manifest entries remain staged, not physically deployed.
+- **New KES-05 spoken audio** (314,523-byte ElevenLabs Morgan MP3, 18.599 sec, 44.1 kHz mono, -15.2 mean / -0.3 dBFS peak) corresponds closely to the **existing required KES-05 Analyst Audio Transcript**. `src/audio/evidenceVoiceManifest.ts` and `src/audio/EvidenceVoicePlayer.tsx` stage a lower-volume, explicitly controlled player; Sound Lab previews it in its own section without inflating the original **19 SFX**. Source was actually transcribed via Descript. Human verification of two dialogue speakers, an ASR-vs-spoken possible "crew/cruise" terminology issue, captions and distribution license is pending.
+- The 8 source MP4 + 1 MP3 binary copies and SHA manifest have been packed into a **verified local delta ZIP** for the user and Main. This ZIP is not in GitHub. Source files and previous four MP4s remain immutable. **No production playback of these nine new files is possible until the source-exact binaries are installed on their manifest paths.**
+- New audio/video tests are included in `npm run test:audio`. Main must root-wire individual footage using [New Media Delivery Audit](../../audio/NEW_MEDIA_DELIVERY_AUDIT_2026-11-15.md) and run independent build, browser and mobile QA. Main owns all shared component edits; no cross-owner file changed.
+
+**Acceptance verdict remains PARTIAL:** audio/video source inventory, source-derived manifest, preview and QA plan prepared; physical binaries, game trigger integration, caption/rights review and real-device playback not yet complete.
