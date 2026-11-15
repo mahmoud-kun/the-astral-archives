@@ -11,3 +11,17 @@
 .pt-locked{height:100dvh;display:grid;place-items:center;background:radial-gradient(circle,#263349,#090e19);color:#f7edda;font-family:'IBM Plex Sans',sans-serif;padding:20px}.pt-locked-card{max-width:560px;background:#0d1a2d;border:1px solid #d4a46a;padding:clamp(18px,4vw,40px);display:grid;gap:13px}.pt-locked-card small{font:700 11px 'IBM Plex Mono',monospace;color:#f2bf7b}.pt-locked-card h1{font:700 clamp(19px,3vw,32px) 'Orbitron',sans-serif;margin:0}.pt-locked-card p{font-size:14px;line-height:1.6;margin:0}.pt-locked-card button{background:#efc38a;color:#0d1d30;border:0;padding:12px;cursor:pointer;font-weight:700}
 @media(orientation:landscape) and (max-height:500px){.pt-top{min-height:44px;padding-top:4px;padding-bottom:4px}.pt-bottom{min-height:56px;padding-top:4px;padding-bottom:4px}.pt-return,.pt-rescue{min-height:34px;padding:6px 8px}.pt-nav button{padding:6px 7px}.pt-inspection span{font-size:9px}}
 @media(max-width:620px){.pt-brand span,.pt-inspection span{display:none}.pt-nav{max-width:72%}.pt-bottom{gap:4px}.pt-return,.pt-rescue{padding:6px;font-size:9px}}
+
+/* Every Past hotspot now opens a readable story inspection panel.
+   Keep stage navigation and the Rescue action reachable without an exam. */
+.pt-object-panel{position:absolute;z-index:10;left:50%;top:50%;transform:translate(-50%,-50%);width:min(580px,calc(100vw - 24px));max-height:calc(100dvh - 125px);overflow-y:auto;box-sizing:border-box;padding:20px 22px;background:linear-gradient(135deg,rgba(9,27,47,.98),rgba(23,34,50,.98));border:1px solid #d7a96f;color:#f3ecdf;border-radius:10px;box-shadow:0 16px 65px #000b}
+.pt-object-head,.pt-object-actions{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:9px}
+.pt-object-head small,.pt-object-panel>small{font-size:11px;letter-spacing:.06em;color:#a9c6d1}
+.pt-object-panel h2{font:700 clamp(17px,2vw,25px) 'IBM Plex Mono',monospace;line-height:1.25;margin:12px 0}
+.pt-object-panel p{font-size:clamp(12px,1.35vw,15px);line-height:1.65;margin:9px 0}
+.pt-object-context{border-left:2px solid #d6aa70;padding-left:12px;color:#c5d7df}
+.pt-object-actions{margin:18px 0 13px}
+.pt-object-panel button{font:700 11px 'IBM Plex Mono',monospace;cursor:pointer;min-height:40px;padding:9px 11px;background:#19384f;border:1px solid #74abbd;color:#fff}
+.pt-object-panel button:hover,.pt-object-panel button:focus-visible{background:#36617b;outline:2px solid #fff;outline-offset:2px}
+.pt-object-head button{min-height:32px}
+@media(max-height:500px){.pt-object-panel{padding:10px 14px;max-height:calc(100dvh - 98px)}.pt-object-panel h2{margin:5px 0;font-size:16px}.pt-object-panel p{margin:5px 0;font-size:12px;line-height:1.4}.pt-object-actions{margin:9px 0}.pt-object-panel button{min-height:32px;padding:5px 8px}}
