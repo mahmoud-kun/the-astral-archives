@@ -2,7 +2,7 @@ import {test} from 'node:test'
 import assert from 'node:assert/strict'
 import {CASE_CODES,EVIDENCE_RECORDS} from '../archive/evidenceRecords.ts'
 import {CINEMATICS} from './cinematicManifest.ts'
-import {CASE_CINEMATIC_CATALOG,caseIntroCinematic,verifiedCaseOutcomeCinematic,evidenceContextCinematic} from './caseCinematicCatalog.ts'
+import {CASE_CINEMATIC_CATALOG,CASE_OUTCOME_REVIEW_HOLDS,caseIntroCinematic,verifiedCaseOutcomeCinematic,evidenceContextCinematic} from './caseCinematicCatalog.ts'
 
 test('all five Bible cases have exactly one authentic intro and one gated outcome film',()=>{
  assert.deepEqual(Object.keys(CASE_CINEMATIC_CATALOG),[...CASE_CODES])
@@ -16,7 +16,7 @@ test('all five Bible cases have exactly one authentic intro and one gated outcom
    seen.add(id)
   }
   assert.equal(caseIntroCinematic(caseId),entry.intro)
-  assert.equal(verifiedCaseOutcomeCinematic(caseId),entry.outcome)
+  assert.equal(verifiedCaseOutcomeCinematic(caseId),caseId==='AST'?null:entry.outcome)
  }
  assert.equal(seen.size,10)
 })
@@ -40,4 +40,11 @@ test('evidence visual clips only supplement authored records, never create colle
  assert.equal(evidenceContextCinematic('AST-07'),null)
  assert.equal(evidenceContextCinematic('XYZ-01'),null)
  assert.equal(evidenceContextCinematic('__proto__'),null)
+})
+
+test('Asterion cannot be portrayed as a verified power rescue until the 472W clip is corrected',()=>{
+ assert.equal(verifiedCaseOutcomeCinematic('AST'),null)
+ assert.match(CASE_OUTCOME_REVIEW_HOLDS.AST,/472 W/)
+ assert.match(CASE_OUTCOME_REVIEW_HOLDS.AST,/450 W/)
+ assert.equal(CINEMATICS.case5Outcome.caseId,'AST')
 })
