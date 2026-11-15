@@ -131,3 +131,17 @@
  .sr-layer-object .sr-hotspot-label{font-size:7px;padding:4px 5px}
 }
 @media(prefers-reduced-motion:reduce){.sr-prop-target,.sr-layer-object .sr-layer-glow{transition:none}}
+
+/* Versioned static Past environment previews. No clean-plate or object-base compositing. */
+.sr-past-root{position:relative;isolation:isolate;display:flex;align-items:center;justify-content:center;width:100%;height:100dvh;min-height:0;overflow:hidden;background:#0a101d;color:#fff;font-family:'IBM Plex Sans',sans-serif}
+.sr-past-stage{position:relative;width:min(100vw,177.7778dvh);aspect-ratio:16/9;max-height:100dvh;overflow:hidden;background:#191326}
+.sr-past-background{display:block;width:100%;height:100%;object-fit:contain}
+.sr-past-target{position:absolute;z-index:2;display:block;border:1px solid transparent;border-radius:5px;padding:0;appearance:none;background:transparent;color:#fff;cursor:pointer;-webkit-tap-highlight-color:transparent}
+.sr-past-target:is(:hover,:focus-visible,[aria-pressed="true"]){border-color:#f9cb76;background:rgba(255,173,54,.13);box-shadow:inset 0 0 18px rgba(252,168,60,.26),0 0 12px rgba(252,168,60,.2)}
+.sr-past-target:focus-visible{outline:2px solid #fff;outline-offset:2px}
+.sr-past-target-name{position:absolute;bottom:100%;left:50%;min-width:max-content;max-width:220px;transform:translate(-50%,-3px);background:rgba(13,20,33,.95);color:#fff;border:1px solid rgba(255,190,85,.5);border-radius:4px;padding:4px 7px;font-size:clamp(9px,1.05vw,13px);line-height:1.25;opacity:0;pointer-events:none;white-space:nowrap}
+.sr-past-target:is(:hover,:focus-visible,[aria-pressed="true"]) .sr-past-target-name{opacity:1}
+.sr-past-back{position:absolute;left:12px;top:12px;z-index:3;background:rgba(9,17,29,.86);border:1px solid rgba(255,205,124,.6);border-radius:4px;color:#fff;padding:9px 12px;cursor:pointer;font:700 12px 'IBM Plex Sans',sans-serif}
+.sr-past-preview-state{position:absolute;z-index:3;bottom:12px;left:50%;transform:translateX(-50%);width:max-content;max-width:95%;padding:8px 11px;background:rgba(9,17,29,.94);border:1px solid rgba(255,205,124,.55);border-radius:5px;display:flex;flex-direction:column;gap:3px;font-size:clamp(10px,1.1vw,13px);text-align:center}
+.sr-past-asset-error{display:grid;place-items:center;width:100%;height:100%;color:#fff}
+@media (prefers-reduced-motion:reduce){.sr-past-target{transition:none}}

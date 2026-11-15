@@ -1,0 +1,96 @@
+{
+  "schemaVersion": 1,
+  "roomId": "manufacturing",
+  "timeline": "past",
+  "variant": "landscape-static-v1",
+  "renderMode": "BAKED_ART_WITH_SEPARATE_HOTSPOTS",
+  "artSource": {
+    "sourceBranch": "experiment/past-landscape-art-production-v1",
+    "sourceCommit": "92a94f889e19f9370d3e54ea49143284904a9935",
+    "originalManifest": "public/assets/rooms/past/manufacturing/layers/landscape-v1/manifest.json"
+  },
+  "background": "/assets/rooms/past/manufacturing/layers/static-v1/room_visible.webp",
+  "coordinateSystem": {
+    "width": 1920,
+    "height": 1080
+  },
+  "objects": [
+    {
+      "id": "materials_structure",
+      "interaction": {
+        "target": "materials_structure",
+        "label": "Inspect materials and structure"
+      },
+      "hitArea": {
+        "x": 337,
+        "y": 580,
+        "width": 248,
+        "height": 155
+      },
+      "hitShape": "rect",
+      "sourceFullLayerPosition": {
+        "x": 98,
+        "y": 394,
+        "width": 544,
+        "height": 501
+      },
+      "reviewStatus": "VISUAL_PROVISIONAL"
+    },
+    {
+      "id": "motors_energy",
+      "interaction": {
+        "target": "motors_energy",
+        "label": "Inspect motors and energy"
+      },
+      "hitArea": {
+        "x": 851,
+        "y": 635,
+        "width": 240,
+        "height": 170
+      },
+      "hitShape": "rect",
+      "sourceFullLayerPosition": {
+        "x": 754,
+        "y": 378,
+        "width": 407,
+        "height": 453
+      },
+      "reviewStatus": "VISUAL_PROVISIONAL"
+    },
+    {
+      "id": "rocket_design",
+      "interaction": {
+        "target": "rocket_design",
+        "label": "Inspect rocket design"
+      },
+      "hitArea": {
+        "x": 1388,
+        "y": 450,
+        "width": 330,
+        "height": 195
+      },
+      "hitShape": "rect",
+      "sourceFullLayerPosition": {
+        "x": 1278,
+        "y": 388,
+        "width": 555,
+        "height": 494
+      },
+      "reviewStatus": "VISUAL_PROVISIONAL"
+    }
+  ],
+  "assetCapabilities": {
+    "objectSpritesNotUsed": true,
+    "requiresCleanPlate": false,
+    "independentObjectAnimation": false,
+    "keyboardAndTouchHotspots": true
+  },
+  "qa": {
+    "assetFormat": "PASS",
+    "hitAreaGeometry": "PASS_INSET_AND_NO_OVERLAP",
+    "manualPixelReview": "PENDING",
+    "browserTouchRuntime": "NOT_VERIFIED",
+    "artApproval": "PENDING",
+    "notes": "Static scene does not rely on failed masks or hidden clean plates."
+  }
+}
