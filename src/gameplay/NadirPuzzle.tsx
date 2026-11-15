@@ -48,6 +48,9 @@ export default function NadirPuzzle({id,onClose}:{id:NadirRecord;onClose:()=>voi
  const [submitted,setSubmitted]=useState(false)
  const [mobileStep,setMobileStep]=useState<'inspect'|'analyze'>('inspect')
  const closeButtonRef=useRef<HTMLButtonElement>(null)
+ const workScrollRef=useRef<HTMLDivElement>(null)
+ const latestCloseRef=useRef(onClose)
+ latestCloseRef.current=onClose
  useEffect(()=>{
   const previous=document.activeElement instanceof HTMLElement ? document.activeElement : null
   closeButtonRef.current?.focus()
@@ -55,12 +58,16 @@ export default function NadirPuzzle({id,onClose}:{id:NadirRecord;onClose:()=>voi
    if(event.key==='Escape'){
     event.preventDefault()
     event.stopPropagation()
-    onClose()
+    latestCloseRef.current()
    }
   }
   window.addEventListener('keydown',escape,true)
   return ()=>{window.removeEventListener('keydown',escape,true);previous?.focus()}
- },[onClose])
+ },[])
+ function chooseMobileStep(step:'inspect'|'analyze'){
+  setMobileStep(step)
+  if(workScrollRef.current)workScrollRef.current.scrollTop=0
+ }
 
  const locked=challenge.requires.filter(prerequisite=>!progress.solved.includes(prerequisite))
  const attempts=progress.attempts[id]??0
@@ -113,15 +120,15 @@ export default function NadirPuzzle({id,onClose}:{id:NadirRecord;onClose:()=>voi
     <div><small>THE ASTRAL ARCHIVES / INVESTIGATIVE ANALYZER</small><strong id="np-title">{id} · {record?.title??'Record'}</strong></div>
     <button ref={closeButtonRef} onClick={onClose} aria-label="Close evidence analyzer">BACK TO ROOM ×</button>
    </header>
-   <div className="np-scroll">
+   <div ref={workScrollRef} className={'np-scroll np-step-'+mobileStep}>
     <div className="np-meta"><span>{challenge.discipline}</span><span>FICTIONAL SIMULATION</span></div>
     <h2>BUILD YOUR CASE</h2>
     <p className="np-objective">{challenge.objective}</p>
     <nav className="np-mobile-steps" aria-label="Investigation workstation steps">
-     <button type="button" aria-current={mobileStep==='inspect'?'step':undefined} className={mobileStep==='inspect'?'current':''} onClick={()=>setMobileStep('inspect')}>
+     <button type="button" aria-current={mobileStep==='inspect'?'step':undefined} className={mobileStep==='inspect'?'current':''} onClick={()=>chooseMobileStep('inspect')}>
       <span>01</span> INSPECT INSTRUMENT
      </button>
-     <button type="button" aria-current={mobileStep==='analyze'?'step':undefined} className={mobileStep==='analyze'?'current':''} onClick={()=>setMobileStep('analyze')}>
+     <button type="button" aria-current={mobileStep==='analyze'?'step':undefined} className={mobileStep==='analyze'?'current':''} onClick={()=>chooseMobileStep('analyze')}>
       <span>02</span> RUN ANALYSIS
      </button>
     </nav>
