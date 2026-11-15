@@ -4,7 +4,7 @@ import {readFileSync} from 'node:fs'
 import {createHash} from 'node:crypto'
 import { CASE_CODES, EVIDENCE_RECORDS } from '../archive/evidenceRecords.ts'
 import { INVESTIGATION_CASES } from '../investigationCases.ts'
-import {CINEMATICS,CINEMATIC_REQUEST_EVENT,CINEMATIC_FINISHED_EVENT,isCinematicId,cinematicVolume} from './cinematicManifest.ts'
+import {CINEMATICS,CINEMATIC_REQUEST_EVENT,CINEMATIC_FINISHED_EVENT,isCinematicId,isLiveCinematicAllowed,CINEMATIC_LIVE_HOLDS,cinematicVolume} from './cinematicManifest.ts'
 test('exactly seventeen Drive-delivered designer films are registered',()=>{
  assert.deepEqual(Object.keys(CINEMATICS),['opening','case1Intro','portalPast','case1Outcome','case1Evidence','case2Intro','case2EmailEvidence','case2UnitsMismatchEvidence','case2Outcome','case3Intro','case3ApprovalEvidence','case3Outcome','case4Intro','case4TestingEvidence','case4Outcome','case5Intro','case5Outcome'])
  assert.equal(isCinematicId('portalPast'),true)
@@ -94,5 +94,14 @@ test('all seventeen MP4 binaries exist in Git and match the exact designer sourc
   assert.equal(bytes.byteLength,info.bytes,id+' length')
   assert.equal(bytes.toString('ascii',4,8),'ftyp',id+' MP4 file header')
   assert.equal(createHash('sha256').update(bytes).digest('hex'),sha256[id],id+' source SHA256')
+ }
+})
+
+test('direct live cinematic events cannot play unapproved AST 472W verified outcome',()=>{
+ assert.equal(isLiveCinematicAllowed('case5Outcome'),false)
+ assert.match(CINEMATIC_LIVE_HOLDS.case5Outcome,/472 W/)
+ assert.match(CINEMATIC_LIVE_HOLDS.case5Outcome,/450 W/)
+ for(const key of Object.keys(CINEMATICS).filter(x=>x!=='case5Outcome')){
+  assert.equal(isLiveCinematicAllowed(key),true,key)
  }
 })
