@@ -2,7 +2,7 @@ import { test } from 'node:test'
 import assert from 'node:assert/strict'
 import { CASE_CODES, EVIDENCE_RECORDS } from './evidenceRecords.ts'
 import {
-  countRequiredEvidence, diagnosisIsSupported, discoverEvidence, emptyArchiveState,
+  countRequiredEvidence, countCaseCollectedEvidence, diagnosisIsSupported, discoverEvidence, emptyArchiveState,
   fileEvidence, rescueIsReady, restoreArchiveState, submitDiagnosis, updateDiagnosis
 } from './archiveState.ts'
 
@@ -53,7 +53,7 @@ const diagnosis = {
   consequence: { answer: 'divergence', evidenceId: 'NAD-01' },
 }
 
-test('Rescue unlocks at 6/6 correct filing; diagnosis is an independent in-rescue review', () => {
+test('Rescue stays unlocked after any six recovered records, independent of historic filing or diagnosis', () => {
   let state = fullNadir()
   assert.equal(countRequiredEvidence(state,'NAD'),6)
   assert.equal(rescueIsReady(state,'NAD'),true)
@@ -63,11 +63,30 @@ test('Rescue unlocks at 6/6 correct filing; diagnosis is an independent in-rescu
   state = submitDiagnosis(state,'NAD')
   assert.equal(diagnosisIsSupported(state,'NAD'),true)
   const moved = fileEvidence(state,'NAD-02','KES')
-  assert.equal(rescueIsReady(moved,'NAD'),false)
+  assert.equal(rescueIsReady(moved,'NAD'),true)
   assert.equal(diagnosisIsSupported(moved,'NAD'),false)
   assert.equal(rescueIsReady(fileEvidence(moved,'NAD-02','NAD'),'NAD'),true)
   const otherMoved = fileEvidence(state, 'NAD-03', 'KES') // Not cited in the three-part diagnosis.
   assert.equal(diagnosisIsSupported(otherMoved, 'NAD'), false, 'losing any required evidence invalidates the review')
+})
+
+test('Every mission unlocks after ANY six of eight, including bonus records, with no filing', () => {
+  for(const code of CASE_CODES) {
+    const all=EVIDENCE_RECORDS.filter(r=>r.caseId===code)
+    const picked=[...all.filter(r=>!r.required),...all.filter(r=>r.required).slice(0,4)]
+    let state=emptyArchiveState()
+    assert.equal(rescueIsReady(state,code),false)
+    for(const [i,record] of picked.entries()){
+      state=discoverEvidence(state,record.id)
+      assert.equal(countCaseCollectedEvidence(state,code),i+1)
+      assert.equal(rescueIsReady(state,code),i+1>=6)
+    }
+    assert.equal(countRequiredEvidence(state,code),0,'No files are required for unlock')
+    state=fileEvidence(state,picked[0].id,'NAD')
+    assert.equal(rescueIsReady(state,code),true,'Misfiling does not undo already collected evidence')
+    assert.equal(rescueIsReady(state,CASE_CODES.find(c=>c!==code)),false,'Other case cannot borrow evidence')
+    assert.equal(rescueIsReady(restoreArchiveState(JSON.stringify(state)),code),true,'Old save format persists unlock')
+  }
 })
 
 test('unsupported diagnosis never passes review, but does not relock an available rescue', () => {
