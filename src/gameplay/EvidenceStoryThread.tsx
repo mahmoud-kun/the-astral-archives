@@ -10,14 +10,12 @@ export default function EvidenceStoryThread({caseId,discovered,focusId,compact=f
  caseId:ArchiveCaseId;discovered:readonly string[];focusId?:string;compact?:boolean
 }){
  const [expanded,setExpanded]=useState(false)
- const [current,setCurrent]=useState(0)
  const arc=CASE_STORY_ARCS[caseId]
  const revealed=getRevealedConnections(caseId,discovered)
  const focused=focusId?focusStoryConnections(caseId,focusId,discovered):[]
  const caseFound=discovered.filter(id=>id.startsWith(caseId+'-')).length
  const visible=compact&&!expanded?revealed.slice(-2):revealed
- const active=visible[Math.min(current,Math.max(visible.length-1,0))]
- useEffect(()=>{setCurrent(0);setExpanded(false)},[caseId])
+ useEffect(()=>{setExpanded(false)},[caseId])
  if(caseFound===0&&!focusId)return null
  return <section className={'est-root'+(compact?' est-compact':'')+(focused.length?' est-connected':'')}
   aria-label={'Investigative story connections for '+caseId}>
@@ -33,7 +31,7 @@ export default function EvidenceStoryThread({caseId,discovered,focusId,compact=f
   {!revealed.length?
     <p className="est-pending">{caseFound} record{caseFound===1?'':'s'} recovered. Each sheet carries part of the story. When two related records are recovered, their connection appears here — no specific evidence order is required.</p>:
     <div className="est-links">
-      {visible.map((link,index)=><article key={link.ids.join('|')} className={'est-link '+(index===Math.min(current,visible.length-1)?'est-current':'')}>
+      {visible.map((link,index)=><article key={link.ids.join('|')} className={'est-link '+(index===0?'est-current':'')}>
        <div className="est-link-heading"><span className="est-node" aria-hidden="true"/><div><small>LINKED RECORDS · {link.ids.join(' + ')}</small><strong>{link.label}</strong></div></div>
        <p>{link.reveal}</p><em>{link.tension}</em>
       </article>)}
