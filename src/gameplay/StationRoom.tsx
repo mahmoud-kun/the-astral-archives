@@ -41,8 +41,8 @@ const ROOM_SCENES: Record<OtherStation, Scene> = {
       receiver_rack: 'NAD-02',
     },
     context: {
-      telemetry_console_left: 'The left telemetry station provides an index of source signals for the other four investigations. Inspect its records in the interactive analyzer; Nadir evidence remains available at its original instruments.',
-      telemetry_console_right: 'The right telemetry station is a supporting instrument. No independent evidence recording or analysis puzzle has been approved for this workstation.',
+      telemetry_console_left: 'The left telemetry station provides recovered signal records for the other four missions. Open and collect a record directly; Nadir's files remain at their original instruments.',
+      telemetry_console_right: 'The right telemetry station is a supporting instrument. No separate recovered evidence recording is assigned to this workstation.',
     },
   },
   archive: {
@@ -55,7 +55,7 @@ const ROOM_SCENES: Record<OtherStation, Scene> = {
       archive_filing_drawers: 'NAD-08',
     },
     context: {
-      archive_shelving: 'The archive shelving hosts a case source index for four additional mission investigations. Opening an analyzer never automatically collects or files evidence. Mission Folders remain available separately.',
+      archive_shelving: 'The archive shelving hosts recovered documents for four other missions. Open a record to read and collect it directly; file it yourself in Mission Folders.',
     },
   },
   recordings: {
@@ -67,7 +67,7 @@ const ROOM_SCENES: Record<OtherStation, Scene> = {
       recording_equipment_rack: 'NAD-07',
     },
     context: {
-      audio_analysis_terminal: 'The audio analysis terminal provides recordings and investigative records for the other four missions. Optional voice playback is inside the original evidence inspector; The Nadir review memory stays on the rack.',
+      audio_analysis_terminal: 'The audio analysis terminal holds recovered records from four missions. Press a record to listen to available voice clips or watch related footage and collect its evidence sheet.',
       video_playback_console: 'Playback controls are represented in the source artwork. The authored Nadir chronology evidence is available on the main video display; no independent clip is connected to this console.',
       headphones_dock: 'The headphones are an inspectable art prop. No independent recording is attached to this object.',
     },
@@ -248,7 +248,7 @@ export default function StationRoom({ station }: { station: OtherStation }) {
     </div>
     <footer className="sr-foot">
       <span>FIVE CASES / EVIDENCE INVESTIGATION</span>
-      <span>INSPECT → ANALYZE → MANUALLY COLLECT → FILE</span>
+      <span>EXPLORE → COLLECT → FILE EVIDENCE → RESCUE</span>
     </footer>
     {inspectedObject && <div className="sr-inspection-shade" role="presentation">
       <section className="sr-inspection-note" role="dialog" aria-modal="true"
