@@ -46,3 +46,14 @@
 **SOURCE & CODE:** new original WAV committed and 19 existing source files unchanged; fully registered in `src/audio/gameAudio.ts`; test of WAV size/header/PCM Git SHA; five-case route mapping and record-specific signal tests; source-exact audio test; live runtime audio focus/volume/mute test. **CI validation is logged in this document after run completes**.
 
 **REMAINING NOT CLAIMED:** Main-owned complete engineering/portal event hooks, case-specific video flow integration, listening on actual Android/desktop speakers, mobile gesture/mute/no-overlap behavior, final voiceover mix and captions. User can audition new cue at `/?audio-lab=1`. No merge to main.
+
+## Final independent GitHub Actions verification
+
+[Final SFX + all production suites + Visual QA run #43688210176](https://github.com/mahmoud-kun/the-astral-archives/actions/runs/43688210176) **SUCCESS** on commit `4ee44fc292e30f685448ba28529d3e79bb0210e3`, including all 20 real SFX and the new Sound Lab view. CI logs confirm:
+
+- **Audio and Cinematics unit suite:** **28/28 PASS**, including actual physical WAV 60,020 bytes and Git blob SHA check, five known-case Rescue soundscapes, unlocked-vs-verified complete cue distinction, Signal Room event route and preservation of wrong-file neutrality, all 17 MP4 source hashes and the KES-05 MP3.
+- **Other studio unit suites:** PASS; **TypeScript / Vite production build:** PASS (Vite bundled in 3.64 seconds).
+- **Automated browser Visual QA:** **52 screenshots**, **0 broken**, **0 clipped**, **0 scenario errors**, **0 console errors**; Sound Lab still exposes 19 original `.al-cue` sources and new success sound as a separate non-counted row.
+- Independent post-CI GitHub recursive tree verifies **11 original designer cues + 8 original Kenney cues unchanged + 1 new original PCM WAV**, 842,128 total SFX bytes. No Main-owned source files were touched. CI added visual-report artifact on a subsequent `[skip ci]` commit.
+
+Physical human audio audition on Android/desktop, subjective loudness balance with upcoming voiceovers and Main-owned portal/test event triggers remain NOT VERIFIED. This is a specialist completion, not release approval.
