@@ -48,7 +48,7 @@ function DocumentViewer({ record, archive, onDiscover, onFile, onClose }: {recor
         <h2 id="af-document-title">{record.title}</h2>
         <div className="af-hero-graphic"><PaperGraphic kind={record.kind}/></div>
         <div className="af-document-copy">{record.content.split(';').filter(Boolean).map((segment,i)=><p key={i}>{segment.trim()}</p>)}</div>
-        <div className="af-document-annotation"><strong>INVESTIGATION ACTION</strong><p>{record.inspectAction}</p></div>
+        <div className="af-document-annotation"><strong>YOUR NEXT STEP</strong><p>Collect this record if you haven’t already, then choose the Mission Folder it belongs to. No puzzles or technical questions are required.</p></div>
         <p className="af-source-mark">FICTIONAL SIMULATION — NOT ORIGINAL NASA FLIGHT DATA</p>
       </article></div>
       <div className="af-modal-footer">
