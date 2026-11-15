@@ -56,7 +56,7 @@ function LayeredObject({
     zIndex: object.zIndex,
   }
 
-  return <button ref={buttonRef} type="button" className="idr-layer-object"
+  return <button ref={buttonRef} data-tutorial-target={object.id} type="button" className="idr-layer-object"
     style={style} aria-label={object.interaction.label} title={object.interaction.label}
     onPointerMove={event => {
       if (event.pointerType !== 'touch') buttonRef.current?.classList.toggle('idr-layer-object-lit', hitAt(event.clientX, event.clientY))
