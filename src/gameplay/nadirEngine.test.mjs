@@ -107,7 +107,7 @@ test('saved investigation is constrained to known ids, valid hints and booleans'
  assert.equal(x.attempts['NAD-02'],2)
  assert.equal(x.attempts['NAD-03'],undefined)
  assert.equal(x.hints['NAD-02'],undefined)
- assert.equal(x.hints['NAD-04'],2)
+ assert.equal(x.hints['NAD-04'],undefined,'unearned hints must not survive restore')
  assert.equal(x.rescue.submitted,false)
  assert.equal(x.rescue.rerunPassed,true)
  const forged=restoreNadir(JSON.stringify({version:1,attempts:{'NAD-02':1},hints:{'NAD-02':2}}))
