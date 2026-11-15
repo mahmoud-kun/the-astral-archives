@@ -163,3 +163,30 @@
  .cw-desk-record{padding:8px;gap:5px}.cw-desk-record>strong{font-size:11px}.cw-desk-record>p{font-size:9px}
  .cw-desk-record-top span,.cw-desk-record>small{font-size:8px}
 }
+
+
+/* Accessible tactile rescue controls: scenario options carry source-derived resource trade values. */
+.cw-control-board{border:1px solid #527789;padding:10px;min-width:0;grid-column:1/-1}
+.cw-control-board legend{color:#e8bb83;font:700 10px 'IBM Plex Mono',monospace}
+.cw-control-board>p{margin:9px 0 0;color:#acc8d1;font:500 11px/1.6 'IBM Plex Sans',sans-serif}
+.cw-option-cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px}
+.cw-option-cards:has(button:nth-child(2):last-child){grid-template-columns:repeat(2,minmax(0,1fr))}
+.cw-option-cards button{display:grid;gap:8px;text-align:left;background:#0c2b3b;color:#dbe9e8;border:1px solid #496d80;
+ padding:12px;min-height:125px;cursor:pointer}
+.cw-option-cards button[aria-pressed=true]{border-color:#edbd83;background:#4b4439;box-shadow:inset 0 0 0 1px #eec18d}
+.cw-option-cards button>strong{font:800 11px/1.5 'IBM Plex Mono',monospace;color:#f3d6b3}
+.cw-option-cards button>b{font:700 11px 'IBM Plex Mono',monospace;color:#acdce3}
+.cw-option-cards button>small{font:500 10px/1.5 'IBM Plex Sans',sans-serif;color:#cad7d7}
+.cw-adjuster{display:grid;grid-template-columns:40px minmax(0,1fr) 40px;gap:10px;margin-top:9px;align-items:center}
+.cw-adjuster button{min-height:45px;background:#173c4a;border:1px solid #5d8997;color:#f1dfc2;cursor:pointer;font-size:22px}
+.cw-adjuster label{min-width:0}
+.cw-control-board input[type=range]{accent-color:#e7af7a;width:100%;min-height:31px;padding:0;border:0;background:transparent}
+.cw-filter-stats{display:flex;align-items:center;flex-wrap:wrap;gap:10px}
+.cw-filter-stats strong{font:800 19px 'Orbitron',sans-serif;color:#f2c591}
+.cw-filter-stats span{font:700 10px 'IBM Plex Mono',monospace;color:#a1c5cc}
+.cw-rescue-fields .cw-control-field{display:grid;gap:7px;min-width:0}
+.cw-control-board button:focus-visible{outline:2px solid #9eeef4;outline-offset:2px}
+@media(max-width:760px){.cw-option-cards{grid-template-columns:1fr}.cw-option-cards button{min-height:82px;padding:9px}}
+@media(orientation:landscape) and (max-height:600px){.cw-control-board{padding:7px}.cw-option-cards button{min-height:75px;padding:6px;gap:3px}
+ .cw-option-cards button>strong,.cw-option-cards button>b{font-size:9px}.cw-option-cards button>small{font-size:8px}
+ .cw-control-board>p{font-size:9px}.cw-adjuster button{min-height:32px}.cw-filter-stats strong{font-size:14px}}
