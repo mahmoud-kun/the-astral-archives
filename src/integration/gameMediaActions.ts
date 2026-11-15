@@ -16,12 +16,23 @@ export const KESTREL_FOOTAGE_PENDING_APPROVAL = true
 
 /** Read again at click AND post-cinematic completion to prevent save/refile bypasses. */
 export function enterRescueThroughPortal(caseId: ArchiveCaseId): boolean {
- return requestCinematicFlow('portalPast', {
-  canStart: () => rescueIsReady(readArchive(), caseId),
-  onAdvance: () => {
-   if(rescueIsReady(readArchive(), caseId))navigateGame('/?past=manufacturing&case='+caseId)
+ if(!rescueIsReady(readArchive(),caseId))return false
+ const destination='/?past=manufacturing&case='+encodeURIComponent(caseId)
+ const started=requestCinematicFlow('portalPast',{
+  canStart:()=>rescueIsReady(readArchive(),caseId),
+  onAdvance:()=>{
+   // Skip, completion and source-unavailable all reach the same verified Past route.
+   if(rescueIsReady(readArchive(),caseId))navigateGame(destination)
   },
  })
+ if(started)return true
+ // An unavailable movie/controller must never permanently block the story.
+ // An active video should be finished or skipped by the player instead.
+ if(typeof document!=='undefined'&&!document.querySelector('.cm-backdrop')){
+  navigateGame(destination)
+  return true
+ }
+ return false
 }
 
 /** An intro is a voluntary visual briefing; it never opens gates or records evidence. */
