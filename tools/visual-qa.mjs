@@ -63,6 +63,47 @@ for(const viewport of [laptop,mobile,phone,small]){
  })
  await check(viewport,'/?folder-lab=1&return=signal','folder')
 }
+// A screenshot with the real mobile workbench open verifies that the
+// second step is usable rather than merely present in the DOM.
+for(const viewport of [mobile,phone,small]){
+ await check(viewport,'/?station=signal','nadir-analysis',async page=>{
+  await page.locator('.sr-hotspot').nth(1).click()
+  await page.locator('.np-mobile-steps button').nth(1).click()
+  assert.equal(await page.locator('.np-workbench').isVisible(),true)
+  assert.equal(await page.locator('.np-sources').isVisible(),false)
+  assert.equal(await page.locator('.np-mobile-steps button').nth(1).getAttribute('aria-current'),'step')
+ })
+}
+
+// Exercise a complete discovery -> analytical puzzle -> explicit collection ->
+// Quick Tray -> manual folder filing -> return-to-origin journey. A document
+// reload would erase the in-memory sentinel set before changing routes.
+await check(mobile,'/?station=signal','nadir-collect-and-file',async page=>{
+ await page.evaluate(()=>{window.__astralRouteSentinel='same-document'})
+ await page.locator('.sr-hotspot').nth(1).click()
+ await page.locator('.np-mobile-steps button').nth(1).click()
+ await page.locator('.np-field select').nth(0).selectOption('lbfs')
+ await page.locator('.np-field select').nth(1).selectOption('ns')
+ await page.locator('.np-field input').fill('53.38')
+ await page.getByRole('button',{name:'VERIFY ANALYSIS'}).click()
+ await page.getByRole('button',{name:/COLLECT EVIDENCE/}).click()
+ await page.getByRole('button',{name:'Close evidence analyzer'}).click()
+ assert.equal((await page.locator('.et-trigger span').textContent()).trim(),'1')
+ await page.locator('.et-trigger').click()
+ await page.locator('.et-footer button').click()
+ assert.match(page.url(),/folder-lab=1/)
+ assert.equal(await page.evaluate(()=>window.__astralRouteSentinel),'same-document')
+ await page.locator('.af-folder-choice').nth(1).click()
+ await page.locator('.af-bottom button').click()
+ await page.locator('.af-intake-items button').filter({hasText:'NAD-02'}).click()
+ await page.locator('.af-file-select select').selectOption('NAD')
+ await page.locator('.af-document-modal .af-primary').click()
+ assert.match((await page.locator('.af-bottom').textContent()).replace(/\s/g,''),/1\/6/)
+ await page.locator('.af-header-end a').click()
+ assert.match(page.url(),/station=signal/)
+ assert.equal(await page.evaluate(()=>window.__astralRouteSentinel),'same-document')
+ assert.equal((await page.locator('.et-trigger span').textContent()).trim(),'0')
+})
 await check({width:390,height:844},'/','portrait-guard')
 await writeFile(`${output}/report.json`, JSON.stringify(report,null,2))
 await browser.close()
