@@ -1,0 +1,73 @@
+{
+  "version": 1,
+  "mode": "no-debug-user-interface",
+  "started": "2026-11-15T09:13:58.800Z",
+  "cases": [
+    {
+      "caseId": "KES",
+      "name": "Kestrel",
+      "steps": [
+        "INSPECT → ANALYZE → MANUAL COLLECT KES-01 @ Archive",
+        "INSPECT → ANALYZE → MANUAL COLLECT KES-02 @ Archive",
+        "INSPECT → ANALYZE → MANUAL COLLECT KES-03 @ Archive",
+        "INSPECT → ANALYZE → MANUAL COLLECT KES-04 @ Archive",
+        "INSPECT → ANALYZE → MANUAL COLLECT KES-05 @ Recordings",
+        "INSPECT → ANALYZE → MANUAL COLLECT KES-06 @ Investigation",
+        "WRONG FILING → MOVE → 6/6 → RELOAD → PORTAL → PAST → RESCUE",
+        "EVIDENCE-BACKED CAUSAL REVIEW",
+        "INDEPENDENT TESTS → SIGN → OUTCOME → RELOAD"
+      ],
+      "status": "PASS"
+    },
+    {
+      "caseId": "LUM",
+      "name": "Lumen",
+      "steps": [
+        "INSPECT → ANALYZE → MANUAL COLLECT LUM-01 @ Archive",
+        "INSPECT → ANALYZE → MANUAL COLLECT LUM-02 @ Signal",
+        "INSPECT → ANALYZE → MANUAL COLLECT LUM-03 @ Archive",
+        "INSPECT → ANALYZE → MANUAL COLLECT LUM-04 @ Archive",
+        "INSPECT → ANALYZE → MANUAL COLLECT LUM-05 @ Signal",
+        "INSPECT → ANALYZE → MANUAL COLLECT LUM-06 @ Investigation",
+        "WRONG FILING → MOVE → 6/6 → RELOAD → PORTAL → PAST → RESCUE",
+        "EVIDENCE-BACKED CAUSAL REVIEW",
+        "INDEPENDENT TESTS → SIGN → OUTCOME → RELOAD"
+      ],
+      "status": "PASS"
+    },
+    {
+      "caseId": "ORI",
+      "name": "Oriole",
+      "steps": [
+        "INSPECT → ANALYZE → MANUAL COLLECT ORI-01 @ Signal",
+        "INSPECT → ANALYZE → MANUAL COLLECT ORI-02 @ Signal",
+        "INSPECT → ANALYZE → MANUAL COLLECT ORI-03 @ Signal",
+        "INSPECT → ANALYZE → MANUAL COLLECT ORI-04 @ Archive",
+        "INSPECT → ANALYZE → MANUAL COLLECT ORI-05 @ Archive",
+        "INSPECT → ANALYZE → MANUAL COLLECT ORI-06 @ Investigation",
+        "WRONG FILING → MOVE → 6/6 → RELOAD → PORTAL → PAST → RESCUE",
+        "EVIDENCE-BACKED CAUSAL REVIEW",
+        "INDEPENDENT TESTS → SIGN → OUTCOME → RELOAD"
+      ],
+      "status": "PASS"
+    },
+    {
+      "caseId": "AST",
+      "name": "Asterion",
+      "steps": [
+        "INSPECT → ANALYZE → MANUAL COLLECT AST-01 @ Archive",
+        "INSPECT → ANALYZE → MANUAL COLLECT AST-02 @ Signal",
+        "INSPECT → ANALYZE → MANUAL COLLECT AST-03 @ Archive",
+        "INSPECT → ANALYZE → MANUAL COLLECT AST-04 @ Investigation",
+        "INSPECT → ANALYZE → MANUAL COLLECT AST-05 @ Recordings",
+        "INSPECT → ANALYZE → MANUAL COLLECT AST-06 @ Signal",
+        "WRONG FILING → MOVE → 6/6 → RELOAD → PORTAL → PAST → RESCUE",
+        "EVIDENCE-BACKED CAUSAL REVIEW",
+        "INDEPENDENT TESTS → SIGN → OUTCOME → RELOAD"
+      ],
+      "status": "PASS"
+    }
+  ],
+  "finished": "2026-11-15T09:14:49.299Z",
+  "passed": 4
+}
