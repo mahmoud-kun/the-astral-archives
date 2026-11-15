@@ -5,6 +5,7 @@ import { navigateGame, onGameLinkClick } from '../gameNavigation'
 import { playGameSound } from '../audio/gameAudio'
 import { ARCHIVE_PROGRESS_EVENT, stationRoute, type StationId } from '../gameplay/nadirEngine'
 import { isOtherCaseId, readActiveCase, setActiveCase } from '../gameplay/caseContext'
+import { enterRescueThroughPortal, playCaseIntroduction, KESTREL_FOOTAGE_PENDING_APPROVAL } from '../integration/gameMediaActions'
 import './archiveFolderLab.css'
 
 function initialState(): ArchiveState {
@@ -146,8 +147,11 @@ export default function ArchiveFolderLab() {
       <aside className="af-status" aria-label="Case investigation status">
         <h2>CASE STATUS <small>{caseId} / INVESTIGATION</small></h2>
         <div className="af-status-section"><span>REQUIRED EVIDENCE</span><div className="af-count"><strong>{required}</strong><em>/ 06</em></div><div className="af-meter" role="progressbar" aria-label="Correctly filed required evidence" aria-valuemin={0} aria-valuemax={6} aria-valuenow={required}><i style={{width:(required/6*100)+'%'}}/></div></div>
+        <div className="af-status-section"><span>MISSION BRIEFING FILM</span>{caseId==='KES'&&KESTREL_FOOTAGE_PENDING_APPROVAL
+          ? <small>Phase-A Kestrel footage awaits the approved visual/story alignment review. The interactive case is still available.</small>
+          : <button className="af-side-action" type="button" data-sfx="none" onClick={()=>playCaseIntroduction(caseId)}>PLAY {meta.name.toUpperCase()} INTRO</button>}</div>
         <div className="af-status-section"><span>DIAGNOSIS</span><strong>{verifiedDiagnosis?'VERIFIED':'INSIDE RESCUE'}</strong><p>Technical cause → process failure → consequence. Submit and verify the causal chain in the Rescue workstation after filing six required records.</p></div>
-        <div className="af-status-section"><span>RESCUE MISSION</span><strong className={ready?'af-ready':''}>{ready?'UNLOCKED':'LOCKED'}</strong><p>{ready?'Six correctly filed required records. The causal and engineering work happens inside Rescue.':'File the six required evidence records in the correct mission folder to unlock.'}</p>{caseId==='NAD'&&ready&&<button className="af-side-action" onClick={()=>navigateGame('/?rescue=NAD')}>ENTER NADIR RESCUE →</button>}{isOtherCaseId(caseId)&&ready&&<button className="af-side-action" onClick={()=>navigateGame('/?rescue='+caseId)}>ENTER {meta.name.toUpperCase()} RESCUE →</button>}</div>
+        <div className="af-status-section"><span>RESCUE MISSION</span><strong className={ready?'af-ready':''}>{ready?'UNLOCKED':'LOCKED'}</strong><p>{ready?'Six correctly filed required records. The causal and engineering work happens inside Rescue.':'File the six required evidence records in the correct mission folder to unlock.'}</p>{caseId==='NAD'&&ready&&<button className="af-side-action" onClick={()=>enterRescueThroughPortal('NAD')}>ENTER NADIR RESCUE →</button>}{isOtherCaseId(caseId)&&ready&&<button className="af-side-action" onClick={()=>enterRescueThroughPortal(caseId)}>ENTER {meta.name.toUpperCase()} RESCUE →</button>}</div>
         <div className="af-status-source">FICTIONAL CASE RECORDS. NOT AUTHENTIC NASA TELEMETRY.</div>
         {debug&&<button className="af-reset" onClick={reset}>RESET DEBUG PREVIEW</button>}
       </aside>
