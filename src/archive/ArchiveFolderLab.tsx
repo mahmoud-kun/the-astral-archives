@@ -1,15 +1,12 @@
 import { useEffect, useState, type CSSProperties } from 'react'
 import { CASE_CODES, CASE_META, EVIDENCE_RECORDS, findEvidence, type ArchiveCaseId, type ArchiveEvidence } from './evidenceRecords'
-import { ARCHIVE_SAVE_KEY, DIAGNOSIS_PROMPTS, countInFolder, countRequiredEvidence, diagnosisIsSupported, discoverEvidence, emptyArchiveState, fileEvidence, rescueIsReady, restoreArchiveState, submitDiagnosis, updateDiagnosis, type ArchiveState, type CaseDiagnosis, type DiagnosticPart } from './archiveState'
+import { ARCHIVE_SAVE_KEY, countInFolder, countRequiredEvidence, diagnosisIsSupported, discoverEvidence, emptyArchiveState, fileEvidence, rescueIsReady, restoreArchiveState, type ArchiveState } from './archiveState'
 import { navigateGame, onGameLinkClick } from '../gameNavigation'
 import { playGameSound } from '../audio/gameAudio'
 import { ARCHIVE_PROGRESS_EVENT, stationRoute, type StationId } from '../gameplay/nadirEngine'
+import { isOtherCaseId, readActiveCase, setActiveCase } from '../gameplay/caseContext'
 import './archiveFolderLab.css'
 
-const PARTS: readonly DiagnosticPart[] = ['technical', 'process', 'consequence']
-const EMPTY_ANSWER: CaseDiagnosis = {
-  technical: { answer: '', evidenceId: '' }, process: { answer: '', evidenceId: '' }, consequence: { answer: '', evidenceId: '' },
-}
 function initialState(): ArchiveState {
   try { return restoreArchiveState(localStorage.getItem(ARCHIVE_SAVE_KEY)) }
   catch { return emptyArchiveState() }
@@ -67,17 +64,15 @@ function DocumentViewer({ record, archive, onDiscover, onFile, onClose }: {recor
 }
 export default function ArchiveFolderLab() {
   const [archive,setArchive]=useState<ArchiveState>(initialState)
-  const [caseId,setCaseId]=useState<ArchiveCaseId>('NAD')
+  const [caseId,setCaseId]=useState<ArchiveCaseId>(()=>readActiveCase()??'NAD')
   const [open,setOpen]=useState(true)
   const [inspectedId,setInspectedId]=useState<string|null>(null)
   const [intake,setIntake]=useState(false)
-  const [diagnose,setDiagnose]=useState(false)
-  const [draft,setDraft]=useState<CaseDiagnosis>(EMPTY_ANSWER)
-  const [reviewMessage,setReviewMessage]=useState('')
   const locationParam = new URLSearchParams(window.location.search)
   const from = locationParam.get('return')
   const origin:StationId = from==='signal'||from==='archive'||from==='recordings'?from:'investigation'
-  const debug = locationParam.get('debug')==='1'
+  // URL flags are user-controlled: development shortcuts must never ship to production.
+  const debug = import.meta.env.DEV && locationParam.get('debug')==='1'
   const meta=CASE_META[caseId], inspected=inspectedId?findEvidence(inspectedId):undefined
   const filed=EVIDENCE_RECORDS.filter(record=>archive.filed[record.id]===caseId)
   const required=countRequiredEvidence(archive,caseId)
@@ -85,11 +80,13 @@ export default function ArchiveFolderLab() {
   const verifiedDiagnosis=diagnosisIsSupported(archive,caseId)
   const unseen=EVIDENCE_RECORDS.filter(record=>record.caseId===caseId&&!archive.discovered.includes(record.id))
   const unfiled=EVIDENCE_RECORDS.filter(record=>archive.discovered.includes(record.id)&&!archive.filed[record.id])
-  const usableEvidence=filed.filter(record=>record.required&&record.caseId===caseId)
   useEffect(()=>{try{localStorage.setItem(ARCHIVE_SAVE_KEY,JSON.stringify(archive))}catch{/* session-only fallback */}
     window.dispatchEvent(new Event(ARCHIVE_PROGRESS_EVENT))
   },[archive])
-  function chooseCase(code:ArchiveCaseId){setCaseId(code);setOpen(true);setDiagnose(false);setReviewMessage('');setDraft(archive.diagnosis[code]??EMPTY_ANSWER)}
+  function chooseCase(code:ArchiveCaseId){
+    setCaseId(code);setOpen(true)
+    if(isOtherCaseId(code))setActiveCase(code)
+  }
   function file(id:string,target:ArchiveCaseId|null){
     const next=fileEvidence(archive,id,target)
     if(next!==archive){
@@ -102,17 +99,9 @@ export default function ArchiveFolderLab() {
     setArchive(next)
     setInspectedId(null)
   }
-  function changeAnswer(part:DiagnosticPart,key:'answer'|'evidenceId',value:string){setDraft(prev=>({...prev,[part]:{...prev[part],[key]:value}}))}
-  function submit(){
-    const next=submitDiagnosis(updateDiagnosis(archive,caseId,draft),caseId)
-    setArchive(next)
-    setReviewMessage(diagnosisIsSupported(next,caseId)
-      ? 'DIAGNOSIS VERIFIED — EVIDENCE CHAIN SUPPORTED'
-      : 'REVIEW SAVED — THIS EVIDENCE CHAIN NEEDS FURTHER INVESTIGATION')
-  }
   function reset(){
     if(window.confirm('Clear this standalone archive preview save? Other gameplay saves will not be affected.')){
-      setArchive(emptyArchiveState());setDraft(EMPTY_ANSWER);setReviewMessage('')
+      setArchive(emptyArchiveState())
     }
   }
   return <main className="af-app">
@@ -157,29 +146,12 @@ export default function ArchiveFolderLab() {
       <aside className="af-status" aria-label="Case investigation status">
         <h2>CASE STATUS <small>{caseId} / INVESTIGATION</small></h2>
         <div className="af-status-section"><span>REQUIRED EVIDENCE</span><div className="af-count"><strong>{required}</strong><em>/ 06</em></div><div className="af-meter" role="progressbar" aria-label="Correctly filed required evidence" aria-valuemin={0} aria-valuemax={6} aria-valuenow={required}><i style={{width:(required/6*100)+'%'}}/></div></div>
-        <div className="af-status-section"><span>DIAGNOSIS</span><strong>{verifiedDiagnosis?'VERIFIED':caseId==='NAD'?'IN RESCUE':'NOT SUBMITTED'}</strong><p>Technical cause → process failure → consequence, supported by correctly filed evidence.</p>{caseId!=='NAD'&&<button className="af-side-action" onClick={()=>{setDraft(archive.diagnosis[caseId]??EMPTY_ANSWER);setDiagnose(true);setReviewMessage('')}}>OPEN DIAGNOSIS PREVIEW</button>}</div>
-        <div className="af-status-section"><span>RESCUE MISSION</span><strong className={ready?'af-ready':''}>{ready?'UNLOCKED':'LOCKED'}</strong><p>{ready?'Six correctly filed required records. The causal and engineering work happens inside Rescue.':'File the six required evidence records in the correct mission folder to unlock.'}</p>{caseId==='NAD'&&ready&&<button className="af-side-action" onClick={()=>navigateGame('/?rescue=NAD')}>ENTER NADIR RESCUE →</button>}{caseId!=='NAD'&&ready&&<small>Future mission: rescue execution is not yet integrated.</small>}</div>
+        <div className="af-status-section"><span>DIAGNOSIS</span><strong>{verifiedDiagnosis?'VERIFIED':'INSIDE RESCUE'}</strong><p>Technical cause → process failure → consequence. Submit and verify the causal chain in the Rescue workstation after filing six required records.</p></div>
+        <div className="af-status-section"><span>RESCUE MISSION</span><strong className={ready?'af-ready':''}>{ready?'UNLOCKED':'LOCKED'}</strong><p>{ready?'Six correctly filed required records. The causal and engineering work happens inside Rescue.':'File the six required evidence records in the correct mission folder to unlock.'}</p>{caseId==='NAD'&&ready&&<button className="af-side-action" onClick={()=>navigateGame('/?rescue=NAD')}>ENTER NADIR RESCUE →</button>}{isOtherCaseId(caseId)&&ready&&<button className="af-side-action" onClick={()=>navigateGame('/?rescue='+caseId)}>ENTER {meta.name.toUpperCase()} RESCUE →</button>}</div>
         <div className="af-status-source">FICTIONAL CASE RECORDS. NOT AUTHENTIC NASA TELEMETRY.</div>
         {debug&&<button className="af-reset" onClick={reset}>RESET DEBUG PREVIEW</button>}
       </aside>
     </div>
-    {diagnose&&<div className="af-dialog-shade" role="presentation" onMouseDown={event=>{if(event.target===event.currentTarget)setDiagnose(false)}}>
-      <section className="af-diagnosis" role="dialog" aria-modal="true" aria-labelledby="af-diagnosis-title">
-        <div className="af-modal-bar"><span>ENGINEERING REVIEW / {caseId}</span><button onClick={()=>setDiagnose(false)}>CLOSE ×</button></div>
-        <div className="af-diagnosis-body"><span className="af-document-kind">REASON FROM THE RECORD</span><h2 id="af-diagnosis-title">CASE DIAGNOSIS</h2><p>Build a three-part explanation. Cite a required record filed in this case. Incorrect selections are not exposed as correct answers.</p>
-          {PARTS.map((part,i)=><fieldset key={part} className="af-diagnosis-part"><legend>0{i+1} / {part.toUpperCase()}</legend>
-            <label>{DIAGNOSIS_PROMPTS[caseId][part].heading}<select value={draft[part].answer} onChange={event=>changeAnswer(part,'answer',event.target.value)}>
-              <option value="">SELECT A HYPOTHESIS</option>{DIAGNOSIS_PROMPTS[caseId][part].choices.map(choice=><option key={choice.id} value={choice.id}>{choice.label}</option>)}
-            </select></label>
-            <label>SUPPORTING EVIDENCE<select value={draft[part].evidenceId} onChange={event=>changeAnswer(part,'evidenceId',event.target.value)}>
-              <option value="">CITE A FILED RECORD</option>{usableEvidence.map(record=><option key={record.id} value={record.id}>{record.id} — {record.title}</option>)}
-            </select></label>
-          </fieldset>)}
-          {reviewMessage&&<p className="af-review-message" role="status">{reviewMessage}</p>}
-          <button className="af-primary" disabled={required<6||PARTS.some(part=>!draft[part].answer||!draft[part].evidenceId)} onClick={submit}>SUBMIT DIAGNOSIS</button>
-        </div>
-      </section>
-    </div>}
     {inspected&&<DocumentViewer key={inspected.id} record={inspected} archive={archive} onDiscover={id=>setArchive(current=>discoverEvidence(current,id))} onFile={file} onClose={()=>setInspectedId(null)}/>}
   </main>
 }
