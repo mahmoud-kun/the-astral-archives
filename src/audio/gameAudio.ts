@@ -46,8 +46,14 @@ const LEVEL:Record<GameSound,number>={
   portal:.26, rescue:.25, scanner:.16, terminal:.12,
   doorOpen:.17, doorClose:.15, engine:.09, energy:.15, metal:.15,thruster:.12,
 }
-const RATE_LIMIT:Partial<Record<GameSound,number>>={hover:110,click:45,scanner:120,signal:900}
+const RATE_LIMIT:Partial<Record<GameSound,number>>={hover:110,click:45,scanner:120,signal:900,folderMove:90,file:80,doorOpen:120,doorClose:120}
 
+/** Pure gain helper. Browser playback and slider use the same bounded calculation. */
+export function gameSoundVolume(cue:GameSound,masterVolume:number):number{
+ const master=typeof masterVolume==='number'&&Number.isFinite(masterVolume)
+  ?Math.max(0,Math.min(100,masterVolume)):0
+ return Math.min(1,LEVEL[cue]*master/100)
+}
 function clampNumber(value:unknown, fallback:number){
  return typeof value==='number'&&Number.isFinite(value)?Math.max(0,Math.min(100,Math.round(value))):fallback
 }
@@ -78,7 +84,27 @@ export function setAudioSettings(patch:Partial<GameAudioSettings>):GameAudioSett
  return next
 }
 
-const activeSounds=new Set<HTMLAudioElement>()
+const activeSounds=new Map<HTMLAudioElement,GameSound>()
+let cinematicFocusCount=0
+/** Quiet the station and one-shots while a cinematic uses its own soundtrack. */
+export function claimCinematicAudioFocus():()=>void{
+ cinematicFocusCount++
+ stopAllSounds()
+ updateAmbience()
+ let released=false
+ return ()=>{
+  if(released)return
+  released=true
+  cinematicFocusCount=Math.max(0,cinematicFocusCount-1)
+  updateAmbience()
+ }
+}
+function stopAllSounds(){
+ for(const clip of activeSounds.keys()){
+  try{clip.pause();clip.currentTime=0}catch{/* Browser may block seeking */ }
+ }
+ activeSounds.clear()
+}
 const lastPlayed=new Map<GameSound,number>()
 let context:AudioContext|null=null
 let ambianceGain:GainNode|null=null
@@ -145,7 +171,7 @@ function updateAmbience(){
  if(!ctx||!gain)return
  const prefs=getAudioSettings()
  const scene=SCENE_TONES[sceneFromSearch(window.location.search)]
- const audible=enabledByGesture&&prefs.ambient&&prefs.volume>0&&!document.hidden
+ const audible=enabledByGesture&&prefs.ambient&&prefs.volume>0&&!document.hidden&&cinematicFocusCount===0
  const target=audible?scene.level*(prefs.volume/100):0
  const now=ctx.currentTime
  gain.gain.setTargetAtTime(target,now,.25)
@@ -161,32 +187,40 @@ function activateFromGesture(){
 export function playGameSound(cue:GameSound){
  if(typeof window==='undefined'||typeof Audio==='undefined')return
  const prefs=getAudioSettings()
- if(!prefs.effects||prefs.volume<=0||document.hidden)return
+ if(!prefs.effects||prefs.volume<=0||document.hidden||cinematicFocusCount>0)return
  const now=performance.now()
  const limit=RATE_LIMIT[cue]??0
- if(limit>0 && now-(lastPlayed.get(cue)??-Infinity)<limit)return
- if(activeSounds.size>=9&&cue==='hover')return
+ if(limit>0&&now-(lastPlayed.get(cue)??-Infinity)<limit)return
+ if(activeSounds.size>=6&&cue==='hover')return
+ if(activeSounds.size>=8){
+  const oldest=activeSounds.keys().next().value
+  if(oldest){oldest.pause();activeSounds.delete(oldest)}
+ }
  lastPlayed.set(cue,now)
  try{
-  // Lazy: no preload on initial page load, each clip is cached by the browser.
+  // Lazy: no network request until the actual cue is triggered.
   const audio=new Audio(SOUND_PATHS[cue])
   audio.preload='none'
-  audio.volume=Math.min(1,LEVEL[cue]*prefs.volume/100)
+  audio.volume=gameSoundVolume(cue,prefs.volume)
   audio.dataset.astralSound=cue
-  activeSounds.add(audio)
+  activeSounds.set(audio,cue)
   const cleanup=()=>{activeSounds.delete(audio);audio.removeEventListener('ended',cleanup);audio.removeEventListener('error',cleanup)}
   audio.addEventListener('ended',cleanup,{once:true})
   audio.addEventListener('error',cleanup,{once:true})
   const promise=audio.play()
   if(promise&&typeof promise.catch==='function')void promise.catch(cleanup)
   soundSerial++
- }catch{/* Never interrupt an investigation because a device lacks audio support. */}
+ }catch{/* Audio failure must never block gameplay. */}
 }
 export function gameSoundPlayCount(){return soundSerial}
 
 /** A single delegated listener prevents 200+ button-specific hover handlers. */
 export function installGameAudio():()=>void{
  let hovered:Element|null=null
+ const onPointerDown=()=>activateFromGesture()
+ const onKeyDown=(event:KeyboardEvent)=>{
+  if(event.key==='Enter'||event.key===' ')activateFromGesture()
+ }
  const onClick=(event:MouseEvent)=>{
   const target=event.target
   if(!(target instanceof Element))return
@@ -211,8 +245,18 @@ export function installGameAudio():()=>void{
   if(!(event.target instanceof Element))return
   if(hovered&&event.target.contains(hovered))hovered=null
  }
- const onChange=()=>{for(const clip of activeSounds){if(!getAudioSettings().effects){clip.pause();activeSounds.delete(clip)}}updateAmbience()}
+ const onChange=()=>{
+  const prefs=getAudioSettings()
+  if(!prefs.effects||prefs.volume<=0||document.hidden||cinematicFocusCount>0){
+   stopAllSounds()
+  }else{
+   for(const [clip,cue] of activeSounds)clip.volume=gameSoundVolume(cue,prefs.volume)
+  }
+  updateAmbience()
+ }
  const onNavigate=()=>updateAmbience()
+ document.addEventListener('pointerdown',onPointerDown,{capture:true,passive:true})
+ document.addEventListener('keydown',onKeyDown,true)
  document.addEventListener('click',onClick,true)
  document.addEventListener('pointerover',onHover)
  document.addEventListener('pointerout',onLeave)
@@ -221,6 +265,8 @@ export function installGameAudio():()=>void{
  window.addEventListener('astral:route-change',onNavigate)
  window.addEventListener('popstate',onNavigate)
  return ()=>{
+  document.removeEventListener('pointerdown',onPointerDown,true)
+  document.removeEventListener('keydown',onKeyDown,true)
   document.removeEventListener('click',onClick,true)
   document.removeEventListener('pointerover',onHover)
   document.removeEventListener('pointerout',onLeave)
@@ -228,6 +274,7 @@ export function installGameAudio():()=>void{
   window.removeEventListener(AUDIO_SETTINGS_EVENT,onChange)
   window.removeEventListener('astral:route-change',onNavigate)
   window.removeEventListener('popstate',onNavigate)
+  stopAllSounds()
   if(ambianceGain&&context)ambianceGain.gain.setTargetAtTime(0,context.currentTime,.05)
  }
 }
