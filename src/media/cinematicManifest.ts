@@ -119,10 +119,14 @@ export type CinematicFinished={id:CinematicId;outcome:CinematicOutcome}
 export function isCinematicId(id:unknown):id is CinematicId{
  return typeof id==='string'&&Object.prototype.hasOwnProperty.call(CINEMATICS,id)
 }
-/** Clamped video gain; portal has a deliberately lower mix, no file transcoding. */
+/** Playback gain is perceptually balanced at the 40% default instead of
+ * attenuating quiet source dialogue twice. Preserve quieter portal/outcomes
+ * and the user's explicit zero/mute. Exact source MP4 files remain unmodified.
+ */
 export function cinematicVolume(id:CinematicId,masterVolume:number):number{
  const master=Number.isFinite(masterVolume)?Math.max(0,Math.min(100,masterVolume)):0
- return Number((master/100*CINEMATICS[id].mixGain).toFixed(4))
+ const sourceMix=CINEMATICS[id].mixGain
+ return Number(Math.min(.94,master/40*(.27+.55*sourceMix)).toFixed(4))
 }
 /** Request only; evidence/route/rescue state remain controlled by Main. */
 export function requestCinematic(id:CinematicId):void{
