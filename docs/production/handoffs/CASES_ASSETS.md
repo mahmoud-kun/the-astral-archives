@@ -78,11 +78,17 @@ No modifications to source evidenceRecords.ts (40/40 already aligned), src/Inves
 2. All 45 object asset paths plus three manifests/backgrounds verified present in Codex Git tree.
 3. All 40 Bible evidence IDs/titles matched active authored data; IDs unique, 6 required+2 optional per case, all fictional.
 4. Earlier post-A GitHub Actions run 43674281572 on 66730eadbc63c13626381aca37cd16a0d3a3208f: pre-compile Node suites reported 0 failures, but TypeScript stopped on an **out-of-scope Chat B** error src/media/CinematicOverlay.tsx:116 TS2345 (number vs numeric literal union). Playwright capture skipped. Issue #5 notifies owner.
-5. Later run 43674525154 on 6eea7fc949f733f0b9995d09e437af5497c94a7b (contains both A commits) **completed npm run build and started Playwright** as inspected at report authoring time. Final browser result, screenshot count and layout defect report still require checking at the actual final run status; do not mark these PASS without verification.
+5. Later run 43674525154 on 6eea7fc949f733f0b9995d09e437af5497c94a7b (contains both A commits) **PASSED npm run build** (all test suites, TypeScript and Vite) and executed Chromium visual QA. Workflow overall **FAILED** on a Chat B/Main-owned Audio Lab assertion: registered/displayed cues 23, stale expectation 19, at 915×412. Published report records **43 screenshots**, 0 broken images, 0 clipped controls, 0 overflows and 0 browser console errors, 1 failed scenario and 1 missing audio-lab screenshot. Archive/Signal/Recordings and Nadir analysis scenarios were captured at desktop 1366×768 and phone-landscape 915×412 / 800×360. This automated check verifies route rendering and basic layout metrics but not visual quality, mask geometry edge accuracy or physical touch. See issue #6: https://github.com/mahmoud-kun/the-astral-archives/issues/6
+
+**Published screenshots and QA machine report (source paths verified)**
+- [Desktop 1366×768 review sheet](https://github.com/mahmoud-kun/the-astral-archives/blob/experiment/room-case-library-layout-fix-2026-11-14/docs/visual-qa/desktop-review.webp)
+- [Mobile landscape review sheet](https://github.com/mahmoud-kun/the-astral-archives/blob/experiment/room-case-library-layout-fix-2026-11-14/docs/visual-qa/mobile-review.webp)
+- [Fullscreen review sheet](https://github.com/mahmoud-kun/the-astral-archives/blob/experiment/room-case-library-layout-fix-2026-11-14/docs/visual-qa/fullscreen-layout-review.webp)
+- [Machine QA report](https://github.com/mahmoud-kun/the-astral-archives/blob/experiment/room-case-library-layout-fix-2026-11-14/docs/visual-qa/latest-report.json)
 
 **Not executed / not verified**
 - Physical Android Brave landscape/fullscreen/touch or real device performance.
-- Independently inspected after-A screenshots at 1366×768, 915×412 and 800×360 and real pixel-aligned pointer edge/mask overlap on those layouts.
+- Independent human/artistic inspection of generated post-A screenshots and true pixel-aligned pointer edge/mask overlap on those layouts. Automated contact sheets exist, but source tool access did not provide a direct visual review or physical device confirmation.
 - Each supporting prop's touch hit box, keyboard tab/Enter/Space through all 13 targets, pixel-perfect art approval.
 - Past production landscape gameplay, other four cases' full puzzles/rescue, cinematic source clips.
 
@@ -100,7 +106,7 @@ Then follow Home → Investigation → Archive/Signal/Recordings. Test each auth
 
 - **P0** Four landscape Past sources missing; designer must deliver and approve. All clean plates need cleanup; see issue #3: https://github.com/mahmoud-kun/the-astral-archives/issues/3
 - **P0** Kestrel/Lumen/Oriole/Asterion lack normal no-debug complete case rescue journeys. Main owns routing; C owns puzzle/science engine and audits; see issue #2: https://github.com/mahmoud-kun/the-astral-archives/issues/2
-- **P0/P1** Shared build on prior run failed in Chat B media file (not A-owned); newer run may supersede it. See issue #5: https://github.com/mahmoud-kun/the-astral-archives/issues/5
+- **P1** Media TypeScript error from prior run was superseded: newer build passed. The latest overall workflow still failed on 23 vs 19 Audio Lab cue-count assertion, owned by B/Main; see issue #6: https://github.com/mahmoud-kun/the-astral-archives/issues/6 and historical issue #5: https://github.com/mahmoud-kun/the-astral-archives/issues/5
 - **Science review requested from Chat C** (posted to issue #2): validate fictional Nadir conversion 12 lbf·s × 4.448221615 = 53.37865938 N·s; KES trade constraints; LUM 100.8 vs 100.0 mm; ORI 80ms transient at simulated 40 m; AST 430/520/480W comparisons and provenance. A owns any accepted evidence source data edit later, not C.
 - **Main/Chat B** must integrate cinematic files and root transition route separately; there is no new real case surveillance video in A's implementation.
 - **Main** must review final CI screenshot report, artist feedback, normal-room route/click QA and physical Android before accepting this stream.
