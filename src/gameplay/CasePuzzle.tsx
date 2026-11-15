@@ -6,7 +6,7 @@ import { playGameSound } from '../audio/gameAudio'
 import { updateArchive, useArchiveSave } from './gameSave'
 import { CASE_EVIDENCE_TASKS, hintOther, inspectOther, solveOther, type CaseAnswer, type OtherRecordId } from './caseEvidenceEngine'
 import { updateOtherProgress, useOtherProgress } from './caseSave'
-import CaseInstrument from './CaseInstrument'
+import CaseEvidenceExhibit from './CaseEvidenceExhibit'
 import './nadirPuzzle.css'
 import './caseWork.css'
 
@@ -91,7 +91,7 @@ export default function CasePuzzle({id,onClose}:{id:OtherRecordId;onClose:()=>vo
      <section className="np-sources">
       <h3>{task.optional?'MEMORY FRAGMENT':'CASE INSTRUMENT'}</h3>
       <p className="cw-scene">{task.scene}</p>
-      <CaseInstrument caseId={id.slice(0,3) as 'KES'|'LUM'|'ORI'|'AST'} plan={answer}/>
+      <CaseEvidenceExhibit id={id} answer={answer}/>
       <details className="np-source-drawer">
        <summary><span>OPEN RECORD FRAGMENTS</span><small>{task.fragments.length} INSPECTABLE SIGNALS</small></summary>
        <div className="np-source-drawer-body">{task.fragments.map((text,i)=>
