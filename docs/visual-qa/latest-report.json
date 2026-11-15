@@ -1,6 +1,6 @@
 {
-  "run_on": "2026-11-15T12:44:27.938Z",
-  "screenshots": 59,
+  "run_on": "2026-11-15T13:19:35.990Z",
+  "screenshots": 56,
   "console_errors": 0,
   "broken_images": 0,
   "clipped_controls": 0,
@@ -112,6 +112,33 @@
         "height": 412
       },
       "error": "AssertionError [ERR_ASSERTION]: Skipping the film must never grant collection before analysis\n\n1 !== 0\n",
+      "faults": []
+    },
+    {
+      "label": "past-portal-to-rescue",
+      "viewport": {
+        "width": 915,
+        "height": 412
+      },
+      "error": "TimeoutError: locator.waitFor: Timeout 30000ms exceeded.\nCall log:\n  - waiting for locator('.nr-root') to be visible\n",
+      "faults": []
+    },
+    {
+      "label": "past-mobile-touch-target",
+      "viewport": {
+        "width": 915,
+        "height": 412
+      },
+      "error": "AssertionError [ERR_ASSERTION]: The input did not match the regular expression /TARGET DESTINATION/. Input:\n\n'0/4 SYSTEMS STABILIZED \u00b7 MISSION TARGET'\n",
+      "faults": []
+    },
+    {
+      "label": "past-desktop-keyboard",
+      "viewport": {
+        "width": 1366,
+        "height": 768
+      },
+      "error": "AssertionError [ERR_ASSERTION]: The input did not match the regular expression /ROCKET DESIGN/. Input:\n\n'0/4 SYSTEMS STABILIZED \u00b7 MANUFACTURING'\n",
       "faults": []
     }
   ],
@@ -623,33 +650,6 @@
       },
       "label": "past-resources-responsive",
       "bytes": 338360
-    },
-    {
-      "route": "/?folder-lab=1",
-      "viewport": {
-        "width": 915,
-        "height": 412
-      },
-      "label": "past-portal-to-rescue",
-      "bytes": 651382
-    },
-    {
-      "route": "/?past=mission_target&case=NAD",
-      "viewport": {
-        "width": 915,
-        "height": 412
-      },
-      "label": "past-mobile-touch-target",
-      "bytes": 710034
-    },
-    {
-      "route": "/?past=manufacturing&case=NAD",
-      "viewport": {
-        "width": 1366,
-        "height": 768
-      },
-      "label": "past-desktop-keyboard",
-      "bytes": 313022
     },
     {
       "route": "/",
