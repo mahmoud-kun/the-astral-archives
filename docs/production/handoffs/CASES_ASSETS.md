@@ -1,6 +1,6 @@
 # The Astral Archives — Work Order A: Cases and Assets Handoff
 
-**Status: PARTIAL — present-room integration committed; NOT approved by Main Chat.**
+**Status: SPECIALIST A INTEGRATION PASS (automated); final release acceptance remains Main-owned.**
 **Date:** 2026-11-15
 **Working branch:** experiment/room-case-library-layout-fix-2026-11-14
 **Authoritative plan:** docs/production/PARALLEL_RELEASE_PLAN_2026-11-15.md
@@ -139,3 +139,11 @@ Then follow Home → Investigation → Archive/Signal/Recordings. Test each auth
 - Final code and screenshot report files were re-read from descendant `54d8b3be6d1fec9e228eec9a2215585708eb8665` and verified to retain the gated route, Portal redirect, and live read-back.
 - **Not a release art sign-off**: Mission Target generation includes NASA branding/signage pending correction; full-removal masks/hidden clean plates of PR #7 remain **FAIL**, were not imported into runtime, and are not required for static-scene gameplay. Final visual/design approval and actual physical mobile touch/listening remain **NOT VERIFIED**.
 - Main retains release acceptance, individual-case end-to-end complete-rescue verification, and deployment decisions. The successful CI does not certify all five case outcomes or content rights.
+
+## Final specialist scope — artwork fix and full five-case CI 2026-11-15
+- Mission Target's active runtime art switched from the NASA-logo original to versioned `static-v2` corrected image in commit `14beba8fca90235986f09f3047b3c25c6761a13a` (original unchanged). Panel-only visually inspected before/after `docs/visual-qa/mission-target-logo-before-after.webp`; four hotspot coordinates unchanged.
+- Full green run [#43699268899](https://github.com/mahmoud-kun/the-astral-archives/actions/runs/43699268899) on `14beba8`: `npm run build` **PASS**, Chrome Visual QA **71 screenshots / 0 console, broken, clipping, overflow, scenario or missing captures**, **4/4 KES/LUM/ORI/AST no-debug E2E PASS**, and **Nadir full puzzle-to-rescue/video E2E PASS**. Added emulated mobile `.tap()` and keyboard Enter checks **PASS**.
+- Read-only final QA report `docs/visual-qa/latest-report.json`; 4/4 source record `docs/visual-qa/four-case-e2e-report.json`. Re-verified actual four active Past manifests and art blob paths on source commit.
+- Exact final handoff for Main in `docs/production/handoffs/CASES_ASSETS_FINAL_2026-11-15.md`.
+- **NOT VERIFIED**: true physical Android device/touch/audio, independent Designer art acceptance and complete content licensing. Unused legacy static-v1 still includes old NASA-logo source; Main should consider packaging policy. Failed PR #7 full clean plates remain unmerged.
+- **Verdict: A INTEGRATION PASS; Main public release acceptance pending the limited items above.**
