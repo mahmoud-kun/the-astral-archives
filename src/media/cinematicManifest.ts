@@ -12,7 +12,7 @@ export const CINEMATICS = {
   duration:10.005,bytes:12567554,mixGain:.9,
  },
  case1Intro: {
-  title:'Case 1 — Mission Introduction',path:'/assets/video/designer-case-1-intro-v1.mp4',
+  title:'Case 01 — Kestrel / Mission Introduction',caseId:'KES',path:'/assets/video/designer-case-1-intro-v1.mp4',
   source:'case 1 intro .mp4',driveId:'1UO5sYEbzf2UFFupybPieoa_2I4gjii2z',
   duration:7.125,bytes:6436608,mixGain:.7,
  },
@@ -22,7 +22,7 @@ export const CINEMATICS = {
   duration:8,bytes:10181404,mixGain:.3,
  },
  case1Outcome: {
-  title:'Case 1 — Rescue Outcome',path:'/assets/video/designer-case-1-outcome-v1.mp4',
+  title:'Case 01 — Kestrel / Rescue Outcome',caseId:'KES',path:'/assets/video/designer-case-1-outcome-v1.mp4',
   source:'case 1 outcome.mp4',driveId:'1vjDCZCYOquFkJhRb63ND_Lddied3OyTp',
   duration:5.97,bytes:4375281,mixGain:.8,
  },
