@@ -15,7 +15,7 @@ export function CinematicPlayer({id,onFinish}:{id:CinematicId;onFinish:(outcome:
  const [soundRequested,setSoundRequested]=useState(false)
  const [reducedMotion]=useState(()=>typeof window!=='undefined'&&typeof window.matchMedia==='function'&&window.matchMedia('(prefers-reduced-motion: reduce)').matches)
  const [status,setStatus]=useState<ClipStatus>(reducedMotion?'reduced-motion':'loading')
- const [duration,setDuration]=useState(clip.duration)
+ const [duration,setDuration]=useState<number>(clip.duration)
  const [position,setPosition]=useState(0)
  const [fullscreenError,setFullscreenError]=useState(false)
  const [attempted,setAttempted]=useState(false)
