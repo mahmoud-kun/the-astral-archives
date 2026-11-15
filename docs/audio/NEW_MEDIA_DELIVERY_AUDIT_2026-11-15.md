@@ -85,3 +85,15 @@ The voice does **NOT** add a new evidence ID or change required count 6, and is 
 **Mandatory verification after Main uploads:** SHA match, HTTP 200/206, 16:9 sizing, explicit play on slow network, autoplay muted/reduced-motion, full-screen consent, audio/captions, 1-case matching, wrong-folder/rescue gating, fallback, audio focus, mobile landscape, and preservation of local saved investigation progress.
 
 **Integration handoff:** update Main via Issue #4; only Main modifies shared route/evidence/rescue screens. Use the above `CINEMATICS` keys and `EvidenceVoicePlayer id='KES-05'` under authorized existing record inspector; do not change source IDs.
+
+
+## Final binary upload resolution — VERIFIED on GitHub (15 November 2026)
+
+**This section supersedes all earlier "MP4/MP3 not deployed to GitHub" warnings in this historical audit.** User authorized another upload attempt. The initial direct `create_blob` upload repeatedly failed with HTTP/2 on multi-MB MP4s. We successfully uploaded the 314,523-byte exact KES-05 MP3 via the Git Data API ([commit 6fe5482](https://github.com/mahmoud-kun/the-astral-archives/commit/6fe5482491143b4d48d2b2298b871248f2106a72)). A temporary, branch-scoped GitHub Actions uploader then downloaded all 12 original MP4 files **from the supplied public Drive IDs**; each full binary passed an independently configured exact SHA-256 check before commit.
+
+- **GitHub Actions run #43682242118:** SUCCESS. https://github.com/mahmoud-kun/the-astral-archives/actions/runs/43682242118
+- **All-12 MP4 commit:** `b3bb9b4f2e0681a1f6d6c67c8561ffd0609d6c08`, message `assets(video): upload twelve SHA-verified original designer films`, with exactly 12 files added under `public/assets/video/`.
+- **One MP3 commit:** `6fe5482491143b4d48d2b2298b871248f2106a72` at `public/assets/audio/voice/designer-kes-05-analyst-review-v1.mp3`.
+- **Post-push remote readback:** GitHub's recursive tree lists all **13/13 exact paths** with **13/13 Git Blob SHA-1 and byte lengths matching the original local source bytes**, total **73,742,154 bytes**. These are repository objects now, not just remote jobs, download links or staging ZIPs.
+- **No new case IDs/evidence/rescue progress introduced. No main merge.** Branch remains `experiment/room-case-library-layout-fix-2026-11-14`. The temporary upload workflow is intended for removal once verification/handoff is complete.
+- **Still pending:** Main trigger/scene wiring, story approval for Kestrel industrial visuals, verified subtitles and rights, post-upload application build and browser/device playback QA. Physical bytes on GitHub do **not** prove that all cinematic events are wired or rendered in the playable experience.
