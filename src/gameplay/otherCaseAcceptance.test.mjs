@@ -150,3 +150,12 @@ test('Four complete state journeys: analyze, collect, wrong-folder, refile, cite
   assert.equal(otherRescueCompleted(archive,progress,caseId),false,'unanalysed debug-collected evidence cannot finish rescue')
  }
 })
+
+
+test('Save restoration prunes a forged dependent analysis chain but retains complete valid chains',()=>{
+ const base={version:1,inspected:[],attempts:{},hints:{},verifiedPlans:{}}
+ const forged=restoreOtherProgress(JSON.stringify({...base,solved:['KES-05','KES-06']}))
+ assert.deepEqual(forged.solved,[],'KES-05 needs launcher warning; KES-06 then loses both prerequisites')
+ const valid=restoreOtherProgress(JSON.stringify({...base,solved:['KES-02','KES-05','KES-06']}))
+ assert.deepEqual(valid.solved,['KES-02','KES-05','KES-06'])
+})
