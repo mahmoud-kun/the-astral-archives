@@ -1,0 +1,107 @@
+{
+  "version": 1,
+  "roomId": "data_analysis",
+  "timeline": "past",
+  "variant": "portrait",
+  "sourceArt": "/assets/rooms/past/sources/03_Data_Analysis_File_Review_1080x1920.png",
+  "coordinateSystem": {
+    "width": 1080,
+    "height": 1920
+  },
+  "background": "/assets/rooms/past/data_analysis/layers/portrait/background/room_bg_clean.png",
+  "objects": [
+    {
+      "id": "mission_files",
+      "sourceArt": "/assets/rooms/past/sources/03_Data_Analysis_File_Review_1080x1920.png",
+      "position": {
+        "x": 75,
+        "y": 552,
+        "width": 485,
+        "height": 576
+      },
+      "zIndex": 1,
+      "assets": {
+        "base": "/assets/rooms/past/data_analysis/layers/portrait/mission_files/mission_files_base.png",
+        "glow": "/assets/rooms/past/data_analysis/layers/portrait/mission_files/mission_files_glow.png",
+        "mask": "/assets/rooms/past/data_analysis/layers/portrait/mission_files/mission_files_mask.png",
+        "screen": "/assets/rooms/past/data_analysis/layers/portrait/mission_files/mission_files_screen.png"
+      },
+      "interaction": {
+        "target": "mission_files",
+        "label": "Review mission files",
+        "mask": "/assets/rooms/past/data_analysis/layers/portrait/mission_files/mission_files_mask.png"
+      },
+      "states": [
+        "idle",
+        "hover",
+        "focus",
+        "touch"
+      ],
+      "extractionMode": "fully_layered",
+      "cleanPlateExtractionComplete": false,
+      "designerCleanupRequired": true
+    },
+    {
+      "id": "dataset_viewer",
+      "sourceArt": "/assets/rooms/past/sources/03_Data_Analysis_File_Review_1080x1920.png",
+      "position": {
+        "x": 552,
+        "y": 553,
+        "width": 477,
+        "height": 574
+      },
+      "zIndex": 2,
+      "assets": {
+        "base": "/assets/rooms/past/data_analysis/layers/portrait/dataset_viewer/dataset_viewer_base.png",
+        "glow": "/assets/rooms/past/data_analysis/layers/portrait/dataset_viewer/dataset_viewer_glow.png",
+        "mask": "/assets/rooms/past/data_analysis/layers/portrait/dataset_viewer/dataset_viewer_mask.png",
+        "screen": "/assets/rooms/past/data_analysis/layers/portrait/dataset_viewer/dataset_viewer_screen.png"
+      },
+      "interaction": {
+        "target": "dataset_viewer",
+        "label": "Review datasets",
+        "mask": "/assets/rooms/past/data_analysis/layers/portrait/dataset_viewer/dataset_viewer_mask.png"
+      },
+      "states": [
+        "idle",
+        "hover",
+        "focus",
+        "touch"
+      ],
+      "extractionMode": "fully_layered",
+      "cleanPlateExtractionComplete": false,
+      "designerCleanupRequired": true
+    },
+    {
+      "id": "analysis_console",
+      "sourceArt": "/assets/rooms/past/sources/03_Data_Analysis_File_Review_1080x1920.png",
+      "position": {
+        "x": 15,
+        "y": 1119,
+        "width": 992,
+        "height": 331
+      },
+      "zIndex": 3,
+      "assets": {
+        "base": "/assets/rooms/past/data_analysis/layers/portrait/analysis_console/analysis_console_base.png",
+        "glow": "/assets/rooms/past/data_analysis/layers/portrait/analysis_console/analysis_console_glow.png",
+        "mask": "/assets/rooms/past/data_analysis/layers/portrait/analysis_console/analysis_console_mask.png",
+        "screen": "/assets/rooms/past/data_analysis/layers/portrait/analysis_console/analysis_console_screen.png"
+      },
+      "interaction": {
+        "target": "analysis_console",
+        "label": "Operate analysis console",
+        "mask": "/assets/rooms/past/data_analysis/layers/portrait/analysis_console/analysis_console_mask.png"
+      },
+      "states": [
+        "idle",
+        "hover",
+        "focus",
+        "touch"
+      ],
+      "extractionMode": "fully_layered",
+      "cleanPlateExtractionComplete": false,
+      "designerCleanupRequired": true
+    }
+  ]
+}
