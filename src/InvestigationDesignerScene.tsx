@@ -34,7 +34,7 @@ function SmallIcon({ type, size = 18 }: { type: 'back' | 'close' | 'help' | 'arr
 
 export default function InvestigationDesignerScene() {
   const [panel, setPanel] = useState<Panel>(null)
-  const [showHint, setShowHint] = useState(true)
+  const [showHint, setShowHint] = useState(false)
   const [puzzleId,setPuzzleId] = useState<NadirRecord|null>(null)
   const [caseSourceOpen,setCaseSourceOpen] = useState(false)
   const archive = useArchiveSave()
@@ -117,7 +117,7 @@ export default function InvestigationDesignerScene() {
           <div className="idr-briefing-steps">
             <div><span>01</span><strong>REVIEW</strong><small>Open a mission file to understand what happened and what remains unexplained.</small></div>
             <div><span>02</span><strong>INVESTIGATE</strong><small>Inspect records, recordings and signal data in the station's rooms.</small></div>
-            <div><span>03</span><strong>RESCUE</strong><small>Once all six required records are correctly filed, unlock the Rescue Mission and defend your engineering repair.</small></div>
+            <div><span>03</span><strong>RESCUE</strong><small>Once all six required records are correctly filed, unlock Rescue, travel to the past and follow the alternate mission story.</small></div>
           </div>
           <button className="idr-primary" onClick={openCaseLibrary}>OPEN MISSION FILES <SmallIcon type="arrow"/></button>
           <button className="idr-primary" onClick={openCaseSources}>OPEN CASE SOURCE INDEX <SmallIcon type="arrow"/></button>
@@ -126,9 +126,9 @@ export default function InvestigationDesignerScene() {
         {panel === 'evidence' && <div className="idr-single-view">
           <span className="idr-eyebrow">EVIDENCE STORAGE / PRESENT TIMELINE</span>
           <h2>THE EVIDENCE BOARD</h2>
-          <p className="idr-lead">Keep the evidence. Follow the question.</p>
+          <p className="idr-lead">Recover the evidence. Restore the story.</p>
           <p>You'll collect records across the station and place them in the five mission folders. An incorrect filing is saved without a warning, and you can move an item later.</p>
-          <div className="idr-interface-message"><span>OPEN INVESTIGATION / CASE NADIR</span><strong>NAV-042 CLOSED WITHOUT A DOCUMENTED RERUN</strong><small>Audit the actual ticket. Identify whether the administrative stamp is supported by a reproduced navigation check.</small></div>
+          <div className="idr-interface-message"><span>OPEN INVESTIGATION / CASE NADIR</span><strong>NAV-042 CLOSED WITHOUT A DOCUMENTED RERUN</strong><small>Read the recovered ticket and collect it. You do not have to solve a question.</small></div>
           <button className="idr-primary" onClick={()=>{setPanel(null);setPuzzleId('NAD-06')}}>EXAMINE NAV-042 · NAD-06 <SmallIcon type="arrow"/></button>
           <button className="idr-primary" onClick={openCaseLibrary}>VIEW MISSION FILES <SmallIcon type="arrow"/></button>
           <button className="idr-primary" onClick={openCaseSources}>INSPECT OTHER CASE SOURCES <SmallIcon type="arrow"/></button>
@@ -144,14 +144,14 @@ export default function InvestigationDesignerScene() {
             <button className="idr-door-room" onClick={()=>navigateGame(stationRoute('recordings'))}><small>03 / ENTER ROOM</small><strong>Recordings</strong><span>Escalations and chronology</span></button>
             <button className="idr-door-room" onClick={()=>navigateGame(stationRoute('signal'))}><small>04 / ENTER ROOM</small><strong>Signal</strong><span>Telemetry and unit analysis</span></button>
           </div>
-          <p className="idr-integrity-note">Return here from any station room. Your evidence and analyzer progress persist automatically.</p>
+          <p className="idr-integrity-note">Return here from any station room. Your collected evidence and folder progress are saved automatically.</p>
         </div>}
 
         {panel === 'rescue' && <div className="idr-single-view">
           <span className="idr-eyebrow">ENGINEERING / RESCUE CONSOLE</span>
           <h2>THE RESCUE CONSOLE</h2>
           <p className="idr-lead">Understand the mission before changing its future.</p>
-          <p>For Nadir, filing all six required records in the correct mission folder unlocks the rescue workbench. The causal review and engineering test are solved inside the Rescue Mission.</p>
+          <p>For Nadir, filing six required records in the correct Mission Folder unlocks Rescue. Travel into the past and see the alternate mission unfold — no quizzes or calculations.</p>
           <div className="idr-interface-message"><span>CASE NAD / ACCESS STATUS</span><strong>{nadirReady?'RESCUE UNLOCKED':'RESCUE LOCKED · '+nadirRequired+'/6 REQUIRED'}</strong><small>Wrongly filed evidence is retained but does not increase the mission progress. Move records freely between folders.</small></div>
           {nadirReady?<button className="idr-primary" onClick={()=>enterRescueThroughPortal('NAD')}>ENTER NADIR RESCUE <SmallIcon type="arrow"/></button>
             :<button className="idr-primary" onClick={openCaseLibrary}>REVIEW MISSION FOLDERS <SmallIcon type="arrow"/></button>}
@@ -161,7 +161,7 @@ export default function InvestigationDesignerScene() {
           <span className="idr-eyebrow">PLAYER ASSISTANT / CONTROLS</span>
           <h2>HOW TO EXPLORE</h2>
           <p className="idr-lead">The entire room is in front of you.</p>
-          <p>Hover or tap a real object to open its inspection. The Station Door leads to Archive, Signal and Recordings. Complete analytical work in each room; then press COLLECT EVIDENCE manually. The Quick Evidence Tray follows you between rooms and opens the physical Mission Folders directly. Wrong filing is saved silently. Escape closes the active inspector.</p>
+          <p>Hover or tap an object to find recovered evidence, then collect it directly. The Station Door leads to Archive, Signal and Recordings. Open each recovered record and press COLLECT EVIDENCE directly. No answers or puzzles are required. The Quick Evidence Tray follows you between rooms and opens the physical Mission Folders directly. Wrong filing is saved silently. Escape closes the active inspector.</p>
           <button className="idr-primary" onClick={openCaseLibrary}>START WITH MISSION FILES <SmallIcon type="arrow"/></button>
         </div>}
         <footer className="idr-inspection-foot"><span>STATION / INVESTIGATION 01</span><span>FICTIONAL CASES — NO NASA TELEMETRY PRESENTED</span></footer>
