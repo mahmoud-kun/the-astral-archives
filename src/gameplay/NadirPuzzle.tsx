@@ -57,7 +57,7 @@ export default function NadirPuzzle({id,onClose}:{id:NadirRecord;onClose:()=>voi
   const previous=document.activeElement instanceof HTMLElement ? document.activeElement : null
   closeButtonRef.current?.focus()
   const escape=(event:KeyboardEvent)=>{
-   if(event.key==='Escape'){
+   if(event.key==='Escape'&&!document.querySelector('.cm-backdrop')){
     event.preventDefault()
     event.stopPropagation()
     latestCloseRef.current()
