@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom/client'
 import HomeScreen from './HomeScreen'
 import LandscapeGuard from './LandscapeGuard'
 import { GAME_ROUTE_EVENT } from './gameNavigation'
+import { installGameAudio } from './audio/gameAudio'
 import './styles.css'
 
 // Load each scene only when the player visits it. In particular, legacy
@@ -18,6 +19,8 @@ const NadirRescue = lazy(() => import('./gameplay/NadirRescue'))
 
 function AstralArchives() {
   const [route, setRoute] = useState(() => window.location.pathname + window.location.search)
+
+  useEffect(() => installGameAudio(), [])
 
   useEffect(() => {
     const update = () => setRoute(window.location.pathname + window.location.search)
