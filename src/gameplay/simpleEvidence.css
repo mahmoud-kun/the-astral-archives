@@ -1,0 +1,16 @@
+.se-dialog{width:min(960px,96vw);max-height:96dvh;display:flex;flex-direction:column}
+.se-scroll{min-height:0;flex:1;overflow-y:auto;overscroll-behavior:contain;padding:18px 22px;display:flex;flex-direction:column;gap:13px}
+.se-scroll h2{margin:0;font-size:clamp(19px,2.6vw,27px);line-height:1.2}
+.se-scene{font-size:14px;line-height:1.55;color:#d5e1e8;margin:0}
+.se-paper{background:linear-gradient(135deg,#efeadb,#dfd5bd);color:#253347;padding:20px 24px;border:1px solid #b39c73;border-radius:4px;box-shadow:0 7px 24px #0004}
+.se-paper>small{color:#51637b;letter-spacing:.12em;font-size:10px;font-weight:700}
+.se-paper>p{white-space:pre-line;line-height:1.7;font-size:clamp(13px,1.5vw,16px)}
+.se-fragments{border-top:1px solid #b7aa91;padding-top:8px}
+.se-fragments p{margin:7px 0;line-height:1.55;font-size:13px}
+.se-fragments b{margin-right:10px;color:#855a2e}
+.se-guidance{margin:0;font-size:12px;line-height:1.5;color:#a9bfcb}
+.se-foot{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px}
+.se-foot .np-primary{min-height:44px;padding:10px 20px}
+.se-scroll .im-evidence-media{flex-shrink:0}
+@media(max-height:480px){.se-scroll{padding:8px 14px;gap:8px}.se-paper{padding:12px}.se-foot{padding:7px 10px}.se-foot .np-primary{min-height:36px}}
+@media(max-width:620px){.se-dialog{width:100vw;max-height:100dvh}.se-scroll{padding:12px}.se-paper{padding:13px}.se-foot{justify-content:center}.se-foot .np-primary{flex:1}}
