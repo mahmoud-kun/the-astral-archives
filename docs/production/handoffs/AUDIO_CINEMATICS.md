@@ -176,3 +176,7 @@ The user uploaded new files into NASA Drive while existing first-four video bina
 - New audio/video tests are included in `npm run test:audio`. Main must root-wire individual footage using [New Media Delivery Audit](../../audio/NEW_MEDIA_DELIVERY_AUDIT_2026-11-15.md) and run independent build, browser and mobile QA. Main owns all shared component edits; no cross-owner file changed.
 
 **Acceptance verdict remains PARTIAL:** audio/video source inventory, source-derived manifest, preview and QA plan prepared; physical binaries, game trigger integration, caption/rights review and real-device playback not yet complete.
+
+### Verified post-delivery code CI
+
+[GitHub Actions run #43680990923](https://github.com/mahmoud-kun/the-astral-archives/actions/runs/43680990923) **SUCCESS** at `952146971fc875a05a235ce139856398f1f39dae`: `npm run build` passes unit suites + TypeScript + Vite; `npm run test:audio` **17/17 PASS**; Visual QA **52 screenshots, 0 broken, 0 clipped, 0 scenario errors, 0 console errors**. This includes code and Sound Lab previews for all 12 media keys and KES-05 voice, **not media playback** (MP4/MP3 binaries are absent from GitHub). The 8 new designer MP4 source originals separately passed full ffmpeg decoding **8/8**; Source-exact ZIP integrity verified locally. Pending Main's root/event mounting, online media file availability, human art/speech review, real-browser playback and physical-device audition.
