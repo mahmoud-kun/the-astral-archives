@@ -273,7 +273,21 @@ export function restoreOtherProgress(raw:string|null):OtherProgress{
   if(!data||typeof data!=='object'||!('version' in data)||data.version!==1)return emptyOtherProgress()
   const d=data as Record<string,unknown>
   const inspected=Array.isArray(d.inspected)?[...new Set(d.inspected.filter(isRecord))]:[]
-  const solved=Array.isArray(d.solved)?[...new Set(d.solved.filter(isRecord))]:[]
+  const claimedSolved=Array.isArray(d.solved)?[...new Set(d.solved.filter(isRecord))]:[]
+  const accepted=new Set(claimedSolved)
+  // A damaged older save must not preserve conclusions after their correlated evidence vanished.
+  // Fixed-point pruning also prevents a forged chain (a missing predecessor invalidates its dependents).
+  let changed=true
+  while(changed){
+   changed=false
+   for(const id of accepted){
+    if(CASE_EVIDENCE_TASKS[id].requires.some(parent=>!accepted.has(parent))){
+     accepted.delete(id)
+     changed=true
+    }
+   }
+  }
+  const solved=[...accepted]
   const attempts:OtherProgress['attempts']={}
   const hints:OtherProgress['hints']={}
   for(const id of OTHER_RECORD_IDS){
