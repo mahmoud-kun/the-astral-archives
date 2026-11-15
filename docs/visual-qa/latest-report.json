@@ -1,12 +1,133 @@
 {
-  "run_on": "2026-11-15T09:57:22.200Z",
-  "screenshots": 71,
+  "run_on": "2026-11-15T11:26:41.863Z",
+  "screenshots": 59,
   "console_errors": 0,
   "broken_images": 0,
   "clipped_controls": 0,
   "overflows": 0,
-  "errors": [],
-  "missing_screenshots": [],
+  "errors": [
+    {
+      "label": "nadir-analysis",
+      "viewport": {
+        "width": 915,
+        "height": 412
+      },
+      "error": "TimeoutError: locator.evaluate: Timeout 30000ms exceeded.\nCall log:\n  - waiting for locator('.np-scroll')\n",
+      "faults": []
+    },
+    {
+      "label": "nadir-analysis",
+      "viewport": {
+        "width": 800,
+        "height": 360
+      },
+      "error": "TimeoutError: locator.evaluate: Timeout 30000ms exceeded.\nCall log:\n  - waiting for locator('.np-scroll')\n",
+      "faults": []
+    },
+    {
+      "label": "nadir-analysis",
+      "viewport": {
+        "width": 740,
+        "height": 360
+      },
+      "error": "TimeoutError: locator.evaluate: Timeout 30000ms exceeded.\nCall log:\n  - waiting for locator('.np-scroll')\n",
+      "faults": []
+    },
+    {
+      "label": "nadir-collect-and-file",
+      "viewport": {
+        "width": 915,
+        "height": 412
+      },
+      "error": "TimeoutError: locator.click: Timeout 30000ms exceeded.\nCall log:\n  - waiting for locator('.np-mobile-steps button').nth(1)\n",
+      "faults": []
+    },
+    {
+      "label": "case-puzzle",
+      "viewport": {
+        "width": 915,
+        "height": 412
+      },
+      "error": "AssertionError [ERR_ASSERTION]: Unsolved other-case puzzles must never show collection\n\n1 !== 0\n",
+      "faults": []
+    },
+    {
+      "label": "case-rescue-kes",
+      "viewport": {
+        "width": 915,
+        "height": 412
+      },
+      "error": "TimeoutError: locator.waitFor: Timeout 30000ms exceeded.\nCall log:\n  - waiting for locator('.cw-rescue') to be visible\n",
+      "faults": []
+    },
+    {
+      "label": "case-rescue-lum",
+      "viewport": {
+        "width": 915,
+        "height": 412
+      },
+      "error": "TimeoutError: locator.waitFor: Timeout 30000ms exceeded.\nCall log:\n  - waiting for locator('.cw-rescue') to be visible\n",
+      "faults": []
+    },
+    {
+      "label": "case-rescue-ori",
+      "viewport": {
+        "width": 915,
+        "height": 412
+      },
+      "error": "TimeoutError: locator.waitFor: Timeout 30000ms exceeded.\nCall log:\n  - waiting for locator('.cw-rescue') to be visible\n",
+      "faults": []
+    },
+    {
+      "label": "case-rescue-ast",
+      "viewport": {
+        "width": 915,
+        "height": 412
+      },
+      "error": "TimeoutError: locator.waitFor: Timeout 30000ms exceeded.\nCall log:\n  - waiting for locator('.cw-rescue') to be visible\n",
+      "faults": []
+    },
+    {
+      "label": "nadir-voice-inspector",
+      "viewport": {
+        "width": 915,
+        "height": 412
+      },
+      "error": "AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n\n1 !== 0\n",
+      "faults": []
+    },
+    {
+      "label": "kestrel-voice-inspector",
+      "viewport": {
+        "width": 915,
+        "height": 412
+      },
+      "error": "AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n\n1 !== 0\n",
+      "faults": []
+    },
+    {
+      "label": "nadir-evidence-video",
+      "viewport": {
+        "width": 915,
+        "height": 412
+      },
+      "error": "AssertionError [ERR_ASSERTION]: Skipping the film must never grant collection before analysis\n\n1 !== 0\n",
+      "faults": []
+    }
+  ],
+  "missing_screenshots": [
+    "qa-artifacts/nadir-analysis-915x412.png",
+    "qa-artifacts/nadir-filed-folder-915x412.png",
+    "qa-artifacts/nadir-collect-and-file-915x412.png",
+    "qa-artifacts/case-puzzle-915x412.png",
+    "qa-artifacts/case-rescue-kes-915x412.png",
+    "qa-artifacts/case-rescue-lum-915x412.png",
+    "qa-artifacts/case-rescue-ori-915x412.png",
+    "qa-artifacts/case-rescue-ast-915x412.png",
+    "qa-artifacts/nadir-voice-inspector-915x412.png",
+    "qa-artifacts/kestrel-voice-inspector-915x412.png",
+    "qa-artifacts/nadir-evidence-video-915x412.png"
+  ],
   "image_transfer_bytes_by_route": [
     {
       "route": "/",
@@ -297,42 +418,6 @@
       "bytes": 0
     },
     {
-      "route": "/?station=signal",
-      "viewport": {
-        "width": 915,
-        "height": 412
-      },
-      "label": "nadir-analysis",
-      "bytes": 499890
-    },
-    {
-      "route": "/?station=signal",
-      "viewport": {
-        "width": 800,
-        "height": 360
-      },
-      "label": "nadir-analysis",
-      "bytes": 499890
-    },
-    {
-      "route": "/?station=signal",
-      "viewport": {
-        "width": 740,
-        "height": 360
-      },
-      "label": "nadir-analysis",
-      "bytes": 499890
-    },
-    {
-      "route": "/?station=signal",
-      "viewport": {
-        "width": 915,
-        "height": 412
-      },
-      "label": "nadir-collect-and-file",
-      "bytes": 499890
-    },
-    {
       "route": "/",
       "viewport": {
         "width": 1650,
@@ -414,51 +499,6 @@
       "bytes": 899502
     },
     {
-      "route": "/?room=1",
-      "viewport": {
-        "width": 915,
-        "height": 412
-      },
-      "label": "case-puzzle",
-      "bytes": 899502
-    },
-    {
-      "route": "/?rescue=KES",
-      "viewport": {
-        "width": 915,
-        "height": 412
-      },
-      "label": "case-rescue-kes",
-      "bytes": 0
-    },
-    {
-      "route": "/?rescue=LUM",
-      "viewport": {
-        "width": 915,
-        "height": 412
-      },
-      "label": "case-rescue-lum",
-      "bytes": 0
-    },
-    {
-      "route": "/?rescue=ORI",
-      "viewport": {
-        "width": 915,
-        "height": 412
-      },
-      "label": "case-rescue-ori",
-      "bytes": 0
-    },
-    {
-      "route": "/?rescue=AST",
-      "viewport": {
-        "width": 915,
-        "height": 412
-      },
-      "label": "case-rescue-ast",
-      "bytes": 0
-    },
-    {
       "route": "/?folder-lab=1&debug=1",
       "viewport": {
         "width": 915,
@@ -502,33 +542,6 @@
       },
       "label": "source-desk-recordings",
       "bytes": 376722
-    },
-    {
-      "route": "/?station=recordings",
-      "viewport": {
-        "width": 915,
-        "height": 412
-      },
-      "label": "nadir-voice-inspector",
-      "bytes": 376722
-    },
-    {
-      "route": "/?station=recordings",
-      "viewport": {
-        "width": 915,
-        "height": 412
-      },
-      "label": "kestrel-voice-inspector",
-      "bytes": 376722
-    },
-    {
-      "route": "/?station=signal",
-      "viewport": {
-        "width": 915,
-        "height": 412
-      },
-      "label": "nadir-evidence-video",
-      "bytes": 499890
     },
     {
       "route": "/?folder-lab=1",
