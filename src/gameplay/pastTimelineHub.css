@@ -25,3 +25,26 @@
 .pt-object-panel button:hover,.pt-object-panel button:focus-visible{background:#36617b;outline:2px solid #fff;outline-offset:2px}
 .pt-object-head button{min-height:32px}
 @media(max-height:500px){.pt-object-panel{padding:10px 14px;max-height:calc(100dvh - 98px)}.pt-object-panel h2{margin:5px 0;font-size:16px}.pt-object-panel p{margin:5px 0;font-size:12px;line-height:1.4}.pt-object-actions{margin:9px 0}.pt-object-panel button{min-height:32px;padding:5px 8px}}
+
+/* Real Past-room interventions. Every click changes a saved system configuration. */
+.pt-intervention-panel{width:min(730px,calc(100vw - 22px));max-height:calc(100dvh - 116px);overflow-y:auto}
+.pt-engineering{display:grid;gap:11px}
+.pt-system-status{background:rgba(69,98,111,.19);border:1px solid #557b8e;border-radius:7px;padding:11px 13px}
+.pt-system-status small,.pt-decision-effect small{display:block;font:700 10px 'IBM Plex Mono',monospace;color:#c3dae5;letter-spacing:.07em;margin-bottom:6px}
+.pt-system-status strong{font:700 clamp(14px,1.6vw,19px) 'Orbitron',sans-serif;color:#f2c68a}
+.pt-system-status p{margin:7px 0 0}
+.pt-repair-choices{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
+.pt-repair-choices .pt-repair-option{text-align:left;border:1px solid #73929f;background:#14283e;padding:11px;min-height:80px;display:flex;flex-direction:column;align-items:flex-start;justify-content:space-between;gap:10px;white-space:normal;line-height:1.5;font-size:12px}
+.pt-repair-option span{font-weight:700}
+.pt-repair-option small{font-size:9px;letter-spacing:.08em;color:#b9d6df}
+.pt-repair-option.pt-option-selected{border:2px solid #fac686;background:#315566}
+.pt-decision-effect{padding:12px 14px;border-radius:7px;border:1px solid #ac805a;background:rgba(93,57,25,.24)}
+.pt-decision-good{border-color:#8dbb9e;background:rgba(31,83,65,.36)}
+.pt-decision-effect strong{display:block;font:700 clamp(12px,1.45vw,17px) 'IBM Plex Mono',monospace;letter-spacing:.02em}
+.pt-decision-effect p{margin:7px 0 0}
+.pt-tradeoff{font-size:12px;color:#d1d8d5;border-left:2px solid #c79960;padding-left:11px}
+.pt-floating-system{position:absolute;z-index:6;bottom:82px;left:50%;transform:translateX(-50%);border:1px solid #ffc77e;background:rgba(17,41,59,.94);color:#f7e9d2;padding:11px 16px;font:700 11px 'IBM Plex Mono',monospace;cursor:pointer;box-shadow:0 7px 25px #0008;max-width:90vw}
+.pt-floating-system:hover,.pt-floating-system:focus-visible{background:#6a4b2f;outline:2px solid white}
+.pt-stage-cleared{border-color:#6dac8c!important;color:#bff5d1!important}
+@media(max-width:650px){.pt-repair-choices{grid-template-columns:1fr}.pt-intervention-panel{padding:11px 12px}.pt-repair-choices .pt-repair-option{min-height:56px}.pt-system-status{padding:8px}.pt-floating-system{bottom:66px}}
+@media(max-height:510px){.pt-intervention-panel{top:51%;max-height:calc(100dvh - 91px);padding:7px 13px}.pt-engineering{gap:6px}.pt-repair-choices .pt-repair-option{min-height:45px;padding:6px 8px;gap:3px}.pt-decision-effect{padding:7px 9px}.pt-system-status{padding:7px 9px}.pt-floating-system{bottom:62px;padding:6px 9px}.pt-object-actions{margin:6px 0}}
