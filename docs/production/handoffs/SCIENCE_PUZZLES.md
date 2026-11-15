@@ -165,3 +165,6 @@ These are **content handoff instructions, not claims that a video or audio clip 
 
 **Release interpretation remains HOLD:** new non-Nadir case overlays and rescue routes are not yet mounted by A/Main, so those 44 screenshots contain **no successful non-Nadir Rescue walk-through**. The production debug-intake bypass still requires Main's patch; four-case browser gameplay end-to-end and designer approval remain pending.
 
+
+**IMPORTANT validated integration refinement (source-readback):** In InvestigationDesignerScene.tsx, the physical cases target currently calls openCaseLibrary() and routes directly to folder-lab. Do **not** replace that action with CaseStationDesk: instead add a secondary OPEN CASE SOURCE INDEX action inside the existing panel==='briefing' or panel==='evidence' inspector (preserving both Mission Folders and NAD-06). In ArchiveFolderLab.tsx, its chooseCase(code) should import isOtherCaseId/setActiveCase from the new pure module src/gameplay/caseContext.ts and call setActiveCase(code) for non-Nadir cases; the selected-case preference then follows the player across all four physical rooms. See [exact non-owner patches in Issue #2](https://github.com/mahmoud-kun/the-astral-archives/issues/2#issuecomment-6889314614). These modifications belong to Main/Chat A, not Chat C.
+
