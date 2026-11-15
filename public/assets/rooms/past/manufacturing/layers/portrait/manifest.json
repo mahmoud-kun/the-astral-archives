@@ -1,0 +1,107 @@
+{
+  "version": 1,
+  "roomId": "manufacturing",
+  "timeline": "past",
+  "variant": "portrait",
+  "sourceArt": "/assets/rooms/past/sources/01_Manufacturing_Materials_1080x1920.png",
+  "coordinateSystem": {
+    "width": 1080,
+    "height": 1920
+  },
+  "background": "/assets/rooms/past/manufacturing/layers/portrait/background/room_bg_clean.png",
+  "objects": [
+    {
+      "id": "materials_structure",
+      "sourceArt": "/assets/rooms/past/sources/01_Manufacturing_Materials_1080x1920.png",
+      "position": {
+        "x": 0,
+        "y": 707,
+        "width": 370,
+        "height": 570
+      },
+      "zIndex": 1,
+      "assets": {
+        "base": "/assets/rooms/past/manufacturing/layers/portrait/materials_structure/materials_structure_base.png",
+        "glow": "/assets/rooms/past/manufacturing/layers/portrait/materials_structure/materials_structure_glow.png",
+        "mask": "/assets/rooms/past/manufacturing/layers/portrait/materials_structure/materials_structure_mask.png",
+        "screen": "/assets/rooms/past/manufacturing/layers/portrait/materials_structure/materials_structure_screen.png"
+      },
+      "interaction": {
+        "target": "materials_structure",
+        "label": "Inspect materials and structure",
+        "mask": "/assets/rooms/past/manufacturing/layers/portrait/materials_structure/materials_structure_mask.png"
+      },
+      "states": [
+        "idle",
+        "hover",
+        "focus",
+        "touch"
+      ],
+      "extractionMode": "fully_layered",
+      "cleanPlateExtractionComplete": false,
+      "designerCleanupRequired": true
+    },
+    {
+      "id": "motors_energy",
+      "sourceArt": "/assets/rooms/past/sources/01_Manufacturing_Materials_1080x1920.png",
+      "position": {
+        "x": 366,
+        "y": 713,
+        "width": 370,
+        "height": 505
+      },
+      "zIndex": 2,
+      "assets": {
+        "base": "/assets/rooms/past/manufacturing/layers/portrait/motors_energy/motors_energy_base.png",
+        "glow": "/assets/rooms/past/manufacturing/layers/portrait/motors_energy/motors_energy_glow.png",
+        "mask": "/assets/rooms/past/manufacturing/layers/portrait/motors_energy/motors_energy_mask.png",
+        "screen": "/assets/rooms/past/manufacturing/layers/portrait/motors_energy/motors_energy_screen.png"
+      },
+      "interaction": {
+        "target": "motors_energy",
+        "label": "Inspect motors and energy",
+        "mask": "/assets/rooms/past/manufacturing/layers/portrait/motors_energy/motors_energy_mask.png"
+      },
+      "states": [
+        "idle",
+        "hover",
+        "focus",
+        "touch"
+      ],
+      "extractionMode": "fully_layered",
+      "cleanPlateExtractionComplete": false,
+      "designerCleanupRequired": true
+    },
+    {
+      "id": "rocket_design",
+      "sourceArt": "/assets/rooms/past/sources/01_Manufacturing_Materials_1080x1920.png",
+      "position": {
+        "x": 745,
+        "y": 697,
+        "width": 335,
+        "height": 575
+      },
+      "zIndex": 3,
+      "assets": {
+        "base": "/assets/rooms/past/manufacturing/layers/portrait/rocket_design/rocket_design_base.png",
+        "glow": "/assets/rooms/past/manufacturing/layers/portrait/rocket_design/rocket_design_glow.png",
+        "mask": "/assets/rooms/past/manufacturing/layers/portrait/rocket_design/rocket_design_mask.png",
+        "screen": "/assets/rooms/past/manufacturing/layers/portrait/rocket_design/rocket_design_screen.png"
+      },
+      "interaction": {
+        "target": "rocket_design",
+        "label": "Inspect rocket design",
+        "mask": "/assets/rooms/past/manufacturing/layers/portrait/rocket_design/rocket_design_mask.png"
+      },
+      "states": [
+        "idle",
+        "hover",
+        "focus",
+        "touch"
+      ],
+      "extractionMode": "fully_layered",
+      "cleanPlateExtractionComplete": false,
+      "designerCleanupRequired": true
+    }
+  ]
+}
