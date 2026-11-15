@@ -58,7 +58,17 @@ jobs:
           git add public/assets/video/
           if git diff --cached --quiet; then echo 'Already synchronized'; exit 0; fi
           git commit -m 'assets(video): upload twelve SHA-verified original designer films'
-          git fetch origin experiment/room-case-library-layout-fix-2026-11-14
-          git rebase origin/experiment/room-case-library-layout-fix-2026-11-14
-          git push origin HEAD:experiment/room-case-library-layout-fix-2026-11-14
-          echo 'Video originals committed and pushed successfully.'
+          # Concurrent Visual QA may publish a commit while these files download.
+          # Always rebase onto FETCH_HEAD, not a stale shallow-clone remote ref.
+          for attempt in 1 2 3 4 5 6; do
+            git fetch origin experiment/room-case-library-layout-fix-2026-11-14
+            git rebase FETCH_HEAD
+            if git push origin HEAD:experiment/room-case-library-layout-fix-2026-11-14; then
+              echo 'Video originals committed and pushed successfully.'
+              exit 0
+            fi
+            echo "Remote moved concurrently; retrying safe fast-forward (attempt $attempt)"
+            sleep 3
+          done
+          echo 'Push could not get a stable remote tip after six attempts' >&2
+          exit 1
