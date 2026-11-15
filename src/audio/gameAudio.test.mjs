@@ -92,6 +92,6 @@ test('unique original rescue-complete cue is an exact nonclipping PCM WAV, sourc
  assert.equal(buffer.readUInt16LE(22),1)
  assert.equal(buffer.readUInt16LE(34),16)
  assert.equal(buffer.readUInt32LE(40),59976)
- const gitBlob=createHash('sha1').update(Buffer.from('blob '+buffer.length+'\\0')).update(buffer).digest('hex')
+ const gitBlob=createHash('sha1').update(Buffer.from('blob '+buffer.length+' ')).update(Buffer.from([0])).update(buffer).digest('hex')
  assert.equal(gitBlob,'eb2b01e5b755f35d9fc2a5aedbf7c0c8965ae0d3')
 })
