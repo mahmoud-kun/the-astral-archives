@@ -346,8 +346,11 @@ await check(mobile,'/?station=signal','nadir-evidence-video',async page=>{
  await page.locator('.im-media-video button').click()
  await page.locator('.cm-backdrop').waitFor({state:'visible'})
  assert.equal(await page.locator('.cm-video').getAttribute('src'),'/assets/video/designer-case-2-units-mismatch-evidence-v1.mp4')
- await page.locator('.cm-actions .cm-primary').click()
+ // Escape must skip only the optional film; never dismiss the underlying puzzle.
+ await page.keyboard.press('Escape')
+ await page.locator('.cm-backdrop').waitFor({state:'detached'})
  await page.locator('.np-dialog').waitFor({state:'visible'})
+ assert.match(await page.locator('.np-head').textContent(),/NAD-02/)
  assert.equal(await page.getByRole('button',{name:/COLLECT EVIDENCE · NAD-02/}).count(),0,
   'Skipping the film must never grant collection before analysis')
 })
