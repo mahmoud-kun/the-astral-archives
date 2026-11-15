@@ -111,6 +111,48 @@ await check(mobile,'/?station=signal','nadir-collect-and-file',async page=>{
  assert.equal(await page.evaluate(()=>window.__astralRouteSentinel),'same-document')
  assert.equal((await page.locator('.et-trigger span').textContent()).trim(),'0')
 })
+// User-reported fullscreen crop (1650x927): assert the rendered ARCHIVES word,
+// not only the h1 box, remains inside the viewport after a real click.
+for(const viewport of [{width:1650,height:927},{width:1920,height:1080}]){
+ await check(viewport,'/','home-fullscreen',async page=>{
+  await page.getByRole('button',{name:'Enter fullscreen'}).click()
+  await page.waitForTimeout(180)
+  assert.equal(await page.evaluate(()=>Boolean(document.fullscreenElement)),true,
+    'Fullscreen must be entered with the Home Screen control')
+  const title=await page.locator('.aa-home-title h1 strong').boundingBox()
+  const heading=await page.locator('.aa-home-title h1').evaluate(el=>({
+   scrollWidth:el.scrollWidth,clientWidth:el.clientWidth
+  }))
+  assert.ok(title&&title.x>=6&&title.x+title.width<=viewport.width-12,
+    'Full-screen title ARCHIVES must not extend outside the visible screen')
+  assert.ok(heading.scrollWidth<=heading.clientWidth+2,
+    'Fullscreen title must not overflow its allocated copy column')
+  for(const selector of ['.aa-home-cta','.aa-home-secondary','.aa-home-header-right']){
+   const rect=await page.locator(selector).boundingBox()
+   assert.ok(rect&&rect.x>=0&&rect.x+rect.width<=viewport.width&&rect.y>=0&&rect.y+rect.height<=viewport.height,
+     selector+' must be fully visible in fullscreen')
+  }
+ })
+}
+// The inventory button is on the left ONLY in Investigation, strictly below
+// the back/room bar and outside the Mission Files hotspot.
+for(const viewport of [laptop,mobile,small]){
+ await check(viewport,'/?room=1','inventory-left',async page=>{
+  const trigger=page.locator('.et-trigger--investigation')
+  await trigger.waitFor()
+  const btn=await trigger.boundingBox()
+  const back=await page.locator('.idr-home-button').boundingBox()
+  assert.ok(btn&&back&&btn.x<viewport.width*.12,
+    'Investigation inventory button must be against the left edge')
+  assert.ok(btn.y>=back.y+back.height+5,
+    'Inventory button must be below Back, without covering navigation')
+  assert.ok(btn.x>=0&&btn.y+btn.height<=viewport.height,
+    'Inventory button must be fully inside the viewport')
+  await trigger.click()
+  assert.equal(await page.locator('.et-panel').isVisible(),true)
+  await page.getByRole('button',{name:'Close evidence tray'}).click()
+ })
+}
 await check({width:390,height:844},'/','portrait-guard')
 await writeFile(`${output}/report.json`, JSON.stringify(report,null,2))
 await browser.close()
