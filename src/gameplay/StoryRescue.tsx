@@ -7,7 +7,7 @@ import {isVerifiedOutcomeFilmAvailable,playVerifiedRescueOutcome} from '../integ
 import {useArchiveSave} from './gameSave'
 import {completeStoryRescue,isStoryRescueComplete} from './storyRescueState'
 import {PAST_STAGES,pastRoute} from './pastTimeline'
-import {allStagesStable,interventionFor,isStageStable,stableStageCount} from './pastInterventions'
+import {allStagesStable,countConfiguredStages,evaluateRepairPlan,interventionFor} from './pastInterventions'
 import {readPastChoices} from './pastInterventionSave'
 import './nadirRescue.css'
 import './storyRescue.css'
@@ -83,7 +83,8 @@ export default function StoryRescue({caseId}:{caseId:ArchiveCaseId}){
  const [finished,setFinished]=useState(()=>isStoryRescueComplete(caseId))
  const [warning,setWarning]=useState('')
  const choices=readPastChoices(caseId)
- const stable=stableStageCount(caseId,choices)
+ const configured=countConfiguredStages(choices)
+ const issues=evaluateRepairPlan(caseId,choices)
  const prepared=allStagesStable(caseId,choices)
  useEffect(()=>{setFinished(isStoryRescueComplete(caseId));setWarning('')},[caseId])
  function finalize(){
@@ -108,8 +109,8 @@ export default function StoryRescue({caseId}:{caseId:ArchiveCaseId}){
    <section className="nr-summary">
     <small>MISSION {caseId} / YOUR ENGINEERING MISSION</small>
     <h2>CHANGE THE MISSION'S FUTURE</h2><p>{story.opening}</p>
-    <div className="nr-progress"><span>STABILIZED SYSTEMS</span><strong>{stable}/4</strong>
-     <div><i style={{width:stable/4*100+'%'}}/></div></div>
+    <div className="nr-progress"><span>CONFIGURATIONS APPLIED</span><strong>{configured}/4</strong>
+     <div><i style={{width:configured/4*100+'%'}}/></div></div>
     <p className="nr-note">You already learned the science from the recovered records. Now repair real systems inside the four Past rooms. Every decision changes the simulation. No quizzes or calculations.</p>
     <p className="nr-note">Archive records recovered: {Math.min(count,6)}/6 to enter the past.</p>
    </section>
@@ -127,22 +128,23 @@ export default function StoryRescue({caseId}:{caseId:ArchiveCaseId}){
     </div>
    </section>:
    <section className="nr-work story-mission-stage">
-    <div className="nr-label"><span>MISSION REPAIR STATUS</span><strong>{prepared?'ALL SYSTEMS STABLE':'INTERVENTIONS REQUIRED'}</strong><em>{stable}/4</em></div>
+    <div className="nr-label"><span>MISSION REPAIR STATUS</span><strong>{prepared?'MISSION REVIEW COMPLETE':'MISSION REVIEW IN PROGRESS'}</strong><em>{configured}/4</em></div>
     <h2>{prepared?'YOUR REPAIR PLAN IS READY':'OPERATE THE PAST SYSTEMS'}</h2>
     <p>{prepared?'You have corrected the four interdependent fictional systems. Finalize the engineering intervention to see the mission outcome.':'Choose each Past room and modify its real systems. If a configuration causes problems, change it and observe the consequences. Your decisions are saved automatically.'}</p>
     <div className="story-repair-list">
      {PAST_STAGES.map(stage=>{
-      const fixed=isStageStable(caseId,stage.id,choices[stage.id])
+      const issue=issues.find(item=>item.room===stage.id)
+      const fixed=!!choices[stage.id]&&!issue
       const system=interventionFor(caseId,stage.id)
       return <button type="button" key={stage.id} className={'story-repair-link '+(fixed?'story-repaired':'')}
        onClick={()=>navigateGame(pastRoute(caseId,stage.id))}>
-        <span>{fixed?'✓':'○'} {stage.label}</span><strong>{system.system}</strong><small>{fixed?'STABILIZED · VIEW OR CHANGE':'OPEN ENGINEERING CONTROLS →'}</small>
+        <span>{choices[stage.id]?'•':'○'} {stage.label}</span><strong>{system.system}</strong><small>{issue?'REVIEW THE DESIGN TRADE-OFF':'CONFIGURATION RECORDED · REVISIT'}</small>
       </button>
      })}
     </div>
     <div className="story-actions">
      {prepared?<button type="button" className="nr-action" onClick={finalize}>FINALIZE RESCUE →</button>
-      :<button type="button" className="nr-action" onClick={()=>navigateGame(pastRoute(caseId,PAST_STAGES.find(stage=>!isStageStable(caseId,stage.id,choices[stage.id]))?.id??'manufacturing'))}>CONTINUE ENGINEERING REPAIRS →</button>}
+      :<button type="button" className="nr-action" onClick={()=>navigateGame(pastRoute(caseId,issues[0]?.room??'manufacturing'))}>CONTINUE ENGINEERING REPAIRS →</button>}
     </div>
     {warning&&<p className="nr-message" role="alert">{warning}</p>}
    </section>}
