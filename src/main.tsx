@@ -1,17 +1,20 @@
-import React, { useEffect, useState } from 'react'
+import React, { lazy, Suspense, useEffect, useState } from 'react'
 import ReactDOM from 'react-dom/client'
 import HomeScreen from './HomeScreen'
-import App from './App'
-import RescueWorkbench from './RescueWorkbench'
-import FixedRoomAdventure from './FixedRoomAdventure'
-import InvestigationDesignerScene from './InvestigationDesignerScene'
-import ArchiveFolderLab from './archive/ArchiveFolderLab'
 import LandscapeGuard from './LandscapeGuard'
-import StationRoom from './gameplay/StationRoom'
-import EvidenceTray from './gameplay/EvidenceTray'
-import NadirRescue from './gameplay/NadirRescue'
 import { GAME_ROUTE_EVENT } from './gameNavigation'
 import './styles.css'
+
+// Load each scene only when the player visits it. In particular, legacy
+// Three.js experiments must never inflate the first Home Screen download.
+const App = lazy(() => import('./App'))
+const RescueWorkbench = lazy(() => import('./RescueWorkbench'))
+const FixedRoomAdventure = lazy(() => import('./FixedRoomAdventure'))
+const InvestigationDesignerScene = lazy(() => import('./InvestigationDesignerScene'))
+const ArchiveFolderLab = lazy(() => import('./archive/ArchiveFolderLab'))
+const StationRoom = lazy(() => import('./gameplay/StationRoom'))
+const EvidenceTray = lazy(() => import('./gameplay/EvidenceTray'))
+const NadirRescue = lazy(() => import('./gameplay/NadirRescue'))
 
 function AstralArchives() {
   const [route, setRoute] = useState(() => window.location.pathname + window.location.search)
@@ -38,6 +41,7 @@ function AstralArchives() {
 
   return <>
     <LandscapeGuard />
+    <Suspense fallback={<div className="aa-route-loading" role="status" aria-live="polite"><span>THE ASTRAL ARCHIVES</span><strong>ACCESSING STATION RECORDS…</strong></div>}>
     {isArchiveFolderLab ? <ArchiveFolderLab /> :
       nadirRescue ? <NadirRescue /> :
       isFixedRoom ? <InvestigationDesignerScene /> :
@@ -46,7 +50,7 @@ function AstralArchives() {
       isRescueWorkbench ? <RescueWorkbench /> :
       isLegacyView ? <App /> : <HomeScreen />}
     {(isFixedRoom || station) && <EvidenceTray room={isFixedRoom ? 'investigation' : station!}/>}
-
+    </Suspense>
   </>
 }
 
