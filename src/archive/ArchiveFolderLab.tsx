@@ -158,7 +158,7 @@ export default function ArchiveFolderLab() {
         <div className="af-status-section"><span>MISSION BRIEFING FILM</span>{caseId==='KES'&&KESTREL_FOOTAGE_PENDING_APPROVAL
           ? <small>PROJECT BRIEF / Early-phase design trade: the original payload, power and cost no longer fit the mission plan. Investigate the actual source records; no launch or assembly footage is represented as historical proof.</small>
           : <button className="af-side-action" type="button" data-sfx="none" onClick={()=>playCaseIntroduction(caseId)}>PLAY {meta.name.toUpperCase()} INTRO</button>}</div>
-        <div className="af-status-section"><EvidenceStoryThread caseId={caseId} discovered={archive.discovered} compact/></div>
+        {archive.discovered.some(id=>id.startsWith(caseId+'-'))&&<div className="af-status-section"><EvidenceStoryThread caseId={caseId} discovered={archive.discovered} compact/></div>}
         <div className="af-status-section"><span>YOUR MISSION</span><strong>{storyComplete?'RESCUED IN THE STORY':'COLLECT ANY SIX OF EIGHT'}</strong><p>Explore the station and collect six distinct documents from this case. Filing them into Mission Folders is optional and can be corrected later.</p></div>
         <div className="af-status-section"><span>RESCUE MISSION</span><strong className={ready?'af-ready':''}>{ready?'UNLOCKED':'LOCKED'}</strong><p>{ready?'Six case records collected! Travel into the past and rescue the mission.':'Collect any six of this mission’s eight records to unlock. Filing is optional.'}</p>{ready&&<button className="af-side-action" onClick={()=>setRecapCase(caseId)}>REVIEW YOUR FINDINGS · ENTER RESCUE →</button>}</div>
         <div className="af-status-source">FICTIONAL CASE RECORDS. NOT AUTHENTIC NASA TELEMETRY.</div>
