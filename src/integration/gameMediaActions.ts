@@ -55,6 +55,12 @@ export function verifiedRescueState(caseId:ArchiveCaseId):boolean {
  return otherRescueCompleted(archive,readOtherProgress(),caseId)
 }
 
+/** The UI may display a verified-outcome film action only when its content is releasable. */
+export function isVerifiedOutcomeFilmAvailable(caseId:ArchiveCaseId):boolean {
+ return !(caseId==='KES'&&KESTREL_FOOTAGE_PENDING_APPROVAL)&&
+  verifiedCaseOutcomeCinematic(caseId)!==null
+}
+
 /** No Asterion false-success 472 W film; no premature Kestrel Phase-A footage. */
 export function playVerifiedRescueOutcome(caseId:ArchiveCaseId):boolean {
  if(caseId==='KES'&&KESTREL_FOOTAGE_PENDING_APPROVAL)return false
