@@ -8,6 +8,7 @@ import { REQUIRED_OTHER_IDS, type OtherCaseId } from './caseEvidenceEngine'
 import { updateOtherProgress, useOtherProgress } from './caseSave'
 import { CASE_RESCUE_COPY, otherRescueCompleted, recordVerifiedRescue, verifyOtherRescue, type RescueEvaluation, type RescueInputs } from './caseRescueEngine'
 import CaseInstrument from './CaseInstrument'
+import CaseRescueControl from './CaseRescueControl'
 import './nadirRescue.css'
 import './caseWork.css'
 
@@ -106,12 +107,9 @@ export default function CaseRescue({caseId}:{caseId:OtherCaseId}){
     <section className={'nr-work '+(!diagnosed?'nr-disabled':'')}>
      <div className="nr-label"><span>02 / REPLAY</span><strong>RECONFIGURE & TEST</strong><em>{completed?'ACCEPTED':'VERIFICATION REQUIRED'}</em></div>
      <p>Every setting changes the fictional engineering scenario. Run the replay, read individual results and only then present the review recommendation.</p>
-     <div className="cw-rescue-fields">{content.fields.map(field=><label key={field.key}>
-      {field.label}{field.kind==='number'
-       ?<input type="number" inputMode="decimal" step="any" value={form[field.key]??''} disabled={!diagnosed||completed} onChange={e=>change(field.key,e.target.value)} aria-label={field.label+' ('+field.unit+')'}/>
-       :<select value={form[field.key]??''} disabled={!diagnosed||completed} onChange={e=>change(field.key,e.target.value)}>
-        {field.options?.map(([value,label])=><option key={value||'empty'} value={value}>{label}</option>)}
-       </select>}</label>)}</div>
+     <div className="cw-rescue-fields">{content.fields.map(field=><CaseRescueControl
+      key={field.key} caseId={caseId} field={field} value={form[field.key]??''}
+      disabled={!diagnosed||completed} onChange={value=>change(field.key,value)}/>)}</div>
      {diagnosed&&!completed&&<button className="nr-action" type="button" disabled={!filled} onClick={runVerification}>RUN FULL ENGINEERING TEST SUITE</button>}
      {tested&&stillTested&&<div className="nr-report" aria-label="Simulated independent engineering test output">
       <strong>SIMULATED TEST ARTIFACT / {tested.result.artifactId}</strong>
