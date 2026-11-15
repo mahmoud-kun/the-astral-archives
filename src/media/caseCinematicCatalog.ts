@@ -1,4 +1,4 @@
-import {CINEMATICS,type CinematicId} from './cinematicManifest.ts'
+import {CINEMATICS,CINEMATIC_LIVE_HOLDS,isLiveCinematicAllowed,type CinematicId} from './cinematicManifest.ts'
 import type {ArchiveCaseId} from '../archive/evidenceRecords.ts'
 
 /**
@@ -27,13 +27,13 @@ export function caseIntroCinematic(caseId:ArchiveCaseId):CinematicId{
  * Keep the original in the designer review lab, never emit in live story.
  */
 export const CASE_OUTCOME_REVIEW_HOLDS={
- AST:'Designer outcome displays 472 W verified; rescue engine requires 450 W (target <=460 W). Correct scene before release.',
+ AST:CINEMATIC_LIVE_HOLDS.case5Outcome,
 } as const
 
 export function verifiedCaseOutcomeCinematic(caseId:ArchiveCaseId):CinematicId|null{
  // This only selects a clip. Caller MUST independently prove verified rescue.
  // An unapproved clip must NEVER play as the canonical verified outcome.
- if(Object.prototype.hasOwnProperty.call(CASE_OUTCOME_REVIEW_HOLDS,caseId))return null
+ if(!isLiveCinematicAllowed(CASE_CINEMATIC_CATALOG[caseId].outcome))return null
  return CASE_CINEMATIC_CATALOG[caseId].outcome
 }
 export function evidenceContextCinematic(evidenceId:string):CinematicId|null{
