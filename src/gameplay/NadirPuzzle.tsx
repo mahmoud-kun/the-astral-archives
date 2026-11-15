@@ -5,6 +5,7 @@ import { findEvidence } from '../archive/evidenceRecords'
 import { hintNadir, inspectNadir, NADIR_CHALLENGES, solveNadir, type NadirAnswer, type NadirRecord } from './nadirEngine'
 import { updateArchive, updateNadir, useArchiveSave, useNadirSave } from './gameSave'
 import EvidenceMachine from './EvidenceMachine'
+import { playGameSound } from '../audio/gameAudio'
 import './nadirPuzzle.css'
 
 function TrajectorySketch({ corrected }: {corrected:boolean}) {
@@ -83,10 +84,12 @@ export default function NadirPuzzle({id,onClose}:{id:NadirRecord;onClose:()=>voi
   updateNadir(()=>result.next)
   setSubmitted(true)
   setFeedback(result.reason)
+  playGameSound(result.ok?'terminal':'error')
  }
  function collect(){
   if(!solved||collected)return
   updateArchive(state=>discoverEvidence(state,id))
+  playGameSound('evidence')
   setFeedback('Evidence stored in UNFILED. Decide which mission dossier it belongs to.')
  }
  function change(key:string,value:string){
@@ -120,7 +123,7 @@ export default function NadirPuzzle({id,onClose}:{id:NadirRecord;onClose:()=>voi
   <section className="np-dialog" role="dialog" aria-modal="true" aria-labelledby="np-title">
    <header className="np-head">
     <div><small>THE ASTRAL ARCHIVES / INVESTIGATIVE ANALYZER</small><strong id="np-title">{id} · {record?.title??'Record'}</strong></div>
-    <button ref={closeButtonRef} onClick={onClose} aria-label="Close evidence analyzer">BACK TO ROOM ×</button>
+    <button ref={closeButtonRef} data-sfx="panelClose" onClick={onClose} aria-label="Close evidence analyzer">BACK TO ROOM ×</button>
    </header>
    <div ref={workScrollRef} className={'np-scroll np-step-'+mobileStep}>
     <div className="np-meta"><span>{challenge.discipline}</span><span>FICTIONAL SIMULATION</span></div>
@@ -212,9 +215,9 @@ export default function NadirPuzzle({id,onClose}:{id:NadirRecord;onClose:()=>voi
    <footer className={'np-foot'+(!solved||collected?' np-foot-nonaction':'')+(mobileStep==='analyze'?' np-step-analyze':'')}>
     <span>{collected?'COLLECTED · UNFILED OR FILED':solved?'READY FOR COLLECTION':'ANALYSIS IN PROGRESS'}</span>
     {!solved&&<button type="submit" form={'np-analyze-'+id} disabled={cannotVerify} className="np-primary np-mobile-verify">VERIFY ANALYSIS</button>}
-    {solved&&!collected&&<button className="np-primary" onClick={collect}>COLLECT EVIDENCE · {id}</button>}
+    {solved&&!collected&&<button className="np-primary" data-sfx="none" onClick={collect}>COLLECT EVIDENCE · {id}</button>}
     {collected&&<strong>✓ EVIDENCE COLLECTED</strong>}
-    <button className="np-secondary" onClick={onClose}>RETURN TO STATION</button>
+    <button className="np-secondary" data-sfx="panelClose" onClick={onClose}>RETURN TO STATION</button>
    </footer>
   </section>
  </div>, document.body)
