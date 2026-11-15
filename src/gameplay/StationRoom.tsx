@@ -11,6 +11,7 @@ import { findEvidence } from '../archive/evidenceRecords'
 import { playGameSound } from '../audio/gameAudio'
 import NadirPuzzle from './NadirPuzzle'
 import EvidenceGlyph from './EvidenceGlyph'
+import {hasRecordsAtObject} from './evidencePlacement'
 import { useArchiveSave, useNadirSave } from './gameSave'
 import { NADIR_ROOM, stationLabel, stationRoute, type NadirRecord, type StationId } from './nadirEngine'
 import './stationRoom.css'
@@ -18,9 +19,6 @@ import './stationRoom.css'
 const CaseStationDesk = lazy(() => import('./CaseStationDesk'))
 
 type OtherStation = Exclude<StationId, 'investigation'>
-const SOURCE_DESK_OBJECT: Record<OtherStation,string> = {
-  archive:'archive_shelving', signal:'telemetry_console_left', recordings:'audio_analysis_terminal',
-}
 type RoomManifest = typeof archiveManifest | typeof signalManifest | typeof recordingsManifest
 type Scene = {
   manifest: RoomManifest
@@ -42,7 +40,7 @@ const ROOM_SCENES: Record<OtherStation, Scene> = {
     },
     context: {
       telemetry_console_left: 'The left telemetry station provides recovered signal records for the other four missions. Open and collect a record directly; The Nadir files remain at their original instruments.',
-      telemetry_console_right: 'The right telemetry station is a supporting instrument. No separate recovered evidence recording is assigned to this workstation.',
+      telemetry_console_right: 'The right telemetry station contains a separate recovered signal source. Open its record index to inspect documents from investigated missions.',
     },
   },
   archive: {
@@ -68,8 +66,8 @@ const ROOM_SCENES: Record<OtherStation, Scene> = {
     },
     context: {
       audio_analysis_terminal: 'The audio analysis terminal holds recovered records from four missions. Press a record to listen to available voice clips or watch related footage and collect its evidence sheet.',
-      video_playback_console: 'Playback controls are represented in the source artwork. The authored Nadir chronology evidence is available on the main video display; no independent clip is connected to this console.',
-      headphones_dock: 'The headphones are an inspectable art prop. No independent recording is attached to this object.',
+      video_playback_console: 'The playback console contains separate recovered recordings and chronology fragments from the other missions.',
+      headphones_dock: 'The headphones are a supporting playback device. Mission recordings can be found at the audio analysis terminal and video console.',
     },
   },
 }
@@ -84,7 +82,7 @@ export default function StationRoom({ station }: { station: OtherStation }) {
   const [hovered, setHovered] = useState<string | null>(null)
   const [selected, setSelected] = useState<NadirRecord | null>(null)
   const [inspecting, setInspecting] = useState<string | null>(null)
-  const [sourceDeskOpen, setSourceDeskOpen] = useState(false)
+  const [sourceDeskObject, setSourceDeskObject] = useState<string|null>(null)
   const [plateSrc, setPlateSrc] = useState(scene.asset)
   const archive = useArchiveSave()
   const research = useNadirSave()
@@ -92,7 +90,7 @@ export default function StationRoom({ station }: { station: OtherStation }) {
   useEffect(() => {
     setSelected(null)
     setInspecting(null)
-    setSourceDeskOpen(false)
+    setSourceDeskObject(null)
     setHovered(null)
     setPlateSrc(scene.asset)
     maskCache.current = {}
@@ -213,7 +211,7 @@ export default function StationRoom({ station }: { station: OtherStation }) {
             data-sfx="scanner"
             className={id ? 'sr-hotspot sr-anchor-target' : 'sr-prop-target sr-anchor-target'}
             title={object.interaction.label}
-            aria-label={object.interaction.label + (record ? ': ' + record.title : object.id===SOURCE_DESK_OBJECT[station] ? ': mission source index' : ': equipment inspection only') +
+            aria-label={object.interaction.label + (record ? ': ' + record.title : hasRecordsAtObject(station,object.id) ? ': recovered case sources' : ': equipment inspection only') +
               (collected ? ', evidence collected' : solved ? ', analyzed' : '')}
             onFocus={() => setHovered(object.id)}
             onBlur={() => setHovered(null)}
@@ -253,13 +251,13 @@ export default function StationRoom({ station }: { station: OtherStation }) {
     {inspectedObject && <div className="sr-inspection-shade" role="presentation">
       <section className="sr-inspection-note" role="dialog" aria-modal="true"
         aria-label={inspectedObject.interaction.label}>
-        <small>STATION EQUIPMENT / NO SEPARATE EVIDENCE</small>
+        <small>STATION EQUIPMENT / {hasRecordsAtObject(station,inspectedObject.id)?'RECOVERED RECORDS AVAILABLE':'CONTEXT ONLY'}</small>
         <h2>{inspectedObject.interaction.label}</h2>
-        <p>{scene.context[inspectedObject.id] ?? 'No additional verified case record is connected to this equipment.'}</p>
+        <p>{scene.context[inspectedObject.id] ?? (hasRecordsAtObject(station,inspectedObject.id) ? 'This workstation holds recovered source records. Open its files to inspect them.' : 'This equipment provides mission context; no independent source sheet is attached.')}</p>
         <div className="sr-inspection-actions">
-          {inspectedObject.id === SOURCE_DESK_OBJECT[station] &&
-            <button onClick={() => {setInspecting(null);setSourceDeskOpen(true)}}>
-              OPEN MISSION SOURCE INDEX
+          {hasRecordsAtObject(station,inspectedObject.id) &&
+            <button onClick={() => {setInspecting(null);setSourceDeskObject(inspectedObject.id)}}>
+              OPEN RECOVERED FILES
             </button>}
           {inspectedObject.id === 'archive_shelving' &&
             <button onClick={() => navigateGame('/?folder-lab=1&return=archive')}>
@@ -271,8 +269,8 @@ export default function StationRoom({ station }: { station: OtherStation }) {
     </div>}
     {selected && NADIR_ROOM[selected] === station &&
       <NadirPuzzle key={selected} id={selected} onClose={() => setSelected(null)}/>}
-    {sourceDeskOpen && <Suspense fallback={<div className="aa-route-loading" role="status">ACCESSING MISSION SOURCES…</div>}>
-      <CaseStationDesk station={station} onClose={()=>setSourceDeskOpen(false)}/>
+    {sourceDeskObject && <Suspense fallback={<div className="aa-route-loading" role="status">ACCESSING MISSION SOURCES…</div>}>
+      <CaseStationDesk station={station} sourceObjectId={sourceDeskObject} onClose={()=>setSourceDeskObject(null)}/>
     </Suspense>}
   </main>
 }
