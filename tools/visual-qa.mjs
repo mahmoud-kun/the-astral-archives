@@ -18,8 +18,8 @@ async function check(viewport, route, label, action){
  const faults=[]
  const responses=[]
  page.on('pageerror', e=>faults.push('pageerror: '+e.message))
- page.on('console',m=>{if(m.type()==='error')faults.push('console: '+m.text())})
- page.on('response',r=>{const u=new URL(r.url());if(/\.(png|webp|jpe?g|svg)$/i.test(u.pathname))responses.push({path:u.pathname,bytes:Number(r.headers()['content-length']||0),status:r.status()})})
+ page.on('console',m=>{if(m.type()==='error')faults.push('console: '+m.text()+' @ '+m.location().url)})
+ page.on('response',r=>{const u=new URL(r.url());if(r.status()>=400)console.log('[VISUAL-QA-HTTP] '+label+' '+r.status()+' '+u.origin+u.pathname);if(/\.(png|webp|jpe?g|svg)$/i.test(u.pathname))responses.push({path:u.pathname,bytes:Number(r.headers()['content-length']||0),status:r.status()})})
  try{
    await page.goto(origin+route,{waitUntil:'networkidle',timeout:45000})
    await page.waitForTimeout(400)
