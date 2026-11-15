@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState, type FormEvent, type KeyboardEvent } from 'react'
 import { createPortal } from 'react-dom'
+import EvidenceMediaPanel from '../integration/EvidenceMediaPanel'
 import { discoverEvidence } from '../archive/archiveState'
 import { findEvidence } from '../archive/evidenceRecords'
 import { playGameSound } from '../audio/gameAudio'
@@ -93,6 +94,7 @@ export default function CasePuzzle({id,onClose}:{id:OtherRecordId;onClose:()=>vo
       <h3>{task.optional?'MEMORY FRAGMENT':'CASE INSTRUMENT'}</h3>
       <p className="cw-scene">{task.scene}</p>
       <CaseEvidenceExhibit id={id} answer={answer}/>
+       <EvidenceMediaPanel evidenceId={id}/>
       <details className="np-source-drawer" onToggle={event=>{if(event.currentTarget.open)setSourceInspected(true)}}>
        <summary><span>OPEN RECORD FRAGMENTS</span><small>{task.fragments.length} INSPECTABLE SIGNALS</small></summary>
        <div className="np-source-drawer-body">{task.fragments.map((text,i)=>
