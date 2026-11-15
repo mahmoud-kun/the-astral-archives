@@ -174,7 +174,12 @@ export default function StationRoom({ station }: { station: OtherStation }) {
         decoding="async" onError={() => {
           if (plateSrc !== scene.manifest.sourceArt) setPlateSrc(scene.manifest.sourceArt)
         }}/>
-      {scene.manifest.objects.map(object => {
+      {[...scene.manifest.objects].sort((a, b) => {
+        // Preserve the original evidence-first DOM order for keyboard and QA.
+        const aEvidence = scene.evidence[a.id] ? 0 : 1
+        const bEvidence = scene.evidence[b.id] ? 0 : 1
+        return aEvidence - bEvidence || a.zIndex - b.zIndex
+      }).map(object => {
         const id = scene.evidence[object.id]
         const record = id ? findEvidence(id) : undefined
         const collected = id ? archive.discovered.includes(id) : false
@@ -187,29 +192,29 @@ export default function StationRoom({ station }: { station: OtherStation }) {
           height: height / scene.manifest.coordinateSystem.height * 100 + '%',
           zIndex: object.zIndex,
         }
-        return <button type="button" key={object.id} style={style}
-          data-object-id={object.id}
-          data-evidence-id={id} data-sfx="scanner"
-          className={'sr-hotspot sr-layer-target' +
-            (hovered === object.id ? ' sr-lit' : '') +
-            (collected ? ' sr-collected' : '')}
-          title={object.interaction.label}
-          aria-label={object.interaction.label + (record ? ': ' + record.title : ': equipment inspection only') +
-            (collected ? ', evidence collected' : solved ? ', analyzed' : '')}
-          onFocus={() => setHovered(object.id)}
-          onBlur={() => setHovered(null)}
-          onClick={event => { if (event.detail === 0) openObject(object.id) }}>
+        return <div key={object.id} style={style} data-object-id={object.id}
+          className={'sr-layer-object' + (hovered === object.id ? ' sr-lit' : '') +
+            (collected ? ' sr-collected' : '')}>
           {'screen' in object.assets && typeof object.assets.screen === 'string' &&
             <img className="sr-layer-screen" src={object.assets.screen} alt="" draggable={false}/>}
           <img className="sr-layer-glow" src={object.assets.glow} alt="" draggable={false}/>
-          {id && <span className="sr-beacon">
-            <EvidenceGlyph kind={record?.kind ?? 'document'}/>
-          </span>}
+          <button type="button" data-object-id={object.id} data-evidence-id={id}
+            data-sfx="scanner"
+            className={id ? 'sr-hotspot sr-anchor-target' : 'sr-prop-target sr-anchor-target'}
+            title={object.interaction.label}
+            aria-label={object.interaction.label + (record ? ': ' + record.title : ': equipment inspection only') +
+              (collected ? ', evidence collected' : solved ? ', analyzed' : '')}
+            onFocus={() => setHovered(object.id)}
+            onBlur={() => setHovered(null)}
+            onClick={event => { event.stopPropagation(); openObject(object.id) }}>
+            {id ? <span className="sr-beacon"><EvidenceGlyph kind={record?.kind ?? 'document'}/></span> :
+              <span className="sr-prop-mark" aria-hidden="true">+</span>}
+          </button>
           <span className="sr-hotspot-label">
             {record?.title ?? object.interaction.label}
             {collected ? ' · COLLECTED' : solved ? ' · READY TO COLLECT' : ''}
           </span>
-        </button>
+        </div>
       })}
     </section>
     <header className="sr-head">
