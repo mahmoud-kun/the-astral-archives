@@ -16,10 +16,10 @@ const TOURS:Record<TourKey,readonly {title:string;copy:string}[]>={
  archive:[{title:'ARCHIVE ROOM',copy:'Open the archive shelves and records. Tap a file, read its story and collect it directly. Use Mission Folders to organize the clues.'}],
  signal:[{title:'SIGNAL ROOM',copy:'The signal displays contain recovered mission records. Inspect and collect any evidence you find; no calculations or technical tests are needed.'}],
  recordings:[{title:'RECORDINGS ROOM',copy:'Explore recovered communications. Open a record to play its video or voice recording when available, then collect the sheet. Audio and video controls are optional.'}],
- 'past-manufacturing':[{title:'YOU HAVE RETURNED TO THE PAST',copy:'You are seeing the mission before its fictional failure. The clues you collected reveal what went wrong. Explore these past rooms and enter RESCUE when you are ready to change its future.'}],
- 'past-mission_target':[{title:'MISSION TARGET · PAST',copy:'Explore the destination, mission goals and design constraints. Your evidence is already saved; you do not need to solve anything here.'}],
- 'past-data_analysis':[{title:'DATA ANALYSIS · PAST',copy:'These are the mission records before the outcome changed. Explore the room and continue toward Rescue when you are ready.'}],
- 'past-resources_review':[{title:'RESOURCES REVIEW · PAST',copy:'Review materials, power and logistics in the mission timeline. When ready, enter the Rescue story and see the alternate outcome.'}],
+ 'past-manufacturing':[{title:'YOU HAVE RETURNED TO THE PAST',copy:'You are in the past, before the mission failed. Operate actual systems in all four rooms. Choose changes, observe the impact, and revise them freely. Stabilize all four systems to unlock the final Rescue outcome.'}],
+ 'past-mission_target':[{title:'MISSION TARGET · PAST',copy:'Adjust the mission objectives and constraints. Real engineering requires trade-offs: preserve core goals while repairing the design.'}],
+ 'past-data_analysis':[{title:'DATA ANALYSIS · PAST',copy:'Operate the simulator, retest changed settings, and inspect their consequences. There are no quizzes or numerical answers.'}],
+ 'past-resources_review':[{title:'RESOURCES REVIEW · PAST',copy:'Revise resources, power, procurement or verification. All four past systems must be stable before you finalize the alternate Rescue.'}],
 }
 function read():TourSave{
  try{
