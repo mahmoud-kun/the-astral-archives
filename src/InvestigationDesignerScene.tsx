@@ -6,6 +6,7 @@ import NadirPuzzle from './gameplay/NadirPuzzle'
 import { stationRoute, type NadirRecord } from './gameplay/nadirEngine'
 import { useArchiveSave } from './gameplay/gameSave'
 import { countRequiredEvidence, rescueIsReady } from './archive/archiveState'
+import { enterRescueThroughPortal } from './integration/gameMediaActions'
 import './investigationDesignerScene.css'
 
 const CaseStationDesk = lazy(() => import('./gameplay/CaseStationDesk'))
@@ -152,7 +153,7 @@ export default function InvestigationDesignerScene() {
           <p className="idr-lead">Understand the mission before changing its future.</p>
           <p>For Nadir, filing all six required records in the correct mission folder unlocks the rescue workbench. The causal review and engineering test are solved inside the Rescue Mission.</p>
           <div className="idr-interface-message"><span>CASE NAD / ACCESS STATUS</span><strong>{nadirReady?'RESCUE UNLOCKED':'RESCUE LOCKED · '+nadirRequired+'/6 REQUIRED'}</strong><small>Wrongly filed evidence is retained but does not increase the mission progress. Move records freely between folders.</small></div>
-          {nadirReady?<button className="idr-primary" onClick={()=>navigateGame('/?rescue=NAD')}>ENTER NADIR RESCUE <SmallIcon type="arrow"/></button>
+          {nadirReady?<button className="idr-primary" onClick={()=>enterRescueThroughPortal('NAD')}>ENTER NADIR RESCUE <SmallIcon type="arrow"/></button>
             :<button className="idr-primary" onClick={openCaseLibrary}>REVIEW MISSION FOLDERS <SmallIcon type="arrow"/></button>}
         </div>}
 
