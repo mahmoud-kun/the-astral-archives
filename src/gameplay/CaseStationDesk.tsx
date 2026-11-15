@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState, type KeyboardEvent as ReactKeyboardEvent } from 'react'
 import { createPortal } from 'react-dom'
 import { CASE_META, EVIDENCE_RECORDS, type ArchiveRoom } from '../archive/evidenceRecords'
 import { countRequiredEvidence } from '../archive/archiveState'
@@ -20,6 +20,7 @@ export default function CaseStationDesk({station,onClose,initialCase='KES'}:{
  const progress=useOtherProgress()
  const archive=useArchiveSave()
  const closer=useRef<HTMLButtonElement>(null)
+ const deskRef=useRef<HTMLElement>(null)
  const onCloseRef=useRef(onClose)
  onCloseRef.current=onClose
  useEffect(()=>{
@@ -31,6 +32,15 @@ export default function CaseStationDesk({station,onClose,initialCase='KES'}:{
   window.addEventListener('keydown',escape)
   return ()=>{window.removeEventListener('keydown',escape);old?.focus()}
  },[selected])
+ function trapTab(event:ReactKeyboardEvent<HTMLElement>){
+  if(selected||event.key!=='Tab')return
+  const focusables=[...(deskRef.current?.querySelectorAll<HTMLElement>('button:not(:disabled), input:not(:disabled), select:not(:disabled), a[href]')??[])]
+   .filter(el=>el.getClientRects().length>0)
+  if(!focusables.length)return
+  const first=focusables[0],last=focusables[focusables.length-1]
+  if(event.shiftKey&&document.activeElement===first){event.preventDefault();last.focus()}
+  else if(!event.shiftKey&&document.activeElement===last){event.preventDefault();first.focus()}
+ }
  const room=(station[0].toUpperCase()+station.slice(1)) as ArchiveRoom
  const items=EVIDENCE_RECORDS.filter(record=>
   record.room===room&&record.caseId===caseId).sort((a,b)=>Number(b.required)-Number(a.required))
@@ -39,7 +49,7 @@ export default function CaseStationDesk({station,onClose,initialCase='KES'}:{
   onClose()
  }
  return createPortal(<div className="cw-desk-shade" role="presentation">
-  <section className="cw-desk" role="dialog" aria-modal="true" aria-labelledby="cw-desk-heading">
+  <section className="cw-desk" ref={deskRef} role="dialog" aria-modal="true" aria-labelledby="cw-desk-heading" onKeyDown={trapTab}>
    <header className="cw-desk-head">
     <div><small>THE ASTRAL ARCHIVES / PHYSICAL STATION TERMINAL / {room.toUpperCase()}</small>
      <h2 id="cw-desk-heading">SOURCE INDEX · {CASE_META[caseId].name.toUpperCase()}</h2></div>
