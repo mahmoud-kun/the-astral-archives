@@ -75,6 +75,14 @@ export default function AudioReviewLab(){
     </p>
    </section>
   </div>
+  <section className="al-list" aria-label="Original game success cue variant" style={{margin:'0 auto 18px',maxWidth:'900px'}}>
+   <header><h2>NEW ORIGINAL · VERIFIED RESCUE</h2><small>1 WAV · ORIGINAL SYNTHESIS · 60 KB</small></header>
+   <div className="al-variant-cue">
+    <div><strong>Rescue Complete — Final Confirmation</strong><small>Distinct from Rescue Unlocked · Only after authorized engineering verification · 1.36 s</small></div>
+    <button type="button" data-sfx="none" disabled={!settings.effects||settings.volume===0}
+     onClick={()=>{playGameSound('rescueComplete');setLastSound('rescueComplete')}} aria-label="Preview final rescue completion sound">▶ PLAY</button>
+   </div>
+  </section>
   <section className="al-list" aria-label="Designer cinematic review" style={{margin:'18px auto',maxWidth:'900px'}}>
    <header><h2>DESIGNER CINEMATICS</h2><small>17 MP4 · SOURCE-VERIFIED IN GITHUB · INTEGRATION PENDING</small></header>
    {Object.entries(CINEMATICS).map(([id,clip])=><div className="al-cinema-cue" key={id}>
