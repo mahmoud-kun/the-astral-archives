@@ -1,6 +1,6 @@
 {
-  "run_on": "2026-11-14T20:34:32.011Z",
-  "screenshots": 33,
+  "run_on": "2026-11-15T01:49:59.059Z",
+  "screenshots": 37,
   "console_errors": 0,
   "broken_images": 0,
   "clipped_controls": 0,
@@ -294,6 +294,42 @@
       },
       "label": "folder",
       "bytes": 0
+    },
+    {
+      "route": "/?station=signal",
+      "viewport": {
+        "width": 915,
+        "height": 412
+      },
+      "label": "nadir-analysis",
+      "bytes": 143120
+    },
+    {
+      "route": "/?station=signal",
+      "viewport": {
+        "width": 800,
+        "height": 360
+      },
+      "label": "nadir-analysis",
+      "bytes": 143120
+    },
+    {
+      "route": "/?station=signal",
+      "viewport": {
+        "width": 740,
+        "height": 360
+      },
+      "label": "nadir-analysis",
+      "bytes": 143120
+    },
+    {
+      "route": "/?station=signal",
+      "viewport": {
+        "width": 915,
+        "height": 412
+      },
+      "label": "nadir-collect-and-file",
+      "bytes": 143120
     },
     {
       "route": "/",
