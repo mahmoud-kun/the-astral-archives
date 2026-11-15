@@ -203,3 +203,19 @@ The user uploaded new files into NASA Drive while existing first-four video bina
 - The validated Git tree has all **13/13 source-identical video/voice blobs** (12 videos + 1 MP3) and the temporary one-shot import workflow has been removed.
 
 **Upload: COMPLETE & verified.** Still **not** evidence of final movie playback at live game triggers, human-approved captions/license, physical phone listening or Main review/merge.
+
+
+## 10. Complete cases media delivery — Oriole & Asterion (2026-11-15)
+
+**Updated official case order: KES → NAD → LUM → ORI → AST.** The previously missing five last-case videos are now physically uploaded as source-exact binaries to the authorized working branch. Full source metadata, SHA-256 hashes, target paths and scientific constraints:
+
+**[Final Cases ORI/AST Video Handoff](../../audio/FINAL_CASES_ORI_AST_VIDEO_HANDOFF_2026-11-15.md)**.
+
+- **Case 04 Oriole:** `case4Intro` (Briefing), `case4TestingEvidence` (existing **ORI-05** missed landing test, NOT a new evidence record), `case4Outcome` (after verified **ORI** rescue success).
+- **Case 05 Asterion:** `case5Intro` (Briefing), `case5Outcome` (**SCIENTIFIC HOLD**: designer shows `472 W VERIFIED`, whereas authentic `src/gameplay/caseRescueEngine.ts` requires independent **450 W** simulated replay meeting target `<=460 W` and original 480 W cap; preview-only until video corrected).
+- All **five** new 1920×1080 H.264/AAC video source files fully decoded 5/5 PASS, with hash/size checked; source-exact GitHub upload action [#43684530377](https://github.com/mahmoud-kun/the-astral-archives/actions/runs/43684530377) **SUCCESS**.
+- Source-exact video Commit [`b6b88be`](https://github.com/mahmoud-kun/the-astral-archives/commit/b6b88be7c9c7a430f1e571cc97a320f3a28dfae6) verified by independent GitHub recursive tree: **5/5 new exact blob SHA-1+size**, **17 total videos** and **1 existing KES-05 MP3** in repo. Total video **96,202,124 bytes**; voice **314,523**.
+- Added `src/media/caseCinematicCatalog.ts` and its tests: stable typed per-case intro/outcome and per-existing-evidence video association. The safe `verifiedCaseOutcomeCinematic('AST')` returns `null` until scientific hold is resolved. Main still must own all actual story hooks and independently verify evidence and Rescue gates.
+- Source files and all legacy 19 SFX unchanged; no main merge. The temporary GitHub Actions uploader should be deleted after verification. Need non-endorsement/logo review, subtitles, and physical playback on mobile before release.
+
+**Updated Chat B status:** **ALL 17 DELIVERED MP4s + KES-05 VOICE PHYSICALLY PRESENT**, case mapping and preview prepared, scientific approval hold on one AST outcome; **Main root/event integration and final release/device QA remain pending**.
