@@ -7,6 +7,7 @@ import { installGameAudio } from './audio/gameAudio'
 import { isOtherCaseId } from './gameplay/caseContext'
 import {isPastRoomId,isPastCaseId} from './gameplay/pastTimeline'
 import CinematicOverlay from './media/CinematicOverlay'
+import RoomTutorial,{type TourKey} from './gameplay/RoomTutorial'
 import './styles.css'
 
 // Load each scene only when the player visits it. In particular, legacy
@@ -54,6 +55,7 @@ function AstralArchives() {
   const rescueCase = params.get('rescue')
   const nadirRescue = rescueCase === 'NAD'
   const otherCaseRescue = isOtherCaseId(rescueCase) ? rescueCase : null
+  const tutorialRoom:TourKey|null = isFixedRoom?'investigation':station?station:pastRoom&&pastCase?('past-'+pastRoom) as TourKey:null
 
   return <>
     <LandscapeGuard />
@@ -70,6 +72,7 @@ function AstralArchives() {
       isLegacyView ? <App /> : <HomeScreen />}
     {(isFixedRoom || station) && <EvidenceTray room={isFixedRoom ? 'investigation' : station!}/>}
     </Suspense>
+    <RoomTutorial roomKey={tutorialRoom}/>
     <CinematicOverlay />
   </>
 }
