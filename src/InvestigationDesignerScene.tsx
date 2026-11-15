@@ -37,6 +37,7 @@ export default function InvestigationDesignerScene() {
   const [showHint, setShowHint] = useState(false)
   const [puzzleId,setPuzzleId] = useState<NadirRecord|null>(null)
   const [caseSourceOpen,setCaseSourceOpen] = useState(false)
+  const [sourceObjectId,setSourceObjectId] = useState('center_terminal')
   const archive = useArchiveSave()
   const nadirCollected = countCaseCollectedEvidence(archive,'NAD')
   const nadirReady = rescueIsReady(archive,'NAD')
@@ -53,7 +54,8 @@ export default function InvestigationDesignerScene() {
   function openCaseLibrary() {
     navigateGame('/?folder-lab=1&return=investigation')
   }
-  function openCaseSources() {
+  function openCaseSources(objectId:'center_terminal'|'evidence_board') {
+    setSourceObjectId(objectId)
     setPanel(null)
     setCaseSourceOpen(true)
   }
@@ -120,7 +122,7 @@ export default function InvestigationDesignerScene() {
             <div><span>03</span><strong>RESCUE</strong><small>Collect any six of a mission’s eight evidence records, then travel into the past to follow its Rescue story.</small></div>
           </div>
           <button className="idr-primary" onClick={openCaseLibrary}>OPEN MISSION FILES <SmallIcon type="arrow"/></button>
-          <button className="idr-primary" onClick={openCaseSources}>OPEN CASE SOURCE INDEX <SmallIcon type="arrow"/></button>
+          <button className="idr-primary" onClick={()=>openCaseSources('center_terminal')}>OPEN RECOVERED TERMINAL FILES <SmallIcon type="arrow"/></button>
         </div>}
 
         {panel === 'evidence' && <div className="idr-single-view">
@@ -131,7 +133,7 @@ export default function InvestigationDesignerScene() {
           <div className="idr-interface-message"><span>OPEN INVESTIGATION / CASE NADIR</span><strong>NAV-042 CLOSED WITHOUT A DOCUMENTED RERUN</strong><small>Read the recovered ticket and collect it. You do not have to solve a question.</small></div>
           <button className="idr-primary" onClick={()=>{setPanel(null);setPuzzleId('NAD-06')}}>EXAMINE NAV-042 · NAD-06 <SmallIcon type="arrow"/></button>
           <button className="idr-primary" onClick={openCaseLibrary}>VIEW MISSION FILES <SmallIcon type="arrow"/></button>
-          <button className="idr-primary" onClick={openCaseSources}>INSPECT OTHER CASE SOURCES <SmallIcon type="arrow"/></button>
+          <button className="idr-primary" onClick={()=>openCaseSources('evidence_board')}>INSPECT OTHER RECOVERED BOARD FILES <SmallIcon type="arrow"/></button>
         </div>}
 
         {panel === 'door' && <div className="idr-single-view">
@@ -170,7 +172,7 @@ export default function InvestigationDesignerScene() {
     </div>}
     {puzzleId && <NadirPuzzle id={puzzleId} onClose={()=>setPuzzleId(null)}/>}
     {caseSourceOpen && <Suspense fallback={<div className="aa-route-loading" role="status">ACCESSING CASE SOURCES…</div>}>
-      <CaseStationDesk station="investigation" onClose={()=>setCaseSourceOpen(false)}/>
+      <CaseStationDesk station="investigation" sourceObjectId={sourceObjectId} onClose={()=>setCaseSourceOpen(false)}/>
     </Suspense>}
   </main>
 }
