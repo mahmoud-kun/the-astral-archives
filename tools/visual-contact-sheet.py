@@ -52,6 +52,13 @@ sheet("mobile-review", [
  ("RETURN TO SIGNAL / 915×412","nadir-collect-and-file-915x412.png"),
  ("FOLDERS / 915×412","folder-915x412.png"),
 ], (790,357))
+# Exact fullscreen viewport and left-side inventory placement comparisons.
+sheet("fullscreen-layout-review", [
+ ("FULLSCREEN HOME / 1650×927","home-fullscreen-1650x927.png"),
+ ("FULLSCREEN HOME / 1920×1080","home-fullscreen-1920x1080.png"),
+ ("INVENTORY LEFT / DESKTOP 1366×768","inventory-left-1366x768.png"),
+ ("INVENTORY LEFT / MOBILE 915×412","inventory-left-915x412.png"),
+], (880,495))
 report=json.loads((SRC/"report.json").read_text())
 summary={
  "run_on":report["started"],
