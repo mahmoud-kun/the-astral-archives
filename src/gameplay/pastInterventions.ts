@@ -1,5 +1,6 @@
 import type {ArchiveCaseId} from '../archive/evidenceRecords'
 import {PAST_STAGES,type PastRoomId} from './pastTimeline'
+import {ALTERNATE_PLANS} from './pastInterventionAlternatives'
 
 /** Fictional engineering interventions, learned from the cases, not inventory items.
  * No quiz, numerical input, or dependence on any particular evidence document.
@@ -10,7 +11,7 @@ export type InterventionOption={
 }
 export type InterventionStage={
  system:string; objectId:string; condition:string; tradeoff:string;
- options:readonly [InterventionOption,InterventionOption]
+ options:readonly InterventionOption[]
 }
 export const INTERVENTIONS:Record<ArchiveCaseId,Record<PastRoomId,InterventionStage>>={
  KES:{
@@ -165,15 +166,37 @@ export const INTERVENTIONS:Record<ArchiveCaseId,Record<PastRoomId,InterventionSt
  },
 }
 export type InterventionChoices=Partial<Record<PastRoomId,string>>
+export type PlanIssue={room:PastRoomId;message:string}
 export function interventionFor(caseId:ArchiveCaseId,room:PastRoomId):InterventionStage{
- return INTERVENTIONS[caseId][room]
+ const base=INTERVENTIONS[caseId][room]
+ return {...base,options:[...base.options,...ALTERNATE_PLANS[caseId][room]]}
 }
 export function isStageStable(caseId:ArchiveCaseId,room:PastRoomId,optionId:string|undefined):boolean{
- const found=INTERVENTIONS[caseId][room].options.find(x=>x.id===optionId)
+ const found=interventionFor(caseId,room).options.find(x=>x.id===optionId)
  return found?.restores===true
 }
+export function countConfiguredStages(choices:InterventionChoices):number{
+ return PAST_STAGES.filter(stage=>typeof choices[stage.id]==='string').length
+}
+/** Assess the entire mission instead of marking choices right/wrong as they are
+ * clicked. Two or more approaches can work in each system. Plans can also be
+ * incompatible across rooms, e.g., documenting the wrong conversion owner.
+ */
+export function evaluateRepairPlan(caseId:ArchiveCaseId,choices:InterventionChoices):PlanIssue[]{
+ const issues:PlanIssue[]=[]
+ for(const stage of PAST_STAGES){
+  if(!choices[stage.id])issues.push({room:stage.id,message:'This system has not been configured yet.'})
+  else if(!isStageStable(caseId,stage.id,choices[stage.id])){
+   issues.push({room:stage.id,message:'The current configuration still leaves a documented engineering risk unresolved.'})
+  }
+ }
+ if(caseId==='NAD'&&choices.manufacturing==='receiver'&&choices.mission_target==='document'){
+  issues.push({room:'mission_target',message:'The contract assigns conversion to the producer, but the installed adapter converts at the receiver. Align ownership and schema before release.'})
+ }
+ return issues
+}
 export function allStagesStable(caseId:ArchiveCaseId,choices:InterventionChoices):boolean{
- return PAST_STAGES.every(s=>isStageStable(caseId,s.id,choices[s.id]))
+ return evaluateRepairPlan(caseId,choices).length===0
 }
 export function stableStageCount(caseId:ArchiveCaseId,choices:InterventionChoices):number{
  return PAST_STAGES.filter(s=>isStageStable(caseId,s.id,choices[s.id])).length
