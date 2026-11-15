@@ -9,20 +9,20 @@
 
 | Stream | Owner | Start | Last handoff commit | Main verdict | P0 blocker |
 | --- | --- | --- | --- | --- | --- |
-| A — Case/Assets/Rooms | Specialist Chat A | NOT STARTED / unreported | — | PENDING | Layer clean plates and four past-landscape scenes need designer signoff |
-| B — Audio/Cinematics | Specialist Chat B | NOT STARTED / unreported | — | PENDING | Actual designer video inventory and device audition unverified |
-| C — Science/Puzzles | Specialist Chat C | NOT STARTED / unreported | — | PENDING | Four non-Nadir cases' real puzzle-to-rescue loops unconfirmed |
-| Main — Integration/QA | Main Chat | Docs initialized | — | NOT YET RELEASED | Final integration, full QA, presentation and demo outstanding |
+| A — Case/Assets/Rooms | Specialist Chat A | PARTIAL HANDOFF received | `5843ba14`, `5aa87974` | HOLD (Main integration incomplete) | New four-case source index not yet wired into supporting present-room props; clean plates/past landscape need designer approval |
+| B — Audio/Cinematics | Specialist Chat B | PARTIAL HANDOFF received | `98df1bc` plus media/code commits | HOLD (media bytes/root events incomplete) | 4 designer MP4 files are inventoried in Drive but not on GitHub; cinematic route/event and device audition pending |
+| C — Science/Puzzles | Specialist Chat C | SCOPED CODE COMPLETE | `a43ea2b` CI #85 | **ACCEPT in scope / Game HOLD** | 4 case modules implemented and scientifically audited; mounted gameplay and fresh full-case E2E are still pending |
+| Main — Integration/QA | Main Chat | Root integration in progress | `dc9b01a`, `29f17d6`, `34f4fdd`, `fece39b`, `5356089` | NOT YET RELEASED | Await independent new-screen browser QA and Chat A room terminal wiring; media/presentation still outstanding |
 
 ## Five-case truth / proof matrix
 
 | Case ID | Name | Registration in UI | Confirmed interactive puzzles | Confirmed playable Rescue | Science signoff | Main acceptance |
 | --- | --- | --- | --- | --- | --- | --- |
-| KES | Kestrel | yes | NOT VERIFIED | NOT VERIFIED | PENDING | HOLD |
+| KES | Kestrel | yes | 8 C-coded; Investigation source index mounted | Rescue route mounted; full normal-room path NOT VERIFIED | SCOPED C ACCEPT | HOLD |
 | NAD | Nadir | yes | Nadir vertical slice exists | Nadir rescue exists | PENDING INDEPENDENT AUDIT | HOLD |
-| LUM | Lumen | yes | NOT VERIFIED | NOT VERIFIED | PENDING | HOLD |
-| ORI | Oriole | yes | NOT VERIFIED | NOT VERIFIED | PENDING | HOLD |
-| AST | Asterion | yes | NOT VERIFIED | NOT VERIFIED | PENDING | HOLD |
+| LUM | Lumen | yes | 8 C-coded; Investigation source index mounted | Rescue route mounted; full normal-room path NOT VERIFIED | SCOPED C ACCEPT; optical tolerance open | HOLD |
+| ORI | Oriole | yes | 8 C-coded; Investigation source index mounted | Rescue route mounted; full normal-room path NOT VERIFIED | SCOPED C ACCEPT | HOLD |
+| AST | Asterion | yes | 8 C-coded; Investigation source index mounted | Rescue route mounted; full normal-room path NOT VERIFIED | SCOPED C ACCEPT; Phase B label corrected by Main | HOLD |
 
 **Proof requirement:** a case is PLAYABLE only if a clean save can navigate, inspect evidence, solve independent analysis, explicitly collect, move file, correctly unlock rescue, make engineering decisions, receive a case outcome and return — with no developer/debug bypass. Current case text/registry is not such proof.
 
@@ -31,6 +31,15 @@
 - [GitHub Visual QA run #46](https://github.com/mahmoud-kun/the-astral-archives/actions/runs/43671815584): completed SUCCESS; 44 screenshots / 0 browser-visible issues, on its checked commit. Does **not** certify later edits, actual mobile listening or completion of five cases.
 - [Codex assets handoff branch](https://github.com/mahmoud-kun/the-astral-archives/tree/experiment/remaining-rooms-layered-assets-v1-2026-11-14): seven layered packs and 28 interactive items exist. Clean background plates need designer cleanup; original sources preserved.
 - [Audio source documentation](../audio/AUDIO_SOURCES_AND_INTEGRATION_V1.md): 19 source cues, with device listening and final cinematic transitions still outstanding.
+
+## Main integration log — 2026-11-15
+
+- `dc9b01a` — `src/main.tsx`: four allowlisted Rescue workbenches; Nadir remains separate.
+- `29f17d6` — `src/archive/ArchiveFolderLab.tsx`: 6/6 rescue buttons, case preference, diagnosis within Rescue, `import.meta.env.DEV` production debug gate.
+- `34f4fdd` — `src/InvestigationDesignerScene.tsx`: secondary physical source index for the four cases while retaining Nadir and Mission Folders.
+- `fece39b`, `5356089` — Visual QA includes new Investigation source/puzzle, all four locked rescue routes and production debug guard, with separate case-integration screenshot contact sheet.
+- [Issue #2 Main coordination comment](https://github.com/mahmoud-kun/the-astral-archives/issues/2#issuecomment-6889445734): directed Chat A to connect three existing supporting room props without touching Main-owned files.
+- **Fresh integrated QA:** pending at this update. Earlier 61-test green CI at C SHA is not proof for Main's newly mounted routes. No five-case completed journey has been independently accepted yet.
 
 ## Main Chat review checkpoints
 
