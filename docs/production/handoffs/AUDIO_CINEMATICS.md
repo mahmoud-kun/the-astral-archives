@@ -221,3 +221,10 @@ The user uploaded new files into NASA Drive while existing first-four video bina
 - Source files and all legacy 19 SFX unchanged; no main merge. The temporary GitHub Actions uploader should be deleted after verification. Need non-endorsement/logo review, subtitles, and physical playback on mobile before release.
 
 **Updated Chat B status:** **ALL 17 DELIVERED MP4s + KES-05 VOICE PHYSICALLY PRESENT**, case mapping and preview prepared, scientific approval hold on one AST outcome; **Main root/event integration and final release/device QA remain pending**.
+
+
+### Final post-upload QA for ALL 17 cinematics — PASS
+
+[GitHub Actions run #43685165238](https://github.com/mahmoud-kun/the-astral-archives/actions/runs/43685165238) **SUCCESS** on `96b521acff9c4deef5b39ddb1d0798d12965a0b8` after final five MP4s were installed, all **17 exact source MP4 SHA256+size tests** included and the Asterion science hold was enforced centrally. `npm run test:audio`: **24/24 PASS** (including API/flow/overlay AST guard and five-case catalog). TypeScript and Vite production build **PASS**; all other unit suites **PASS**. Automated visual audit **52 screenshot scenarios / 0 broken / 0 clipped / 0 scenario errors / 0 console errors**. Media file SHA and size are verified; independent phone physical playback and actual gameplay trigger wiring are still not verified.
+
+Asterion release block is **code enforced**, not just documented: `CINEMATIC_LIVE_HOLDS.case5Outcome` rejects Main-origin requests at `requestCinematic`, `requestCinematicFlow`, and overlay event handling; Sound Lab alone can preview the original. Main must request a scientifically corrected designer scene showing the successful **450 W** independent replay meeting **<=460 W** target, or obtain an explicit canonical scientific revision, *before* release.
