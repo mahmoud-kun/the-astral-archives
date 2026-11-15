@@ -192,3 +192,14 @@ The user uploaded new files into NASA Drive while existing first-four video bina
 - **Post-push remote readback:** GitHub's recursive tree lists all **13/13 exact paths** with **13/13 Git Blob SHA-1 and byte lengths matching the original local source bytes**, total **73,742,154 bytes**. These are repository objects now, not just remote jobs, download links or staging ZIPs.
 - **No new case IDs/evidence/rescue progress introduced. No main merge.** Branch remains `experiment/room-case-library-layout-fix-2026-11-14`. The temporary upload workflow is intended for removal once verification/handoff is complete.
 - **Still pending:** Main trigger/scene wiring, story approval for Kestrel industrial visuals, verified subtitles and rights, post-upload application build and browser/device playback QA. Physical bytes on GitHub do **not** prove that all cinematic events are wired or rendered in the playable experience.
+
+### Final post-upload independent GitHub Actions QA — PASS
+
+[Visual QA workflow #43682463236](https://github.com/mahmoud-kun/the-astral-archives/actions/runs/43682463236) completed **SUCCESS** on the media-populated branch (`c39fbef52b99c41badcc20508cf1ef1cf854196c`):
+
+- `npm run test:audio` **19/19 PASS** including **all 12 physically committed MP4 exact SHA-256/size checks** and **physical KES-05 MP3 exact SHA-256/size check**.
+- All other unit suites **PASS**; TypeScript compile and Vite production build **PASS**.
+- Visual QA **52 screenshots**, **0 broken assets**, **0 clipped**, **0 scenario errors**, **0 console errors**.
+- The validated Git tree has all **13/13 source-identical video/voice blobs** (12 videos + 1 MP3) and the temporary one-shot import workflow has been removed.
+
+**Upload: COMPLETE & verified.** Still **not** evidence of final movie playback at live game triggers, human-approved captions/license, physical phone listening or Main review/merge.
