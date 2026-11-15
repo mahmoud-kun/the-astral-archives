@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { CASE_META, EVIDENCE_RECORDS } from '../archive/evidenceRecords'
 import { DIAGNOSIS_PROMPTS, countRequiredEvidence, diagnosisIsSupported, rescueIsReady, submitDiagnosis, updateDiagnosis, type CaseDiagnosis, type DiagnosticPart } from '../archive/archiveState'
 import { navigateGame } from '../gameNavigation'
+import { playGameSound } from '../audio/gameAudio'
 import { verifyRescuePlan } from './nadirEngine'
 import { updateArchive, updateNadir, useArchiveSave, useNadirSave } from './gameSave'
 import './nadirRescue.css'
@@ -29,7 +30,9 @@ export default function NadirRescue(){
  }
  function submitReview(){
   const next=updateArchive(s=>submitDiagnosis(updateDiagnosis(s,'NAD',draft),'NAD'))
-  setMessage(diagnosisIsSupported(next,'NAD')
+  const supported=diagnosisIsSupported(next,'NAD')
+  playGameSound(supported?'terminal':'error')
+  setMessage(supported
     ?'EVIDENCE CHAIN VERIFIED — Engineering reconstruction is now available.'
     :'INCONCLUSIVE REVIEW — At least one causal link is not supported by its cited record. Re-examine the evidence.')
  }
@@ -38,9 +41,11 @@ export default function NadirRescue(){
   const result=verifyRescuePlan(plan)
   setTestResults(result.report)
   if(result.passed){
+   playGameSound('rescue')
    updateNadir(s=>({...s,rescue:{submitted:true,rerunPassed:true}}))
    setMessage('SIMULATION ACCEPTED: the interface contract and both independent test cases now agree.')
   }else{
+   playGameSound('error')
    setMessage('REVIEW REJECTED: one or more engineering verification conditions failed. Inspect the report and rerun.')
   }
  }
