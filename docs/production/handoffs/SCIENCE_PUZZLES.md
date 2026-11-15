@@ -59,6 +59,12 @@ Per case, 8 authored records = **6 required + 2 optional**; 5 cases = **40**. Th
 - [Run #43674281572](https://github.com/mahmoud-kun/the-astral-archives/actions/runs/43674281572) on further audio/media changes was **IN PROGRESS** at this documentation update. Main must review latest HEAD and the final uncancelled full run, not reuse old screenshots as proof.
 - New physical-device QA, complete Nadir browser E2E, all-four remaining case rescues, 1366×768 / 915×412 per-case screenshot captures and actual designer media playback: **NOT VERIFIED by Chat C**.
 
+### Concurrent audio/media CI note (2026-11-15)
+
+- [Run #43674281572](https://github.com/mahmoud-kun/the-astral-archives/actions/runs/43674281572), commit `66730eadb`: **47/47 unit tests PASS, TypeScript BUILD FAIL** with `TS2345` at `src/media/CinematicOverlay.tsx:116` due to narrow inferred `duration` literal union. Chromium visual QA not executed on that run.
+- Chat B concurrently committed [6cb2a8a](https://github.com/mahmoud-kun/the-astral-archives/commit/6cb2a8a898b022dfb54c8dfe93377c9e991c8e53), making the duration state `useState<number>(clip.duration)`. Verified source is present on shared branch, **but succeeding full CI/visual QA had not yet been verified at this checkpoint**.
+- This correction was performed by the media owner, not Chat C. Keep science/test status separated from unrelated media integration compilation status and require Main to check the final release head.
+
 ## Blockers, exact requests, and reproduction
 
 **P0 / Main + Chat A — four case rescue loops absent.** `src/gameplay/StationRoom.tsx` has only NAD hotspots; `src/main.tsx` routes only `?rescue=NAD`; `src/archive/ArchiveFolderLab.tsx` shows “Future mission: rescue execution is not yet integrated” for KES/LUM/ORI/AST. No one should convert six-file presence or folder READY status into a claim of playable Rescue. Need case-specific room hotspot puzzle interactions, simulation validators, actual rescue routes, outcomes, return and automated E2E proof. **Main owns root routing; Chat A owns station room and evidence IDs; coordinate written contracts, do not rewrite these paths from Chat C.**
