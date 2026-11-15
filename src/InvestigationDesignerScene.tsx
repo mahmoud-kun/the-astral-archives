@@ -43,7 +43,7 @@ export default function InvestigationDesignerScene() {
 
   useEffect(() => {
     const close = (event: KeyboardEvent) => {
-      if (event.key !== 'Escape') return
+      if (event.key !== 'Escape' || document.querySelector('.cm-backdrop')) return
       if (panel) setPanel(null)
     }
     window.addEventListener('keydown', close)
