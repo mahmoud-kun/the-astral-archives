@@ -221,6 +221,50 @@ await check(mobile,'/?audio-lab=1','audio-lab',async page=>{
   await page.getByRole('button',{name:'Play Equipment Scanner'}).waitFor({state:'visible',timeout:7000})
   assert.equal(await page.locator('.al-cue').count(),19,'Sound Lab must retain all cues after scene switching')
 })
+// Main integration: exercise the newly mounted four-case screens, not just
+// historical Nadir routes. All contexts start with an empty player save.
+async function openCaseSourceIndex(page) {
+ const terminal=page.getByRole('button',{name:'Read Mission Briefing at center terminal'})
+ await terminal.waitFor({state:'visible'})
+ await terminal.focus()
+ await page.keyboard.press('Enter')
+ await page.getByRole('button',{name:'OPEN CASE SOURCE INDEX'}).click()
+ await page.locator('.cw-desk').waitFor({state:'visible'})
+ assert.equal(await page.locator('.cw-case-tabs button').count(),4)
+}
+await check(laptop,'/?room=1','case-source-index',async page=>{
+ await openCaseSourceIndex(page)
+ assert.ok((await page.locator('.cw-desk').textContent()).includes('KES'))
+})
+await check(mobile,'/?room=1','case-source-index',async page=>{
+ await openCaseSourceIndex(page)
+ assert.ok(await page.locator('.cw-desk-record').count()>0,'Investigation terminal must host at least one KES source')
+})
+await check(mobile,'/?room=1','case-puzzle',async page=>{
+ await openCaseSourceIndex(page)
+ await page.locator('.cw-desk-record').first().click()
+ await page.locator('.np-dialog').waitFor({state:'visible'})
+ assert.equal(await page.getByRole('button',{name:/COLLECT EVIDENCE · KES-/}).count(),0,
+  'Unsolved other-case puzzles must never show collection')
+ await page.locator('.np-source-drawer summary').first().click()
+ await page.locator('.np-mobile-steps button').nth(1).click()
+ assert.equal(await page.locator('.np-workbench').isVisible(),true)
+})
+for(const id of ['KES','LUM','ORI','AST']){
+ await check(mobile,'/?rescue='+id,'case-rescue-'+id.toLowerCase(),async page=>{
+  await page.locator('.cw-rescue').waitFor({state:'visible'})
+  assert.match(await page.locator('.cw-rescue').textContent(),/RESCUE LOCKED/)
+  assert.equal(await page.locator('.cw-outcome').count(),0,
+   'A direct rescue URL must not bypass six correctly filed records')
+ })
+}
+// A URL query flag is not authorization to bulk-collect unseen evidence.
+await check(mobile,'/?folder-lab=1&debug=1','production-debug-guard',async page=>{
+ await page.locator('.af-bottom button').click()
+ assert.equal(await page.locator('.af-intake-items button').filter({hasText:'DEBUG COLLECT'}).count(),0)
+ assert.equal(await page.locator('.af-reset').count(),0)
+ assert.ok(await page.locator('.af-intake').isVisible())
+})
 await check({width:390,height:844},'/','portrait-guard')
 await writeFile(`${output}/report.json`, JSON.stringify(report,null,2))
 await browser.close()
