@@ -61,3 +61,42 @@
  .sr-foot span:first-child{display:none}
  .sr-foot{justify-content:flex-end}
 }
+
+
+/* Work Order A — source-plate-safe layered interactions.
+   Mask PNGs select true object pixels; overlapping rectangular bounds do not block
+   a lower physical object. Focus stays on real keyboard-accessible buttons. */
+.sr-stage{cursor:default}
+.sr-stage.sr-stage-interactive{cursor:pointer}
+.sr-hotspot.sr-layer-target{pointer-events:none;border:0;box-shadow:none}
+.sr-hotspot.sr-layer-target:is(:hover,:focus-visible,:active){border:0;box-shadow:none}
+.sr-layer-target img{position:absolute;inset:0;display:block;width:100%;height:100%;pointer-events:none;user-select:none;-webkit-user-drag:none}
+.sr-layer-screen{opacity:1}
+.sr-layer-glow{opacity:0;transition:opacity .16s ease;filter:drop-shadow(0 0 4px #72e9fb)}
+.sr-layer-target:is(.sr-lit,:focus-visible) .sr-layer-glow{opacity:1}
+.sr-layer-target:focus-visible{outline:2px solid #a4f3fa;outline-offset:-2px}
+.sr-layer-target:is(.sr-lit,:focus-visible) .sr-hotspot-label{opacity:1;transform:translateX(-50%) translateY(0)}
+.sr-layer-target:is(.sr-lit,:focus-visible) .sr-beacon{
+ transform:translate(-50%,-50%) scale(1.13);opacity:1;
+ background:#0a304be9;box-shadow:0 0 0 8px #67d2e22a,0 0 24px #56eeffe8}
+.sr-inspection-shade{position:absolute;z-index:14;inset:0;display:grid;place-items:center;padding:65px 18px 36px;background:#020b17c9}
+.sr-inspection-note{width:min(520px,95vw);max-height:100%;overflow:auto;border:1px solid #56869b;
+ background:linear-gradient(150deg,#112f43,#051522);box-shadow:0 20px 65px #000a;
+ padding:22px;color:#e1edf0}
+.sr-inspection-note small{color:#d6ac77;font:700 10px 'IBM Plex Mono',monospace;letter-spacing:.06em}
+.sr-inspection-note h2{font:700 18px 'Orbitron',sans-serif;margin:12px 0}
+.sr-inspection-note p{font:400 13px/1.65 'IBM Plex Sans',sans-serif;color:#c9dce3}
+.sr-inspection-actions{display:flex;gap:10px;justify-content:flex-end;flex-wrap:wrap;margin-top:18px}
+.sr-inspection-actions button{background:#143a50;border:1px solid #78bcc5;color:#e8f4f6;
+ padding:9px 14px;cursor:pointer;font:700 10px 'IBM Plex Mono',monospace}
+.sr-inspection-actions button:focus-visible{outline:2px solid #b8f4ff;outline-offset:3px}
+@media (orientation:landscape) and (max-width:1000px) and (max-height:600px){
+ .sr-inspection-shade{padding:40px 12px 16px}
+ .sr-inspection-note{padding:13px 16px}
+ .sr-inspection-note h2{font-size:13px;margin:5px 0}
+ .sr-inspection-note p{font-size:11px;line-height:1.45;margin:5px 0}
+ .sr-inspection-actions{margin-top:7px}
+ .sr-inspection-actions button{padding:6px 9px;font-size:9px}
+ .sr-inspection-note small{font-size:8px}
+}
+@media(prefers-reduced-motion:reduce){.sr-layer-glow{transition:none}}
