@@ -68,7 +68,9 @@ for(const viewport of [laptop,mobile,phone,small]){
 for(const viewport of [mobile,phone,small]){
  await check(viewport,'/?station=signal','nadir-analysis',async page=>{
   await page.locator('.sr-hotspot').nth(1).click()
+  await page.locator('.np-scroll').evaluate(el=>{el.scrollTop=120})
   await page.locator('.np-mobile-steps button').nth(1).click()
+  assert.equal(await page.locator('.np-scroll').evaluate(el=>el.scrollTop),0)
   assert.equal(await page.locator('.np-workbench').isVisible(),true)
   assert.equal(await page.locator('.np-sources').isVisible(),false)
   assert.equal(await page.locator('.np-mobile-steps button').nth(1).getAttribute('aria-current'),'step')
@@ -99,6 +101,7 @@ await check(mobile,'/?station=signal','nadir-collect-and-file',async page=>{
  await page.locator('.af-file-select select').selectOption('NAD')
  await page.locator('.af-document-modal .af-primary').click()
  assert.match((await page.locator('.af-bottom').textContent()).replace(/\s/g,''),/1\/6/)
+ await page.screenshot({path:`${output}/nadir-filed-folder-915x412.png`,animations:'disabled'})
  await page.locator('.af-header-end a').click()
  assert.match(page.url(),/station=signal/)
  assert.equal(await page.evaluate(()=>window.__astralRouteSentinel),'same-document')
