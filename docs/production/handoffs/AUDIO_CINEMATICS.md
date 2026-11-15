@@ -152,3 +152,13 @@ The user explicitly approved a **staged integration plan now**, with video-binar
 - `case1Intro` is staged for KES (Case 1) dossier on explicit view-only request, **but hold canonical binding** pending visual/source alignment signoff; the 7-second video shows hardware in assembly, while KES is a pre-Phase-A/Phase-A observatory concept. Video content is not evidence.
 - `case1Outcome` **must not** play on NAD, after just 6/6 or simply on clicking Rescue. Intended only for KES's verified alternate outcome, after actual integrated KES rescue UI and `otherRescueCompleted(...,'KES')` pass, and confirmation that its industrial hangar visuals fit source narrative.
 - Four original clip binaries are **still not in GitHub**. This document adds no invented footage and is not Main acceptance. New designer clips will be audited/versioned when delivered.
+
+## 8. Authoritative case order — user-confirmed after direct Evidence file review (2026-11-15)
+
+Source: [Cases Evidence Production Bible v2.docx](https://docs.google.com/document/d/1lGpnlCkWYZowYNge9Fcd14wGeZH3FdWr/edit) from the approved NASA Drive. The explicit order is **01 KES / Kestrel → 02 NAD / Nadir → 03 LUM / Lumen → 04 ORI / Oriole → 05 AST / Asterion**. This matches the source's five section headings and `CASE_CODES` in `src/archive/evidenceRecords.ts`, `INVESTIGATION_CASES`, and Home previews.
+
+**Decided:** `case1Intro` / `case1Outcome` are definitively **Case 01 = KES**, not Nadir. Updated `src/media/cinematicManifest.ts` titles with explicit `caseId:'KES'`; `src/media/cinematicManifest.test.mjs` asserts the five-code order and both clips' association. The separate concern about whether supplied industrial spacecraft footage accurately depicts the pre-Phase-A Kestrel concept **remains subject to artistic/story approval**, but must not trigger re-numbering or silent video remapping.
+
+During same review, Main/Chat C had advanced the shared game: `src/gameplay/CaseRescue.tsx` and routing `/?rescue=KES|LUM|ORI|AST` now exist. Our old handoff sentence saying KES Rescue was not exposed in UI is superseded. **Only Main** wires the KES-success cinematic based on `otherRescueCompleted(...,'KES')`. `ArchiveFolderLab` restores the active case and otherwise defaults to NAD, but **visible dossier order is correct**. Refer to updated [Cinematic Placement & Main Patch V1](../../audio/CINEMATIC_PLACEMENT_AND_MAIN_PATCH_V1.md).
+
+The four MP4s remain subject to separate upload and eventual physical playback QA. New case video deliveries will be reviewed and registered independently, following this fixed case order.
