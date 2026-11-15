@@ -26,6 +26,55 @@ export const CINEMATICS = {
   source:'case 1 outcome.mp4',driveId:'1vjDCZCYOquFkJhRb63ND_Lddied3OyTp',
   duration:5.97,bytes:4375281,mixGain:.8,
  },
+
+ case1Evidence: {
+  title:'Case 01 — Kestrel / Launch Schedule Context',caseId:'KES',mediaRole:'evidence-context',recordContext:'KES-02',
+  path:'/assets/video/designer-case-1-evidence-v1.mp4',
+  source:'case 1 evidence.mp4',driveId:'1aeFKVcvfglWRYOQf3u_DgaxJOtYUyfU6',
+  duration:10,bytes:6481903,mixGain:.7,
+ },
+ case2Intro: {
+  title:'Case 02 — Nadir / Mission Introduction',caseId:'NAD',mediaRole:'cinematic',
+  path:'/assets/video/designer-case-2-intro-v1.mp4',
+  source:'case 2 intro.mp4',driveId:'14GhVxCpyjSiclmxe6GAo-rK2sieSUNTz',
+  duration:7,bytes:4228560,mixGain:.35,
+ },
+ case2EmailEvidence: {
+  title:'Case 02 — Nadir / Open Anomaly Email',caseId:'NAD',mediaRole:'evidence-context',recordContext:'NAD-05',
+  path:'/assets/video/designer-case-2-email-evidence-v1.mp4',
+  source:'case 2 email evidence .mp4',driveId:'15oDkj50S1dYHeZ1M92wDvo8LAHfhADWE',
+  duration:7,bytes:4092994,mixGain:.7,
+ },
+ case2UnitsMismatchEvidence: {
+  title:'Case 02 — Nadir / Units Mismatch Context',caseId:'NAD',mediaRole:'evidence-context',recordContext:'NAD-02',
+  path:'/assets/video/designer-case-2-units-mismatch-evidence-v1.mp4',
+  source:'case 2 units mismatch evidence.mp4',driveId:'1XVpZaqmhtGtO5R-ZXBUAurl5BAtFwjmP',
+  duration:10,bytes:5971124,mixGain:.5,
+ },
+ case2Outcome: {
+  title:'Case 02 — Nadir / Verified Rescue Outcome',caseId:'NAD',mediaRole:'cinematic',
+  path:'/assets/video/designer-case-2-outcome-v1.mp4',
+  source:'case 2 outcome.mp4',driveId:'1BVg5wPA2_2fIjrpgoGi7YGRgRskqT5nA',
+  duration:5.25,bytes:4886242,mixGain:.7,
+ },
+ case3Intro: {
+  title:'Case 03 — Lumen / Mission Introduction',caseId:'LUM',mediaRole:'cinematic',
+  path:'/assets/video/designer-case-3-intro-v1.mp4',
+  source:'case 3 intro.mp4',driveId:'1u-ZP3m3W5YUW2nm9J_fHxK4DIJNRleCm',
+  duration:7,bytes:3323996,mixGain:.8,
+ },
+ case3ApprovalEvidence: {
+  title:'Case 03 — Lumen / Optical Test Context',caseId:'LUM',mediaRole:'evidence-context',recordContext:'LUM-05',
+  path:'/assets/video/designer-case-3-approval-evidence-v1.mp4',
+  source:'case 3 approval evidence.mp4',driveId:'1VdFCysk4vb09q4tdRmFcGla0mQNB1D1_',
+  duration:6.25,bytes:5720883,mixGain:.8,
+ },
+ case3Outcome: {
+  title:'Case 03 — Lumen / Verified Rescue Outcome',caseId:'LUM',mediaRole:'cinematic',
+  path:'/assets/video/designer-case-3-outcome-v1.mp4',
+  source:'case 3 outcome.mp4',driveId:'1e2P5Sy-VbuVVciKvIR06IEw8qIhBnWaT',
+  duration:7,bytes:5161082,mixGain:.9,
+ },
 } as const
 export type CinematicId=keyof typeof CINEMATICS
 export type CinematicOutcome='completed'|'skipped'|'returned'|'unavailable'
