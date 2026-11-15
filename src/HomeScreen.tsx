@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { navigateGame } from './gameNavigation'
+import { getAudioSettings, setAudioSettings, playGameSound, type GameAudioSettings } from './audio/gameAudio'
 import './homeScreen.css'
 
 type Panel = 'files' | 'about' | 'settings' | null
@@ -52,6 +53,8 @@ export default function HomeScreen() {
   const [panel, setPanel] = useState<Panel>(null)
   const [activeCase, setActiveCase] = useState(0)
   const [reduceMotion, setReduceMotion] = useState(getPreference)
+  const [audioSettings,setAudioSettingsLocal] = useState(getAudioSettings)
+  function changeAudio(patch:Partial<GameAudioSettings>){setAudioSettingsLocal(setAudioSettings(patch))}
   const [fullscreen, setFullscreen] = useState(Boolean(document.fullscreenElement))
   const [hasSave] = useState(hasSavedInvestigation)
   const [fallbackArt, setFallbackArt] = useState(false)
@@ -108,18 +111,18 @@ export default function HomeScreen() {
         <p className="aa-home-tagline">Every mission leaves a trace.</p>
         <p className="aa-home-description">Five cases. One unfolding mystery.<br/>Enter the station, examine the records, and uncover what the files don't say.</p>
         <div className="aa-home-actions">
-          <button className="aa-home-cta" onClick={enterInvestigation}>
+          <button className="aa-home-cta" data-sfx="doorOpen" onClick={enterInvestigation}>
             <span className="aa-home-cta-symbol"><MiniSymbol kind="play" size={22}/></span>
             <span className="aa-home-cta-label"><strong>{hasSave ? 'CONTINUE INVESTIGATION' : 'START INVESTIGATION'}</strong><small>ENTER THE STATION</small></span>
             <MiniSymbol kind="arrow" size={23}/>
           </button>
-          <button className="aa-home-secondary" onClick={() => { setActiveCase(0); setPanel('files') }}>
+          <button className="aa-home-secondary" data-sfx="panelOpen" onClick={() => { setActiveCase(0); setPanel('files') }}>
             <MiniSymbol kind="folder" size={20}/><span>MISSION ARCHIVES</span><span className="aa-home-secondary-tail">05</span>
           </button>
           <div className="aa-home-minor-actions">
-            <button onClick={() => setPanel('settings')}><MiniSymbol kind="settings" size={17}/> SETTINGS</button>
+            <button data-sfx="panelOpen" onClick={() => setPanel('settings')}><MiniSymbol kind="settings" size={17}/> SETTINGS</button>
             <span aria-hidden="true"/>
-            <button onClick={() => setPanel('about')}><MiniSymbol kind="info" size={17}/> ABOUT</button>
+            <button data-sfx="panelOpen" onClick={() => setPanel('about')}><MiniSymbol kind="info" size={17}/> ABOUT</button>
           </div>
         </div>
       </div>
@@ -136,7 +139,7 @@ export default function HomeScreen() {
       <section className="aa-home-dialog" role="dialog" aria-modal="true" aria-label={panel === 'files' ? 'Mission Archives' : panel === 'settings' ? 'Settings' : 'About the game'}>
         <header className="aa-home-dialog-head">
           <span>ASTRAL RECORDS <i>/</i> {panel === 'files' ? 'CASE REGISTRY 005' : panel === 'settings' ? 'PREFERENCES' : 'ABOUT THE EXPERIENCE'}</span>
-          <button type="button" aria-label="Close panel" onClick={() => setPanel(null)}><MiniSymbol kind="close"/></button>
+          <button type="button" data-sfx="panelClose" aria-label="Close panel" onClick={() => setPanel(null)}><MiniSymbol kind="close"/></button>
         </header>
         {panel === 'files' && <div className="aa-home-files-content">
           <div className="aa-home-files-heading"><p className="aa-home-overline"><span/> CLASSIFIED RECORDS</p><h2>MISSION ARCHIVES</h2><p>Five investigations are waiting inside the station. Select a file for a spoiler-free briefing.</p></div>
@@ -158,7 +161,12 @@ export default function HomeScreen() {
           </div>
         </div>}
         {panel === 'settings' && <div className="aa-home-simple-panel">
-          <p className="aa-home-overline"><span/> EXPERIENCE SETTINGS</p><h2>SETTINGS</h2><p>Display preferences for this visual prototype. Audio controls will be added when approved sound assets are integrated.</p>
+          <p className="aa-home-overline"><span/> EXPERIENCE SETTINGS</p><h2>SETTINGS</h2><p>Adjust sound, station atmosphere and display preferences. Audio begins after your first interaction and never requires a paid service.</p>
+
+          <label className="aa-home-setting-row"><span><strong>Sound effects</strong><small>Buttons, evidence, scanning and investigation feedback.</small></span><input type="checkbox" checked={audioSettings.effects} onChange={event=>changeAudio({effects:event.target.checked})}/></label>
+          <label className="aa-home-setting-row"><span><strong>Station ambience</strong><small>Quiet mechanical room atmosphere; no music or autoplay.</small></span><input type="checkbox" checked={audioSettings.ambient} onChange={event=>changeAudio({ambient:event.target.checked})}/></label>
+          <label className="aa-home-setting-row aa-home-audio-volume"><span><strong>Master volume · {audioSettings.volume}%</strong><small>Shared level for all sounds; preference is saved.</small></span><input type="range" min="0" max="100" step="5" value={audioSettings.volume} onChange={event=>changeAudio({volume:Number(event.target.value)})} aria-label="Master audio volume"/></label>
+          <button type="button" className="aa-home-preview-sound" data-sfx="none" onClick={()=>playGameSound('panelOpen')}>TEST SOUND EFFECT</button>
           <label className="aa-home-setting-row"><span><strong>Reduce ambient motion</strong><small>Disable decorative background movement and animated transitions.</small></span><input type="checkbox" checked={reduceMotion} onChange={event => setReduceMotion(event.target.checked)}/></label>
           <div className="aa-home-setting-row"><span><strong>Fullscreen display</strong><small>Use the available screen area when supported by your browser.</small></span><button onClick={toggleFullscreen}>{fullscreen ? 'EXIT FULLSCREEN' : 'ENTER FULLSCREEN'}</button></div>
         </div>}
