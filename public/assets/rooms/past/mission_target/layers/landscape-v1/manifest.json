@@ -1,0 +1,154 @@
+{
+  "version": 1,
+  "roomId": "mission_target",
+  "timeline": "past",
+  "variant": "landscape-v1",
+  "sourceArt": "/assets/rooms/past/mission_target/layers/landscape-v1/background/room_visible.png",
+  "coordinateSystem": {
+    "width": 1920,
+    "height": 1080
+  },
+  "background": "/assets/rooms/past/mission_target/layers/landscape-v1/background/room_bg_clean.png",
+  "objects": [
+    {
+      "id": "mission_objectives",
+      "sourceArt": "/assets/rooms/past/mission_target/layers/landscape-v1/background/room_visible.png",
+      "sourceProvenance": {
+        "portrait": "/assets/rooms/past/sources/02_Mission_Target_1080x1920.png",
+        "method": "reference_guided_landscape_recreation_and_traced_polygon"
+      },
+      "position": {
+        "x": 53,
+        "y": 363,
+        "width": 341,
+        "height": 507
+      },
+      "zIndex": 1,
+      "assets": {
+        "base": "/assets/rooms/past/mission_target/layers/landscape-v1/mission_objectives/mission_objectives_base.png",
+        "mask": "/assets/rooms/past/mission_target/layers/landscape-v1/mission_objectives/mission_objectives_mask.png",
+        "glow": "/assets/rooms/past/mission_target/layers/landscape-v1/mission_objectives/mission_objectives_glow.png",
+        "screen": "/assets/rooms/past/mission_target/layers/landscape-v1/mission_objectives/mission_objectives_screen.png"
+      },
+      "interaction": {
+        "target": "mission_objectives",
+        "label": "Review mission objectives",
+        "mask": "/assets/rooms/past/mission_target/layers/landscape-v1/mission_objectives/mission_objectives_mask.png"
+      },
+      "states": [
+        "idle",
+        "hover",
+        "focus",
+        "touch"
+      ],
+      "extractionMode": "polygon_traced",
+      "cleanPlateExtractionComplete": false,
+      "designerCleanupRequired": true
+    },
+    {
+      "id": "target_destination",
+      "sourceArt": "/assets/rooms/past/mission_target/layers/landscape-v1/background/room_visible.png",
+      "sourceProvenance": {
+        "portrait": "/assets/rooms/past/sources/02_Mission_Target_1080x1920.png",
+        "method": "reference_guided_landscape_recreation_and_traced_polygon"
+      },
+      "position": {
+        "x": 403,
+        "y": 396,
+        "width": 310,
+        "height": 444
+      },
+      "zIndex": 2,
+      "assets": {
+        "base": "/assets/rooms/past/mission_target/layers/landscape-v1/target_destination/target_destination_base.png",
+        "mask": "/assets/rooms/past/mission_target/layers/landscape-v1/target_destination/target_destination_mask.png",
+        "glow": "/assets/rooms/past/mission_target/layers/landscape-v1/target_destination/target_destination_glow.png",
+        "screen": "/assets/rooms/past/mission_target/layers/landscape-v1/target_destination/target_destination_screen.png"
+      },
+      "interaction": {
+        "target": "target_destination",
+        "label": "Inspect target destination",
+        "mask": "/assets/rooms/past/mission_target/layers/landscape-v1/target_destination/target_destination_mask.png"
+      },
+      "states": [
+        "idle",
+        "hover",
+        "focus",
+        "touch"
+      ],
+      "extractionMode": "polygon_traced",
+      "cleanPlateExtractionComplete": false,
+      "designerCleanupRequired": true
+    },
+    {
+      "id": "scientific_priorities",
+      "sourceArt": "/assets/rooms/past/mission_target/layers/landscape-v1/background/room_visible.png",
+      "sourceProvenance": {
+        "portrait": "/assets/rooms/past/sources/02_Mission_Target_1080x1920.png",
+        "method": "reference_guided_landscape_recreation_and_traced_polygon"
+      },
+      "position": {
+        "x": 1210,
+        "y": 398,
+        "width": 311,
+        "height": 439
+      },
+      "zIndex": 3,
+      "assets": {
+        "base": "/assets/rooms/past/mission_target/layers/landscape-v1/scientific_priorities/scientific_priorities_base.png",
+        "mask": "/assets/rooms/past/mission_target/layers/landscape-v1/scientific_priorities/scientific_priorities_mask.png",
+        "glow": "/assets/rooms/past/mission_target/layers/landscape-v1/scientific_priorities/scientific_priorities_glow.png",
+        "screen": "/assets/rooms/past/mission_target/layers/landscape-v1/scientific_priorities/scientific_priorities_screen.png"
+      },
+      "interaction": {
+        "target": "scientific_priorities",
+        "label": "Review scientific priorities",
+        "mask": "/assets/rooms/past/mission_target/layers/landscape-v1/scientific_priorities/scientific_priorities_mask.png"
+      },
+      "states": [
+        "idle",
+        "hover",
+        "focus",
+        "touch"
+      ],
+      "extractionMode": "polygon_traced",
+      "cleanPlateExtractionComplete": false,
+      "designerCleanupRequired": true
+    },
+    {
+      "id": "mission_constraints",
+      "sourceArt": "/assets/rooms/past/mission_target/layers/landscape-v1/background/room_visible.png",
+      "sourceProvenance": {
+        "portrait": "/assets/rooms/past/sources/02_Mission_Target_1080x1920.png",
+        "method": "reference_guided_landscape_recreation_and_traced_polygon"
+      },
+      "position": {
+        "x": 1532,
+        "y": 363,
+        "width": 340,
+        "height": 505
+      },
+      "zIndex": 4,
+      "assets": {
+        "base": "/assets/rooms/past/mission_target/layers/landscape-v1/mission_constraints/mission_constraints_base.png",
+        "mask": "/assets/rooms/past/mission_target/layers/landscape-v1/mission_constraints/mission_constraints_mask.png",
+        "glow": "/assets/rooms/past/mission_target/layers/landscape-v1/mission_constraints/mission_constraints_glow.png",
+        "screen": "/assets/rooms/past/mission_target/layers/landscape-v1/mission_constraints/mission_constraints_screen.png"
+      },
+      "interaction": {
+        "target": "mission_constraints",
+        "label": "Review mission constraints",
+        "mask": "/assets/rooms/past/mission_target/layers/landscape-v1/mission_constraints/mission_constraints_mask.png"
+      },
+      "states": [
+        "idle",
+        "hover",
+        "focus",
+        "touch"
+      ],
+      "extractionMode": "polygon_traced",
+      "cleanPlateExtractionComplete": false,
+      "designerCleanupRequired": true
+    }
+  ]
+}

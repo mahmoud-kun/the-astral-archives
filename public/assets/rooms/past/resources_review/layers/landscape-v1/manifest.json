@@ -1,0 +1,191 @@
+{
+  "version": 1,
+  "roomId": "resources_review",
+  "timeline": "past",
+  "variant": "landscape-v1",
+  "sourceArt": "/assets/rooms/past/resources_review/layers/landscape-v1/background/room_visible.png",
+  "coordinateSystem": {
+    "width": 1920,
+    "height": 1080
+  },
+  "background": "/assets/rooms/past/resources_review/layers/landscape-v1/background/room_bg_clean.png",
+  "objects": [
+    {
+      "id": "hardware_inventory",
+      "sourceArt": "/assets/rooms/past/resources_review/layers/landscape-v1/background/room_visible.png",
+      "sourceProvenance": {
+        "portrait": "/assets/rooms/past/sources/04_Resources_Review_1080x1920.png",
+        "method": "reference_guided_landscape_recreation_and_traced_polygon"
+      },
+      "position": {
+        "x": 129,
+        "y": 210,
+        "width": 445,
+        "height": 290
+      },
+      "zIndex": 1,
+      "assets": {
+        "base": "/assets/rooms/past/resources_review/layers/landscape-v1/hardware_inventory/hardware_inventory_base.png",
+        "mask": "/assets/rooms/past/resources_review/layers/landscape-v1/hardware_inventory/hardware_inventory_mask.png",
+        "glow": "/assets/rooms/past/resources_review/layers/landscape-v1/hardware_inventory/hardware_inventory_glow.png",
+        "screen": "/assets/rooms/past/resources_review/layers/landscape-v1/hardware_inventory/hardware_inventory_screen.png"
+      },
+      "interaction": {
+        "target": "hardware_inventory",
+        "label": "Inspect hardware inventory",
+        "mask": "/assets/rooms/past/resources_review/layers/landscape-v1/hardware_inventory/hardware_inventory_mask.png"
+      },
+      "states": [
+        "idle",
+        "hover",
+        "focus",
+        "touch"
+      ],
+      "extractionMode": "polygon_traced",
+      "cleanPlateExtractionComplete": false,
+      "designerCleanupRequired": true
+    },
+    {
+      "id": "power_energy",
+      "sourceArt": "/assets/rooms/past/resources_review/layers/landscape-v1/background/room_visible.png",
+      "sourceProvenance": {
+        "portrait": "/assets/rooms/past/sources/04_Resources_Review_1080x1920.png",
+        "method": "reference_guided_landscape_recreation_and_traced_polygon"
+      },
+      "position": {
+        "x": 118,
+        "y": 502,
+        "width": 463,
+        "height": 362
+      },
+      "zIndex": 2,
+      "assets": {
+        "base": "/assets/rooms/past/resources_review/layers/landscape-v1/power_energy/power_energy_base.png",
+        "mask": "/assets/rooms/past/resources_review/layers/landscape-v1/power_energy/power_energy_mask.png",
+        "glow": "/assets/rooms/past/resources_review/layers/landscape-v1/power_energy/power_energy_glow.png",
+        "screen": "/assets/rooms/past/resources_review/layers/landscape-v1/power_energy/power_energy_screen.png"
+      },
+      "interaction": {
+        "target": "power_energy",
+        "label": "Inspect power and energy",
+        "mask": "/assets/rooms/past/resources_review/layers/landscape-v1/power_energy/power_energy_mask.png"
+      },
+      "states": [
+        "idle",
+        "hover",
+        "focus",
+        "touch"
+      ],
+      "extractionMode": "polygon_traced",
+      "cleanPlateExtractionComplete": false,
+      "designerCleanupRequired": true
+    },
+    {
+      "id": "personnel_roles",
+      "sourceArt": "/assets/rooms/past/resources_review/layers/landscape-v1/background/room_visible.png",
+      "sourceProvenance": {
+        "portrait": "/assets/rooms/past/sources/04_Resources_Review_1080x1920.png",
+        "method": "reference_guided_landscape_recreation_and_traced_polygon"
+      },
+      "position": {
+        "x": 1350,
+        "y": 208,
+        "width": 440,
+        "height": 292
+      },
+      "zIndex": 3,
+      "assets": {
+        "base": "/assets/rooms/past/resources_review/layers/landscape-v1/personnel_roles/personnel_roles_base.png",
+        "mask": "/assets/rooms/past/resources_review/layers/landscape-v1/personnel_roles/personnel_roles_mask.png",
+        "glow": "/assets/rooms/past/resources_review/layers/landscape-v1/personnel_roles/personnel_roles_glow.png",
+        "screen": "/assets/rooms/past/resources_review/layers/landscape-v1/personnel_roles/personnel_roles_screen.png",
+        "closeup": "/assets/rooms/past/resources_review/layers/landscape-v1/closeups/personnel_roles.png"
+      },
+      "interaction": {
+        "target": "personnel_roles",
+        "label": "Inspect personnel and roles",
+        "mask": "/assets/rooms/past/resources_review/layers/landscape-v1/personnel_roles/personnel_roles_mask.png"
+      },
+      "states": [
+        "idle",
+        "hover",
+        "focus",
+        "touch"
+      ],
+      "extractionMode": "polygon_traced",
+      "cleanPlateExtractionComplete": false,
+      "designerCleanupRequired": true
+    },
+    {
+      "id": "supplies_logistics",
+      "sourceArt": "/assets/rooms/past/resources_review/layers/landscape-v1/background/room_visible.png",
+      "sourceProvenance": {
+        "portrait": "/assets/rooms/past/sources/04_Resources_Review_1080x1920.png",
+        "method": "reference_guided_landscape_recreation_and_traced_polygon"
+      },
+      "position": {
+        "x": 1347,
+        "y": 502,
+        "width": 459,
+        "height": 361
+      },
+      "zIndex": 4,
+      "assets": {
+        "base": "/assets/rooms/past/resources_review/layers/landscape-v1/supplies_logistics/supplies_logistics_base.png",
+        "mask": "/assets/rooms/past/resources_review/layers/landscape-v1/supplies_logistics/supplies_logistics_mask.png",
+        "glow": "/assets/rooms/past/resources_review/layers/landscape-v1/supplies_logistics/supplies_logistics_glow.png",
+        "screen": "/assets/rooms/past/resources_review/layers/landscape-v1/supplies_logistics/supplies_logistics_screen.png",
+        "closeup": "/assets/rooms/past/resources_review/layers/landscape-v1/closeups/supplies_logistics.png"
+      },
+      "interaction": {
+        "target": "supplies_logistics",
+        "label": "Inspect supplies and logistics",
+        "mask": "/assets/rooms/past/resources_review/layers/landscape-v1/supplies_logistics/supplies_logistics_mask.png"
+      },
+      "states": [
+        "idle",
+        "hover",
+        "focus",
+        "touch"
+      ],
+      "extractionMode": "polygon_traced",
+      "cleanPlateExtractionComplete": false,
+      "designerCleanupRequired": true
+    },
+    {
+      "id": "resource_allocation",
+      "sourceArt": "/assets/rooms/past/resources_review/layers/landscape-v1/background/room_visible.png",
+      "sourceProvenance": {
+        "portrait": "/assets/rooms/past/sources/04_Resources_Review_1080x1920.png",
+        "method": "reference_guided_landscape_recreation_and_traced_polygon"
+      },
+      "position": {
+        "x": 660,
+        "y": 310,
+        "width": 600,
+        "height": 611
+      },
+      "zIndex": 5,
+      "assets": {
+        "base": "/assets/rooms/past/resources_review/layers/landscape-v1/resource_allocation/resource_allocation_base.png",
+        "mask": "/assets/rooms/past/resources_review/layers/landscape-v1/resource_allocation/resource_allocation_mask.png",
+        "glow": "/assets/rooms/past/resources_review/layers/landscape-v1/resource_allocation/resource_allocation_glow.png",
+        "screen": "/assets/rooms/past/resources_review/layers/landscape-v1/resource_allocation/resource_allocation_screen.png"
+      },
+      "interaction": {
+        "target": "resource_allocation",
+        "label": "Inspect resource allocation table",
+        "mask": "/assets/rooms/past/resources_review/layers/landscape-v1/resource_allocation/resource_allocation_mask.png"
+      },
+      "states": [
+        "idle",
+        "hover",
+        "focus",
+        "touch"
+      ],
+      "extractionMode": "polygon_traced",
+      "cleanPlateExtractionComplete": false,
+      "designerCleanupRequired": true
+    }
+  ]
+}

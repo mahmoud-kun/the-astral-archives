@@ -1,0 +1,169 @@
+{
+  "version": 1,
+  "roomId": "resources_review",
+  "timeline": "past",
+  "variant": "portrait",
+  "sourceArt": "/assets/rooms/past/sources/04_Resources_Review_1080x1920.png",
+  "coordinateSystem": {
+    "width": 1080,
+    "height": 1920
+  },
+  "background": "/assets/rooms/past/resources_review/layers/portrait/background/room_bg_clean.png",
+  "objects": [
+    {
+      "id": "hardware_inventory",
+      "sourceArt": "/assets/rooms/past/sources/04_Resources_Review_1080x1920.png",
+      "position": {
+        "x": 0,
+        "y": 576,
+        "width": 282,
+        "height": 259
+      },
+      "zIndex": 1,
+      "assets": {
+        "base": "/assets/rooms/past/resources_review/layers/portrait/hardware_inventory/hardware_inventory_base.png",
+        "glow": "/assets/rooms/past/resources_review/layers/portrait/hardware_inventory/hardware_inventory_glow.png",
+        "mask": "/assets/rooms/past/resources_review/layers/portrait/hardware_inventory/hardware_inventory_mask.png",
+        "screen": "/assets/rooms/past/resources_review/layers/portrait/hardware_inventory/hardware_inventory_screen.png"
+      },
+      "interaction": {
+        "target": "hardware_inventory",
+        "label": "Inspect hardware inventory",
+        "mask": "/assets/rooms/past/resources_review/layers/portrait/hardware_inventory/hardware_inventory_mask.png"
+      },
+      "states": [
+        "idle",
+        "hover",
+        "focus",
+        "touch"
+      ],
+      "extractionMode": "fully_layered",
+      "cleanPlateExtractionComplete": false,
+      "designerCleanupRequired": true
+    },
+    {
+      "id": "power_energy",
+      "sourceArt": "/assets/rooms/past/sources/04_Resources_Review_1080x1920.png",
+      "position": {
+        "x": 0,
+        "y": 834,
+        "width": 282,
+        "height": 263
+      },
+      "zIndex": 2,
+      "assets": {
+        "base": "/assets/rooms/past/resources_review/layers/portrait/power_energy/power_energy_base.png",
+        "glow": "/assets/rooms/past/resources_review/layers/portrait/power_energy/power_energy_glow.png",
+        "mask": "/assets/rooms/past/resources_review/layers/portrait/power_energy/power_energy_mask.png",
+        "screen": "/assets/rooms/past/resources_review/layers/portrait/power_energy/power_energy_screen.png"
+      },
+      "interaction": {
+        "target": "power_energy",
+        "label": "Inspect power and energy",
+        "mask": "/assets/rooms/past/resources_review/layers/portrait/power_energy/power_energy_mask.png"
+      },
+      "states": [
+        "idle",
+        "hover",
+        "focus",
+        "touch"
+      ],
+      "extractionMode": "fully_layered",
+      "cleanPlateExtractionComplete": false,
+      "designerCleanupRequired": true
+    },
+    {
+      "id": "personnel_roles",
+      "sourceArt": "/assets/rooms/past/sources/04_Resources_Review_1080x1920.png",
+      "position": {
+        "x": 823,
+        "y": 569,
+        "width": 257,
+        "height": 268
+      },
+      "zIndex": 3,
+      "assets": {
+        "base": "/assets/rooms/past/resources_review/layers/portrait/personnel_roles/personnel_roles_base.png",
+        "glow": "/assets/rooms/past/resources_review/layers/portrait/personnel_roles/personnel_roles_glow.png",
+        "mask": "/assets/rooms/past/resources_review/layers/portrait/personnel_roles/personnel_roles_mask.png",
+        "screen": "/assets/rooms/past/resources_review/layers/portrait/personnel_roles/personnel_roles_screen.png"
+      },
+      "interaction": {
+        "target": "personnel_roles",
+        "label": "Inspect personnel and roles",
+        "mask": "/assets/rooms/past/resources_review/layers/portrait/personnel_roles/personnel_roles_mask.png"
+      },
+      "states": [
+        "idle",
+        "hover",
+        "focus",
+        "touch"
+      ],
+      "extractionMode": "fully_layered",
+      "cleanPlateExtractionComplete": false,
+      "designerCleanupRequired": true
+    },
+    {
+      "id": "supplies_logistics",
+      "sourceArt": "/assets/rooms/past/sources/04_Resources_Review_1080x1920.png",
+      "position": {
+        "x": 823,
+        "y": 834,
+        "width": 257,
+        "height": 264
+      },
+      "zIndex": 4,
+      "assets": {
+        "base": "/assets/rooms/past/resources_review/layers/portrait/supplies_logistics/supplies_logistics_base.png",
+        "glow": "/assets/rooms/past/resources_review/layers/portrait/supplies_logistics/supplies_logistics_glow.png",
+        "mask": "/assets/rooms/past/resources_review/layers/portrait/supplies_logistics/supplies_logistics_mask.png",
+        "screen": "/assets/rooms/past/resources_review/layers/portrait/supplies_logistics/supplies_logistics_screen.png"
+      },
+      "interaction": {
+        "target": "supplies_logistics",
+        "label": "Inspect supplies and logistics",
+        "mask": "/assets/rooms/past/resources_review/layers/portrait/supplies_logistics/supplies_logistics_mask.png"
+      },
+      "states": [
+        "idle",
+        "hover",
+        "focus",
+        "touch"
+      ],
+      "extractionMode": "fully_layered",
+      "cleanPlateExtractionComplete": false,
+      "designerCleanupRequired": true
+    },
+    {
+      "id": "resource_allocation",
+      "sourceArt": "/assets/rooms/past/sources/04_Resources_Review_1080x1920.png",
+      "position": {
+        "x": 231,
+        "y": 646,
+        "width": 641,
+        "height": 815
+      },
+      "zIndex": 5,
+      "assets": {
+        "base": "/assets/rooms/past/resources_review/layers/portrait/resource_allocation/resource_allocation_base.png",
+        "glow": "/assets/rooms/past/resources_review/layers/portrait/resource_allocation/resource_allocation_glow.png",
+        "mask": "/assets/rooms/past/resources_review/layers/portrait/resource_allocation/resource_allocation_mask.png",
+        "screen": "/assets/rooms/past/resources_review/layers/portrait/resource_allocation/resource_allocation_screen.png"
+      },
+      "interaction": {
+        "target": "resource_allocation",
+        "label": "Inspect resource allocation table",
+        "mask": "/assets/rooms/past/resources_review/layers/portrait/resource_allocation/resource_allocation_mask.png"
+      },
+      "states": [
+        "idle",
+        "hover",
+        "focus",
+        "touch"
+      ],
+      "extractionMode": "fully_layered",
+      "cleanPlateExtractionComplete": false,
+      "designerCleanupRequired": true
+    }
+  ]
+}

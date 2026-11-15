@@ -1,0 +1,139 @@
+{
+  "version": 1,
+  "roomId": "signal",
+  "timeline": "present",
+  "variant": "clean-v2-review-candidate",
+  "sourceArt": "/assets/rooms/Signal_Original_REFERENCE.png",
+  "coordinateSystem": {
+    "width": 1672,
+    "height": 941
+  },
+  "background": "/assets/rooms/signal/layers/clean-v2/background/room_bg_clean_candidate.png",
+  "objects": [
+    {
+      "id": "telemetry_console_left",
+      "sourceArt": "/assets/rooms/Signal_Original_REFERENCE.png",
+      "position": {
+        "x": 0,
+        "y": 436,
+        "width": 485,
+        "height": 489
+      },
+      "zIndex": 1,
+      "assets": {
+        "base": "/assets/rooms/signal/layers/original/telemetry_console_left/telemetry_console_left_base.png",
+        "glow": "/assets/rooms/signal/layers/original/telemetry_console_left/telemetry_console_left_glow.png",
+        "mask": "/assets/rooms/signal/layers/original/telemetry_console_left/telemetry_console_left_mask.png",
+        "screen": "/assets/rooms/signal/layers/original/telemetry_console_left/telemetry_console_left_screen.png"
+      },
+      "interaction": {
+        "target": "telemetry_left",
+        "label": "Inspect left telemetry workstation",
+        "mask": "/assets/rooms/signal/layers/original/telemetry_console_left/telemetry_console_left_mask.png"
+      },
+      "states": [
+        "idle",
+        "hover",
+        "focus",
+        "touch"
+      ],
+      "extractionMode": "fully_layered",
+      "cleanPlateExtractionComplete": false,
+      "designerCleanupRequired": true
+    },
+    {
+      "id": "main_signal_display",
+      "sourceArt": "/assets/rooms/Signal_Original_REFERENCE.png",
+      "position": {
+        "x": 464,
+        "y": 256,
+        "width": 743,
+        "height": 330
+      },
+      "zIndex": 2,
+      "assets": {
+        "base": "/assets/rooms/signal/layers/original/main_signal_display/main_signal_display_base.png",
+        "glow": "/assets/rooms/signal/layers/original/main_signal_display/main_signal_display_glow.png",
+        "mask": "/assets/rooms/signal/layers/original/main_signal_display/main_signal_display_mask.png",
+        "screen": "/assets/rooms/signal/layers/original/main_signal_display/main_signal_display_screen.png"
+      },
+      "interaction": {
+        "target": "signal_analysis",
+        "label": "Analyze main signal display",
+        "mask": "/assets/rooms/signal/layers/original/main_signal_display/main_signal_display_mask.png"
+      },
+      "states": [
+        "idle",
+        "hover",
+        "focus",
+        "touch"
+      ],
+      "extractionMode": "fully_layered",
+      "cleanPlateExtractionComplete": false,
+      "designerCleanupRequired": true
+    },
+    {
+      "id": "receiver_rack",
+      "sourceArt": "/assets/rooms/Signal_Original_REFERENCE.png",
+      "position": {
+        "x": 699,
+        "y": 594,
+        "width": 291,
+        "height": 85
+      },
+      "zIndex": 3,
+      "assets": {
+        "base": "/assets/rooms/signal/layers/original/receiver_rack/receiver_rack_base.png",
+        "glow": "/assets/rooms/signal/layers/original/receiver_rack/receiver_rack_glow.png",
+        "mask": "/assets/rooms/signal/layers/original/receiver_rack/receiver_rack_mask.png"
+      },
+      "interaction": {
+        "target": "signal_tuning",
+        "label": "Tune signal receiver rack",
+        "mask": "/assets/rooms/signal/layers/original/receiver_rack/receiver_rack_mask.png"
+      },
+      "states": [
+        "idle",
+        "hover",
+        "focus",
+        "touch"
+      ],
+      "extractionMode": "fully_layered",
+      "cleanPlateExtractionComplete": false,
+      "designerCleanupRequired": true
+    },
+    {
+      "id": "telemetry_console_right",
+      "sourceArt": "/assets/rooms/Signal_Original_REFERENCE.png",
+      "position": {
+        "x": 1193,
+        "y": 441,
+        "width": 479,
+        "height": 484
+      },
+      "zIndex": 4,
+      "assets": {
+        "base": "/assets/rooms/signal/layers/original/telemetry_console_right/telemetry_console_right_base.png",
+        "glow": "/assets/rooms/signal/layers/original/telemetry_console_right/telemetry_console_right_glow.png",
+        "mask": "/assets/rooms/signal/layers/original/telemetry_console_right/telemetry_console_right_mask.png",
+        "screen": "/assets/rooms/signal/layers/original/telemetry_console_right/telemetry_console_right_screen.png"
+      },
+      "interaction": {
+        "target": "telemetry_right",
+        "label": "Inspect right telemetry workstation",
+        "mask": "/assets/rooms/signal/layers/original/telemetry_console_right/telemetry_console_right_mask.png"
+      },
+      "states": [
+        "idle",
+        "hover",
+        "focus",
+        "touch"
+      ],
+      "extractionMode": "fully_layered",
+      "cleanPlateExtractionComplete": false,
+      "designerCleanupRequired": true
+    }
+  ],
+  "qualityStatus": "FAIL",
+  "qualityNote": "Hidden plate visually improved, but normal recomposition and edge quality still require repair and review."
+}

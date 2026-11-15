@@ -1,0 +1,307 @@
+{
+  "project": "The Astral Archives",
+  "name": "Past Timeline Interactive Art Pack",
+  "version": "1.0",
+  "status": "integration_ready_prototype",
+  "canvas": [
+    1080,
+    1920
+  ],
+  "orientation": "9:16 portrait",
+  "source": "approved background pack V1",
+  "rooms": [
+    {
+      "room": "manufacturing",
+      "background": "backgrounds/01_Manufacturing_Materials_1080x1920.png",
+      "hotspots": [
+        {
+          "id": "materials_structure",
+          "label": "Materials & Structure",
+          "rect_px": [
+            20,
+            560,
+            390,
+            1200
+          ],
+          "rect_norm_xywh": [
+            0.0185,
+            0.2917,
+            0.3426,
+            0.3333
+          ],
+          "open_asset": "closeups/manufacturing__materials_structure.png",
+          "quality": "source_crop_with_background_extension",
+          "interaction": "inspect"
+        },
+        {
+          "id": "motors_energy",
+          "label": "Motors & Energy",
+          "rect_px": [
+            330,
+            530,
+            780,
+            1210
+          ],
+          "rect_norm_xywh": [
+            0.3056,
+            0.276,
+            0.4167,
+            0.3542
+          ],
+          "open_asset": "closeups/manufacturing__motors_energy.png",
+          "quality": "source_crop_with_background_extension",
+          "interaction": "inspect"
+        },
+        {
+          "id": "rocket_design",
+          "label": "Rocket Design",
+          "rect_px": [
+            690,
+            550,
+            1060,
+            1200
+          ],
+          "rect_norm_xywh": [
+            0.6389,
+            0.2865,
+            0.3426,
+            0.3385
+          ],
+          "open_asset": "closeups/manufacturing__rocket_design.png",
+          "quality": "source_crop_with_background_extension",
+          "interaction": "inspect"
+        }
+      ],
+      "background_size": [
+        1080,
+        1920
+      ]
+    },
+    {
+      "room": "mission_target",
+      "background": "backgrounds/02_Mission_Target_1080x1920.png",
+      "hotspots": [
+        {
+          "id": "mission_objectives",
+          "label": "Mission Objectives",
+          "rect_px": [
+            45,
+            500,
+            395,
+            1150
+          ],
+          "rect_norm_xywh": [
+            0.0417,
+            0.2604,
+            0.3241,
+            0.3385
+          ],
+          "open_asset": "closeups/mission_target__mission_objectives.png",
+          "quality": "source_crop_with_background_extension",
+          "interaction": "inspect"
+        },
+        {
+          "id": "target_destination",
+          "label": "Target & Destination",
+          "rect_px": [
+            295,
+            520,
+            855,
+            1120
+          ],
+          "rect_norm_xywh": [
+            0.2731,
+            0.2708,
+            0.5185,
+            0.3125
+          ],
+          "open_asset": "closeups/mission_target__target_destination.png",
+          "quality": "source_crop_with_background_extension",
+          "interaction": "inspect"
+        },
+        {
+          "id": "scientific_priorities",
+          "label": "Scientific Priorities",
+          "rect_px": [
+            60,
+            1000,
+            525,
+            1450
+          ],
+          "rect_norm_xywh": [
+            0.0556,
+            0.5208,
+            0.4306,
+            0.2344
+          ],
+          "open_asset": "closeups/mission_target__scientific_priorities.png",
+          "quality": "source_crop_with_background_extension",
+          "interaction": "inspect"
+        },
+        {
+          "id": "mission_constraints",
+          "label": "Mission Constraints",
+          "rect_px": [
+            560,
+            1000,
+            1030,
+            1450
+          ],
+          "rect_norm_xywh": [
+            0.5185,
+            0.5208,
+            0.4352,
+            0.2344
+          ],
+          "open_asset": "closeups/mission_target__mission_constraints.png",
+          "quality": "source_crop_with_background_extension",
+          "interaction": "inspect"
+        }
+      ],
+      "background_size": [
+        1080,
+        1920
+      ]
+    },
+    {
+      "room": "data_analysis",
+      "background": "backgrounds/03_Data_Analysis_File_Review_1080x1920.png",
+      "hotspots": [
+        {
+          "id": "mission_files",
+          "label": "Mission Files",
+          "rect_px": [
+            40,
+            360,
+            440,
+            1000
+          ],
+          "rect_norm_xywh": [
+            0.037,
+            0.1875,
+            0.3704,
+            0.3333
+          ],
+          "open_asset": "closeups/data_analysis__mission_files.png",
+          "quality": "source_crop_with_background_extension",
+          "interaction": "inspect"
+        },
+        {
+          "id": "dataset_viewer",
+          "label": "Dataset Viewer",
+          "rect_px": [
+            280,
+            440,
+            1000,
+            1140
+          ],
+          "rect_norm_xywh": [
+            0.2593,
+            0.2292,
+            0.6667,
+            0.3646
+          ],
+          "open_asset": "closeups/data_analysis__dataset_viewer.png",
+          "quality": "source_crop_with_background_extension",
+          "interaction": "inspect"
+        },
+        {
+          "id": "analysis_console",
+          "label": "Analysis Console",
+          "rect_px": [
+            160,
+            1100,
+            930,
+            1700
+          ],
+          "rect_norm_xywh": [
+            0.1481,
+            0.5729,
+            0.713,
+            0.3125
+          ],
+          "open_asset": "closeups/data_analysis__analysis_console.png",
+          "quality": "source_crop_with_background_extension",
+          "interaction": "inspect"
+        }
+      ],
+      "background_size": [
+        1080,
+        1920
+      ]
+    },
+    {
+      "room": "resources_review",
+      "background": "backgrounds/04_Resources_Review_1080x1920.png",
+      "hotspots": [
+        {
+          "id": "hardware_inventory",
+          "label": "Hardware & Components",
+          "rect_px": [
+            60,
+            420,
+            510,
+            1120
+          ],
+          "rect_norm_xywh": [
+            0.0556,
+            0.2188,
+            0.4167,
+            0.3646
+          ],
+          "open_asset": "closeups/resources_review__hardware_inventory.png",
+          "quality": "source_crop_with_background_extension",
+          "interaction": "inspect"
+        },
+        {
+          "id": "power_energy",
+          "label": "Power & Energy",
+          "rect_px": [
+            550,
+            420,
+            1020,
+            1120
+          ],
+          "rect_norm_xywh": [
+            0.5093,
+            0.2188,
+            0.4352,
+            0.3646
+          ],
+          "open_asset": "closeups/resources_review__power_energy.png",
+          "quality": "source_crop_with_background_extension",
+          "interaction": "inspect"
+        },
+        {
+          "id": "resource_allocation",
+          "label": "Resource Allocation",
+          "rect_px": [
+            230,
+            1030,
+            915,
+            1690
+          ],
+          "rect_norm_xywh": [
+            0.213,
+            0.5365,
+            0.6343,
+            0.3438
+          ],
+          "open_asset": "closeups/resources_review__resource_allocation.png",
+          "quality": "source_crop_with_background_extension",
+          "interaction": "inspect"
+        }
+      ],
+      "background_size": [
+        1080,
+        1920
+      ]
+    }
+  ],
+  "constraints": [
+    "No authentic NASA dataset or science metrics embedded",
+    "Close-ups are crops from approved background artwork, not new scene renderings",
+    "UI icons are transparent vector assets; not individually generated 3D objects",
+    "Hotspot coordinates are initial estimates requiring visual tuning"
+  ]
+}

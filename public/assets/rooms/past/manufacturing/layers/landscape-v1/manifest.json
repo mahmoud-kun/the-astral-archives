@@ -1,0 +1,119 @@
+{
+  "version": 1,
+  "roomId": "manufacturing",
+  "timeline": "past",
+  "variant": "landscape-v1",
+  "sourceArt": "/assets/rooms/past/manufacturing/layers/landscape-v1/background/room_visible.png",
+  "coordinateSystem": {
+    "width": 1920,
+    "height": 1080
+  },
+  "background": "/assets/rooms/past/manufacturing/layers/landscape-v1/background/room_bg_clean.png",
+  "objects": [
+    {
+      "id": "materials_structure",
+      "sourceArt": "/assets/rooms/past/manufacturing/layers/landscape-v1/background/room_visible.png",
+      "sourceProvenance": {
+        "portrait": "/assets/rooms/past/sources/01_Manufacturing_Materials_1080x1920.png",
+        "method": "reference_guided_landscape_recreation_and_traced_polygon"
+      },
+      "position": {
+        "x": 98,
+        "y": 394,
+        "width": 544,
+        "height": 501
+      },
+      "zIndex": 1,
+      "assets": {
+        "base": "/assets/rooms/past/manufacturing/layers/landscape-v1/materials_structure/materials_structure_base.png",
+        "mask": "/assets/rooms/past/manufacturing/layers/landscape-v1/materials_structure/materials_structure_mask.png",
+        "glow": "/assets/rooms/past/manufacturing/layers/landscape-v1/materials_structure/materials_structure_glow.png",
+        "screen": "/assets/rooms/past/manufacturing/layers/landscape-v1/materials_structure/materials_structure_screen.png"
+      },
+      "interaction": {
+        "target": "materials_structure",
+        "label": "Inspect materials and structure",
+        "mask": "/assets/rooms/past/manufacturing/layers/landscape-v1/materials_structure/materials_structure_mask.png"
+      },
+      "states": [
+        "idle",
+        "hover",
+        "focus",
+        "touch"
+      ],
+      "extractionMode": "polygon_traced",
+      "cleanPlateExtractionComplete": false,
+      "designerCleanupRequired": true
+    },
+    {
+      "id": "motors_energy",
+      "sourceArt": "/assets/rooms/past/manufacturing/layers/landscape-v1/background/room_visible.png",
+      "sourceProvenance": {
+        "portrait": "/assets/rooms/past/sources/01_Manufacturing_Materials_1080x1920.png",
+        "method": "reference_guided_landscape_recreation_and_traced_polygon"
+      },
+      "position": {
+        "x": 754,
+        "y": 378,
+        "width": 407,
+        "height": 453
+      },
+      "zIndex": 2,
+      "assets": {
+        "base": "/assets/rooms/past/manufacturing/layers/landscape-v1/motors_energy/motors_energy_base.png",
+        "mask": "/assets/rooms/past/manufacturing/layers/landscape-v1/motors_energy/motors_energy_mask.png",
+        "glow": "/assets/rooms/past/manufacturing/layers/landscape-v1/motors_energy/motors_energy_glow.png",
+        "screen": "/assets/rooms/past/manufacturing/layers/landscape-v1/motors_energy/motors_energy_screen.png"
+      },
+      "interaction": {
+        "target": "motors_energy",
+        "label": "Inspect motors and energy",
+        "mask": "/assets/rooms/past/manufacturing/layers/landscape-v1/motors_energy/motors_energy_mask.png"
+      },
+      "states": [
+        "idle",
+        "hover",
+        "focus",
+        "touch"
+      ],
+      "extractionMode": "polygon_traced",
+      "cleanPlateExtractionComplete": false,
+      "designerCleanupRequired": true
+    },
+    {
+      "id": "rocket_design",
+      "sourceArt": "/assets/rooms/past/manufacturing/layers/landscape-v1/background/room_visible.png",
+      "sourceProvenance": {
+        "portrait": "/assets/rooms/past/sources/01_Manufacturing_Materials_1080x1920.png",
+        "method": "reference_guided_landscape_recreation_and_traced_polygon"
+      },
+      "position": {
+        "x": 1278,
+        "y": 388,
+        "width": 555,
+        "height": 494
+      },
+      "zIndex": 3,
+      "assets": {
+        "base": "/assets/rooms/past/manufacturing/layers/landscape-v1/rocket_design/rocket_design_base.png",
+        "mask": "/assets/rooms/past/manufacturing/layers/landscape-v1/rocket_design/rocket_design_mask.png",
+        "glow": "/assets/rooms/past/manufacturing/layers/landscape-v1/rocket_design/rocket_design_glow.png",
+        "screen": "/assets/rooms/past/manufacturing/layers/landscape-v1/rocket_design/rocket_design_screen.png"
+      },
+      "interaction": {
+        "target": "rocket_design",
+        "label": "Inspect rocket design",
+        "mask": "/assets/rooms/past/manufacturing/layers/landscape-v1/rocket_design/rocket_design_mask.png"
+      },
+      "states": [
+        "idle",
+        "hover",
+        "focus",
+        "touch"
+      ],
+      "extractionMode": "polygon_traced",
+      "cleanPlateExtractionComplete": false,
+      "designerCleanupRequired": true
+    }
+  ]
+}
