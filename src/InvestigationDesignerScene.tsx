@@ -162,6 +162,7 @@ export default function InvestigationDesignerScene() {
           <h2>HOW TO EXPLORE</h2>
           <p className="idr-lead">The entire room is in front of you.</p>
           <p>Hover or tap an object to find recovered evidence, then collect it directly. The Station Door leads to Archive, Signal and Recordings. Open each recovered record and press COLLECT EVIDENCE directly. No answers or puzzles are required. The Quick Evidence Tray follows you between rooms and opens the physical Mission Folders directly. Wrong filing is saved silently. Escape closes the active inspector.</p>
+          <button className="idr-primary" onClick={()=>{setPanel(null);window.dispatchEvent(new Event('astral:replay-tutorial'))}}>REPLAY INTERACTIVE ROOM GUIDE <SmallIcon type="arrow"/></button>
           <button className="idr-primary" onClick={openCaseLibrary}>START WITH MISSION FILES <SmallIcon type="arrow"/></button>
         </div>}
         <footer className="idr-inspection-foot"><span>STATION / INVESTIGATION 01</span><span>FICTIONAL CASES — NO NASA TELEMETRY PRESENTED</span></footer>
