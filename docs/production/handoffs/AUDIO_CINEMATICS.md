@@ -138,3 +138,17 @@ The `CINEMATICS` manifest intentionally references:
 **P1 — Physical media QA:** No actual device listening, video URL playback or disabled-network Skip/Replay tested; browser media support and real timing remain unknown.
 
 **Final recommendation:** Main may review audio/playback **code** and manifest as a candidate; do **not** mark cinematic feature/release ACCEPTED until exact binaries, shared integration, browser + physical-device QA, and artistic/rights approvals are verified.
+
+
+## 7. User-approved continuation: four available clips only (2026-11-15)
+
+The user explicitly approved a **staged integration plan now**, with video-binary upload handled later and missing clips added only when designer delivery actually occurs. The new detailed, exact per-view Main patch/handoff is:
+
+**[Cinematic Placement & Main Patch V1](../../audio/CINEMATIC_PLACEMENT_AND_MAIN_PATCH_V1.md)**
+
+- `src/media/cinematicFlow.ts` — gated one-shot request + outcome listener bridge; no save changes/navigation, no duplicate pending requests, Return separate from video completion. `src/media/cinematicFlow.test.mjs` covers blocked gates, concurrent requests, wrong-ID events, Skip, Return, unavailable fallback and listener cancellation. These tests were added to the existing `test:audio` entrypoint.
+- Home first Start -> `opening` -> Investigation. Saved Continue should skip cinematic by default.
+- Investigation Rescue Console and Case Folder alternate NAD entry -> `portalPast` -> `/?rescue=NAD`, with **fresh 6/6 evidence authorization check both before launch and before route advance**.
+- `case1Intro` is staged for KES (Case 1) dossier on explicit view-only request, **but hold canonical binding** pending visual/source alignment signoff; the 7-second video shows hardware in assembly, while KES is a pre-Phase-A/Phase-A observatory concept. Video content is not evidence.
+- `case1Outcome` **must not** play on NAD, after just 6/6 or simply on clicking Rescue. Intended only for KES's verified alternate outcome, after actual integrated KES rescue UI and `otherRescueCompleted(...,'KES')` pass, and confirmation that its industrial hangar visuals fit source narrative.
+- Four original clip binaries are **still not in GitHub**. This document adds no invented footage and is not Main acceptance. New designer clips will be audited/versioned when delivered.
