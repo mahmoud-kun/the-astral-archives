@@ -3,6 +3,7 @@ import { CASE_META, EVIDENCE_RECORDS } from '../archive/evidenceRecords'
 import { DIAGNOSIS_PROMPTS, countRequiredEvidence, diagnosisIsSupported, rescueIsReady, submitDiagnosis, updateDiagnosis, type CaseDiagnosis, type DiagnosticPart } from '../archive/archiveState'
 import { navigateGame } from '../gameNavigation'
 import { playGameSound } from '../audio/gameAudio'
+import { isVerifiedOutcomeFilmAvailable, playVerifiedRescueOutcome } from '../integration/gameMediaActions'
 import { verifyRescuePlan } from './nadirEngine'
 import { updateArchive, updateNadir, useArchiveSave, useNadirSave } from './gameSave'
 import './nadirRescue.css'
@@ -102,7 +103,7 @@ export default function NadirRescue(){
      <div className="nr-reference">REFERENCE: 1 lbf = 4.448221615 N. Each impulse measurement includes seconds. Numerical tolerance: ±0.02 N·s.</div>
      {diagnosed&&!completed&&<button className="nr-action" disabled={Object.values(plan).some(x=>!x)} onClick={tryRerun}>RUN INDEPENDENT NAVIGATION RECHECK</button>}
      {!!testResults.length&&<div className="nr-report" aria-label="Verification output"><strong>TEST BENCH / RESULTS</strong>{testResults.map(line=><span key={line} className={line.endsWith('PASS')?'passed':'failed'}>{line}</span>)}</div>}
-     {completed&&<p className="nr-success">RESCUE SIMULATION VERIFIED — Corrected contract and independently checked unit conversions. This is a fictional engineering outcome, not a NASA mission result.</p>}
+     {completed&&<><p className="nr-success">RESCUE SIMULATION VERIFIED — Corrected contract and independently checked unit conversions. This is a fictional engineering outcome, not a NASA mission result.</p><button type="button" className="nr-action" data-sfx="none" onClick={()=>playVerifiedRescueOutcome('NAD')}>WATCH VERIFIED NADIR OUTCOME</button></>}
     </section>
    </>}
    {message&&<p className="nr-message" role="status">{message}</p>}
