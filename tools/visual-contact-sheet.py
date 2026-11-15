@@ -45,8 +45,10 @@ sheet("mobile-review", [
  ("SIGNAL / 915×412","signal-915x412.png"),
  ("ARCHIVE / 915×412","archive-915x412.png"),
  ("RECORDINGS / 915×412","recordings-915x412.png"),
- ("PUZZLE / 915×412","nadir-puzzle-915x412.png"),
+ ("PUZZLE / INSPECT / 915×412","nadir-puzzle-915x412.png"),
+ ("PUZZLE / ANALYZE / 915×412","nadir-analysis-915x412.png"),
  ("TRAY / 915×412","tray-open-915x412.png"),
+ ("FILED ONE RECORD / 915×412","nadir-collect-and-file-915x412.png"),
  ("FOLDERS / 915×412","folder-915x412.png"),
 ], (790,357))
 report=json.loads((SRC/"report.json").read_text())
