@@ -140,3 +140,27 @@
  .np-meta{font-size:8px}
  .np-foot{padding-block:4px}
 }
+
+/* Screen-height first on landscape phones: show a useful instrument, not a
+   headline and duplicated navigation. Footer appears when collection is ready. */
+@media(orientation:landscape) and (max-width:1000px) and (max-height:600px){
+ .np-meta{display:none}
+ .np-scroll h2{display:none}
+ .np-objective{font-size:12px;line-height:1.35;margin:4px 0 6px;color:#d8e8e8}
+ .np-mobile-steps{position:sticky;top:-8px;z-index:11;margin:3px 0 8px;
+   background:#071d2d;padding:4px;border:1px solid #2c5365}
+ .np-mobile-steps button{min-height:36px;font-size:10px}
+ .np-mobile-steps button span{width:21px;height:21px}
+ .np-foot.np-foot-nonaction{display:none}
+ .np-foot .np-secondary{display:none}
+ .np-head button{min-height:34px}
+ .np-sources,.np-workbench{width:100%}
+ .np-impulse-readouts{min-width:0}
+}
+@media(orientation:landscape) and (max-width:800px) and (max-height:390px){
+ .np-objective{font-size:11px;margin:2px 0 4px}
+ .np-mobile-steps{margin:2px 0 5px;padding:3px}
+ .np-mobile-steps button{min-height:32px;font-size:9px}
+ .np-dialog{height:calc(100dvh - 4px)}
+ .np-head{padding-block:3px}
+}
