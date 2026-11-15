@@ -91,6 +91,12 @@
 
 **Only genuine human/owner gates remain:** playback + UI touch on real Android, designer art approval, accurate speaker/word-for-word subtitles, media distribution/license authorization, final slide export, pitch rehearsal and smoke test on the Preview. Old PR #7 clean plate/mask candidates remain excluded. KES and AST unsafe video claims never appear as success in the shipped story.
 
+## Fast QA diagnosis after content clean-up
+
+- [Auto CI #153](https://github.com/mahmoud-kun/the-astral-archives/actions/runs/43701151029) **FAILED**, *not a gameplay-engine failure*: the test asserted an old `awaits the approved visual` Kestrel warning after Main replaced it with a truthful playable briefing, and `tools/visual-contact-sheet.py` attempted to regenerate a review image from the deliberately deleted old logo-bearing `static-v1` source. Build/unit suite completed before the visual/test-generation steps.
+- **Fixes:** `fdc56a11` makes the art-candidate generation conditional when the retired public source no longer exists; neutral `static-v2` remains the runtime asset. `7a430cbb` updates the exact Kestrel Browser QA assertion to the new briefing text; film-playback prohibition stays tested.
+- [Auto CI #155](https://github.com/mahmoud-kun/the-astral-archives/actions/runs/43701610936) was **IN PROGRESS when logged**, not a claimed PASS; no additional manual full 5-case E2E was requested. Last verified 5/5 full playable baseline: #150. Newly READY Vercel Preview `3e37b536` includes the actual gameplay fixes, but the CI script/test fixes are separate commits and not reflected in that preview (they do not change built gameplay).
+
 ## Main Chat review checkpoints
 
 | Gate | Required review output | Decision |
