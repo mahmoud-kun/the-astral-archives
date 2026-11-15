@@ -6,6 +6,13 @@ on:
       - experiment/room-case-library-layout-fix-2026-11-14
     paths:
       - "src/gameplay/**"
+      - "src/audio/**"
+      - "src/HomeScreen.tsx"
+      - "src/homeScreen.css"
+      - "src/main.tsx"
+      - "src/archive/ArchiveFolderLab.tsx"
+      - "public/assets/audio/**"
+      - "package.json"
       - "src/InvestigationLayeredScene.tsx"
       - "src/InvestigationDesignerScene.tsx"
       - "src/investigationDesignerScene.css"
