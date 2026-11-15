@@ -137,3 +137,10 @@ Six required and two optional records remain for each mission. Optional memories
 - Still blocked: new modules not called by A's hotspot mappings or Main's root router; production debug=1 shortcut outside this stream; user-art review, full fresh-save five-case browser QA, physical-device playback; Lumen formal optical acceptance tolerance remains unknown. No final release acceptance or merge by Chat C.
 
 
+### Latest complete verification after all Chat C code changes
+
+- [GitHub Actions **SUCCESS** #43677155809](https://github.com/mahmoud-kun/the-astral-archives/actions/runs/43677155809) on **49e2d156**, after source-first evidence gate, save-chain repair, case-route reset, keyboard focus, control styling and additional test.
+- **60/60 automated tests PASS**, across 8 suites: investigation 3, fixed-room 4, legacy rescue 6, archive 6, navigation 3, layers 3, **Nadir and four-case science 22**, audio 13. **TypeScript/Vite production build PASS**.
+- **44/44 Chromium screenshots PASS** for the existing approved routes, with zero broken images, UI clipping, overflow or browser console errors **on those routes**. **New KES/LUM/ORI/AST CaseStationDesk, CasePuzzle and CaseRescue are unmounted, so their rendered UX is NOT visually tested by the 44 screenshots**.
+- No subsequent Chat C gameplay-code change was made after commit 49e2d156 before this documentation checkpoint; the documentation-only updates do not alter the tested application bundle. Main/A route/hotspot integration will require a separate full run and fresh new-screen E2E.
+
