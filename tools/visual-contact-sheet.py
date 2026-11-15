@@ -137,4 +137,10 @@ with Image.open(source_plate) as original:
 # immutable runtime source. CI publishes it under docs/visual-qa first; the
 # integration specialist must inspect it before using it in gameplay.
 import subprocess,sys
-subprocess.run([sys.executable,"tools/patch-mission-target-art.py"],check=True)
+legacy_mission_art=Path("public/assets/rooms/past/mission_target/layers/static-v1/room_visible.webp")
+if legacy_mission_art.is_file():
+    subprocess.run([sys.executable,"tools/patch-mission-target-art.py"],check=True)
+else:
+    # Archived logo-bearing source was intentionally removed from public assets.
+    # static-v2 is already approved as the active runtime art; do not resurrect it.
+    print("[MISSION-ART] Retired static-v1 source absent; keeping active neutral static-v2.")
