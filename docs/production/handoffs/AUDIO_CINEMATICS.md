@@ -248,3 +248,26 @@ Asterion release block is **code enforced**, not just documented: `CINEMATIC_LIV
 [GitHub Actions #43688210176](https://github.com/mahmoud-kun/the-astral-archives/actions/runs/43688210176) **SUCCESS**: all 20 source cues (11 unchanged designer WAV + 8 unchanged Kenney M4A + 1 original Rescue Complete WAV, 842,128 bytes), audio suite **28/28 PASS**, production build and other suites **PASS**, **52 browser screenshot scenarios / 0 broken / 0 clipped / 0 errors / 0 console errors**. The source chime has a Git-verified blob SHA and its own user-controlled preview in the Sound Lab; original 19 source rows and all gameplay saves remain intact. See [SFX Main Patch](../../audio/SFX_FINALIZATION_AND_MAIN_PATCH_2026-11-15.md).
 
 **SFX specialist finish:** COMPLETE for owned source code, binary production, trigger-safe audio behavior, testing and documentation. **Integration/release outstanding:** Main-owned portal and real engineering simulation trigger hooks, actual mobile/headphone listening, final incoming Voice Over loudness/captions, and cinema integration/Asterion outcome scientific correction. No main merge or shared-file edit.
+
+
+## 12. Final Five-Voice Delivery — Complete in Chat B Scope (2026-11-15)
+
+The **current authoritative update** for spoken evidence supersedes Sections 1–11 references to only one KES-05 MP3. All five supplied canonical Recordings Room evidence voices **are physically on GitHub, source-exact, and available to the audio runtime**:
+
+- KES-05 — 314,523 bytes (previously installed).
+- NAD-07 — 277,325 bytes.
+- LUM-07 — 299,059 bytes.
+- ORI-07 — 395,190 bytes.
+- AST-07 — 556,522 bytes.
+
+**Total voice 1,842,619 bytes.** Exact SHA256 and Git blob SHA1 values are embedded in `src/audio/evidenceVoiceManifest.ts` and checked by `src/audio/evidenceVoiceManifest.test.mjs`. New exact-original four-media upload commit: [`95d266d`](https://github.com/mahmoud-kun/the-astral-archives/commit/95d266d1d47abfdd716234de0df9a254dfc4116b). All five map only to already-existing canonically numbered `Recordings` evidence; KES-07 and ORI-08 remain optional text/visual evidence without provided MP3.
+
+**Completed in audio-owned files:** `EVIDENCE_VOICE` 5-entry manifest; `EvidenceVoicePlayer` single-voice playback, native controls, mutually exclusive playback, audio focus, source fallback and master volume; Sound Lab `5 MP3` preview; five-source SHA tests. Voice preview mix controls use measured original LUFS and do not alter the MP3 bytes. The 20 registered SFX and 17 approved cinema assets remain intact.
+
+**Final verified CI:** [GitHub Actions run #43693601655](https://github.com/mahmoud-kun/the-astral-archives/actions/runs/43693601655) **SUCCESS**, including `npm run test:audio` **28/28 PASS**, all production build suites and TypeScript/Vite **PASS**, and desktop/phone visual audit **52 screenshots, zero broken/clipped/errors/console errors**. This is automated source/build/screenshot validation and **does not prove audible physical mobile playback or actual in-game inspector entry points**. The voice-source exact byte sizes and SHA256 were additionally calculated from the physical downloaded Google Drive originals and matched the source ledger.
+
+**Main Chat REQUIRED:** mount `<EvidenceVoicePlayer id={record.id}/>` inside only the **authoritatively accessible Recordings Room evidence inspector**, guarded by `record.room === 'Recordings' && isEvidenceVoiceId(record.id)`; do not alter collecting, filing, puzzle solving, six-record gate or rescue verification. Full minimal patch, five source hashes, exclusive-play contract, accessibility and manual test: [Voice Over Final Handoff](../../audio/VOICE_OVER_FINAL_HANDOFF_2026-11-15.md).
+
+**Publication dependencies:** approve verbatim audio transcripts/speaker labels for captions, physically listen on desktop and Android, verify non-overlap with cinematic soundtrack, ensure Main's cinematic root/event integration; Asterion incorrect 472 W outcome remains live-blocked pending 450 W correction; 18th Drive `game demo.mp4` is a newly detected visual demo/reference, **not an approved cinematic**, and is not silently registered. No distinct Return to Present or Closing file is present in the latest Drive `videos` inventory. No source media files were overwritten and no Main-owned files were modified.
+
+**Final Chat B verdict: SOURCE ASSET PREP + ALL OWNED AUDIO/CINEMATIC CODE/TESTS = DONE. MAIN GAMEPLAY MEDIA WIRING + FINAL DEVICE/CONTENT QA = PENDING. NO MAIN MERGE.**
