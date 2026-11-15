@@ -59,6 +59,18 @@ test('settings persistence, live SFX volume, tab mute and cinematic audio focus'
   videoFocus()
   playGameSound('metal')
   assert.equal(samples.length,3,'idempotent focus release restores normal sound')
+  // Real Nadir/other-case rescue callbacks still emit the legacy "rescue" event.
+  // The sound engine chooses the new reward ONLY on a recognized rescue route.
+  globalThis.window.location={search:'?rescue=AST'}
+  playGameSound('rescue')
+  assert.equal(samples.length,4)
+  assert.equal(samples[3].src,'/assets/audio/sfx/rescue_completed_original_v1.wav')
+  assert.equal(samples[3].dataset.astralSound,'rescueComplete')
+  assert.equal(samples[3].volume,gameSoundVolume('rescueComplete',40))
+  globalThis.window.location.search='?folder-lab=1'
+  playGameSound('rescue')
+  assert.equal(samples.length,5)
+  assert.equal(samples[4].src,'/assets/audio/sfx/rescue_unlocked.wav','folder unlock must retain original reward')
   globalThis.document.hidden=true
   docListeners.get('visibilitychange')()
   assert.ok(samples[2].pauseCalls>0,'backgrounded tab stops active sound')
