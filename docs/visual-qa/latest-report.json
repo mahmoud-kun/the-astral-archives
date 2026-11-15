@@ -1,11 +1,21 @@
 {
-  "run_on": "2026-11-15T08:16:17.670Z",
-  "screenshots": 52,
+  "run_on": "2026-11-15T08:41:03.753Z",
+  "screenshots": 60,
   "console_errors": 0,
   "broken_images": 0,
   "clipped_controls": 0,
   "overflows": 0,
-  "errors": [],
+  "errors": [
+    {
+      "label": "opening-to-investigation",
+      "viewport": {
+        "width": 915,
+        "height": 412
+      },
+      "error": "TimeoutError: locator.click: Timeout 30000ms exceeded.\nCall log:\n  - waiting for getByRole('button', { name: 'SKIP & CONTINUE' })\n",
+      "faults": []
+    }
+  ],
   "missing_screenshots": [],
   "image_transfer_bytes_by_route": [
     {
@@ -465,6 +475,78 @@
         "height": 412
       },
       "label": "production-debug-guard",
+      "bytes": 0
+    },
+    {
+      "route": "/?station=archive",
+      "viewport": {
+        "width": 915,
+        "height": 412
+      },
+      "label": "source-desk-archive",
+      "bytes": 365024
+    },
+    {
+      "route": "/?station=signal",
+      "viewport": {
+        "width": 915,
+        "height": 412
+      },
+      "label": "source-desk-signal",
+      "bytes": 499890
+    },
+    {
+      "route": "/?station=recordings",
+      "viewport": {
+        "width": 915,
+        "height": 412
+      },
+      "label": "source-desk-recordings",
+      "bytes": 376722
+    },
+    {
+      "route": "/?station=recordings",
+      "viewport": {
+        "width": 915,
+        "height": 412
+      },
+      "label": "nadir-voice-inspector",
+      "bytes": 376722
+    },
+    {
+      "route": "/?station=recordings",
+      "viewport": {
+        "width": 915,
+        "height": 412
+      },
+      "label": "kestrel-voice-inspector",
+      "bytes": 376722
+    },
+    {
+      "route": "/?station=signal",
+      "viewport": {
+        "width": 915,
+        "height": 412
+      },
+      "label": "nadir-evidence-video",
+      "bytes": 499890
+    },
+    {
+      "route": "/?folder-lab=1",
+      "viewport": {
+        "width": 915,
+        "height": 412
+      },
+      "label": "lumen-briefing-film",
+      "bytes": 0
+    },
+    {
+      "route": "/?folder-lab=1",
+      "viewport": {
+        "width": 915,
+        "height": 412
+      },
+      "label": "kestrel-film-content-hold",
       "bytes": 0
     },
     {
