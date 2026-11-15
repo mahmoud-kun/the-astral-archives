@@ -6,17 +6,13 @@ import { navigateGame } from '../gameNavigation'
 import { useArchiveSave } from './gameSave'
 import { CASE_EVIDENCE_TASKS, OTHER_CASE_IDS, type OtherCaseId, type OtherRecordId } from './caseEvidenceEngine'
 import { useOtherProgress } from './caseSave'
+import { readActiveCase, setActiveCase } from './caseContext'
 import CasePuzzle from './CasePuzzle'
 import './caseWork.css'
 
-const ACTIVE_CASE_KEY='astral-active-mission-v1'
 function initialSelection(station:'investigation'|'archive'|'signal'|'recordings',explicit?:OtherCaseId):OtherCaseId{
  if(explicit)return explicit
- try{
-  const saved=window.localStorage.getItem(ACTIVE_CASE_KEY)
-  if(OTHER_CASE_IDS.some(c=>c===saved))return saved as OtherCaseId
- }catch{/* Storage is optional. */}
- return station==='signal'?'LUM':'KES' // KES has no Signal records; show an inspectable case.
+ return readActiveCase()??(station==='signal'?'LUM':'KES')
 }
 /** A source browser attaches to one physical in-room instrument, not 32 new floating hotspots.
  * Chat A/Main mount this on existing non-Nadir supporting objects while Nadir stays unchanged.
@@ -27,7 +23,7 @@ export default function CaseStationDesk({station,onClose,initialCase}:{
  const [caseId,setCaseId]=useState<OtherCaseId>(()=>initialSelection(station,initialCase))
  const [selected,setSelected]=useState<OtherRecordId|null>(null)
  const progress=useOtherProgress()
- useEffect(()=>{if(initialCase)setCaseId(initialCase)},[initialCase])
+ useEffect(()=>{if(initialCase){setCaseId(initialCase);setActiveCase(initialCase)}},[initialCase])
  const archive=useArchiveSave()
  const closer=useRef<HTMLButtonElement>(null)
  const deskRef=useRef<HTMLElement>(null)
@@ -58,7 +54,7 @@ export default function CaseStationDesk({station,onClose,initialCase}:{
  function chooseCase(next:OtherCaseId){
   setCaseId(next)
   setSelected(null)
-  try{window.localStorage.setItem(ACTIVE_CASE_KEY,next)}catch{/* Continue without persistence. */}
+  setActiveCase(next)
  }
  function openFolders(){
   navigateGame('/?folder-lab=1&return='+station)
