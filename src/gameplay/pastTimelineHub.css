@@ -48,3 +48,20 @@
 .pt-stage-cleared{border-color:#6dac8c!important;color:#bff5d1!important}
 @media(max-width:650px){.pt-repair-choices{grid-template-columns:1fr}.pt-intervention-panel{padding:11px 12px}.pt-repair-choices .pt-repair-option{min-height:56px}.pt-system-status{padding:8px}.pt-floating-system{bottom:66px}}
 @media(max-height:510px){.pt-intervention-panel{top:51%;max-height:calc(100dvh - 91px);padding:7px 13px}.pt-engineering{gap:6px}.pt-repair-choices .pt-repair-option{min-height:45px;padding:6px 8px;gap:3px}.pt-decision-effect{padding:7px 9px}.pt-system-status{padding:7px 9px}.pt-floating-system{bottom:62px;padding:6px 9px}.pt-object-actions{margin:6px 0}}
+
+/* Nuanced multi-path decisions: no green/red correctness cue before review. */
+.pt-repair-choices.pt-choices-3{grid-template-columns:repeat(3,minmax(0,1fr))}
+.pt-repair-choices.pt-choices-4{grid-template-columns:repeat(2,minmax(0,1fr))}
+.pt-repair-option{transition:border-color .13s ease,background .13s ease}
+.pt-decision-effect{background:rgba(36,70,89,.4);border-color:#81a2b6}
+.pt-decision-effect small{color:#c9dae3}
+.pt-stage-configured{border-color:#bca276!important}
+.pt-review-panel{width:min(740px,calc(100vw - 24px))}
+.pt-review-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;margin:12px 0}
+.pt-review-line{padding:10px 12px;border:1px solid #617c8c;background:#11293b;border-radius:5px}
+.pt-review-line strong{display:block;font-size:12px;color:#f1d1a1;line-height:1.4}
+.pt-review-line p{font-size:12px;margin:5px 0}
+.pt-review-line small{display:block;color:#d3e1e5;margin:7px 0;font-size:11px;line-height:1.4}
+.pt-review-line button{width:100%;margin-top:7px;text-align:center}
+@media(max-width:740px){.pt-repair-choices.pt-choices-3{grid-template-columns:repeat(2,minmax(0,1fr))}.pt-review-list{grid-template-columns:1fr}}
+@media(max-width:620px){.pt-repair-choices.pt-choices-3,.pt-repair-choices.pt-choices-4{grid-template-columns:1fr}}
