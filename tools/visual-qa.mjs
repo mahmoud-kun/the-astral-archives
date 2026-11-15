@@ -153,6 +153,33 @@ for(const viewport of [laptop,mobile,small]){
   await page.getByRole('button',{name:'Close evidence tray'}).click()
  })
 }
+// Sound files must not load on the initial low-bandwidth Home visit.
+// Audio begins only after a real gesture; mute and volume persist.
+await check(mobile,'/','audio-settings',async page=>{
+  const initial=await page.evaluate(()=>performance.getEntriesByType('resource').filter(r=>new URL(r.name).pathname.startsWith('/assets/audio/')).length)
+  assert.equal(initial,0,'Home must not preload any audio files')
+  const loaded=[]
+  page.on('response',r=>{if(new URL(r.url()).pathname.startsWith('/assets/audio/'))loaded.push({url:r.url(),status:r.status()})})
+  await page.getByRole('button',{name:'SETTINGS'}).click()
+  await page.waitForTimeout(650)
+  assert.ok(loaded.some(x=>x.url.includes('/audio/sfx/panel_open.wav')&&x.status===200),
+    'Settings click should load the original designer panel-open cue')
+  const fx=page.locator('.aa-home-setting-row input[type="checkbox"]').nth(0)
+  const ambient=page.locator('.aa-home-setting-row input[type="checkbox"]').nth(1)
+  assert.equal(await fx.isChecked(),true)
+  assert.equal(await ambient.isChecked(),true)
+  await fx.uncheck()
+  await ambient.uncheck()
+  await page.locator('.aa-home-audio-volume input').focus()
+  await page.keyboard.press('End')
+  const prefs=await page.evaluate(()=>JSON.parse(localStorage.getItem('astral-audio-settings-v1')||'null'))
+  assert.deepEqual(prefs,{effects:false,ambient:false,volume:100})
+  await page.reload({waitUntil:'networkidle'})
+  await page.getByRole('button',{name:'SETTINGS'}).click()
+  assert.equal(await page.locator('.aa-home-setting-row input[type="checkbox"]').nth(0).isChecked(),false)
+  assert.equal(await page.locator('.aa-home-audio-volume input').inputValue(),'100')
+  // Leave this isolated browser context muted; other QA contexts are unaffected.
+})
 await check({width:390,height:844},'/','portrait-guard')
 await writeFile(`${output}/report.json`, JSON.stringify(report,null,2))
 await browser.close()
