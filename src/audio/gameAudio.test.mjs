@@ -42,6 +42,7 @@ test('every registered sound has a real nonempty local binary file',()=>{
 
 import '../media/cinematicManifest.test.mjs'
 import '../media/cinematicFlow.test.mjs'
+import './evidenceVoiceManifest.test.mjs'
 import './audioRuntime.test.mjs'
 
 test('every cue remains quiet at 40 percent and fully mutes at zero',()=>{
