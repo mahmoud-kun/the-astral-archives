@@ -4,6 +4,7 @@ import {getAudioSettings,setAudioSettings,playGameSound,sceneFromSearch,type Gam
 import './audioReviewLab.css'
 import {CinematicPlayer} from '../media/CinematicOverlay'
 import {CINEMATICS,type CinematicId} from '../media/cinematicManifest'
+import EvidenceVoicePlayer from './EvidenceVoicePlayer'
 
 const ORIGINAL:readonly {cue:GameSound;label:string;use:string}[]=[
  {cue:'hover',label:'UI Hover',use:'Quiet pointer feedback · 0.10s'},
@@ -75,11 +76,15 @@ export default function AudioReviewLab(){
    </section>
   </div>
   <section className="al-list" aria-label="Designer cinematic review" style={{margin:'18px auto',maxWidth:'900px'}}>
-   <header><h2>DESIGNER CINEMATICS</h2><small>4 MP4 DELIVERED IN DRIVE · PUBLISHING PENDING</small></header>
+   <header><h2>DESIGNER CINEMATICS</h2><small>12 MP4 DELIVERED IN DRIVE · PUBLISHING PENDING</small></header>
    {Object.entries(CINEMATICS).map(([id,clip])=><div className="al-cinema-cue" key={id}>
     <div><strong>{clip.title}</strong><small>{clip.duration}s · Original preserved in Drive · Local clip required for playback</small></div>
     <button type="button" data-sfx="none" onClick={()=>setPreviewClip(id as CinematicId)}>REVIEW</button>
    </div>)}
+  </section>
+  <section className="al-list" aria-label="Designer spoken evidence review" style={{margin:'18px auto',maxWidth:'900px'}}>
+   <header><h2>DESIGNER VOICE · KES-05</h2><small>1 MP3 · RECORDINGS ROOM · PUBLISHING PENDING</small></header>
+   <EvidenceVoicePlayer id="KES-05"/>
   </section>
   {previewClip&&<CinematicPlayer id={previewClip} onFinish={()=>setPreviewClip(null)}/>}
   <footer>PRODUCTION AUDIO PREVIEW · ORIGINAL FILES PRESERVED · ZERO PAID SERVICES</footer>
