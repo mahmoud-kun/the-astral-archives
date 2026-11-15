@@ -43,3 +43,16 @@
 On a running build, verify successful HTTP 200/206 for MP4s, first-use tap/gesture and iOS/Android browser playback, 16:9 responsive presentation, sound toggle/mute and no double audio, optional clip lazy load and fallback, manual Skip/Replay/Return, no changes to saved evidence from playback, six-required-evidence rescue gates, opening only on a new Start, and science-signoff for the held Asterion outcome.
 
 **Status:** SOURCE INVENTORY / UPLOAD / MANIFEST / PREVIEW — DONE; ACTUAL GAME ENTRY POINTS / LICENSE / CAPTIONS / MOBILE REAL-PLAYBACK — MAIN QA PENDING; AST outcome — SCIENTIFIC HOLD.
+
+
+## Final source-populated independent CI verification
+
+[Visual QA + complete build run #43685165238](https://github.com/mahmoud-kun/the-astral-archives/actions/runs/43685165238) **SUCCESS** on commit `96b521acff9c4deef5b39ddb1d0798d12965a0b8`, which includes all new 17 source paths, the central `CINEMATIC_LIVE_HOLDS.case5Outcome` API/flow/overlay guard, explicit review-only alert and the final tests:
+
+- `npm run test:audio`: **24/24 PASS**; in particular **all 17 uploaded MP4 exact source SHA256/size checks PASS**, five-case intro/outcome catalog tests PASS, five authentic evidence-context IDs PASS, held AST outcome both catalog and direct-event/flow tests PASS.
+- `npm run build`: **PASS**, TypeScript/Vite production build (3.89 sec Vite bundle in CI), all other test suites PASS.
+- Visual QA: **52 screenshots, 0 broken, 0 clipped, 0 scenario errors, 0 console errors** at desktop/mobile sizes. This is automated UI/route QA, **NOT actual playback audition**.
+- `case5Outcome` is blocked at all game presentation entry points (`requestCinematic`, `requestCinematicFlow`, `CinematicOverlay` event handler and approved outcome selector). **The Audio Lab may still preview the original 472 W footage for a designer correction.**
+- The physical source video files were separately checked by GitHub recursive tree (17/17 videos with expected sizes plus the one MP3); temporary import workflow removed.
+
+**No remaining binary upload blocker; only Main-owned live event wiring, captions/rights review, mobile browser media playback, and scientifically corrected AST outcome require completion.**
