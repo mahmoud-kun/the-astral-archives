@@ -5,6 +5,7 @@ import LandscapeGuard from './LandscapeGuard'
 import { GAME_ROUTE_EVENT } from './gameNavigation'
 import { installGameAudio } from './audio/gameAudio'
 import { isOtherCaseId } from './gameplay/caseContext'
+import {isPastRoomId,isPastCaseId} from './gameplay/pastTimeline'
 import CinematicOverlay from './media/CinematicOverlay'
 import './styles.css'
 
@@ -19,6 +20,7 @@ const StationRoom = lazy(() => import('./gameplay/StationRoom'))
 const EvidenceTray = lazy(() => import('./gameplay/EvidenceTray'))
 const NadirRescue = lazy(() => import('./gameplay/NadirRescue'))
 const CaseRescue = lazy(() => import('./gameplay/CaseRescue'))
+const PastTimelineHub = lazy(() => import('./gameplay/PastTimelineHub'))
 const AudioReviewLab = lazy(() => import('./audio/AudioReviewLab'))
 
 function AstralArchives() {
@@ -45,6 +47,10 @@ function AstralArchives() {
   const isOldFixedRoom = params.get('old-room') === '1'
   const roomParam = params.get('station')
   const station = roomParam === 'signal' || roomParam === 'archive' || roomParam === 'recordings' ? roomParam : null
+  const pastRoomParam = params.get('past')
+  const pastCaseParam = params.get('case')
+  const pastRoom = isPastRoomId(pastRoomParam) ? pastRoomParam : null
+  const pastCase = isPastCaseId(pastCaseParam) ? pastCaseParam : null
   const rescueCase = params.get('rescue')
   const nadirRescue = rescueCase === 'NAD'
   const otherCaseRescue = isOtherCaseId(rescueCase) ? rescueCase : null
@@ -56,6 +62,7 @@ function AstralArchives() {
       isArchiveFolderLab ? <ArchiveFolderLab /> :
       nadirRescue ? <NadirRescue /> :
       otherCaseRescue ? <CaseRescue key={otherCaseRescue} caseId={otherCaseRescue}/> :
+      pastRoom && pastCase ? <PastTimelineHub key={pastRoom+pastCase} room={pastRoom} caseId={pastCase}/> :
       isFixedRoom ? <InvestigationDesignerScene /> :
       station ? <StationRoom station={station} /> :
       isOldFixedRoom ? <FixedRoomAdventure /> :

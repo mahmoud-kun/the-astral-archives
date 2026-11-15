@@ -18,7 +18,7 @@ export function enterRescueThroughPortal(caseId: ArchiveCaseId): boolean {
  return requestCinematicFlow('portalPast', {
   canStart: () => rescueIsReady(readArchive(), caseId),
   onAdvance: () => {
-   if(rescueIsReady(readArchive(), caseId))navigateGame('/?rescue='+caseId)
+   if(rescueIsReady(readArchive(), caseId))navigateGame('/?past=manufacturing&case='+caseId)
   },
  })
 }
