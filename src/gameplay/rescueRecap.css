@@ -39,3 +39,12 @@
 .rr-modal button:focus-visible{outline:2px solid #f9d795;outline-offset:2px}
 @media(max-width:690px){.rr-shade{padding:6px}.rr-modal{max-height:99dvh}.rr-head{padding:9px 12px}.rr-head h2{font-size:16px}.rr-intro{padding:7px 12px}.rr-intro p{font-size:11px}.rr-tabs{padding:6px 12px;gap:5px}.rr-tabs button{font-size:10px;padding:7px}.rr-content{padding:8px 12px}.rr-lesson-layout{grid-template-columns:1fr;gap:7px}.rr-topic-list{flex-direction:row;overflow-x:auto}.rr-topic-list button{min-width:145px;padding:8px}.rr-lesson{padding:10px}.rr-lesson p{font-size:12px}.rr-foot{padding:8px 12px}.rr-records{grid-template-columns:1fr}.rr-foot-actions button{min-height:35px;padding:7px 9px}}
 @media(max-height:480px){.rr-intro{padding:4px 10px}.rr-intro p{font-size:11px}.rr-head{padding:5px 10px}.rr-head h2{font-size:14px}.rr-tabs{padding:4px 10px}.rr-content{padding:7px 10px}.rr-lesson{padding:8px}.rr-lesson p{margin:6px 0}.rr-lesson h3{margin:4px 0}.rr-topic-list button{padding:6px}.rr-foot{padding:5px 10px}.rr-foot-actions button{min-height:31px}}
+
+.rr-modal{animation:astral-briefing-arrive .34s cubic-bezier(.17,.9,.29,1) both}
+.rr-story-count{display:inline-flex;margin-left:8px;padding:2px 6px;background:#2d4c5c;border:1px solid #668d9a;border-radius:4px;color:#e9c893;font:700 10px 'IBM Plex Mono',monospace}
+.rr-lesson{animation:astral-briefing-page .24s ease-out both}
+.rr-start{transition:filter .18s,transform .18s}
+.rr-start:hover{transform:translateY(-2px);filter:brightness(1.08)}
+@keyframes astral-briefing-arrive{from{opacity:0;transform:translateY(16px) scale(.985)}to{opacity:1;transform:translateY(0) scale(1)}}
+@keyframes astral-briefing-page{from{opacity:0;transform:translateX(9px)}to{opacity:1;transform:translateX(0)}}
+@media(prefers-reduced-motion:reduce){.rr-modal,.rr-lesson{animation:none}.rr-start{transition:none}}
