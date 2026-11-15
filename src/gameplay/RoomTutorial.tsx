@@ -65,7 +65,9 @@ export default function RoomTutorial({roomKey,caseId}:{roomKey:TourKey|null;case
  const [position,setPosition]=useState<Position|null>(null)
  const cardRef=useRef<HTMLElement>(null)
  const steps=roomKey?currentTour(roomKey,caseId):[]
- const targetSelector=steps[step]?.target
+ // The room may change before the first-visit effect resets the old step.
+ const safeStep=Math.min(step,Math.max(steps.length-1,0))
+ const targetSelector=steps[safeStep]?.target
  useEffect(()=>{
   setStep(0)
   if(!roomKey){setVisible(false);return}
@@ -126,20 +128,20 @@ export default function RoomTutorial({roomKey,caseId}:{roomKey:TourKey|null;case
    window.removeEventListener('resize',schedule);window.removeEventListener('scroll',schedule,true)
    window.visualViewport?.removeEventListener('resize',schedule)
   }
- },[visible,targetSelector,roomKey,step])
+ },[visible,targetSelector,roomKey,safeStep])
  if(!roomKey||!visible)return null
- const tip=steps[step]
- function next(){if(step+1>=steps.length)setVisible(false);else{setStep(n=>n+1);setPosition(null)}}
+ const tip=steps[safeStep]
+ function next(){if(safeStep+1>=steps.length)setVisible(false);else{setStep(safeStep+1);setPosition(null)}}
  function skipAll(){const prior=read();save({...prior,skipAll:true});setVisible(false)}
  return <>
   {position&&<div className="rt-target-ring" aria-hidden="true" style={position.target}/>}
   <aside ref={cardRef} className={'rt-bubble rt-anchored'+(position?' rt-side-'+position.side:' rt-finding')}
     style={position?{left:position.left,top:position.top}:undefined}
     role="complementary" aria-label="Optional room tutorial">
-   <header><small>GUIDED TOUR · {step+1}/{steps.length}</small><button type="button" onClick={skipAll} aria-label="Skip all room tutorials">SKIP ALL</button></header>
+   <header><small>GUIDED TOUR · {safeStep+1}/{steps.length}</small><button type="button" onClick={skipAll} aria-label="Skip all room tutorials">SKIP ALL</button></header>
    <span className="rt-target-label">FOCUS · {tip.label}</span>
    <h2>{tip.title}</h2><p>{tip.copy}</p>
-   <footer><span>First visit only</span><button type="button" onClick={next}>{step+1<steps.length?'NEXT':'START EXPLORING'} →</button></footer>
+   <footer><span>First visit only</span><button type="button" onClick={next}>{safeStep+1<steps.length?'NEXT':'START EXPLORING'} →</button></footer>
   </aside>
  </>
 }
