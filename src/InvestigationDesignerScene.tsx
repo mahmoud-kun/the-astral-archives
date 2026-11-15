@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { navigateGame, onGameLinkClick } from './gameNavigation'
+import { playGameSound } from './audio/gameAudio'
 import InvestigationLayeredScene, { type RoomObjectTarget } from './InvestigationLayeredScene'
 import NadirPuzzle from './gameplay/NadirPuzzle'
 import { stationRoute, type NadirRecord } from './gameplay/nadirEngine'
@@ -51,6 +52,7 @@ export default function InvestigationDesignerScene() {
 
   function open(target: Interaction) {
     setShowHint(false)
+    playGameSound('panelOpen')
     setPanel(target)
   }
 
@@ -96,7 +98,7 @@ export default function InvestigationDesignerScene() {
         <div className={'idr-inspection-back idr-inspection-back-' + panel} aria-hidden="true"/>
         <header className="idr-inspection-head">
           <span>THE ASTRAL ARCHIVES <b>/</b> {panel === 'briefing' ? 'DESK TERMINAL' : panel === 'door' ? 'STATION DIRECTORY' : panel === 'evidence' ? 'EVIDENCE BOARD' : panel === 'rescue' ? 'RESCUE CONSOLE' : 'INVESTIGATOR HELP'}</span>
-          <button onClick={() => setPanel(null)}><SmallIcon type="close"/> <span>BACK TO ROOM</span></button>
+          <button data-sfx="panelClose" onClick={() => setPanel(null)}><SmallIcon type="close"/> <span>BACK TO ROOM</span></button>
         </header>
 
         {panel === 'briefing' && <div className="idr-single-view">
